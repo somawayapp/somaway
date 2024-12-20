@@ -39,16 +39,19 @@ const SinglePostPage = () => {
         <h1 className="text-[15px] md:text-2xl mt-3 md:mt-[6] font-semibold">{data.title}</h1>
       </div>
 
+      {/* Image */}
       {data.img && (
-  <>
-    {/* For sm screens */}
-    <div className="w-full max-h-[1000px]   max-w-[900px]">
-      <Image src={data.img} width={900} height={1000} alt="Responsive Image" />
-    </div>
- 
-  </>
-)}
+        <div className="w-full max-h-[700px] hidden sm:block md:hidden   max-w-[900px]">
+          <Image src={data.img} w="900"  h={"700"} />
+        </div>
+      )}
 
+      {/* Image */}
+      {data.img && (
+        <div className="w-full max-h-[500px] hidden sm:hidden md:block   max-w-[900px]">
+          <Image src={data.img} w="900"  h={"500"} />
+        </div>
+      )}
 
 
       {/* Author Info and Other Content */}
@@ -65,8 +68,7 @@ const SinglePostPage = () => {
           <div className="flex flex-col">
             <span>
               Written by <Link className="text-[#1DA1F2]">{data.user.username}</Link>
-           </span>
-           <span>
+           
               <Link className="text-[#1DA1F2]">{data.category}</Link> -{" "}
               {format(data.createdAt)}
             </span>
