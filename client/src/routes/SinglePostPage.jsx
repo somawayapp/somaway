@@ -42,7 +42,7 @@ const SinglePostPage = () => {
       {data.img && (
   <>
     {/* For sm screens */}
-    <div className="w-full max-h-[700px] hidden sm:block md:hidden max-w-[900px]">
+    <div className="w-full max-h-[700px]  sm:block md:hidden max-w-[900px]">
       <Image src={data.img} width={900} height={700} alt="Responsive Image" />
     </div>
     {/* For md and larger screens */}
