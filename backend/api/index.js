@@ -35,6 +35,7 @@ app.use(
     origin: function (origin, callback) {
       const allowedOrigins = [
         'https://www.xtechnewsletter.com',
+        'https://blogifiyclient.vercel.app',
         'http://localhost:5173',
       ];
 
