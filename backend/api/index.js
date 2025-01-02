@@ -34,7 +34,8 @@ app.use(
   cors({
     origin: function (origin, callback) {
       const allowedOrigins = [
-        'https://xtechnewsletter.com',
+        'https://blogifiyclient.vercel.app',
+        'https://www.xtechnewsletter.com/',
         'http://localhost:5173',
       ];
 
