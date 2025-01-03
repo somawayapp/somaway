@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import Navbar from "./components/Navbar";
 import { SignedIn, SignedOut, UserButton } from "@clerk/clerk-react";
 import "../index.css"; // Assuming styles are in App.css
-import { Analytics } from "@vercel/analytics/react";
 
 const App = () => {
   const [zIndexObsolete, setZIndexObsolete] = useState(false);
@@ -23,8 +22,6 @@ const App = () => {
         {/* FEATURED POSTS */}
         {/* POST LIST */}
       </div>
-        <Analytics/>
-      
     </div>
   );
 };

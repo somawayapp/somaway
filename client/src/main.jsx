@@ -13,6 +13,7 @@ import { ClerkProvider } from "@clerk/clerk-react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { Analytics } from "@vercel/analytics/react"; // Import Vercel Analytics
 
 const queryClient = new QueryClient();
 
@@ -61,6 +62,7 @@ createRoot(document.getElementById("root")).render(
       <QueryClientProvider client={queryClient}>
         <RouterProvider router={router} />
         <ToastContainer position="bottom-right" />
+        <Analytics />
       </QueryClientProvider>
     </ClerkProvider>
   </StrictMode>
