@@ -13,9 +13,9 @@ const MainCategories = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false); // Toggle menu dropdo]wn
 
   return (
-    <div className=" max-w-[1100px] mx-auto bg-[#1da1f2]/95 rounded-full  shadow-lg ">
+    <div className=" max-w-[1000px] mx-auto bg-[#1da1f2]/95 rounded-full  shadow-lg ">
       {/* Navigation container */}
-      <div className="flex items-center text-[#e6e6ff] justify-between px-4 py-2">
+      <div className="flex items-center text-[#e6e6ff] justify-between px-4 py-1">
         {/* Categories or Search Bar */}
         <div className="flex flex-1  items-center">
           {!isSearchOpen ? (
@@ -26,7 +26,7 @@ const MainCategories = () => {
             >
               <Link
                 to="/posts?sort=newest"
-                className="bg-black  text-white rounded-full px-4 py-3"
+                className="bg-[var(--bg2)]  text-[var(--textColor)] rounded-full px-4 py-2.5"
               >
                 Latest
               </Link>
@@ -78,7 +78,7 @@ const MainCategories = () => {
   <div className="flex items-center space-x-2 ">
     <Link
       to="/newsletter"
-      className={`bg-black text-white sm:block md:hidden rounded-full px-4 py-3 ${isSearchOpen ? "hidden" : "block"}`}
+      className={`bg-[var(--bg2)]  text-[var(--textColor)] sm:block md:hidden rounded-full px-4 py-2.5 ${isSearchOpen ? "hidden" : "block"}`}
     >
       Newsletter
     </Link>
