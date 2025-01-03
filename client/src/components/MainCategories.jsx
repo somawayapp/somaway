@@ -15,7 +15,7 @@ const MainCategories = () => {
   return (
     <div className=" max-w-[1000px] mx-auto bg-[#1da1f2]/95 rounded-full  shadow-lg ">
       {/* Navigation container */}
-      <div className="flex items-center text-[#e6e6ff] justify-between px-4 py-1.5">
+      <div className="flex items-center text-[#e6e6ff] justify-between px-4 py-1">
         {/* Categories or Search Bar */}
         <div className="flex flex-1  items-center">
           {!isSearchOpen ? (
@@ -26,7 +26,7 @@ const MainCategories = () => {
             >
               <Link
                 to="/posts?sort=newest"
-                className="bg-[var(--bg2)]  text-[var(--textColor)] rounded-full px-4 py-1.5"
+                className="bg-[var(--bg2)]  text-[var(--textColor)] rounded-full px-4 py-2"
               >
                 Latest
               </Link>

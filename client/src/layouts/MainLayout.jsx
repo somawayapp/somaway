@@ -3,6 +3,7 @@ import { Outlet, useLocation } from "react-router-dom";
 import { useEffect } from "react";
 import Navbar from "../components/Navbar";
 import { ThemeProvider } from "../../themecontext";
+import { Analytics } from "@vercel/analytics/react";
 
 const MainLayout = () => {
   const location = useLocation();
@@ -49,6 +50,7 @@ return (
     <Outlet />
 
   </div>
+  <Analytics/>
   </ThemeProvider>
 
 
