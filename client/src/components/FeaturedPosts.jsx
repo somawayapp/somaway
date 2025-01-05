@@ -42,7 +42,7 @@ const FeaturedPosts = () => {
           src={posts[0].img}
 
           
-          className="absolute top-0 left-0 w-full h-full object-cover rounded-none sm:rounded-tl-2xl sm:rounded-bl-2xl" 
+          className="absolute top-0 left-0 w-full h-full object-cover " 
        />
        <div 
           className="absolute inset-0 bg-black opacity-30 rounded-none sm:rounded-tl-2xl sm:rounded-bl-2xl" 
