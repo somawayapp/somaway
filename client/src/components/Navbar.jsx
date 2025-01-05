@@ -25,7 +25,7 @@ const Navbar = () => {
       {/* LOGO */}
       <Link to="/" className="flex items-center gap-1 text-lg font-bold md:text-2xl">
       <img src="/x.png" alt="Logo" className="w-4 h-4 md:w-6 md:h-6" />
-      <span className="bg-clip-text text-[var(--TextColor)] hidden md:block lg:block font-impact">tech</span>
+      <span className="bg-clip-text text-[var(--textLogo)] hidden md:block lg:block font-impact">tech</span>
 
 
 
@@ -87,11 +87,13 @@ const Navbar = () => {
 
         
 
-          <Link to="/" onClick={() => setOpen(false)}>Home</Link>
-          <Link to="/posts?sort=trending" onClick={() => setOpen(false)}>Trending</Link>
-          <Link to="/posts?sort=popular" onClick={() => setOpen(false)}>Most Popular</Link>
-          <Link to="/write" onClick={() => setOpen(false)}>Create Post</Link>
-          <Link to="/about" onClick={() => setOpen(false)}>About</Link>
+          <Link to="/" onClick={() => setOpen(false)} className="">Home</Link>
+          <Link to="/posts?sort=trending" onClick={() => setOpen(false)}>Newsletter</Link>
+          <Link to="/posts?sort=popular" onClick={() => setOpen(false)}> Premium</Link>
+          <Link to="/write" onClick={() => setOpen(false)}>Settings</Link>
+          <Link to="/write" onClick={() => setOpen(false)}>Write</Link>
+          <Link to="/about" onClick={() => setOpen(false)}>About Us</Link>
+          
 
           <SignedOut>
             <Link to="/login" onClick={() => setOpen(false)}>

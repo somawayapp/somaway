@@ -45,6 +45,8 @@ a {
 
   --textColor2: #ffffff;
   --textColore: #0F1419;
+  --textLogo: #ffffff;
+
 
   --bg2: #050505;
   --bd: #303030;
@@ -77,6 +79,7 @@ a {
   --textColor: #0F1419;
   --TextColor: #0F1419;
   --textColore: #dfecf5;
+  --textLogo: #000000;
 
   --textColor2: #000000;
   --shadow-color: rgba(0, 0, 0, 0.1); /* Default for light mode */

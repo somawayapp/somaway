@@ -89,12 +89,12 @@ const Navbar = () => {
         {/* MOBILE LINK LIST */}
         <div style={{ zIndex: 100007 }}
           className={`w-[75%] h-screen bg-[var(--bg)] flex flex-col p-5 pt-7 items-left justify-left text-[var(--TextColor)]
-             gap-8 font-sm text-md fixed top-0 right-0 transition-transform ease-in-out  ${
+             gap-8 font-sm text-sm fixed top-0 right-0 transition-transform ease-in-out  ${
             open ? "translate-x-0" : "translate-x-full"
           }`}
         >
           <button
-            className="absolute top-4 right-4 text-md text-[var(--TextColor)]"
+            className="absolute top-7 right-8 text-md text-[var(--TextColor)]"
             onClick={() => setOpen(false)}
           >
             ✕
@@ -102,12 +102,13 @@ const Navbar = () => {
 
         
 
-          <Link to="/" onClick={() => setOpen(false)}>Home</Link>
-          <Link to="/posts?sort=trending" onClick={() => setOpen(false)}>Trending</Link>
-          <Link to="/posts?sort=popular" onClick={() => setOpen(false)}>Most Popular</Link>
-          <Link to="/write" onClick={() => setOpen(false)}>Create Post</Link>
-          <Link to="/about" onClick={() => setOpen(false)}>About</Link>
-
+          <Link to="/" onClick={() => setOpen(false)} className="">Home</Link>
+          <Link to="/posts?sort=trending" onClick={() => setOpen(false)}>Newsletter</Link>
+          <Link to="/posts?sort=popular" onClick={() => setOpen(false)}> Premium</Link>
+          <Link to="/write" onClick={() => setOpen(false)}>Settings</Link>
+          <Link to="/write" onClick={() => setOpen(false)}>Write</Link>
+          <Link to="/about" onClick={() => setOpen(false)}>About Us</Link>
+          
           <SignedOut>
             <Link to="/login" onClick={() => setOpen(false)}>
               <button className="py-2 px-4 rounded-3xl bg-[#1DA1F2] text-white">

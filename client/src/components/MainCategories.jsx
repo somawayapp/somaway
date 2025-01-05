@@ -15,48 +15,48 @@ const MainCategories = () => {
   return (
     <div className=" max-w-[1000px] mx-auto bg-[#1da1f2]/95 rounded-full  shadow-lg ">
       {/* Navigation container */}
-      <div className="flex items-center text-[#e6e6ff] justify-between px-4 py-1">
+      <div className="flex items-center text-[#e6e6ff] justify-between px-2 py-1.5">
         {/* Categories or Search Bar */}
         <div className="flex flex-1  items-center">
           {!isSearchOpen ? (
             <div
               className={`${
                 isMenuOpen ? "hidden" : "hidden"
-              } lg:flex items-center flex-wrap overflow-x-auto hidden sm:hidden md:block whitespace-nowrap`}
+              } lg:flex items-center flex-wrap text-[14px] gap-1 overflow-x-auto hidden sm:hidden md:block whitespace-nowrap`}
             >
               <Link
                 to="/posts?sort=newest"
-                className="bg-[var(--bg2)]  text-[var(--textColor)] rounded-full px-4 py-2"
+                className="bg-[var(--bg2)]  text-[var(--textColor)] rounded-full px-4 py-2.5"
               >
                 Latest
               </Link>
               <Link
                 to="/posts?sort=popular"
-                className="hover:bg-black rounded-full px-4 py-1"
+                className="hover:bg-[var(--bg2)]  hover:text-[var(--textColor2)]  hover:text-[var(--textColor2)] rounded-full px-2 py-1"
               >
                 Most Popular
               </Link>
               <Link
                 to="/posts?sort=trending"
-                className="hover:bg-black rounded-full px-4 py-1"
+                className="hover:bg-[var(--bg2)]  hover:text-[var(--textColor2)]  rounded-full px-2 py-1"
               >
                 Top Trending
               </Link>
               <Link
                 to="/posts?sort=oldest"
-                className="hover:bg-black rounded-full px-4 py-1"
+                className="hover:bg-[var(--bg2)]  hover:text-[var(--textColor2)]  rounded-full px-2 py-1"
               >
                 Oldest
               </Link>
               <Link
                 to="/newsletter"
-                className="hover:bg-black rounded-full px-4 py-1"
+                className="hover:bg-[var(--bg2)]  hover:text-[var(--textColor2)]  rounded-full px-2 py-1"
               >
               Newsletter            
               </Link>
               <Link
                 to="/about"
-                className="hover:bg-black  rounded-full px-4 py-1"
+                className="hover:bg-[var(--bg2)]  hover:text-[var(--textColor2)]   rounded-full px-2 py-1"
               >
                 About Us
               </Link>
@@ -145,43 +145,98 @@ const MainCategories = () => {
 
       {/* Categories dropdown for menu */}
       {isMenuOpen && !isSearchOpen && (
-        <div className="absolute top-full left-0 w-full bg-[#1da1f2] p-4 z-10">
+        <div className="flex flex-row  absolute top-full mt-2 left-0 w-full text-[14px] gap-1  md:gap-24 rounded-2xl shadow-lg bg-[#1da1f2]/95 p-4 z-10">
+         
+         <div>
           <Link
             to="/posts"
-            className="block py-2 text-white hover:bg-gray-700 rounded"
+            className="block py-2 text-white hover:bg-gray-500 p-2 rounded-xl "
           >
             All Posts
           </Link>
           <Link
             to="/posts?cat=web-design"
-            className="block py-2 text-white hover:bg-gray-700 rounded"
+            className="block py-2 text-white hover:bg-gray-500 p-2 rounded-xl"
           >
             Web Design
           </Link>
           <Link
             to="/posts?cat=development"
-            className="block py-2 text-white hover:bg-gray-700 rounded"
+            className="block py-2 text-white hover:bg-gray-500 p-2 rounded-xl"
           >
             Development
           </Link>
           <Link
             to="/posts?cat=databases"
-            className="block py-2 text-white hover:bg-gray-700 rounded"
+            className="block py-2 text-white hover:bg-gray-500 p-2 rounded-xl"
           >
             Databases
           </Link>
           <Link
             to="/posts?cat=seo"
-            className="block py-2 text-white hover:bg-gray-700 rounded"
+            className="block py-2 text-white hover:bg-gray-500 p-2 rounded-xl"
           >
             Search Engines
           </Link>
           <Link
             to="/posts?cat=marketing"
-            className="block py-2 text-white hover:bg-gray-700 rounded"
+            className="block py-2 text-white hover:bg-gray-500 p-2 rounded-xl"
           >
             Marketing
           </Link>
+        </div>
+
+
+
+
+        <div>
+          <Link
+            to="/posts?sort=newest"
+            className="block py-2 text-white hover:bg-gray-500 p-2 rounded-xl "
+          >Newest          </Link>
+          <Link
+            to="/posts?sort=popular"
+            className="block py-2 text-white hover:bg-gray-500 p-2 rounded-xl"
+          > Popular          </Link>
+          <Link
+            to="/posts?sort=trending"
+            className="block py-2 text-white hover:bg-gray-500 p-2 rounded-xl"
+          > Trending
+          </Link>
+          <Link
+            to="/posts?sort=oldest"
+            className="block py-2 text-white hover:bg-gray-500 p-2 rounded-xl"
+              > Oldest         </Link>
+        
+        </div>
+
+
+
+
+        <div>
+          <Link
+            to="/newsletter"
+            className="block py-2 text-white hover:bg-gray-500 p-2 rounded-xl "
+          >Newsletter          </Link>
+          <Link
+            to="/premium"
+            className="block py-2 text-white hover:bg-gray-500 p-2 rounded-xl"
+          > Premium          </Link>
+          <Link
+            to="/about"
+            className="block py-2 text-white hover:bg-gray-500 p-2 rounded-xl"
+          > About Us 
+          </Link>
+          <Link
+            to="/settings"
+            className="block py-2 text-white hover:bg-gray-500 p-2 rounded-xl"
+              > Settings          </Link>
+           <Link
+            to="/write"
+            className="block py-2 text-white hover:bg-gray-500 p-2 rounded-xl"
+              > Write          </Link>
+        </div>
+        
         </div>
       )}
     </div>
