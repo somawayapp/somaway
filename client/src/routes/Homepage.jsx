@@ -70,7 +70,7 @@ const Homepage = () => {
        
 
         <Link to="/" className="flex items-center mt-[10px] gap-1 text-lg font-bold md:text-2xl">
-        <img src="/logo.jpg" alt="Logo" className="w-50 h-20 lg:w-100 lg:h-40" />
+        <img src="/logo.jpg" alt="Logo" className="w-50 h-20 lg:w-50 lg:h-20" />
 
 <span className="text-[var(--textLogo)] text-[30px] lg:text-[90px]"></span>
 
