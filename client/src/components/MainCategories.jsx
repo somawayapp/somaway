@@ -25,14 +25,21 @@ const MainCategories = () => {
               } lg:flex items-center flex-wrap text-[14px] gap-1 overflow-x-auto hidden sm:hidden md:block whitespace-nowrap`}
             >
               <Link
-                to="/posts?sort=newest"
+                to="/newsletter"
                 className="bg-[var(--bg2)]  text-[var(--textColor)] rounded-full px-4 py-2.5"
               >
+                Newsletter
+              </Link>
+              <Link
+                to="/posts?sort=newest"
+                className="hover:bg-[var(--bg2)]  hover:text-[var(--textColor2)]  hover:text-[var(--textColor2)] rounded-full px-2 py-1"
+              >
                 Latest
+
               </Link>
               <Link
                 to="/posts?sort=popular"
-                className="hover:bg-[var(--bg2)]  hover:text-[var(--textColor2)]  hover:text-[var(--textColor2)] rounded-full px-2 py-1"
+                className="hover:bg-[var(--bg2)]  hover:text-[var(--textColor2)]  rounded-full px-2 py-1"
               >
                 Most Popular
               </Link>
@@ -43,16 +50,10 @@ const MainCategories = () => {
                 Top Trending
               </Link>
               <Link
-                to="/posts?sort=oldest"
+                to="/oldest"
                 className="hover:bg-[var(--bg2)]  hover:text-[var(--textColor2)]  rounded-full px-2 py-1"
               >
-                Oldest
-              </Link>
-              <Link
-                to="/newsletter"
-                className="hover:bg-[var(--bg2)]  hover:text-[var(--textColor2)]  rounded-full px-2 py-1"
-              >
-              Newsletter            
+              Oldest            
               </Link>
               <Link
                 to="/about"

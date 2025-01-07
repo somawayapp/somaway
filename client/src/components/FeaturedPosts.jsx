@@ -34,7 +34,7 @@ const FeaturedPosts = () => {
 <div className=" lg:grid grid-cols-12 gap-6 mt-4">
 
 {/* First column: First post (takes half the width, spans 6 out of 12) */}
-<div className="col-span-6 flex flex-col gap-6 lg:gap-[3] lg:mb-[15px] mb-[30px] relative rounded-none sm:rounded-tl-lg sm:rounded-bl-lg">
+<div className="col-span-6 flex flex-col gap-6 lg:gap-[3] lg:mb-[15px] mb-[30px] relative">
   {posts[0].img && (
     <Link to={`/${posts[0].slug}`} className="relative">
       <div className="relative w-full" style={{ paddingTop: '100%' }}> {/* Square container */}
@@ -42,10 +42,10 @@ const FeaturedPosts = () => {
           src={posts[0].img}
 
           
-          className="absolute top-0 left-0 w-full h-full object-cover " 
+          className="absolute top-0 left-0 w-full h-full object-cover" 
        />
        <div 
-          className="absolute inset-0 bg-black opacity-30 rounded-none sm:rounded-tl-2xl sm:rounded-bl-2xl" 
+          className="absolute inset-0 bg-black opacity-30 " 
        />
        
 
@@ -151,7 +151,7 @@ rounded-none lg:rounded-tr-2xl lg:rounded-br-2xl p-4">
 
   {/* White Overlay */}
   <div
-    className="absolute  lg:bg-[var(--bg)] rounded-none  lg:rounded-tr-2xl lg:rounded-br-2xl"
+    className="absolute  lg:bg-[var(--bg)]"
     style={{
       top: '2px',
       right: '2px',
