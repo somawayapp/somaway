@@ -147,7 +147,7 @@ const FeaturedPosts = () => {
 
 <div className="hidden md:flex relative col-span-3 justify-end items-center text-xl 
 font-semibold bg-gradient-to-r from-black via-gray-500 to-gray-700 
-rounded-none lg:rounded-tr-2xl lg:rounded-br-2xl p-4">
+rounded-none  p-4">
 
   {/* White Overlay */}
   <div
