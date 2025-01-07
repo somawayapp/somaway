@@ -58,7 +58,6 @@ const Homepage = () => {
 
   return (
       <div>
-        <Navbar/>
     <div className="mb-9   flex flex-col gap-0">
 
       {/* Floating Section */}
@@ -70,10 +69,10 @@ const Homepage = () => {
 
        
 
-        <Link to="/" className="flex items-center gap-1 text-lg font-bold md:text-2xl">
-        <img src="/x.png" alt="Logo" className="w-10 h-10 lg:w-18 lg:h-18" />
+        <Link to="/" className="flex items-center mt-[10px] gap-1 text-lg font-bold md:text-2xl">
+        <img src="/x.png" alt="Logo" className="w-10 h-10 lg:w-20 lg:h-20" />
 
-<span className="text-[var(--textLogo)] text-[30px] lg:text-[46px] font-extrabold">tech</span>
+<span className="text-[var(--textLogo)] text-[30px] lg:text-[90px]">tech</span>
 
 
 
