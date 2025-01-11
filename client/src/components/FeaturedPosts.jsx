@@ -123,10 +123,10 @@ const FeaturedPosts = () => {
         {posts.slice(4, 9).map((post, index) => (
           post && (
             <div key={index} className="flex items-start gap-2">
-              <div className="w-2 h-2 bg-black mt-1" />
+              <div className="w-2 h-1 bg-black " />
               <Link
                 to={`/${post.slug}`}
-                className="text-lg font-semibold text-gray-700 hover:underline"
+                className="text-sm text-[var(--textColor)] hover:underline"
               >
                 {truncateText(post.title, 75)}
               </Link>
