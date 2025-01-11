@@ -125,19 +125,9 @@ const FeaturedPosts = () => {
             <div key={index} className="w-full relative">
               <Link to={`/${post.slug}`} className="relative">
                 <div className="relative w-full" style={{ paddingTop: "100%" }}>
-                  <Image
-                    src={post.img}
-                    className="absolute top-0 left-0 w-full h-full object-cover"
-                  />
+                 
                   <div className="absolute inset-0 bg-black opacity-30" />
                   <div className="absolute bottom-0 left-0 p-4 text-white">
-                    <Link
-                      to={`/posts?category=${post.category}`}
-                      className="text-md font-semibold uppercase"
-                    >
-                      {post.category}
-                    </Link>
-                    <br />
                     <Link
                       to={`/${post.slug}`}
                       className="text-lg font-bold leading-snug"
