@@ -167,13 +167,10 @@ rounded-none  p-4">
 
 
 
- {/* Third column: Posts 4 to 8 */}
-<div className="col-span-3 flex flex-col gap-[4px]">
-  {posts.slice(4, 9).map((post, index) => (
-    post && (
-      <div key={index} className="flex items-start gap-2">
-        {/* Squared dot */}
-        <div className="w-2 h-2 bg-black" />
+  <div className="col-span-3 flex flex-col gap-3">
+        {posts.slice(4, 9).map((post, index) => (
+          post && (
+            <div key={index} className="w-full relative">
               
                   <div className="absolute bottom-0 left-0 p-4 text-white">
                     <Link
@@ -187,7 +184,6 @@ rounded-none  p-4">
           )
         ))}
       </div>
-
 
 
 
