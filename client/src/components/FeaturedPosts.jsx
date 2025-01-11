@@ -60,7 +60,7 @@ const FeaturedPosts = () => {
                   to={`/posts?author=${posts[0].user.username}`}
                   onClick={(e) => e.stopPropagation()}
                 >
-                  {posts[0].user.username} mm
+                  {posts[0].user.username} 
                 </Link>
                 <span className="text-md px-1 text-gray-300">-</span>
                 <span className="text-md text-gray-300">
