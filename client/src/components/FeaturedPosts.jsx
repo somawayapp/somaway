@@ -164,24 +164,29 @@ rounded-none  p-4">
   {/* Original Content */}
   <div className="relative  text-left" style={{ zIndex: 2 }}>
 
-{/* Third column: Posts 4 to 8 */}
+
+
+
+ {/* Third column: Posts 4 to 8 */}
 <div className="col-span-3 flex flex-col gap-[4px]">
   {posts.slice(4, 9).map((post, index) => (
     post && (
       <div key={index} className="flex items-start gap-2">
         {/* Squared dot */}
         <div className="w-2 h-2 bg-black" />
-        {/* Title */}
-        <Link
-          to={`/${post.slug}`}
-          className="text-lg font-medium leading-snug"
-        >
-          {truncateText(post.title, 75)}
-        </Link>
+              
+                  <div className="absolute bottom-0 left-0 p-4 text-white">
+                    <Link
+                      to={`/${post.slug}`}
+                      className="text-lg font-bold leading-snug"
+                    >
+                      {truncateText(post.title, 75)}
+                    </Link>
+                  </div>
+            </div>
+          )
+        ))}
       </div>
-    )
-  ))}
-</div>
 
 
 
