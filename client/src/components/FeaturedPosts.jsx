@@ -47,7 +47,7 @@ const FeaturedPosts = () => {
           className="absolute top-0 left-0 w-full h-full object-cover" 
        />
        <div 
-          className="absolute inset-0 bg-black opacity-45 " 
+          className="absolute inset-0 bg-black opacity-40 " 
        />
        
 
@@ -96,7 +96,7 @@ const FeaturedPosts = () => {
 
 
 {/* Second column: Second and third post (stacked vertically, takes half the width, spans 3 out of 12) */}
-<div className="col-span-3 flex  mb-[0px] flex-col gap:[1]">
+<div className="col-span-3 flex mb-[25px]  md:mb-[10px] flex-col gap-6 md-gap:3">
   {[posts[1], posts[2]].map((post, index) => post && (
     <div key={index} className="w-full relative">
       <Link to={`/${post.slug}`} className="relative">
@@ -107,7 +107,7 @@ const FeaturedPosts = () => {
           />
           <div className="absolute inset-0 bg-black opacity-40" /> {/* Dark overlay */}
           {/* Post title on top of the image */}
-          <div className="absolute bg-black bg-opacity-30 top-0 left-0 right-0 bottom-0 flex flex-col justify-end p-4"> {/* Align text at bottom */}
+          <div className="absolute bg-black bg-opacity-25 top-0 left-0 right-0 bottom-0 flex flex-col justify-end p-4"> {/* Align text at bottom */}
             <div className="text-white text-left">
             <Link
                 to={`/posts?category=${post.category}`}
