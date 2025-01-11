@@ -123,10 +123,7 @@ const FeaturedPosts = () => {
         {posts.slice(4, 9).map((post, index) => (
           post && (
             <div key={index} className="w-full relative">
-              <Link to={`/${post.slug}`} className="relative">
-                <div className="relative w-full" style={{ paddingTop: "100%" }}>
-                 
-                  <div className="absolute inset-0 bg-black opacity-30" />
+              
                   <div className="absolute bottom-0 left-0 p-4 text-white">
                     <Link
                       to={`/${post.slug}`}
@@ -135,8 +132,6 @@ const FeaturedPosts = () => {
                       {truncateText(post.title, 75)}
                     </Link>
                   </div>
-                </div>
-              </Link>
             </div>
           )
         ))}
