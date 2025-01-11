@@ -6,7 +6,7 @@ import { format } from "timeago.js";
 
 const fetchPost = async () => {
   const res = await axios.get(
-    `${import.meta.env.VITE_API_URL}/posts?featured=true&limit=4&sort=newest`
+    `${import.meta.env.VITE_API_URL}/posts?featured=true&limit=9&sort=newest`
   );
   return res.data;
 };
@@ -15,18 +15,19 @@ const truncateText = (text, length) =>
   text.length > length ? text.substring(0, length) + "..." : text;
 
 const FeaturedPosts = () => {
-  const { isPending, error, data } = useQuery({
+  const { isLoading, error, data } = useQuery({
     queryKey: ["featuredPosts"],
-    queryFn: () => fetchPost(),
+    queryFn: fetchPost,
   });
 
-  if (isPending) return "loading...";
-  if (error) return "Something went wrong!" + error.message;
+  if (isLoading) return "Loading...";
+  if (error) return "Something went wrong! " + error.message;
 
-  const posts = data.posts;
+  const posts = data?.posts;
   if (!posts || posts.length < 9) {
-    return; // Ensure there are at least 3 posts
+    return null; // Ensure there are enough posts
   }
+
 
   return (
     <>{/* Layout for large screens only */}
@@ -145,6 +146,21 @@ const FeaturedPosts = () => {
   ))}
 </div>
 
+<div className="hidden md:flex relative col-span-3 justify-end items-center text-xl 
+font-semibold bg-gradient-to-r from-black via-gray-500 to-gray-700 
+rounded-none  p-4">
+
+  {/* White Overlay */}
+  <div
+    className="absolute  lg:bg-[var(--bg)]"
+    style={{
+      top: '2px',
+      right: '2px',
+      bottom: '2px',
+      left: '0',
+      zIndex: 1,
+    }}
+  ></div>
 
   {/* Original Content */}
   <div className="relative  text-left" style={{ zIndex: 2 }}>
@@ -166,21 +182,10 @@ const FeaturedPosts = () => {
 </div>
 
 
-<div className="hidden md:flex relative col-span-3 justify-end items-center text-xl 
-font-semibold bg-gradient-to-r from-black via-gray-500 to-gray-700 
-rounded-none  p-4">
 
-  {/* White Overlay */}
-  <div
-    className="absolute  lg:bg-[var(--bg)]"
-    style={{
-      top: '2px',
-      right: '2px',
-      bottom: '2px',
-      left: '0',
-      zIndex: 1,
-    }}
-  ></div>
+
+
+
 
   <p className="text-[var(--TextColor)]" style={{ fontSize: '1rem' }}>
       BY THE <br />
