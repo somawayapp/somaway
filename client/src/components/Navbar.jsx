@@ -88,9 +88,9 @@ const Navbar = () => {
         
 
           <Link to="/" onClick={() => setOpen(false)} className="">Home</Link>
-          <Link to="/posts?sort=trending" onClick={() => setOpen(false)}>Newsletter</Link>
-          <Link to="/posts?sort=popular" onClick={() => setOpen(false)}> Premium</Link>
-          <Link to="/write" onClick={() => setOpen(false)}>Settings</Link>
+          <Link to="/newsletter" onClick={() => setOpen(false)}>Newsletter</Link>
+          <Link to="/premium" onClick={() => setOpen(false)}> Premium</Link>
+          <Link to="/settings" onClick={() => setOpen(false)}>Settings</Link>
           <Link to="/write" onClick={() => setOpen(false)}>Write</Link>
           <Link to="/about" onClick={() => setOpen(false)}>About Us</Link>
           
