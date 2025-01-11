@@ -146,21 +146,9 @@ const FeaturedPosts = () => {
   ))}
 </div>
 
-<div className=" relative col-span-3 justify-end items-center text-xl 
-font-semibold bg-gradient-to-r from-black via-gray-500 to-gray-700 
-rounded-none  ">
+<div className=" relative col-span-3   ">
 
-  {/* White Overlay */}
-  <div
-    className="absolute  lg:bg-[var(--bg)]"
-    style={{
-      top: '2px',
-      right: '2px',
-      bottom: '2px',
-      left: '0',
-      zIndex: 1,
-    }}
-  ></div>
+
 
   {/* Original Content */}
   <div className="relative  text-left" style={{ zIndex: 2 }}>
@@ -181,35 +169,13 @@ rounded-none  ">
   ))}
 </div>
 
-
-
-
-
-
-
-
-    <p className="text-5xl font-extrabold bg-clip-text text-transparent  bg-gradient-to-r from-[var(--TextColor)]  to-[#1DA1F2] ">
-      <span style={{ fontSize: '1.2rem' }}>OVER</span> 100K+
-    </p>
-    <p className="text-[var(--TextColor)]" style={{ fontSize: '1rem' }}>
-     DAILY READERS   </p>
-    <p className="text-[var(--TextColor)]" style={{ fontSize: '1rem' }}>
-      ARTICLES EVERYDAY 
-    </p>
-    <Link to="/about" >
-
-    <div className="flex items-center justify-end mt-2">
-      <p className="text-xs text-[var(--TextColor)]">READ MORE</p>
-      <span className="ml-2 bg-black text-white rounded-full p-2 border border-[var(--TextColor)]">
-  {/* Content */}
         <img 
              src="/arrow.png"
               alt="Arrow"
               className="w-3 h-3 sm:w-3 sm:h-3 md:w-3 md:h-3"
             />
-      </span>
-    </div>
-    </Link>
+    
+  
   </div>
 </div>
 
