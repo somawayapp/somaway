@@ -24,7 +24,7 @@ const FeaturedPosts = () => {
   if (error) return "Something went wrong!" + error.message;
 
   const posts = data.posts;
-  if (!posts || posts.length < 5) {
+  if (!posts || posts.length < 8) {
     return; // Ensure there are at least 3 posts
   }
 
@@ -170,7 +170,7 @@ rounded-none  p-4">
 
 
   <div className="col-span-3 flex mb-[2px]  flex-col gap-1">
-  {[posts[1], posts[2],  posts[3],  posts[4],  posts[5]].map((post, index) => post && (
+  {[posts[4], posts[5],  posts[6],  posts[7],  posts[8]].map((post, index) => post && (
     <div key={index} className="w-full relative">
       <Link to={`/${post.slug}`} className="relative">
         <div className="relative w-full" style={{ paddingTop: '100%' }}> {/* Square container */}
