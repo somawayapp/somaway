@@ -47,7 +47,7 @@ const FeaturedPosts = () => {
           className="absolute top-0 left-0 w-full h-full object-cover" 
        />
        <div 
-          className="absolute inset-0 bg-black opacity-50 " 
+          className="absolute inset-0 bg-black opacity-45 " 
        />
        
 
@@ -96,7 +96,7 @@ const FeaturedPosts = () => {
 
 
 {/* Second column: Second and third post (stacked vertically, takes half the width, spans 3 out of 12) */}
-<div className="col-span-3 flex  md:mb-[0px] flex-col gap-6 md-gap:[1]">
+<div className="col-span-3 flex  ">
   {[posts[1], posts[2]].map((post, index) => post && (
     <div key={index} className="w-full relative">
       <Link to={`/${post.slug}`} className="relative">
