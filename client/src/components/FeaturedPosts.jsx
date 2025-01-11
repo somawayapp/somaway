@@ -120,14 +120,14 @@ const FeaturedPosts = () => {
 
 {/* Third column: Posts 4 to 8 with square dots and titles only */}
 <div className="col-span-3 flex flex-col gap-3">
-  <p className="text-lg text-[var(--textColor)]">Top Headlines</p>
+  <p className="text-xl text-[var(--textColor)] font-extrabold">Top Headlines</p>
   {posts.slice(4, 9).map((post, index) => (
     post && (
       <div key={index} className="flex items-top mt-[10px] gap-2">
-        <div className="w-3 h-3 bg-[var(--textColor)] flex-shrink-0" />
+        <div className="w-3 h-3 bg-[var(--textColor)] mb-[-5px] flex-shrink-0" />
         <Link
           to={`/${post.slug}`}
-          className="text-md text-[var(--textColor)] hover:underline"
+          className="text-md text-[var(--textColor)] font-extrabold hover:underline"
         >
           {truncateText(post.title, 50)}
         </Link>
