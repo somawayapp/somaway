@@ -96,7 +96,7 @@ const FeaturedPosts = () => {
 
 
 {/* Second column: Second and third post (stacked vertically, takes half the width, spans 3 out of 12) */}
-<div className="col-span-3 flex mb-[25px]   flex-col gap-4 md:gap-6">
+<div className="col-span-3 flex mb-[25px] flex-col gap-6 md:gap-3 lg:gap-3">
   {[posts[1], posts[2]].map((post, index) => post && (
     <div key={index} className="w-full relative">
       <Link to={`/${post.slug}`} className="relative">
