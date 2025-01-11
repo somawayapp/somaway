@@ -8,8 +8,6 @@ import Write from "./routes/Write.jsx";
 import LoginPage from "./routes/LoginPage.jsx";
 import RegisterPage from "./routes/RegisterPage.jsx";
 import SinglePostPage from "./routes/SinglePostPage.jsx";
-import SettingsPage from "./routes/SettingsPage.jsx";
-import PremiumPage from "./routes/PremiumPage.jsx";
 import AboutPage from "./routes/AboutPage.jsx";
 import NewsletterPage from "./routes/NewsletterPage.jsx";
 import MainLayout from "./layouts/MainLayout.jsx";
