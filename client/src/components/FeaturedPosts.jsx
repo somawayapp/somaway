@@ -3,6 +3,7 @@ import Image from "./Image";
 import axios from "axios";
 import { useQuery } from "@tanstack/react-query";
 import { format } from "timeago.js";
+import AdChanger from "./Adchanger";
 
 const fetchPost = async () => {
   const res = await axios.get(
@@ -169,11 +170,7 @@ const FeaturedPosts = () => {
   ))}
 </div>
 
-        <img 
-             src="/add2.gif"
-              alt="adds"
-              className="w-full h-full"
-            />
+        <AdChanger/>
     
   
   </div>
