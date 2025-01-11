@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 
 
-const Settings = () => {
+const SettingsPage = () => {
   return (
     <div className="mt-4 flex flex-col gap-4">
       {/* BREADCRUMB */}
@@ -67,4 +67,4 @@ const Settings = () => {
   );
 };
 
-export default Settings;
+export default SettingsPage;

@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 
 
-const About = () => {
+const AboutPage = () => {
   return (
     <div className="mt-4 flex flex-col gap-4">
       {/* BREADCRUMB */}
@@ -18,7 +18,7 @@ const About = () => {
           Become smarter in just 5 minutes
           </h1>
           <p className="mt-4 text-md md:text-xl">
-          Hoolicon delivers quick and insightful updates about the tech world   </p>
+          Hoolicon delivers quick and insightful updates AboutPagePage the tech world   </p>
           <p className=" text-md md:text-xl">
           Subscribe to Hoolicon: Your 5-minute brief on latest tech news.
           </p>
@@ -67,4 +67,4 @@ const About = () => {
   );
 };
 
-export default About;
+export default AboutPage;

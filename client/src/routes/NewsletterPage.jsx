@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 
 
-const Newsletter = () => {
+const NewsletterPage = () => {
   return (
     <div className="mt-4 flex flex-col gap-4">
       {/* BREADCRUMB */}
@@ -67,4 +67,4 @@ const Newsletter = () => {
   );
 };
 
-export default Newsletter;
+export default NewsletterPage;

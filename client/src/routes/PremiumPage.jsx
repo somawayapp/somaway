@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 
 
-const Premium = () => {
+const PremiumPage = () => {
   return (
     <div className="mt-4 flex flex-col gap-4">
       {/* BREADCRUMB */}
@@ -67,4 +67,4 @@ const Premium = () => {
   );
 };
 
-export default Premium;
+export default PremiumPage;
