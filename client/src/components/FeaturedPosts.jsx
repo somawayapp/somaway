@@ -146,9 +146,9 @@ const FeaturedPosts = () => {
   ))}
 </div>
 
-<div className="hidden md:flex relative col-span-3 justify-end items-center text-xl 
+<div className=" relative col-span-3 justify-end items-center text-xl 
 font-semibold bg-gradient-to-r from-black via-gray-500 to-gray-700 
-rounded-none  p-4">
+rounded-none  ">
 
   {/* White Overlay */}
   <div
@@ -187,10 +187,7 @@ rounded-none  p-4">
 
 
 
-  <p className="text-[var(--TextColor)]" style={{ fontSize: '1rem' }}>
-      BY THE <br />
-      <span className="underline">NUMBERS</span>
-    </p>
+
     <p className="text-5xl font-extrabold bg-clip-text text-transparent  bg-gradient-to-r from-[var(--TextColor)]  to-[#1DA1F2] ">
       <span style={{ fontSize: '1.2rem' }}>OVER</span> 100K+
     </p>
