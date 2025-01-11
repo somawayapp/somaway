@@ -145,21 +145,6 @@ const FeaturedPosts = () => {
   ))}
 </div>
 
-<div className="hidden md:flex relative col-span-3 justify-end items-center text-xl 
-font-semibold bg-gradient-to-r from-black via-gray-500 to-gray-700 
-rounded-none  p-4">
-
-  {/* White Overlay */}
-  <div
-    className="absolute  lg:bg-[var(--bg)]"
-    style={{
-      top: '2px',
-      right: '2px',
-      bottom: '2px',
-      left: '0',
-      zIndex: 1,
-    }}
-  ></div>
 
   {/* Original Content */}
   <div className="relative  text-left" style={{ zIndex: 2 }}>
@@ -181,10 +166,21 @@ rounded-none  p-4">
 </div>
 
 
+<div className="hidden md:flex relative col-span-3 justify-end items-center text-xl 
+font-semibold bg-gradient-to-r from-black via-gray-500 to-gray-700 
+rounded-none  p-4">
 
-
-
-
+  {/* White Overlay */}
+  <div
+    className="absolute  lg:bg-[var(--bg)]"
+    style={{
+      top: '2px',
+      right: '2px',
+      bottom: '2px',
+      left: '0',
+      zIndex: 1,
+    }}
+  ></div>
 
   <p className="text-[var(--TextColor)]" style={{ fontSize: '1rem' }}>
       BY THE <br />
