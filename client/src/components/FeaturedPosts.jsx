@@ -154,7 +154,7 @@ const FeaturedPosts = () => {
   <div className="relative  text-left" style={{ zIndex: 2 }}>
   <div className="col-span-3 flex flex-col gap-3">
   <p className="text-2xl text-[var(--textColor)] font-bold">Top Headlines</p>
-  {posts.slice(4, 9).map((post, index) => (
+  {posts.slice(4, 8).map((post, index) => (
     post && (
       <div key={index} className="flex items-top mt-[10px] gap-2">
         <div className="w-2 h-2 bg-[var(--textColor)] bottom-[-7px] flex-shrink-0" />
@@ -170,9 +170,9 @@ const FeaturedPosts = () => {
 </div>
 
         <img 
-             src="/arrow.png"
-              alt="Arrow"
-              className="w-3 h-3 sm:w-3 sm:h-3 md:w-3 md:h-3"
+             src="/add2.gif"
+              alt="adds"
+              className="w-full h-full"
             />
     
   
