@@ -4,9 +4,11 @@ const AdChanger = () => {
   const [currentAd, setCurrentAd] = useState(0);
 
   const ads = [
+    "/add1.gif",
     "/add2.gif",
-    "/add123.gif",
+    "/add3.gif",
     "/add4.gif",
+
   ];
 
   useEffect(() => {
