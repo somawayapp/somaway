@@ -14,6 +14,9 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { Analytics } from "@vercel/analytics/react"; // Import Vercel Analytics
+import PremiumPage from "./routes/PremiumPage.jsx";
+import { Settings } from "@mui/icons-material";
+import SettingsPage from "./routes/SettingsPage.jsx";
 
 const queryClient = new QueryClient();
 
@@ -43,6 +46,22 @@ const router = createBrowserRouter([
       {
         path: "/write",
         element: <Write />,
+      },
+      {
+        path: "/settings",
+        element: <SettingsPage />,
+      },
+      {
+        path: "/newsletter",
+        element: <NewsletterPage />,
+      },
+      {
+        path: "/about",
+        element: <AboutPage />,
+      },
+      {
+        path: "/premium",
+        element: <PremiumPage />,
       },
       {
         path: "/login",
