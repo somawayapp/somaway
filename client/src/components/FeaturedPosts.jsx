@@ -167,12 +167,12 @@ rounded-none  p-4">
 
 
 
-  <div className="col-span-3 flex flex-col  gap-3">
+ <div className="col-span-3 flex flex-col gap-3">
         {posts.slice(4, 9).map((post, index) => (
           post && (
             <div key={index} className="w-full relative">
               
-                  <div className="absolute bottom-0 mb-5 left-0 p-4 text-white">
+                  <div className="absolute bottom-0 left-0 p-4 text-white">
                     <Link
                       to={`/${post.slug}`}
                       className="text-lg font-bold leading-snug"
