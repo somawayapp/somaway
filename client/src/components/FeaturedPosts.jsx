@@ -154,7 +154,7 @@ const FeaturedPosts = () => {
   {/* Original Content */}
   <div className="relative  text-left" style={{ zIndex: 2 }}>
   <div className="col-span-3 flex flex-col gap-3">
-  <p className="text-2xl text-[var(--textColor)]  mt-0 sm:mt-[10px] font-bold">Top Headlines</p>
+  <p className="text-2xl text-[var(--textColor)]  mt-6 md:mt-0 lg:mt-0 font-bold">Top Headlines</p>
   {posts.slice(4, 8).map((post, index) => (
     post && (
       <div key={index} className="flex items-top mt-[10px] gap-2">
