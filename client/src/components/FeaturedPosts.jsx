@@ -24,7 +24,7 @@ const FeaturedPosts = () => {
   if (error) return "Something went wrong!" + error.message;
 
   const posts = data.posts;
-  if (!posts || posts.length < 3) {
+  if (!posts || posts.length < 5) {
     return; // Ensure there are at least 3 posts
   }
 
@@ -162,7 +162,53 @@ rounded-none  p-4">
   ></div>
 
   {/* Original Content */}
-  <div className="relative  text-right" style={{ zIndex: 2 }}>
+  <div className="relative  text-left" style={{ zIndex: 2 }}>
+
+
+
+
+
+
+  <div className="col-span-3 flex mb-[2px]  flex-col gap-1">
+  {[posts[1], posts[2],  posts[3],  posts[4],  posts[5]].map((post, index) => post && (
+    <div key={index} className="w-full relative">
+      <Link to={`/${post.slug}`} className="relative">
+        <div className="relative w-full" style={{ paddingTop: '100%' }}> {/* Square container */}
+          
+          <div className="absolute inset-0 bg-black opacity-30" /> {/* Dark overlay */}
+          {/* Post title on top of the image */}
+          <div className="absolute bg-black bg-opacity-25 top-0 left-0 right-0 bottom-0 flex flex-col justify-end p-4"> {/* Align text at bottom */}
+            <div className="text-white text-left">
+           
+              <Link
+                to={`/${post.slug}`}
+                className=" text-lg lg:text-md font-bold leading-snug"
+              >
+                {truncateText(post.title, 75)}
+              </Link>
+<br className="mt-5" /> 
+             
+
+
+            </div>
+          </div>
+        </div>
+      </Link>
+      <div className="flex items-center gap-2 sm:gap-3 text-xs sm:text-sm text-gray-500 mb-1">
+        {/* Empty for now, can add more details if needed */}
+      </div>
+    </div>
+  ))}
+</div>
+
+
+
+
+
+
+
+
+
   <p className="text-[var(--TextColor)]" style={{ fontSize: '1rem' }}>
       BY THE <br />
       <span className="underline">NUMBERS</span>
@@ -171,8 +217,7 @@ rounded-none  p-4">
       <span style={{ fontSize: '1.2rem' }}>OVER</span> 100K+
     </p>
     <p className="text-[var(--TextColor)]" style={{ fontSize: '1rem' }}>
-      USERS READ THIS
-    </p>
+     DAILY READERS   </p>
     <p className="text-[var(--TextColor)]" style={{ fontSize: '1rem' }}>
       ARTICLES EVERYDAY 
     </p>
