@@ -93,7 +93,7 @@ const Homepage = () => {
           <img
             src="/logo3.jpg"
             alt="Newsletter illustration"
-            className="w-full h-full object-cover rounded-l-3xl lg:rounded-l-3xl lg:rounded-r-none"
+            className="w-full h-full object-cover :rounded-r-none"
           />
         </div>
 
