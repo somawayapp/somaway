@@ -8,7 +8,7 @@ import SideMenu from "../components/SideMenu";
 import ThemeToggler from "../components/Theme";
 import Sidebar from "../components/Sidebar2";
 import { ThemeProvider } from "../../themecontext";
-import Navbar from "../components/navbar";
+import Navbar from "../components/Navbar";
 
 
 const Homepage = () => {
