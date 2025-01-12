@@ -8,7 +8,7 @@ import SideMenu from "../components/SideMenu";
 import ThemeToggler from "../components/Theme";
 import Sidebar from "../components/Sidebar2";
 import { ThemeProvider } from "../../themecontext";
-import Navbar from "../components/navbar2";
+import Navbar from "../components/navbar";
 
 
 const Homepage = () => {
@@ -58,7 +58,10 @@ const Homepage = () => {
 
   return (
       <div>
+            <Navbar/>
+
     <div className="mb-9   flex flex-col gap-0">
+
 
       {/* Floating Section */}
       <div
@@ -67,28 +70,61 @@ const Homepage = () => {
  
 >
 
-       
+        {/* 
 
         <Link to="/" className="flex items-center mt-[10px] gap-1 text-lg font-bold md:text-2xl">
-        <img src="/logo.jpg" alt="Logo" className="w-50 h-20 lg:w-50 lg:h-20" />
+        <img src="/x.png" alt="Logo" className="w-50 h-20 lg:w-50 lg:h-20" />
 
 <span className="text-[var(--textLogo)] text-[30px] lg:text-[90px]"></span>
 
-
-
-</Link>
+</Link>  */}
 
       
 
  
       </div>
 
+
+
+      {/* MAIN CONTENT */}
+      <div className="bg-[var(--textColore)] flex flex-col  mb-[60px] lg:flex-row items-center lg:items-stretch gap-6 rounded-3xl">
+        {/* IMAGE SECTION */}
+        <div className="lg:w-1/3 w-full">
+          <img
+            src="/logo3.jpg"
+            alt="Newsletter illustration"
+            className="w-full h-full object-cover rounded-l-3xl lg:rounded-l-3xl lg:rounded-r-none"
+          />
+        </div>
+
+        {/* TEXT AND FORM SECTION */}
+        <div className="lg:w-2/3 w-full flex flex-col justify-center text-white gap-1 p-6">
+          {/* TEXT */}
+          <h2 className="text-sm text-[var(--textColor)] leading-relaxed">        </h2>
+          {/* SUBSCRIPTION FORM */}
+          <form className="flex items-center w-full">
+            <input
+              type="email"
+              placeholder="Enter your email address"
+              className="flex-grow px-4 py-2 text-sm text-[var(--textColor)] border  border-2 border-[var(--bd)] rounded-l-2xl
+               bg-[var(--bd)] focus:outline-none focus:ring-1 focus:ring-[#1da1f2]"
+            />
+            <button
+              type="submit"
+              className="px-6 py-2.5 text-sm bg-[#1da1f2] text-white ml-[-40px] rounded-2xl font-medium hover:bg-blue-700 transition duration-300"
+            >
+              Subscribe
+            </button>   
+          </form>
+        </div>
+      </div>
+
+   {/*
+
       <div  style={{ zIndex: 100004 }} className="mb-[45px] md:mb-[30px] mt-[15px] md:mt-[20px] sticky top-0.5 md:top-2 ">
   <Maincategories />
-
-  
 </div>
-
+     */}
 
    <FeaturedPosts />
 

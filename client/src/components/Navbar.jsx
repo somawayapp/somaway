@@ -18,7 +18,7 @@ const Navbar = () => {
 
     
      // Modify or remove z-index here
-     <div className="relative w-full h-[55px] gap-4 md:h-[55px] flex items-center text-[var(--TextColor)] top-0 justify-between bg-[var(--bg)]">
+     <div style={{ zIndex: 100004 }}  className="relative w-full h-[55px] gap-4 md:h-[55px] flex items-center text-[var(--TextColor)] sticky top-0 justify-between bg-[var(--bg)]">
    
    
 
@@ -27,15 +27,25 @@ const Navbar = () => {
       <img src="/x.png" alt="Logo" className="w-4 h-4 md:w-6 md:h-6" />
       <span className="bg-clip-text text-[var(--textLogo)] hidden md:block lg:block font-impact">tech</span>
 
-
-
-
       {/*   <span className="bg-clip-text text-[#1ADAff] font-impact"></span> */}
 
-
-
-
 </Link>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
       {/* MOBILE MENU */}
@@ -109,6 +119,16 @@ const Navbar = () => {
 
       {/* DESKTOP MENU */}
       <div className="hidden md:flex items-center gap-8 xl:gap-12 font-medium">
+
+        
+<Link to="/" onClick={() => setOpen(false)} className="">Home</Link>
+          <Link to="/newsletter" onClick={() => setOpen(false)}>Newsletter</Link>
+          <Link to="/premium" onClick={() => setOpen(false)}> Premium</Link>
+          <Link to="/settings" onClick={() => setOpen(false)}>Settings</Link>
+          <Link to="/write" onClick={() => setOpen(false)}>Write</Link>
+          <Link  class to="/about" onClick={() => setOpen(false)}>About Us</Link>
+
+
         <SignedOut>
           <Link to="/login">
             <button className="py-2 px-4 rounded-3xl bg-[#1DA1F2] text-white">
