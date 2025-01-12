@@ -87,7 +87,7 @@ const Homepage = () => {
 
 
       {/* MAIN CONTENT */}
-      <div className="bg-[var(--textColore)] flex flex-col  mb-[60px] lg:flex-row items-center lg:items-stretch gap-6 rounded-3xl">
+      <div className="bg-[var(--textColore)] flex flex-col  mb-[40px] lg:flex-row items-center lg:items-stretch gap-6 rounded-none">
         {/* IMAGE SECTION */}
         <div className="lg:w-1/3 w-full">
           <img

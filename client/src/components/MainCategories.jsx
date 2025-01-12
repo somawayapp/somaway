@@ -50,7 +50,8 @@ const MainCategories = () => {
                 Top Trending
               </Link>
               <Link
-                to="/oldest"
+                              to="/posts?sort=oldest"
+
                 className="hover:bg-[var(--bg2)]  hover:text-[var(--textColor2)]  rounded-full px-2 py-1"
               >
               Oldest            
