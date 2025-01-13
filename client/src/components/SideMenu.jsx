@@ -28,11 +28,12 @@ const SideMenu = () => {
     <div
       style={{
         zIndex: "10000",
-        maxHeight: "100vh",
+        maxHeight: "80vh",
         overflowY: "auto", // Make it scrollable if content overflows
       }}
-      className="px-6  py-4 bg-[var(--bg)]  border-2 border-[var(--textColore)]  rounded-lg  sticky top-[90px] flex flex-col gap-4 text-[var(--textColor)] shadow-md"
+            className="side-menu px-6  py-4 bg-[var(--bg)]  border-2 border-[var(--textColore)]  rounded-lg  sticky top-[70px] flex flex-col gap-4 text-[var(--textColor)] shadow-md"
     >
+
       <div>
         <Search/>
         <h1 className="mt-2 mb-4 text-md font-semibold text-[var(--textColor)]">Filter</h1>
