@@ -23,39 +23,71 @@ const PremiumPage = () => {
 
       
       </div>
-
-      {/* TESTIMONIALS */}
-      <div>
-        <h2 className="text-[var(--textLogo)] text-3xl font-semibold mb-4 text-center">
-          What Our Premium Members Say
-        </h2>
-        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-          {["Greg Inseberg", "Lizza carter ", "James Omondi"].map((name, i) => (
-            <div
-              key={i}
-              className="flex flex-col items-center gap-4 bg-[var(--textColore)] p-6 rounded-lg shadow-lg"
-            >
-              
-              {/* Circular Profile Image */}
-              <div className="w-24 h-24 rounded-full overflow-hidden">
-                <img
-            src="/profile.jpg"
-            alt={`${name}`}
-                  className="w-full h-full object-cover"
-                />
-              </div>
-
-              {/* Name and Feedback */}
-              <h3 className="text-lg font-medium text-[var(--textColor)]text-center">
-                {name}
-              </h3>
-              <p className="text-sm text-[var(--textColor)] text-center italic">
-                "Joining Premium has been a game-changer for me. Highly recommend!"
-              </p>
-            </div>
-          ))}
-        </div>
+{/* TESTIMONIALS */}
+<div>
+  <h2 className="text-[var(--textLogo)] text-3xl font-semibold mb-4 text-center">
+    What Our Premium Members Say
+  </h2>
+  <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+    {/* Testimonial 1 */}
+    <div className="flex flex-col items-center gap-4 bg-[var(--textColore)] p-6 rounded-lg shadow-lg">
+      {/* Circular Profile Image */}
+      <div className="w-24 h-24 rounded-full overflow-hidden">
+        <img
+          src="/shaan.jpg"
+          alt="Shaan Puri"
+          className="w-full h-full object-cover"
+        />
       </div>
+      {/* Name and Feedback */}
+      <h3 className="text-lg font-medium text-[var(--textColor)] text-center">
+        Shaan Puri
+      </h3>
+      <p className="text-sm text-[var(--textColor)] text-center italic">
+        "Being part of this community has opened up doors I never imagined. Premium is worth every penny."
+      </p>
+    </div>
+
+    {/* Testimonial 2 */}
+    <div className="flex flex-col items-center gap-4 bg-[var(--textColore)] p-6 rounded-lg shadow-lg">
+      {/* Circular Profile Image */}
+      <div className="w-24 h-24 rounded-full overflow-hidden">
+        <img
+          src="/lizza.webp"
+          alt="Lizza Carter"
+          className="w-full h-full object-cover"
+        />
+      </div>
+      {/* Name and Feedback */}
+      <h3 className="text-lg font-medium text-[var(--textColor)] text-center">
+        Lizza Carter
+      </h3>
+      <p className="text-sm text-[var(--textColor)] text-center italic">
+        "Premium has not only boosted my career but also connected me with incredible people. A must-try!"
+      </p>
+    </div>
+
+    {/* Testimonial 3 */}
+    <div className="flex flex-col items-center gap-4 bg-[var(--textColore)] p-6 rounded-lg shadow-lg">
+      {/* Circular Profile Image */}
+      <div className="w-24 h-24 rounded-full overflow-hidden">
+        <img
+          src="/greg.jpg"
+          alt="Greg Isenberg"
+          className="w-full h-full object-cover"
+        />
+      </div>
+      {/* Name and Feedback */}
+      <h3 className="text-lg font-medium text-[var(--textColor)] text-center">
+        Greg Isenberg
+      </h3>
+      <p className="text-sm text-[var(--textColor)] text-center italic">
+        "I never knew such growth and support could come from an online community. Highly recommended!"
+      </p>
+    </div>
+  </div>
+</div>
+
 
       {/* CALL TO ACTION */}
       <div className="mt-6 text-center">

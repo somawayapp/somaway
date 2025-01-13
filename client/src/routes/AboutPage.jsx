@@ -56,36 +56,64 @@ About Us    </h1>
 
 
       {/* TESTIMONIALS */}
-      <div>
-        <h2 className="text-[var(--textLogo)] text-3xl font-semibold mb-4 text-center">
-          Meet The Team
-        </h2>
-        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-          {["Mbelenzi Lexanda", "John Mandela", "Frank Kimeu"].map((name, i) => (
-            <div
-              key={i}
-              className="flex flex-col items-center gap-4 bg-[var(--textColore)] p-6 rounded-lg shadow-lg"
-            >
-              {/* Circular Profile Image */}
-              <div className="w-24 h-24 rounded-full overflow-hidden">
-                <img
-            src="/profile.jpg"
-            alt={`${name}`}
-                  className="w-full h-full object-cover"
-                />
-              </div>
 
-              {/* Name and Feedback */}
-              <h3 className="text-lg font-medium text-[var(--textColor)] text-center">
-                {name}
-              </h3>
-              <p className="text-sm text-[var(--textColor)] text-center italic">
-                "editor"
-              </p>
-            </div>
-          ))}
-        </div>
+      <div>
+  <h2 className="text-[var(--textLogo)] text-3xl font-semibold mb-4 text-center">
+Meet The Team  </h2>
+  <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+    {/* Testimonial 1 */}
+    <div className="flex flex-col items-center gap-4 bg-[var(--textColore)] p-6 rounded-lg shadow-lg">
+      {/* Circular Profile Image */}
+      <div className="w-24 h-24 rounded-full overflow-hidden">
+        <img
+          src="/profile.jpg"
+          alt="Shaan Puri"
+          className="w-full h-full object-cover"
+        />
       </div>
+      {/* Name and Feedback */}
+      <h3 className="text-lg font-medium text-[var(--textColor)] text-center">
+         Mbelenzi Lexanda      </h3>
+      <p className="text-sm text-[var(--textColor)] text-center italic"> 
+        Chief Editor      </p>
+    </div>
+
+    {/* Testimonial 2 */}
+    <div className="flex flex-col items-center gap-4 bg-[var(--textColore)] p-6 rounded-lg shadow-lg">
+      {/* Circular Profile Image */}
+      <div className="w-24 h-24 rounded-full overflow-hidden">
+        <img
+          src="/lizza.webp"
+          alt="James Oomondi"
+          className="w-full h-full object-cover"
+        />
+      </div>
+      {/* Name and Feedback */}
+      <h3 className="text-lg font-medium text-[var(--textColor)] text-center">
+      James Omondi     </h3>
+      <p className="text-sm text-[var(--textColor)] text-center italic">
+        Senoir Editor      </p>
+    </div>
+
+    {/* Testimonial 3 */}
+    <div className="flex flex-col items-center gap-4 bg-[var(--textColore)] p-6 rounded-lg shadow-lg">
+      {/* Circular Profile Image */}
+      <div className="w-24 h-24 rounded-full overflow-hidden">
+        <img
+          src="/greg.jpg"
+          alt="Mitchell Mukami"
+          className="w-full h-full object-cover"
+        />
+      </div>
+      {/* Name and Feedback */}
+      <h3 className="text-lg font-medium text-[var(--textColor)] text-center">
+       Mitchell Mukami      </h3>
+      <p className="text-sm text-[var(--textColor)] text-center italic">
+        Lead Writter      </p>
+    </div>
+  </div>
+</div>
+
 
       {/* CALL TO ACTION */}
       <div className="mt-6 text-center">
