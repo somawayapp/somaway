@@ -42,7 +42,7 @@ const Search = () => {
       <input
         type="text"
         placeholder="search a post..."
-        className="bg-transparent outline-none w-full"
+        className="bg-transparent text-sm outline-none w-full"
         onKeyDown={handleKeyPress}
       />
     </div>

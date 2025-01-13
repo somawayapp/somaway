@@ -148,11 +148,29 @@ const Write = () => {
           >
             <option value="" disabled>Select a category</option>
             <option value="general">General</option>
-            <option value="web-design">Web Design</option>
-            <option value="development">Development</option>
-            <option value="databases">Databases</option>
-            <option value="seo">SEO</option>
-            <option value="marketing">Marketing</option>
+            <option value="apps">Apps</option>
+            <option value="software">Software</option>
+            <option value="health">Health</option>
+            <option value="climate">Climate</option>
+            <option value="cloud">Cloud</option>
+            <option value="commerce">Commerce</option>
+            <option value="crypto">Crypto</option>
+            <option value="fintech">Fintech</option>
+            <option value="gamming">Gaming</option>
+            <option value="gadgets">Gadgets</option>
+            <option value="security">Security</option>
+            <option value="space">Space</option> 
+            <option value="startups">Startups</option>
+            <option value="transportation">Transportation </option>
+            <option value="hardware">Hardware</option>
+            <option value="ai-robotics">AI& Robotics</option>
+            <option value="entertainment">Entertainment </option>
+            <option value="media">Media</option>
+            <option value="industrial">Industrial</option>
+            <option value="engineering">Engineering</option>
+            <option value="energy">Energy</option>
+            <option value="science">Science</option>
+           
           </select>
         </div>
 

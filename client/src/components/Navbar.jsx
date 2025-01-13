@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 import { SignedIn, SignedOut, UserButton } from "@clerk/clerk-react";
 import ThemeToggler from "./Theme";
 import "../index.css"; // Assuming styles are in App.css
-import Search from "./Search2";
+import Search from "./Search";
 
 const Navbar = () => {
   const [open, setOpen] = useState(false);
@@ -57,17 +57,17 @@ const Navbar = () => {
         >
           <div className="flex flex-col gap-1">
             <div
-              className={`h-[1px] rounded-md w-0.5 bg-[var(--textColor)] origin-left transition-all ease-in-out ${
+              className={`h-[1px] rounded-md w-4 bg-[var(--textColor)] origin-left transition-all ease-in-out ${
                 open && "rotate-45"
               }`}
             ></div>
             <div
-              className={`h-[1px] rounded-md w-0.5  bg-[var(--textColor)] transition-all ease-in-out ${
+              className={`h-[1px] rounded-md w-4 bg-[var(--textColor)] transition-all ease-in-out ${
                 open && "opacity-0"
               }`}
             ></div>
             <div
-              className={`h-[1px] rounded-md w-0.5 bg-[var(--textColor)] origin-left transition-all ease-in-out ${
+              className={`h-[1px] rounded-md w-4 bg-[var(--textColor)] origin-left transition-all ease-in-out ${
                 open && "-rotate-45"
               }`}
             ></div>
@@ -84,26 +84,120 @@ const Navbar = () => {
 
         {/* MOBILE LINK LIST */}
         <div
-          className={`w-[75%] h-screen bg-[var(--bg)] flex flex-col p-5 pt-7 items-left justify-left text-[var(--TextColor)] gap-8 font-sm text-md fixed top-0 right-0 transition-transform ease-in-out z-50 ${
+          className={`w-[100%] h-cover bg-[#1da1f2] flex flex-col p-5  items-left justify-left  text-[var(--TextColor)] 
+            gap-8 font-sm text-md fixed top-0 right-0  transition-transform ease-in-out z-50 ${
             open ? "translate-x-0" : "translate-x-full"
           }`}
         >
+<div>
+
+</div>
+<Search/>
+
           <button
-            className="absolute top-4 right-4 text-md text-[var(--TextColor)]"
+            className="absolute top-2  right-8 text-md text-[var(--TextColor)]"
             onClick={() => setOpen(false)}
           >
             ✕
           </button>
 
-        
 
-          <Link to="/" onClick={() => setOpen(false)} className="">Home</Link>
-          <Link to="/newsletter" onClick={() => setOpen(false)}>Newsletter</Link>
-          <Link to="/premium" onClick={() => setOpen(false)}> Premium</Link>
-          <Link to="/settings" onClick={() => setOpen(false)}>Settings</Link>
-          <Link to="/write" onClick={() => setOpen(false)}>Write</Link>
-          <Link to="/about" onClick={() => setOpen(false)}>About Us</Link>
-          
+<div className="flex flex-row">
+
+
+         <div>
+          <Link
+            to="/posts"
+            className="block py-2 text-white hover:bg-gray-500 p-2 rounded-xl "
+          >
+            All Posts
+          </Link>
+          <Link
+            to="/posts?cat=web-design"
+            className="block py-2 text-white hover:bg-gray-500 p-2 rounded-xl"
+          >
+            Web Design
+          </Link>
+          <Link
+            to="/posts?cat=development"
+            className="block py-2 text-white hover:bg-gray-500 p-2 rounded-xl"
+          >
+            Development
+          </Link>
+          <Link
+            to="/posts?cat=databases"
+            className="block py-2 text-white hover:bg-gray-500 p-2 rounded-xl"
+          >
+            Databases
+          </Link>
+          <Link
+            to="/posts?cat=seo"
+            className="block py-2 text-white hover:bg-gray-500 p-2 rounded-xl"
+          >
+            Search Engines
+          </Link>
+          <Link
+            to="/posts?cat=marketing"
+            className="block py-2 text-white hover:bg-gray-500 p-2 rounded-xl"
+          >
+            Marketing
+          </Link>
+        </div>
+
+
+
+
+        <div>
+          <Link
+            to="/posts?sort=newest"
+            className="block py-2 text-white hover:bg-gray-500 p-2 rounded-xl "
+          >Newest          </Link>
+          <Link
+            to="/posts?sort=popular"
+            className="block py-2 text-white hover:bg-gray-500 p-2 rounded-xl"
+          > Popular          </Link>
+          <Link
+            to="/posts?sort=trending"
+            className="block py-2 text-white hover:bg-gray-500 p-2 rounded-xl"
+          > Trending
+          </Link>
+          <Link
+            to="/posts?sort=oldest"
+            className="block py-2 text-white hover:bg-gray-500 p-2 rounded-xl"
+              > Oldest         </Link>
+        
+        </div>
+
+
+
+
+        <div>
+          <Link
+            to="/newsletter"
+            className="block py-2 text-white hover:bg-gray-500 p-2 rounded-xl "
+          >Newsletter          </Link>
+          <Link
+            to="/premium"
+            className="block py-2 text-white hover:bg-gray-500 p-2 rounded-xl"
+          > Premium          </Link>
+          <Link
+            to="/about"
+            className="block py-2 text-white hover:bg-gray-500 p-2 rounded-xl"
+          > About Us 
+          </Link>
+          <Link
+            to="/settings"
+            className="block py-2 text-white hover:bg-gray-500 p-2 rounded-xl"
+              > Settings          </Link>
+           <Link
+            to="/write"
+            className="block py-2 text-white hover:bg-gray-500 p-2 rounded-xl"
+              > Write          </Link>
+        </div>
+        
+        </div>
+
+       
 
           <SignedOut>
             <Link to="/login" onClick={() => setOpen(false)}>
@@ -112,21 +206,19 @@ const Navbar = () => {
               </button>
             </Link>
           </SignedOut>
-          <ThemeToggler />
 
         </div>
       </div>
 
       {/* DESKTOP MENU */}
-      <div className="hidden md:flex items-center gap-8 xl:gap-12 font-medium">
+      <div className="hidden md:flex items-center gap-8 xl:gap-12  font-medium">
 
-        
-<Link to="/" onClick={() => setOpen(false)} className="">Home</Link>
-          <Link to="/newsletter" onClick={() => setOpen(false)}>Newsletter</Link>
-          <Link to="/premium" onClick={() => setOpen(false)}> Premium</Link>
-          <Link to="/settings" onClick={() => setOpen(false)}>Settings</Link>
-          <Link to="/write" onClick={() => setOpen(false)}>Write</Link>
-          <Link  class to="/about" onClick={() => setOpen(false)}>About Us</Link>
+<Link className="hover:text-[#1DA1F2] " to="/" onClick={() => setOpen(false)} >Home</Link>
+          <Link className="hover:text-[#1DA1F2] " to="/newsletter" onClick={() => setOpen(false)}>Newsletter</Link>
+          <Link className="hover:text-[#1DA1F2] " to="/premium" onClick={() => setOpen(false)}> Premium</Link>
+          <Link className="hover:text-[#1DA1F2] " to="/settings" onClick={() => setOpen(false)}>Settings</Link>
+          <Link className="hover:text-[#1DA1F2] " to="/write" onClick={() => setOpen(false)}>Write</Link>
+          <Link className="hover:text-[#1DA1F2] " to="/about" onClick={() => setOpen(false)}>About Us</Link>
 
 
         <SignedOut>

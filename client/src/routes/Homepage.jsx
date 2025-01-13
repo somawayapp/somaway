@@ -87,7 +87,8 @@ const Homepage = () => {
 
 
       {/* MAIN CONTENT */}
-      <div className="bg-[var(--textColore)] flex flex-col  mb-[40px] lg:flex-row items-center lg:items-stretch gap-6 rounded-none">
+      <div className="bg-[var(--textColore)] flex flex-col border  border-2 border-[var(--textColore)]   mb-[40px] lg:flex-row items-center
+       lg:items-stretch gap-6 rounded-none">
         {/* IMAGE SECTION */}
         <div className="lg:w-1/3 w-full">
           <img
@@ -98,23 +99,27 @@ const Homepage = () => {
         </div>
 
         {/* TEXT AND FORM SECTION */}
-        <div className="lg:w-2/3 w-full flex flex-col justify-center text-white gap-1 p-6">
+        <div className="lg:w-2/3 w-full flex flex-col justify-center text-white gap-1 p-2">
           {/* TEXT */}
           <h2 className="text-sm text-[var(--textColor)] leading-relaxed">        </h2>
           {/* SUBSCRIPTION FORM */}
-          <form className="flex items-center w-full">
+          <form className="flex   items-center w-full">
             <input
               type="email"
               placeholder="Enter your email address"
-              className="flex-grow px-4 py-2 text-sm text-[var(--textColor)] border  border-2 border-[var(--bd)] rounded-l-2xl
-               bg-[var(--bd)] focus:outline-none focus:ring-1 focus:ring-[#1da1f2]"
+              className="flex-grow px-4 py-2 text-sm  text-[var(--textColor)] border  border-1 border-[var(--softTextColor7)] rounded-full
+               bg-[var(--textColore)] focus:outline-none focus:ring-1 focus:ring-[#0875b9]"
             />
+            <Link to="/login">
+
             <button
               type="submit"
-              className="px-6 py-2.5 text-sm bg-[#1da1f2] text-white ml-[-40px] rounded-2xl font-medium hover:bg-blue-700 transition duration-300"
+              className="px-6 py-2.5 text-sm bg-[#1da1f2] text-white ml-[-110px] rounded-full font-medium hover:bg-[#0875b9]
+              transition duration-300"
             >
               Subscribe
             </button>   
+            </Link>
           </form>
         </div>
       </div>

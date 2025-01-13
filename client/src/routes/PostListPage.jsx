@@ -7,6 +7,7 @@ import Search from "../components/Search";
 import { Link } from "react-router-dom";
 import Sidebar from "../components/Sidebar2";
 import MainCategories from "../components/MainCategories";
+import Navbar from "../components/Navbar";
 
 const PostListPage = () => {
   const [open, setOpen] = useState(false);
@@ -33,10 +34,15 @@ const PostListPage = () => {
 
   return (
     <div  className="  ">
+       <Navbar/>
+   {/*
+
 <div  style={{ zIndex: 100004 }} className="mb-[22px] md:mb-[25px] mt-[15px] md:mt-[20px] sticky top-0.5 md:top-2 ">
  <MainCategories/>
-
 </div>
+     */}
+<div   className="mb-[22px] md:mb-[25px] mt-[15px] md:mt-[20px] sticky top-0.5 md:top-2 "></div>
+
       <div className="flex flex-row  text-[var(--textColor)] justify-between">
       <div className="w-full md:w-3/4 pr-0  text-[var(--textColor)] md:pr-10">
      

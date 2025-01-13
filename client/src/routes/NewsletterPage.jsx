@@ -4,7 +4,7 @@ const NewsletterPage = () => {
   return (
     <div className="mt-4 px-6 md:px-12 lg:px-24 flex flex-col gap-12">
       {/* BREADCRUMB */}
-      <div className="flex gap-2 text-sm text-gray-600">
+      <div className="flex gap-2 text-sm text-[var(--textColor)]">
         <Link to="/" className="hover:text-blue-800">
           Home
         </Link>
@@ -28,39 +28,41 @@ const NewsletterPage = () => {
         {/* IMAGE SECTION */}
         <div className="lg:w-1/3 w-full">
           <img
-            src="/news.svg"
+            src="/newsletter.jpg"
             alt="Newsletter illustration"
-            className="w-full h-full object-cover rounded-l-lg lg:rounded-l-lg lg:rounded-r-none"
+            className="w-full h-full object-cover rounded-t-lg lg:rounded-l-lg lg:rounded-r-none "
           />
         </div>
 
-        {/* TEXT AND FORM SECTION */}
-        <div className="lg:w-2/3 w-full flex flex-col justify-center text-white gap-6 p-6">
+        <div className="lg:w-2/3 w-full flex flex-col justify-center text-[var(--textColor)] gap-1 p-2 lg:p-6 md:p-4">
           {/* TEXT */}
-          <h2 className="text-md pb-9 pt-9 leading-relaxed">
+          <h2 className="text-md pb-4 pt-0  md:pt-9 md:pb-9 leading-relaxed">
           Welcome to Xtech. Every day we'll send you the world's most important tech news, 
           with a hint of wit and humor, so that you start your day informed, knowledgeable, and ready to go.          </h2>
-          {/* SUBSCRIPTION FORM */}
-          <form className="flex items-center  pb-20 w-full">
+        {/* TEXT AND FORM SECTION */}          {/* SUBSCRIPTION FORM */}
+          <form className="flex  mb-[30px] md:mb-[60px] items-center w-full">
             <input
               type="email"
               placeholder="Enter your email address"
-              className="flex-grow px-4 py-2 border border-2 border-gray-300 rounded-l-2xl focus:outline-none focus:ring-1 focus:ring-[#1da1f2]"
+              className="flex-grow px-4 py-2 text-sm  text-[var(--textColor)] border  border-1 border-[var(--softTextColor7)] rounded-full
+               bg-[var(--textColore)] focus:outline-none focus:ring-1 focus:ring-[#0875b9]"
             />
+                        <Link to="/login">
+
             <button
               type="submit"
-              className="px-6 py-2.5 bg-[#1da1f2] text-white rounded-r-2xl font-medium hover:bg-blue-700 transition duration-300"
+              className="px-6 py-2.5 text-sm bg-[#1da1f2] text-white ml-[-110px] rounded-full font-medium hover:bg-[#0875b9]
+              transition duration-300"
             >
               Subscribe
             </button>
+            </Link>
+
           </form>
         </div>
       </div>
       <p>
-        on small screens make the image rounded only at the tops
-        reduce the  padding top and bottoms of the text and input bar on small screens
-        the input section is spanning past the screen width on small screens i think it is too long
-        add a button checkout our latest send
+      
       </p>
     </div>
   );

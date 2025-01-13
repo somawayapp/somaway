@@ -21,7 +21,8 @@ const ThemeToggler = () => {
   return (
     <button
       onClick={toggleTheme}
-      className="p-2 rounded-md bg-gray-200 dark:bg-gray-800 text-black dark:text-white transition-colors flex items-center justify-center"
+      className="p-2 bg-[#1da1f2] text-white rounded-full font-medium hover:bg-[#0875b9]
+        text-black dark:text-white transition-colors flex items-center justify-center"
     >
       {theme === "light" ? (
         // Moon icon for dark mode

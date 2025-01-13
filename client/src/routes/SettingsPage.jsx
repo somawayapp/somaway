@@ -1,68 +1,84 @@
 import { Link } from "react-router-dom";
-
+import ThemeToggler from "../components/Theme";
+import { SignedIn, SignedOut, UserButton } from "@clerk/clerk-react";
 
 const SettingsPage = () => {
   return (
-    <div className="mt-4 flex flex-col gap-4">
+    <div className="mt-4 px-6 md:px-12 lg:px-24 flex flex-col gap-12">
       {/* BREADCRUMB */}
-      <div className="flex gap-4">
-        <Link to="/">Home</Link>
-        <span>•</span>
-        <span className="text-blue-800">Blogs and Articles</span>
-      </div>
-      {/* INTRODUCTION */}
-      <div className="flex items-center justify-between">
-        {/* titles */}
-        <div className="">
-          <h1 className="text-gray-800 text-2xl md:text-3xl lg:text-4xl font-bold">
-          Become smarter in just 5 minutes
-          </h1>
-          <p className="mt-4 text-md md:text-xl">
-          Hoolicon delivers quick and insightful updates about the tech world   </p>
-          <p className=" text-md md:text-xl">
-          Subscribe to Hoolicon: Your 5-minute brief on latest tech news.
-          </p>
-        </div>
-        {/* animated button */}
-        <Link to="write" className="hidden md:block relative">
-          <svg
-            viewBox="0 0 200 200"
-            width="200"
-            height="200"
-            // className="text-lg tracking-widest animate-spin animatedButton"
-            className="text-lg tracking-widest"
-          >
-            <path
-              id="circlePath"
-              fill="none"
-              d="M 100, 100 m -75, 0 a 75,75 0 1,1 150,0 a 75,75 0 1,1 -150,0"
-            />
-            <text>
-              <textPath href="#circlePath" startOffset="0%">
-                Write your story •
-              </textPath>
-              <textPath href="#circlePath" startOffset="50%">
-                Share your idea •
-              </textPath>
-            </text>
-          </svg>
-          <button className="absolute top-0 left-0 right-0 bottom-0 m-auto w-20 h-20 bg-blue-800 rounded-full flex items-center justify-center">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 24 24"
-              width="50"
-              height="50"
-              fill="none"
-              stroke="white"
-              strokeWidth="2"
-            >
-              <line x1="6" y1="18" x2="18" y2="6" />
-              <polyline points="9 6 18 6 18 15" />
-            </svg>
-          </button>
+      <div className="flex gap-2 text-sm text-[var(--textColor)]">
+        <Link to="/" className="hover:text-blue-800">
+          Home
         </Link>
+        <span>•</span>
+        <span className="text-[#1da1f2]">Settings</span>
       </div>
-   
+
+      {/* INTRODUCTION */}
+      <div className="text-center flex flex-col gap-4">
+        <h1 className="text-[#1da1f2] text-3xl md:text-4xl lg:text-5xl font-bold">
+          Settings
+        </h1>
+        
+
+      
+      </div>
+
+      {/* TESTIMONIALS */}
+      <div>
+        <h2 className="text-[var(--textLogo)] text-3xl font-semibold mb-4 text-center">
+       Edit your profile        </h2>
+        <div className="grid gap-6">
+          {["Profile settings"].map((name, i) => (
+            <div
+              key={i}
+              className="flex flex-col items-center gap-4 bg-[var(--textColore)] p-6 rounded-lg shadow-lg"
+            >
+              
+              {/* Circular Profile Image */}
+              <div className="w-24 h-24 rounded-full overflow-hidden">
+              <SignedOut>
+          <Link to="/login">
+            <button className="py-2 px-4 rounded-3xl bg-[#1DA1F2] text-white">
+              Login 👋
+            </button>
+          </Link>
+        </SignedOut>
+
+        <SignedIn>
+          <UserButton />
+        </SignedIn>
+              </div>
+
+              {/* Name and Feedback */}
+              <h3 className="text-lg font-medium text-[var(--textColor)] text-center">
+                {name}
+              </h3>
+              <p className="text-sm text-[var(--textColor)] text-center italic">
+Click on the profile image to edit your profile/ <span className=" text-[#1da1f2]  hover:text-[#0875b9]">  <Link to="/login">  Login</Link>   </span>               </p>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* CALL TO ACTION */}
+      <div className="mt-6 text-center">
+        <h3 className="text-[var(--textLogo)] text-xl font-semibold mb-2">
+          Change color theme?
+        </h3>
+        <p className="text-md text-[var(--textColor)] leading-relaxed">
+Click on the toogle button below to the chnage the theme between light mode and dark mode        </p>
+        <Link
+          className="mt-4 inline-block px-6 mb-[35px] py-2 bg-[#1da1f2]  rounded-full font-medium hover:bg-[#0875b9] transition duration-300"
+        >
+                   <ThemeToggler />
+
+        </Link>
+
+
+      </div>
+
+      
     </div>
   );
 };

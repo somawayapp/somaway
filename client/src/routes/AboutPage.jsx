@@ -5,7 +5,7 @@ const PremiumPage = () => {
   return (
     <div className="mt-4 px-6 md:px-12 lg:px-24 flex flex-col gap-12">
       {/* BREADCRUMB */}
-      <div className="flex gap-2 text-sm text-gray-600">
+      <div className="flex gap-2 text-sm text-[var(--textColor)]">
         <Link to="/" className="hover:text-blue-800">
           Home
         </Link>
@@ -61,7 +61,7 @@ About Us    </h1>
           Meet The Team
         </h2>
         <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-          {["Jane Doe", "John Smith", "Emily Carter"].map((name, i) => (
+          {["Mbelenzi Lexanda", "John Mandela", "Frank Kimeu"].map((name, i) => (
             <div
               key={i}
               className="flex flex-col items-center gap-4 bg-[var(--textColore)] p-6 rounded-lg shadow-lg"
@@ -69,17 +69,17 @@ About Us    </h1>
               {/* Circular Profile Image */}
               <div className="w-24 h-24 rounded-full overflow-hidden">
                 <img
-                  src={`https://via.placeholder.com/150`}
-                  alt={`${name}`}
+            src="/profile.jpg"
+            alt={`${name}`}
                   className="w-full h-full object-cover"
                 />
               </div>
 
               {/* Name and Feedback */}
-              <h3 className="text-lg font-medium text-gray-800 text-center">
+              <h3 className="text-lg font-medium text-[var(--textColor)] text-center">
                 {name}
               </h3>
-              <p className="text-sm text-gray-600 text-center italic">
+              <p className="text-sm text-[var(--textColor)] text-center italic">
                 "editor"
               </p>
             </div>
@@ -103,8 +103,9 @@ About Us    </h1>
             href="mailto:contact@xtech.com"
             className="text-[#1da1f2] underline ml-1"
           >
-            contact@xtech.com
+            xtechnewsletter@gmail.com
           </a>
+          or call our hotline +254703394794
           .
         </p>
       </div>
@@ -119,7 +120,7 @@ About Us    </h1>
           minutes.
         </p>
         <Link
-          to="/subscribe"
+          to="/newsletter"
           className="mt-4 inline-block px-6 py-2 bg-[#1da1f2]  mb-[150px] text-white rounded-full font-medium hover:bg-blue-700 transition duration-300"
         >
           Subscribe Now
