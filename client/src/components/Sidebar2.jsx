@@ -63,12 +63,31 @@ const Sidebar = () => {
         <h1 className="mt-2 mb-4 text-md font-semibold text-[var(--textColor)] text-right">Categories</h1>
         <div className="flex pb-9 flex-col gap-3 text-sm text-right">
           {[
-            { label: "All Posts", category: "general" },
-            { label: "Web Design", category: "web-design" },
-            { label: "Development", category: "development" },
-            { label: "Databases", category: "databases" },
-            { label: "Search Engines", category: "seo" },
-            { label: "Marketing", category: "marketing" },
+          
+              { label: "All Posts", category: "general" },
+              { label: "Apps", category: "apps" },
+              { label: "Software", category: "software" },
+              { label: "Health", category: "health" },
+              { label: "Climate", category: "climate" },
+              { label: "Cloud", category: "cloud" },
+              { label: "Commerce", category: "commerce" },
+              { label: "Crypto", category: "crypto" },
+              { label: "Fintech", category: "fintech" },
+              { label: "Gaming", category: "gaming" },
+              { label: "Gadgets", category: "gadgets" },
+              { label: "Security", category: "security" },
+              { label: "Space", category: "space" },
+              { label: "Startups", category: "startups" },
+              { label: "Transportation", category: "transportation" },
+              { label: "Hardware", category: "hardware" },
+              { label: "AI & Robotics", category: "ai-robotics" },
+              { label: "Entertainment", category: "entertainment" },
+              { label: "Media", category: "media" },
+              { label: "Industrial", category: "industrial" },
+              { label: "Engineering", category: "engineering" },
+              { label: "Energy", category: "energy" },
+              { label: "Science", category: "science" },
+                    
           ].map((cat) => (
             <span
             key={cat.category}

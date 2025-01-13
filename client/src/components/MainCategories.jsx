@@ -150,43 +150,146 @@ const MainCategories = () => {
         <div className="flex flex-row  absolute top-full mt-2 left-0 w-full text-[14px] gap-1  md:gap-24 rounded-2xl shadow-lg bg-[#1da1f2]/95 p-4 z-10">
          
          <div>
-          <Link
-            to="/posts"
-            className="block py-2 text-white hover:bg-gray-500 p-2 rounded-xl "
-          >
-            All Posts
-          </Link>
-          <Link
-            to="/posts?cat=web-design"
-            className="block py-2 text-white hover:bg-gray-500 p-2 rounded-xl"
-          >
-            Web Design
-          </Link>
-          <Link
-            to="/posts?cat=development"
-            className="block py-2 text-white hover:bg-gray-500 p-2 rounded-xl"
-          >
-            Development
-          </Link>
-          <Link
-            to="/posts?cat=databases"
-            className="block py-2 text-white hover:bg-gray-500 p-2 rounded-xl"
-          >
-            Databases
-          </Link>
-          <Link
-            to="/posts?cat=seo"
-            className="block py-2 text-white hover:bg-gray-500 p-2 rounded-xl"
-          >
-            Search Engines
-          </Link>
-          <Link
-            to="/posts?cat=marketing"
-            className="block py-2 text-white hover:bg-gray-500 p-2 rounded-xl"
-          >
-            Marketing
-          </Link>
-        </div>
+  <Link
+    to="/posts"
+    className="block py-2 text-white hover:bg-gray-500 p-2 rounded-xl"
+  >
+    All Posts
+  </Link>
+  <Link
+    to="/posts?cat=apps"
+    className="block py-2 text-white hover:bg-gray-500 p-2 rounded-xl"
+  >
+    Apps
+  </Link>
+  <Link
+    to="/posts?cat=software"
+    className="block py-2 text-white hover:bg-gray-500 p-2 rounded-xl"
+  >
+    Software
+  </Link>
+  <Link
+    to="/posts?cat=health"
+    className="block py-2 text-white hover:bg-gray-500 p-2 rounded-xl"
+  >
+    Health
+  </Link>
+  <Link
+    to="/posts?cat=climate"
+    className="block py-2 text-white hover:bg-gray-500 p-2 rounded-xl"
+  >
+    Climate
+  </Link>
+  <Link
+    to="/posts?cat=cloud"
+    className="block py-2 text-white hover:bg-gray-500 p-2 rounded-xl"
+  >
+    Cloud
+  </Link>
+  <Link
+    to="/posts?cat=commerce"
+    className="block py-2 text-white hover:bg-gray-500 p-2 rounded-xl"
+  >
+    Commerce
+  </Link>
+  <Link
+    to="/posts?cat=crypto"
+    className="block py-2 text-white hover:bg-gray-500 p-2 rounded-xl"
+  >
+    Crypto
+  </Link>
+  <Link
+    to="/posts?cat=fintech"
+    className="block py-2 text-white hover:bg-gray-500 p-2 rounded-xl"
+  >
+    Fintech
+  </Link>
+  <Link
+    to="/posts?cat=gaming"
+    className="block py-2 text-white hover:bg-gray-500 p-2 rounded-xl"
+  >
+    Gaming
+  </Link>
+  <Link
+    to="/posts?cat=gadgets"
+    className="block py-2 text-white hover:bg-gray-500 p-2 rounded-xl"
+  >
+    Gadgets
+  </Link>
+  <Link
+    to="/posts?cat=security"
+    className="block py-2 text-white hover:bg-gray-500 p-2 rounded-xl"
+  >
+    Security
+  </Link>
+  <Link
+    to="/posts?cat=space"
+    className="block py-2 text-white hover:bg-gray-500 p-2 rounded-xl"
+  >
+    Space
+  </Link>
+  <Link
+    to="/posts?cat=startups"
+    className="block py-2 text-white hover:bg-gray-500 p-2 rounded-xl"
+  >
+    Startups
+  </Link>
+  <Link
+    to="/posts?cat=transportation"
+    className="block py-2 text-white hover:bg-gray-500 p-2 rounded-xl"
+  >
+    Transportation
+  </Link>
+  <Link
+    to="/posts?cat=hardware"
+    className="block py-2 text-white hover:bg-gray-500 p-2 rounded-xl"
+  >
+    Hardware
+  </Link>
+  <Link
+    to="/posts?cat=ai-robotics"
+    className="block py-2 text-white hover:bg-gray-500 p-2 rounded-xl"
+  >
+    AI & Robotics
+  </Link>
+  <Link
+    to="/posts?cat=entertainment"
+    className="block py-2 text-white hover:bg-gray-500 p-2 rounded-xl"
+  >
+    Entertainment
+  </Link>
+  <Link
+    to="/posts?cat=media"
+    className="block py-2 text-white hover:bg-gray-500 p-2 rounded-xl"
+  >
+    Media
+  </Link>
+  <Link
+    to="/posts?cat=industrial"
+    className="block py-2 text-white hover:bg-gray-500 p-2 rounded-xl"
+  >
+    Industrial
+  </Link>
+  <Link
+    to="/posts?cat=engineering"
+    className="block py-2 text-white hover:bg-gray-500 p-2 rounded-xl"
+  >
+    Engineering
+  </Link>
+  <Link
+    to="/posts?cat=energy"
+    className="block py-2 text-white hover:bg-gray-500 p-2 rounded-xl"
+  >
+    Energy
+  </Link>
+  <Link
+    to="/posts?cat=science"
+    className="block py-2 text-white hover:bg-gray-500 p-2 rounded-xl"
+  >
+    Science
+  </Link>
+</div>
+
 
 
 
