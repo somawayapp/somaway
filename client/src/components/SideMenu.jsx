@@ -31,7 +31,7 @@ const SideMenu = () => {
         maxHeight: "100vh",
         overflowY: "auto", // Make it scrollable if content overflows
       }}
-      className="px-6  py-4 bg-[var(--bg)]  border-2 border-[var(--textColore)]  rounded-lg  sticky top-[120px] flex flex-col gap-4 text-[var(--textColor)] shadow-md"
+      className="px-6  py-4 bg-[var(--bg)]  border-2 border-[var(--textColore)]  rounded-lg  sticky top-[90px] flex flex-col gap-4 text-[var(--textColor)] shadow-md"
     >
       <div>
         <Search/>
