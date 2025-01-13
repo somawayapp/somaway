@@ -84,10 +84,11 @@ const Navbar = () => {
 
         {/* MOBILE LINK LIST */}
         <div
-          className={`w-[100%] h-cover bg-[#1da1f2] flex flex-col p-5  items-left justify-left  text-[var(--TextColor)] 
+          className={`w-[100%]  overflow-y-auto h-cover bg-[#1da1f2] flex flex-col p-5  mb-[60px]items-left justify-left  text-[var(--TextColor)] 
             gap-8 font-sm text-md fixed top-0 right-0  transition-transform ease-in-out z-50 ${
             open ? "translate-x-0" : "translate-x-full"
-          }`}
+          }`}   style={{ maxHeight: "100vh" }}
+
         >
 <div>
 
@@ -109,139 +110,141 @@ const Navbar = () => {
   <Link
     to="/posts"
     className="block py-2 text-white hover:bg-gray-500 p-2 rounded-xl"
+   onClick={() => setOpen(false)}    
+
   >
     All Posts
   </Link>
   <Link
     to="/posts?cat=apps"
     className="block py-2 text-white hover:bg-gray-500 p-2 rounded-xl"
-  >
+   onClick={() => setOpen(false)}  >
     Apps
   </Link>
   <Link
     to="/posts?cat=software"
     className="block py-2 text-white hover:bg-gray-500 p-2 rounded-xl"
-  >
+   onClick={() => setOpen(false)}  >
     Software
   </Link>
   <Link
     to="/posts?cat=health"
     className="block py-2 text-white hover:bg-gray-500 p-2 rounded-xl"
-  >
+   onClick={() => setOpen(false)}  >
     Health
   </Link>
   <Link
     to="/posts?cat=climate"
     className="block py-2 text-white hover:bg-gray-500 p-2 rounded-xl"
-  >
+   onClick={() => setOpen(false)}  >
     Climate
   </Link>
   <Link
     to="/posts?cat=cloud"
     className="block py-2 text-white hover:bg-gray-500 p-2 rounded-xl"
-  >
+   onClick={() => setOpen(false)}  >
     Cloud
   </Link>
   <Link
     to="/posts?cat=commerce"
     className="block py-2 text-white hover:bg-gray-500 p-2 rounded-xl"
-  >
+   onClick={() => setOpen(false)}  >
     Commerce
   </Link>
   <Link
     to="/posts?cat=crypto"
     className="block py-2 text-white hover:bg-gray-500 p-2 rounded-xl"
-  >
+   onClick={() => setOpen(false)}  >
     Crypto
   </Link>
   <Link
     to="/posts?cat=fintech"
     className="block py-2 text-white hover:bg-gray-500 p-2 rounded-xl"
-  >
+   onClick={() => setOpen(false)}  >
     Fintech
   </Link>
   <Link
     to="/posts?cat=gaming"
     className="block py-2 text-white hover:bg-gray-500 p-2 rounded-xl"
-  >
+   onClick={() => setOpen(false)}  >
     Gaming
   </Link>
   <Link
     to="/posts?cat=gadgets"
     className="block py-2 text-white hover:bg-gray-500 p-2 rounded-xl"
-  >
+   onClick={() => setOpen(false)}  >
     Gadgets
   </Link>
   <Link
     to="/posts?cat=security"
     className="block py-2 text-white hover:bg-gray-500 p-2 rounded-xl"
-  >
+   onClick={() => setOpen(false)}  >
     Security
   </Link>
   <Link
     to="/posts?cat=space"
     className="block py-2 text-white hover:bg-gray-500 p-2 rounded-xl"
-  >
+   onClick={() => setOpen(false)}  >
     Space
   </Link>
   <Link
     to="/posts?cat=startups"
     className="block py-2 text-white hover:bg-gray-500 p-2 rounded-xl"
-  >
+   onClick={() => setOpen(false)}  >
     Startups
   </Link>
   <Link
     to="/posts?cat=transportation"
     className="block py-2 text-white hover:bg-gray-500 p-2 rounded-xl"
-  >
+   onClick={() => setOpen(false)}  >
     Transportation
   </Link>
   <Link
     to="/posts?cat=hardware"
     className="block py-2 text-white hover:bg-gray-500 p-2 rounded-xl"
-  >
+   onClick={() => setOpen(false)}  >
     Hardware
   </Link>
   <Link
     to="/posts?cat=ai-robotics"
     className="block py-2 text-white hover:bg-gray-500 p-2 rounded-xl"
-  >
+   onClick={() => setOpen(false)}  >
     AI & Robotics
   </Link>
   <Link
     to="/posts?cat=entertainment"
     className="block py-2 text-white hover:bg-gray-500 p-2 rounded-xl"
-  >
+   onClick={() => setOpen(false)}  >
     Entertainment
   </Link>
   <Link
     to="/posts?cat=media"
     className="block py-2 text-white hover:bg-gray-500 p-2 rounded-xl"
-  >
+   onClick={() => setOpen(false)}  >
     Media
   </Link>
   <Link
     to="/posts?cat=industrial"
     className="block py-2 text-white hover:bg-gray-500 p-2 rounded-xl"
-  >
+   onClick={() => setOpen(false)}  >
     Industrial
   </Link>
   <Link
     to="/posts?cat=engineering"
     className="block py-2 text-white hover:bg-gray-500 p-2 rounded-xl"
-  >
+   onClick={() => setOpen(false)}  >
     Engineering
   </Link>
   <Link
     to="/posts?cat=energy"
     className="block py-2 text-white hover:bg-gray-500 p-2 rounded-xl"
-  >
+   onClick={() => setOpen(false)}  >
     Energy
   </Link>
   <Link
     to="/posts?cat=science"
     className="block py-2 text-white hover:bg-gray-500 p-2 rounded-xl"
-  >
+   onClick={() => setOpen(false)}  >
     Science
   </Link>
 </div>
@@ -258,16 +261,16 @@ const Navbar = () => {
           <Link
             to="/posts?sort=popular"
             className="block py-2 text-white hover:bg-gray-500 p-2 rounded-xl"
-          > Popular          </Link>
+   onClick={() => setOpen(false)}          > Popular          </Link>
           <Link
             to="/posts?sort=trending"
             className="block py-2 text-white hover:bg-gray-500 p-2 rounded-xl"
-          > Trending
+   onClick={() => setOpen(false)}          > Trending
           </Link>
           <Link
             to="/posts?sort=oldest"
             className="block py-2 text-white hover:bg-gray-500 p-2 rounded-xl"
-              > Oldest         </Link>
+   onClick={() => setOpen(false)}              > Oldest         </Link>
         
         </div>
 
@@ -282,20 +285,20 @@ const Navbar = () => {
           <Link
             to="/premium"
             className="block py-2 text-white hover:bg-gray-500 p-2 rounded-xl"
-          > Premium          </Link>
+   onClick={() => setOpen(false)}          > Premium          </Link>
           <Link
             to="/about"
             className="block py-2 text-white hover:bg-gray-500 p-2 rounded-xl"
-          > About Us 
+   onClick={() => setOpen(false)}          > About Us 
           </Link>
           <Link
             to="/settings"
             className="block py-2 text-white hover:bg-gray-500 p-2 rounded-xl"
-              > Settings          </Link>
+   onClick={() => setOpen(false)}              > Settings          </Link>
            <Link
             to="/write"
             className="block py-2 text-white hover:bg-gray-500 p-2 rounded-xl"
-              > Write          </Link>
+   onClick={() => setOpen(false)}              > Write          </Link>
         </div>
         
         </div>
@@ -304,7 +307,7 @@ const Navbar = () => {
 
           <SignedOut>
             <Link to="/login" onClick={() => setOpen(false)}>
-              <button className="py-2 px-4 rounded-3xl bg-[#1DA1F2] text-white">
+              <button className="py-2 px-4 rounded-3xl bg-white text-black">
                 Login 👋
               </button>
             </Link>

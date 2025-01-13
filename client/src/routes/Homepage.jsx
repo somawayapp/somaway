@@ -92,7 +92,7 @@ const Homepage = () => {
         {/* IMAGE SECTION */}
         <div className="lg:w-1/3 w-full">
           <img
-            src="/logo3.jpg"
+            src="/news4.gif"
             alt="Newsletter illustration"
             className="w-full h-full object-cover :rounded-r-none"
           />
