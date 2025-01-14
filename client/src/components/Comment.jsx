@@ -58,7 +58,7 @@ const Comment = ({ comment, postId }) => {
             </span>
           )}
       </div>
-      <div className="mt-2">
+      <div className="mt-1">
         <p>{comment.desc}</p>
       </div>
     </div>

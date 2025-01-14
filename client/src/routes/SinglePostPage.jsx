@@ -73,7 +73,15 @@ const SinglePostPage = () => {
               {format(data.createdAt)}
             </span>
 
-            <PostMenuActions post={data} />
+            <div className="flex flex-row">
+
+            <div className="w-full max-w-[1400px]">
+        <Comments postId={data._id} />
+        <PostMenuActions post={data} />
+
+      </div>
+            </div>
+
 
           </div>
         </div>
@@ -86,9 +94,7 @@ const SinglePostPage = () => {
       </div>
 
       {/* Comments */}
-      <div className="w-full max-w-[700px]">
-        <Comments postId={data._id} />
-      </div>
+     
       </div>
     </div>
   );
