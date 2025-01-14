@@ -5,7 +5,6 @@ import { useAuth, useUser } from "@clerk/clerk-react";
 import { toast } from "react-toastify";
 import { useState } from "react";
 import { FaCommentAlt } from "react-icons/fa";
-import PostMenuActions from "./PostMenuActions";
 
 const fetchComments = async (postId) => {
   const res = await axios.get(
@@ -80,7 +79,6 @@ const Comments = ({ postId }) => {
         onClick={() => setShowComments((prev) => !prev)}
       >
         <FaCommentAlt />
-        <PostMenuActions post={data} />
 
       </div>
 

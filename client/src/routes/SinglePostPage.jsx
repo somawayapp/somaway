@@ -76,6 +76,7 @@ const SinglePostPage = () => {
             <div className="flex flex-row">
 
         <Comments postId={data._id} />
+        <PostMenuActions post={data} />
 
             </div>
 
