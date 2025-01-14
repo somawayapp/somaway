@@ -1,6 +1,7 @@
 import { useAuth, useUser } from "@clerk/clerk-react";
 import { useMutation } from "@tanstack/react-query";
 import axios from "axios";
+import ReactQuill from "react-quill-new";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
@@ -176,13 +177,16 @@ const Write = () => {
 
         {/* Description Input */}
         <div>
-          <textarea
-            className="p-4 rounded-xl bg-white shadow-md w-full h-32"
-            name="desc"
-            placeholder="A Short Description"
+
+        <ReactQuill
+            theme="snow"
+            className="flex-1 rounded-xl bg-white shadow-md"
             value={desc}
+            placeholder="A Short Description"
             onChange={handleDescChange}
+            readOnly={0 < progress && progress < 100}
           />
+        
           <span className="text-sm text-gray-500">{descRemainingChars} characters remaining</span>
         </div>
 

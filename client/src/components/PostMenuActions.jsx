@@ -1,3 +1,10 @@
+import { useUser, useAuth } from "@clerk/clerk-react";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import { useState, useRef, useEffect } from "react";
+
 const PostMenuActions = ({ post }) => {
   const { user } = useUser();
   const { getToken } = useAuth();
@@ -125,15 +132,28 @@ const PostMenuActions = ({ post }) => {
     <div className="relative z-10">
       {/* Three dots icon */}
       <div
-        onClick={() => setDropdownOpen((prev) => !prev)} // Toggle dropdown open/close
-        className="cursor-pointer text-[var(--textColor)]"
-      >
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="14" height="14">
-          <circle cx="12" cy="5" r="2" />
-          <circle cx="12" cy="15" r="2" />
-          <circle cx="12" cy="25" r="2" />
-        </svg>
-      </div>
+  onClick={() => setDropdownOpen(true)} // Open the dropdown
+  className="cursor-pointer text-[var(--textColor)]"
+>
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="14" height="14">
+    <circle cx="12" cy="3" r="2" />
+    <circle cx="12" cy="9" r="2" />
+    <circle cx="12" cy="15" r="2" />
+  </svg>
+</div>
+
+{/* If dropdown is open, clicking it again closes it */}
+{dropdownOpen && (
+  <div
+    ref={dropdownRef}
+    className="absolute right-0 bg-[var(--textColore)] border-[var(--softColor7)] rounded shadow-lg p-2 mt-2 w-48"
+    onClick={() => setDropdownOpen(false)} // Close dropdown when clicking inside
+  >
+    {/* Dropdown content */}
+  </div>
+)}
+
+
 
       {/* Dropdown menu */}
       {dropdownOpen && (
