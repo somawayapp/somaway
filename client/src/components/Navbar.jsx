@@ -78,7 +78,7 @@ const Navbar = () => {
 
         {/* MOBILE LINK LIST */}
         <div
-          className={`w-[100%]  overflow-y-auto h-cover bg-[#1da1f2] flex flex-col p-5  mb-[60px]items-left justify-left  text-[var(--TextColor)] 
+          className={`w-[80%]  overflow-y-auto h-cover bg-[#1da1f2] flex flex-col p-5  mb-[60px]items-left justify-left  text-[var(--TextColor)] 
             gap-8 font-sm text-md fixed top-0 right-0  transition-transform ease-in-out z-50 ${
             open ? "translate-x-0" : "translate-x-full"
           }`}   style={{ maxHeight: "100vh" }}
@@ -266,12 +266,9 @@ const Navbar = () => {
             className="block py-2 text-white hover:bg-gray-500 p-2 rounded-xl"
    onClick={() => setOpen(false)}              > Oldest         </Link>
         
-        </div>
 
 
-
-
-        <div>
+        <div className="mt-5">
           <Link
             to="/newsletter"
             className="block py-2 text-white hover:bg-gray-500 p-2 rounded-xl "
@@ -296,6 +293,14 @@ const Navbar = () => {
         </div>
         
         </div>
+
+
+
+        </div>
+
+
+
+
 
        
 
