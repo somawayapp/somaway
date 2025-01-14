@@ -4,7 +4,7 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useAuth, useUser } from "@clerk/clerk-react";
 import { toast } from "react-toastify";
 import { useState } from "react";
-import { FaCommentAlt } from "react-icons/fa"; // Add this icon package for the comment icon
+import { FaCommentAlt } from "react-icons/fa";
 
 const fetchComments = async (postId) => {
   const res = await axios.get(
@@ -19,7 +19,7 @@ const Comments = ({ postId }) => {
   const queryClient = useQueryClient();
 
   const [showComments, setShowComments] = useState(false); // Toggle comment box
-  const [visibleComments, setVisibleComments] = useState(5); // Initial visible comments
+  const [visibleComments, setVisibleComments] = useState(3); // Initial visible comments
   const [commentSuccess, setCommentSuccess] = useState(false); // Temporary success message
 
   const { isPending, error, data = [] } = useQuery({
@@ -66,6 +66,11 @@ const Comments = ({ postId }) => {
     setVisibleComments((prev) => prev + 5); // Load 5 more comments
   };
 
+  const closeComments = () => {
+    setShowComments(false);
+    setVisibleComments(3); // Reset to initial state
+  };
+
   return (
     <div className="flex flex-col gap-1 lg:w-3/5 mb-2">
       {/* Comment Icon */}
@@ -79,7 +84,7 @@ const Comments = ({ postId }) => {
       {/* Comments Section */}
       {showComments && (
         <>
-          <h1 className="text-xl text-[var(--textLogo)] ">Comments</h1>
+          <h1 className="text-xl text-[var(--textLogo)]">Comments</h1>
           <form
             onSubmit={handleSubmit}
             className="flex items-center text-[var(--textColor)] justify-between gap-1 w-full"
@@ -111,11 +116,17 @@ const Comments = ({ postId }) => {
               {visibleComments < data.length && (
                 <button
                   onClick={loadMoreComments}
-                  className="text-[#1DA1F2] "
+                  className="text-[#1DA1F2]"
                 >
                   Show More
                 </button>
               )}
+              <button
+                onClick={closeComments}
+                className="text-red-500 mt-2"
+              >
+                Close Comments
+              </button>
             </>
           )}
         </>
