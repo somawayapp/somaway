@@ -6,7 +6,6 @@ import { Link } from "react-router-dom";
 import { SignedIn, SignedOut, UserButton } from "@clerk/clerk-react";
 import "../index.css"; // Assuming styles are in App.css
 import Search from "./Search";
-import { useTheme } from '../../ThemeContext'; // Adjust path as necessary
 
 
 const Navbar = () => {
@@ -14,7 +13,6 @@ const Navbar = () => {
 
   const handleOverlayClick = () => setOpen(false);
 
-  const { theme } = useTheme();
 
 
 
@@ -38,18 +36,6 @@ const Navbar = () => {
       {/*   <span className="bg-clip-text text-[#1ADAff] font-impact"></span> */}
 
 </Link>
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
