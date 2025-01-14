@@ -4,14 +4,22 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { SignedIn, SignedOut, UserButton } from "@clerk/clerk-react";
-import ThemeToggler from "./Theme";
 import "../index.css"; // Assuming styles are in App.css
 import Search from "./Search";
+import { useTheme } from '../../ThemeContext'; // Adjust path as necessary
+
 
 const Navbar = () => {
   const [open, setOpen] = useState(false);
 
   const handleOverlayClick = () => setOpen(false);
+
+  const { theme } = useTheme();
+
+
+
+
+
 
   return (
 
@@ -24,7 +32,7 @@ const Navbar = () => {
 
       {/* LOGO */}
       <Link to="/" className="flex items-center gap-1 text-lg font-bold md:text-2xl">
-      <img src="/x.png" alt="Logo" className="w-4 h-4 md:w-6 md:h-6" />
+      <img src="/x6.png" alt="Logo" className="w-4 h-4 md:w-6 md:h-6" />
       <span className="bg-clip-text text-[var(--textLogo)] hidden md:block lg:block font-impact">tech</span>
 
       {/*   <span className="bg-clip-text text-[#1ADAff] font-impact"></span> */}

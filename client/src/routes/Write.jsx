@@ -80,16 +80,16 @@ const Write = () => {
   };
 
   if (!isLoaded) {
-    return <div className="text-center mt-8">Loading...</div>;
+    return <div className="text-center  text-[var(--textColor)] mt-8">Loading...</div>;
   }
 
   if (isLoaded && !isSignedIn) {
-    return <div className="text-center mt-8">You need to sign in to create a post!</div>;
+    return <div className="text-center  text-[var(--textColor)] mt-8">You need to sign in to create a post!</div>;
   }
 
   return (
     <div className="h-[calc(100vh-64px)] md:h-[calc(100vh-80px)] flex flex-col top-[150px] gap-6 px-4 py-6">
-      <h1 className="text-3xl font-semibold text-gray-800">Create a New Post</h1>
+      <h1 className="text-3xl font-semibold text-[var(--textColor)] ">Create a New Post</h1>
       {error && (
         <div className="p-4 text-sm text-red-700 bg-red-100 rounded-lg shadow-md">
           {error}
@@ -102,7 +102,8 @@ const Write = () => {
             type="button"
             onClick={clearError}
             disabled={progress > 0 && progress < 100}
-            className="w-max p-3 shadow-md rounded-xl text-sm text-gray-500 bg-white disabled:opacity-50 hover:bg-gray-100 transition-all duration-200"
+            className="w-max p-3 shadow-md rounded-xl text-sm text-[var(--textColor)] bg-white
+             disabled:opacity-50 hover:bg-gray-100 transition-all duration-200"
           >
             {progress > 0 && progress < 100 ? "Uploading..." : "Add a cover image"}
           </button>
@@ -136,18 +137,18 @@ const Write = () => {
             onChange={handleTitleChange}
             name="title"
           />
-          <span className="text-sm text-gray-500">{titleRemainingChars} characters remaining</span>
+          <span className="text-sm text-[var(--textColor)]">{titleRemainingChars} characters remaining</span>
         </div>
 
         {/* Category Selection */}
         <div className="flex items-center gap-4">
-          <label htmlFor="category" className="text-sm text-gray-700">Choose a category:</label>
+          <label htmlFor="category" className="text-sm text-[var(--textColor)]">Choose a category:</label>
           <select
             name="category"
             id="category"
             value={category}
             onChange={(e) => setCategory(e.target.value)}
-            className="p-3 rounded-xl bg-white shadow-md w-full max-w-xs"
+            className="p-3 rounded-xl bg-text-[var(--textColore)] shadow-md w-full max-w-xs"
           >
             <option value="" disabled>Select a category</option>
             <option value="general">General</option>
@@ -194,7 +195,7 @@ const Write = () => {
             }} 
             formats={['header', 'font', 'list', 'bold', 'italic', 'underline', 'link', 'align', 'image']} 
           />
-          <span className="text-sm text-gray-500">{descRemainingChars} characters remaining</span>
+          <span className="text-sm text-text-[var(--textColor)]">{descRemainingChars} characters remaining</span>
         </div>
 
         {/* Submit Button */}
@@ -204,7 +205,7 @@ const Write = () => {
         >
           {mutation.isPending ? "Publishing..." : "Publish Post"}
         </button>
-        <span className="text-sm text-gray-500">{`Progress: ${progress}%`}</span>
+        <span className="text-sm text-[var(--textColor)]">{`Progress: ${progress}%`}</span>
       </form>
     </div>
   );

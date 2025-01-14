@@ -14,6 +14,8 @@
   --softBg: #f0f0f0;
   
   --softTextColor: #626262;
+  --bg-image-light: url('/client/public/x.png');
+  --bg-image-dark:  url('/client/public/add2.gif');
 }
 
 
@@ -42,6 +44,9 @@ a {
   --bg: #020203;
   --textColor: #dfecf5;
   --TextColor: #dfecf5;
+
+  --bg-image: var(--bg-image-dark);
+
 
   --textColor2: #ffffff;
   --textColore: #0F1419;
@@ -80,6 +85,8 @@ a {
   --TextColor: #0F1419;
   --textColore: #dfecf5;
   --textLogo: #000000;
+
+  --bg-image: var(--bg-image-light);
 
   --textColor2: #000000;
   --shadow-color: rgba(0, 0, 0, 0.1); /* Default for light mode */
