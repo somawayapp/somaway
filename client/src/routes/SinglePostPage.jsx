@@ -88,7 +88,7 @@ const SinglePostPage = () => {
 
 
         {/* Description */}
-        <p className="text-[var(--textColor)] text-[14px] md:text-[16px] text-justify mt-2">
+        <p className="text-[var(--textColor)] text-[14px] mb-[50px] md:text-[16px] text-justify mt-2">
           {data.desc}
         </p>
       </div>
