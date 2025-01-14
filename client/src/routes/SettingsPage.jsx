@@ -36,7 +36,7 @@ const SettingsPage = () => {
             >
               
               {/* Circular Profile Image */}
-              <div className="w-24 h-24 rounded-full overflow-hidden">
+              <div className=" item-center overflow-hidden">
               <SignedOut>
           <Link to="/login">
             <button className="py-2 px-4 rounded-3xl bg-[#1DA1F2] text-white">

@@ -53,14 +53,14 @@ const PremiumPage = () => {
       {/* Circular Profile Image */}
       <div className="w-24 h-24 rounded-full overflow-hidden">
         <img
-          src="/lizza.webp"
-          alt="Lizza Carter"
+          src="/shanlyn.jpg"
+          alt="Shan-Lyn Ma"
           className="w-full h-full object-cover"
         />
       </div>
       {/* Name and Feedback */}
       <h3 className="text-lg font-medium text-[var(--textColor)] text-center">
-        Lizza Carter
+        Shan-Lyn Ma
       </h3>
       <p className="text-sm text-[var(--textColor)] text-center italic">
         "Premium has not only boosted my career but also connected me with incredible people. A must-try!"

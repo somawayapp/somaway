@@ -83,7 +83,7 @@ Meet The Team  </h2>
       {/* Circular Profile Image */}
       <div className="w-24 h-24 rounded-full overflow-hidden">
         <img
-          src="/lizza.webp"
+          src="/profile3.jpg"
           alt="James Oomondi"
           className="w-full h-full object-cover"
         />
