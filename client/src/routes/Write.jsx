@@ -103,7 +103,7 @@ const Write = () => {
             onClick={clearError}
             disabled={progress > 0 && progress < 100}
             className="w-max p-3 shadow-md rounded-xl text-sm text-[var(--textColor)] bg-[var(--textColore)]
-             disabled:opacity-50 hover:bg-gray-100 transition-all duration-200"
+             disabled:opacity-50 hover:bg-[var(--softTextColor7)] transition-all duration-200"
           >
             {progress > 0 && progress < 100 ? "Uploading..." : "Add a cover image"}
           </button>
@@ -130,7 +130,7 @@ const Write = () => {
         {/* Title Input */}
         <div>
           <input
-            className="text-xl font-semibold bg-transparent outline-none p-3 w-full border-b border-gray-300"
+            className="text-md font-semibold   bg-transparent outline-none p-3 w-full  border  border-1 border-[var(--textColore)]"
             type="text"
             placeholder="Enter Post Title"
             value={title}
@@ -182,6 +182,7 @@ const Write = () => {
           <ReactQuill 
             value={desc} 
             onChange={handleDescChange} 
+            className=" border  border-1 border-[var(--textColore)] text-[var(--textColor)]  "
             placeholder="A Short Description" 
             modules={{
               toolbar: [
@@ -201,7 +202,7 @@ const Write = () => {
         {/* Submit Button */}
         <button
           disabled={mutation.isPending || (progress > 0 && progress < 100)}
-          className="bg-blue-800 text-white font-medium rounded-xl mt-4 p-3 w-full disabled:bg-blue-400 disabled:cursor-not-allowed"
+          className="bg-[#1da1f2]  hover:bg-[#0875b9] text-white font-medium rounded-xl mt-4 p-3 w-full disabled:bg-blue-400 disabled:cursor-not-allowed"
         >
           {mutation.isPending ? "Publishing..." : "Publish Post"}
         </button>
