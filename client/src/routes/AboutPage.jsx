@@ -37,7 +37,7 @@ About Us    </h1>
 
       {/* FEATURES */}
       <div >
-        <h2 className="text-[var(--textColor2)] text-3xl font-semibold  text-center"
+        <h2 className="text-[var(--textColor2)]  mb-4 text-3xl font-semibold  text-center"
 >
           Our Vission
         </h2>
@@ -100,7 +100,7 @@ Meet The Team  </h2>
       {/* Circular Profile Image */}
       <div className="w-24 h-24 rounded-full overflow-hidden">
         <img
-          src="/greg.jpg"
+          src="/profile2.jpg"
           alt="Mitchell Mukami"
           className="w-full h-full object-cover"
         />
@@ -127,15 +127,21 @@ Meet The Team  </h2>
     <p className="text-md md:text-md text-[var(--textColor)]  leading-relaxed text-center">
           Have questions, feedback, or ideas? We’d love to hear from you! Reach
           out to us at
+
           <a
-            href="mailto:contact@xtech.com"
-            className="text-[#1da1f2] underline ml-1"
+            href="mailto:xtechnewsletter@gmail.com"
+            className="text-[#1da1f2] pl-1 underline ml-1"
           >
             xtechnewsletter@gmail.com
+
           </a>
-          or call our hotline +254703394794
+
           .
         </p>
+<p>
+or call our hotline +254703394794
+
+</p>
       </div>
 
       {/* CTA - Subscribe to Newsletter */}
