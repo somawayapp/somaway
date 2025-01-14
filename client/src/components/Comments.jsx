@@ -87,12 +87,12 @@ const Comments = ({ postId }) => {
           <h1 className="text-xl text-[var(--textLogo)]">Comments</h1>
           <form
             onSubmit={handleSubmit}
-            className="flex items-center text-[var(--textColor)] justify-between gap-1 w-full"
+            className="flex items-center bg-[var(--textColore)] text-[var(--textColor)] justify-between gap-1 w-full"
           >
             <textarea
               name="desc"
               placeholder="Write a comment..."
-              className="w-full p-4 rounded-xl"
+              className="w-full p-1 text-[var(--textColor)] rounded-xl"
             />
             <button className="bg-[#1DA1F2] px-4 py-3 text-white font-medium rounded-xl">
               Send
@@ -116,14 +116,14 @@ const Comments = ({ postId }) => {
               {visibleComments < data.length && (
                 <button
                   onClick={loadMoreComments}
-                  className="text-[#1DA1F2]"
+                  className=" text-sm text-[#1DA1F2]"
                 >
                   Show More
                 </button>
               )}
               <button
                 onClick={closeComments}
-                className="text-red-500 mt-2"
+                className="text-red-500 text-sm mt-2"
               >
                 Close Comments
               </button>
