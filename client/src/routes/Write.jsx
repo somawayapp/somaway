@@ -102,7 +102,7 @@ const Write = () => {
             type="button"
             onClick={clearError}
             disabled={progress > 0 && progress < 100}
-            className="w-max p-3 shadow-md rounded-xl text-sm text-[var(--textColor)] bg-white
+            className="w-max p-3 shadow-md rounded-xl text-sm text-[var(--textColor)] bg-[var(--textColore)]
              disabled:opacity-50 hover:bg-gray-100 transition-all duration-200"
           >
             {progress > 0 && progress < 100 ? "Uploading..." : "Add a cover image"}
@@ -148,7 +148,7 @@ const Write = () => {
             id="category"
             value={category}
             onChange={(e) => setCategory(e.target.value)}
-            className="p-3 rounded-xl bg-text-[var(--textColore)] shadow-md w-full max-w-xs"
+            className="p-3 rounded-xl bg-[var(--textColore)] text-[var(--textColor)] shadow-md w-full max-w-xs"
           >
             <option value="" disabled>Select a category</option>
             <option value="general">General</option>
