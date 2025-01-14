@@ -1,13 +1,11 @@
 import PostListItem from "./PostListItem";
-import { useInfiniteQuery, useQuery } from "@tanstack/react-query";
+import { useInfiniteQuery } from "@tanstack/react-query";
 import axios from "axios";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { useSearchParams } from "react-router-dom";
 
 const fetchPosts = async (pageParam, searchParams) => {
   const searchParamsObj = Object.fromEntries([...searchParams]);
-
-  console.log(searchParamsObj);
 
   const res = await axios.get(`${import.meta.env.VITE_API_URL}/posts`, {
     params: { page: pageParam, limit: 10, ...searchParamsObj },
@@ -16,14 +14,13 @@ const fetchPosts = async (pageParam, searchParams) => {
 };
 
 const PostList = () => {
-  const [searchParams, setSearchParams] = useSearchParams();
+  const [searchParams] = useSearchParams();
 
   const {
     data,
     error,
     fetchNextPage,
     hasNextPage,
-    isFetching,
     isFetchingNextPage,
     status,
   } = useInfiniteQuery({
@@ -32,13 +29,11 @@ const PostList = () => {
     initialPageParam: 1,
     getNextPageParam: (lastPage, pages) =>
       lastPage.hasMore ? pages.length + 1 : undefined,
+    staleTime: 1000 * 60 * 10, // Data stays fresh for 10 minutes
+    cacheTime: 1000 * 60 * 30, // Cache remains available for 30 minutes
   });
 
-  // if (status === "loading") return "Loading...";
-  if (isFetching) return "Loading...";
-  
-
-  // if (status === "error") return "Something went wrong!";
+  if (status === "loading") return "Loading...";
   if (error) return "Something went wrong!";
 
   const allPosts = data?.pages?.flatMap((page) => page.posts) || [];
@@ -50,7 +45,7 @@ const PostList = () => {
       hasMore={!!hasNextPage}
       loader={<h4>Loading more posts...</h4>}
       endMessage={
-        <p className="lg:text-lg  text-gray-100 text-sm">
+        <p className="lg:text-lg text-gray-100 text-sm">
           <b>All posts loaded!</b>
         </p>
       }
