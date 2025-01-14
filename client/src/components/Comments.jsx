@@ -5,6 +5,7 @@ import { useAuth, useUser } from "@clerk/clerk-react";
 import { toast } from "react-toastify";
 import { useState } from "react";
 import { FaCommentAlt } from "react-icons/fa";
+import PostMenuActions from "./PostMenuActions";
 
 const fetchComments = async (postId) => {
   const res = await axios.get(
@@ -75,10 +76,12 @@ const Comments = ({ postId }) => {
     <div className="flex flex-col gap-1 lg:w-3/5 mb-2">
       {/* Comment Icon */}
       <div
-        className="cursor-pointer text-[#1DA1F2] text-2xl"
+        className="cursor-pointer flex flex-row gap-4 text-[#1DA1F2] text-2xl"
         onClick={() => setShowComments((prev) => !prev)}
       >
         <FaCommentAlt />
+        <PostMenuActions post={data} />
+
       </div>
 
       {/* Comments Section */}
