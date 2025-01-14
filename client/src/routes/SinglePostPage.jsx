@@ -92,10 +92,11 @@ const SinglePostPage = () => {
             </div>
 
 
-        {/* Description */}
-        <p className="text-[var(--textColor)] text-[14px] mb-[50px] md:text-[16px] text-justify mt-2">
-          {data.desc}
-        </p>
+            <p
+  className="text-[var(--textColor)] text-[14px] mb-[50px] md:text-[16px] text-justify mt-2"
+  dangerouslySetInnerHTML={{ __html: data.desc }} 
+/>
+
       </div>
 
       {/* Comments */}
