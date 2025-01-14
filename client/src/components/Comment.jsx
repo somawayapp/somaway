@@ -34,7 +34,7 @@ const Comment = ({ comment, postId }) => {
   });
 
   return (
-    <div className="p-4 bg-text-[var(--textColore)] rounded-xl mb-2">
+    <div className="p-2 bg-[var(--textColore)] rounded-xl mb-1">
       <div className="flex items-center gap-1">
         {comment.user.img && (
           <Image
