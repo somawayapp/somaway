@@ -75,7 +75,7 @@ const Comments = ({ postId }) => {
     <div className="flex flex-col gap-1 lg:w-3/5 mb-2">
       {/* Comment Icon */}
       <div
-        className="cursor-pointer text-[#1DA1F2] text-lg"
+        className="cursor-pointer text-[#1DA1F2] text-xl"
         onClick={() => setShowComments((prev) => !prev)}
       >
         <FaCommentAlt />
@@ -92,7 +92,7 @@ const Comments = ({ postId }) => {
             <textarea
               name="desc"
               placeholder="Write a comment..."
-              className="w-full pt-1 bg-[var(--textColore)] border border-1-[var(--textColor7)]  pl-2 text-[var(--textColor)] rounded-xl"
+              className="w-full pt-1 bg-[var(--textColore)] border-1 border-[var(--softTextColor7)] text-sm  mb-[-2px] pl-2 text-[var(--textColor)] rounded-xl"
             />
             <button className="bg-[#1DA1F2] px-4 py-3 text-white text-sm rounded-xl">
               Send
