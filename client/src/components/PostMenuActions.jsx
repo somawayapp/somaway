@@ -135,10 +135,10 @@ const PostMenuActions = ({ post }) => {
   onClick={() => setDropdownOpen(true)} // Open the dropdown
   className="cursor-pointer text-[var(--textColor)]"
 >
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="14" height="14">
-    <circle cx="12" cy="5" r="2" />
-    <circle cx="12" cy="10" r="2" />
-    <circle cx="12" cy="25" r="2" />
+  <svg xmlns="http://www.w3.org/2000/svg" className="text-[var(--textColor)]" viewBox="0 0 24 24" width="14" height="14">
+    <circle cx="12" cy="0" r="2" />
+    <circle cx="12" cy="8" r="2" />
+    <circle cx="12" cy="16" r="2" />
   </svg>
 </div>
 
