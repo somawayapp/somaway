@@ -68,19 +68,20 @@ const SinglePostPage = () => {
           <div className="flex flex-col">
             <span>
               Written by <Link className="text-[#1DA1F2]">{data.user.username}</Link>
+              <span className="pl-1 pr-1 ">
+                on
+              </span>
            
               <Link className="text-[#1DA1F2]">{data.category}</Link> -{" "}
               {format(data.createdAt)}
             </span>
 
 
-            <div className="w-full max-w-[1000px]">
+          </div>
+          <div className="w-full max-w-[1000px]">
         <Comments postId={data._id} />
 
             </div>
-
-
-          </div>
         </div>
 
 
