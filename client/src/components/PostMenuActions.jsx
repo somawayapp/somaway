@@ -129,18 +129,25 @@ const PostMenuActions = ({ post }) => {
   };
 
   return (
-    <div className="relative z-10">
-      {/* Three dots icon */}
-      <div
-  onClick={() => setDropdownOpen(true)} // Open the dropdown
-  className="cursor-pointer text-[var(--textColor)]"
->
-  <svg xmlns="http://www.w3.org/2000/svg" className="text-[var(--textColor)]" viewBox="0 0 24 24" width="14" height="14">
-    <circle cx="12" cy="0" r="2" />
-    <circle cx="12" cy="8" r="2" />
-    <circle cx="12" cy="16" r="2" />
-  </svg>
-</div>
+<div className="relative z-10">
+  {/* Three dots icon */}
+  <div
+    onClick={() => setDropdownOpen(true)} // Open the dropdown
+    className="cursor-pointer"
+  >
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 24 24"
+      width="14"
+      height="24" // Height increased to better center the dots
+      className="text-[var(--textColor)]"
+    >
+      <circle cx="12" cy="4" r="2" fill="currentColor" />
+      <circle cx="12" cy="12" r="2" fill="currentColor" />
+      <circle cx="12" cy="20" r="2" fill="currentColor" />
+    </svg>
+  </div>
+
 
 {/* If dropdown is open, clicking it again closes it */}
 {dropdownOpen && (
