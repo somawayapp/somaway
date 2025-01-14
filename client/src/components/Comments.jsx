@@ -3,6 +3,8 @@ import Comment from "./Comment";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useAuth, useUser } from "@clerk/clerk-react";
 import { toast } from "react-toastify";
+import { useState } from "react";
+import { FaCommentAlt } from "react-icons/fa"; // Add this icon package for the comment icon
 
 const fetchComments = async (postId) => {
   const res = await axios.get(
@@ -14,13 +16,16 @@ const fetchComments = async (postId) => {
 const Comments = ({ postId }) => {
   const { user } = useUser();
   const { getToken } = useAuth();
+  const queryClient = useQueryClient();
 
-  const { isPending, error, data } = useQuery({
+  const [showComments, setShowComments] = useState(false); // Toggle comment box
+  const [visibleComments, setVisibleComments] = useState(5); // Initial visible comments
+  const [commentSuccess, setCommentSuccess] = useState(false); // Temporary success message
+
+  const { isPending, error, data = [] } = useQuery({
     queryKey: ["comments", postId],
     queryFn: () => fetchComments(postId),
   });
-
-  const queryClient = useQueryClient();
 
   const mutation = useMutation({
     mutationFn: async (newComment) => {
@@ -37,6 +42,8 @@ const Comments = ({ postId }) => {
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["comments", postId] });
+      setCommentSuccess(true);
+      setTimeout(() => setCommentSuccess(false), 2000); // Remove message after 2 seconds
     },
     onError: (error) => {
       toast.error(error.response.data);
@@ -52,46 +59,65 @@ const Comments = ({ postId }) => {
     };
 
     mutation.mutate(data);
+    e.target.reset(); // Clear the input field
+  };
+
+  const loadMoreComments = () => {
+    setVisibleComments((prev) => prev + 5); // Load 5 more comments
   };
 
   return (
     <div className="flex flex-col gap-8 lg:w-3/5 mb-12">
-      <h1 className="text-xl text-gray-500 underline">Comments</h1>
-      <form
-        onSubmit={handleSubmit}
-        className="flex items-center justify-between gap-8 w-full"
+      {/* Comment Icon */}
+      <div
+        className="cursor-pointer text-blue-800 text-2xl"
+        onClick={() => setShowComments((prev) => !prev)}
       >
-        <textarea
-          name="desc"
-          placeholder="Write a comment..."
-          className="w-full p-4 rounded-xl"
-        />
-        <button className="bg-blue-800 px-4 py-3 text-white font-medium rounded-xl">
-          Send
-        </button>
-      </form>
-      {isPending ? (
-        "Loading..."
-      ) : error ? (
-        "Error loading comments!"
-      ) : (
+        <FaCommentAlt />
+      </div>
+
+      {/* Comments Section */}
+      {showComments && (
         <>
-          {mutation.isPending && (
-            <Comment
-              comment={{
-                desc: `${mutation.variables.desc} (Sending...)`,
-                createdAt: new Date(),
-                user: {
-                  img: user.imageUrl,
-                  username: user.username,
-                },
-              }}
+          <h1 className="text-xl text-gray-500 underline">Comments</h1>
+          <form
+            onSubmit={handleSubmit}
+            className="flex items-center justify-between gap-8 w-full"
+          >
+            <textarea
+              name="desc"
+              placeholder="Write a comment..."
+              className="w-full p-4 rounded-xl"
             />
+            <button className="bg-blue-800 px-4 py-3 text-white font-medium rounded-xl">
+              Send
+            </button>
+          </form>
+
+          {commentSuccess && (
+            <p className="text-green-500">Commented successfully!</p>
           )}
 
-          {data.map((comment) => (
-            <Comment key={comment._id} comment={comment} postId={postId} />
-          ))}
+          {isPending ? (
+            "Loading..."
+          ) : error ? (
+            "Error loading comments!"
+          ) : (
+            <>
+              {data.slice(0, visibleComments).map((comment) => (
+                <Comment key={comment._id} comment={comment} postId={postId} />
+              ))}
+
+              {visibleComments < data.length && (
+                <button
+                  onClick={loadMoreComments}
+                  className="text-blue-800 underline"
+                >
+                  Show More
+                </button>
+              )}
+            </>
+          )}
         </>
       )}
     </div>
@@ -99,3 +125,4 @@ const Comments = ({ postId }) => {
 };
 
 export default Comments;
+
