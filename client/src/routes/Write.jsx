@@ -1,17 +1,18 @@
 import { useAuth, useUser } from "@clerk/clerk-react";
 import { useMutation } from "@tanstack/react-query";
 import axios from "axios";
-import ReactQuill from "react-quill-new";  // Import ReactQuill
-import "react-quill-new/dist/quill.snow.css";  // Import Quill CSS for styles
+import ReactQuill from "react-quill-new";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import Upload from "../components/Upload"; // Assuming this component handles file uploads and provides preview
 
+import 'react-quill-new/dist/quill.snow.css'; // Import Quill styles
+
 const Write = () => {
   const { isLoaded, isSignedIn } = useUser();
   const [title, setTitle] = useState("");
-  const [desc, setDesc] = useState("");  // State for description (rich text)
+  const [desc, setDesc] = useState("");
   const [category, setCategory] = useState("");
   const [cover, setCover] = useState(null); // Initially null, will hold the image file and preview URL
   const [progress, setProgress] = useState(0);
@@ -71,7 +72,7 @@ const Write = () => {
       img: cover.filePath, // Assuming `filePath` is the path to the uploaded file
       title,
       category,
-      desc,  // Use the rich text content here
+      desc,
       slug,
     };
 
@@ -87,7 +88,7 @@ const Write = () => {
   }
 
   return (
-    <div className="h-[calc(100vh-64px)] md:h-[calc(100vh-80px)] flex flex-col top-[150px]  gap-6 px-4 py-6">
+    <div className="h-[calc(100vh-64px)] md:h-[calc(100vh-80px)] flex flex-col top-[150px] gap-6 px-4 py-6">
       <h1 className="text-3xl font-semibold text-gray-800">Create a New Post</h1>
       {error && (
         <div className="p-4 text-sm text-red-700 bg-red-100 rounded-lg shadow-md">
@@ -95,6 +96,7 @@ const Write = () => {
         </div>
       )}
       <form onSubmit={handleSubmit} className="flex flex-col gap-6 flex-1">
+        {/* Upload Component */}
         <Upload type="image" setProgress={setProgress} setData={setCover}>
           <button
             type="button"
@@ -160,12 +162,12 @@ const Write = () => {
             <option value="gaming">Gaming</option>
             <option value="gadgets">Gadgets</option>
             <option value="security">Security</option>
-            <option value="space">Space</option>
+            <option value="space">Space</option> 
             <option value="startups">Startups</option>
-            <option value="transportation">Transportation</option>
+            <option value="transportation">Transportation </option>
             <option value="hardware">Hardware</option>
             <option value="ai-robotics">AI & Robotics</option>
-            <option value="entertainment">Entertainment</option>
+            <option value="entertainment">Entertainment </option>
             <option value="media">Media</option>
             <option value="industrial">Industrial</option>
             <option value="engineering">Engineering</option>
@@ -174,25 +176,23 @@ const Write = () => {
           </select>
         </div>
 
-        {/* Description Input (Rich Text Editor) */}
+        {/* Rich Text Description Input using ReactQuill */}
         <div>
-          <ReactQuill
-            value={desc}
-            onChange={handleDescChange}
-            placeholder="A Short Description"
-            theme="snow"
+          <ReactQuill 
+            value={desc} 
+            onChange={handleDescChange} 
+            placeholder="A Short Description" 
             modules={{
               toolbar: [
-                [{ header: "1" }, { header: "2" }, { font: [] }],
-                [{ list: "ordered" }, { list: "bullet" }],
-                ["bold", "italic", "underline"],
-                [{ align: [] }],
-                ["link"],
-                ["image"],
-                [{ color: [] }, { background: [] }],
-                ["blockquote"],
+                [{ 'header': '1'}, { 'header': '2'}, { 'font': [] }],
+                [{ 'list': 'ordered'}, { 'list': 'bullet' }],
+                ['bold', 'italic', 'underline'],
+                ['link'],
+                [{ 'align': [] }],
+                ['image'] // To allow image insertion
               ],
-            }}
+            }} 
+            formats={['header', 'font', 'list', 'bold', 'italic', 'underline', 'link', 'align', 'image']} 
           />
           <span className="text-sm text-gray-500">{descRemainingChars} characters remaining</span>
         </div>
