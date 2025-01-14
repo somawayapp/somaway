@@ -76,14 +76,18 @@ const SinglePostPage = () => {
               {format(data.createdAt)}
             </span>
 
+            <div className="absolute right-0 top-0">
+            <PostMenuActions post={data} />
+            </div>
+
+
 
           </div>
         
         </div>
 
-        <div className="w-full mt-2  flex flex-row max-w-[1000px]">
+        <div className="w-full mt-2  max-w-[1000px]">
         <Comments postId={data._id} />
-        <PostMenuActions post={data} />
 
             </div>
 
