@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 
 const PremiumPage = () => {
   return (
-    <div className="mt-4 px-6 md:px-12 lg:px-24 flex flex-col gap-12">
+    <div className="mt-4 flex flex-col gap-12">
       {/* BREADCRUMB */}
       <div className="flex gap-2 text-sm text-[var(--textColor)]">
         <Link to="/" className="hover:text-blue-800">
