@@ -99,7 +99,6 @@ const PostMenuActions = ({ post }) => {
   const dropdownRef = useRef(null);
 
   useEffect(() => {
-    // Close the dropdown if clicked outside
     const handleClickOutside = (event) => {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
         setDropdownOpen(false);
@@ -130,17 +129,17 @@ const PostMenuActions = ({ post }) => {
   };
 
   return (
-    <div className="relative">
+    <div className="relative z-10">
       {/* Three dots icon */}
       <div
         onClick={() => setDropdownOpen(!dropdownOpen)}
-        className="cursor-pointer"
+        className="cursor-pointer text-[var(--textColor)]"
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 24 24"
-          width="24"
-          height="24"
+          width="18"
+          height="18"
         >
           <circle cx="12" cy="3" r="2" />
           <circle cx="12" cy="12" r="2" />
@@ -152,11 +151,11 @@ const PostMenuActions = ({ post }) => {
       {dropdownOpen && (
         <div
           ref={dropdownRef}
-          className="absolute right-0 bg-white border z-9 rounded shadow-lg p-2 mt-2 w-48"
+          className="absolute right-0 bg-[var(--textColor)] border-[var(--softColor7)] rounded shadow-lg p-2 mt-2 w-48"
         >
           {isAdmin && (
             <div
-              className="flex items-center gap-2 py-2 text-sm cursor-pointer"
+              className="flex items-center gap-2 py-2 text-[var(--textColor)] text-sm cursor-pointer"
               onClick={handleFeature}
             >
               <span>Feature</span>
@@ -167,7 +166,7 @@ const PostMenuActions = ({ post }) => {
           )}
           {user && (post.user.username === user.username || isAdmin) && (
             <div
-              className="flex items-center gap-2 py-2 text-sm cursor-pointer"
+              className="flex items-center gap-2 py-2 text-[var(--textColor)] text-sm cursor-pointer"
               onClick={handleDelete}
             >
               <span>Delete</span>
@@ -178,7 +177,7 @@ const PostMenuActions = ({ post }) => {
           )}
           {user && (
             <div
-              className="flex items-center gap-2 py-2 text-sm cursor-pointer"
+              className="flex items-center gap-2 py-2 text-[var(--textColor)] text-sm cursor-pointer"
               onClick={handleSave}
             >
               <span>{isSaved ? "Unsave" : "Save"}</span>
