@@ -67,7 +67,7 @@ const SinglePostPage = () => {
           )}
           <div className="flex flex-col">
             <span>
-              Written n n n n n n n n n n n n n n n n n n n n n nn n n n n n n n n n n n n  n n n n n  n n  n n  n n n n n  n n  n  n  n n  by <Link className="text-[#1DA1F2]">{data.user.username}</Link>
+              Written by <Link className="text-[#1DA1F2]">{data.user.username}</Link>
               <span className="pl-1 pr-1 ">
                 on
               </span>
@@ -76,14 +76,14 @@ const SinglePostPage = () => {
               {format(data.createdAt)}
             </span>
 
-            <div className="absolute right-0 top-0">
-            <PostMenuActions post={data} />
-            </div>
+           
 
 
 
           </div>
-        
+          <div className="absolute  right-0 top-0">
+            <PostMenuActions post={data} />
+            </div>
         </div>
 
         <div className="w-full mt-2  max-w-[1000px]">

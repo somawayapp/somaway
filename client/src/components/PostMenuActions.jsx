@@ -152,7 +152,7 @@ const PostMenuActions = ({ post }) => {
       {dropdownOpen && (
         <div
           ref={dropdownRef}
-          className="absolute right-0 bg-white border rounded shadow-lg p-2 mt-2 w-48"
+          className="absolute right-0 bg-white border z-9 rounded shadow-lg p-2 mt-2 w-48"
         >
           {isAdmin && (
             <div
