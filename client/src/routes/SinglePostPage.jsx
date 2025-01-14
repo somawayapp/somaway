@@ -67,7 +67,7 @@ const SinglePostPage = () => {
           )}
           <div className="flex flex-col">
             <span>
-              Written by <Link className="text-[#1DA1F2]">{data.user.username}</Link>
+              Written n n n n n n n n n n n n n n n n n n n n n nn n n n n n n n n n n n n  n n n n n  n n  n n  n n n n n  n n  n  n  n n  by <Link className="text-[#1DA1F2]">{data.user.username}</Link>
               <span className="pl-1 pr-1 ">
                 on
               </span>
