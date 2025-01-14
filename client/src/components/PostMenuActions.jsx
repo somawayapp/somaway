@@ -132,26 +132,22 @@ const PostMenuActions = ({ post }) => {
     <div className="relative z-10">
       {/* Three dots icon */}
       <div
-        onClick={() => setDropdownOpen(!dropdownOpen)}
-        className="cursor-pointer text-[var(--textColor)]"
-      >
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          viewBox="0 0 24 24"
-          width="18"
-          height="18"
-        >
-          <circle cx="12" cy="3" r="2" />
-          <circle cx="12" cy="12" r="2" />
-          <circle cx="12" cy="21" r="2" />
-        </svg>
-      </div>
+onClick={() => setDropdownOpen(prevState => !prevState)} // Toggle the dropdown state
+className="cursor-pointer text-[var(--textColor)]"
+>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="10" height="10">
+  <circle cx="12" cy="3" r="2" />
+  <circle cx="12" cy="12" r="2" />
+  <circle cx="12" cy="21" r="2" />
+</svg>
+</div>
+
 
       {/* Dropdown menu */}
       {dropdownOpen && (
         <div
           ref={dropdownRef}
-          className="absolute right-0 bg-[var(--textColor)] border-[var(--softColor7)] rounded shadow-lg p-2 mt-2 w-48"
+          className="absolute right-0 bg-[var(--textColore)] border-[var(--softColor7)] rounded shadow-lg p-2 mt-2 w-48"
         >
           {isAdmin && (
             <div
