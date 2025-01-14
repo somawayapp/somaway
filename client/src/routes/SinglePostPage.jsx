@@ -85,6 +85,7 @@ const SinglePostPage = () => {
         <Comments postId={data._id} />
 
             </div>
+            <PostMenuActions post={data} />
 
 
         {/* Description */}
