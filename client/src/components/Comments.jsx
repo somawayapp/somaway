@@ -67,10 +67,10 @@ const Comments = ({ postId }) => {
   };
 
   return (
-    <div className="flex flex-col gap-8 lg:w-3/5 mb-12">
+    <div className="flex flex-col gap-1 lg:w-3/5 mb-2">
       {/* Comment Icon */}
       <div
-        className="cursor-pointer text-blue-800 text-2xl"
+        className="cursor-pointer text-[#1DA1F2] text-md"
         onClick={() => setShowComments((prev) => !prev)}
       >
         <FaCommentAlt />
@@ -79,17 +79,17 @@ const Comments = ({ postId }) => {
       {/* Comments Section */}
       {showComments && (
         <>
-          <h1 className="text-xl text-gray-500 underline">Comments</h1>
+          <h1 className="text-xl text-[var(--textLogo)] ">Comments</h1>
           <form
             onSubmit={handleSubmit}
-            className="flex items-center justify-between gap-8 w-full"
+            className="flex items-center text-[var(--textColor)] justify-between gap-1 w-full"
           >
             <textarea
               name="desc"
               placeholder="Write a comment..."
               className="w-full p-4 rounded-xl"
             />
-            <button className="bg-blue-800 px-4 py-3 text-white font-medium rounded-xl">
+            <button className="bg-[#1DA1F2] px-4 py-3 text-white font-medium rounded-xl">
               Send
             </button>
           </form>
@@ -111,7 +111,7 @@ const Comments = ({ postId }) => {
               {visibleComments < data.length && (
                 <button
                   onClick={loadMoreComments}
-                  className="text-blue-800 underline"
+                  className="text-[#1DA1F2] "
                 >
                   Show More
                 </button>

@@ -34,8 +34,8 @@ const Comment = ({ comment, postId }) => {
   });
 
   return (
-    <div className="p-4 bg-slate-50 rounded-xl mb-8">
-      <div className="flex items-center gap-4">
+    <div className="p-4 bg-text-[var(--textColore)] rounded-xl mb-2">
+      <div className="flex items-center gap-1">
         {comment.user.img && (
           <Image
             src={comment.user.img}
@@ -44,7 +44,7 @@ const Comment = ({ comment, postId }) => {
           />
         )}
         <span className="font-medium">{comment.user.username}</span>
-        <span className="text-sm text-gray-500">
+        <span className="text-sm text-text-[var(--textColor)]">
           {format(comment.createdAt)}
         </span>
         {user &&
