@@ -78,13 +78,15 @@ const SinglePostPage = () => {
 
 
           </div>
-          <div className="w-full max-w-[1000px]">
+        
+        </div>
+
+        <div className="w-full max-w-[1000px]">
         <Comments postId={data._id} />
 
             </div>
-        </div>
 
-
+            
         {/* Description */}
         <p className="text-[var(--textColor)] text-[14px] md:text-[16px] text-justify mt-4">
           {data.desc}
