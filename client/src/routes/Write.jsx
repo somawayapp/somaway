@@ -88,7 +88,7 @@ const Write = () => {
   }
 
   return (
-    <div className="h-[calc(100vh-64px)] md:h-[calc(100vh-80px)] flex flex-col top-[150px] gap-6 px-4 py-6">
+    <div className="h-[calc(100vh-64px)] md:h-[calc(100vh-80px)] flex flex-col top-[20px] lg:top-[100] gap-6 px-4 py-6">
       <h1 className="text-3xl font-semibold text-[var(--textColor)] ">Create a New Post</h1>
       {error && (
         <div className="p-4 text-sm text-red-700 bg-red-100 rounded-lg shadow-md">
@@ -130,7 +130,7 @@ const Write = () => {
         {/* Title Input */}
         <div>
           <input
-            className="text-md font-semibold   bg-transparent outline-none p-3 w-full  border  border-1 border-[var(--textColore)]"
+            className="text-md font-semibold   rounded-xl bg-transparent outline-none p-3 w-full  border  border-1 border-[var(--textColore)]"
             type="text"
             placeholder="Enter Post Title"
             value={title}
@@ -182,7 +182,7 @@ const Write = () => {
           <ReactQuill 
             value={desc} 
             onChange={handleDescChange} 
-            className=" border  border-1 border-[var(--textColore)] text-[var(--textColor)]  "
+            className=" border  border-1 border-[var(--textColore)] rounded-xl text-[var(--textColor)]  "
             placeholder="A Short Description" 
             modules={{
               toolbar: [
