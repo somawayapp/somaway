@@ -90,9 +90,9 @@ const Homepage = () => {
       <div className="bg-[var(--textColore)] flex flex-col border  border-2 border-[var(--textColore)]   mb-[40px] lg:flex-row items-center
        lg:items-stretch gap-6 rounded-none">
         {/* IMAGE SECTION */}
-        <div className="lg:w-1/3 w-full">
+        <div className="lg:w-1/3 bg-[var(--bg)] w-full">
           <img
-            src="/logo2.jpg"
+            src="/logo6.png"
             alt="Newsletter illustration"
             className="w-full h-full object-cover :rounded-r-none"
           />
