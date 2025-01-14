@@ -56,7 +56,7 @@ const SinglePostPage = () => {
 
       {/* Author Info and Other Content */}
       <div className="w-full max-w-[700px]">
-        <div className="flex items-center gap-4 text-sm text-[var(--softTextColor)] mt-4">
+        <div className="flex items-center gap-2 text-sm text-[var(--softTextColor)] mt-2">
           {data.user.img && (
             <Image
               src={data.user.img}
@@ -81,14 +81,14 @@ const SinglePostPage = () => {
         
         </div>
 
-        <div className="w-full max-w-[1000px]">
+        <div className="w-full mt-2 max-w-[1000px]">
         <Comments postId={data._id} />
 
             </div>
 
-            
+
         {/* Description */}
-        <p className="text-[var(--textColor)] text-[14px] md:text-[16px] text-justify mt-4">
+        <p className="text-[var(--textColor)] text-[14px] md:text-[16px] text-justify mt-2">
           {data.desc}
         </p>
       </div>
