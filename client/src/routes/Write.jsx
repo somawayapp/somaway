@@ -1,7 +1,8 @@
 import { useAuth, useUser } from "@clerk/clerk-react";
 import { useMutation } from "@tanstack/react-query";
 import axios from "axios";
-import ReactQuill from "react-quill-new";
+import ReactQuill from "react-quill-new";  // Import ReactQuill
+import "react-quill-new/dist/quill.snow.css";  // Import Quill CSS for styles
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
@@ -10,7 +11,7 @@ import Upload from "../components/Upload"; // Assuming this component handles fi
 const Write = () => {
   const { isLoaded, isSignedIn } = useUser();
   const [title, setTitle] = useState("");
-  const [desc, setDesc] = useState("");
+  const [desc, setDesc] = useState("");  // State for description (rich text)
   const [category, setCategory] = useState("");
   const [cover, setCover] = useState(null); // Initially null, will hold the image file and preview URL
   const [progress, setProgress] = useState(0);
@@ -47,8 +48,7 @@ const Write = () => {
     setTitleRemainingChars(150 - value.length);
   };
 
-  const handleDescChange = (e) => {
-    const value = e.target.value.slice(0, 10000);
+  const handleDescChange = (value) => {
     setDesc(value);
     setDescRemainingChars(10000 - value.length);
   };
@@ -71,7 +71,7 @@ const Write = () => {
       img: cover.filePath, // Assuming `filePath` is the path to the uploaded file
       title,
       category,
-      desc,
+      desc,  // Use the rich text content here
       slug,
     };
 
@@ -157,36 +157,43 @@ const Write = () => {
             <option value="commerce">Commerce</option>
             <option value="crypto">Crypto</option>
             <option value="fintech">Fintech</option>
-            <option value="gamming">Gaming</option>
+            <option value="gaming">Gaming</option>
             <option value="gadgets">Gadgets</option>
             <option value="security">Security</option>
-            <option value="space">Space</option> 
+            <option value="space">Space</option>
             <option value="startups">Startups</option>
-            <option value="transportation">Transportation </option>
+            <option value="transportation">Transportation</option>
             <option value="hardware">Hardware</option>
-            <option value="ai-robotics">AI& Robotics</option>
-            <option value="entertainment">Entertainment </option>
+            <option value="ai-robotics">AI & Robotics</option>
+            <option value="entertainment">Entertainment</option>
             <option value="media">Media</option>
             <option value="industrial">Industrial</option>
             <option value="engineering">Engineering</option>
             <option value="energy">Energy</option>
             <option value="science">Science</option>
-           
           </select>
         </div>
 
-        {/* Description Input */}
+        {/* Description Input (Rich Text Editor) */}
         <div>
-
-        <ReactQuill
-            theme="snow"
-            className="flex-1 rounded-xl bg-white shadow-md"
+          <ReactQuill
             value={desc}
-            placeholder="A Short Description"
             onChange={handleDescChange}
-            readOnly={0 < progress && progress < 100}
+            placeholder="A Short Description"
+            theme="snow"
+            modules={{
+              toolbar: [
+                [{ header: "1" }, { header: "2" }, { font: [] }],
+                [{ list: "ordered" }, { list: "bullet" }],
+                ["bold", "italic", "underline"],
+                [{ align: [] }],
+                ["link"],
+                ["image"],
+                [{ color: [] }, { background: [] }],
+                ["blockquote"],
+              ],
+            }}
           />
-        
           <span className="text-sm text-gray-500">{descRemainingChars} characters remaining</span>
         </div>
 
@@ -204,3 +211,4 @@ const Write = () => {
 };
 
 export default Write;
+

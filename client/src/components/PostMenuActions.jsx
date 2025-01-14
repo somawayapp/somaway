@@ -136,9 +136,9 @@ const PostMenuActions = ({ post }) => {
   className="cursor-pointer text-[var(--textColor)]"
 >
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="14" height="14">
-    <circle cx="12" cy="3" r="2" />
-    <circle cx="12" cy="9" r="2" />
-    <circle cx="12" cy="15" r="2" />
+    <circle cx="12" cy="5" r="2" />
+    <circle cx="12" cy="10" r="2" />
+    <circle cx="12" cy="25" r="2" />
   </svg>
 </div>
 
