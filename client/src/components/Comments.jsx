@@ -87,12 +87,12 @@ const Comments = ({ postId }) => {
           <h1 className="text-md text-[var(--textColor)]">Comments</h1>
           <form
             onSubmit={handleSubmit}
-            className="flex items-center bg-[var(--textColore)] text-[var(--textColor)] justify-between gap-1 w-full"
+            className="flex items-centerbg-[var(--textColore)] text-[var(--textColor)] justify-between gap-1 w-full"
           >
             <textarea
               name="desc"
               placeholder="Write a comment..."
-              className="w-full pt-1 bg-[var(--textColore)]border-none text-sm  mb-[-2px]
+              className="w-full pt-1 bg-[var(--textColore)] border-none text-sm  mb-[-2px]
                pl-4 text-[var(--textColor)] rounded-xl"
             />
             <button className="bg-[#1DA1F2] px-4 py-3 text-white text-sm rounded-xl">

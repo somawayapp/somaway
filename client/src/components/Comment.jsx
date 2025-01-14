@@ -34,7 +34,7 @@ const Comment = ({ comment, postId }) => {
   });
 
   return (
-    <div className="p-2 bg-[var(--textColore)] rounded-xl mb-1">
+    <div className="p-2  pl-4 bg-[var(--bg)] rounded-xl mb-1">
       <div className="flex items-center gap-1">
         {comment.user.img && (
           <Image
@@ -50,7 +50,7 @@ const Comment = ({ comment, postId }) => {
         {user &&
           (comment.user.username === user.username || role === "admin") && (
             <span
-              className="text-xs text-red-300 hover:text-red-500 cursor-pointer"
+              className="text-xs text-right align-right item-right text-red-300 hover:text-red-500 cursor-pointer"
               onClick={() => mutation.mutate()}
             >
               delete
@@ -58,7 +58,7 @@ const Comment = ({ comment, postId }) => {
             </span>
           )}
       </div>
-      <div className="mt-4">
+      <div className="mt-2">
         <p>{comment.desc}</p>
       </div>
     </div>
