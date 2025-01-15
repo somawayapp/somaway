@@ -117,7 +117,6 @@ const Write = () => {
                 type="file"
                 accept="image/*"
                 onChange={handleImageChange}
-                onClick={clearError}
                 className="hidden"
                 id="coverImageInput"
               />
@@ -149,7 +148,8 @@ const Write = () => {
           </div>
         )}
 
-        
+       
+
 
         {/* Title Input */}
         <div>
