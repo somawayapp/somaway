@@ -1,9 +1,21 @@
+import { useAuth, useUser } from "@clerk/clerk-react";
+import { useMutation } from "@tanstack/react-query";
+import axios from "axios";
+import ReactQuill from "react-quill-new";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import Upload from "../components/Upload"; // Assuming this component handles file uploads and provides preview
+
+import 'react-quill-new/dist/quill.snow.css'; // Import Quill styles
+
 const Write = () => {
   const { isLoaded, isSignedIn } = useUser();
   const [title, setTitle] = useState("");
   const [desc, setDesc] = useState("");
   const [category, setCategory] = useState("");
   const [cover, setCover] = useState(null); // Initially null, will hold the image file and preview URL
+  const [coverPreview, setCoverPreview] = useState(null); // State for storing preview image URL
   const [progress, setProgress] = useState(0);
   const [isFeatured, setIsFeatured] = useState(false); // Added state for featured
   const [titleRemainingChars, setTitleRemainingChars] = useState(150);
@@ -59,7 +71,7 @@ const Write = () => {
     const slug = `${title.replace(/\s+/g, "-").toLowerCase()}-${timestamp}`;
 
     const data = {
-      img: cover.filePath, // Assuming `filePath` is the path to the uploaded file
+      img: cover.filePath, // Assuming filePath is the path to the uploaded file
       title,
       category,
       desc,
@@ -88,7 +100,7 @@ const Write = () => {
       )}
       <form onSubmit={handleSubmit} className="flex flex-col gap-6 flex-1">
         {/* Upload Component */}
-        <Upload type="image" setProgress={setProgress} setData={setCover}>
+        <Upload type="image" setProgress={setProgress} setData={setCover} setPreview={setCoverPreview}>
           <button
             type="button"
             onClick={clearError}
@@ -100,10 +112,9 @@ const Write = () => {
         </Upload>
 
         {/* Image Preview */}
-        {cover && cover.filePath && (
+        {coverPreview && (
           <div className="mt-4">
-            <h3 className="text-sm text-gray-600">Image Preview</h3>
-            <img src={cover.filePath} alt="Cover Preview" className="w-full h-auto rounded-xl shadow-lg" />
+            <img src={coverPreview} alt="Cover Preview" className="w-full rounded-xl shadow-md" />
           </div>
         )}
 
@@ -171,9 +182,6 @@ const Write = () => {
           />
           <span className="text-sm text-gray-600">{descRemainingChars} characters remaining</span>
         </div>
-
-   
-
 
         {/* Submit Button */}
         <button
