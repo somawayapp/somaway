@@ -116,6 +116,7 @@ const Write = () => {
       <form onSubmit={handleSubmit} className="flex flex-col gap-6 flex-1">
         {/* Upload Component */}
         <div>
+  {/* Hidden File Input */}
   <input
     type="file"
     accept="image/*"
@@ -123,19 +124,17 @@ const Write = () => {
     className="hidden"
     id="coverImageInput"
   />
+
+  {/* Single Button for Image Selection & Upload */}
   <label
     htmlFor="coverImageInput"
-    className="w-max p-3 shadow-md rounded-xl text-sm text-[var(--textColor)] bg-[var(--textColore)]
-      cursor-pointer"
+    className="w-max p-3 shadow-md rounded-xl text-sm text-[var(--textColor)] bg-[var(--textColore)] cursor-pointer"
   >
     {cover ? "Upload Cover Image" : "Add a Cover Image"}
   </label>
-</div>
 
-{/* Button for both preview and upload */}
-{cover ? (
-  <>
-    {/* Image Preview Section */}
+  {/* Image Preview Section */}
+  {cover && cover.previewUrl && (
     <div className="relative w-full max-w-[250px] h-[150px] mb-4 mx-auto">
       <img
         src={cover.previewUrl}
@@ -150,8 +149,10 @@ const Write = () => {
         ✕
       </button>
     </div>
+  )}
 
-    {/* Upload Button */}
+  {/* Upload Button */}
+  {cover && (
     <Upload type="image" setProgress={setProgress} setData={setCover}>
       <button
         type="button"
@@ -163,17 +164,8 @@ const Write = () => {
         {progress > 0 && progress < 100 ? "Uploading..." : "Upload Cover Image"}
       </button>
     </Upload>
-  </>
-) : (
-  <button
-    type="button"
-    onClick={() => document.getElementById('coverImageInput').click()}
-    className="w-max p-3 shadow-md rounded-xl text-sm text-[var(--textColor)] bg-[var(--textColore)]
-      cursor-pointer"
-  >
-    Add a Cover Image
-  </button>
-)}
+  )}
+</div>
 
 
 
