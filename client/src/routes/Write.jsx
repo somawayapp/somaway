@@ -1,14 +1,3 @@
-import { useAuth, useUser } from "@clerk/clerk-react";
-import { useMutation } from "@tanstack/react-query";
-import axios from "axios";
-import ReactQuill from "react-quill-new";
-import { useState, useRef } from "react";
-import { useNavigate } from "react-router-dom";
-import { toast } from "react-toastify";
-import Upload from "../components/Upload"; // Assuming this component handles file uploads and provides preview
-
-import 'react-quill-new/dist/quill.snow.css'; // Import Quill styles
-
 const Write = () => {
   const { isLoaded, isSignedIn } = useUser();
   const [title, setTitle] = useState("");
@@ -151,6 +140,7 @@ const Write = () => {
             </button>
           </div>
         )}
+
 
 
 
