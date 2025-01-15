@@ -1,4 +1,3 @@
-
 import { useAuth, useUser } from "@clerk/clerk-react";
 import { useMutation } from "@tanstack/react-query";
 import axios from "axios";
@@ -17,7 +16,6 @@ const Write = () => {
   const [category, setCategory] = useState("");
   const [cover, setCover] = useState(null); // Initially null, will hold the image file and preview URL
   const [progress, setProgress] = useState(0);
-  const [isFeatured, setIsFeatured] = useState(false); // Added state for featured
   const [titleRemainingChars, setTitleRemainingChars] = useState(150);
   const [descRemainingChars, setDescRemainingChars] = useState(10000);
   const [error, setError] = useState("");
@@ -76,23 +74,22 @@ const Write = () => {
       category,
       desc,
       slug,
-      isFeatured, // Added the isFeatured field
     };
 
     mutation.mutate(data);
   };
 
   if (!isLoaded) {
-    return <div className="text-center mt-8">Loading...</div>;
+    return <div className="text-center  text-[var(--textColor)] mt-8">Loading...</div>;
   }
 
   if (isLoaded && !isSignedIn) {
-    return <div className="text-center mt-8">You need to sign in to create a post!</div>;
+    return <div className="text-center  text-[var(--textColor)] mt-8">You need to sign in to create a post!</div>;
   }
 
   return (
-    <div className="h-[calc(100vh-64px)] md:h-[calc(100vh-80px)] flex flex-col gap-6 px-4 py-6">
-      <h1 className="text-3xl font-semibold text-black">Create a New Post</h1>
+    <div className="h-[calc(100vh-64px)] md:h-[calc(100vh-80px)] flex flex-col top-[20px] lg:top-[100px] gap-6 px-4 py-6">
+      <h1 className="text-3xl font-semibold text-[var(--textColor)] ">Create a New Post</h1>
       {error && (
         <div className="p-4 text-sm text-red-700 bg-red-100 rounded-lg shadow-md">
           {error}
@@ -105,55 +102,79 @@ const Write = () => {
             type="button"
             onClick={clearError}
             disabled={progress > 0 && progress < 100}
-            className="w-max p-3 shadow-md rounded-xl text-sm text-black bg-blue-500 disabled:opacity-50 hover:bg-blue-400 transition-all duration-200"
+            className="w-max p-3 shadow-md rounded-xl text-sm text-[var(--textColor)] bg-[var(--textColore)]
+             disabled:opacity-50 hover:bg-[var(--softTextColor7)] transition-all duration-200"
           >
             {progress > 0 && progress < 100 ? "Uploading..." : "Add a cover image"}
           </button>
         </Upload>
 
-       
+        {/* Image Preview Section */}
+        {cover && cover.previewUrl && (
+          <div className="relative w-full max-w-[250px] h-[150px] mb-4 mx-auto">
+            <img
+              src={cover.previewUrl}
+              alt="Cover preview"
+              className="w-full h-full object-cover rounded-md shadow-lg"
+            />
+            <button
+              type="button"
+              onClick={() => setCover(null)}
+              className="absolute top-2 right-2 bg-red-500 text-white p-1 rounded-full text-xs"
+            >
+              ✕
+            </button>
+          </div>
+        )}
 
         {/* Title Input */}
         <div>
           <input
-            className="text-md font-semibold rounded-xl bg-transparent outline-none p-3 w-full border border-1 border-gray-300"
+            className="text-md font-semibold   rounded-xl bg-transparent outline-none p-3 w-full  border  border-1 border-[var(--textColore)]"
             type="text"
             placeholder="Enter Post Title"
             value={title}
             onChange={handleTitleChange}
             name="title"
           />
-          <span className="text-sm text-gray-600">{titleRemainingChars} characters remaining</span>
+          <span className="text-sm text-[var(--textColor)]">{titleRemainingChars} characters remaining</span>
         </div>
 
         {/* Category Selection */}
         <div className="flex items-center gap-4">
-          <label htmlFor="category" className="text-sm text-gray-600">Choose a category:</label>
+          <label htmlFor="category" className="text-sm text-[var(--textColor)]">Choose a category:</label>
           <select
             name="category"
             id="category"
             value={category}
             onChange={(e) => setCategory(e.target.value)}
-            className="p-3 rounded-xl bg-gray-100 text-gray-600 shadow-md w-full max-w-xs"
+            className="p-3 rounded-xl bg-[var(--textColore)] text-[var(--textColor)] shadow-md w-full max-w-xs"
           >
             <option value="" disabled>Select a category</option>
             <option value="general">General</option>
             <option value="apps">Apps</option>
             <option value="software">Software</option>
-            {/* Add more categories as necessary */}
+            <option value="health">Health</option>
+            <option value="climate">Climate</option>
+            <option value="cloud">Cloud</option>
+            <option value="commerce">Commerce</option>
+            <option value="crypto">Crypto</option>
+            <option value="fintech">Fintech</option>
+            <option value="gaming">Gaming</option>
+            <option value="gadgets">Gadgets</option>
+            <option value="security">Security</option>
+            <option value="space">Space</option> 
+            <option value="startups">Startups</option>
+            <option value="transportation">Transportation </option>
+            <option value="hardware">Hardware</option>
+            <option value="ai-robotics">AI & Robotics</option>
+            <option value="entertainment">Entertainment </option>
+            <option value="media">Media</option>
+            <option value="industrial">Industrial</option>
+            <option value="engineering">Engineering</option>
+            <option value="energy">Energy</option>
+            <option value="science">Science</option>
           </select>
-        </div>
-
-        {/* Featured Toggle */}
-        <div className="flex items-center gap-4 mt-4">
-          <label className="text-sm text-gray-600">Featured Post:</label>
-          <button
-            type="button"
-            onClick={() => setIsFeatured(!isFeatured)}
-            className={`px-4 py-2 rounded-xl ${isFeatured ? 'bg-green-500' : 'bg-gray-400'} text-white transition-all duration-200`}
-          >
-            {isFeatured ? "Featured" : "Not Featured"}
-          </button>
         </div>
 
         {/* Rich Text Description Input using ReactQuill */}
@@ -161,7 +182,7 @@ const Write = () => {
           <ReactQuill 
             value={desc} 
             onChange={handleDescChange} 
-            className="border border-1 border-gray-300 rounded-xl text-gray-600"
+            className=" border  border-1 border-[var(--textColore)] rounded-xl text-[var(--textColor)]  "
             placeholder="A Short Description" 
             modules={{
               toolbar: [
@@ -175,20 +196,21 @@ const Write = () => {
             }} 
             formats={['header', 'font', 'list', 'bold', 'italic', 'underline', 'link', 'align', 'image']} 
           />
-          <span className="text-sm text-gray-600">{descRemainingChars} characters remaining</span>
+          <span className="text-sm text-text-[var(--textColor)]">{descRemainingChars} characters remaining</span>
         </div>
 
         {/* Submit Button */}
         <button
           disabled={mutation.isPending || (progress > 0 && progress < 100)}
-          className="bg-blue-500 hover:bg-blue-400 text-white font-medium rounded-xl mt-4 p-3 w-full disabled:bg-blue-300 disabled:cursor-not-allowed"
+          className="bg-[#1da1f2]  hover:bg-[#0875b9] text-white font-medium rounded-xl mt-4 p-3 w-full disabled:bg-blue-400 disabled:cursor-not-allowed"
         >
           {mutation.isPending ? "Publishing..." : "Publish Post"}
         </button>
-        <span className="text-sm text-gray-600">{`Progress: ${progress}%`}</span>
+        <span className="text-sm text-[var(--textColor)]">{`Progress: ${progress}%`}</span>
       </form>
     </div>
   );
 };
 
 export default Write;
+
