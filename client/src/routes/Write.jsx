@@ -1,3 +1,4 @@
+
 import { useAuth, useUser } from "@clerk/clerk-react";
 import { useMutation } from "@tanstack/react-query";
 import axios from "axios";
@@ -99,27 +100,20 @@ const Write = () => {
       )}
       <form onSubmit={handleSubmit} className="flex flex-col gap-6 flex-1">
         {/* Upload Component */}
-               {/* Image Upload */}
-               <div className="relative w-full max-w-[250px] h-[150px] mb-4">
-          {cover && cover.previewUrl ? (
-            <img
-              src={cover.previewUrl}
-              alt="Cover preview"
-              className="w-full h-full object-cover rounded-md shadow-lg"
-            />
-          ) : (
-            <div className="w-full h-full bg-gray-200 rounded-md flex items-center justify-center">
-              <p className="text-gray-500">No Image Preview</p>
-            </div>
-          )}
-          <input
-            type="file"
-            onChange={handleFileUpload}
-            className="mt-2"
-          />
-        </div>
+        <Upload type="image" setProgress={setProgress} setData={setCover}>
+          <button
+            type="button"
+            onClick={clearError}
+            disabled={progress > 0 && progress < 100}
+            className="w-max p-3 shadow-md rounded-xl text-sm text-black bg-blue-500 disabled:opacity-50 hover:bg-blue-400 transition-all duration-200"
+          >
+            {progress > 0 && progress < 100 ? "Uploading..." : "Add a cover image"}
+          </button>
+        </Upload>
 
-        
+       
+
+        {/* Title Input */}
         <div>
           <input
             className="text-md font-semibold rounded-xl bg-transparent outline-none p-3 w-full border border-1 border-gray-300"
@@ -198,3 +192,6 @@ const Write = () => {
 };
 
 export default Write;
+
+
+
