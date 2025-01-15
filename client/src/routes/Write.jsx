@@ -5,10 +5,8 @@ import ReactQuill from "react-quill-new";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import "react-quill-new/dist/quill.snow.css"; // Import Quill styles
 import Upload from "../components/Upload"; // Assuming this component handles file uploads and provides preview
-const [isFeatured, setIsFeatured] = useState(false); // For featured toggle
-
-import 'react-quill-new/dist/quill.snow.css'; // Import Quill styles
 
 const Write = () => {
   const { isLoaded, isSignedIn } = useUser();
@@ -20,6 +18,7 @@ const Write = () => {
   const [titleRemainingChars, setTitleRemainingChars] = useState(150);
   const [descRemainingChars, setDescRemainingChars] = useState(10000);
   const [error, setError] = useState("");
+  const [isFeatured, setIsFeatured] = useState(false); // For featured toggle
 
   const navigate = useNavigate();
   const { getToken } = useAuth();
@@ -85,31 +84,30 @@ const Write = () => {
       desc,
       slug,
       isFeatured, // Featured field
-
     };
 
     mutation.mutate(data);
   };
 
   if (!isLoaded) {
-    return <div className="text-center  text-[var(--textColor)] mt-8">Loading...</div>;
+    return <div className="text-center text-[var(--textColor)] mt-8">Loading...</div>;
   }
 
   if (isLoaded && !isSignedIn) {
-    return <div className="text-center  text-[var(--textColor)] mt-8">You need to sign in to create a post!</div>;
+    return <div className="text-center text-[var(--textColor)] mt-8">You need to sign in to create a post!</div>;
   }
 
   return (
     <div className="h-[calc(100vh-64px)] md:h-[calc(100vh-80px)] flex flex-col top-[20px] lg:top-[100px] gap-6 px-4 py-6">
-      <h1 className="text-3xl font-semibold text-[var(--textColor)] ">Create a New Post</h1>
+      <h1 className="text-3xl font-semibold text-[var(--textColor)]">Create a New Post</h1>
       {error && (
         <div className="p-4 text-sm text-red-700 bg-red-100 rounded-lg shadow-md">
           {error}
         </div>
       )}
-      <form onSubmit={handleSubmit} className="flex flex-col gap-6 flex-1"> 
-   {/* Image Upload */}
-   <div className="relative w-full max-w-[250px] h-[150px] mb-4">
+      <form onSubmit={handleSubmit} className="flex flex-col gap-6 flex-1">
+        {/* Image Upload */}
+        <div className="relative w-full max-w-[250px] h-[150px] mb-4">
           {cover && cover.previewUrl ? (
             <img
               src={cover.previewUrl}
@@ -145,7 +143,7 @@ const Write = () => {
         {/* Title Input */}
         <div>
           <input
-            className="text-md font-semibold   rounded-xl bg-transparent outline-none p-3 w-full  border  border-1 border-[var(--textColore)]"
+            className="text-md font-semibold rounded-xl bg-transparent outline-none p-3 w-full border border-1 border-[var(--textColor)]"
             type="text"
             placeholder="Enter Post Title"
             value={title}
@@ -163,7 +161,7 @@ const Write = () => {
             id="category"
             value={category}
             onChange={(e) => setCategory(e.target.value)}
-            className="p-3 rounded-xl bg-[var(--textColore)] text-[var(--textColor)] shadow-md w-full max-w-xs"
+            className="p-3 rounded-xl bg-[var(--textColor)] text-[var(--textColor)] shadow-md w-full max-w-xs"
           >
             <option value="" disabled>Select a category</option>
             <option value="general">General</option>
@@ -178,12 +176,12 @@ const Write = () => {
             <option value="gaming">Gaming</option>
             <option value="gadgets">Gadgets</option>
             <option value="security">Security</option>
-            <option value="space">Space</option> 
+            <option value="space">Space</option>
             <option value="startups">Startups</option>
-            <option value="transportation">Transportation </option>
+            <option value="transportation">Transportation</option>
             <option value="hardware">Hardware</option>
             <option value="ai-robotics">AI & Robotics</option>
-            <option value="entertainment">Entertainment </option>
+            <option value="entertainment">Entertainment</option>
             <option value="media">Media</option>
             <option value="industrial">Industrial</option>
             <option value="engineering">Engineering</option>
@@ -194,38 +192,36 @@ const Write = () => {
 
         {/* Rich Text Description Input using ReactQuill */}
         <div>
-          <ReactQuill 
-            value={desc} 
-            onChange={handleDescChange} 
-            className=" border  border-1 border-[var(--textColore)] rounded-xl text-[var(--textColor)]  "
-            placeholder="A Short Description" 
+          <ReactQuill
+            value={desc}
+            onChange={handleDescChange}
+            className="border border-1 border-[var(--textColor)] rounded-xl text-[var(--textColor)]"
+            placeholder="A Short Description"
             modules={{
               toolbar: [
-                [{ 'header': '1'}, { 'header': '2'}, { 'font': [] }],
-                [{ 'list': 'ordered'}, { 'list': 'bullet' }],
-                ['bold', 'italic', 'underline'],
-                ['link'],
-                [{ 'align': [] }],
-                ['image'] // To allow image insertion
+                [{ header: "1" }, { header: "2" }, { font: [] }],
+                [{ list: "ordered" }, { list: "bullet" }],
+                ["bold", "italic", "underline"],
+                ["link"],
+                [{ align: [] }],
+                ["image"], // To allow image insertion
               ],
-            }} 
-            formats={['header', 'font', 'list', 'bold', 'italic', 'underline', 'link', 'align', 'image']} 
+            }}
+            formats={["header", "font", "list", "bold", "italic", "underline", "link", "align", "image"]}
           />
-          <span className="text-sm text-text-[var(--textColor)]">{descRemainingChars} characters remaining</span>
+          <span className="text-sm text-[var(--textColor)]">{descRemainingChars} characters remaining</span>
         </div>
 
         {/* Submit Button */}
         <button
-          disabled={mutation.isPending || (progress > 0 && progress < 100)}
-          className="bg-[#1da1f2]  hover:bg-[#0875b9] text-white font-medium rounded-xl mt-4 p-3 w-full disabled:bg-blue-400 disabled:cursor-not-allowed"
+          className="w-full max-w-xs mt-4 bg-[var(--btnColor)] text-white p-3 rounded-xl shadow-md"
+          type="submit"
         >
-          {mutation.isPending ? "Publishing..." : "Publish Post"}
+          Publish Post
         </button>
-        <span className="text-sm text-[var(--textColor)]">{`Progress: ${progress}%`}</span>
       </form>
     </div>
   );
 };
 
 export default Write;
-
