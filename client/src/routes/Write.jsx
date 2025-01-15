@@ -119,7 +119,7 @@ const Write = () => {
   <input
     type="file"
     accept="image/*"
-    onChange={handleImageChange}
+    onChange={handleImageChange} // Handle file selection and upload
     className="hidden"
     id="coverImageInput"
   />
@@ -132,8 +132,8 @@ const Write = () => {
   </label>
 </div>
 
-{/* Image Preview Section */}
-{cover && cover.previewUrl && (
+{/* Image Preview Section and Upload Logic */}
+{cover ? (
   <div className="relative w-full max-w-[250px] h-[150px] mb-4 mx-auto">
     <img
       src={cover.previewUrl}
@@ -142,24 +142,25 @@ const Write = () => {
     />
     <button
       type="button"
-      onClick={() => setCover(null)}
+      onClick={() => setCover(null)} // Clear the preview
       className="absolute top-2 right-2 bg-red-500 text-white p-1 rounded-full text-xs"
     >
       ✕
     </button>
   </div>
+) : (
+  <Upload type="image" setProgress={setProgress} setData={setCover}>
+    <button
+      type="button"
+      onClick={clearError}
+      disabled={progress > 0 && progress < 100} // Disable while uploading
+      className="w-max p-3 shadow-md rounded-xl text-sm text-[var(--textColor)] bg-[var(--textColore)]
+        disabled:opacity-50 hover:bg-[var(--softTextColor7)] transition-all duration-200"
+    >
+      {progress > 0 && progress < 100 ? "Uploading..." : "Add a cover image"}
+    </button>
+  </Upload>
 )}
-
-{/* Single Button for Uploading and Handling Image */}
-<button
-  type="button"
-  onClick={() => document.getElementById("coverImageInput").click()} // Trigger file input
-  disabled={progress > 0 && progress < 100}
-  className="w-max p-3 shadow-md rounded-xl text-sm text-[var(--textColor)] bg-[var(--textColore)]
-    disabled:opacity-50 hover:bg-[var(--softTextColor7)] transition-all duration-200"
->
-  {progress > 0 && progress < 100 ? "Uploading..." : "Add a cover image"}
-</button>
 
 
         {/* Title Input */}
