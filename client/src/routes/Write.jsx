@@ -148,7 +148,6 @@ const Write = () => {
           </div>
         )}
 
-       
 
 
         {/* Title Input */}
