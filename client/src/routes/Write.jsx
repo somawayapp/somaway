@@ -3,7 +3,7 @@ const Write = () => {
   const [title, setTitle] = useState("");
   const [desc, setDesc] = useState("");
   const [category, setCategory] = useState("");
-  const [cover, setCover] = useState(null); // Initially null, will hold the image file and preview URL
+  const [cover, setCover] = useState(null); // Holds the image file and preview URL
   const [progress, setProgress] = useState(0);
   const [titleRemainingChars, setTitleRemainingChars] = useState(150);
   const [descRemainingChars, setDescRemainingChars] = useState(10000);
@@ -83,10 +83,33 @@ const Write = () => {
   const handleImageChange = (e) => {
     const file = e.target.files[0];
     if (file) {
-      const previewUrl = URL.createObjectURL(file); // Create a preview URL for the image
+      // Create preview URL for the image
+      const previewUrl = URL.createObjectURL(file);
+
+      // Set the cover state with file and preview URL
       setCover({
         file,
         previewUrl,
+      });
+
+      // Here you can handle uploading the file to the server or cloud storage
+      // Assuming you have an upload function to handle file uploads
+      const formData = new FormData();
+      formData.append('file', file);
+
+      // Upload the image file and get the file path for the database
+      axios.post('/upload-endpoint', formData, {
+        onUploadProgress: (progressEvent) => {
+          const { loaded, total } = progressEvent;
+          setProgress(Math.round((loaded * 100) / total));
+        },
+      })
+      .then((response) => {
+        setCover((prev) => ({ ...prev, filePath: response.data.filePath }));
+        toast.success('Image uploaded successfully');
+      })
+      .catch((error) => {
+        toast.error('Image upload failed');
       });
     }
   };
@@ -102,25 +125,22 @@ const Write = () => {
       <form onSubmit={handleSubmit} className="flex flex-col gap-6 flex-1">
         {/* Upload Component */}
         <div>
-          <Upload type="image" setProgress={setProgress} setData={setCover}>
-            <div>
-              {/* The file input is now handled with a ref to avoid re-render */}
-              <input
-                type="file"
-                accept="image/*"
-                onChange={handleImageChange}
-                className="hidden"
-                ref={fileInputRef}  // Set the reference
-                id="coverImageInput"
-              />
-              <label
-                htmlFor="coverImageInput"
-                className="w-max p-3 shadow-md rounded-xl text-sm text-[var(--textColor)] bg-[var(--textColore)] cursor-pointer"
-              >
-                {progress > 0 && progress < 100 ? "Uploading..." : "Add a cover image"}
-              </label>
-            </div>
-          </Upload>
+          <div>
+            <input
+              type="file"
+              accept="image/*"
+              onChange={handleImageChange}
+              className="hidden"
+              ref={fileInputRef}  // Set the reference
+              id="coverImageInput"
+            />
+            <label
+              htmlFor="coverImageInput"
+              className="w-max p-3 shadow-md rounded-xl text-sm text-[var(--textColor)] bg-[var(--textColore)] cursor-pointer"
+            >
+              {progress > 0 && progress < 100 ? "Uploading..." : "Add a cover image"}
+            </label>
+          </div>
         </div>
 
         {/* Image Preview Section */}
@@ -140,6 +160,8 @@ const Write = () => {
             </button>
           </div>
         )}
+
+  
 
 
 
