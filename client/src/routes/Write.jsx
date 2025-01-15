@@ -50,17 +50,6 @@ const Write = () => {
     setTitleRemainingChars(150 - value.length);
   };
 
-  // Inside your Upload component's file handling logic
-const handleFileChange = (e) => {
-  const file = e.target.files[0];
-  const previewUrl = URL.createObjectURL(file); // For preview purposes
-  setCover({
-    filePath: file.name, // Replace with your actual logic for file path
-    previewUrl,
-  });
-};
-
-
   const handleDescChange = (value) => {
     setDesc(value);
     setDescRemainingChars(10000 - value.length);
@@ -81,7 +70,7 @@ const handleFileChange = (e) => {
     const slug = `${title.replace(/\s+/g, "-").toLowerCase()}-${timestamp}`;
 
     const data = {
-      img: cover.filePath, // Assuming `filePath` is the path to the uploaded file
+      img: cover.filePath, // Assuming filePath is the path to the uploaded file
       title,
       category,
       desc,
@@ -100,6 +89,17 @@ const handleFileChange = (e) => {
     return <div className="text-center text-[var(--textColor)] mt-8">You need to sign in to create a post!</div>;
   }
 
+  const handleImageChange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      const previewUrl = URL.createObjectURL(file); // Create a preview URL for the image
+      setCover({
+        file,
+        previewUrl,
+      });
+    }
+  };
+
   return (
     <div className="h-[calc(100vh-64px)] md:h-[calc(100vh-80px)] flex flex-col top-[20px] lg:top-[100px] gap-6 px-4 py-6">
       <h1 className="text-3xl font-semibold text-[var(--textColor)]">Create a New Post</h1>
@@ -110,37 +110,40 @@ const handleFileChange = (e) => {
       )}
       <form onSubmit={handleSubmit} className="flex flex-col gap-6 flex-1">
         {/* Upload Component */}
-        <Upload type="image" setProgress={setProgress} setData={setCover}>
-          <button
-            type="button"
-            onClick={clearError}
-            disabled={progress > 0 && progress < 100}
+        <div>
+          <input
+            type="file"
+            accept="image/*"
+            onChange={handleImageChange}
+            className="hidden"
+            id="coverImageInput"
+          />
+          <label
+            htmlFor="coverImageInput"
             className="w-max p-3 shadow-md rounded-xl text-sm text-[var(--textColor)] bg-[var(--textColore)]
-             disabled:opacity-50 hover:bg-[var(--softTextColor7)] transition-all duration-200"
+             cursor-pointer"
           >
             {progress > 0 && progress < 100 ? "Uploading..." : "Add a cover image"}
-          </button>
-        </Upload>
+          </label>
+        </div>
 
         {/* Image Preview Section */}
-        {/* Image Preview Section */}
-{cover && cover.previewUrl && (
-  <div className="relative w-full max-w-[250px] h-[150px] mb-4 mx-auto">
-    <img
-      src={cover.previewUrl}
-      alt="Cover preview"
-      className="w-full h-full object-cover rounded-md shadow-lg"
-    />
-    <button
-      type="button"
-      onClick={() => setCover(null)}
-      className="absolute top-2 right-2 bg-red-500 text-white p-1 rounded-full text-xs"
-    >
-      ✕
-    </button>
-  </div>
-)}
-
+        {cover && cover.previewUrl && (
+          <div className="relative w-full max-w-[250px] h-[150px] mb-4 mx-auto">
+            <img
+              src={cover.previewUrl}
+              alt="Cover preview"
+              className="w-full h-full object-cover rounded-md shadow-lg"
+            />
+            <button
+              type="button"
+              onClick={() => setCover(null)}
+              className="absolute top-2 right-2 bg-red-500 text-white p-1 rounded-full text-xs"
+            >
+              ✕
+            </button>
+          </div>
+        )}
 
         {/* Title Input */}
         <div>
@@ -212,7 +215,7 @@ const handleFileChange = (e) => {
         >
           {mutation.isPending ? "Publishing..." : "Publish Post"}
         </button>
-        <span className="text-sm text-[var(--textColor)]">{`Progress: ${progress}%`}</span>
+        <span className="text-sm text-[var(--textColor)]">Progress: {progress}%</span>
       </form>
     </div>
   );
