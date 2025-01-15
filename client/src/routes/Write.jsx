@@ -114,6 +114,9 @@ const Write = () => {
       )}
       <form onSubmit={handleSubmit} className="flex flex-col gap-6 flex-1">
         {/* Upload Component */}
+         
+
+        <Upload type="image" setProgress={setProgress} setData={setCover}>
         <div>
   <input
     type="file"
@@ -131,6 +134,8 @@ const Write = () => {
   </label>
 </div>
 
+
+        </Upload>
 {/* Image Preview Section */}
 {cover && cover.previewUrl && (
   <div className="relative w-full max-w-[250px] h-[150px] mb-4 mx-auto">
