@@ -115,59 +115,23 @@ const Write = () => {
       )}
       <form onSubmit={handleSubmit} className="flex flex-col gap-6 flex-1">
         {/* Upload Component */}
-        <div>
-  {/* Hidden File Input */}
-  <input
-    type="file"
-    accept="image/*"
-    onChange={handleImageChange}
-    className="hidden"
-    id="coverImageInput"
-  />
+        
+        <Upload type="image" setProgress={setProgress} setData={setCover}>
+          <button
+            type="button"
+            onClick={clearError}
+            id="coverImageInput"
+            htmlFor="coverImageInput"
 
-  {/* Single Button for Image Selection & Upload */}
-  <label
-    htmlFor="coverImageInput"
-    className="w-max p-3 shadow-md rounded-xl text-sm text-[var(--textColor)] bg-[var(--textColore)] cursor-pointer"
-  >
-    {cover ? "Upload Cover Image" : "Add a Cover Image"}
-  </label>
-
-  {/* Image Preview Section */}
-  {cover && cover.previewUrl && (
-    <div className="relative w-full max-w-[250px] h-[150px] mb-4 mx-auto">
-      <img
-        src={cover.previewUrl}
-        alt="Cover preview"
-        className="w-full h-full object-cover rounded-md shadow-lg"
-      />
-      <button
-        type="button"
-        onClick={() => setCover(null)}
-        className="absolute top-2 right-2 bg-red-500 text-white p-1 rounded-full text-xs"
-      >
-        ✕
-      </button>
-    </div>
-  )}
-
-  {/* Upload Button */}
-  {cover && (
-    <Upload type="image" setProgress={setProgress} setData={setCover}>
-      <button
-        type="button"
-        onClick={clearError}
-        disabled={progress > 0 && progress < 100}
-        className="w-max p-3 shadow-md rounded-xl text-sm text-[var(--textColor)] bg-[var(--textColore)]
-          disabled:opacity-50 hover:bg-[var(--softTextColor7)] transition-all duration-200"
-      >
-        {progress > 0 && progress < 100 ? "Uploading..." : "Upload Cover Image"}
-      </button>
-    </Upload>
-  )}
-</div>
-
-
+            accept="image/*"
+            onChange={handleImageChange}
+            disabled={progress > 0 && progress < 100}
+            className="w-max p-3 shadow-md rounded-xl text-sm text-[var(--textColor)] bg-[var(--textColore)]
+             disabled:opacity-50 hover:bg-[var(--softTextColor7)] transition-all duration-200"
+          >
+            {progress > 0 && progress < 100 ? "Uploading..." : "Add a cover image"}
+          </button>
+        </Upload>
 
         {/* Image Preview Section */}
         {cover && cover.previewUrl && (
