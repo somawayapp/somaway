@@ -55,7 +55,7 @@ const Write = () => {
     setDescRemainingChars(10000 - value.length);
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
     clearError();
 
@@ -65,42 +65,20 @@ const Write = () => {
     if (!category) return setError("Please select a category for your post.");
     if (!cover) return setError("Please upload a cover image for your post.");
 
-    // Step 1: Upload the image first and get the file URL
-    const formData = new FormData();
-    formData.append("file", cover); // Assuming the cover is the file to be uploaded
+    // Slug generation
+    const timestamp = Date.now();
+    const slug = `${title.replace(/\s+/g, "-").toLowerCase()}-${timestamp}`;
 
-    try {
-      const imageResponse = await axios.post(`${import.meta.env.VITE_API_URL}/upload`, formData, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-          Authorization: `Bearer ${await getToken()}`,
-        },
-        onUploadProgress: (progressEvent) => {
-          if (progressEvent.total) {
-            setProgress(Math.round((progressEvent.loaded * 100) / progressEvent.total));
-          }
-        },
-      });
+    const data = {
+      img: cover.filePath, // Assuming filePath is the path to the uploaded file
+      title,
+      category,
+      desc,
+      slug,
+      isFeatured, // Add the "isFeatured" flag to the request data
+    };
 
-      const coverUrl = imageResponse.data.url; // The URL of the uploaded image
-
-      // Step 2: Create the post with the cover URL
-      const timestamp = Date.now();
-      const slug = `${title.replace(/\s+/g, "-").toLowerCase()}-${timestamp}`;
-
-      const data = {
-        img: coverUrl, // Use the uploaded image URL
-        title,
-        category,
-        desc,
-        slug,
-        isFeatured, // Add the "isFeatured" flag to the request data
-      };
-
-      mutation.mutate(data); // Submit the post data
-    } catch (error) {
-      setError("Image upload failed. Please try again.");
-    }
+    mutation.mutate(data);
   };
 
   if (!isLoaded) {
@@ -110,6 +88,17 @@ const Write = () => {
   if (isLoaded && !isSignedIn) {
     return <div className="text-center text-[var(--textColor)] mt-8">You need to sign in to create a post!</div>;
   }
+
+  const handleImageChange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      const previewUrl = URL.createObjectURL(file); // Create a preview URL for the image
+      setCover({
+        file,
+        previewUrl,
+      });
+    }
+  };
 
   return (
     <div className="h-[calc(100vh-64px)] md:h-[calc(100vh-80px)] flex flex-col top-[20px] lg:top-[100px] gap-6 px-4 py-6">
@@ -121,16 +110,22 @@ const Write = () => {
       )}
       <form onSubmit={handleSubmit} className="flex flex-col gap-6 flex-1">
         {/* Upload Component */}
-        <Upload type="image" setProgress={setProgress} setData={setCover}>
-          <button
-            type="button"
-            onClick={clearError}
-            disabled={progress > 0 && progress < 100}
-            className="w-max p-3 shadow-md rounded-xl text-sm text-[var(--textColor)] bg-[var(--textColore)] disabled:opacity-50 hover:bg-[var(--softTextColor7)] transition-all duration-200"
+        <div>
+          <input
+            type="file"
+            accept="image/*"
+            onChange={handleImageChange}
+            className="hidden"
+            id="coverImageInput"
+          />
+          <label
+            htmlFor="coverImageInput"
+            className="w-max p-3 shadow-md rounded-xl text-sm text-[var(--textColor)] bg-[var(--textColore)]
+             cursor-pointer"
           >
             {progress > 0 && progress < 100 ? "Uploading..." : "Add a cover image"}
-          </button>
-        </Upload>
+          </label>
+        </div>
 
         {/* Image Preview Section */}
         {cover && cover.previewUrl && (
@@ -215,12 +210,12 @@ const Write = () => {
 
         {/* Submit Button */}
         <button
-          type="submit"
-          disabled={progress > 0 && progress < 100}
-          className="px-5 py-3 text-white rounded-xl bg-[var(--softTextColor3)] hover:bg-[var(--textColor)]"
+          disabled={mutation.isPending || (progress > 0 && progress < 100)}
+          className="bg-[#1da1f2] hover:bg-[#0875b9] text-white font-medium rounded-xl mt-4 p-3 w-full disabled:bg-blue-400 disabled:cursor-not-allowed"
         >
-          {progress > 0 && progress < 100 ? "Creating..." : "Create Post"}
+          {mutation.isPending ? "Publishing..." : "Publish Post"}
         </button>
+        <span className="text-sm text-[var(--textColor)]">Progress: {progress}%</span>
       </form>
     </div>
   );
