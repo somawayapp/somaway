@@ -50,6 +50,17 @@ const Write = () => {
     setTitleRemainingChars(150 - value.length);
   };
 
+  // Inside your Upload component's file handling logic
+const handleFileChange = (e) => {
+  const file = e.target.files[0];
+  const previewUrl = URL.createObjectURL(file); // For preview purposes
+  setCover({
+    filePath: file.name, // Replace with your actual logic for file path
+    previewUrl,
+  });
+};
+
+
   const handleDescChange = (value) => {
     setDesc(value);
     setDescRemainingChars(10000 - value.length);
@@ -112,22 +123,24 @@ const Write = () => {
         </Upload>
 
         {/* Image Preview Section */}
-        {cover && cover.previewUrl && (
-          <div className="relative w-full max-w-[250px] h-[150px] mb-4 mx-auto">
-            <img
-              src={cover.previewUrl}
-              alt="Cover preview"
-              className="w-full h-full object-cover rounded-md shadow-lg"
-            />
-            <button
-              type="button"
-              onClick={() => setCover(null)}
-              className="absolute top-2 right-2 bg-red-500 text-white p-1 rounded-full text-xs"
-            >
-              ✕
-            </button>
-          </div>
-        )}
+        {/* Image Preview Section */}
+{cover && cover.previewUrl && (
+  <div className="relative w-full max-w-[250px] h-[150px] mb-4 mx-auto">
+    <img
+      src={cover.previewUrl}
+      alt="Cover preview"
+      className="w-full h-full object-cover rounded-md shadow-lg"
+    />
+    <button
+      type="button"
+      onClick={() => setCover(null)}
+      className="absolute top-2 right-2 bg-red-500 text-white p-1 rounded-full text-xs"
+    >
+      ✕
+    </button>
+  </div>
+)}
+
 
         {/* Title Input */}
         <div>
