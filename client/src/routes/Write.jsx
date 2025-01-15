@@ -1,15 +1,3 @@
-
-import { useAuth, useUser } from "@clerk/clerk-react";
-import { useMutation } from "@tanstack/react-query";
-import axios from "axios";
-import ReactQuill from "react-quill-new";
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { toast } from "react-toastify";
-import Upload from "../components/Upload"; // Assuming this component handles file uploads and provides preview
-
-import 'react-quill-new/dist/quill.snow.css'; // Import Quill styles
-
 const Write = () => {
   const { isLoaded, isSignedIn } = useUser();
   const [title, setTitle] = useState("");
@@ -111,7 +99,13 @@ const Write = () => {
           </button>
         </Upload>
 
-       
+        {/* Image Preview */}
+        {cover && cover.filePath && (
+          <div className="mt-4">
+            <h3 className="text-sm text-gray-600">Image Preview</h3>
+            <img src={cover.filePath} alt="Cover Preview" className="w-full h-auto rounded-xl shadow-lg" />
+          </div>
+        )}
 
         {/* Title Input */}
         <div>
@@ -178,6 +172,9 @@ const Write = () => {
           <span className="text-sm text-gray-600">{descRemainingChars} characters remaining</span>
         </div>
 
+   
+
+
         {/* Submit Button */}
         <button
           disabled={mutation.isPending || (progress > 0 && progress < 100)}
@@ -192,6 +189,3 @@ const Write = () => {
 };
 
 export default Write;
-
-
-
