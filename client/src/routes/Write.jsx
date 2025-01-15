@@ -1,9 +1,20 @@
+import { useAuth, useUser } from "@clerk/clerk-react";
+import { useMutation } from "@tanstack/react-query";
+import axios from "axios";
+import ReactQuill from "react-quill-new";
+import { useState, useRef } from "react";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import Upload from "../components/Upload"; // Assuming this component handles file uploads and provides preview
+
+import 'react-quill-new/dist/quill.snow.css'; // Import Quill styles
+
 const Write = () => {
   const { isLoaded, isSignedIn } = useUser();
   const [title, setTitle] = useState("");
   const [desc, setDesc] = useState("");
   const [category, setCategory] = useState("");
-  const [cover, setCover] = useState(null); // Holds the image file and preview URL
+  const [cover, setCover] = useState(null); // Initially null, will hold the image file and preview URL
   const [progress, setProgress] = useState(0);
   const [titleRemainingChars, setTitleRemainingChars] = useState(150);
   const [descRemainingChars, setDescRemainingChars] = useState(10000);
@@ -80,37 +91,41 @@ const Write = () => {
     return <div className="text-center text-[var(--textColor)] mt-8">You need to sign in to create a post!</div>;
   }
 
-  const handleImageChange = (e) => {
+  const handleImageChange = async (e) => {
     const file = e.target.files[0];
     if (file) {
-      // Create preview URL for the image
+      // Show preview
       const previewUrl = URL.createObjectURL(file);
-
-      // Set the cover state with file and preview URL
       setCover({
         file,
         previewUrl,
       });
 
-      // Here you can handle uploading the file to the server or cloud storage
-      // Assuming you have an upload function to handle file uploads
+      // You can handle the actual file upload process here
       const formData = new FormData();
-      formData.append('file', file);
+      formData.append("file", file);
 
-      // Upload the image file and get the file path for the database
-      axios.post('/upload-endpoint', formData, {
-        onUploadProgress: (progressEvent) => {
-          const { loaded, total } = progressEvent;
-          setProgress(Math.round((loaded * 100) / total));
-        },
-      })
-      .then((response) => {
-        setCover((prev) => ({ ...prev, filePath: response.data.filePath }));
-        toast.success('Image uploaded successfully');
-      })
-      .catch((error) => {
-        toast.error('Image upload failed');
-      });
+      // Simulating an upload (you can replace this with your actual upload logic)
+      try {
+        setProgress(0);
+        const uploadResponse = await axios.post(`${import.meta.env.VITE_API_URL}/upload`, formData, {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+          onUploadProgress: (progressEvent) => {
+            const percent = Math.round((progressEvent.loaded / progressEvent.total) * 100);
+            setProgress(percent);
+          },
+        });
+
+        // Assuming the upload returns the file path
+        setCover((prevCover) => ({
+          ...prevCover,
+          filePath: uploadResponse.data.filePath,
+        }));
+      } catch (error) {
+        toast.error("Failed to upload image");
+      }
     }
   };
 
@@ -125,22 +140,25 @@ const Write = () => {
       <form onSubmit={handleSubmit} className="flex flex-col gap-6 flex-1">
         {/* Upload Component */}
         <div>
-          <div>
-            <input
-              type="file"
-              accept="image/*"
-              onChange={handleImageChange}
-              className="hidden"
-              ref={fileInputRef}  // Set the reference
-              id="coverImageInput"
-            />
-            <label
-              htmlFor="coverImageInput"
-              className="w-max p-3 shadow-md rounded-xl text-sm text-[var(--textColor)] bg-[var(--textColore)] cursor-pointer"
-            >
-              {progress > 0 && progress < 100 ? "Uploading..." : "Add a cover image"}
-            </label>
-          </div>
+          <Upload type="image" setProgress={setProgress} setData={setCover}>
+            <div>
+              {/* The file input is now handled with a ref to avoid re-render */}
+              <input
+                type="file"
+                accept="image/*"
+                onChange={handleImageChange}
+                className="hidden"
+                ref={fileInputRef}  // Set the reference
+                id="coverImageInput"
+              />
+              <label
+                htmlFor="coverImageInput"
+                className="w-max p-3 shadow-md rounded-xl text-sm text-[var(--textColor)] bg-[var(--textColore)] cursor-pointer"
+              >
+                {progress > 0 && progress < 100 ? "Uploading..." : "Add a cover image"}
+              </label>
+            </div>
+          </Upload>
         </div>
 
         {/* Image Preview Section */}
@@ -161,7 +179,8 @@ const Write = () => {
           </div>
         )}
 
-  
+      
+
 
 
 
