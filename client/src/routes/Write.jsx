@@ -1,3 +1,8 @@
+
+      
+
+
+
 import { useAuth, useUser } from "@clerk/clerk-react";
 import { useMutation } from "@tanstack/react-query";
 import axios from "axios";
@@ -126,6 +131,18 @@ const Write = () => {
             {progress > 0 && progress < 100 ? "Uploading..." : "Add a cover image"}
           </label>
         </div>
+
+        <Upload type="image" setProgress={setProgress} setData={setCover}>
+          <button
+            type="button"
+            onClick={clearError}
+            disabled={progress > 0 && progress < 100}
+            className="w-max p-3 shadow-md rounded-xl text-sm text-[var(--textColor)] bg-[var(--textColore)]
+             disabled:opacity-50 hover:bg-[var(--softTextColor7)] transition-all duration-200"
+          >
+            {progress > 0 && progress < 100 ? "Uploading..." : "Add a cover image"}
+          </button>
+        </Upload>
 
         {/* Image Preview Section */}
         {cover && cover.previewUrl && (
