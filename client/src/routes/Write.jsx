@@ -2,7 +2,7 @@ import { useAuth, useUser } from "@clerk/clerk-react";
 import { useMutation } from "@tanstack/react-query";
 import axios from "axios";
 import ReactQuill from "react-quill-new";
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import Upload from "../components/Upload"; // Assuming this component handles file uploads and provides preview
@@ -23,6 +23,8 @@ const Write = () => {
 
   const navigate = useNavigate();
   const { getToken } = useAuth();
+  
+  const fileInputRef = useRef(null); // Using ref to handle file input without re-rendering
 
   const mutation = useMutation({
     mutationFn: async (newPost) => {
@@ -113,11 +115,13 @@ const Write = () => {
         <div>
           <Upload type="image" setProgress={setProgress} setData={setCover}>
             <div>
+              {/* The file input is now handled with a ref to avoid re-render */}
               <input
                 type="file"
                 accept="image/*"
                 onChange={handleImageChange}
                 className="hidden"
+                ref={fileInputRef}  // Set the reference
                 id="coverImageInput"
               />
               <label
