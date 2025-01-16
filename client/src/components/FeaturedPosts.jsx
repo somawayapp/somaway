@@ -35,24 +35,25 @@ const FeaturedPosts = () => {
 
       {/* Left Section */}
       <div className="lg:w-1/2 flex flex-col items-start gap-1 md:gap-4   rounded-md">
-        <h1 className="text-2xl lg:text-5xl font-bold text-[var(--textColor)]">
+        <h1 className="text-3xl lg:text-5xl font-bold text-[var(--textColor)]">
           #1 most 
         </h1>
-        <h1 className="text-2xl lg:text-5xl font-bold text-[var(--textColor)]">
+        <h1 className="text-3xl lg:text-5xl font-bold text-[var(--textColor)]">
            downloaded <span className="text-blue-600">book </span> 
-        </h1> <h1 className="text-2xl lg:text-5xl font-bold text-[var(--textColor)]">
+        </h1> <h1 className="text-3xl lg:text-5xl font-bold text-[var(--textColor)]">
            <span className="text-blue-600"> summary</span> app
         </h1>
 
-        <p className="text-[var(--textColor)]">
+        <p className=" text-xl text-[var(--textColor)]">
           Achieve your goals with Headway by listening and reading the world’s best ideas
         </p>
         <Link
-          to="/login"
-          className="px-4 py-2 bg-blue-600 text-white font-semibold rounded-md hover:bg-blue-700"
-        >
-          Get Started
-        </Link>
+  to="/login"
+  className="w-full sm:w-auto px-4 py-3 md:py-2 bg-blue-600 text-white font-semibold rounded-md hover:bg-blue-700"
+>
+  Get Started
+</Link>
+
       </div>
     
 
