@@ -34,10 +34,16 @@ const FeaturedPosts = () => {
           <div style={{ height: "60vh" }}  className="flex flex-col lg:flex-row gap-[100px] mt-4">
 
       {/* Left Section */}
-      <div className="lg:w-1.1/3 flex flex-col items-start gap-4 p-4  rounded-md">
+      <div className="lg:w-1/3 flex flex-col items-start gap-4 p-4  rounded-md">
         <h1 className="text-2xl lg:text-6xl font-bold text-[var(--textColor)]">
-          #1 most downloaded <span className="text-blue-600">book summary</span> app
+          #1 most 
         </h1>
+        <h1 className="text-2xl lg:text-6xl font-bold text-[var(--textColor)]">
+           downloaded <span className="text-blue-600">book </span> 
+        </h1> <h1 className="text-2xl lg:text-6xl font-bold text-[var(--textColor)]">
+           <span className="text-blue-600"> summary</span> app
+        </h1>
+
         <p className="text-[var(--textColor)]">
           Achieve your goals with Headway by listening and reading the world’s best ideas
         </p>
@@ -49,12 +55,12 @@ const FeaturedPosts = () => {
         </Link>
       </div>
     
-      <div className="lg:w-0.9/3 flex flex-col items-start gap-4 p-4  rounded-md">
+      <div className="lg:w-1.5/3 flex flex-col items-start gap-4 p-4  rounded-md">
       </div>
 
 
       {/* Right Section */}
-      <div className="lg:w-1/3 flex flex-col gap-6">
+      <div className="lg:w-1.5/3 flex flex-col gap-6">
         {/* First Featured Post */}
         <div className="flex flex-col gap-1">
           <Link to={`/${posts[0].slug}`} className="relative w-full" style={{ paddingTop: '50%', height: "60vh" }}>
