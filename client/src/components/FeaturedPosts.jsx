@@ -114,7 +114,7 @@ const FeaturedPosts = () => {
         </div>
 
 
-        <div className="grid grid-cols-8 hidden sm:block gap-4">
+        <div className="grid grid-rows-8 hidden sm:block gap-4">
           {posts.slice(1, 8).map((post, index) => (
             <div key={index} className="flex flex-col gap-2">
               <Link to={`/${post.slug}`} className="relative w-full" style={{ paddingTop: '150%' }}>
