@@ -111,7 +111,6 @@ const Write = () => {
       )}
       <form onSubmit={handleSubmit} className="flex flex-col gap-6 flex-1">
         {/* File Upload Section */}
-        <Upload type="image" setProgress={setProgress} setData={setCover}>
 
         <div>
         <input
@@ -133,7 +132,6 @@ const Write = () => {
         </label>
       
       </div>
-      </Upload>
 
       {/* Image Preview */}
       {cover && cover.previewUrl && (

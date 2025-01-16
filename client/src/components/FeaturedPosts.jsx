@@ -30,7 +30,9 @@ const FeaturedPosts = () => {
   }
 
   return (
-    <div className="flex flex-col lg:flex-row gap-6 mt-4">
+    <div className="flex flex-col  gap-6 mt-4">
+          <div className="flex flex-col lg:flex-row gap-6 mt-4">
+
       {/* Left Section */}
       <div className="lg:w-2/3 flex flex-col items-start gap-4 p-4  rounded-md">
         <h1 className="text-2xl md:text-4xl font-bold text-[var(--textColor)]">
@@ -64,13 +66,15 @@ const FeaturedPosts = () => {
             >
               {posts[0].category}
             </Link>
-            <h2 className="text-sm font-bold text-gray-900 mt-1">
+            <h2 className="text-sm font-bold text-[var(--textColor)] mt-1">
               {truncateText(posts[0].title, 75)}
             </h2>
           </div>
         </div>
 
       </div>
+      </div>
+
       
         {/* Featured Section Title */}
         <div>
@@ -90,7 +94,7 @@ const FeaturedPosts = () => {
               </Link>
               <Link
                 to={`/posts?category=${post.category}`}
-                className="text-blue-600 text-xs font-semibold uppercase"
+                className="text-[var(--textColor)] text-xs font-semibold "
               >
                 {post.category}
               </Link>
