@@ -29,158 +29,74 @@ const FeaturedPosts = () => {
     return null; // Ensure there are enough posts
   }
 
-
   return (
-    <>{/* Layout for large screens only */}
-{/* Layout for large screens only */}
-<div className=" lg:grid grid-cols-12 gap-6 mt-4">
-
-{/* First column: First post (takes half the width, spans 6 out of 12) */}
-<div className="col-span-6 flex flex-col gap-6 lg:gap-[3] lg:mb-[15px] mb-[30px] relative">
-  {posts[0].img && (
-    <Link to={`/${posts[0].slug}`} className="relative">
-      <div className="relative w-full" style={{ paddingTop: '100%' }}> {/* Square container */}
-        <Image
-          src={posts[0].img}
-
-          
-          className="absolute top-0 left-0 w-full h-full object-cover" 
-       />
-       <div 
-          className="absolute inset-0 bg-black opacity-40 " 
-       />
-       
-
-
-        <div className="absolute bottom-0 left-0 p-4 sm:p-6 text-white">
-
-          <Link
-              to={`/posts?category=${posts[0].category}`}
-              className="text-md font-semibold uppercase"
-              >
-              {posts[0].category}
-              </Link>
-          <br />
-          <Link
-            to={`/${posts[0].slug}`}
-            className="text-2xl lg:text-4xl font-bold leading-snug mt-2 block"
-          >
-            {window.innerWidth > 1024
-              ? posts[0].title
-              : truncateText(posts[0].title, 130)}
-          </Link>
-
-
-          <br />
-          <Link
-    className="text-md text-gray-300 font-base "
-    to={`/posts?author=${posts[0].user.username}`}
-    onClick={(e) => e.stopPropagation()}
-  >
-    { posts[0].user.username}
-  </Link>
-  <span     className="text-md p-1 text-gray-300 font-base "
-  >-</span>
- 
-  <span     className="text-md text-gray-300 font-base "
-  >{format( posts[0].createdAt)}</span>
-        </div>
-      </div>
-    </Link>
-
-
-  )}
-</div>
-
-
-
-
-{/* Second column: Second and third post (stacked vertically, takes half the width, spans 3 out of 12) */}
-<div className="col-span-3 flex mb-[25px] flex-col gap-6 md:gap-4 lg:gap-4">
-  {[posts[1], posts[2]].map((post, index) => post && (
-    <div key={index} className="w-full relative">
-      <Link to={`/${post.slug}`} className="relative">
-        <div className="relative w-full" style={{ paddingTop: '100%' }}> {/* Square container */}
-          <Image
-            src={post.img}
-            className="absolute top-0 left-0 w-full h-full object-cover"
-          />
-          <div className="absolute inset-0 bg-black opacity-40" /> {/* Dark overlay */}
-          {/* Post title on top of the image */}
-          <div className="absolute bg-black bg-opacity-25 top-0 left-0 right-0 bottom-0 flex flex-col justify-end p-4"> {/* Align text at bottom */}
-            <div className="text-white text-left">
-            <Link
-                to={`/posts?category=${post.category}`}
-                className="text-md font-semibold uppercase"
-                >
-                {post.category}
-              </Link>
-              <br />
-              <Link
-                to={`/${post.slug}`}
-                className=" text-lg lg:text-md font-bold leading-snug"
-              >
-                {truncateText(post.title, 75)}
-              </Link>
-<br className="mt-5" /> 
-              <Link
-    className="text-md text-gray-300 font-base"
-    to={`/posts?author=${post.user.username}`}
-    onClick={(e) => e.stopPropagation()}
-  >
-    { post.user.username}
-  </Link>
-  <span     className="text-md p-1 text-gray-300 font-base "
-  >-</span>
- 
-  <span     className="text-md text-gray-300 font-base "
-  >{format( post.createdAt)}</span>
-             
-            </div>
-          </div>
-        </div>
-      </Link>
-      <div className="flex items-center gap-2 sm:gap-3 text-xs sm:text-sm text-gray-500 mb-1">
-        {/* Empty for now, can add more details if needed */}
-      </div>
-    </div>
-  ))}
-</div>
-
-<div className=" relative col-span-3   ">
-
-
-
-  {/* Original Content */}
-  <div className="relative  text-left" style={{ zIndex: 2 }}>
-  <div className="col-span-3 flex flex-col gap-3">
-  <p className="text-2xl text-[var(--textColor)]  mt-6 md:mt-0 lg:mt-0 font-bold">Top Headlines</p>
-  {posts.slice(4, 8).map((post, index) => (
-    post && (
-      <div key={index} className="flex items-top mt-[10px] gap-2">
-        <div className="w-2 h-2 bg-[var(--textColor)] bottom-[-7px] flex-shrink-0" />
+    <div className="flex flex-col lg:flex-row gap-6 mt-4">
+      {/* Left Section */}
+      <div className="lg:w-1/3 flex flex-col items-start gap-4 p-4 bg-gray-100 rounded-md">
+        <h1 className="text-2xl font-bold text-gray-900">
+          #1 most downloaded <span className="text-blue-600">book summary</span> app
+        </h1>
+        <p className="text-gray-700">
+          Achieve your goals with Headway by listening and reading the world’s best ideas
+        </p>
         <Link
-          to={`/${post.slug}`}
-          className="text-md text-[var(--textColor)] font-bold hover:underline"
+          to="/login"
+          className="px-4 py-2 bg-blue-600 text-white font-semibold rounded-md hover:bg-blue-700"
         >
-          {truncateText(post.title, 55)}
+          Get Started
         </Link>
       </div>
-    )
-  ))}
-</div>
 
-        <AdChanger/>
-    
-  
-  </div>
-</div>
+      {/* Right Section */}
+      <div className="lg:w-2/3 flex flex-col gap-6">
+        {/* First Featured Post */}
+        <div className="flex flex-col gap-2">
+          <Link to={`/${posts[0].slug}`} className="relative w-full" style={{ paddingTop: '150%' }}>
+            <Image
+              src={posts[0].img}
+              className="absolute top-0 left-0 w-full h-full object-cover rounded-md"
+            />
+          </Link>
+          <div className="mt-2">
+            <Link
+              to={`/posts?category=${posts[0].category}`}
+              className="text-blue-600 text-sm font-semibold uppercase"
+            >
+              {posts[0].category}
+            </Link>
+            <h2 className="text-sm font-bold text-gray-900 mt-1">
+              {truncateText(posts[0].title, 75)}
+            </h2>
+          </div>
+        </div>
 
+        {/* Featured Section Title */}
+        <div>
+          <h3 className="text-lg font-bold text-gray-900">Featured</h3>
+          <p className="text-gray-600">Featured posts for you</p>
+        </div>
 
-
- 
+        {/* Additional Featured Posts */}
+        <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
+          {posts.slice(1, 8).map((post, index) => (
+            <div key={index} className="flex flex-col gap-2">
+              <Link to={`/${post.slug}`} className="relative w-full" style={{ paddingTop: '150%' }}>
+                <Image
+                  src={post.img}
+                  className="absolute top-0 left-0 w-full h-full object-cover rounded-md"
+                />
+              </Link>
+              <Link
+                to={`/posts?category=${post.category}`}
+                className="text-blue-600 text-xs font-semibold uppercase"
+              >
+                {post.category}
+              </Link>
+            </div>
+          ))}
+        </div>
       </div>
-    </>
+    </div>
   );
 };
 
