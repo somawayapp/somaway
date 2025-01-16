@@ -28,15 +28,7 @@ const FeaturedPosts = () => {
   if (!posts || posts.length < 9) {
     return null; // Ensure there are enough posts
   }
-  document.querySelectorAll('.scroll-btn').forEach(button => {
-    button.addEventListener('click', () => {
-      button.closest('.scroll-container').scrollBy({
-        left: 200, // Adjust this to scroll the desired distance
-        behavior: 'smooth'
-      });
-    });
-  });
-  
+
   return (
     <div className="flex flex-col mt-0 md:mt-4">
 <div className="flex flex-col lg:flex-row lg:h-[60vh] gap-[100px] mt-4">
@@ -100,18 +92,16 @@ const FeaturedPosts = () => {
           <p className=" text-lg md:text-2xl text-[var(--textColor)]0">For you</p>
         </div>
 
+        {/* Additional Featured Posts */}
         <div className="scroll-container">
   <div className="scroll-content">
     {posts.slice(1, 8).map((post, index) => (
       <div key={index} className="scroll-item flex flex-col gap-2 w-full sm:w-1/2 md:w-1/4 lg:w-1/7">
-        <Link to={`/${post.slug}`} className="relative w-full">
+        <Link to={`/${post.slug}`} className="relative w-full" style={{ paddingTop: '150%' }}>
           <Image
             src={post.img}
-            className="image absolute top-0 left-0 w-full h-full object-cover rounded-md"
+            className="absolute top-0 left-0 w-full h-full object-cover rounded-md"
           />
-          <div className="scroll-btn absolute bottom-2 right-2 bg-opacity-50 rounded-full p-2 bg-black text-white hidden">
-            <span className="arrow">→</span>
-          </div>
         </Link>
         <Link
           to={`/posts?category=${post.category}`}
@@ -121,6 +111,7 @@ const FeaturedPosts = () => {
         </Link>
       </div>
     ))}
+   
   </div>
 </div>
 
