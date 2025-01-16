@@ -96,7 +96,7 @@ const FeaturedPosts = () => {
         <div className="scroll-container">
   <div className="scroll-content">
     {posts.slice(1, 8).map((post, index) => (
-      <div key={index} className="flex flex-col gap-2">
+      <div key={index} className="scroll-item flex flex-col gap-2 w-full sm:w-1/2 md:w-1/4 lg:w-1/5">
         <Link to={`/${post.slug}`} className="relative w-full" style={{ paddingTop: '150%' }}>
           <Image
             src={post.img}
@@ -105,7 +105,7 @@ const FeaturedPosts = () => {
         </Link>
         <Link
           to={`/posts?category=${post.category}`}
-          className="text-[var(--textColor)] text-xs font-semibold "
+          className="text-[var(--textColor)] text-xs font-semibold"
         >
           {post.category}
         </Link>

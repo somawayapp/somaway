@@ -274,7 +274,11 @@ body {
 
 .scroll-content {
   display: flex;
-  animation: scroll 27s infinite linear;
+  animation: scroll 25s infinite linear; /* Adjusted time to fit your needs */
+}
+
+.scroll-item {
+  flex: 0 0 auto; /* Prevent flex items from growing or shrinking */
 }
 
 @keyframes scroll {
@@ -285,3 +289,4 @@ body {
     transform: translateX(-100%);
   }
 }
+
