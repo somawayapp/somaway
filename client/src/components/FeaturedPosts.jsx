@@ -44,7 +44,7 @@ const FeaturedPosts = () => {
            <span className="text-blue-600"> summary</span> app
         </h1>
 
-        <p className=" text-md text-[var(--textColor)]">
+        <p className=" text-md md:text-xl text-[var(--textColor)]">
           Achieve your goals with Headway by listening and reading the world’s best ideas
         </p>
         <Link
@@ -59,7 +59,7 @@ const FeaturedPosts = () => {
 
 
       {/* Right Section */}
-      <div className="lg:w-1/2 flex flex-col ">
+      <div className="lg:w-1/2 flex mt-[-20px] flex-col ">
         {/* First Featured Post */}
         <div className="flex  mb-8 md:mb-0 top-0  ">
         <Link to={`/${posts[0].slug}`} className="relative w-full">
