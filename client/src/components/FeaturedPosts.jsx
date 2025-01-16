@@ -35,7 +35,7 @@ const FeaturedPosts = () => {
 
       {/* Left Section */}
       <div className="lg:w-2/2 flex flex-col items-start gap-4 p-4  rounded-md">
-        <h1 className="text-2xl lg:text-5xl font-bold text-[var(--textColor)]">
+        <h1 className="text-2xl lg:text-6xl font-bold text-[var(--textColor)]">
           #1 most downloaded <span className="text-blue-600">book summary</span> app
         </h1>
         <p className="text-[var(--textColor)]">
