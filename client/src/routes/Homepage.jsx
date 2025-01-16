@@ -62,8 +62,11 @@ const Homepage = () => {
 
     <div className="mb-9   flex flex-col gap-0">
 
+         
 
       {/* Floating Section */}
+              {/* 
+
       <div
   className={` flex items-center mx-auto justify-between px-5 py-3 transition-opacity 
     duration-300 ${isVisible ? "opacity-100" : "opacity-0 pointer-events-none"} sm:opacity-100 sm:pointer-events-auto  `}
@@ -77,7 +80,7 @@ const Homepage = () => {
 
 <span className="text-[var(--textLogo)] text-[30px] lg:text-[90px]"></span>
 
-</Link>  */}
+</Link>  
 
       
 
