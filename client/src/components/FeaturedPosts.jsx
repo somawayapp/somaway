@@ -31,11 +31,11 @@ const FeaturedPosts = () => {
 
   return (
     <div className="flex flex-col  gap-6 mt-4">
-          <div style={{ height: "70vh" }}  className="flex flex-col lg:flex-row gap-[100px] mt-4">
+          <div style={{ height: "60vh" }}  className="flex flex-col lg:flex-row gap-[100px] mt-4">
 
       {/* Left Section */}
       <div className="lg:w-2/2 flex flex-col items-start gap-4 p-4  rounded-md">
-        <h1 className="text-2xl md:text-[60px] lg:text-[60px] font-bold text-[var(--textColor)]">
+        <h1 className="text-2xl lg:text-8xl font-bold text-[var(--textColor)]">
           #1 most downloaded <span className="text-blue-600">book summary</span> app
         </h1>
         <p className="text-[var(--textColor)]">
@@ -53,10 +53,10 @@ const FeaturedPosts = () => {
       <div className="lg:w-1/2 flex flex-col gap-6">
         {/* First Featured Post */}
         <div className="flex flex-col gap-2">
-          <Link to={`/${posts[0].slug}`} className="relative w-full" style={{ paddingTop: '150%' }}>
+          <Link to={`/${posts[0].slug}`} className="relative w-full" style={{ paddingTop: '150%', height: "60vh" }}>
             <Image
               src={posts[0].img}
-              className="absolute top-0 left-0 w-full h-full object-cover rounded-md"
+              className="absolute top-0 left-0 w-full object-cover rounded-md"
             />
           </Link>
           <div className="mt-2">
