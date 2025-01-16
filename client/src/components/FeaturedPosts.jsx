@@ -60,14 +60,14 @@ const FeaturedPosts = () => {
       {/* Right Section */}
       <div className="lg:w-1/2 flex flex-col gap-6">
         {/* First Featured Post */}
-        <div className="flex flex-col gap-1">
-          <Link to={`/${posts[0].slug}`} className="relative w-full" style={{ paddingTop: '50%', height: "60vh" }}>
+        <div className="flex top-0 gap-1">
+          <Link to={`/${posts[0].slug}`} className="relative top-0 w-full" style={{ height: "60vh" }}>
         
             
             <img
             src="/desktop.webp"
             alt="Newsletter illustration"
-            className="w-full  object-cover rounded-lg  "
+            className="w-full   object-cover rounded-lg  "
           />
 
           </Link>
