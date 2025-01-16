@@ -30,7 +30,7 @@ const FeaturedPosts = () => {
   }
 
   return (
-    <div className="flex flex-col  gap-1 md:gap-6 mt-0 md:mt-4">
+    <div className="flex flex-col mt-0 md:mt-4">
 <div className="flex flex-col lg:flex-row lg:h-[60vh] gap-[100px] mt-4">
 
       {/* Left Section */}
