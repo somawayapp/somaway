@@ -49,7 +49,7 @@ const FeaturedPosts = () => {
         </p>
         <Link
   to="/login"
-  className="w-full text-center sm:w-auto px-4 py-3 md:py-2 bg-blue-600 text-white font-semibold rounded-md hover:bg-blue-700"
+  className="w-full text-center mt-3 md:mt-0 sm:w-auto px-4 py-3 md:py-2 bg-blue-600 text-white font-semibold rounded-md hover:bg-blue-700"
 >
   Get Started
 </Link>
@@ -59,7 +59,7 @@ const FeaturedPosts = () => {
 
 
       {/* Right Section */}
-      <div className="lg:w-1/2 flex mt-[-50px] md:mt-0 flex-col ">
+      <div className="lg:w-1/2 flex mt-[-53px] md:mt-0 flex-col ">
         {/* First Featured Post */}
         <div className="flex  mb-8 md:mb-0 top-0  ">
         <Link to={`/${posts[0].slug}`} className="relative w-full">
