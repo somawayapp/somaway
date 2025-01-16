@@ -94,7 +94,27 @@ const FeaturedPosts = () => {
 
 
         {/* Additional Featured Posts */}
-        <div className="grid grid-cols-3 sm:grid-cols-6 gap-4">
+        <div className="grid grid-cols-3 block sm:hidden gap-4">
+          {posts.slice(1, 4).map((post, index) => (
+            <div key={index} className="flex flex-col gap-2">
+              <Link to={`/${post.slug}`} className="relative w-full" style={{ paddingTop: '150%' }}>
+                <Image
+                  src={post.img}
+                  className="absolute top-0 left-0 w-full h-full object-cover rounded-md"
+                />
+              </Link>
+              <Link
+                to={`/posts?category=${post.category}`}
+                className="text-[var(--textColor)] text-xs font-semibold "
+              >
+                {post.category}
+              </Link>
+            </div>
+          ))}
+        </div>
+
+
+        <div className="grid grid-cols-3 hidden sm:block gap-4">
           {posts.slice(1, 8).map((post, index) => (
             <div key={index} className="flex flex-col gap-2">
               <Link to={`/${post.slug}`} className="relative w-full" style={{ paddingTop: '150%' }}>
@@ -112,6 +132,7 @@ const FeaturedPosts = () => {
             </div>
           ))}
         </div>
+
     </div>
   );
 };
