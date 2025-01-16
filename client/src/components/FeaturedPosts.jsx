@@ -31,11 +31,11 @@ const FeaturedPosts = () => {
 
   return (
     <div className="flex flex-col  gap-6 mt-4">
-          <div className="flex flex-col lg:flex-row gap-6 mt-4">
+          <div className="flex flex-col lg:flex-row gap-[60px] mt-4">
 
       {/* Left Section */}
-      <div className="lg:w-2/3 flex flex-col items-start gap-4 p-4  rounded-md">
-        <h1 className="text-2xl md:text-4xl font-bold text-[var(--textColor)]">
+      <div className="lg:w-2/2 flex flex-col items-start gap-4 p-4  rounded-md">
+        <h1 className="text-2xl md:text-[40px] font-bold text-[var(--textColor)]">
           #1 most downloaded <span className="text-blue-600">book summary</span> app
         </h1>
         <p className="text-[var(--textColor)]">
@@ -50,7 +50,7 @@ const FeaturedPosts = () => {
       </div>
 
       {/* Right Section */}
-      <div className="lg:w-1/3 flex flex-col gap-6">
+      <div className="lg:w-1/2 flex flex-col gap-6">
         {/* First Featured Post */}
         <div className="flex flex-col gap-2">
           <Link to={`/${posts[0].slug}`} className="relative w-full" style={{ paddingTop: '150%' }}>
@@ -83,7 +83,7 @@ const FeaturedPosts = () => {
         </div>
 
         {/* Additional Featured Posts */}
-        <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
+        <div className="grid grid-cols-2 sm:grid-cols-7 gap-4">
           {posts.slice(1, 8).map((post, index) => (
             <div key={index} className="flex flex-col gap-2">
               <Link to={`/${post.slug}`} className="relative w-full" style={{ paddingTop: '150%' }}>
