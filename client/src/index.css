@@ -264,3 +264,24 @@ body {
 .side-menu::-webkit-scrollbar-thumb:hover {
   background: var(--textColore); /* Keep the same color when hovered, or adjust if needed */
 }
+
+
+.scroll-container {
+  display: flex;
+  overflow-x: hidden;
+  scroll-behavior: smooth;
+}
+
+.scroll-content {
+  display: flex;
+  animation: scroll 7s infinite linear;
+}
+
+@keyframes scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
