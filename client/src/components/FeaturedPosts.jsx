@@ -14,13 +14,6 @@ const fetchPost = async () => {
 
 const truncateText = (text, length) =>
   text.length > length ? text.substring(0, length) + "..." : text;
- // Scroll functionality when button is clicked
- const handleScroll = (slug) => {
-  const target = document.querySelector(`a[href='/${slug}']`);
-  if (target) {
-    target.scrollIntoView({ behavior: 'smooth' });
-  }
-};
 
 const FeaturedPosts = () => {
   const { isLoading, error, data } = useQuery({
@@ -35,7 +28,15 @@ const FeaturedPosts = () => {
   if (!posts || posts.length < 9) {
     return null; // Ensure there are enough posts
   }
-
+  document.querySelectorAll('.scroll-btn').forEach(button => {
+    button.addEventListener('click', () => {
+      button.closest('.scroll-container').scrollBy({
+        left: 200, // Adjust this to scroll the desired distance
+        behavior: 'smooth'
+      });
+    });
+  });
+  
   return (
     <div className="flex flex-col mt-0 md:mt-4">
 <div className="flex flex-col lg:flex-row lg:h-[60vh] gap-[100px] mt-4">
@@ -98,75 +99,30 @@ const FeaturedPosts = () => {
           <h3 className="text-3xl  md:text-5xl font-bold text-[var(--textColor)]">Discover</h3>
           <p className=" text-lg md:text-2xl text-[var(--textColor)]0">For you</p>
         </div>
+
         <div className="scroll-container">
-      <div className="scroll-content">
-        {posts.slice(1, 8).map((post, index) => (
-          <div key={index} className="scroll-item flex flex-col gap-2 w-full sm:w-1/2 md:w-1/4 lg:w-1/7">
-            <div className="relative w-full group">
-              <Link to={`/${post.slug}`} className="relative w-full" style={{ paddingTop: '150%' }}>
-                <Image
-                  src={post.img}
-                  className="absolute top-0 left-0 w-full h-full object-cover rounded-md"
-                  alt={post.title}
-                />
-              </Link>
-
-              {/* Hover Arrow Scroll Button */}
-              <div className="hidden group-hover:flex absolute inset-0 justify-center items-center">
-                <button 
-                  onClick={() => handleScroll(post.slug)} 
-                  className="scroll-button bg-white p-2 rounded-full shadow-md hover:bg-gray-200">
-                  <span className="arrow-icon">↓</span>
-                </button>
-              </div>
-            </div>
-
-            <Link
-              to={`/posts?category=${post.category}`}
-              className="text-[var(--textColor)] text-xs font-semibold"
-            >
-              {post.category}
-            </Link>
+  <div className="scroll-content">
+    {posts.slice(1, 8).map((post, index) => (
+      <div key={index} className="scroll-item flex flex-col gap-2 w-full sm:w-1/2 md:w-1/4 lg:w-1/7">
+        <Link to={`/${post.slug}`} className="relative w-full">
+          <Image
+            src={post.img}
+            className="image absolute top-0 left-0 w-full h-full object-cover rounded-md"
+          />
+          <div className="scroll-btn absolute bottom-2 right-2 bg-opacity-50 rounded-full p-2 bg-black text-white hidden">
+            <span className="arrow">→</span>
           </div>
-        ))}
+        </Link>
+        <Link
+          to={`/posts?category=${post.category}`}
+          className="text-[var(--textColor)] text-xs font-semibold"
+        >
+          {post.category}
+        </Link>
       </div>
-    </div>
-
-<style jsx>{`
-  /* Ensure images are responsive */
-  @media (max-width: 640px) {
-    .scroll-item img {
-      object-fit: cover;
-      height: auto; /* Adjusting image height on small screens */
-    }
-  }
-
-  .scroll-container {
-    overflow-x: scroll;
-    white-space: nowrap;
-  }
-
-  /* Button style for hover effect */
-  .scroll-button {
-    background: rgba(0, 0, 0, 0.5);
-    color: white;
-    font-size: 20px;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .scroll-button:hover {
-    background: rgba(0, 0, 0, 0.7);
-  }
-
-  .arrow-icon {
-    font-size: 24px; /* Adjust arrow size */
-  }
-`}</style>
-
- 
+    ))}
+  </div>
+</div>
 
     </div>
   );

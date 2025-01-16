@@ -264,31 +264,47 @@ body {
 .side-menu::-webkit-scrollbar-thumb:hover {
   background: var(--textColore); /* Keep the same color when hovered, or adjust if needed */
 }
-
-
 .scroll-container {
   display: flex;
   overflow-x: auto;
   scroll-behavior: smooth;
-  white-space: nowrap; /* Prevents wrapping */
+  white-space: nowrap;
 }
 
 .scroll-content {
   display: flex;
-  flex-wrap: nowrap; /* Ensures items stay in one row */
+  flex-wrap: nowrap;
 }
 
 .scroll-item {
-  flex: 0 0 auto; /* Prevent flex items from shrinking or growing */
-  margin-right: 20px; /* Add a gap between items */
+  flex: 0 0 auto;
+  margin-right: 20px;
+  position: relative;
 }
 
 .scroll-container::-webkit-scrollbar {
-  display: none; /* Hides the scrollbar */
+  display: none;
 }
 
 .scroll-container {
-  -ms-overflow-style: none;  /* For Internet Explorer 10+ */
-  scrollbar-width: none; /* For Firefox */
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
 
+.image {
+  padding-top: 56.25%; /* Aspect ratio for responsiveness (16:9) */
+}
+
+.scroll-item:hover .scroll-btn {
+  display: block; /* Show the scroll button on hover */
+}
+
+.scroll-btn {
+  transition: opacity 0.3s ease;
+  opacity: 0.8;
+  cursor: pointer;
+}
+
+.scroll-btn:hover {
+  opacity: 1; /* Brighten button on hover */
+}
