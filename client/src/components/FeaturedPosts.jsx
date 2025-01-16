@@ -98,41 +98,39 @@ const FeaturedPosts = () => {
           <h3 className="text-3xl  md:text-5xl font-bold text-[var(--textColor)]">Discover</h3>
           <p className=" text-lg md:text-2xl text-[var(--textColor)]0">For you</p>
         </div>
+        <div className="scroll-container">
+      <div className="scroll-content">
+        {posts.slice(1, 8).map((post, index) => (
+          <div key={index} className="scroll-item flex flex-col gap-2 w-full sm:w-1/2 md:w-1/4 lg:w-1/7">
+            <div className="relative w-full group">
+              <Link to={`/${post.slug}`} className="relative w-full" style={{ paddingTop: '150%' }}>
+                <Image
+                  src={post.img}
+                  className="absolute top-0 left-0 w-full h-full object-cover rounded-md"
+                  alt={post.title}
+                />
+              </Link>
 
-    {/* Additional Featured Posts */}
-<div className="scroll-container">
-  <div className="scroll-content">
-    {posts.slice(1, 8).map((post, index) => (
-      <div key={index} className="scroll-item flex flex-col gap-2 w-full sm:w-1/2 md:w-1/4 lg:w-1/7">
-        <div className="relative w-full group"> {/* group class for hover effect */}
-          <Link to={`/${post.slug}`} className="relative w-full" style={{ paddingTop: '150%' }}>
-            <Image
-              src={post.img}
-              className="absolute top-0 left-0 w-full h-full object-cover rounded-md"
-              alt={post.title} 
-            />
-          </Link>
-          
-          {/* Hover Arrow Scroll Button */}
-          <div className="hidden group-hover:flex absolute inset-0 justify-center items-center">
-            <button 
-              onClick={() => handleScroll(post.slug)} 
-              className="scroll-button bg-white p-2 rounded-full shadow-md hover:bg-gray-200">
-              <span className="arrow-icon">↓</span> {/* You can replace ↓ with an icon */}
-            </button>
+              {/* Hover Arrow Scroll Button */}
+              <div className="hidden group-hover:flex absolute inset-0 justify-center items-center">
+                <button 
+                  onClick={() => handleScroll(post.slug)} 
+                  className="scroll-button bg-white p-2 rounded-full shadow-md hover:bg-gray-200">
+                  <span className="arrow-icon">↓</span>
+                </button>
+              </div>
+            </div>
+
+            <Link
+              to={`/posts?category=${post.category}`}
+              className="text-[var(--textColor)] text-xs font-semibold"
+            >
+              {post.category}
+            </Link>
           </div>
-        </div>
-
-        <Link
-          to={`/posts?category=${post.category}`}
-          className="text-[var(--textColor)] text-xs font-semibold"
-        >
-          {post.category}
-        </Link>
+        ))}
       </div>
-    ))}
-  </div>
-</div>
+    </div>
 
 <style jsx>{`
   /* Ensure images are responsive */
