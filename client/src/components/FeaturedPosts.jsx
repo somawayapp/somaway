@@ -35,12 +35,12 @@ const FeaturedPosts = () => {
 
       {/* Left Section */}
       <div className="lg:w-1/2 flex flex-col items-start gap-4 p-4  rounded-md">
-        <h1 className="text-2xl lg:text-4xl font-bold text-[var(--textColor)]">
+        <h1 className="text-2xl lg:text-5xl font-bold text-[var(--textColor)]">
           #1 most 
         </h1>
-        <h1 className="text-2xl lg:text-4xl font-bold text-[var(--textColor)]">
+        <h1 className="text-2xl lg:text-5xl font-bold text-[var(--textColor)]">
            downloaded <span className="text-blue-600">book </span> 
-        </h1> <h1 className="text-2xl lg:text-4xl font-bold text-[var(--textColor)]">
+        </h1> <h1 className="text-2xl lg:text-5xl font-bold text-[var(--textColor)]">
            <span className="text-blue-600"> summary</span> app
         </h1>
 
@@ -60,14 +60,14 @@ const FeaturedPosts = () => {
       {/* Right Section */}
       <div className="lg:w-1/2 flex flex-col gap-6">
         {/* First Featured Post */}
-        <div className="flex top-0 gap-1">
-          <Link to={`/${posts[0].slug}`} className="relative top-0 w-full" style={{ height: "60vh" }}>
+        <div className="flex top-0  gap-1">
+          <Link to={`/${posts[0].slug}`} className="relative w-full" >
         
             
             <img
             src="/desktop.webp"
             alt="Newsletter illustration"
-            className="w-full   object-cover rounded-lg  "
+            className="w-full  object-cover rounded-lg  "
           />
 
           </Link>
