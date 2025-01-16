@@ -96,7 +96,24 @@ const FeaturedPosts = () => {
         <div className="scroll-container">
   <div className="scroll-content">
     {posts.slice(1, 8).map((post, index) => (
-      <div key={index} className="scroll-item flex flex-col gap-2 w-full sm:w-1/2 md:w-1/4 lg:w-1/5">
+      <div key={index} className="scroll-item flex flex-col gap-2 w-full sm:w-1/2 md:w-1/4 lg:w-1/7">
+        <Link to={`/${post.slug}`} className="relative w-full" style={{ paddingTop: '150%' }}>
+          <Image
+            src={post.img}
+            className="absolute top-0 left-0 w-full h-full object-cover rounded-md"
+          />
+        </Link>
+        <Link
+          to={`/posts?category=${post.category}`}
+          className="text-[var(--textColor)] text-xs font-semibold"
+        >
+          {post.category}
+        </Link>
+      </div>
+    ))}
+    {/* Duplicate the content to create the infinite loop effect */}
+    {posts.slice(1, 8).map((post, index) => (
+      <div key={`duplicate-${index}`} className="scroll-item flex flex-col gap-2 w-full sm:w-1/2 md:w-1/4 lg:w-1/7">
         <Link to={`/${post.slug}`} className="relative w-full" style={{ paddingTop: '150%' }}>
           <Image
             src={post.img}

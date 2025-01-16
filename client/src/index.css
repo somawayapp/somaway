@@ -268,25 +268,27 @@ body {
 
 .scroll-container {
   display: flex;
-  overflow-x: hidden;
+  overflow-x: auto;
   scroll-behavior: smooth;
+  white-space: nowrap; /* Prevents wrapping */
 }
 
 .scroll-content {
   display: flex;
-  animation: scroll 25s infinite linear; /* Adjusted time to fit your needs */
+  flex-wrap: nowrap; /* Ensures items stay in one row */
 }
 
 .scroll-item {
-  flex: 0 0 auto; /* Prevent flex items from growing or shrinking */
+  flex: 0 0 auto; /* Prevent flex items from shrinking or growing */
+  margin-right: 20px; /* Add a gap between items */
 }
 
-@keyframes scroll {
-  0% {
-    transform: translateX(0);
-  }
-  100% {
-    transform: translateX(-100%);
-  }
+.scroll-container::-webkit-scrollbar {
+  display: none; /* Hides the scrollbar */
+}
+
+.scroll-container {
+  -ms-overflow-style: none;  /* For Internet Explorer 10+ */
+  scrollbar-width: none; /* For Firefox */
 }
 
