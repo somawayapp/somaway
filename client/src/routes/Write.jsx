@@ -152,17 +152,92 @@ const Write = () => {
           </div>
         )}
 
-        {/* Other form fields (title, desc, category, etc.) */}
 
-        <button type="submit" className="p-3 text-white bg-blue-500 rounded-lg">
-          Submit Post
-        </button>
-      </form>
-    </div>
-  );
+      {/* Title Input */}
+      <div>
+        <input
+          className="text-md font-semibold rounded-xl bg-transparent outline-none p-3 w-full border border-1 border-[var(--textColore)]"
+          type="text"
+          placeholder="Enter Post Title"
+          value={title}
+          onChange={handleTitleChange}
+          name="title"
+        />
+        <span className="text-sm text-[var(--textColor)]">{titleRemainingChars} characters remaining</span>
+      </div>
+
+      {/* Category Selection */}
+      <div className="flex items-center gap-4">
+        <label htmlFor="category" className="text-sm text-[var(--textColor)]">Choose a category:</label>
+        <select
+          name="category"
+          id="category"
+          value={category}
+          onChange={(e) => setCategory(e.target.value)}
+          className="p-3 rounded-xl bg-[var(--textColore)] text-[var(--textColor)] shadow-md w-full max-w-xs"
+        >
+          <option value="" disabled>Select a category</option>
+          <option value="general">General</option>
+          {/* Add other categories as needed */}
+        </select>
+      </div>
+
+      {/* Rich Text Description Input using ReactQuill */}
+      <div>
+        <ReactQuill 
+          value={desc} 
+          onChange={handleDescChange} 
+          className="border border-1 border-[var(--textColore)] rounded-xl text-[var(--textColor)]"
+          placeholder="A Short Description" 
+          modules={{
+            toolbar: [
+              [{ 'header': '1'}, { 'header': '2'}, { 'font': [] }],
+              [{ 'list': 'ordered'}, { 'list': 'bullet' }],
+              ['bold', 'italic', 'underline'],
+              ['link'],
+              [{ 'align': [] }],
+              ['image'] // To allow image insertion
+            ],
+          }} 
+          formats={['header', 'font', 'list', 'bold', 'italic', 'underline', 'link', 'align', 'image']} 
+        />
+        <span className="text-sm text-[var(--textColor)]">{descRemainingChars} characters remaining</span>
+      </div>
+
+      {/* Is Featured Button */}
+      <div className="flex items-center gap-4">
+        <label htmlFor="isFeatured" className="text-sm text-[var(--textColor)]">Is this post featured?</label>
+        <input
+          type="checkbox"
+          id="isFeatured"
+          checked={isFeatured}
+          onChange={() => setIsFeatured(!isFeatured)}
+          className="w-4 h-4"
+        />
+      </div>
+
+      {/* Submit Button */}
+      <button
+        disabled={mutation.isPending || (progress > 0 && progress < 100)}
+        className="bg-[#1da1f2] hover:bg-[#0875b9] text-white font-medium rounded-xl mt-4 p-3 w-full disabled:bg-blue-400 disabled:cursor-not-allowed"
+      >
+        {mutation.isPending ? "Publishing..." : "Publish Post"}
+      </button>
+      <span className="text-sm text-[var(--textColor)]">Progress: {progress}%</span>
+    </form>
+  </div>
+);
 };
 
+
+
+
 export default Write;
+
+
+
+
+
 
 
 

@@ -31,11 +31,11 @@ const FeaturedPosts = () => {
 
   return (
     <div className="flex flex-col  gap-6 mt-4">
-          <div className="flex flex-col lg:flex-row gap-[60px] mt-4">
+          <div style={{ height: "70vh" }}  className="flex flex-col lg:flex-row gap-[100px] mt-4">
 
       {/* Left Section */}
       <div className="lg:w-2/2 flex flex-col items-start gap-4 p-4  rounded-md">
-        <h1 className="text-2xl md:text-[40px] font-bold text-[var(--textColor)]">
+        <h1 className="text-2xl md:text-[60px] lg:text-[60px] font-bold text-[var(--textColor)]">
           #1 most downloaded <span className="text-blue-600">book summary</span> app
         </h1>
         <p className="text-[var(--textColor)]">
