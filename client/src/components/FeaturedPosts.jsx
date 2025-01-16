@@ -34,13 +34,13 @@ const FeaturedPosts = () => {
           <div style={{ height: "60vh" }}  className="flex flex-col lg:flex-row gap-[100px] mt-4">
 
       {/* Left Section */}
-      <div className="lg:w-2/3 flex flex-col items-start gap-4 p-4  rounded-md">
-        <h1 className="text-2xl lg:text-6xl font-bold text-[var(--textColor)]">
+      <div className="lg:w-1/2 flex flex-col items-start gap-4 p-4  rounded-md">
+        <h1 className="text-2xl lg:text-4xl font-bold text-[var(--textColor)]">
           #1 most 
         </h1>
-        <h1 className="text-2xl lg:text-6xl font-bold text-[var(--textColor)]">
+        <h1 className="text-2xl lg:text-4xl font-bold text-[var(--textColor)]">
            downloaded <span className="text-blue-600">book </span> 
-        </h1> <h1 className="text-2xl lg:text-6xl font-bold text-[var(--textColor)]">
+        </h1> <h1 className="text-2xl lg:text-4xl font-bold text-[var(--textColor)]">
            <span className="text-blue-600"> summary</span> app
         </h1>
 
@@ -58,24 +58,20 @@ const FeaturedPosts = () => {
 
 
       {/* Right Section */}
-      <div className="lg:w-1/3 flex flex-col gap-6">
+      <div className="lg:w-1/2 flex flex-col gap-6">
         {/* First Featured Post */}
         <div className="flex flex-col gap-1">
           <Link to={`/${posts[0].slug}`} className="relative w-full" style={{ paddingTop: '50%', height: "60vh" }}>
-            <Image
-              src={posts[0].img}
-              className="absolute top-0 left-0 w-full object-cover rounded-md"
-            />
+        
+            
+            <img
+            src="/desktop.webp"
+            alt="Newsletter illustration"
+            className="w-full  object-cover rounded-lg  "
+          />
+
           </Link>
-          <div className="">
-            <Link
-              to={`/posts?category=${posts[0].category}`}
-              className="text-blue-600 text-sm font-semibold uppercase"
-            >
-              {posts[0].category}
-            </Link>
-          
-          </div>
+     
         </div>
 
       </div>
