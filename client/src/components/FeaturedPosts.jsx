@@ -30,11 +30,11 @@ const FeaturedPosts = () => {
   }
 
   return (
-    <div className="flex flex-col  gap-6 mt-4">
-          <div style={{ height: "60vh" }}  className="flex flex-col lg:flex-row gap-[100px] mt-4">
+    <div className="flex flex-col  gap-1 md:gap-6 mt-0 md:mt-4">
+<div className="flex flex-col lg:flex-row lg:h-[60vh] gap-[100px] mt-4">
 
       {/* Left Section */}
-      <div className="lg:w-1/2 flex flex-col items-start gap-4 p-4  rounded-md">
+      <div className="lg:w-1/2 flex flex-col items-start gap-1 md:gap-4 p-4  rounded-md">
         <h1 className="text-2xl lg:text-5xl font-bold text-[var(--textColor)]">
           #1 most 
         </h1>
@@ -58,19 +58,24 @@ const FeaturedPosts = () => {
 
 
       {/* Right Section */}
-      <div className="lg:w-1/2 flex flex-col gap-6">
+      <div className="lg:w-1/2 flex flex-col ">
         {/* First Featured Post */}
-        <div className="flex top-0  gap-1">
-          <Link to={`/${posts[0].slug}`} className="relative w-full" >
-        
-            
-            <img
-            src="/desktop.webp"
-            alt="Newsletter illustration"
-            className="w-full  object-cover rounded-lg  "
-          />
+        <div className="flex  top-0  ">
+        <Link to={`/${posts[0].slug}`} className="relative w-full">
+  {/* For larger screens */}
+  <img
+    src="/desktop.webp"
+    alt="Newsletter illustration"
+    className="hidden sm:block w-full object-cover rounded-lg"
+  />
+  {/* For smaller screens */}
+  <img
+    src="/mobile.webp"
+    alt="Newsletter illustration"
+    className="block sm:hidden w-full object-cover rounded-lg"
+  />
+</Link>
 
-          </Link>
      
         </div>
 
