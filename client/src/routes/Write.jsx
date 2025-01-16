@@ -1,9 +1,4 @@
-
-     
-
-
-
-          import { useAuth, useUser } from "@clerk/clerk-react";
+ import { useAuth, useUser } from "@clerk/clerk-react";
 import { useMutation } from "@tanstack/react-query";
 import axios from "axios";
 import ReactQuill from "react-quill-new";

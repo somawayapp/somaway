@@ -30,7 +30,7 @@ About Us    </h1>
       <h2 className="text-[var(--textColor2)] text-3xl mt-[20px] font-semibold mb-4 text-center">
             Who WeAre        </h2>
         <p className="text-md md:text-md text-center text-[var(--textColor)] mb-[30px] leading-relaxed">
-        Welcome to xtech, your trusted source for insightful news and
+        Welcome to soma, your trusted source for insightful news and
           updates on the tech world. Our mission is to keep you informed,
           inspired, and ahead of the curve in just 5 minutes a day.
         </p>
@@ -129,10 +129,10 @@ Meet The Team  </h2>
           out to us at
 
           <a
-            href="mailto:xtechnewsletter@gmail.com"
+            href="mailto:somanewsletter@gmail.com"
             className="text-[#1da1f2] pl-1 underline ml-1"
           >
-            xtechnewsletter@gmail.com
+            somanewsletter@gmail.com
 
           </a>
 
@@ -150,7 +150,7 @@ or call our hotline +254703394794
           Stay Updated
         </h3>
         <p className="text-md text-[var(--textColor)]  leading-relaxed">
-          Subscribe to xtech and get your daily dose of tech news in just 5
+          Subscribe to soma and get your daily dose of tech news in just 5
           minutes.
         </p>
         <Link

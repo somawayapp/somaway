@@ -37,7 +37,7 @@ const NewsletterPage = () => {
         <div className="lg:w-2/3 w-full flex flex-col justify-center text-[var(--textColor)] gap-1 p-2 lg:p-6 md:p-4">
           {/* TEXT */}
           <h2 className="text-md pb-4 pt-0  md:pt-9 md:pb-9 leading-relaxed">
-          Welcome to Xtech. Every day we'll send you the world's most important tech news, 
+          Welcome to soma. Every day we'll send you the world's most important tech news, 
           with a hint of wit and humor, so that you start your day informed, knowledgeable, and ready to go.          </h2>
         {/* TEXT AND FORM SECTION */}          {/* SUBSCRIPTION FORM */}
           <form className="flex  mb-[30px] md:mb-[60px] items-center w-full">
