@@ -59,7 +59,7 @@ const FeaturedPosts = () => {
 
 
       {/* Right Section */}
-      <div className="lg:w-1/2 flex mt-[-200px] flex-col ">
+      <div className="lg:w-1/2 flex mt-[-100px] md:mt-0 flex-col ">
         {/* First Featured Post */}
         <div className="flex  mb-8 md:mb-0 top-0  ">
         <Link to={`/${posts[0].slug}`} className="relative w-full">
