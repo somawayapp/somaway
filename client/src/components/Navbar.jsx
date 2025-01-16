@@ -30,8 +30,8 @@ const Navbar = () => {
 
       {/* LOGO */}
       <Link to="/" className="flex items-center gap-1 text-lg font-bold md:text-2xl">
-      <img src="/x6.png" alt="Logo" className="w-4 h-4 md:w-6 md:h-6" />
-      <span className="bg-clip-text text-[var(--textLogo)] hidden md:block lg:block font-impact">soma</span>
+      <img src="/logo7.png" alt="Logo" className="w-6 h-6 md:w-8 md:h-8" />
+      <span className="bg-clip-text text-blue-500 pl-1 hidden md:block lg:block font-impact">soma</span>
 
       {/*   <span className="bg-clip-text text-[#1ADAff] font-impact"></span> */}
 

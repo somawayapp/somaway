@@ -34,7 +34,7 @@ const FeaturedPosts = () => {
 <div className="flex flex-col lg:flex-row lg:h-[60vh] gap-[100px] mt-4">
 
       {/* Left Section */}
-      <div className="lg:w-1/2 flex flex-col items-start gap-1 md:gap-4   rounded-md">
+      <div className="lg:w-1/2 flex flex-col mt-0 md:mt-9 items-start gap-1 md:gap-4   rounded-md">
         <h1 className="text-4xl lg:text-5xl font-bold text-[var(--textColor)]">
           #1 most 
         </h1>
@@ -59,7 +59,7 @@ const FeaturedPosts = () => {
 
 
       {/* Right Section */}
-      <div className="lg:w-1/2 flex mt-[-100px] md:mt-0 flex-col ">
+      <div className="lg:w-1/2 flex mt-[-50px] md:mt-0 flex-col ">
         {/* First Featured Post */}
         <div className="flex  mb-8 md:mb-0 top-0  ">
         <Link to={`/${posts[0].slug}`} className="relative w-full">
