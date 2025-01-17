@@ -38,7 +38,7 @@ const TrendingPosts = () => {
       {posts.slice(0, 8).map((post, index) => (
         <div
           key={index}
-          className="flex flex-col  flex-shrink-0 w-[70px] border border-2 border-blue-700 rounded-2xl p-[0.5px]  sm:w-[90px] lg:w-[110px]"
+          className="flex flex-col  flex-shrink-0 w-[70px] border border-3 border-blue-500 rounded-2xl p-[1px]  sm:w-[90px] lg:w-[110px]"
         >
           <Link
             to={`/${post.slug}`}
