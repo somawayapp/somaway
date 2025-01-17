@@ -102,6 +102,7 @@ const Homepage = () => {
 
    <FeaturedPosts />
    <TrendingPosts />
+   <LatestPosts />
 
 
 

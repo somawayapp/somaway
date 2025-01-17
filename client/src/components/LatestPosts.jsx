@@ -25,7 +25,7 @@ const LatestPosts = () => {
   }
 
   return (
-    <div className="flex flex-col mt-0 md:mt-4">
+    <div className="flex flex-col mt-5 md:mt-8">
      
 
       {/* Featured Section Title */}
