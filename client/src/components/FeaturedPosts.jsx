@@ -78,7 +78,7 @@ const FeaturedPosts = () => {
       </div>
 
       {/* Additional Featured Posts */}
-      <div className="flex gap-3 md:gap-4 overflow-x-auto scrollbar-hide">
+      <div className="flex gap- md:gap-4 overflow-x-auto scrollbar-hide">
         {posts.slice(0, 8).map((post, index) => (
           <div
             key={index}

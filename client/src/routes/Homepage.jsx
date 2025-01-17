@@ -10,6 +10,7 @@ import Sidebar from "../components/Sidebar2";
 import { ThemeProvider } from "../../themecontext";
 import Navbar from "../components/Navbar";
 import TrendingPosts from "../components/TrendingPosts";
+import CategoriesScroll from "../components/CategoriesScroll";
 
 
 const Homepage = () => {
@@ -94,6 +95,7 @@ const Homepage = () => {
   <Maincategories />
 </div>
      */}
+   <CategoriesScroll />
 
    <FeaturedPosts />
    <TrendingPosts />

@@ -29,7 +29,7 @@ const TrendingPosts = () => {
     {/* Featured Section Title */}
     <div>
       <h3 className="text-xl md:text-2xl mb-2 md:mb-3 font-bold text-[var(--textColor)]">
-        For You Learning Session
+        Daily microlearning session
       </h3>
     </div>
   
@@ -38,7 +38,7 @@ const TrendingPosts = () => {
       {posts.slice(0, 8).map((post, index) => (
         <div
           key={index}
-          className="flex flex-col  flex-shrink-0 w-[70px] border border-3 border-blue-500 rounded-2xl p-[1px]  sm:w-[90px] lg:w-[110px]"
+          className="flex flex-col  flex-shrink-0 w-[70px] border border-4 border-blue-500 rounded-2xl p-[1px]  sm:w-[90px] lg:w-[110px]"
         >
           <Link
             to={`/${post.slug}`}
