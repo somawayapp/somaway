@@ -5,14 +5,13 @@ import { useQuery } from "@tanstack/react-query";
 
 const fetchPost = async () => {
   const res = await axios.get(
-    `${import.meta.env.VITE_API_URL}/posts?sort=trending     `
+    `${import.meta.env.VITE_API_URL}/posts?sort=trending`
   );
   return res.data;
 };
 
 const TrendingPosts = () => {
   const { isLoading, error, data } = useQuery({
-    queryKey: ["posts"],
     queryFn: fetchPost,
   });
 
@@ -20,9 +19,14 @@ const TrendingPosts = () => {
   if (error) return "Something went wrong! " + error.message;
 
   const posts = data?.posts;
-  if (!posts || posts.length < 19) {
+  if (!posts || posts.length < 18) {
     return null; // Ensure there are enough posts
   }
+
+  // Render your component logic here
+};
+
+
 
   return (
     <div className="flex flex-col mt-8 md:mt-12">
@@ -35,7 +39,7 @@ const TrendingPosts = () => {
   
     {/* Additional Featured Posts */}
     <div className="flex  gap-1 md:gap-2 overflow-x-auto scrollbar-hide">
-      {posts.slice(0, 18).map((post, index) => (
+      {posts.slice(0, 8).map((post, index) => (
         <div
           key={index}
           className="flex flex-col  flex-shrink-0 w-[70px] border border-2 border-blue-500 rounded-2xl p-[1px]  sm:w-[90px] lg:w-[110px]"
