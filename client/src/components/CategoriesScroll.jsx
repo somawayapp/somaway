@@ -23,14 +23,15 @@ const categories = [
 const CategoriesScroll = ({ setOpen }) => {
   return (
     <div
-      className="flex gap-4 overflow-x-auto scrollbar-hide px-4 py-2"
+      className="flex gap-4 overflow-x-auto mb-5 scrollbar-hide "
       style={{ whiteSpace: "nowrap" }}
     >
       {categories.map((category) => (
         <Link
           key={category}
           to={`/posts?cat=${category.toLowerCase().replace(/\s+/g, "-")}`}
-          className="text-[var(--textColor)] bg-[var(--textColore)] hover:bg-[var(--softTextColor7)] rounded-xl px-4 py-2 transition-all"
+          className="text-[var(--textColor)] text-xs md:text-md bg-[var(--textColore)] hover:bg-[var(--softTextColor7)] rounded-xl
+           px-4 py-2 transition-all"
           onClick={() => setOpen(false)}
         >
           {category}
