@@ -25,7 +25,7 @@ const LatestPosts = () => {
   }
 
   return (
-    <div className="flex flex-col mt-5 md:mt-8">
+    <div className="flex flex-col mt-8 md:mt-12">
      
 
       {/* Featured Section Title */}
@@ -37,7 +37,7 @@ const LatestPosts = () => {
 
       {/* Additional Featured Posts */}
       <div className="flex gap-2 md:gap-4 overflow-x-auto scrollbar-hide">
-        {posts.slice(0, 8).map((post, index) => (
+        {posts.map((post, index) => (
           <div
             key={index}
             className="flex flex-col  flex-shrink-0 w-[100px] sm:w-[150px] lg:w-[200px]"
