@@ -12,7 +12,7 @@ const fetchPost = async () => {
 
 const LatestPosts = () => {
   const { isLoading, error, data } = useQuery({
-    queryKey: ["featuredPosts"],
+    queryKey: ["posts"],
     queryFn: fetchPost,
   });
 
@@ -20,7 +20,7 @@ const LatestPosts = () => {
   if (error) return "Something went wrong! " + error.message;
 
   const posts = data?.posts;
-  if (!posts || posts.length < 9) {
+  if (!posts) {
     return null; // Ensure there are enough posts
   }
 
