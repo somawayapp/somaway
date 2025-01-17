@@ -5,7 +5,7 @@ import { useQuery } from "@tanstack/react-query";
 
 const fetchPost = async () => {
   const res = await axios.get(
-    `${import.meta.env.VITE_API_URL}/posts?featured=true&limit=9&sort=trending     `
+    `${import.meta.env.VITE_API_URL}/posts?sort=trending     `
   );
   return res.data;
 };
@@ -38,7 +38,7 @@ const TrendingPosts = () => {
       {posts.slice(0, 8).map((post, index) => (
         <div
           key={index}
-          className="flex flex-col  flex-shrink-0 w-[70px] border border-4 border-blue-500 rounded-2xl p-[1px]  sm:w-[90px] lg:w-[110px]"
+          className="flex flex-col  flex-shrink-0 w-[70px] border border-2 border-blue-500 rounded-2xl p-[1px]  sm:w-[90px] lg:w-[110px]"
         >
           <Link
             to={`/${post.slug}`}

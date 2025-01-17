@@ -5,12 +5,12 @@ import { useQuery } from "@tanstack/react-query";
 
 const fetchPost = async () => {
   const res = await axios.get(
-    `${import.meta.env.VITE_API_URL}/posts?featured=true&limit=9&sort=newest`
+    `${import.meta.env.VITE_API_URL}/posts`
   );
   return res.data;
 };
 
-const FeaturedPosts = () => {
+const LatestPosts = () => {
   const { isLoading, error, data } = useQuery({
     queryKey: ["featuredPosts"],
     queryFn: fetchPost,
@@ -31,8 +31,7 @@ const FeaturedPosts = () => {
       {/* Featured Section Title */}
       <div>
         <h3 className="text-2xl md:text-3xl mb-2 md:mb-3 font-bold text-[var(--textColor)]">
-          Featured
-        </h3>
+      All books        </h3>
       
       </div>
 
@@ -63,4 +62,4 @@ const FeaturedPosts = () => {
   );
 };
 
-export default FeaturedPosts;
+export default LatestPosts;

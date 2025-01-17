@@ -12,6 +12,7 @@ import Navbar from "../components/Navbar";
 import TrendingPosts from "../components/TrendingPosts";
 import CategoriesScroll from "../components/CategoriesScroll";
 import Hero from "../components/Hero";
+import LatestPosts from "../components/LatestPosts";
 
 const Homepage = () => {
   const [isVisible, setIsVisible] = useState(true);
