@@ -23,8 +23,7 @@ const TrendingPosts = () => {
     return null; // Ensure there are enough posts
   }
 
-  // Render your component logic here
-};
+  
 
 
 
