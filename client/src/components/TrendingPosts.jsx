@@ -34,11 +34,11 @@ const TrendingPosts = () => {
     </div>
   
     {/* Additional Featured Posts */}
-    <div className="flex gap-4 overflow-x-auto scrollbar-hide">
+    <div className="flex  gap-1 md:gap-2 overflow-x-auto scrollbar-hide">
       {posts.slice(0, 8).map((post, index) => (
         <div
           key={index}
-          className="flex flex-col  flex-shrink-0 w-[70px] border border-2 border-blue-700 p-1  sm:w-[90px] lg:w-[110px]"
+          className="flex flex-col  flex-shrink-0 w-[70px] border border-2 border-blue-700 rounded-2xl p-[0.5px]  sm:w-[90px] lg:w-[110px]"
         >
           <Link
             to={`/${post.slug}`}
