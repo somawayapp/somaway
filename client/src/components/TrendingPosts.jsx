@@ -38,7 +38,7 @@ const TrendingPosts = () => {
   {posts.slice(0, 8).map((post, index) => (
     <div
       key={index}
-      className="flex flex-col gap-0.5 md:gap-1 flex-shrink-0 w-[70px] sm:w-[90px] lg:w-[110px]"
+      className="flex flex-col gap-[0.5px] flex-shrink-0 w-[70px] sm:w-[90px] lg:w-[110px]"
     >
       <Link
         to={`/${post.slug}`}
@@ -46,7 +46,7 @@ const TrendingPosts = () => {
         style={{ paddingTop: "120%" }} // Adjusted to make it almost square
       >
         <div
-          className="absolute top-0 left-0 w-full h-full p-[1px] rounded-2xl bg-blue-700 box-border"
+          className="absolute top-0 left-0 w-full h-full p-[1px] gap-[0.5px] rounded-2xl bg-blue-700 box-border"
         >
           <Image
             src={post.img}
