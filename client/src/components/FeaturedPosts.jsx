@@ -82,7 +82,7 @@ const FeaturedPosts = () => {
         {posts.slice(0, 8).map((post, index) => (
           <div
             key={index}
-            className="flex flex-col gap-1 flex-shrink-0 w-[100px] sm:w-[150px] lg:w-[200px]"
+            className="flex flex-col gap-0.5 md:gap-1 flex-shrink-0 w-[100px] sm:w-[150px] lg:w-[200px]"
           >
             <Link to={`/${post.slug}`} className="relative w-full" style={{ paddingTop: "150%" }}>
               <Image
