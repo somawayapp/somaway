@@ -26,33 +26,35 @@ const TrendingPosts = () => {
 
   return (
     <div className="flex flex-col mt-8 md:mt-12">
-   
-
-      {/* Featured Section Title */}
-      <div>
-        <h3 className="text-xl md:text-2xl font-bold text-[var(--textColor)]">
-        For You Learning Session        </h3>
-      
-      </div>
-
-      {/* Additional Featured Posts */}
-      <div className="flex gap-4 overflow-x-auto scrollbar-hide">
-        {posts.slice(0, 8).map((post, index) => (
-          <div
-            key={index}
-            className="flex flex-col gap-1 flex-shrink-0 w-[60px]  border  border-4 border-blue-700 rounded-3xl sm:w-[80px] lg:w-[100px]"
-          >
-            <Link to={`/${post.slug}`} className="relative w-full" style={{ paddingTop: "150%" }}>
-              <Image
-                src={post.img}
-                className="absolute top-0  left-0 w-full h-full object-cover rounded-3xl"
-              />
-            </Link>
-         
-          </div>
-        ))}
-      </div>
+    {/* Featured Section Title */}
+    <div>
+      <h3 className="text-xl md:text-2xl mb-2 md:mb-3 font-bold text-[var(--textColor)]">
+        For You Learning Session
+      </h3>
     </div>
+  
+    {/* Additional Featured Posts */}
+    <div className="flex gap-4 overflow-x-auto scrollbar-hide">
+      {posts.slice(0, 8).map((post, index) => (
+        <div
+          key={index}
+          className="flex flex-col gap-1 flex-shrink-0 w-[70px] sm:w-[90px] lg:w-[110px]"
+        >
+          <Link
+            to={`/${post.slug}`}
+            className="relative w-full"
+            style={{ paddingTop: "120%" }} // Adjusted to make it almost square
+          >
+            <Image
+              src={post.img}
+              className="absolute top-0 left-0 w-full h-full object-cover border border-4 border-blue-700 rounded-2xl"
+            />
+          </Link>
+        </div>
+      ))}
+    </div>
+  </div>
+  
   );
 };
 

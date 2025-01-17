@@ -71,7 +71,7 @@ const FeaturedPosts = () => {
 
       {/* Featured Section Title */}
       <div>
-        <h3 className="text-2xl md:text-3xl font-bold text-[var(--textColor)]">
+        <h3 className="text-2xl md:text-3xl mb-2 md:mb-3 font-bold text-[var(--textColor)]">
           Featured
         </h3>
       
