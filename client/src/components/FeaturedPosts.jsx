@@ -84,15 +84,21 @@ const FeaturedPosts = () => {
         {posts.slice(0, 8).map((post, index) => (
           <div
             key={index}
-            className="flex flex-col gap-1 flex-shrink-0 w-[60px] sm:w-[100px] lg:w-[150px]"
+            className="flex flex-col gap-1 flex-shrink-0 w-[100px] sm:w-[150px] lg:w-[200px]"
           >
             <Link to={`/${post.slug}`} className="relative w-full" style={{ paddingTop: "150%" }}>
               <Image
                 src={post.img}
-                className="absolute top-0 border border-4 border-blue-700 left-0 w-full h-full object-cover rounded-xl"
+                className="absolute top-0  left-0 w-full h-full object-cover rounded-md"
               />
             </Link>
           
+            <Link
+              to={`/posts?category=${post.category}`}
+              className="text-[var(--textColor)] text-xs font-semibold"
+            >
+              {post.category}
+            </Link>
           </div>
         ))}
       </div>
