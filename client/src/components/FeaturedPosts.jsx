@@ -100,7 +100,7 @@ const FeaturedPosts = () => {
               <Link to={`/${post.slug}`} className="relative w-full" style={{ paddingTop: '150%' }}>
                 <Image
                   src={post.img}
-                  className="absolute top-0 left-0 w-full h-full object-cover rounded-md"
+                  className="absolute top-0  border  border-1 border-blue-500  left-0 w-full h-full object-cover rounded-md"
                 />
               </Link>
               <Link
