@@ -35,29 +35,25 @@ const TrendingPosts = () => {
   
     {/* Additional Featured Posts */}
     <div className="flex gap-4 overflow-x-auto scrollbar-hide">
-  {posts.slice(0, 8).map((post, index) => (
-    <div
-      key={index}
-      className="flex flex-col gap-[0.5px] flex-shrink-0 w-[70px] sm:w-[90px] lg:w-[110px]"
-    >
-      <Link
-        to={`/${post.slug}`}
-        className="relative w-full"
-        style={{ paddingTop: "120%" }} // Adjusted to make it almost square
-      >
+      {posts.slice(0, 8).map((post, index) => (
         <div
-          className="absolute top-0 left-0 w-full h-full p-[1px] gap-[0.5px] rounded-2xl bg-blue-700 box-border"
+          key={index}
+          className="flex flex-col  flex-shrink-0 w-[70px] border border-2 border-blue-700 p-1  sm:w-[90px] lg:w-[110px]"
         >
-          <Image
-            src={post.img}
-            className="w-full h-full object-cover rounded-2xl"
-          />
+          <Link
+            to={`/${post.slug}`}
+            className="relative w-full"
+            style={{ paddingTop: "120%" }} // Adjusted to make it almost square
+          >
+            <Image
+              src={post.img}
+              className="absolute top-0 left-0 w-full h-full object-cover rounded-2xl"
+            />
+          </Link>
         </div>
-      </Link>
+      ))}
     </div>
-  ))}
-</div>
-</div>
+  </div>
   
   );
 };
