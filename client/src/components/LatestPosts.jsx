@@ -3,28 +3,27 @@ import Image from "./Image";
 import axios from "axios";
 import { useQuery } from "@tanstack/react-query";
 
-const fetchPost = async () => {
-  const res = await axios.get(
-    `${import.meta.env.VITE_API_URL}/posts`
-  );
+const fetchPosts = async () => {
+  const res = await axios.get(`${import.meta.env.VITE_API_URL}/posts`);
   return res.data;
 };
 
 const LatestPosts = () => {
   const { isLoading, error, data } = useQuery({
-    queryKey: ["posts"],
-    queryFn: fetchPost,
+    queryKey: ["posts"], // General query key for posts
+    queryFn: fetchPosts,
   });
 
   if (isLoading) return "Loading...";
   if (error) return "Something went wrong! " + error.message;
 
   const posts = data?.posts;
-  if (!posts) {
-    return null; // Ensure there are enough posts
+  if (!posts || posts.length === 0) {
+    return "No posts available.";
   }
 
   return (
+  
     <div className="flex flex-col mt-8 md:mt-12">
      
 
