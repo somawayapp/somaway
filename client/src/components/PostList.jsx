@@ -27,7 +27,7 @@ const PostList = () => {
     isFetchingNextPage,
     status,
   } = useInfiniteQuery({
-    queryKey: ["posts", searchParams.toString()],
+    queryKey: ["posts", "newest", searchParams.toString()], // Add "popular" to the queryKey
     queryFn: ({ pageParam = 1 }) => fetchPosts(pageParam, searchParams),
     initialPageParam: 1,
     getNextPageParam: (lastPage, pages) =>

@@ -27,7 +27,7 @@ const TrendingPosts = () => {
     isFetchingNextPage,
     status,
   } = useInfiniteQuery({
-    queryKey: ["posts", searchParams.toString()],
+    queryKey: ["posts", "trending", searchParams.toString()], // Add "popular" to the queryKey
     queryFn: ({ pageParam = 1 }) => fetchPosts(pageParam, searchParams),
     initialPageParam: 1,
     getNextPageParam: (lastPage, pages) =>
