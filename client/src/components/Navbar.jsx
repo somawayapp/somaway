@@ -56,7 +56,7 @@ const Navbar = () => {
         
         {/* MOBILE BUTTON */}
         <div
-          className="cursor-pointer text-[var(--textColor)] mt-7 text-sm"
+          className="cursor-pointer text-[var(--textColor)] mt-6 text-sm"
           onClick={() => setOpen((prev) => !prev)}
         >
           <div className="flex flex-col gap-1">
