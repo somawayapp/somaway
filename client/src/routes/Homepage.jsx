@@ -132,7 +132,7 @@ const Homepage = () => {
 
 
    <div>
-      <h3 className="text-xl md:text-2xl mt-2 md:mt-3 font-bold text-[var(--textColor)]">
+      <h3 className="text-xl md:text-2xl mt-4 md:mt-8 font-bold text-[var(--textColor)]">
      Latest Books      </h3>
     </div>
    <LatestPosts />
@@ -143,7 +143,7 @@ const Homepage = () => {
 
       {/* Recent Posts */}
       <div>
-      <h1 className="my-8 lg:text-4xl text-2xl ml-2 mb-5 mt-5 lg:mb-10 lg:mt-10  text-text-[var(--textColor)] font-bold">Book liblary</h1>
+      <h1 className="my-8 lg:text-8xl text-4xl ml-2 mb-5 mt-9 lg:mb-10 lg:mt-18  text-text-[var(--textColor)] font-bold">Book summaries library</h1>
     
       
       <PostList />
