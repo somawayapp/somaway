@@ -2,6 +2,7 @@
 import { Link } from "react-router-dom";
 import Image from "./Image";
 import { format } from "timeago.js";
+import Search from "./Search2";
 
 const FeaturedItem = ({ post }) => {
   // Truncate title based on screen size
@@ -21,9 +22,7 @@ const FeaturedItem = ({ post }) => {
 
       {/* Additional Featured Posts */}
       <div className="flex gap-2 md:gap-4 overflow-x-auto scrollbar-hide">
-        {posts.slice(0, 18).map((post, index) => (
           <div
-            key={index}
             className="flex flex-col  flex-shrink-0 w-[100px] sm:w-[150px] lg:w-[200px]"
           >
             <Link to={`/${post.slug}`} className="relative w-full" style={{ paddingTop: "150%" }}>
@@ -40,7 +39,6 @@ const FeaturedItem = ({ post }) => {
               {post.category}
             </Link>
           </div>
-        ))}
       </div>
     </div>
   );
