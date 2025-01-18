@@ -1,5 +1,4 @@
 
-
 import { Link } from "react-router-dom";
 import Image from "./Image";
 import { format } from "timeago.js";
@@ -11,9 +10,7 @@ const PopularItem = ({ post }) => {
     <div className="flex flex-col mt-8 md:mt-12">
   
   
-    {/* Additional Featured Posts */}
    
-      {/* Additional Featured Posts */}
       <div className="flex gap-2 md:gap-4 overflow-x-auto scrollbar-hide">
           <div
             className="flex flex-col  flex-shrink-0 w-[100px] sm:w-[150px] lg:w-[200px]"
