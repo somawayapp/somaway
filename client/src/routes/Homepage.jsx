@@ -93,7 +93,7 @@ const Homepage = () => {
 
    {/*
 
-      <div  style={{ zIndex: 100004 }} className="m-[45px] md:mb-[30px] mt-[15px] md:mt-[20px] sticky top-0.5 md:top-2 ">
+      <div  style={{ zIndex: 100004 }} className="mb-[45px] md:mb-[30px] mt-[15px] md:mt-[20px] sticky top-0.5 md:top-2 ">
   <Maincategories />
 </div>
      */}
