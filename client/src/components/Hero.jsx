@@ -3,26 +3,9 @@ import Image from "./Image";
 import axios from "axios";
 import { useQuery } from "@tanstack/react-query";
 
-const fetchPost = async () => {
-  const res = await axios.get(
-    `${import.meta.env.VITE_API_URL}/posts?featured=true&limit=9&sort=newest`
-  );
-  return res.data;
-};
 
 const Hero = () => {
-  const { isLoading, error, data } = useQuery({
-    queryKey: ["featuredPosts"],
-    queryFn: fetchPost,
-  });
 
-  if (isLoading) return "Loading...";
-  if (error) return "Something went wrong! " + error.message;
-
-  const posts = data?.posts;
-  if (!posts || posts.length < 9) {
-    return null; // Ensure there are enough posts
-  }
 
   return (
     <div className="flex flex-col mt-0 md:mt-4">
