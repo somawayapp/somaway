@@ -4,6 +4,7 @@ import axios from "axios";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { useSearchParams } from "react-router-dom";
 import LatestItem from "./LatestItem";
+import PostListItem from "./PostListItem";
 
 
 
@@ -57,7 +58,7 @@ const TrendingPosts = () => {
       >
 
       {allPosts.map((post) => (
-        <LatestItem key={post._id} post={post} />
+        <PostListItem key={post._id} post={post} />
       ))}
     </InfiniteScroll>
   );
