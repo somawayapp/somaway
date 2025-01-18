@@ -107,10 +107,14 @@ const Homepage = () => {
      
 
      {/* Featured Section Title */}
-   <div className="flex justify-between mb-3 md:mb-6 items-center gap-5 flex-col md:flex-row">
+   <div className="flex justify-between mb-3 md:mb-6 items-center gap-2 flex-col md:flex-row">
      <h3 className="text-xl md:text-2xl font-extrabold text-[var(--textColor)]">
        Featured book summaries
      </h3>
+     <div className="mb-3">
+     <Search />
+
+     </div>
      <Search />
    </div>
    <FeaturedPosts />
@@ -126,7 +130,7 @@ const Homepage = () => {
 
 
     <div>
-      <div className="flex justify-between  mt-20 mb-15 md:mt[35px] md:mb-[30px] pt-5 pl-0  md:pl-5 overflow-x-hidden  rounded-2xl bg-[#7a00da] 
+      <div className="flex justify-between  mt-10 mb-15 md:mt[30px] md:mb-[30px] pt-5 pl-0  md:pl-5 overflow-x-hidden  rounded-2xl bg-[#7a00da] 
         items-center gap-5 flex-col md:flex-row">
       <div>
       <h1 className="my-8 text-center lg:text-5xl text-2xl ml-2 pl-2 md:pl-0 mb-2 mt-4 lg:mb-5 lg:mt-8 text-white font-bold">
@@ -157,7 +161,7 @@ const Homepage = () => {
 
 
 
-    <div className=" bg-[var(--textColore)] rounded-2xl p-3 mt-4 md:mt-8 md:p-6 ">
+    <div className=" bg-[var(--textColore)] rounded-2xl p-3 mt-10 md:mt-4 md:mt-8 md:p-6 ">
     <h3 className="text-xl md:text-2xl  font-extrabold text-[var(--textColor)]">
      Most popular Books      </h3>
     <PopularPosts/>
@@ -165,7 +169,7 @@ const Homepage = () => {
 
 
    <div>
-      <h3 className="text-xl md:text-2xl mt-4 md:mt-8 font-extrabold text-[var(--textColor)]">
+      <h3 className="text-xl md:text-2xl ml-2 mt-4 md:mt-8 font-extrabold text-[var(--textColor)]">
      Latest Books      </h3>
     </div>
    <LatestPosts />
@@ -176,7 +180,7 @@ const Homepage = () => {
 
       {/* Recent Posts */}
       <div>
-      <div className="flex justify-between  mt-20 mb-20 md:mt[45px] md:mb-[45px] pt-5 pl-0  md:pl-5 overflow-x-hidden  rounded-2xl bg-[var(--textLogo)] 
+      <div className="flex justify-between  mt-10 mb-10 md:mt[40px] md:mb-[50px] pt-5 pl-0  md:pl-5 overflow-x-hidden  rounded-2xl bg-[var(--textLogo)] 
         items-center gap-5 flex-col md:flex-row">
       <div>
       <h1 className="my-8 lg:text-6xl text-3xl ml-2 pl-2 md:pl-0 mb-2 mt-4 lg:mb-5 lg:mt-8 text-[var(--textColore2)] font-bold"> Book summaries library</h1>
