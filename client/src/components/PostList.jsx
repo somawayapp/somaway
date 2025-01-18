@@ -4,14 +4,17 @@ import axios from "axios";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { useSearchParams } from "react-router-dom";
 
+
+
 const fetchPosts = async (pageParam, searchParams) => {
   const searchParamsObj = Object.fromEntries([...searchParams]);
 
   const res = await axios.get(`${import.meta.env.VITE_API_URL}/posts`, {
-    params: { page: pageParam, limit: 10, ...searchParamsObj },
+    params: { page: pageParam, limit: 30, ...searchParamsObj }, // Changed limit to 30
   });
   return res.data;
 };
+
 
 const PostList = () => {
   const [searchParams] = useSearchParams();

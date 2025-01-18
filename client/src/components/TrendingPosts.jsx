@@ -1,61 +1,66 @@
-import { Link } from "react-router-dom";
-import Image from "./Image";
+ import PostListItem from "./PostListItem";
+import { useInfiniteQuery } from "@tanstack/react-query";
 import axios from "axios";
-import { useQuery } from "@tanstack/react-query";
+import InfiniteScroll from "react-infinite-scroll-component";
+import { useSearchParams } from "react-router-dom";
 
-const fetchPost = async () => {
-  const res = await axios.get(
-    `${import.meta.env.VITE_API_URL}/posts?featured=true&limit=9&sort=trending     `
-  );
+
+
+
+const fetchPosts = async (pageParam, searchParams) => {
+  const searchParamsObj = Object.fromEntries([...searchParams]);
+
+  const res = await axios.get(`${import.meta.env.VITE_API_URL}/posts`, {
+    params: { page: pageParam, limit: 3, ...searchParamsObj }, // Changed limit to 30
+  });
   return res.data;
 };
 
+
 const TrendingPosts = () => {
-  const { isLoading, error, data } = useQuery({
-    queryKey: ["featuredPosts"],
-    queryFn: fetchPost,
+  const [searchParams] = useSearchParams();
+
+  const {
+    data,
+    error,
+    fetchNextPage,
+    hasNextPage,
+    isFetchingNextPage,
+    status,
+  } = useInfiniteQuery({
+    queryKey: ["posts", searchParams.toString()],
+    queryFn: ({ pageParam = 1 }) => fetchPosts(pageParam, searchParams),
+    initialPageParam: 1,
+    getNextPageParam: (lastPage, pages) =>
+      lastPage.hasMore ? pages.length + 1 : undefined,
+    staleTime: 1000 * 60 * 10, // Data stays fresh for 10 minutes
+    cacheTime: 1000 * 60 * 30, // Cache remains available for 30 minutes
   });
 
-  if (isLoading) return "Loading...";
-  if (error) return "Something went wrong! " + error.message;
+  if (status === "loading") return "Loading...";
+  if (error) return "Something went wrong!";
 
-  const posts = data?.posts;
-  if (!posts || posts.length < 9) {
-    return null; // Ensure there are enough posts
-  }
+  const allPosts = data?.pages?.flatMap((page) => page.posts) || [];
 
   return (
-    <div className="flex flex-col mt-8 md:mt-12">
-    {/* Featured Section Title */}
-    <div>
-      <h3 className="text-xl md:text-2xl mb-2 md:mb-3 font-bold text-[var(--textColor)]">
-        Daily microlearning session
-      </h3>
-    </div>
-  
-    {/* Additional Featured Posts */}
-    <div className="flex  gap-1 md:gap-2 overflow-x-auto scrollbar-hide">
-      {posts.slice(0, 8).map((post, index) => (
-        <div
-          key={index}
-          className="flex flex-col  flex-shrink-0 w-[70px] border border-2 border-blue-500 rounded-2xl p-[1px]  sm:w-[90px] lg:w-[110px]"
-        >
-          <Link
-            to={`/${post.slug}`}
-            className="relative w-full"
-            style={{ paddingTop: "120%" }} // Adjusted to make it almost square
-          >
-            <Image
-              src={post.img}
-              className="absolute top-0 left-0 w-full h-full object-cover rounded-2xl"
-            />
-          </Link>
-        </div>
+    <InfiniteScroll
+      dataLength={allPosts.length}
+      next={fetchNextPage}
+      hasMore={!!hasNextPage}
+      loader={<h4>Loading more posts...</h4>}
+      endMessage={
+        <p className="lg:text-lg text-gray-100 text-sm">
+          </p>
+        }
+        className="flex  gap-1 md:gap-2 scrollbar-hide" // Flex layout for horizontal scrolling
+      >
+
+      {allPosts.map((post) => (
+        <PostListItem key={post._id} post={post} />
       ))}
-    </div>
-  </div>
-  
+    </InfiniteScroll>
   );
 };
+
 
 export default TrendingPosts;

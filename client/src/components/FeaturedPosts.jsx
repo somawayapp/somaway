@@ -52,7 +52,7 @@ const FeaturedPosts = () => {
           
             <Link
               to={`/posts?category=${post.category}`}
-              className="text-[var(--textColor)] text-xs font-semibold"
+              className="text-[var(--textColor)] mt-1 md:mt-2 text-xs font-semibold"
             >
               {post.category}
             </Link>
