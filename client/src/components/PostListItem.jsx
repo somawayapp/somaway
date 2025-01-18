@@ -10,7 +10,7 @@ const PostListItem = ({ post }) => {
         <div className="relative rounded-md w-full" style={{ paddingTop: "150%" }}>
           <Image
             src={post.img}
-            className="absolute top-0 left-0 w-full h-full object-cover"
+            className="absolute top-0 rounded-md left-0 w-full h-full object-cover"
           />
         </div>
       </Link>
