@@ -19,7 +19,6 @@ const PostListItem = ({ post }) => {
     {/* Additional Featured Posts */}
     <div className="flex  gap-1 md:gap-2 overflow-x-auto scrollbar-hide">
       <div
-          key={index}
           className="flex flex-col  flex-shrink-0 w-[70px] border border-2 border-blue-500 rounded-2xl p-[1px]  sm:w-[90px] lg:w-[110px]"
         >
           <Link
