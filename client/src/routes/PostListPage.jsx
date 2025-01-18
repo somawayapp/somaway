@@ -48,7 +48,7 @@ const PostListPage = () => {
      
 
     <h1 style={{  zIndex: "10000"}} className="mb-5  md:mb-[30px] lg:text-[30px] text-xl ml-2   text-[#1da1f2] font-bold">
-        {`Blog - ${displayText}`}
+        {`Book liblary - ${displayText}`}
       </h1>
 
       <PostList />

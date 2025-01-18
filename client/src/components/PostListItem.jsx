@@ -18,7 +18,7 @@ const PostListItem = ({ post }) => {
       </Link>
       <Link
         to={`/posts?category=${post.category}`}
-        className="text-sm text-blue-500 font-semibold mt-2 block"
+        className="text-sm text-[var(--softTextColor)] font-semibold mt-2 block"
       >
         {post.category}
       </Link>
