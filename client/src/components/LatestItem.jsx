@@ -7,7 +7,7 @@ const LatestItem = ({ post }) => {
   // Truncate title based on screen size
 
   return (
-    <div className="flex flex-col mt-4 md:mt-6">
+    <div className="bg-[var(--textColore)] rounded-2xl p-2 md:p-4 ">
   
   
    
