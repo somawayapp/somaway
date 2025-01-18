@@ -13,6 +13,7 @@ import TrendingPosts from "../components/TrendingPosts";
 import CategoriesScroll from "../components/CategoriesScroll";
 import Hero from "../components/Hero";
 import LatestPosts from "../components/LatestPosts";
+import PopularPosts from "../components/PopularPosts";
 
 const Homepage = () => {
   const [isVisible, setIsVisible] = useState(true);
@@ -103,18 +104,19 @@ const Homepage = () => {
    <FeaturedPosts />
     {/* Featured Section Title */}
     <div>
-      <h3 className="text-xl md:text-2xl mb-2 md:mb-3 font-bold text-[var(--textColor)]">
+      <h3 className="text-xl md:text-2xl mt-2 md:mt-3 font-bold text-[var(--textColor)]">
      Trending Books      </h3>
     </div>
    <TrendingPosts />
 
    <div>
-      <h3 className="text-xl md:text-2xl mb-2 md:mb-3 font-bold text-[var(--textColor)]">
+      <h3 className="text-xl md:text-2xl mt-2 md:mt-3 font-bold text-[var(--textColor)]">
      Most popular Books      </h3>
     </div>
+    <PopularPosts />
 
    <div>
-      <h3 className="text-xl md:text-2xl mb-2 md:mb-3 font-bold text-[var(--textColor)]">
+      <h3 className="text-xl md:text-2xl mt-2 md:mt-3 font-bold text-[var(--textColor)]">
      Latest Books      </h3>
     </div>
    <LatestPosts />

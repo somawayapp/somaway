@@ -3,15 +3,14 @@ import { useInfiniteQuery } from "@tanstack/react-query";
 import axios from "axios";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { useSearchParams } from "react-router-dom";
-import LatestItem from "./LatestItem";
+import PopularItem from "./PopularItem";
 
 
 
-
-const LatestPosts = async (pageParam, searchParams) => {
+const PopularPosts = async (pageParam, searchParams) => {
   const searchParamsObj = Object.fromEntries([...searchParams]);
 
-  const res = await axios.get(`${import.meta.env.VITE_API_URL}/posts?sort=latest`, {
+  const res = await axios.get(`${import.meta.env.VITE_API_URL}/posts?sort=popular`, {
     params: { page: pageParam, limit: 30, ...searchParamsObj }, // Changed limit to 30
   });
   return res.data;
@@ -57,7 +56,7 @@ const TrendingPosts = () => {
       >
 
       {allPosts.map((post) => (
-        <LatestItem key={post._id} post={post} />
+        <PopularItem key={post._id} post={post} />
       ))}
     </InfiniteScroll>
   );
@@ -65,4 +64,4 @@ const TrendingPosts = () => {
 
 
 
-export default LatestPosts;
+export default PopularPosts;
