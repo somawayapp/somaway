@@ -107,6 +107,12 @@ const Homepage = () => {
      Trending Books      </h3>
     </div>
    <TrendingPosts />
+
+   <div>
+      <h3 className="text-xl md:text-2xl mb-2 md:mb-3 font-bold text-[var(--textColor)]">
+     Most popular Books      </h3>
+    </div>
+
    <div>
       <h3 className="text-xl md:text-2xl mb-2 md:mb-3 font-bold text-[var(--textColor)]">
      Latest Books      </h3>

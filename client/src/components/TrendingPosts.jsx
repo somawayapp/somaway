@@ -10,7 +10,7 @@ import { useSearchParams } from "react-router-dom";
 const fetchPosts = async (pageParam, searchParams) => {
   const searchParamsObj = Object.fromEntries([...searchParams]);
 
-  const res = await axios.get(`${import.meta.env.VITE_API_URL}/posts`, {
+  const res = await axios.get(`${import.meta.env.VITE_API_URL}/posts?sort=trending`, {
     params: { page: pageParam, limit: 3, ...searchParamsObj }, // Changed limit to 30
   });
   return res.data;
