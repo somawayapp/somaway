@@ -42,13 +42,13 @@ if (error) return <p>Something went wrong!</p>; // Handle errors gracefully
 const allPosts = data?.pages?.flatMap((page) => page.posts) || [];
 
 return (
-  <InfiniteScroll
+ <InfiniteScroll
   dataLength={allPosts.length}
   next={fetchNextPage}
   hasMore={!!hasNextPage}
   loader={<h4>Loading more posts...</h4>}
   endMessage={<p>No more posts to show.</p>}
-  className="gap-1 grid grid-cols-3 md:gap-2 scrollbar-hide"
+  className="gap-1 grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-7 md:gap-2 scrollbar-hide"
 >
   {allPosts.length > 0 ? (
     allPosts.map((post) => <PostListItem key={post._id} post={post} />)
