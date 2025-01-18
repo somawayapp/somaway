@@ -36,30 +36,28 @@ const PostList = () => {
     cacheTime: 1000 * 60 * 30, // Cache remains available for 30 minutes
   });
 
-  if (status === "loading") return "Loading...";
-  if (error) return "Something went wrong!";
+  if (status === "loading") return <p>Loading...</p>; // Show a loading spinner or message
+if (error) return <p>Something went wrong!</p>; // Handle errors gracefully
 
-  const allPosts = data?.pages?.flatMap((page) => page.posts) || [];
+const allPosts = data?.pages?.flatMap((page) => page.posts) || [];
 
-  return (
-    <InfiniteScroll
-      dataLength={allPosts.length}
-      next={fetchNextPage}
-      hasMore={!!hasNextPage}
-      loader={<h4>Loading more posts...</h4>}
-      endMessage={
-        <p className="lg:text-lg text-gray-100 text-sm">
-          <b>All posts loaded!</b>
-          </p>
-        }
-        className="flex" // Flex layout for horizontal scrolling
-      >
+return (
+  <InfiniteScroll
+    dataLength={allPosts.length}
+    next={fetchNextPage}
+    hasMore={!!hasNextPage}
+    loader={<h4>Loading more posts...</h4>}
+    endMessage={<p>No more posts to show.</p>}
+    className="flex gap-1 md:gap-2 scrollbar-hide"
+  >
+    {allPosts.length > 0 ? (
+      allPosts.map((post) => <PostListItem key={post._id} post={post} />)
+    ) : (
+      <p>No posts found.</p>
+    )}
+  </InfiniteScroll>
+);
 
-      {allPosts.map((post) => (
-        <PostListItem key={post._id} post={post} />
-      ))}
-    </InfiniteScroll>
-  );
 };
 
 export default PostList;

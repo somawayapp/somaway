@@ -9,11 +9,9 @@ import ThemeToggler from "../components/Theme";
 import Sidebar from "../components/Sidebar2";
 import { ThemeProvider } from "../../themecontext";
 import Navbar from "../components/Navbar";
-import TrendingPosts from "../components/TrendingPosts";
 import CategoriesScroll from "../components/CategoriesScroll";
 import Hero from "../components/Hero";
-import LatestPosts from "../components/LatestPosts";
-import PopularPosts from "../components/PopularPosts";
+
 
 const Homepage = () => {
   const [isVisible, setIsVisible] = useState(true);
@@ -103,11 +101,7 @@ const Homepage = () => {
 
    <FeaturedPosts />
 
-   <div>
-      <h3 className="text-xl md:text-2xl mt-2 md:mt-3 font-bold text-[var(--textColor)]">
-     Latest Books      </h3>
-    </div>
-   <LatestPosts />
+  
 
 
 
