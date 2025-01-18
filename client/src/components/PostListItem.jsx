@@ -9,24 +9,28 @@ const PostListItem = ({ post }) => {
     <div className="flex flex-col mt-8 md:mt-12">
   
   
-    {/* Additional Featured Posts */}
-    <div className="flex  gap-1 md:gap-2 overflow-x-auto scrollbar-hide">
-      <div
-          className="flex flex-col  flex-shrink-0 w-[70px] border border-2 border-blue-500 rounded-2xl p-[1px]  sm:w-[90px] lg:w-[110px]"
+   
+    <div className="flex gap-2 md:gap-4 overflow-x-auto scrollbar-hide">
+        <div
+          key={index}
+          className="flex flex-col  flex-shrink-0 w-[100px] sm:w-[150px] lg:w-[200px]"
         >
-          <Link
-            to={`/${post.slug}`}
-            className="relative w-full"
-            style={{ paddingTop: "120%" }} // Adjusted to make it almost square
-          >
+          <Link to={`/${post.slug}`} className="relative w-full" style={{ paddingTop: "150%" }}>
             <Image
               src={post.img}
-              className="absolute top-0 left-0 w-full h-full object-cover rounded-2xl"
+              className="absolute top-0  left-0 w-full h-full object-cover rounded-md"
             />
+          </Link>
+        
+          <Link
+            to={`/posts?category=${post.category}`}
+            className="text-[var(--textColor)] text-xs font-semibold"
+          >
+            {post.category}
           </Link>
         </div>
     </div>
-  </div>
+</div>
   );
 };
 

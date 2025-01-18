@@ -1,5 +1,4 @@
 
-    {/* Dropdown content 
 import { Link } from "react-router-dom";
 import Image from "./Image";
 import { format } from "timeago.js";
@@ -37,4 +36,3 @@ const LatestItem = ({ post }) => {
 };
 
 export default LatestItem;
-     Dropdown content */}

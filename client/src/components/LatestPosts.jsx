@@ -1,25 +1,23 @@
-    {/* Dropdown content 
 import { useInfiniteQuery } from "@tanstack/react-query";
 import axios from "axios";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { useSearchParams } from "react-router-dom";
 import LatestItem from "./LatestItem";
-import PostListItem from "./PostListItem";
 
 
 
+const fetchPosts = async (pageParam, searchParams) => {
+    const searchParamsObj = Object.fromEntries([...searchParams]);
+  
+    const res = await axios.get(`${import.meta.env.VITE_API_URL}/posts?sort=newest`, {
+      params: { page: pageParam, limit: 30, ...searchParamsObj }, // Changed limit to 30
+    });
+    return res.data;
+  };
+  
 
-const LatestPosts = async (pageParam, searchParams) => {
-  const searchParamsObj = Object.fromEntries([...searchParams]);
 
-  const res = await axios.get(`${import.meta.env.VITE_API_URL}/posts?sort=latest`, {
-    params: { page: pageParam, limit: 30, ...searchParamsObj }, // Changed limit to 30
-  });
-  return res.data;
-};
-
-
-const TrendingPosts = () => {
+const LatestPosts = () => {
   const [searchParams] = useSearchParams();
 
   const {
@@ -65,4 +63,3 @@ const TrendingPosts = () => {
 
 
 export default LatestPosts;
-     Dropdown content */}

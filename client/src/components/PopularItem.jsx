@@ -1,5 +1,5 @@
 
-    {/* Dropdown content 
+
 import { Link } from "react-router-dom";
 import Image from "./Image";
 import { format } from "timeago.js";
@@ -11,7 +11,9 @@ const PopularItem = ({ post }) => {
     <div className="flex flex-col mt-8 md:mt-12">
   
   
+    {/* Additional Featured Posts */}
    
+      {/* Additional Featured Posts */}
       <div className="flex gap-2 md:gap-4 overflow-x-auto scrollbar-hide">
           <div
             key={index}
@@ -37,4 +39,3 @@ const PopularItem = ({ post }) => {
 };
 
 export default PopularItem;
-     Dropdown content */}

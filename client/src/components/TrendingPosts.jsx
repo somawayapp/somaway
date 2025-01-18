@@ -1,5 +1,3 @@
-
-    {/* Dropdown content 
 import { useInfiniteQuery } from "@tanstack/react-query";
 import axios from "axios";
 import InfiniteScroll from "react-infinite-scroll-component";
@@ -7,15 +5,15 @@ import { useSearchParams } from "react-router-dom";
 import TrendingItem from "./TrendingItem";
 
 
-
 const fetchPosts = async (pageParam, searchParams) => {
-  const searchParamsObj = Object.fromEntries([...searchParams]);
-
-  const res = await axios.get(`${import.meta.env.VITE_API_URL}/posts?sort=trending`, {
-    params: { page: pageParam, limit: 30, ...searchParamsObj }, // Changed limit to 30
-  });
-  return res.data;
-};
+    const searchParamsObj = Object.fromEntries([...searchParams]);
+  
+    const res = await axios.get(`${import.meta.env.VITE_API_URL}/posts?sort=trending`, {
+      params: { page: pageParam, limit: 30, ...searchParamsObj }, // Changed limit to 30
+    });
+    return res.data;
+  };
+  
 
 
 const TrendingPosts = () => {
@@ -37,7 +35,6 @@ const TrendingPosts = () => {
     staleTime: 1000 * 60 * 10, // Data stays fresh for 10 minutes
     cacheTime: 1000 * 60 * 30, // Cache remains available for 30 minutes
   });
-
   if (status === "loading") return <p>Loading...</p>; // Show a loading spinner or message
   if (error) return <p>Something went wrong!</p>; // Handle errors gracefully
   
@@ -63,5 +60,5 @@ const TrendingPosts = () => {
 };
 
 
+
 export default TrendingPosts;
-     Dropdown content */}
