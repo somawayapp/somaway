@@ -30,7 +30,7 @@ const CategoriesScroll = ({ setOpen }) => {
         // Transform category for URL slug
         const slug = category
           .toLowerCase()
-          .replace(/\s+/g, "-") // Replace spaces with hyphens
+          .replace(/\s+/g, "") 
           .replace(/&/g, "-");  // Replace "&" with hyphens
 
         return (

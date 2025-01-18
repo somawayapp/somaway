@@ -30,7 +30,7 @@ const Navbar = () => {
 
       {/* LOGO */}
       <Link to="/" className="flex items-center gap-1 text-lg font-bold md:text-2xl">
-      <img src="/logo7.png" alt="Logo" className="w-6 h-6 md:w-8 md:h-8" />
+      <img src="/logo7.png" alt="Logo" className="w-8 h-8 md:w-8 md:h-8" />
       <span className="bg-clip-text text-blue-500 pl-1  font-impact">soma</span>
 
       {/*   <span className="bg-clip-text text-[#1ADAff] font-impact"></span> */}
@@ -38,34 +38,47 @@ const Navbar = () => {
 </Link>
 
 
+<div className="md:hidden">
+<div className="md:hidden  ">
+<div className="flex flex-row mb-3 gap-2">
 
-
-
+     <SignedOut>
+     <Link
+            to="/login"
+            className="w-full text-center mt-3 md:mt-0 sm:w-auto px-4 py-2 md:py-2 bg-blue-600 text-white
+            text-xs font-semibold rounded-md hover:bg-blue-700"
+          >
+            Get Started
+          </Link>
+        </SignedOut>
 
       {/* MOBILE MENU */}
-      <div className="md:hidden">
+        
         {/* MOBILE BUTTON */}
         <div
-          className="cursor-pointer text-[var(--textColor)] text-sm"
+          className="cursor-pointer text-[var(--textColor)] mt-5 text-sm"
           onClick={() => setOpen((prev) => !prev)}
         >
           <div className="flex flex-col gap-1">
             <div
-              className={`h-[1px] rounded-md w-4 bg-[var(--textColor)] origin-left transition-all ease-in-out ${
+              className={`h-[1px] rounded-md w-5 bg-[var(--textColor)] origin-left transition-all ease-in-out ${
                 open && "rotate-45"
               }`}
             ></div>
             <div
-              className={`h-[1px] rounded-md w-4 bg-[var(--textColor)] transition-all ease-in-out ${
+              className={`h-[1px] rounded-md w-5 bg-[var(--textColor)] transition-all ease-in-out ${
                 open && "opacity-0"
               }`}
             ></div>
             <div
-              className={`h-[1px] rounded-md w-4 bg-[var(--textColor)] origin-left transition-all ease-in-out ${
+              className={`h-[1px] rounded-md w-5 bg-[var(--textColor)] origin-left transition-all ease-in-out ${
                 open && "-rotate-45"
               }`}
             ></div>
           </div>
+        </div>
+
+          
         </div>
 
         {/* DARK OVERLAY */}
@@ -305,15 +318,20 @@ const Navbar = () => {
        
 
           <SignedOut>
-            <Link to="/login" onClick={() => setOpen(false)}>
-              <button className="py-2 px-4 rounded-3xl bg-white text-black">
-                Login 👋
-              </button>
-            </Link>
+          <Link
+            to="/login"
+            className="w-full items-center ml-4 md:ml-2 mr-4 text-center  text-md md:text-xl sm:w-auto px-4 md:px-6  py-3 md:py-3
+             bg-blue-500 text-white font-semibold 
+            rounded-md hover:bg-blue-700"
+          >
+          Login     
+               </Link>
           </SignedOut>
 
         </div>
       </div>
+      </div>
+
 
       {/* DESKTOP MENU */}
       <div className="hidden md:flex items-center gap-8 xl:gap-12  font-medium">
@@ -324,13 +342,21 @@ const Navbar = () => {
           <Link className="hover:text-[#1DA1F2] " to="/settings" onClick={() => setOpen(false)}>Settings</Link>
           <Link className="hover:text-[#1DA1F2] " to="/write" onClick={() => setOpen(false)}>Write</Link>
           <Link className="hover:text-[#1DA1F2] " to="/about" onClick={() => setOpen(false)}>About Us</Link>
-
+          <Link
+            to="/login"
+            className="w-full text-center mt-3 md:mt-0 sm:w-auto px-4 py-3 md:py-2 bg-blue-600 text-white
+            text-sm font-semibold rounded-md hover:bg-blue-700"
+          >
+            Get Started
+          </Link>
 
         <SignedOut>
-          <Link to="/login">
-            <button className="py-2 px-4 rounded-3xl bg-[#1DA1F2] text-white">
-              Login 👋
-            </button>
+        <Link
+            to="/login"
+            className="w-full text-center mt-3 md:mt-0 sm:w-auto px-4 py-3 md:py-2 bg-[var(--textColore3)] text-sm text-[var(--textColor)] 
+            font-semibold rounded-md hover:bg-blue-700"
+          >
+            Login
           </Link>
         </SignedOut>
 
