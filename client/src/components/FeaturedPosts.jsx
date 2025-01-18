@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import Image from "./Image";
 import axios from "axios";
 import { useQuery } from "@tanstack/react-query";
+import Search from "./Search2";
 
 const fetchPost = async () => {
   const res = await axios.get(
@@ -29,11 +30,12 @@ const FeaturedPosts = () => {
      
 
       {/* Featured Section Title */}
-      <div>
+      <div className="flex gap-5 flex-col">
         <h3 className="text-2xl md:text-3xl mb-2 md:mb-3 font-bold text-[var(--textColor)]">
           Featured
         </h3>
-      
+        <Search/>
+
       </div>
 
       {/* Additional Featured Posts */}
