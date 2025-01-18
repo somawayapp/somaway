@@ -7,7 +7,7 @@ const TrendingItem = ({ post }) => {
   // Truncate title based on screen size
 
   return (
-    <div className="flex flex-col mt-8 md:mt-12">
+    <div className="flex flex-col mt-3 md:mt-6">
   
   
     {/* Additional Featured Posts */}

@@ -104,18 +104,19 @@ const Homepage = () => {
    <FeaturedPosts />
     {/* Featured Section Title */}
     <div>
-      <h3 className="text-xl md:text-2xl mt-2 md:mt-3 font-bold text-[var(--textColor)]">
-     Trending Books      </h3>
+      <h3 className="text-2xl md:text-3xl mt-4 md:mt-8 font-extrabold text-[var(--textColor)]">
+     Trending Book summaries    </h3>
     </div>
     <TrendingPosts/>
 
 
-   <div>
-      <h3 className="text-xl md:text-2xl mt-2 md:mt-3 font-bold text-[var(--textColor)]">
+    <div className=" bg-[var(--textColore)] rounded-2xl p-3  md:p-6 ">
+    <h3 className="text-2xl md:text-3xl mt-4 md:mt-8 font-bold text-[var(--textColor)]">
      Most popular Books      </h3>
-    </div>
     <PopularPosts/>
- 
+    </div>
+
+
    <div>
       <h3 className="text-xl md:text-2xl mt-2 md:mt-3 font-bold text-[var(--textColor)]">
      Latest Books      </h3>
