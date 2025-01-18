@@ -126,7 +126,7 @@ const Homepage = () => {
 
 
     <div>
-      <div className="flex justify-between  mt-8 mb-8 md:mt[16px] md:mb-[16px] pt-5 pl-0  md:pl-5 overflow-x-hidden  rounded-2xl bg-[#7a00da] 
+      <div className="flex justify-between  mt-10 mb-10 md:mt[25px] md:mb-[25px] pt-5 pl-0  md:pl-5 overflow-x-hidden  rounded-2xl bg-[#7a00da] 
         items-center gap-5 flex-col md:flex-row">
       <div>
       <h1 className="my-8 text-center lg:text-5xl text-2xl ml-2 pl-2 md:pl-0 mb-2 mt-4 lg:mb-5 lg:mt-8 text-white font-bold">
@@ -176,7 +176,7 @@ const Homepage = () => {
 
       {/* Recent Posts */}
       <div>
-      <div className="flex justify-between  mt-8 mb-8 md:mt[16px] md:mb-[16px] pt-5 pl-0  md:pl-5 overflow-x-hidden  rounded-2xl bg-[var(--textLogo)] 
+      <div className="flex justify-between  mt-10 mb-10 md:mt[25px] md:mb-[25px] pt-5 pl-0  md:pl-5 overflow-x-hidden  rounded-2xl bg-[var(--textLogo)] 
         items-center gap-5 flex-col md:flex-row">
       <div>
       <h1 className="my-8 lg:text-6xl text-3xl ml-2 pl-2 md:pl-0 mb-2 mt-4 lg:mb-5 lg:mt-8 text-[var(--textColore2)] font-bold"> Book summaries library</h1>
