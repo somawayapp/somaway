@@ -9,7 +9,6 @@ const FeaturedItem = ({ post }) => {
 
   return (
   
-      <div className="flex gap-2 md:gap-4 overflow-x-auto scrollbar-hide">
           <div
             className="flex flex-col  flex-shrink-0 w-[100px] sm:w-[150px] lg:w-[200px]"
           >
@@ -27,7 +26,6 @@ const FeaturedItem = ({ post }) => {
               {post.category}
             </Link>
           </div>
-      </div>
   );
 };
 
