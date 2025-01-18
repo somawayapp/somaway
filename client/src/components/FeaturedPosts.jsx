@@ -26,11 +26,11 @@ const FeaturedPosts = () => {
   }
 
   return (
-    <div className="flex flex-col mt-0 md:mt-4">
+    <div className="flex flex-col bg-[var(--textColore)] p-2  md:p-4 mt-0 md:mt-4">
      
 
       {/* Featured Section Title */}
-      <div className="flex gap-5 flex-col">
+      <div className="flex gap-5 flex-col ">
         <h3 className="text-2xl md:text-3xl mb-2 md:mb-3 font-bold text-[var(--textColor)]">
           Featured
         </h3>
