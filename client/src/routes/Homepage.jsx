@@ -171,7 +171,7 @@ const Homepage = () => {
 
 
    <div>
-      <h3 className="text-xl md:text-2xl ml-2 mt-7 md:mt-10 font-extrabold text-[var(--textColor)]">
+      <h3 className="text-xl md:text-2xl ml-2 mt-7 mb-4 md:mb-8 md:mt-10 font-extrabold text-[var(--textColor)]">
      Latest Books      </h3>
     </div>
    <LatestPosts />
