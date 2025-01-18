@@ -102,8 +102,21 @@ const Homepage = () => {
 
    <CategoriesScroll />
 
+
+   <div className=" bg-[var(--textColore)] rounded-2xl p-3  md:p-6 mt-0 md:mt-4">
+     
+
+     {/* Featured Section Title */}
+   <div className="flex justify-between mb-3 md:mb-6 items-center gap-5 flex-col md:flex-row">
+     <h3 className="text-xl md:text-2xl font-extrabold text-[var(--textColor)]">
+       Featured book summaries
+     </h3>
+     <Search />
+   </div>
    <FeaturedPosts />
-    {/* Featured Section Title */}
+
+   </div>
+
     <div>
       <h3 className="text-xl md:text-2xl mt-5 md:mt-10 font-bold text-[var(--textColor)]">
      Trending Book summaries    </h3>
