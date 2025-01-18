@@ -45,7 +45,7 @@ const MainLayout = () => {
 return (
   <ThemeProvider>
 
-  <div className="container  mx-auto px-2 md:px-4 lg:px-4">
+  <div className="container  mx-auto px-2 ">
     <Outlet />
 
   </div>

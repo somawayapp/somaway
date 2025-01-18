@@ -26,17 +26,17 @@ const FeaturedPosts = () => {
   }
 
   return (
-    <div className="flex flex-col bg-[var(--textColore)] p-2  md:p-4 mt-0 md:mt-4">
+    <div className="flex flex-col bg-[var(--textColore)] rounded-xl p-2  md:p-4 mt-0 md:mt-4">
      
 
-      {/* Featured Section Title */}
-      <div className="flex gap-5 flex-col ">
-        <h3 className="text-2xl md:text-3xl mb-2 md:mb-3 font-bold text-[var(--textColor)]">
-          Featured
-        </h3>
-        <Search/>
+  {/* Featured Section Title */}
+<div className="flex justify-between items-center gap-5 flex-col md:flex-row">
+  <h3 className="text-2xl md:text-3xl mb-2 md:mb-3 font-bold text-[var(--textColor)]">
+    Featured book summaries
+  </h3>
+  <Search />
+</div>
 
-      </div>
 
       {/* Additional Featured Posts */}
       <div className="flex gap-2 md:gap-4 overflow-x-auto scrollbar-hide">
