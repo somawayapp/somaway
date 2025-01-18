@@ -1,6 +1,7 @@
 import PostListItem from "./PostListItem";
 import { useInfiniteQuery } from "@tanstack/react-query";
 import axios from "axios";
+import InfiniteScroll from "react-infinite-scroll-component";
 import { useSearchParams } from "react-router-dom";
 
 const fetchPosts = async (pageParam, searchParams) => {
@@ -36,23 +37,29 @@ const PostList = () => {
   if (error) return "Something went wrong!";
 
   const allPosts = data?.pages?.flatMap((page) => page.posts) || [];
+  const visiblePosts = allPosts.slice(0, 50); // Limit to 50 posts
 
   return (
-    <div className="flex overflow-x-auto scrollbar-hide gap-4 p-4">
-      {allPosts.map((post) => (
-        <PostListItem key={post._id} post={post} />
-      ))}
-      {hasNextPage && (
-        <button
-          className="p-4 bg-blue-500 text-white rounded-lg"
-          onClick={fetchNextPage}
-          disabled={isFetchingNextPage}
-        >
-          {isFetchingNextPage ? "Loading..." : "Load More"}
-        </button>
-      )}
+    <div className="overflow-x-auto scrollbar-hide">
+      <InfiniteScroll
+        dataLength={visiblePosts.length}
+        next={fetchNextPage}
+        hasMore={!!hasNextPage}
+        loader={<h4>Loading more posts...</h4>}
+        endMessage={
+          <p className="lg:text-lg text-gray-100 text-sm">
+            <b>All posts loaded!</b>
+          </p>
+        }
+        className="flex gap-4" // Flex layout for horizontal scrolling
+      >
+        {visiblePosts.map((post) => (
+          <PostListItem key={post._id} post={post} />
+        ))}
+      </InfiniteScroll>
     </div>
   );
 };
 
 export default PostList;
+
