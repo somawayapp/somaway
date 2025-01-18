@@ -118,21 +118,21 @@ const Homepage = () => {
    </div>
 
     <div>
-      <h3 className="text-xl md:text-2xl mt-5 md:mt-10 font-bold text-[var(--textColor)]">
+      <h3 className="text-xl md:text-2xl mt-5 md:mt-10 font-extrabold text-[var(--textColor)]">
      Trending Book summaries    </h3>
     </div>
     <TrendingPosts/>
 
 
     <div className=" bg-[var(--textColore)] rounded-2xl p-3 mt-4 md:mt-8 md:p-6 ">
-    <h3 className="text-xl md:text-2xl  font-bold text-[var(--textColor)]">
+    <h3 className="text-xl md:text-2xl  font-extrabold text-[var(--textColor)]">
      Most popular Books      </h3>
     <PopularPosts/>
     </div>
 
 
    <div>
-      <h3 className="text-xl md:text-2xl mt-4 md:mt-8 font-bold text-[var(--textColor)]">
+      <h3 className="text-xl md:text-2xl mt-4 md:mt-8 font-extrabold text-[var(--textColor)]">
      Latest Books      </h3>
     </div>
    <LatestPosts />
@@ -143,7 +143,28 @@ const Homepage = () => {
 
       {/* Recent Posts */}
       <div>
-      <h1 className="my-8 lg:text-8xl text-4xl ml-2 mb-5 mt-9 lg:mb-10 lg:mt-18  text-text-[var(--textColor)] font-bold">Book summaries library</h1>
+      <div className="flex justify-between  pt-5 pl-0  md:pl-5 overflow-x-hidden  rounded-2xl bg-[var(--textLogo)] 
+        items-center gap-5 flex-col md:flex-row">
+      <div>
+      <h1 className="my-8 lg:text-6xl text-3xl ml-2 pl-2 md:pl-0 mb-2 mt-4 lg:mb-5 lg:mt-8 text-[var(--textColore2)] font-bold"> Book summaries library</h1>
+      <p className="text-[var(--textColore2)] pl-2 md:pl-0 ml-2 text-md mb-5 md:mb-7 md:text-xl">Enjoy summarized nonfiction bestsellers</p>
+      <Link
+            to="/login"
+            className="w-full ml-4 md:ml-2 text-center  text-md md:text-xl sm:w-auto px-4 md:px-8  py-3 md:py-4 bg-blue-600 text-white font-semibold 
+            rounded-md hover:bg-blue-700"
+          >
+            Discover    
+                  </Link>
+    </div>
+
+     <img
+            src="/summary.svg"
+            alt="Newsletter illustration"
+            className="w-100 md:w-180  h-40 md:h-80 mr-0  md:mr-[-100px] object-cover "
+          />   
+          
+          </div>
+
     
       
       <PostList />

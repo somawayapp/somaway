@@ -50,6 +50,8 @@ a {
 
   --textColor2: #ffffff;
   --textColore: #0F1419;
+  --textColore2: #0F1419;
+
   --textLogo: #ffffff;
 
 
@@ -84,6 +86,9 @@ a {
   --textColor: #0F1419;
   --TextColor: #0F1419;
   --textColore: #dfecf5;
+  --textColore2: #ffffff;
+
+
   --textLogo: #000000;
 
   --bg-image: var(--bg-image-light);
