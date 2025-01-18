@@ -102,18 +102,6 @@ const Homepage = () => {
    <CategoriesScroll />
 
    <FeaturedPosts />
-    {/* Featured Section Title */}
-    <div>
-      <h3 className="text-xl md:text-2xl mt-2 md:mt-3 font-bold text-[var(--textColor)]">
-     Trending Books      </h3>
-    </div>
-   <TrendingPosts />
-
-   <div>
-      <h3 className="text-xl md:text-2xl mt-2 md:mt-3 font-bold text-[var(--textColor)]">
-     Most popular Books      </h3>
-    </div>
-    <PopularPosts />
 
    <div>
       <h3 className="text-xl md:text-2xl mt-2 md:mt-3 font-bold text-[var(--textColor)]">
