@@ -53,7 +53,6 @@ const Hero = () => {
         <div className="lg:w-1/2 flex mt-[-53px] md:mt-0 flex-col">
           {/* First Featured Post */}
           <div className="flex mb-8 md:mb-0 top-0">
-            <Link to={`/${posts[0].slug}`} className="relative w-full">
               <img
                 src="/desktop.webp"
                 alt="Newsletter illustration"
@@ -64,7 +63,6 @@ const Hero = () => {
                 alt="Newsletter illustration"
                 className="block sm:hidden w-full object-cover rounded-lg"
               />
-            </Link>
           </div>
         </div>
       </div>

@@ -13,7 +13,7 @@ const fetchPost = async () => {
 
 const FeaturedPosts = () => {
   const { isLoading, error, data } = useQuery({
-    queryKey: ["featuredPosts"],
+    queryKey: ["newest"],
     queryFn: fetchPost,
   });
 
