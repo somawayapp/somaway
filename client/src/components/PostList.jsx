@@ -48,7 +48,7 @@ return (
     hasMore={!!hasNextPage}
     loader={<h4>Loading more posts...</h4>}
     endMessage={<p>No more posts to show.</p>}
-    className=" gap-1 md:gap-2 scrollbar-hide"
+    className=" grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-7 gap-1 md:gap-2 scrollbar-hide"
   >
     {allPosts.length > 0 ? (
       allPosts.map((post) => <PostListItem key={post._id} post={post} />)
