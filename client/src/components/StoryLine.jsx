@@ -21,7 +21,7 @@ const StoryLine = () => {
   </div>
 
 
-<div className="items-center justify-center text-white mt-[-650px] mb-[250px] md:mb-[550px] text-center ">
+<div className="items-center justify-center text-white mt-[-450px] md:mt-[-650px] mb-[250px] md:mb-[550px] text-center ">
 
 <div className="h-full p-1 box-border">
       <h1 className="text-3xl md:text-6xl  font-bold">
