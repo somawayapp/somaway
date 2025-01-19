@@ -49,7 +49,6 @@
           next={fetchNextPage}
           hasMore={!!hasNextPage}
           loader={<h4>Loading more posts...</h4>}
-          endMessage={<p>No more posts to show.</p>}
           className="flex gap-2 md:gap-4 scrollbar-hide"
         >
           {allPosts.length > 0 ? (

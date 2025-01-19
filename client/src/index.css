@@ -50,7 +50,7 @@ a {
 
   --textColor2: #ffffff;
   --textColore: #0F1419;
-  --textColore4: #06090e;
+  --textColore4: #05070a;
 
   --textColore3: #202730;
 
@@ -90,7 +90,7 @@ a {
   --textColor: #0F1419;
   --TextColor: #0F1419;
   --textColore: #dfecf5;
-  --textColore4: #eef5fa;
+  --textColore4: #f3f6f8;
 
   --textColore3: #d1d9df;
 
@@ -321,3 +321,4 @@ body {
 .scroll-btn:hover {
   opacity: 1; /* Brighten button on hover */
 }
+

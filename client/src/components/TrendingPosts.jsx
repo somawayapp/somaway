@@ -45,7 +45,6 @@ const TrendingPosts = () => {
       dataLength={allPosts.length}
       next={fetchNextPage}
       hasMore={!!hasNextPage}
-      loader={<h4>Loading more posts...</h4>}
       endMessage={<p>No more posts to show.</p>}
       className="flex gap-1 md:gap-2 scrollbar-hide"
     >
