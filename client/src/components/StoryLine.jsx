@@ -7,7 +7,7 @@ const StoryLine = () => {
 
 
   return (
-<div>
+<div className="mt-[40px] md:mt-[80px] ">
 
 
 <div>
