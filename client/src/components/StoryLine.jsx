@@ -38,7 +38,7 @@ const StoryLine = () => {
 </div>
 
   {/* Scrolling Content */}
-  <div className="p-1 md:p-[30px] md:mb-[20px] mt-[120px]">
+  <div className="p-2 md:p-[30px] md:mb-[20px] mt-[120px]">
     <div
       className="relative bg-white w-full rounded-3xl md:rounded-[30px] shadow-md 
         text-black text-center animate-fadeIn flex flex-col items-center justify-center"
