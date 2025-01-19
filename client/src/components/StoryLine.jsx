@@ -8,6 +8,71 @@ const StoryLine = () => {
 
   return (
 <div>
+
+
+<div>
+  {/* Background Section */}
+  <div
+    className="sticky top-0  bg-cover bg-center h-screen w-full flex flex-col 
+      items-center justify-center text-white text-center overflow-y-auto"
+    style={{ backgroundImage: "url('/bgbook.webp')" }}
+  >
+  
+  </div>
+
+
+<div className="items-center justify-center text-white mt-[-650px] mb-[250px] md:mb-[550px] text-center ">
+
+<div className="h-full p-1 box-border">
+      <h1 className="text-3xl md:text-6xl  font-bold">
+        Enjoy summarized nonfiction
+      </h1>
+      <h1 className="text-3xl md:text-6xl font-bold">bestsellers</h1>
+      <p className="mt-2 text-md md:text-xl">
+        Grasp the book’s key ideas in less than 15 minutes
+      </p>
+      <button className="mt-9 bg-white text-black py-3 text-bold px-6 rounded-lg cursor-pointer hover:bg-gray-200">
+        Get Started
+      </button>
+    </div>
+</div>
+
+  {/* Scrolling Content */}
+  <div className="p-1 md:p-[30px] md:mb-[20px] mt-[120px]">
+    <div
+      className="relative bg-white w-full rounded-3xl md:rounded-[30px] shadow-md 
+        text-black text-center animate-fadeIn flex flex-col items-center justify-center"
+    >
+      <div className="h-full p-2  box-border">
+        <h1 className="text-3xl md:text-6xl mt-[20px] md:mt-[70px] font-bold">
+          Get new knowledge easily
+        </h1>
+        <p className="mt-2 text-md md:text-xl">
+          Let’s check how many titles you can finish in a month with Headway! Tell us how
+        </p>
+        <p className="mt-2 text-md md:text-xl">
+          much time you’d like to spend on reading:
+        </p>
+        <button
+          className="mt-9 bg-black text-white py-4 text-extrabold text-2xl md:text-5xl 
+            px-8 rounded-[40px] cursor-pointer hover:bg-gray-200"
+        >
+          30 titles/month
+        </button>
+      </div>
+      <img
+        src="/pic3.svg"
+        alt="Centered Illustration"
+        className="max-w-full h-auto mx-auto mt-8"
+      />
+    </div>
+  </div>
+</div>
+
+
+
+
+
     <div className="flex flex-col items-center justify-center">
       <div className="mt-0 mb:mt-[45px]">
         <div className="flex flex-col items-center justify-center mt-[60px] md:mt-[120px] mb-[40px] pt-9 pb-9 rounded-2xl gap-5">
@@ -84,67 +149,36 @@ const StoryLine = () => {
 
 
 
-    <div>
-  {/* Background Section */}
-  <div
-    className="sticky top-0 bg-cover bg-center h-screen w-full flex flex-col 
-      items-center justify-center text-white text-center overflow-y-auto"
-    style={{ backgroundImage: "url('/bgbook.webp')" }}
-  >
-  
-  </div>
+ 
 
 
-<div className="items-center justify-center text-white mt-[-650px] mb-[350px] md:mb-[550px] text-center ">
-
-<div className="h-full p-5 box-border">
-      <h1 className="text-3xl md:text-6xl  font-bold">
-        Enjoy summarized nonfiction
-      </h1>
-      <h1 className="text-3xl md:text-6xl font-bold">bestsellers</h1>
-      <p className="mt-2 text-md md:text-xl">
-        Grasp the book’s key ideas in less than 15 minutes
-      </p>
-      <button className="mt-9 bg-white text-black py-3 text-bold px-6 rounded-lg cursor-pointer hover:bg-gray-200">
-        Get Started
-      </button>
-    </div>
-</div>
-
-  {/* Scrolling Content */}
-  <div className="p-[20px] mt-[120px]">
     <div
-      className="relative bg-white w-full rounded-3xl md:rounded-[30px] shadow-md 
-        text-black text-center animate-fadeIn flex flex-col items-center justify-center"
+      className="relative bg-[#7a00da] w-full rounded-3xl md:rounded-[30px] shadow-md 
+        text-white text-center animate-fadeIn flex flex-col items-center justify-center"
     >
-      <div className="h-full p-5 box-border">
+      <div className="h-full p-2  box-border">
         <h1 className="text-3xl md:text-6xl mt-[20px] md:mt-[70px] font-bold">
-          Get new knowledge easily
+          Go premium now 
         </h1>
         <p className="mt-2 text-md md:text-xl">
-          Let’s check how many titles you can finish in a month with Headway! Tell us how
-        </p>
+        Experience unlimited acces to our exclusive book summaries 
+              </p>
         <p className="mt-2 text-md md:text-xl">
-          much time you’d like to spend on reading:
+          on a premium model for only $5.99 per month :
         </p>
         <button
           className="mt-9 bg-black text-white py-4 text-extrabold text-2xl md:text-5xl 
             px-8 rounded-[40px] cursor-pointer hover:bg-gray-200"
         >
-          30 titles/month
+          $5.99 US/month
         </button>
       </div>
       <img
-        src="/pic3.svg"
+        src="/illustration.svg"
         alt="Centered Illustration"
         className="max-w-full h-auto mx-auto mt-8"
       />
     </div>
-  </div>
-</div>
-
-
-
 
 
 

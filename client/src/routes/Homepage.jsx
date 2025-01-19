@@ -15,6 +15,7 @@ import LatestPosts from "../components/LatestPosts";
 import PopularPosts from "../components/PopularPosts";
 import TrendingPosts from "../components/TrendingPosts";
 import StoryLine from "../components/StoryLine";
+import Footer from "../components/Footer";
 
 const Homepage = () => {
   const [isVisible, setIsVisible] = useState(true);
@@ -214,6 +215,7 @@ const Homepage = () => {
 
       <StoryLine />
 
+      <Footer />
 
 
     
