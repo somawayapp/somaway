@@ -10,9 +10,6 @@ const PlanCard = () => {
     if (isSignedIn) {
       // If the user is signed in, navigate to the subscribe page
       navigate('/subscribe', { state: { planPrice: plan.price, planName: plan.name } });
-    } else {
-      // If the user is signed out, navigate to the login page
-      navigate('/login');
     }
   };
 
