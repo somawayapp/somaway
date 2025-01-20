@@ -1,7 +1,6 @@
 import React from 'react';
 import { useLocation } from 'react-router-dom';
-import Paypal from '../components/paypal';
-
+import Paypal from '../components/Paypal';
 
 const SubscriptionPage = () => {
   const location = useLocation();
