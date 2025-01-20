@@ -38,7 +38,7 @@ const PremiumPage = () => {
          <img
            src="/illustration.svg"
            alt="Centered Illustration"
-           className="h-[100px] h-auto mx-auto mt-8"
+           className="h-[100px] mx-auto mt-8"
          />
        </div>
    

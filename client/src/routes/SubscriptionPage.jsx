@@ -31,37 +31,45 @@ const SubscriptionPage = () => {
   <div className="flex flex-col max-w-[1200px]  rounded-3xl md:rounded-[20px] bg-[var(--softBg)]  mx-auto mt-0 md:mt-4">
       <div className="flex flex-col lg:flex-row  min-h-[93vh] gap-[100px] ">
         {/* Left Section */}
-        <div className="lg:w-1/2 flex flex-col p-2 md:p-[50px]  bg-[#7a00da]  items-start gap-1 md:gap-4 
+        <div className="lg:w-1/2 flex flex-col pl-2 pr-2 pb-20 pt-4 md:p-[50px]  bg-[#7a00da]  items-center md:items-start gap-1 md:gap-4 
         rounded-tl-xl rounded-tr-xl md:rounded-tr-none md:rounded-bl-xl ">
-        <div className='flex flex-row gap-1'>
-        <Link to="/premium">
-  <FontAwesomeIcon
-    icon={faArrowLeft}
-    className="text-[var(--textColor)] h-[15px] md:h-[20px] text-orange-500"
-  />
-</Link>
+       <div className="flex flex-row items-center gap-2">
+  <Link to="/premium">
+    <FontAwesomeIcon
+      icon={faArrowLeft}
+      className="text-[var(--textColor)] h-[15px] md:h-[20px] text-orange-500"
+    />
+  </Link>
 
-        <SignedIn>
-          <UserButton />
-        </SignedIn>
-        <p className='text-extrabold text-xs  bg-orange-500 py-2 px-3 rounded-[20px] text-white '>
-          Check Out
-        </p>
-        </div>
-      
-          <h1 className="text-xl lg:text-2xl font-bold text-white">
-            Try somaAI's premium
-              </h1>
-              <p className="text-6xl font-bold text-white">${planPrice}</p>
+  <SignedIn>
+    <UserButton />
+  </SignedIn>
 
-              <p className="text-lg font-bold text-white mt-2">{planName} Subscription</p>
 
-          <h1 className="text-sm lg:text-md font-bold text-gray-100">
-            Get smarter in just 5 minutes
-          </h1>
-          <h1 className="text-sm lg:text-md font-bold text-gray-100">
-            With unlimited access to the worlds top best-selling non fiction books
-          </h1>
+
+
+  <p className="font-extrabold text-xs bg-orange-500 py-2 px-3 rounded-[20px] text-white">
+    Check Out
+  </p>
+</div>
+
+<>
+  <div className="text-center sm:text-left">
+    <h1 className="text-xl lg:text-2xl font-bold text-white">
+      Try somaAI's premium
+    </h1>
+    <p className="text-6xl font-bold text-white">{planPrice}</p>
+    <p className="text-lg font-bold text-white mt-2">{planName} Subscription</p>
+    <h1 className="text-sm lg:text-md font-bold text-gray-100">
+      Get smarter in just 5 minutes
+    </h1>
+    <h1 className="text-sm lg:text-md font-bold text-gray-100">
+      With unlimited access to the world's top best-selling non-fiction books
+    </h1>
+  </div>
+</>
+
+     
           <p className="text-md md:text-lg text-gray-400 italic absolute bottom-5">
             Powered by <span className="text-xl md:text-2xl font-bold">SomaAI</span>
                 </p>
