@@ -1,6 +1,11 @@
 import React from 'react';
 import { useLocation } from 'react-router-dom';
 import Paypal from '../components/Paypal';
+import { Link } from 'react-router-dom';
+import { SignedIn, SignedOut, UserButton } from "@clerk/clerk-react";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faArrowLeft} from '@fortawesome/free-solid-svg-icons';
+
 
 const SubscriptionPage = () => {
   const location = useLocation();
@@ -15,31 +20,88 @@ const SubscriptionPage = () => {
   if (!planPrice || !planName) {
     return (
       <div className="flex items-center justify-center min-h-screen">
-        <p className="text-gray-700 text-lg">No plan selected. Please go back and select a subscription plan.</p>
+        <p className="text-[var(--textColor)] text-lg">No plan selected. Please go back and select a subscription plan.</p>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-gray-100 p-6 flex items-center justify-center">
-      <div className="max-w-lg w-full bg-white rounded-lg shadow-lg p-8">
-        <h1 className="text-3xl font-bold text-gray-800 text-center">Checkout</h1>
-        <div className="mt-6 text-center">
-          <p className="text-xl font-semibold text-gray-700">Subscription Plan:</p>
-          <p className="text-2xl font-bold text-blue-600 mt-2">{planName}</p>
-          <p className="text-lg text-gray-500 mt-4">Price:</p>
-          <p className="text-2xl font-bold text-green-600">${planPrice}</p>
+
+
+  <div className="flex flex-col max-w-[1200px]  rounded-3xl md:rounded-[20px] bg-[var(--softBg)]  mx-auto mt-0 md:mt-4">
+      <div className="flex flex-col lg:flex-row  min-h-[93vh] gap-[100px] ">
+        {/* Left Section */}
+        <div className="lg:w-1/2 flex flex-col p-2 md:p-[50px]  bg-[#7a00da]  items-start gap-1 md:gap-4 
+        rounded-tl-xl rounded-tr-xl md:rounded-tr-none md:rounded-bl-xl ">
+        <div className='flex flex-row gap-1'>
+        <Link to="/premium">
+  <FontAwesomeIcon
+    icon={faArrowLeft}
+    className="text-[var(--textColor)] h-[15px] md:h-[20px] text-orange-500"
+  />
+</Link>
+
+        <SignedIn>
+          <UserButton />
+        </SignedIn>
+        <p className='text-extrabold text-xs  bg-orange-500 py-2 px-3 rounded-[20px] text-white '>
+          Check Out
+        </p>
         </div>
-        <div className="mt-6">
-          <p className="text-gray-600 text-sm text-center">
-            Complete your subscription by securely paying via PayPal.
-          </p>
-          <div className="mt-4">
-            <Paypal price={planPrice} />
+      
+          <h1 className="text-xl lg:text-2xl font-bold text-white">
+            Try somaAI's premium
+              </h1>
+              <p className="text-6xl font-bold text-white">${planPrice}</p>
+
+              <p className="text-lg font-bold text-white mt-2">{planName} Subscription</p>
+
+          <h1 className="text-sm lg:text-md font-bold text-gray-100">
+            Get smarter in just 5 minutes
+          </h1>
+          <h1 className="text-sm lg:text-md font-bold text-gray-100">
+            With unlimited access to the worlds top best-selling non fiction books
+          </h1>
+          <p className="text-md md:text-lg text-gray-400 italic absolute bottom-5">
+            Powered by <span className="text-xl md:text-2xl font-bold">SomaAI</span>
+                </p>
+
+      
+        </div>
+
+        {/* Right Section */}
+        <div className="lg:w-1/2 flex mt-[-53px] md:mt-0 flex-col">
+          {/* First Featured Post */}
+          <div className="flex mb-8  flex-col p-2 md:p-20 md:mb-0 top-0">
+          <img
+                src="/desktop.webp"
+                alt="Newsletter illustration"
+                className="hidden sm:block w-full object-cover rounded-lg"
+              />
+                          <Paypal price={planPrice} />
+
+          </div>
+
+          <div className="flex mb-8 md:mb-0 top-0">
+            
+              <img
+                src="/mobile.webp"
+                alt="Newsletter illustration"
+                className="block sm:hidden w-full object-cover rounded-lg"
+              />
+                   <Paypal price={planPrice} />
+
           </div>
         </div>
       </div>
-    </div>
+
+
+
+
+
+      </div>
+   
+
   );
 };
 

@@ -1,19 +1,24 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { SignedIn, SignedOut, UserButton } from "@clerk/clerk-react";
+import { useClerk } from '@clerk/clerk-react'; // Import useClerk hook
 
 const PlanCard = () => {
   const navigate = useNavigate();
+  const { isSignedIn } = useClerk(); // Get the signed-in status using the hook
 
   const handleSelectPlan = (plan) => {
-    navigate('/subscribe', { state: { planPrice: plan.price, planName: plan.name } });
+    if (isSignedIn) {
+      // If the user is signed in, navigate to the subscribe page
+      navigate('/subscribe', { state: { planPrice: plan.price, planName: plan.name } });
+    } else {
+      // If the user is signed out, navigate to the login page
+      navigate('/login');
+    }
   };
 
   return (
     <div className="p-2 md:p-[30px]">
-      <div
-        className="relative w-full rounded-3xl md:rounded-[30px] text-[var(--textColor)] text-center flex flex-col items-center justify-center animate-fadeIn"
-      >
+      <div className="relative w-full rounded-3xl md:rounded-[30px] text-[var(--textColor)] text-center flex flex-col items-center justify-center animate-fadeIn">
         <div className="h-full p-4">
           <h1 className="text-3xl md:text-6xl font-bold">Choose Your Plan</h1>
           <p className="mt-2 text-md md:text-xl">
@@ -50,24 +55,9 @@ const PlanCard = () => {
                   Cancel anytime.
                 </div>
               </div>
-
-              <SignedIn>
-                <button
-                  className="mt-6 bg-blue-700 text-white py-3 px-6 w-full rounded-lg font-bold hover:bg-blue-700 transition"
-                  onClick={() => handleSelectPlan({ name: 'Monthly Plan', price: 4.99 })}
-                >
-                  Start your 7-days free trial
-                </button>
-              </SignedIn>
-
-              <SignedOut>
-                <button
-                  className="mt-6 bg-blue-700 text-white py-3 px-6 w-full rounded-lg font-bold hover:bg-blue-700 transition"
-                  onClick={() => navigate('/login')}
-                >
-                  Start your 7-days free trial
-                </button>
-              </SignedOut>
+              <button className="mt-6 bg-blue-700 text-white py-3 px-6 w-full rounded-lg font-bold hover:bg-blue-700 transition">
+                Start your 7-days free trial
+              </button>
             </div>
 
             {/* Annual Plan */}
@@ -109,24 +99,9 @@ const PlanCard = () => {
                   Cancel anytime.
                 </div>
               </div>
-
-              <SignedIn>
-                <button
-                  className="mt-6 bg-blue-700 text-white py-3 px-6 w-full rounded-lg font-bold hover:bg-blue-700 transition"
-                  onClick={() => handleSelectPlan({ name: 'Annual Plan', price: 49.99 })}
-                >
-                  Start your 1-month free trial
-                </button>
-              </SignedIn>
-
-              <SignedOut>
-                <button
-                  className="mt-6 bg-blue-700 text-white py-3 px-6 w-full rounded-lg font-bold hover:bg-blue-700 transition"
-                  onClick={() => navigate('/login')}
-                >
-                  Start your 1-month free trial
-                </button>
-              </SignedOut>
+              <button className="mt-6 bg-blue-700 text-white py-3 px-6 w-full rounded-lg font-bold hover:bg-blue-700 transition">
+                Start your 1-month free trial
+              </button>
             </div>
           </div>
         </div>
