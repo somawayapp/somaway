@@ -80,7 +80,7 @@ const SubscriptionPage = () => {
         {/* Right Section */}
         <div className="lg:w-1/2 flex mt-[-53px] md:mt-0 flex-col">
           {/* First Featured Post */}
-          <div className=" flex flex-col mb-8 hidden sm:block   p-2 md:p-20 md:mb-0 top-0">
+          <div className=" flex flex-col  mb-8 hidden sm:block   p-2 md:p-20 md:mb-0 top-0">
           <img
                 src="/desktop.webp"
                 alt="Newsletter illustration"
@@ -90,7 +90,7 @@ const SubscriptionPage = () => {
 
           </div>
 
-          <div className="flex block sm:hidden flex-col mb-8 md:mb-0 top-0">
+          <div className="flex block sm:hidden flex-col p-2 mb-8 md:mb-0 top-0">
           <Paypal price={planPrice} />
 
               <img
