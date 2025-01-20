@@ -80,24 +80,24 @@ const SubscriptionPage = () => {
         {/* Right Section */}
         <div className="lg:w-1/2 flex mt-[-53px] md:mt-0 flex-col">
           {/* First Featured Post */}
-          <div className="flex mb-8  flex-col p-2 md:p-20 md:mb-0 top-0">
+          <div className=" flex flex-col mb-8 hidden sm:block   p-2 md:p-20 md:mb-0 top-0">
           <img
                 src="/desktop.webp"
                 alt="Newsletter illustration"
-                className="hidden sm:block w-full object-cover rounded-lg"
+                className=" w-full object-cover rounded-lg"
               />
-                          <Paypal price={planPrice} />
+              <Paypal price={planPrice} />
 
           </div>
 
-          <div className="flex mb-8 md:mb-0 top-0">
-            
+          <div className="flex block sm:hidden flex-col mb-8 md:mb-0 top-0">
+          <Paypal price={planPrice} />
+
               <img
                 src="/mobile.webp"
                 alt="Newsletter illustration"
-                className="block sm:hidden w-full object-cover rounded-lg"
+                className=" w-full object-cover rounded-lg"
               />
-                   <Paypal price={planPrice} />
 
           </div>
         </div>

@@ -11,9 +11,10 @@ const PlanCard = () => {
   };
 
   return (
-    <div className="p-2 md:p-[30px]">
-      <div className="relative w-full rounded-3xl md:rounded-[30px] text-[var(--textColor)] text-center flex flex-col items-center justify-center animate-fadeIn">
-        <div className="h-full p-4">
+    <div className="p-1 md:p-[30px]">
+      <div className="relative w-full rounded-3xl md:rounded-[30px] text-[var(--textColor)] 
+      text-center flex flex-col items-center justify-center animate-fadeIn">
+        <div className="h-full p-1 md:p-4">
           <h1 className="text-3xl md:text-6xl font-bold">Choose Your Plan</h1>
           <p className="mt-2 text-md md:text-xl">
             Enjoy unlimited access to book summaries tailored for you.
