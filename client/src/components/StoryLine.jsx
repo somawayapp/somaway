@@ -21,7 +21,7 @@ const StoryLine = () => {
   </div>
 
 
-<div className="items-center justify-center text-white mt-[-450px] md:mt-[-650px] mb-[250px] md:mb-[550px] text-center ">
+<div className="items-center justify-center text-white mt-[-500px] md:mt-[-650px] mb-[250px] md:mb-[550px] text-center ">
 
 <div className="h-full p-1 box-border">
       <h1 className="text-3xl md:text-6xl  font-bold">
@@ -166,12 +166,17 @@ const StoryLine = () => {
         <p className="mt-2 text-md md:text-xl">
           on a premium model for only $5.99 per month :
         </p>
+        <Link to="/premium">
         <button
-          className="mt-9 bg-black text-white py-4 text-extrabold text-2xl md:text-5xl 
-            px-8 rounded-[40px] cursor-pointer hover:bg-gray-200"
-        >
-          $5.99 US/month
-        </button>
+        className="mt-9 bg-black text-white py-4 text-extrabold text-2xl md:text-5xl 
+        px-8 rounded-[40px] cursor-pointer hover:text-black hover:bg-white"
+>
+
+        $5.99 US/month
+      </button>
+        
+        </Link>
+      
       </div>
       <img
         src="/illustration.svg"
