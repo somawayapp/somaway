@@ -14,5 +14,3 @@ router.post("/", requireAuth, (req, res) => {
 router.post("/verifyPayment", requireAuth, verifyPayment);
 
 export default router;
-
-

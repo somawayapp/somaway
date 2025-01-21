@@ -18,9 +18,10 @@ export const verifyPayment = async (req, res) => {
     const paypalResponse = await fetch(`https://api-m.paypal.com/v2/checkout/orders/${orderId}`, {
       method: 'GET',
       headers: {
-        Authorization: `Bearer ${process.env.PAYPAL_ACCESS_TOKEN}`,
+        Authorization: `Bearer A21AAIoWwtYiekNsX7NDwszS0YAUp7RrYKvpIK08IDnf5h1N6NSDqV2adq6_P2jrlCgW-_KFTbIMAsJbZXcx89m3ahOr7rELA`,
       },
     });
+
     const paymentDetails = await paypalResponse.json();
 
     if (paymentDetails.status !== 'COMPLETED') {
@@ -30,7 +31,7 @@ export const verifyPayment = async (req, res) => {
 
     // Find user and update subscription
     const user = await User.findOne({ clerkUserId }).lean();
-    if (!user) return;
+    if (!user) return res.status(404).json({ message: "User not found." });
 
     const duration = plan === "monthly" ? 30 : 365;
     const startDate = new Date();
@@ -45,5 +46,6 @@ export const verifyPayment = async (req, res) => {
     console.log("Subscription updated successfully for user:", clerkUserId);
   } catch (error) {
     console.error("Error verifying payment:", error);
+    res.status(500).json({ message: "An error occurred while verifying the payment." });
   }
 };

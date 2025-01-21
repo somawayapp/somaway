@@ -51,7 +51,7 @@ const Paypal = ({ price, planType, token }) => {
               const order = await actions.order.capture();
 
               // Send payment details to the backend
-              const response = await fetch(`${import.meta.env.VITE_API_URL}/subscriptions/verify-payment`, {
+              const response = await fetch('https://your-api-url.com/subscriptions/verify-payment', {
                 method: 'POST',
                 headers: {
                   'Content-Type': 'application/json',
