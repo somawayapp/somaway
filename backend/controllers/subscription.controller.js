@@ -2,7 +2,7 @@ import Subscription from '../models/subscription.model.js';
 import User from '../models/user.model.js';
 
 export const updateSubscriptionFromPayment = async (req, res) => {
-  const { plan, price, orderId } = req.body;
+  const { plan, price } = req.body;
   const clerkUserId = req.auth.userId; // Assumes Clerk is used for authentication.
 
   if (!clerkUserId) {

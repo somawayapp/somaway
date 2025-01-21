@@ -51,7 +51,7 @@ const Paypal = ({ price, planType, token }) => {
               console.log('Order captured:', order);
 
               // Send subscription details to backend
-              const response = await fetch('/subscriptions/update-from-payment', {
+              const response = await fetch('/subscriptions', {
                 method: 'POST',
                 headers: {
                   'Content-Type': 'application/json',
