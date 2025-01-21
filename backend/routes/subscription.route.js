@@ -1,5 +1,5 @@
 import express from "express";
-import { updateSubscriptionFromPayment } from "../controllers/subscription.controller.js";
+import { verifyPayment } from "../controllers/subscription.controller.js";
 import { requireAuth } from "@clerk/express"; // Import Clerk's requireAuth
 
 const router = express.Router();
@@ -11,6 +11,8 @@ router.post("/", requireAuth, (req, res) => {
 });
 
 // Update subscription route
-router.post("/update-from-payment", requireAuth, updateSubscriptionFromPayment);
+router.post("/update-from-payment", requireAuth, verifyPayment);
 
 export default router;
+
+

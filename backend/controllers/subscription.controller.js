@@ -1,18 +1,34 @@
 import Subscription from '../models/subscription.model.js';
 import User from '../models/user.model.js';
 
-export const updateSubscriptionFromPayment = async (req, res) => {
+export const verifyPayment = async (req, res) => {
   try {
     const clerkUserId = req.auth?.userId;
     if (!clerkUserId) return res.status(401).json("Not authenticated!");
 
-    const { plan, price } = req.body;
-    if (!plan || !price) return res.status(400).json({ message: "Plan and price are required." });
+    const { plan, price, orderId } = req.body;
+    if (!plan || !price || !orderId) {
+      return res.status(400).json({ message: "Plan, price, and order ID are required." });
+    }
 
-    // Send response immediately to prevent delay
-    res.status(200).json({ message: "Subscription update in progress." });
+    // Respond immediately to the client
+    res.status(200).json({ message: "Payment verification in progress." });
 
-    // Find user and handle subscription in the background
+    // Verify payment with PayPal API
+    const paypalResponse = await fetch(`https://api-m.paypal.com/v2/checkout/orders/${orderId}`, {
+      method: 'GET',
+      headers: {
+        Authorization: `Bearer ${process.env.PAYPAL_ACCESS_TOKEN}`,
+      },
+    });
+    const paymentDetails = await paypalResponse.json();
+
+    if (paymentDetails.status !== 'COMPLETED') {
+      console.error("Payment not completed:", paymentDetails);
+      return;
+    }
+
+    // Find user and update subscription
     const user = await User.findOne({ clerkUserId }).lean();
     if (!user) return;
 
@@ -25,7 +41,9 @@ export const updateSubscriptionFromPayment = async (req, res) => {
       { $set: { plan, price, startDate, endDate, status: "active", isActive: true } },
       { upsert: true }
     );
+
+    console.log("Subscription updated successfully for user:", clerkUserId);
   } catch (error) {
-    console.error("Error updating subscription:", error);
+    console.error("Error verifying payment:", error);
   }
 };

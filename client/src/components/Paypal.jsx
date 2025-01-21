@@ -50,7 +50,8 @@ const Paypal = ({ price, planType, token }) => {
             try {
               const order = await actions.order.capture();
 
-              const response = await fetch(`${import.meta.env.VITE_API_URL}/subscriptions/update-from-payment`, {
+              // Send payment details to the backend
+              const response = await fetch(`${import.meta.env.VITE_API_URL}/subscriptions/verify-payment`, {
                 method: 'POST',
                 headers: {
                   'Content-Type': 'application/json',
@@ -59,16 +60,14 @@ const Paypal = ({ price, planType, token }) => {
                 body: JSON.stringify({
                   plan: planType,
                   price: price,
+                  orderId: order.id, // PayPal order ID
                 }),
               });
-
-              const result = await response.json();
 
               if (response.ok) {
                 alert('Payment successful! Subscription updated.');
               } else {
-                console.error('Failed to update subscription:', result);
-                alert('Failed to update subscription.');
+                alert('Failed to update subscription. Please contact support.');
               }
             } catch (err) {
               console.error('Error capturing order:', err);
