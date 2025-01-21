@@ -4,14 +4,14 @@ import { Schema } from "mongoose";
 const subscriptionSchema = new Schema(
   {
     user: {
-        type: Schema.Types.ObjectId,
-        ref: "User",
-        required: true,
-      },
+      type: Schema.Types.ObjectId,
+      ref: "User",
+      required: true,
+    },
     plan: {
       type: String,
-      enum: ['monthly', 'annual', 'none'],
-      default: 'none',
+      enum: ["monthly", "annual", "none"],
+      default: "none",
     },
     startDate: {
       type: Date,
@@ -21,8 +21,12 @@ const subscriptionSchema = new Schema(
     },
     status: {
       type: String,
-      enum: ['active', 'inactive'],
-      default: 'inactive',
+      enum: ["active", "inactive"],
+      default: "inactive",
+    },
+    isActive: {
+      type: Boolean,
+      default: true,
     },
   },
   { timestamps: true }
