@@ -1,12 +1,12 @@
 import express from 'express';
-import { updateSubscription, getSubscriptionDetails } from '../controllers/subscription.controller';
+import { getSubscriptionDetails, updateSubscription } from '../controllers/subscription.controller';
 
 const router = express.Router();
 
 // Route to update subscription
 router.put('/update', updateSubscription);
 
-// Route to get subscription details
+// Route to get subscription details  
 router.get('/details', getSubscriptionDetails);
 
 export default router;
