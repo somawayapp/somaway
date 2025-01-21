@@ -4,6 +4,11 @@ const { Schema } = mongoose;
 
 const subscriptionSchema = new Schema(
   {
+    user: {
+        type: Schema.Types.ObjectId,
+        ref: "User",
+        required: true,
+      },
     plan: {
       type: String,
       enum: ['monthly', 'annual', 'none'],
