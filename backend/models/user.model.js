@@ -1,18 +1,17 @@
 import { Schema } from "mongoose";
 import mongoose from "mongoose";
 
-// User Schema
 const userSchema = new Schema(
   {
     clerkUserId: {
       type: String,
       required: true,
       unique: true,
+      index: true, // Index for faster lookups
     },
     subscription: {
       type: Schema.Types.ObjectId,
-      ref: "Subscription",
-      required: true, // made optional
+      ref: "Subscription", // optional, no `required: true`
     },
     username: {
       type: String,
@@ -23,6 +22,7 @@ const userSchema = new Schema(
       type: String,
       required: true,
       unique: true,
+      index: true, // Add index for querying
     },
     img: {
       type: String,
@@ -30,11 +30,18 @@ const userSchema = new Schema(
     savedPosts: [
       {
         type: Schema.Types.ObjectId,
-        ref: "Post", // assuming you have a Post model
+        ref: "Post",
       },
     ],
   },
   { timestamps: true }
 );
+
+// Virtual population for saved posts (optional)
+userSchema.virtual("savedPostDetails", {
+  ref: "Post",
+  localField: "savedPosts",
+  foreignField: "_id",
+});
 
 export default mongoose.model("User", userSchema);

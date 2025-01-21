@@ -17,8 +17,8 @@ const Paypal = ({ price, planType, token }) => {
               ],
             }),
           onApprove: async (data, actions) => {
-            const order = await actions.order.capture();
             try {
+              const order = await actions.order.capture();
               const response = await fetch(
                 `${import.meta.env.VITE_API_URL}/subscriptions/update-from-payment`,
                 {
@@ -30,33 +30,29 @@ const Paypal = ({ price, planType, token }) => {
                   body: JSON.stringify({ plan: planType, price }),
                 }
               );
-
               if (response.ok) {
                 alert('Payment successful! Subscription updated.');
               } else {
                 alert('Failed to update subscription.');
               }
-            } catch {
-              alert('Error processing subscription update.');
+            } catch (err) {
+              alert('Error processing payment.');
             }
           },
-          onError: () => alert("Error loading PayPal button."),
         })
         .render(paypal.current);
     };
 
-    const loadPayPalScript = () => {
+    if (!window.paypal) {
       const script = document.createElement('script');
       script.src =
         "https://www.paypal.com/sdk/js?client-id=AdquOIVKN9I4lW_QVdLYyPZ7On9-KwEvDk32IyE772orS4WudPfW1pVCXKHnSGFyVYzN_QdDDgDmAZcC&currency=USD";
       script.async = true;
       script.onload = initializePayPalButtons;
-      script.onerror = () => alert("PayPal failed to load.");
       document.body.appendChild(script);
-    };
-
-    if (!window.paypal) loadPayPalScript();
-    else initializePayPalButtons();
+    } else {
+      initializePayPalButtons();
+    }
   }, [price, planType, token]);
 
   return <div ref={paypal}></div>;
