@@ -36,3 +36,51 @@ export const savePost = async (req, res) => {
 
   res.status(200).json(isSaved ? "Post unsaved" : "Post saved");
 };
+
+
+export const updateSubscription = async (req, res) => {
+  const clerkUserId = req.auth.userId;
+  const { plan, startDate } = req.body;
+
+  if (!clerkUserId) {
+    return res.status(401).json("Not authenticated!");
+  }
+
+  const user = await User.findOne({ clerkUserId });
+
+  if (!user) {
+    return res.status(404).json("User not found!");
+  }
+
+  const duration = plan === 'monthly' ? 30 : 365; // Days
+  const endDate = new Date(new Date(startDate).getTime() + duration * 24 * 60 * 60 * 1000);
+
+  await User.findByIdAndUpdate(user._id, {
+    subscription: {
+      plan,
+      startDate,
+      endDate,
+      status: 'active',
+    },
+  });
+
+  res.status(200).json("Subscription updated successfully");
+};
+
+
+export const getSubscriptionDetails = async (req, res) => {
+  const clerkUserId = req.auth.userId;
+
+  if (!clerkUserId) {
+    return res.status(401).json("Not authenticated!");
+  }
+
+  const user = await User.findOne({ clerkUserId });
+
+  if (!user) {
+    return res.status(404).json("User not found!");
+  }
+
+  res.status(200).json(user.subscription);
+};
+
