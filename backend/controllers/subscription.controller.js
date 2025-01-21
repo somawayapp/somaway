@@ -1,5 +1,5 @@
-import User from "../models/user.model";
-import Subscription from "../models/subscription.model";
+import User from "../models/user.model.js";
+import Subscription from "../models/subscription.model.js";
 
 export const updateSubscription = async (req, res) => {
   const clerkUserId = req.auth.userId;
