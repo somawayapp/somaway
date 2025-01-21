@@ -3,7 +3,7 @@ import User from '../models/user.model.js';
 import { Clerk } from '@clerk/clerk-sdk-node'; // Ensure Clerk SDK is imported for verification
 
 // Middleware to authenticate user from Clerk token
-const authenticateUser = async (req, res, next) => {
+export const authenticateUser = async (req, res, next) => {
   const token = req.headers.authorization?.split(' ')[1]; // Assuming Bearer token
 
   if (!token) {
