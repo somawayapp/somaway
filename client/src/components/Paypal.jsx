@@ -44,30 +44,36 @@ const Paypal = ({ price, planType }) => { // Add planType prop to capture subscr
               ],
             });
           },
+       
+
           onApprove: async (data, actions) => {
             try {
               const order = await actions.order.capture();
               console.log('Order captured:', order);
-
+          
               // Send subscription details to backend
               await fetch('https://blogifiyapi.vercel.app/subscriptions', {
                 method: 'POST',
                 headers: {
                   'Content-Type': 'application/json',
+                  'Authorization': `Bearer ${token}`, // If you're using authorization token
                 },
                 body: JSON.stringify({
                   plan: planType, // Subscription type (e.g., "monthly", "annual")
                   price: price,    // Price of the subscription
-                  orderId: order.id, // PayPal order ID for reference
                 }),
               });
-
+          
               alert('Payment successful! Subscription updated.');
             } catch (err) {
               console.error('Error capturing order:', err);
               alert('Payment capture failed.');
             }
           },
+          
+
+
+
           onError: (err) => {
             console.error('PayPal button error:', err);
             alert('Error loading PayPal button.');
