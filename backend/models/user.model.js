@@ -1,7 +1,6 @@
 import { Schema } from "mongoose";
 import mongoose from "mongoose";
 
-
 const userSchema = new Schema(
   {
     clerkUserId: {
@@ -25,24 +24,6 @@ const userSchema = new Schema(
     savedPosts: {
       type: [String],
       default: [],
-    },
-    subscription: {
-      plan: {
-        type: String,
-        enum: ['monthly', 'annual', 'none'],
-        default: 'none',
-      },
-      startDate: {
-        type: Date,
-      },
-      endDate: {
-        type: Date,
-      },
-      status: {
-        type: String,
-        enum: ['active', 'inactive'],
-        default: 'inactive',
-      },
     },
   },
   { timestamps: true }
