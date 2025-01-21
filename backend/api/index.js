@@ -10,7 +10,7 @@ import userRouter from '../routes/user.route.js';
 import postRouter from '../routes/post.route.js';
 import commentRouter from '../routes/comment.route.js';
 import webhookRouter from '../routes/webhook.route.js';
-import SubscriptionRouter from '../routes/subscription.route.js';
+import subscriptionRouter from '../routes/subscription.route.js';
 import cors from 'cors';
 import 'dotenv/config';
 
@@ -76,7 +76,7 @@ app.get("/test",(req,res)=>{
 // API Routes
 app.use('/users', userRouter);
 app.use('/posts', postRouter); // Correctly map the posts route
-app.use('/subscriptions', SubscriptionRouter); 
+app.use('/subscriptions', subscriptionRouter); 
 app.use('/comments', commentRouter);
 app.use('/webhook', webhookRouter);
 
