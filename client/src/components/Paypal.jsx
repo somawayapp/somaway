@@ -27,11 +27,13 @@ const Paypal = ({ price, planType, token }) => {
       }
     };
 
+   
+
+
     const initializePayPalButtons = () => {
       window.paypal
         .Buttons({
           createOrder: (data, actions) => {
-            const finalPrice = price && !isNaN(price) ? price : '0.00';
             return actions.order.create({
               intent: 'CAPTURE',
               purchase_units: [
@@ -39,7 +41,8 @@ const Paypal = ({ price, planType, token }) => {
                   description: 'Subscription Plan',
                   amount: {
                     currency_code: 'USD',
-                    value: finalPrice,
+                    value: price || '0.00',
+                
                   },
                 },
               ],
@@ -66,7 +69,7 @@ const Paypal = ({ price, planType, token }) => {
                 },
                 body: JSON.stringify({
                   plan: planType,  // Subscription type (e.g., "monthly", "annual")
-                  price: finalPrice,     // Price of the subscription
+                  price: price,     // Price of the subscription
                 }),
               });
 
@@ -97,3 +100,6 @@ const Paypal = ({ price, planType, token }) => {
 };
 
 export default Paypal;
+
+
+       
