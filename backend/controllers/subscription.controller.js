@@ -3,62 +3,36 @@ import User from '../models/user.model.js';
 
 export const updateSubscriptionFromPayment = async (req, res) => {
   try {
-    console.log("Request Headers:", req.headers);
+    const clerkUserId = req.auth?.userId;
 
-    const clerkUserId = req.auth?.userId; // Access Clerk user ID from the request object
-
-    // Ensure the user is authenticated
     if (!clerkUserId) {
-      console.log("Not authenticated, returning 401.");
       return res.status(401).json("Not authenticated!");
     }
 
-    console.log("Authenticated Clerk User ID:", clerkUserId);
-
     const { plan, price } = req.body;
 
-    // Validate the incoming request data
     if (!plan || !price) {
-      console.error("Plan or price is missing from the request body.");
       return res.status(400).json({ message: "Plan and price are required." });
     }
 
-    console.log("Plan selected:", plan, "Price:", price);
-
-    // Find the user in the database
     const user = await User.findOne({ clerkUserId }).lean();
     if (!user) {
-      console.log("User not found, returning 404.");
       return res.status(404).json("User not found!");
     }
 
-    console.log("Found user:", user);
-
-    // Calculate the subscription period
-    const duration = plan === "monthly" ? 30 : 365; // 30 days for monthly, 365 for annual
+    const duration = plan === "monthly" ? 30 : 365;
     const startDate = new Date();
-    const endDate = new Date(startDate.getTime() + duration * 24 * 60 * 60 * 1000); // Add days to current time
+    const endDate = new Date(startDate.getTime() + duration * 24 * 60 * 60 * 1000);
 
-    // Respond immediately and handle subscription update in the background
+    // Queue response before handling database operation
     res.status(200).json({ message: "Subscription update queued." });
 
-    // Update or create the subscription asynchronously
     await Subscription.findOneAndUpdate(
       { user: user._id },
-      {
-        plan,
-        price,
-        startDate,
-        endDate,
-        status: "active",
-        isActive: true,
-      },
-      { new: true, upsert: true } // Ensure subscription creation if it doesn't exist
+      { plan, price, startDate, endDate, status: "active", isActive: true },
+      { new: true, upsert: true }
     );
-
-    console.log("Subscription updated successfully.");
   } catch (error) {
-    console.error("Error updating subscription:", error);
     if (!res.headersSent) {
       res.status(500).json("Internal server error!");
     }
