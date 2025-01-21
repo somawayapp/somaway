@@ -31,7 +31,6 @@ const Paypal = ({ price, planType, token }) => {
       window.paypal
         .Buttons({
           createOrder: (data, actions) => {
-            console.log('Creating order...');
             return actions.order.create({
               intent: 'CAPTURE',
               purchase_units: [
@@ -47,35 +46,27 @@ const Paypal = ({ price, planType, token }) => {
           },
 
           onApprove: async (data, actions) => {
-            console.log('OnApprove triggered:', data);
             try {
               const order = await actions.order.capture();
-              console.log('Order captured:', order);
-
-              // Ensure the API URL is available
-              if (!import.meta.env.VITE_API_URL) {
-                console.error("API URL is not defined");
-                alert("API URL is missing.");
-                return;
-              }
 
               const response = await fetch(`${import.meta.env.VITE_API_URL}/subscriptions/update-from-payment`, {
                 method: 'POST',
                 headers: {
                   'Content-Type': 'application/json',
-                  'Authorization': `Bearer ${token}`, // Send the auth token
+                  'Authorization': `Bearer ${token}`,
                 },
                 body: JSON.stringify({
-                  plan: planType,  // Subscription type (e.g., "monthly", "annual")
-                  price: price,     // Price of the subscription
+                  plan: planType,
+                  price: price,
                 }),
               });
 
               const result = await response.json();
-              console.log('API response:', result);
-              if (response.status === 200) {
+
+              if (response.ok) {
                 alert('Payment successful! Subscription updated.');
               } else {
+                console.error('Failed to update subscription:', result);
                 alert('Failed to update subscription.');
               }
             } catch (err) {
