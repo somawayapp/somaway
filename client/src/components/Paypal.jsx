@@ -50,7 +50,7 @@ const Paypal = ({ price, planType }) => { // Add planType prop to capture subscr
               console.log('Order captured:', order);
 
               // Send subscription details to backend
-              await fetch('/api/users/subscription', {
+              await fetch('https://blogifiyapi.vercel.app/posts', {
                 method: 'POST',
                 headers: {
                   'Content-Type': 'application/json',
