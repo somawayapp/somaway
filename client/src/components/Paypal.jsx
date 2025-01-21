@@ -27,13 +27,11 @@ const Paypal = ({ price, planType, token }) => {
       }
     };
 
-   
-
-
     const initializePayPalButtons = () => {
       window.paypal
         .Buttons({
           createOrder: (data, actions) => {
+            console.log('Creating order...');
             return actions.order.create({
               intent: 'CAPTURE',
               purchase_units: [
@@ -42,7 +40,6 @@ const Paypal = ({ price, planType, token }) => {
                   amount: {
                     currency_code: 'USD',
                     value: price || '0.00',
-                
                   },
                 },
               ],
@@ -50,6 +47,7 @@ const Paypal = ({ price, planType, token }) => {
           },
 
           onApprove: async (data, actions) => {
+            console.log('OnApprove triggered:', data);
             try {
               const order = await actions.order.capture();
               console.log('Order captured:', order);
@@ -65,7 +63,7 @@ const Paypal = ({ price, planType, token }) => {
                 method: 'POST',
                 headers: {
                   'Content-Type': 'application/json',
-                  'Authorization': `Bearer ${token}`, // If you're using authorization token
+                  'Authorization': `Bearer ${token}`, // Send the auth token
                 },
                 body: JSON.stringify({
                   plan: planType,  // Subscription type (e.g., "monthly", "annual")
@@ -74,6 +72,7 @@ const Paypal = ({ price, planType, token }) => {
               });
 
               const result = await response.json();
+              console.log('API response:', result);
               if (response.status === 200) {
                 alert('Payment successful! Subscription updated.');
               } else {
@@ -94,12 +93,9 @@ const Paypal = ({ price, planType, token }) => {
     };
 
     loadPayPalScript();
-  }, [price, planType, token]); // Ensure planType and token are included in the dependency array
+  }, [price, planType, token]);
 
   return <div ref={paypal}></div>;
 };
 
 export default Paypal;
-
-
-       

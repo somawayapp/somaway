@@ -1,9 +1,10 @@
 import express from 'express';
-import { updateSubscriptionFromPayment } from '../controllers/subscription.controller.js';
+import { updateSubscriptionFromPayment } from './subscription.controller.js';
+import { authenticateUser } from './subscription.controller.js';
 
 const router = express.Router();
 
-// Route to update subscription after payment
-router.post('/update-from-payment', updateSubscriptionFromPayment);
+// Use the authenticateUser middleware to check the token
+router.post('/update-from-payment', authenticateUser, updateSubscriptionFromPayment);
 
 export default router;
