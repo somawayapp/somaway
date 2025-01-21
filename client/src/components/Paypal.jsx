@@ -31,6 +31,7 @@ const Paypal = ({ price, planType, token }) => {
       window.paypal
         .Buttons({
           createOrder: (data, actions) => {
+            const finalPrice = price && !isNaN(price) ? price : '0.00';
             return actions.order.create({
               intent: 'CAPTURE',
               purchase_units: [
@@ -38,7 +39,7 @@ const Paypal = ({ price, planType, token }) => {
                   description: 'Subscription Plan',
                   amount: {
                     currency_code: 'USD',
-                    value: price || '0.00',
+                    value: finalPrice,
                   },
                 },
               ],
@@ -50,11 +51,14 @@ const Paypal = ({ price, planType, token }) => {
               const order = await actions.order.capture();
               console.log('Order captured:', order);
 
-              // Send subscription details to backend
-                      // Send subscription details to backend
-                      const response = await fetch(   '${import.meta.env.VITE_API_URL}/subscriptions/update-from-payment'  
-      
-                , {
+              // Ensure the API URL is available
+              if (!import.meta.env.VITE_API_URL) {
+                console.error("API URL is not defined");
+                alert("API URL is missing.");
+                return;
+              }
+
+              const response = await fetch(`${import.meta.env.VITE_API_URL}/subscriptions/update-from-payment`, {
                 method: 'POST',
                 headers: {
                   'Content-Type': 'application/json',
@@ -62,7 +66,7 @@ const Paypal = ({ price, planType, token }) => {
                 },
                 body: JSON.stringify({
                   plan: planType,  // Subscription type (e.g., "monthly", "annual")
-                  price: price,     // Price of the subscription
+                  price: finalPrice,     // Price of the subscription
                 }),
               });
 
