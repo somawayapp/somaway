@@ -1,3 +1,5 @@
+import { Schema } from "mongoose";
+import mongoose from "mongoose";
 
 // User Schema
 const userSchema = new Schema(
