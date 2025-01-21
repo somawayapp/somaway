@@ -11,7 +11,7 @@ router.post("/", requireAuth, (req, res) => {
 });
 
 // Update subscription route
-router.post("/update-from-payment", requireAuth, verifyPayment);
+router.post("/verifyPayment", requireAuth, verifyPayment);
 
 export default router;
 
