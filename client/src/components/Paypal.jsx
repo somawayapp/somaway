@@ -60,7 +60,6 @@ const Paypal = ({ price, planType, token }) => {
                 body: JSON.stringify({
                   plan: planType,  // Subscription type (e.g., "monthly", "annual")
                   price: price,     // Price of the subscription
-                  orderId: order.id, // PayPal order ID
                 }),
               });
 

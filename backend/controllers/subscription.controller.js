@@ -28,7 +28,6 @@ export const updateSubscriptionFromPayment = async (req, res) => {
       {
         plan,
         price,
-        orderId,
         startDate,
         endDate,
         status: 'active',
