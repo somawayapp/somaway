@@ -7,7 +7,8 @@ const Paypal = ({ price, planType, token }) => {
     const loadPayPalScript = () => {
       if (!document.querySelector('script[src*="paypal.com"]')) {
         const script = document.createElement('script');
-        script.src = "https://www.paypal.com/sdk/js?client-id=AdquOIVKN9I4lW_QVdLYyPZ7On9-KwEvDk32IyE772orS4WudPfW1pVCXKHnSGFyVYzN_QdDDgDmAZcC&currency=USD";
+        script.src =
+          "https://www.paypal.com/sdk/js?client-id=AdquOIVKN9I4lW_QVdLYyPZ7On9-KwEvDk32IyE772orS4WudPfW1pVCXKHnSGFyVYzN_QdDDgDmAZcC&currency=USD";
         script.async = true;
 
         script.onload = () => {
@@ -17,8 +18,8 @@ const Paypal = ({ price, planType, token }) => {
         };
 
         script.onerror = () => {
-          console.error('Failed to load PayPal script');
-          alert('PayPal failed to load. Please refresh the page.');
+          console.error("Failed to load PayPal script");
+          alert("PayPal failed to load. Please refresh the page.");
         };
 
         document.body.appendChild(script);
@@ -53,7 +54,7 @@ const Paypal = ({ price, planType, token }) => {
                 method: 'POST',
                 headers: {
                   'Content-Type': 'application/json',
-                  'Authorization': `Bearer ${token}`,
+                  Authorization: `Bearer ${token}`,
                 },
                 body: JSON.stringify({
                   plan: planType,
@@ -76,8 +77,8 @@ const Paypal = ({ price, planType, token }) => {
           },
 
           onError: (err) => {
-            console.error('PayPal button error:', err);
-            alert('Error loading PayPal button.');
+            console.error("PayPal button error:", err);
+            alert("Error loading PayPal button.");
           },
         })
         .render(paypal.current);
