@@ -3,8 +3,7 @@ import { updateSubscriptionFromPayment } from '../controllers/subscription.contr
 
 const router = express.Router();
 
-// Route to update subscription
+// Route to update subscription after payment
 router.post('/update-from-payment', updateSubscriptionFromPayment);
-
 
 export default router;

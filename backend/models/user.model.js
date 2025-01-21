@@ -12,7 +12,7 @@ const userSchema = new Schema(
     subscription: {
       type: Schema.Types.ObjectId,
       ref: "Subscription",
-      required: false, // made optional
+      required: true, // made optional
     },
     username: {
       type: String,

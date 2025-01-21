@@ -1,6 +1,6 @@
 import React, { useRef, useEffect } from 'react';
 
-const Paypal = ({ price, planType }) => { // Add planType prop to capture subscription type
+const Paypal = ({ price, planType, token }) => {
   const paypal = useRef();
 
   useEffect(() => {
@@ -44,35 +44,37 @@ const Paypal = ({ price, planType }) => { // Add planType prop to capture subscr
               ],
             });
           },
-       
 
           onApprove: async (data, actions) => {
             try {
               const order = await actions.order.capture();
               console.log('Order captured:', order);
-          
+
               // Send subscription details to backend
-              await fetch('https://blogifiyapi.vercel.app/subscriptions', {
+              const response = await fetch('/subscriptions/update-from-payment', {
                 method: 'POST',
                 headers: {
                   'Content-Type': 'application/json',
                   'Authorization': `Bearer ${token}`, // If you're using authorization token
                 },
                 body: JSON.stringify({
-                  plan: planType, // Subscription type (e.g., "monthly", "annual")
-                  price: price,    // Price of the subscription
+                  plan: planType,  // Subscription type (e.g., "monthly", "annual")
+                  price: price,     // Price of the subscription
+                  orderId: order.id, // PayPal order ID
                 }),
               });
-          
-              alert('Payment successful! Subscription updated.');
+
+              const result = await response.json();
+              if (response.status === 200) {
+                alert('Payment successful! Subscription updated.');
+              } else {
+                alert('Failed to update subscription.');
+              }
             } catch (err) {
               console.error('Error capturing order:', err);
               alert('Payment capture failed.');
             }
           },
-          
-
-
 
           onError: (err) => {
             console.error('PayPal button error:', err);
@@ -83,7 +85,7 @@ const Paypal = ({ price, planType }) => { // Add planType prop to capture subscr
     };
 
     loadPayPalScript();
-  }, [price, planType]); // Ensure planType is included in the dependency array
+  }, [price, planType, token]); // Ensure planType and token are included in the dependency array
 
   return <div ref={paypal}></div>;
 };

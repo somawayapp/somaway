@@ -76,7 +76,7 @@ app.get("/test",(req,res)=>{
 // API Routes
 app.use('/users', userRouter);
 app.use('/posts', postRouter); // Correctly map the posts route
-app.use('/subscriptions', subscriptionRouter); 
+app.use('/subscriptions', subscriptionRouter);
 app.use('/comments', commentRouter);
 app.use('/webhook', webhookRouter);
 
