@@ -1,6 +1,7 @@
 import mongoose from "mongoose";
 import { Schema } from "mongoose";
 
+// Subscription Schema
 const subscriptionSchema = new Schema(
   {
     user: {
@@ -15,6 +16,7 @@ const subscriptionSchema = new Schema(
     },
     startDate: {
       type: Date,
+      default: Date.now, // set default to current date if not provided
     },
     endDate: {
       type: Date,
@@ -33,3 +35,4 @@ const subscriptionSchema = new Schema(
 );
 
 export default mongoose.model("Subscription", subscriptionSchema);
+

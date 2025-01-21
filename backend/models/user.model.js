@@ -1,12 +1,16 @@
-import { Schema } from "mongoose";
-import mongoose from "mongoose";
 
+// User Schema
 const userSchema = new Schema(
   {
     clerkUserId: {
       type: String,
       required: true,
       unique: true,
+    },
+    subscription: {
+      type: Schema.Types.ObjectId,
+      ref: "Subscription",
+      required: false, // made optional
     },
     username: {
       type: String,
@@ -21,10 +25,12 @@ const userSchema = new Schema(
     img: {
       type: String,
     },
-    savedPosts: {
-      type: [String],
-      default: [],
-    },
+    savedPosts: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: "Post", // assuming you have a Post model
+      },
+    ],
   },
   { timestamps: true }
 );
