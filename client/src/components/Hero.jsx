@@ -16,13 +16,13 @@ const Hero = () => {
             #1 most
           </h1>
           <h1 className="text-4xl lg:text-5xl font-bold text-[var(--textColor)]">
-            downloaded <span className="text-blue-600">book </span>
+            popular <span className="text-blue-600">book </span>
           </h1>
           <h1 className="text-4xl lg:text-5xl font-bold text-[var(--textColor)]">
             <span className="text-blue-600">summary</span> app
           </h1>
           <p className="text-md md:text-xl text-[var(--textColor)]">
-            Achieve your goals with Headway by listening and reading the world’s best ideas
+            Achieve your goals with somaAI by listening and reading the world’s best ideas
           </p>
           <Link
             to="/login"

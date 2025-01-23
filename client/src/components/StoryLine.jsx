@@ -48,7 +48,7 @@ const StoryLine = () => {
           Get new knowledge easily
         </h1>
         <p className="mt-2 text-md md:text-xl">
-          Let’s check how many titles you can finish in a month with Headway! Tell us how
+          Let’s check how many titles you can finish in a month with somaAi! Tell us how
         </p>
         <p className="mt-2 text-md md:text-xl">
           much time you’d like to spend on reading:
