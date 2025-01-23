@@ -19,54 +19,11 @@ const fetchPosts = async (pageParam, searchParams) => {
 
 const FeaturedPosts = ({ setOpen }) => {
   const containerRef = useRef(null);
-  const [canScrollLeft, setCanScrollLeft] = useState(false);
-  const [canScrollRight, setCanScrollRight] = useState(false);
-
-  const updateScrollButtons = () => {
-    const container = containerRef.current;
-    if (container) {
-      setCanScrollLeft(container.scrollLeft > 0);
-      setCanScrollRight(
-        container.scrollWidth > container.clientWidth + container.scrollLeft
-      );
-    }
-  };
-
-  useEffect(() => {
-    const container = containerRef.current;
-  
-    const updateScroll = () => {
-      if (container) {
-        setCanScrollLeft(container.scrollLeft > 0);
-        setCanScrollRight(
-          container.scrollWidth > container.clientWidth + container.scrollLeft
-        );
-      }
-    };
-  
-    // Update buttons after rendering posts
-    if (data) {
-      const timeout = setTimeout(updateScroll, 0); // Delay to ensure layout is updated
-      return () => clearTimeout(timeout);
-    }
-  
-    if (container) {
-      container.addEventListener("scroll", updateScroll);
-      window.addEventListener("resize", updateScroll);
-    }
-  
-    return () => {
-      if (container) {
-        container.removeEventListener("scroll", updateScroll);
-      }
-      window.removeEventListener("resize", updateScroll);
-    };
-  }, [data]); // Re-run when `data` (posts) changes
-  
-  
+  const [showLeftButton, setShowLeftButton] = useState(false);
+  const [showRightButton, setShowRightButton] = useState(false);
 
   const scroll = (direction) => {
-    const scrollAmount = 200;
+    const scrollAmount = 200; // Adjust this value based on how much you want to scroll
     if (direction === "left") {
       containerRef.current.scrollBy({ left: -scrollAmount, behavior: "smooth" });
     } else {
@@ -74,6 +31,31 @@ const FeaturedPosts = ({ setOpen }) => {
     }
   };
 
+  const checkScrollPosition = () => {
+    if (!containerRef.current) return;
+
+    const { scrollLeft, scrollWidth, clientWidth } = containerRef.current;
+
+    // Show or hide left button
+    setShowLeftButton(scrollLeft > 0);
+
+    // Show or hide right button
+    setShowRightButton(scrollLeft + clientWidth < scrollWidth);
+  };
+
+  useEffect(() => {
+    // Check scroll position initially
+    checkScrollPosition();
+
+    // Add scroll event listener to container
+    const container = containerRef.current;
+    container.addEventListener("scroll", checkScrollPosition);
+
+    return () => {
+      container.removeEventListener("scroll", checkScrollPosition);
+    };
+  }, []);
+  
   const [searchParams] = useSearchParams();
 
   const {
