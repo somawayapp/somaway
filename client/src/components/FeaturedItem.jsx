@@ -2,7 +2,7 @@
 import { Link } from "react-router-dom";
 import Image from "./Image";
 import { format } from "timeago.js";
-import Search from "./Search2";
+import React, { useRef } from "react";
 
   // Truncate title based on screen size
 const FeaturedItem = ({ setOpen }) => {
