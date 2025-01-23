@@ -34,24 +34,35 @@ const FeaturedPosts = ({ setOpen }) => {
 
   useEffect(() => {
     const container = containerRef.current;
-    if (container) {
-      const updateScroll = () => {
+  
+    const updateScroll = () => {
+      if (container) {
         setCanScrollLeft(container.scrollLeft > 0);
         setCanScrollRight(
           container.scrollWidth > container.clientWidth + container.scrollLeft
         );
-      };
+      }
+    };
   
-      updateScroll(); // Check on mount
+    // Update buttons after rendering posts
+    if (data) {
+      const timeout = setTimeout(updateScroll, 0); // Delay to ensure layout is updated
+      return () => clearTimeout(timeout);
+    }
+  
+    if (container) {
       container.addEventListener("scroll", updateScroll);
       window.addEventListener("resize", updateScroll);
-  
-      return () => {
-        container.removeEventListener("scroll", updateScroll);
-        window.removeEventListener("resize", updateScroll);
-      };
     }
-  }, []);
+  
+    return () => {
+      if (container) {
+        container.removeEventListener("scroll", updateScroll);
+      }
+      window.removeEventListener("resize", updateScroll);
+    };
+  }, [data]); // Re-run when `data` (posts) changes
+  
   
 
   const scroll = (direction) => {
