@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 
 const categories = [
@@ -22,6 +22,8 @@ const categories = [
 
 const CategoriesScroll = ({ setOpen }) => {
   const containerRef = useRef(null);
+  const [showLeftButton, setShowLeftButton] = useState(false);
+  const [showRightButton, setShowRightButton] = useState(false);
 
   const scroll = (direction) => {
     const scrollAmount = 200; // Adjust this value based on how much you want to scroll
@@ -32,28 +34,53 @@ const CategoriesScroll = ({ setOpen }) => {
     }
   };
 
+  const checkScrollPosition = () => {
+    if (!containerRef.current) return;
+
+    const { scrollLeft, scrollWidth, clientWidth } = containerRef.current;
+
+    // Show or hide left button
+    setShowLeftButton(scrollLeft > 0);
+
+    // Show or hide right button
+    setShowRightButton(scrollLeft + clientWidth < scrollWidth);
+  };
+
+  useEffect(() => {
+    // Check scroll position initially
+    checkScrollPosition();
+
+    // Add scroll event listener to container
+    const container = containerRef.current;
+    container.addEventListener("scroll", checkScrollPosition);
+
+    return () => {
+      container.removeEventListener("scroll", checkScrollPosition);
+    };
+  }, []);
+
   return (
     <div className="relative">
       {/* Scroll Buttons */}
-      <button
-        onClick={() => scroll("left")}
-        className="absolute left-1  transform bg-[var(--shadow-color)] bg-opacity-5 rounded-full  py-2 px-4 z-10"
-        style={{ border: "none" }}
-      >
-<span className="text-white font-bold">&lt;</span>
-</button>
+      {showLeftButton && (
+        <button
+          onClick={() => scroll("left")}
+          className="absolute left-1 top-1/3 transform -translate-y-1/2 hidden md:block bg-[var(--shadow-color)] bg-opacity-5 rounded-full py-2 px-4 z-10"
+          style={{ border: "none" }}
+        >
+          <span className="text-white font-bold">&lt;</span>
+        </button>
+      )}
 
-
-
-
-   <button
-  onClick={() => scroll("right")}
-  className="absolute right-1  transform bg-[var(--shadow-color)]  bg-opacity-50 rounded-full py-2 px-4 z-10"
-  style={{ border: "none" }}
->
-  <span className="text-white font-bold"> &gt; </span> {/* Using &gt; for greater-than sign */}
-</button>
-
+      {showRightButton && (
+        <button
+          onClick={() => scroll("right")}
+          className="absolute right-1 top-1/3 transform -translate-y-1/2 hidden md:block bg-[var(--shadow-color)] bg-opacity-50 rounded-full py-2 px-4 z-10"
+          style={{ border: "none" }}
+        >
+          <span className="text-white font-bold">&gt;</span>
+        </button>
+      )}
 
       {/* Categories Container */}
       <div
