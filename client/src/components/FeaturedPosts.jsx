@@ -35,18 +35,24 @@ const FeaturedPosts = ({ setOpen }) => {
   useEffect(() => {
     const container = containerRef.current;
     if (container) {
-      updateScrollButtons();
-      container.addEventListener("scroll", updateScrollButtons);
-      window.addEventListener("resize", updateScrollButtons);
+      const updateScroll = () => {
+        setCanScrollLeft(container.scrollLeft > 0);
+        setCanScrollRight(
+          container.scrollWidth > container.clientWidth + container.scrollLeft
+        );
+      };
+  
+      updateScroll(); // Check on mount
+      container.addEventListener("scroll", updateScroll);
+      window.addEventListener("resize", updateScroll);
+  
+      return () => {
+        container.removeEventListener("scroll", updateScroll);
+        window.removeEventListener("resize", updateScroll);
+      };
     }
-
-    return () => {
-      if (container) {
-        container.removeEventListener("scroll", updateScrollButtons);
-      }
-      window.removeEventListener("resize", updateScrollButtons);
-    };
   }, []);
+  
 
   const scroll = (direction) => {
     const scrollAmount = 200;
@@ -87,7 +93,7 @@ const FeaturedPosts = ({ setOpen }) => {
       {canScrollLeft && (
         <button
           onClick={() => scroll("left")}
-          className="absolute left-1 top-1/3 transform -translate-y-1/2 hidden md:block bg-[var(--shadow-color)] bg-opacity-5 rounded-full py-2 px-4 z-10"
+          className="absolute left-1 top-1/2 transform -translate-y-1/2 hidden md:block bg-[var(--shadow-color)] bg-opacity-5 rounded-full py-2 px-4 z-10"
           style={{ border: "none" }}
         >
           <span className="text-white font-bold">&lt;</span>
@@ -96,7 +102,8 @@ const FeaturedPosts = ({ setOpen }) => {
       {canScrollRight && (
         <button
           onClick={() => scroll("right")}
-          className="absolute right-1 top-1/3 transform -translate-y-1/2 hidden md:block bg-[var(--shadow-color)] bg-opacity-50 rounded-full py-2 px-4 z-10"
+          className="absolute right-1 top-1/2 transform -translate-y-1/2 hidden md:block bg-[var(--shadow-color)] bg-opacity-50 
+          rounded-full py-2 px-4 z-10"
           style={{ border: "none" }}
         >
           <span className="text-white font-bold">&gt;</span>
@@ -106,7 +113,7 @@ const FeaturedPosts = ({ setOpen }) => {
       {/* Categories Container */}
       <div
         ref={containerRef}
-        className="flex overflow-x-auto"
+        className="flex scrollbar-hide overflow-x-auto"
         style={{ whiteSpace: "nowrap" }}
       >
         <InfiniteScroll
