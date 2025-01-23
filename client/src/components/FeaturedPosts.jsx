@@ -5,7 +5,8 @@
     import InfiniteScroll from "react-infinite-scroll-component";
     import { useSearchParams } from "react-router-dom";
     import FeaturedItem from "./FeaturedItem";
-    
+    import React, { useRef } from "react";
+
     
     
     const fetchPosts = async (pageParam, searchParams) => {
@@ -19,7 +20,19 @@
       
     
     
-    const FeaturedPosts = () => {
+
+      const FeaturedPosts = ({ setOpen }) => {
+        const containerRef = useRef(null);
+      
+        const scroll = (direction) => {
+          const scrollAmount = 200; // Adjust this value based on how much you want to scroll
+          if (direction === "left") {
+            containerRef.current.scrollBy({ left: -scrollAmount, behavior: "smooth" });
+          } else {
+            containerRef.current.scrollBy({ left: scrollAmount, behavior: "smooth" });
+          }
+        };
+
       const [searchParams] = useSearchParams();
     
       const {
@@ -44,6 +57,32 @@
       const allPosts = data?.pages?.flatMap((page) => page.posts) || [];
       
       return (
+        <div className="relative">
+        {/* Scroll Buttons */}
+        <button
+          onClick={() => scroll("left")}
+          className="absolute left-1  transform bg-[var(--shadow-color)] bg-opacity-5 rounded-full  py-2 px-4 z-10"
+          style={{ border: "none" }}
+        >
+  <span className="text-white font-bold">&lt;</span>
+  </button>
+  
+  
+  
+  
+     <button
+    onClick={() => scroll("right")}
+    className="absolute right-1  transform bg-[var(--shadow-color)]  bg-opacity-50 rounded-full py-2 px-4 z-10"
+    style={{ border: "none" }}
+  >
+    <span className="text-white font-bold"> &gt; </span> {/* Using &gt; for greater-than sign */}
+  </button>
+    {/* Categories Container */}
+    <div
+        ref={containerRef}
+        className="flex overflow-x-auto "
+        style={{ whiteSpace: "nowrap" }}
+      >
         <InfiniteScroll
           dataLength={allPosts.length}
           next={fetchNextPage}
@@ -57,6 +96,9 @@
             <p>No posts found.</p>
           )}
         </InfiniteScroll>
+        </div>
+
+        </div>
       );
       
     };
