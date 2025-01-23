@@ -20,7 +20,7 @@ const fetchPosts = async (pageParam, searchParams) => {
 const FeaturedPosts = ({ setOpen }) => {
   const containerRef = useRef(null);
   const [showLeftButton, setShowLeftButton] = useState(false);
-  const [showRightButton, setShowRightButton] = useState(false);
+  const [showRightButton, setShowRightButton] = useState(true);
 
   const scroll = (direction) => {
     const scrollAmount = 200; // Adjust this value based on how much you want to scroll
