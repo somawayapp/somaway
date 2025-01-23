@@ -55,7 +55,7 @@ const FeaturedPosts = ({ setOpen }) => {
       container.removeEventListener("scroll", checkScrollPosition);
     };
   }, []);
-  
+
   const [searchParams] = useSearchParams();
 
   const {
@@ -83,7 +83,7 @@ const FeaturedPosts = ({ setOpen }) => {
   return (
     <div className="relative">
       {/* Scroll Buttons */}
-      {canScrollLeft && (
+      {showLeftButton && (
         <button
           onClick={() => scroll("left")}
           className="absolute left-1 top-1/2 transform -translate-y-1/2 hidden md:block bg-[var(--shadow-color)] bg-opacity-5 rounded-full py-2 px-4 z-10"
@@ -92,7 +92,7 @@ const FeaturedPosts = ({ setOpen }) => {
           <span className="text-white font-bold">&lt;</span>
         </button>
       )}
-      {canScrollRight && (
+      {showRightButton && (
         <button
           onClick={() => scroll("right")}
           className="absolute right-1 top-1/2 transform -translate-y-1/2 hidden md:block bg-[var(--shadow-color)] bg-opacity-50 
@@ -119,7 +119,7 @@ const FeaturedPosts = ({ setOpen }) => {
           {allPosts.length > 0 ? (
             allPosts.map((post) => <FeaturedItem key={post._id} post={post} />)
           ) : (
-            <p>No posts found.</p>
+            <p> </p>
           )}
         </InfiniteScroll>
       </div>
