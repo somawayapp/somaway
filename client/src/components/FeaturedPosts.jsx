@@ -1,26 +1,7 @@
-import { useInfiniteQuery } from "@tanstack/react-query";
-import axios from "axios";
-import InfiniteScroll from "react-infinite-scroll-component";
-import { useSearchParams } from "react-router-dom";
-import FeaturedItem from "./FeaturedItem";
-import React, { useRef, useState, useEffect } from "react";
-
-const fetchPosts = async (pageParam, searchParams) => {
-  const searchParamsObj = Object.fromEntries([...searchParams]);
-
-  const res = await axios.get(
-    `${import.meta.env.VITE_API_URL}/posts?featured=true&limit=20&sort=newest`,
-    {
-      params: { page: pageParam, limit: 30, ...searchParamsObj },
-    }
-  );
-  return res.data;
-};
-
 const FeaturedPosts = ({ setOpen }) => {
   const containerRef = useRef(null);
   const [showLeftButton, setShowLeftButton] = useState(false);
-  const [showRightButton, setShowRightButton] = useState(true);
+  const [showRightButton, setShowRightButton] = useState(true); // Initially set to true
 
   const scroll = (direction) => {
     const scrollAmount = 200; // Adjust this value based on how much you want to scroll

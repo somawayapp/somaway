@@ -21,7 +21,7 @@ const FeaturedItem = ({ post }) => {
           
             <Link
               to={`/posts?category=${post.category}`}
-              className="text-[var(--softTextColor)] mt-1 md:mt-2 text-sm md:text-md font-semibold"
+              className="text-[var(--softTextColor)] mt-1 ml-2 md:mt-2 text-sm md:text-md font-semibold"
             >
               {post.category}
             </Link>
