@@ -100,7 +100,7 @@ const CategoriesScroll = ({ setOpen }) => {
               key={category}
               to={`/posts?cat=${slug}`}
               className="flex items-center justify-center text-[var(--textColor)] text-xs 
-              md:text-md bg-[var(--bd)]  shadow-2xl hover:bg-[var(--softTextColor7)] rounded-xl px-5 py-2 md:px-7 transition-all"
+              md:text-md bg-[var(--textColore)] shadow-2xl hover:bg-[var(--softTextColor7)] rounded-xl px-5 py-2 md:px-7 transition-all"
               onClick={() => setOpen(false)}
             >
               {/* Image for the category */}
