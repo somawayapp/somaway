@@ -32,16 +32,16 @@ const FeaturedPosts = ({ setOpen }) => {
 
   const checkScrollPosition = () => {
     if (!containerRef.current) return;
-
+  
     const { scrollLeft, scrollWidth, clientWidth } = containerRef.current;
-
+  
     // Show or hide left button
     setShowLeftButton(scrollLeft > 0);
-
-    // Show or hide right button
-    setShowRightButton(scrollLeft + clientWidth < scrollWidth);
+  
+    // Show right button initially, hide only if there's no scrollable content
+    setShowRightButton(scrollWidth > clientWidth);
   };
-
+  
   useEffect(() => {
     // Check scroll position initially
     checkScrollPosition();
