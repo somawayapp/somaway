@@ -146,7 +146,7 @@ const Homepage = () => {
 <Link
             to="/login"
             className="w-full items-center ml-4 md:ml-2 mr-4 text-center  text-md md:text-xl sm:w-auto px-4 md:px-6  py-3 md:py-3 bg-white 
-            text-black font-semibold  rounded-md hover:text-white hover:bg-blue-700"
+            text-black font-semibold  rounded-md hover:text-white hover:bg-black"
           >
             Get Started    
           </Link>

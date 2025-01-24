@@ -17,53 +17,50 @@ const fetchPosts = async (pageParam, searchParams) => {
   };
   
 
-  
-    const containerRef = useRef(null);
-    const [showLeftButton, setShowLeftButton] = useState(false);
-    const [showRightButton, setShowRightButton] = useState(true); // Always true initially
-  
-    const scroll = (direction) => {
-      const scrollAmount = 200; // Adjust this value based on how much you want to scroll
-      if (direction === "left") {
-        containerRef.current.scrollBy({ left: -scrollAmount, behavior: "smooth" });
-      } else {
-        containerRef.current.scrollBy({ left: scrollAmount, behavior: "smooth" });
-      }
-    };
-  
-    const checkScrollPosition = () => {
-      if (!containerRef.current) return;
-  
-      const { scrollLeft, scrollWidth, clientWidth } = containerRef.current;
-  
-      // Show or hide left button
-      setShowLeftButton(scrollLeft > 0);
-  
-      // Ensure the right button is only hidden when scrolled to the end
-      if (scrollWidth > clientWidth) {
-        setShowRightButton(scrollLeft + clientWidth < scrollWidth);
-      } else {
-        setShowRightButton(true); // Ensure it's visible when there's no overflow
-      }
-    };
-  
-    useEffect(() => {
-      // Check scroll position initially
-      checkScrollPosition();
-  
-      // Add scroll event listener to container
-      const container = containerRef.current;
-      container.addEventListener("scroll", checkScrollPosition);
-  
-      return () => {
-        container.removeEventListener("scroll", checkScrollPosition);
-      };
-    }, []);
-  
-  
 
 const PopularPosts = () => {
   const [searchParams] = useSearchParams();
+  const containerRef = useRef(null);
+  const [showLeftButton, setShowLeftButton] = useState(false);
+  const [showRightButton, setShowRightButton] = useState(true); // Always true initially
+
+  const scroll = (direction) => {
+    const scrollAmount = 200; // Adjust this value based on how much you want to scroll
+    if (direction === "left") {
+      containerRef.current.scrollBy({ left: -scrollAmount, behavior: "smooth" });
+    } else {
+      containerRef.current.scrollBy({ left: scrollAmount, behavior: "smooth" });
+    }
+  };
+
+  const checkScrollPosition = () => {
+    if (!containerRef.current) return;
+
+    const { scrollLeft, scrollWidth, clientWidth } = containerRef.current;
+
+    // Show or hide left button
+    setShowLeftButton(scrollLeft > 0);
+
+    // Ensure the right button is only hidden when scrolled to the end
+    if (scrollWidth > clientWidth) {
+      setShowRightButton(scrollLeft + clientWidth < scrollWidth);
+    } else {
+      setShowRightButton(true); // Ensure it's visible when there's no overflow
+    }
+  };
+
+  useEffect(() => {
+    // Check scroll position initially
+    checkScrollPosition();
+
+    // Add scroll event listener to container
+    const container = containerRef.current;
+    container.addEventListener("scroll", checkScrollPosition);
+
+    return () => {
+      container.removeEventListener("scroll", checkScrollPosition);
+    };
+  }, []);
 
   const {
     data,
@@ -130,8 +127,9 @@ const PopularPosts = () => {
       </InfiniteScroll>
     </div>
   </div>
- 
+    
      
+  
   );
   
 };
