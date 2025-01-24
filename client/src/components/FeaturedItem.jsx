@@ -20,7 +20,7 @@ const FeaturedItem = ({ post }) => {
             </Link>
           
             <Link
-              to={`/posts?category=${post.category}`}
+              to={`/discover?category=${post.category}`}
               className="text-[var(--softTextColor)] mt-1 ml-2  text-xs  font-semibold"
             >
               {post.category}

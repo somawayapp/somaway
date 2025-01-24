@@ -31,26 +31,26 @@ const MainCategories = () => {
                 Newsletter
               </Link>
               <Link
-                to="/posts?sort=newest"
+                to="/discover?sort=newest"
                 className="hover:bg-[var(--bg2)]  hover:text-[var(--textColor2)]  hover:text-[var(--textColor2)] rounded-full px-2 py-1"
               >
                 Latest
 
               </Link>
               <Link
-                to="/posts?sort=popular"
+                to="/discover?sort=popular"
                 className="hover:bg-[var(--bg2)]  hover:text-[var(--textColor2)]  rounded-full px-2 py-1"
               >
                 Most Popular
               </Link>
               <Link
-                to="/posts?sort=trending"
+                to="/discover?sort=trending"
                 className="hover:bg-[var(--bg2)]  hover:text-[var(--textColor2)]  rounded-full px-2 py-1"
               >
                 Top Trending
               </Link>
               <Link
-                              to="/posts?sort=oldest"
+                              to="/discover?sort=oldest"
 
                 className="hover:bg-[var(--bg2)]  hover:text-[var(--textColor2)]  rounded-full px-2 py-1"
               >
@@ -157,133 +157,133 @@ const MainCategories = () => {
     All Books
   </Link>
   <Link
-    to="/posts?cat=apps"
+    to="/discover?cat=apps"
     className="block py-2 text-white hover:bg-gray-500 p-2 rounded-xl"
   >
     Apps
   </Link>
   <Link
-    to="/posts?cat=software"
+    to="/discover?cat=software"
     className="block py-2 text-white hover:bg-gray-500 p-2 rounded-xl"
   >
     Software
   </Link>
   <Link
-    to="/posts?cat=health"
+    to="/discover?cat=health"
     className="block py-2 text-white hover:bg-gray-500 p-2 rounded-xl"
   >
     Health
   </Link>
   <Link
-    to="/posts?cat=climate"
+    to="/discover?cat=climate"
     className="block py-2 text-white hover:bg-gray-500 p-2 rounded-xl"
   >
     Climate
   </Link>
   <Link
-    to="/posts?cat=cloud"
+    to="/discover?cat=cloud"
     className="block py-2 text-white hover:bg-gray-500 p-2 rounded-xl"
   >
     Cloud
   </Link>
   <Link
-    to="/posts?cat=commerce"
+    to="/discover?cat=commerce"
     className="block py-2 text-white hover:bg-gray-500 p-2 rounded-xl"
   >
     Commerce
   </Link>
   <Link
-    to="/posts?cat=crypto"
+    to="/discover?cat=crypto"
     className="block py-2 text-white hover:bg-gray-500 p-2 rounded-xl"
   >
     Crypto
   </Link>
   <Link
-    to="/posts?cat=fintech"
+    to="/discover?cat=fintech"
     className="block py-2 text-white hover:bg-gray-500 p-2 rounded-xl"
   >
     Fintech
   </Link>
   <Link
-    to="/posts?cat=gaming"
+    to="/discover?cat=gaming"
     className="block py-2 text-white hover:bg-gray-500 p-2 rounded-xl"
   >
     Gaming
   </Link>
   <Link
-    to="/posts?cat=gadgets"
+    to="/discover?cat=gadgets"
     className="block py-2 text-white hover:bg-gray-500 p-2 rounded-xl"
   >
     Gadgets
   </Link>
   <Link
-    to="/posts?cat=security"
+    to="/discover?cat=security"
     className="block py-2 text-white hover:bg-gray-500 p-2 rounded-xl"
   >
     Security
   </Link>
   <Link
-    to="/posts?cat=space"
+    to="/discover?cat=space"
     className="block py-2 text-white hover:bg-gray-500 p-2 rounded-xl"
   >
     Space
   </Link>
   <Link
-    to="/posts?cat=startups"
+    to="/discover?cat=startups"
     className="block py-2 text-white hover:bg-gray-500 p-2 rounded-xl"
   >
     Startups
   </Link>
   <Link
-    to="/posts?cat=transportation"
+    to="/discover?cat=transportation"
     className="block py-2 text-white hover:bg-gray-500 p-2 rounded-xl"
   >
     Transportation
   </Link>
   <Link
-    to="/posts?cat=hardware"
+    to="/discover?cat=hardware"
     className="block py-2 text-white hover:bg-gray-500 p-2 rounded-xl"
   >
     Hardware
   </Link>
   <Link
-    to="/posts?cat=ai-robotics"
+    to="/discover?cat=ai-robotics"
     className="block py-2 text-white hover:bg-gray-500 p-2 rounded-xl"
   >
     AI & Robotics
   </Link>
   <Link
-    to="/posts?cat=entertainment"
+    to="/discover?cat=entertainment"
     className="block py-2 text-white hover:bg-gray-500 p-2 rounded-xl"
   >
     Entertainment
   </Link>
   <Link
-    to="/posts?cat=media"
+    to="/discover?cat=media"
     className="block py-2 text-white hover:bg-gray-500 p-2 rounded-xl"
   >
     Media
   </Link>
   <Link
-    to="/posts?cat=industrial"
+    to="/discover?cat=industrial"
     className="block py-2 text-white hover:bg-gray-500 p-2 rounded-xl"
   >
     Industrial
   </Link>
   <Link
-    to="/posts?cat=engineering"
+    to="/discover?cat=engineering"
     className="block py-2 text-white hover:bg-gray-500 p-2 rounded-xl"
   >
     Engineering
   </Link>
   <Link
-    to="/posts?cat=energy"
+    to="/discover?cat=energy"
     className="block py-2 text-white hover:bg-gray-500 p-2 rounded-xl"
   >
     Energy
   </Link>
   <Link
-    to="/posts?cat=science"
+    to="/discover?cat=science"
     className="block py-2 text-white hover:bg-gray-500 p-2 rounded-xl"
   >
     Science
@@ -296,20 +296,20 @@ const MainCategories = () => {
 
         <div>
           <Link
-            to="/posts?sort=newest"
+            to="/discover?sort=newest"
             className="block py-2 text-white hover:bg-gray-500 p-2 rounded-xl "
           >Newest          </Link>
           <Link
-            to="/posts?sort=popular"
+            to="/discover?sort=popular"
             className="block py-2 text-white hover:bg-gray-500 p-2 rounded-xl"
           > Popular          </Link>
           <Link
-            to="/posts?sort=trending"
+            to="/discover?sort=trending"
             className="block py-2 text-white hover:bg-gray-500 p-2 rounded-xl"
           > Trending
           </Link>
           <Link
-            to="/posts?sort=oldest"
+            to="/discover?sort=oldest"
             className="block py-2 text-white hover:bg-gray-500 p-2 rounded-xl"
               > Oldest         </Link>
         

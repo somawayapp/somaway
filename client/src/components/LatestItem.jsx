@@ -23,7 +23,7 @@ const LatestItem = ({ post }) => {
             </Link>
           
             <Link
-              to={`/posts?category=${post.category}`}
+              to={`/discover?category=${post.category}`}
               className="text-[var(--textColor)] ml-2 mt-1 text-xs font-semibold"
             >
               {post.category}
