@@ -105,7 +105,7 @@ const Homepage = () => {
    <CategoriesScroll />
 
 
-   <div className=" bg-[var(--textColore)] rounded-2xl p-3  md:p-6 mt-0 md:mt-4">
+   <div className=" bg-[var(--bd)]  shadow-2xl rounded-2xl p-3  md:p-6 mt-0 md:mt-4">
      
 
      {/* Featured Section Title */}

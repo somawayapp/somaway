@@ -126,7 +126,7 @@ const StoryLine = () => {
   ].map((review, index) => (
     <div
       key={index}
-      className="bg-[var(--textColore)] shadow-md rounded-2xl p-4 md:px-8  flex flex-col items-center text-center"
+      className="bg-[var(--bd)] shadow-2xl rounded-3xl p-4 md:px-8  flex flex-col items-center text-center"
     >
       <div className="flex gap-1 mb-2">
         {Array(5)
@@ -164,7 +164,7 @@ const StoryLine = () => {
         Experience unlimited acces to our exclusive book summaries 
               </p>
         <p className="mt-2 text-md md:text-xl">
-          on a premium model for only $5.99 per month :
+          on a premium model for only $4.99 per month :
         </p>
         <Link to="/premium">
         <button
@@ -172,7 +172,7 @@ const StoryLine = () => {
         px-8 rounded-[40px] cursor-pointer hover:text-black hover:bg-white"
 >
 
-        $5.99 US/month
+        $4.99 US/month
       </button>
         
         </Link>

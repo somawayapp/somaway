@@ -58,7 +58,7 @@ const AboutPage = () => {
         ].map((item, index) => (
           <div
             key={index}
-            className="bg-[var(--bd)] shadow-lg rounded-2xl md:rounded-[20px] p-4 md:px-8 flex flex-col items-start text-left relative"
+            className="bg-[var(--bd)] shadow-2xl rounded-2xl md:rounded-[20px] p-4 md:px-8 flex flex-col items-start text-left relative"
           >
             {/* Icon */}
             <img
@@ -85,14 +85,19 @@ const AboutPage = () => {
 <div className=" bg-[#7a00da]  bg-cover bg-no-repeat" style={{ backgroundImage: "url('/bg.svg')" }}>
 
 
-  <div className="flex flex-col pl-2 pt-12 md:pt-0  md:pl-[100px] lg:pl-[200px] md:flex-row items-center justify-between  z-10 text-[var(--textColor)]">
+  <div className="flex flex-col pl-2 pt-12 md:pt-0  md:pl-[100px] lg:pl-[200px] md:flex-row items-center justify-between  z-10 text-black">
     <div className="flex-1  text-center  md:text-left">
       <h3 className="text-3xl md:text-5xl font-bold mb-4">How did the idea of SomaAI come?</h3>
       <p className="text-sm md:text-lg max-w-md mb-6">
         Ever since I can remember, self-education has been a significant part of my life. I wanted to learn so many things but couldn’t find the most efficient, productive, and enjoyable tool for self-growth. Also, I’ve realized that there’re millions of inquiring minds with the same problem as mine. So what was the best solution? To create such a tool for each of us. That's how the SomaAI app appeared. Later on, we grew into a multiproduct startup.
       </p>
-      <img src="/love.svg" alt="Love" className="w-8 mx-auto h-8 mb-6" />
-      <p className="font-semibold text-md">Lexanda Mbelenzi</p>
+      <img 
+  src="/love.svg" 
+  alt="Love" 
+  className="w-8 h-8 mb-6 mx-auto md:mx-0 md:ml-0" 
+/>
+
+       <p className="font-semibold text-md">Lexanda Mbelenzi</p>
       <p className="text-sm text-opacity-80">SomaAI CEO and founder</p>
     </div>
 
@@ -132,7 +137,7 @@ const AboutPage = () => {
         ].map((item, index) => (
           <div
             key={index}
-            className="bg-[var(--bd)] shadow-lg rounded-2xl md:rounded-[20px] p-4 md:px-8 flex flex-col items-start text-left relative"
+            className="bg-[var(--bd)] shadow-2xl rounded-2xl md:rounded-[20px] p-4 md:px-8 flex flex-col items-start text-left relative"
           >
             {/* Icon */}
             <img
