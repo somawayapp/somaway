@@ -33,12 +33,13 @@ const FeaturedPosts = ({ setOpen }) => {
   const checkScrollPosition = () => {
     if (!containerRef.current) return;
 
-    const { scrollLeft } = containerRef.current;
+    const { scrollLeft, scrollWidth, clientWidth } = containerRef.current;
 
     // Show or hide left button
     setShowLeftButton(scrollLeft > 0);
 
-    // Right button logic is skipped to keep it always visible
+    // Show or hide right button
+    setShowRightButton(scrollLeft + clientWidth < scrollWidth);
   };
 
   useEffect(() => {
@@ -53,6 +54,8 @@ const FeaturedPosts = ({ setOpen }) => {
       container.removeEventListener("scroll", checkScrollPosition);
     };
   }, []);
+
+
 
 
   const [searchParams] = useSearchParams();
