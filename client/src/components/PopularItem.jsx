@@ -24,7 +24,7 @@ const PopularItem = ({ post }) => {
           
             <Link
               to={`/posts?category=${post.category}`}
-              className="text-[var(--textColor)] ml-2 text-xs font-semibold"
+              className="text-[var(--textColor)] ml-2 mt-1 text-xs font-semibold"
             >
               {post.category}
             </Link>

@@ -10,7 +10,7 @@ const fetchPosts = async (pageParam, searchParams) => {
   const searchParamsObj = Object.fromEntries([...searchParams]);
 
   const res = await axios.get(`${import.meta.env.VITE_API_URL}/posts`, {
-    params: { page: pageParam, limit: 30, ...searchParamsObj }, // Changed limit to 30
+    params: { page: pageParam, limit: 3, ...searchParamsObj }, // Changed limit to 30
   });
   return res.data;
 };
@@ -52,7 +52,7 @@ return (
   {allPosts.length > 0 ? (
     allPosts.map((post) => <PostListItem key={post._id} post={post} />)
   ) : (
-    <p>No posts found.</p>
+    <p></p>
   )}
 </InfiniteScroll>
 
