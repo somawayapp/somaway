@@ -85,7 +85,7 @@ const AboutPage = () => {
 <div className=" bg-[#7a00da]  bg-cover bg-no-repeat" style={{ backgroundImage: "url('/bg.svg')" }}>
 
 
-  <div className="flex flex-col pl-2 pt-12 md:pt-0  md:pl-[100px] lg:pl-[200px] md:flex-row items-center justify-between  z-10 text-black">
+  <div className="flex flex-col pl-2 pr-2 pt-12 md:pt-0  md:pl-[100px] lg:pl-[200px] md:flex-row items-center justify-between  z-10 text-black">
     <div className="flex-1  text-center  md:text-left">
       <h3 className="text-3xl md:text-5xl font-bold mb-4">How did the idea of SomaAI come?</h3>
       <p className="text-sm md:text-lg max-w-md mb-6">
