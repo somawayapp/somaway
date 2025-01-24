@@ -1,14 +1,11 @@
 
 import { useState } from "react";
 import { useLocation } from "react-router-dom"; // Import useLocation from react-router-dom
-import PostList from "../components/PostList";
-import SideMenu from "../components/SideMenu";
 import Search from "../components/Search";
 import { Link } from "react-router-dom";
-import Sidebar from "../components/Sidebar2";
-import MainCategories from "../components/MainCategories";
 import Navbar from "../components/Navbar";
 import CategoriesScroll from "../components/CategoriesScroll";
+import Discover from "../components/Discover";
 
 const PostListPage = () => {
   const [open, setOpen] = useState(false);
@@ -54,7 +51,7 @@ const PostListPage = () => {
       <div className="w-full  pr-0  text-[var(--textColor)] ">
      
 <div className="flex justify-between mb-5  md:mb-[30px] flex-row " >
-<h1 style={{  zIndex: "10000"}} className=" lg:text-[30px] text-xl ml-2 text-[var(--textColor)] font-bold">
+<h1 style={{  zIndex: "10000"}} className=" lg:text-[30px] mb-5  md:mb-[30px] text-xl ml-2 text-[var(--textColor)] font-bold">
         {`Book liblary - ${displayText}`}
       </h1>
       <Search />
@@ -62,7 +59,7 @@ const PostListPage = () => {
 </div>
    
 
-      <PostList />
+      <Discover />
     </div>
 
 </div>
