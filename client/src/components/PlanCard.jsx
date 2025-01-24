@@ -14,7 +14,7 @@ const PlanCard = () => {
     <div className="md:p-[30px]">
       <div className="relative w-full rounded-3xl md:rounded-[30px] text-[var(--textColor)] 
       text-center flex flex-col items-center justify-center animate-fadeIn">
-        <div className="h-full p-2 md:p-4">
+        <div className="h-full p-1 md:p-4">
           <h1 className="text-3xl md:text-6xl font-bold">Choose Your Plan</h1>
           <p className="mt-2 text-md md:text-xl">
             Enjoy unlimited access to book summaries tailored for you.
@@ -23,7 +23,7 @@ const PlanCard = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 text--[var(--bg)] gap-6 mt-10 w-full px-4">
             {/* Monthly Plan */}
             <div
-              className="bg-[var(--bd)] shadow-2xl rounded-2xl p-1 md:p-6 flex flex-col items-center text-center transition-shadow hover:shadow-lg border-[var(--textColore)]"
+              className="bg-[var(--bd)] shadow-2xl rounded-2xl p-2 md:p-6 flex flex-col items-center text-center transition-shadow hover:shadow-lg border-[var(--textColore)]"
             >
               <p className="mt-3 text-md text-[var(--softTextColor)] mb-2 border border-2 border-[var(--softTextColor)] py-2 px-3 rounded-[20px] font-semibold">
                 Monthly Plan
@@ -67,7 +67,7 @@ const PlanCard = () => {
 
             {/* Annual Plan */}
             <div
-              className="bg-[var(--bd)] shadow-2xl rounded-2xl p-1 md:p-6 flex flex-col items-center text-center transition-shadow hover:shadow-lg border-2 border-[var(--textColore)]"
+              className="bg-[var(--bd)] shadow-2xl rounded-2xl p-2 md:p-6 flex flex-col items-center text-center transition-shadow hover:shadow-lg border-2 border-[var(--textColore)]"
             
             >
               <div className="flex items-center justify-center gap-2 mb-3">
