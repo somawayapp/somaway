@@ -29,7 +29,6 @@ const FeaturedPosts = ({ setOpen }) => {
       containerRef.current.scrollBy({ left: scrollAmount, behavior: "smooth" });
     }
   };
-
   const checkScrollPosition = () => {
     if (!containerRef.current) return;
   
@@ -38,31 +37,33 @@ const FeaturedPosts = ({ setOpen }) => {
     // Show or hide left button
     setShowLeftButton(scrollLeft > 0);
   
-    // Show right button initially, hide only if there's no scrollable content
+    // Keep the right button visible by default, hide only if no scrollable content
     setShowRightButton(scrollWidth > clientWidth);
   };
   
   useEffect(() => {
-    const timeout = setTimeout(() => {
-      checkScrollPosition();
-    }, 0); // Delay execution to let the DOM update
+    // Always show the right button on load
+    setShowRightButton(true);
   
-    return () => clearTimeout(timeout); // Cleanup timeout on unmount
+    const timeout = setTimeout(() => {
+      checkScrollPosition(); // Adjust visibility after DOM updates
+    }, 0); // Delay to allow rendering
+  
+    return () => clearTimeout(timeout);
   }, [data]);
   
-  
   useEffect(() => {
-    // Check scroll position initially
-    checkScrollPosition();
-
-    // Add scroll event listener to container
     const container = containerRef.current;
+    if (!container) return;
+  
+    // Add scroll listener
     container.addEventListener("scroll", checkScrollPosition);
-
+  
     return () => {
       container.removeEventListener("scroll", checkScrollPosition);
     };
   }, []);
+  
 
   const [searchParams] = useSearchParams();
 
