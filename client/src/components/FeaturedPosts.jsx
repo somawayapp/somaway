@@ -38,8 +38,12 @@ const FeaturedPosts = ({ setOpen }) => {
     // Show or hide left button
     setShowLeftButton(scrollLeft > 0);
 
-    // Show or hide right button
-    setShowRightButton(scrollLeft + clientWidth < scrollWidth);
+    // Ensure the right button is only hidden when scrolled to the end
+    if (scrollWidth > clientWidth) {
+      setShowRightButton(scrollLeft + clientWidth < scrollWidth);
+    } else {
+      setShowRightButton(true); // Ensure it's visible when there's no overflow
+    }
   };
 
   useEffect(() => {
