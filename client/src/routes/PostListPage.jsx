@@ -53,10 +53,14 @@ const PostListPage = () => {
       <div className="flex flex-row  text-[var(--textColor)] justify-between">
       <div className="w-full  pr-0  text-[var(--textColor)] ">
      
-
-    <h1 style={{  zIndex: "10000"}} className="mb-5  md:mb-[30px] lg:text-[30px] text-xl ml-2 text-[var(--textColor)] font-bold">
+<div className="flex justify-between flex-row " >
+<h1 style={{  zIndex: "10000"}} className="mb-5  md:mb-[30px] lg:text-[30px] text-xl ml-2 text-[var(--textColor)] font-bold">
         {`Book liblary - ${displayText}`}
       </h1>
+      <Search />
+
+</div>
+   
 
       <PostList />
     </div>

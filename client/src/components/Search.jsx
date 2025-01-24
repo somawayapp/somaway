@@ -16,26 +16,36 @@ const Search = () => {
     }
   };
 
-  return (<div className="bg-[#fefefe] p-2 rounded-full  border border-gray-300 flex items-center gap-2 focus-within:ring-2 focus-within:ring-gray-300">
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      viewBox="0 0 24 24"
-      width="20"
-      height="20"
-      fill="none"
-      stroke="gray"
+  return (
+    <div
+      className="bg-[var(--textColore)] p-2 rounded-xl  border border-[var(--textColore4)] flex items-center gap-2 
+      focus-within:ring-1 focus-within:ring-border-[var(--textColore4)]"
+      style={{
+        maxWidth: "550px",
+        minWidth: "50px",
+        
+        flex: "1 1 auto",
+      }}
     >
-      <circle cx="10.5" cy="10.5" r="7.5" />
-      <line x1="16.5" y1="16.5" x2="22" y2="22" />
-    </svg>
-    <input
-      type="text"
-      placeholder="search a post..."
-      className="bg-transparent  text-black outline-none"
-      onKeyDown={handleKeyPress}
-    />
-  </div>
-  
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 24 24"
+        width="20"
+        height="20"
+        fill="none"
+        stroke="gray"
+        className="flex-shrink-0"
+      >
+        <circle cx="10.5" cy="10.5" r="7.5" />
+        <line x1="16.5" y1="16.5" x2="22" y2="22" />
+      </svg>
+      <input
+        type="text"
+        placeholder="search a post..."
+        className="bg-transparent text-sm outline-none w-full"
+        onKeyDown={handleKeyPress}
+      />
+    </div>
   );
 };
 

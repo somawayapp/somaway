@@ -125,7 +125,10 @@ const Navbar = () => {
 
 
         <div >
-        
+        <Link
+            to="/discover"
+            className="block py-2 text-[var(--TextColor)]  hover:bg-gray-500 p-2 rounded-xl"
+   onClick={() => setOpen(false)}          > Discover          </Link>
           <Link
             to="/premium"
             className="block py-2 text-[var(--TextColor)]  hover:bg-gray-500 p-2 rounded-xl"
@@ -180,7 +183,8 @@ const Navbar = () => {
       {/* DESKTOP MENU */}
       <div className="hidden md:flex items-center gap-8 xl:gap-12  font-medium">
 
-<Link className="hover:text-blue-700 " to="/" onClick={() => setOpen(false)} >Home</Link>
+          <Link className="hover:text-blue-700 " to="/" onClick={() => setOpen(false)} >Home</Link>
+           <Link className="hover:text-blue-700 " to="/discover" onClick={() => setOpen(false)}> Discover</Link>
           <Link className="hover:text-blue-700 " to="/premium" onClick={() => setOpen(false)}> Premium</Link>
           <Link className="hover:text-blue-700 " to="/settings" onClick={() => setOpen(false)}>Settings</Link>
           <Link className="hover:text-blue-700 " to="/write" onClick={() => setOpen(false)}>Write</Link>
