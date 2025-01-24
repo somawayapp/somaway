@@ -9,7 +9,7 @@ const fetchPosts = async (pageParam, searchParams) => {
   const searchParamsObj = Object.fromEntries([...searchParams]);
 
   const res = await axios.get(
-    `${import.meta.env.VITE_API_URL}/posts?featured=true&limit=20&sort=newest`,
+    `${import.meta.env.VITE_API_URL}/posts?featured=true&limit=30&sort=newest`,
     {
       params: { page: pageParam, limit: 30, ...searchParamsObj },
     }
