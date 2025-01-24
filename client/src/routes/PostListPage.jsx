@@ -8,6 +8,7 @@ import { Link } from "react-router-dom";
 import Sidebar from "../components/Sidebar2";
 import MainCategories from "../components/MainCategories";
 import Navbar from "../components/Navbar";
+import CategoriesScroll from "../components/CategoriesScroll";
 
 const PostListPage = () => {
   const [open, setOpen] = useState(false);
@@ -30,11 +31,17 @@ const PostListPage = () => {
     cat ? `Category: ${cat}` : "", // Display 'cat' if present
   ]
     .filter(Boolean) // Remove empty strings
-    .join(" | ") || "All Posts"; // Default to "All Posts" if no filters are applied
+    .join(" | ") || "All books"; // Default to "All Books" if no filters are applied
 
   return (
     <div  className="  ">
        <Navbar/>
+       <div className="mt-2 md:mt-5">
+       <CategoriesScroll/>
+
+       </div>
+
+       
    {/*
 
 <div  style={{ zIndex: 100004 }} className="mb-[22px] md:mb-[25px] mt-[15px] md:mt-[20px] sticky top-0.5 md:top-2 ">
@@ -44,19 +51,16 @@ const PostListPage = () => {
 <div   className="mb-[22px] md:mb-[25px] mt-[15px] md:mt-[20px] sticky top-0.5 md:top-2 "></div>
 
       <div className="flex flex-row  text-[var(--textColor)] justify-between">
-      <div className="w-full md:w-3/4 pr-0  text-[var(--textColor)] md:pr-10">
+      <div className="w-full  pr-0  text-[var(--textColor)] ">
      
 
-    <h1 style={{  zIndex: "10000"}} className="mb-5  md:mb-[30px] lg:text-[30px] text-xl ml-2   text-[#1da1f2] font-bold">
+    <h1 style={{  zIndex: "10000"}} className="mb-5  md:mb-[30px] lg:text-[30px] text-xl ml-2 text-[var(--textColor)] font-bold">
         {`Book liblary - ${displayText}`}
       </h1>
 
       <PostList />
     </div>
-    <div className={`${open ? "block" : "hidden"} lg:mt-[30px] md:block w-1/4`}>
-        <SideMenu />
 
-    </div>
 </div>
  </div>
   );

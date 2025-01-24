@@ -21,7 +21,8 @@ const ThemeToggler = () => {
   return (
     <button
       onClick={toggleTheme}
-      className="p-2 rounded-full  bg-[#1da1f2]  t-white transition-colors flex items-center justify-center"
+      className="px-10 py-4 rounded-full  bg-[var(--bg)]   text-[var(--textColor)] hover:text-[var(--bg)] hover:bg-[var(--textColor)]
+       transition-colors flex items-center justify-center"
     >
       {theme === "light" ? (
         // Moon icon for dark mode

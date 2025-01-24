@@ -39,7 +39,7 @@ const router = createBrowserRouter([
         element: <Homepage />,
       },
       {
-        path: "/posts",
+        path: "/discover",
         element: <PostListPage />,
       },
       {

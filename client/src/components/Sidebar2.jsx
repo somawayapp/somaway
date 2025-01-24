@@ -64,7 +64,7 @@ const Sidebar = () => {
         <div className="flex pb-9 flex-col gap-3 text-sm text-right">
           {[
           
-              { label: "All Posts", category: "general" },
+              { label: "All Books", category: "general" },
               { label: "Apps", category: "apps" },
               { label: "Software", category: "software" },
               { label: "Health", category: "health" },

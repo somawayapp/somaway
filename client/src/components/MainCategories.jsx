@@ -154,7 +154,7 @@ const MainCategories = () => {
     to="/posts"
     className="block py-2 text-white hover:bg-gray-500 p-2 rounded-xl"
   >
-    All Posts
+    All Books
   </Link>
   <Link
     to="/posts?cat=apps"

@@ -1,46 +1,46 @@
 import { Link } from "react-router-dom";
 import ThemeToggler from "../components/Theme";
 import { SignedIn, SignedOut, UserButton } from "@clerk/clerk-react";
-
+import Navbar from "../components/Navbar";
 const SettingsPage = () => {
   return (
-    <div className="mt-4  flex flex-col gap-12">
-      {/* BREADCRUMB */}
-      <div className="flex gap-2 text-sm text-[var(--textColor)]">
-        <Link to="/" className="hover:text-blue-800">
-          Home
-        </Link>
-        <span>•</span>
-        <span className="text-[#1da1f2]">Settings</span>
-      </div>
+    <div>
+    <Navbar/>
 
-      {/* INTRODUCTION */}
-      <div className="text-center flex flex-col gap-4">
-        <h1 className="text-[#1da1f2] text-3xl md:text-4xl lg:text-5xl font-bold">
-          Settings
-        </h1>
-        
 
-      
-      </div>
 
-      {/* TESTIMONIALS */}
-      <div>
-        <h2 className="text-[var(--textLogo)] text-3xl font-semibold mb-4 text-center">
-       Edit your profile        </h2>
+
+    <div
+         className="relative bg-[#7a00da] mt-[20px] md:mt-[50px] w-full rounded-3xl md:rounded-[30px] shadow-md 
+           text-[var(--bg)] text-center animate-fadeIn flex flex-col items-center justify-center"
+       >
+         <div className="h-full p-2  box-border">
+           <h1 className="text-3xl md:text-6xl  mt-[20px] md:mt-[70px] font-bold">
+             Settings
+           </h1>
+           <p className="mt-2 text-md md:text-xl">
+           Click the profile image to edit your info or logout!
+                 </p>
+           <p className="mt-2 text-md md:text-xl">
+             Profile settings
+           </p>
+
+           <div >
+       
         <div className="grid gap-6">
-          {["Profile settings"].map((name, i) => (
+          {[""].map((name, i) => (
             <div
               key={i}
-              className="flex flex-col items-center gap-4 bg-[var(--textColore)] p-6 rounded-lg shadow-lg"
+              className="flex flex-col items-center  gap-4 p-6  "
             >
               
               {/* Circular Profile Image */}
               <div className=" item-center overflow-hidden">
               <SignedOut>
           <Link to="/login">
-            <button className="py-2 px-4 rounded-3xl bg-[#1DA1F2] text-white">
-              Login 👋
+            <button     className="bg-[var(--bg)] text-[var(--textColor)] py-4 text-extrabold text-xl md:text-2xl 
+               px-8 rounded-[40px] cursor-pointer hover:bg-[var(--textColor)] hover:text-[var(--bg)] ">
+              Login 
             </button>
           </Link>
         </SignedOut>
@@ -50,26 +50,26 @@ const SettingsPage = () => {
         </SignedIn>
               </div>
 
-              {/* Name and Feedback */}
-              <h3 className="text-lg font-medium text-[var(--textColor)] text-center">
+              <h3 className="text-lg font-medium text-[var(--bg)] text-center">
                 {name}
               </h3>
-              <p className="text-sm text-[var(--textColor)] text-center italic">
-Click on the profile image to edit your profile/ <span className=" text-[#1da1f2]  hover:text-[#0875b9]">  <Link to="/login">  Login</Link>   </span>               </p>
+              <p className="text-sm text-[var(--bg)] text-center italic">
+             Click on the profile image to edit your profile/ <span className=" text-[var(--textColor)]  hover:text-blue-700]">  
+              <Link to="/login">  Login</Link>   </span>               </p>
             </div>
           ))}
         </div>
       </div>
-
-      {/* CALL TO ACTION */}
-      <div className="mt-6 text-center">
-        <h3 className="text-[var(--textLogo)] text-xl font-semibold mb-2">
+          
+         </div>
+         <div className="mt-6 text-center">
+        <h3 className="text-[var(--bg)] text-xl font-semibold mb-2">
           Change color theme?
         </h3>
-        <p className="text-md text-[var(--textColor)] leading-relaxed">
+        <p className="text-md text-[var(--bg)] leading-relaxed">
 Click on the toogle button below to the chnage the theme between light mode and dark mode        </p>
         <Link
-          className="mt-4 inline-block px-6 mb-[35px] py-2 bg-[#1da1f2]  rounded-full font-medium hover:bg-[#0875b9] transition duration-300"
+          className="mt-4 inline-block  mb-[35px]  font-medium  transition duration-300"
         >
                    <ThemeToggler />
 
@@ -78,8 +78,12 @@ Click on the toogle button below to the chnage the theme between light mode and 
 
       </div>
 
-      
-    </div>
+       </div>
+   
+
+
+        </div>
+
   );
 };
 
