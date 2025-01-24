@@ -124,7 +124,7 @@ const TrendingPosts = () => {
 
         >
           {allPosts.length > 0 ? (
-            allPosts.map((post) => <FeaturedItem key={post._id} post={post} />)
+            allPosts.map((post) => <TrendingItem key={post._id} post={post} />)
           ) : (
             <p> </p>
           )}
