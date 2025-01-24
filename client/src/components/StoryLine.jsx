@@ -55,7 +55,7 @@ const StoryLine = () => {
         </p>
         <button
           className="mt-9 bg-black text-white py-4 text-extrabold text-2xl md:text-5xl 
-            px-8 rounded-[40px] cursor-pointer hover:bg-gray-200"
+            px-8 rounded-[40px] cursor-pointer hover:bg-blue-700"
         >
           30 titles/month
         </button>
@@ -115,13 +115,13 @@ const StoryLine = () => {
           <div className="grid grid-cols-1 mx-auto max-w-[1200px] md:grid-cols-3 gap-6 mt-8 w-full px-4">
   {[
     {
-      text: "Everything you need to be motivated, to learn & to self improve is all here. I actually do appreciate the reminders because otherwise this wouldn’t work for me. Thank you.",
+      text: "Everything you need to be motivated, to learn & to self improve is all here. I actually do believe that this is the best book summuary app. This works very good for me. Thank you.",
     },
     {
-      text: "The selections are on point and the summaries are excellent! I listen while I walk my pup 🐶 and have in turn, ordered a few selections! REALLY loving the app, its layout, daily selections and features!",
+      text: "The selections are on point and the summaries are excellent! I read them at all times 🐶 and have in turn, ordered a few selections! REALLY loving the app, its layout, daily selections and features!",
     },
     {
-      text: "The app is so easy to use. I use it while driving or cooking and it's great. I love the fact that the chapters are short, so you can finish them quickly. Very knowledgeable.",
+      text: "The app is so easy to use. I use it after school and it's great. I love the fact that the chapters are short, so you can finish them quickly. Very knowledgeable.",
     },
   ].map((review, index) => (
     <div

@@ -1,169 +1,179 @@
-
 import { Link } from "react-router-dom";
+import Navbar from "../components/Navbar";
+import Footer from "../components/Footer";
+import { FaStar } from 'react-icons/fa';
+import PlanCard from "../components/PlanCard";
 
-const PremiumPage = () => {
+
+const AboutPage = () => {
+
+
   return (
-    <div className="mt-4  flex flex-col gap-12">
-      {/* BREADCRUMB */}
-      <div className="flex gap-2 text-sm text-[var(--textColor)]">
-        <Link to="/" className="hover:text-blue-800">
-          Home
-        </Link>
-        <span>•</span>
-        <span className="text-[#1da1f2]">About Us</span>
+    <div>
+<Navbar/>     
+
+
+
+      <div
+         className="relative bg-[#7a00da] mt-[20px] md:mt-[50px] w-full rounded-3xl md:rounded-[30px] shadow-md 
+           text-white text-center animate-fadeIn flex flex-col items-center justify-center"
+       >
+         <div className="h-full p-2  max-w-[900px] mx-auto box-border">
+           <h1 className="text-3xl md:text-6xl mt-[20px] md:mt-[70px] font-bold">
+            About SomaAI
+                   </h1>
+           <p className="mt-2 text-md md:text-xl">
+            SomaAi is a global EdTech startup with african roots. We are mission driven and passionate about self-improvement                  </p>
+        
+        
+         </div>
+         <img
+           src="/summary.png"
+           alt="Centered Illustration"
+           className="h-[100px] md:h-[400px] mx-auto "
+         />
+       </div>
+   
+
+   <div >
+  
+   
+   <div className="flex flex-col items-center justify-center">
+  <div>
+    <div className="flex flex-col items-center justify-center mb-[40px] pt-9 pb-9 rounded-2xl gap-5">
+      <div className="grid grid-cols-1 mx-auto md:grid-cols-3 gap-6 mt-8 w-full px-4">
+        {[
+          {
+            text: "2021 – SomaAI founded by Lexanda Mbelenzi",
+            icon: "rocket.svg",
+          },
+          {
+            text: "SomaAI has grown from a 3-person startup into a team of 250+ people in 3 years",
+            icon: "smile.svg",
+          },
+          {
+            text: "Now, SomaAI has offices in London, Nairobi, and San Francisco.",
+            icon: "pin.svg",
+          },
+        ].map((item, index) => (
+          <div
+            key={index}
+            className="bg-[var(--bd)] shadow-lg rounded-2xl md:rounded-[20px] p-4 md:px-8 flex flex-col items-start text-left relative"
+          >
+            {/* Icon */}
+            <img
+              src={item.icon}
+              alt="icon"
+              className="absolute top-4 left-4 w-12 h-12 md:w-20 md;h-20"
+            />
+            {/* Text */}
+            <p className="text-lg md:text-2xl font-bold text-[var(--textColor)] mt-[70px] md:mt-[150px] ">
+              {item.text}
+            </p>
+          </div>
+        ))}
       </div>
-
-      {/* INTRODUCTION */}
-      <div className="text-center flex flex-col gap-4">
-        <h1 className="text-[#1da1f2] text-3xl md:text-4xl lg:text-5xl font-bold">
-About Us    </h1>
-        <p className="text-md md:text-xl text-[var(--textColor)] leading-relaxed">
-        Discover what's happening now
-        </p>
-
-      
-      </div>
-
-<div className=" items-center gap-4 bg-[var(--textColore)] p-6 rounded-lg shadow-lg">
-
-
-      <h2 className="text-[var(--textColor2)] text-3xl mt-[20px] font-semibold mb-4 text-center">
-            Who WeAre        </h2>
-        <p className="text-md md:text-md text-center text-[var(--textColor)] mb-[30px] leading-relaxed">
-        Welcome to soma, your trusted source for insightful news and
-          updates on the tech world. Our mission is to keep you informed,
-          inspired, and ahead of the curve in just 5 minutes a day.
-        </p>
-
-      {/* FEATURES */}
-      <div >
-        <h2 className="text-[var(--textColor2)]  mb-4 text-3xl font-semibold  text-center"
->
-          Our Vission
-        </h2>
-                  <p className="text-md md:text-md text-center text-[var(--textColor)] mb-[30px] leading-relaxed">
-        To be the leading platform for tech enthusiasts and professionals,
-          bridging the gap between complex technologies and everyday life. Our
-          vision is to inspire curiosity and fuel progress in the digital age.</p>
-      </div>
-
-
-
-
-</div>
-
-
-
-
-      {/* TESTIMONIALS */}
-
-      <div>
-  <h2 className="text-[var(--textLogo)] text-3xl font-semibold mb-4 text-center">
-Meet The Team  </h2>
-  <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-    {/* Testimonial 1 */}
-    <div className="flex flex-col items-center gap-4 bg-[var(--textColore)] p-6 rounded-lg shadow-lg">
-      {/* Circular Profile Image */}
-      <div className="w-24 h-24 rounded-full overflow-hidden">
-        <img
-          src="/profile.jpg"
-          alt="Shaan Puri"
-          className="w-full h-full object-cover"
-        />
-      </div>
-      {/* Name and Feedback */}
-      <h3 className="text-lg font-medium text-[var(--textColor)] text-center">
-         Mbelenzi Lexanda      </h3>
-      <p className="text-sm text-[var(--textColor)] text-center italic"> 
-        Chief Editor      </p>
-    </div>
-
-    {/* Testimonial 2 */}
-    <div className="flex flex-col items-center gap-4 bg-[var(--textColore)] p-6 rounded-lg shadow-lg">
-      {/* Circular Profile Image */}
-      <div className="w-24 h-24 rounded-full overflow-hidden">
-        <img
-          src="/profile3.jpg"
-          alt="James Oomondi"
-          className="w-full h-full object-cover"
-        />
-      </div>
-      {/* Name and Feedback */}
-      <h3 className="text-lg font-medium text-[var(--textColor)] text-center">
-      James Omondi     </h3>
-      <p className="text-sm text-[var(--textColor)] text-center italic">
-        Senoir Editor      </p>
-    </div>
-
-    {/* Testimonial 3 */}
-    <div className="flex flex-col items-center gap-4 bg-[var(--textColore)] p-6 rounded-lg shadow-lg">
-      {/* Circular Profile Image */}
-      <div className="w-24 h-24 rounded-full overflow-hidden">
-        <img
-          src="/profile2.jpg"
-          alt="Mitchell Mukami"
-          className="w-full h-full object-cover"
-        />
-      </div>
-      {/* Name and Feedback */}
-      <h3 className="text-lg font-medium text-[var(--textColor)] text-center">
-       Mitchell Mukami      </h3>
-      <p className="text-sm text-[var(--textColor)] text-center italic">
-        Lead Writter      </p>
     </div>
   </div>
 </div>
 
+   
+   
+   
+    
+   
+<div className=" bg-[#7a00da]  bg-cover bg-no-repeat" style={{ backgroundImage: "url('/bg.svg')" }}>
 
-      {/* CALL TO ACTION */}
-      <div className="mt-6 text-center">
+
+  <div className="flex flex-col pl-2 pt-12 md:pt-0  md:pl-[100px] lg:pl-[200px] md:flex-row items-center justify-between  z-10 text-[var(--textColor)]">
+    <div className="flex-1  text-center  md:text-left">
+      <h3 className="text-3xl md:text-5xl font-bold mb-4">How did the idea of SomaAI come?</h3>
+      <p className="text-sm md:text-lg max-w-md mb-6">
+        Ever since I can remember, self-education has been a significant part of my life. I wanted to learn so many things but couldn’t find the most efficient, productive, and enjoyable tool for self-growth. Also, I’ve realized that there’re millions of inquiring minds with the same problem as mine. So what was the best solution? To create such a tool for each of us. That's how the SomaAI app appeared. Later on, we grew into a multiproduct startup.
+      </p>
+      <img src="/love.svg" alt="Love" className="w-8 mx-auto h-8 mb-6" />
+      <p className="font-semibold text-md">Lexanda Mbelenzi</p>
+      <p className="text-sm text-opacity-80">SomaAI CEO and founder</p>
+    </div>
+
+    {/* Adjust vertical alignment with self-start or self-end */}
+    <div className=" self-end  z-10">
+      <img src="/ceo.png" alt="CEO" className=" h-[500px] top-[115px] md:top-[153px]  mt-0 md:mt-[300px] object-cover" />
+    </div>
+  </div>
 
 
-      {/* CONTACT US */}
-      <div>
-        <h2 className="text-[var(--textColor2)]  text-2xl font-semibold mb-4 text-center">
-          Contact Us
-        </h2>
-    <p className="text-md md:text-md text-[var(--textColor)]  leading-relaxed text-center">
-          Have questions, feedback, or ideas? We’d love to hear from you! Reach
-          out to us at
+</div>
 
-          <a
-            href="mailto:somanewsletter@gmail.com"
-            className="text-[#1da1f2] pl-1 underline ml-1"
+<div className= "bg-[#7a00da] rounded-b-2xl h-[20vh]">
+
+</div>
+
+   
+   
+
+<div className="flex flex-col items-center justify-center">
+  <div>
+    <div className="flex flex-col items-center justify-center mb-[40px] pt-9 pb-9 rounded-2xl gap-5">
+      <div className="grid grid-cols-1 mx-auto md:grid-cols-3 gap-6 mt-8 w-full px-4">
+        {[
+          {
+            text: "Who we are – SomaAI is a non-fiction book summary app",
+            icon: "negotiation.webp",
+          },
+          {
+            text: "Mission - Empower every curious mind with the tools to learn, grow, and create.",
+            icon: "business-and-career.webp",
+          },
+          {
+            text: "Vission - To become the world’s leading platform for self-education and growth.",
+            icon: "self-growth.webp",
+          },
+        ].map((item, index) => (
+          <div
+            key={index}
+            className="bg-[var(--bd)] shadow-lg rounded-2xl md:rounded-[20px] p-4 md:px-8 flex flex-col items-start text-left relative"
           >
-            somanewsletter@gmail.com
-
-          </a>
-
-          .
-        </p>
-<p>
-or call our hotline +254703394794
-
-</p>
+            {/* Icon */}
+            <img
+              src={item.icon}
+              alt="icon"
+              className="absolute top-4 left-4 w-12 h-18 md:w-20 md;h-30"
+            />
+            {/* Text */}
+            <p className="text-lg md:text-2xl font-bold text-[var(--textColor)] mt-[70px] md:mt-[150px] ">
+              {item.text}
+            </p>
+          </div>
+        ))}
       </div>
+    </div>
+  </div>
+</div>
+   
+<div className="flex items-center justify-center text-[var(--textColor)] mx-auto">
+  <div className="text-center">
+    <p className="mt-2 text-sm md:text-lg">
+      Contact us @soma.ai@gmail.com or call +254 703 394794
+    </p>
+    <button
+      className="mt-9 bg-[var(--textColor)] text-[var(--bg)] py-4 text-extrabold text-xl md:text-3xl 
+        px-8 rounded-[40px] cursor-pointer hover:bg-white hover:text-black"
+    >
+      Discover
+    </button>
+  </div>
+</div>
 
-      {/* CTA - Subscribe to Newsletter */}
-      <div className="mt-6 text-center">
-        <h3 className="text-[var(--textLogo)] text-xl font-semibold mb-2">
-          Stay Updated
-        </h3>
-        <p className="text-md text-[var(--textColor)]  leading-relaxed">
-          Subscribe to soma and get your daily dose of tech news in just 5
-          minutes.
-        </p>
-        <Link
-          to="/newsletter"
-          className="mt-4 inline-block px-6 py-2 bg-[#1da1f2]  mb-[150px] text-white rounded-full font-medium hover:bg-blue-700 transition duration-300"
-        >
-          Subscribe Now
-        </Link>
-      </div>
+    
+         
    </div>
+   <Footer/>     
+
     </div>
   );
-};
+}
 
-export default PremiumPage;
+
+export default AboutPage;
 
