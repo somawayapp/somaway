@@ -19,7 +19,7 @@ const fetchPosts = async (pageParam, searchParams) => {
 const FeaturedPosts = ({ setOpen }) => {
   const containerRef = useRef(null);
   const [showLeftButton, setShowLeftButton] = useState(false);
-  const [showRightButton, setShowRightButton] = useState(true); // Initially set to true
+  const [showRightButton, setShowRightButton] = useState(true); // Always true initially
 
   const scroll = (direction) => {
     const scrollAmount = 200; // Adjust this value based on how much you want to scroll
@@ -29,41 +29,31 @@ const FeaturedPosts = ({ setOpen }) => {
       containerRef.current.scrollBy({ left: scrollAmount, behavior: "smooth" });
     }
   };
+
   const checkScrollPosition = () => {
     if (!containerRef.current) return;
-  
-    const { scrollLeft, scrollWidth, clientWidth } = containerRef.current;
-  
+
+    const { scrollLeft } = containerRef.current;
+
     // Show or hide left button
     setShowLeftButton(scrollLeft > 0);
-  
-    // Keep the right button visible by default, hide only if no scrollable content
-    setShowRightButton(scrollWidth > clientWidth);
+
+    // Right button logic is skipped to keep it always visible
   };
-  
+
   useEffect(() => {
-    // Always show the right button on load
-    setShowRightButton(true);
-  
-    const timeout = setTimeout(() => {
-      checkScrollPosition(); // Adjust visibility after DOM updates
-    }, 0); // Delay to allow rendering
-  
-    return () => clearTimeout(timeout);
-  }, [data]);
-  
-  useEffect(() => {
+    // Check scroll position initially
+    checkScrollPosition();
+
+    // Add scroll event listener to container
     const container = containerRef.current;
-    if (!container) return;
-  
-    // Add scroll listener
     container.addEventListener("scroll", checkScrollPosition);
-  
+
     return () => {
       container.removeEventListener("scroll", checkScrollPosition);
     };
   }, []);
-  
+
 
   const [searchParams] = useSearchParams();
 
