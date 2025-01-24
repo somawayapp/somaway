@@ -11,7 +11,7 @@ const Hero = () => {
     <div className="flex flex-col mt-0 md:mt-4">
       <div className="flex flex-col lg:flex-row lg:h-[60vh] gap-[100px] mt-4">
         {/* Left Section */}
-        <div className="lg:w-1/2 flex flex-col mt-0 md:mt-[500px] items-start gap-1 md:gap-4 rounded-md">
+        <div className="lg:w-1/2 flex flex-col mt-0 md:mt-9 items-start gap-1 md:gap-4 rounded-md">
           <h1 className="text-4xl lg:text-5xl font-bold text-[var(--textColor)]">
             #1 most
           </h1>
