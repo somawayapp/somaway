@@ -43,6 +43,15 @@ const FeaturedPosts = ({ setOpen }) => {
   };
   
   useEffect(() => {
+    const timeout = setTimeout(() => {
+      checkScrollPosition();
+    }, 0); // Delay execution to let the DOM update
+  
+    return () => clearTimeout(timeout); // Cleanup timeout on unmount
+  }, [data]);
+  
+  
+  useEffect(() => {
     // Check scroll position initially
     checkScrollPosition();
 
