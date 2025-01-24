@@ -12,14 +12,14 @@ const Sidebar = () => {
     const currentParams = new URLSearchParams(searchParams);
     currentParams.set("sort", newSort); // Set the new sort filter
     setSearchParams(currentParams, { replace: true }); // Update URL
-    navigate(`/posts?${currentParams.toString()}`); // Navigate to the new URL
+    navigate(`/discover?${currentParams.toString()}`); // Navigate to the new URL
   };
   
   const handleCategoryChange = (category) => {
     const currentParams = new URLSearchParams(searchParams);
     currentParams.set("cat", category); // Set the new category
     setSearchParams(currentParams, { replace: true }); // Update URL
-    navigate(`/posts?${currentParams.toString()}`); // Navigate to the new URL
+    navigate(`/discover?${currentParams.toString()}`); // Navigate to the new URL
     setSelectedCategory(category); // Update the selected category state
   };
   
