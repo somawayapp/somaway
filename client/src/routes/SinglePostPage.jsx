@@ -45,7 +45,7 @@ const SinglePostPage = () => {
         )}
 
         <div className="lg:w-2/4 flex flex-col gap-2">
-        <p className="  text-[var(--softerTextColor)]  ">
+        <p className="  text-[var(--softTextColor)]  ">
           SUMMARY OF
         </p>
           <h1 className="text-xl md:text-4xl font-semibold">
@@ -57,12 +57,12 @@ const SinglePostPage = () => {
             <span>Category</span>
             <Link>{data.category}</Link>
           </div>
-           <div className="flex gap-0 flex-row">
-               <FaStar  className="text-orange-500 w-[40px] text-orange-500"  />
-               <FaStar  className="text-orange-500 w-[40px] text-orange-500"  />
-               <FaStar  className="text-orange-500 w-[40px] text-orange-500"  />
-               <FaStar  className="text-orange-500 w-[40px] text-orange-500"  />
-               <FaStar  className="text-orange-500 w-[40px] text-orange-500"  />
+           <div className="flex flex-row">
+               <FaStar  className="text-orange-500 w-[40px] text-orange-500 ml-[-2] "   />
+               <FaStar  className="text-orange-500 w-[40px] text-orange-500  ml-[-2]"  />
+               <FaStar  className="text-orange-500 w-[40px] text-orange-500  ml-[-2]"  />
+               <FaStar  className="text-orange-500 w-[40px] text-orange-500  ml-[-2]"  />
+               <FaStar  className="text-orange-500 w-[40px] text-orange-500  ml-[-2]"  />
 
            </div>
            <p className="mt-5 text-lg md:text-xl font-bold">
