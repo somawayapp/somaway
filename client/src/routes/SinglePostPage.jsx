@@ -54,16 +54,31 @@ const SinglePostPage = () => {
             </div>
           </div>
 
-          <div className="w-full md:w-1/4 flex flex-col gap-2">
-            <p className="text-md md:text-xl font-bold">Table of contents</p>
-            <PostMenuActions post={data} />
+      
 
-            <p className="text-md md:text-xl mt-[20px] font-bold">What you will learn</p>
-            <Comments postId={data._id} />
-          </div>
-        </div>
+          <p
+          className="text-[var(--textColor)] text-[15px] mb-[50px] md:text-[18px] text-justify "
+          dangerouslySetInnerHTML={{ __html: data.desc }} 
+         />      
+
       </div>
+      <div className="lg:w-1/4 flex flex-col gap-2">
+      <p className="text-md md:text-xl  font-bold ">
+        Table of contents
+      </p>
+      <PostMenuActions post={data}/>
+
+      <p className="text-md md:text-xl mt-[20px] font-bold ">
+        What you  will learn
+      </p>
+      <Comments postId={data._id}/>
+
+        </div>
+     
+      </div>
+   
     </div>
+
   );
 };
 
