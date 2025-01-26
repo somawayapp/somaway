@@ -58,15 +58,15 @@ const SinglePostPage = () => {
             <Link>{data.category}</Link>
           </div>
            <div className="flex flex-row">
-               <FaStar  className="text-orange-500 w-[40px] text-orange-500 ml-[-2] "   />
-               <FaStar  className="text-orange-500 w-[40px] text-orange-500  ml-[-2]"  />
-               <FaStar  className="text-orange-500 w-[40px] text-orange-500  ml-[-2]"  />
-               <FaStar  className="text-orange-500 w-[40px] text-orange-500  ml-[-2]"  />
-               <FaStar  className="text-orange-500 w-[40px] text-orange-500  ml-[-2]"  />
+               <FaStar  className="text-orange-500 w-[40px] text-orange-500 ml-[-5px] "   />
+               <FaStar  className="text-orange-500 w-[40px] text-orange-500  ml-[-5px]"  />
+               <FaStar  className="text-orange-500 w-[40px] text-orange-500  ml-[-5px]"  />
+               <FaStar  className="text-orange-500 w-[40px] text-orange-500  ml-[-5px]"  />
+               <FaStar  className="text-orange-500 w-[40px] text-orange-500  ml-[-5px]"  />
 
            </div>
-           <p className="mt-5 text-lg md:text-xl font-bold">
-           A short summary
+           <p className="mt-5 text-xl md:text-2xl font-bold">
+           Short summary
           </p>
 
           <p
