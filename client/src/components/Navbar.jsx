@@ -51,7 +51,7 @@ const Navbar = () => {
 
      <Link
             to="/discover"
-            className="w-full text-center mt-0 sm:w-auto px-4 py-2 md:py-2 bg-blue-600 text-white
+            className="w-full text-center mt-3 md:mt-0 sm:w-auto px-4 py-2 md:py-2 bg-blue-600 text-white
             text-xs font-semibold rounded-md hover:bg-blue-700"
           >
             Get Started
@@ -61,7 +61,7 @@ const Navbar = () => {
         
         {/* MOBILE BUTTON */}
         <div
-          className="cursor-pointer text-[var(--textColor)]  text-sm"
+          className="cursor-pointer text-[var(--textColor)] mt-6 text-sm"
           onClick={() => setOpen((prev) => !prev)}
         >
           <div className="flex flex-col gap-1">
@@ -190,7 +190,7 @@ const Navbar = () => {
           <Link className="hover:text-blue-700 " to="/about" onClick={() => setOpen(false)}>About Us</Link>
           <Link
             to="/login"
-            className="w-full text-center mt-0 sm:w-auto px-4 py-3 md:py-2 bg-blue-600 text-white
+            className="w-full text-center mt-3 md:mt-0 sm:w-auto px-4 py-3 md:py-2 bg-blue-600 text-white
             text-sm font-semibold rounded-md hover:bg-blue-700"
           >
             Get Started

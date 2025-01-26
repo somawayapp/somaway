@@ -32,7 +32,7 @@ const SinglePostPage = () => {
       <div className="flex flex-col p-2 md:p-8 mt-[10px] border-t border-t-[var(--textColore)] gap-4">
       <div className="flex flex-col md:flex-row gap-4 md:gap-8">
           {data.img && (
-            <div className="w-full md:w-1/4 flex justify-center md:block">
+            <div className="w-full md:w-1/4 mt-2 md:mt-0 flex justify-center md:block">
              <Image
              src={data.img}
                 className=" w-[250px] md:w-[400px] rounded-2xl"
