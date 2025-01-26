@@ -33,18 +33,18 @@ const SinglePostPage = () => {
     <div>
      <Navbar/>
 
-    <div className="flex flex-col gap-8">
+    <div className="flex flex-col  mt-[50px] gap-4">
         
 
       <div className="flex gap-2">
 
       {data.img && (
           <div className=" w-2/8">
-            <Image src={data.img} w="300" className="rounded-2xl" />
+            <Image src={data.img} w="400" className="rounded-2xl" />
           </div>
         )}
 
-        <div className="lg:w-4/8 flex flex-col gap-8">
+        <div className="lg:w-4/8 flex flex-col gap-2">
           <h1 className="text-xl md:text-3xl font-semibold">
             {data.title}
           </h1>
@@ -61,7 +61,7 @@ const SinglePostPage = () => {
          />      
 
       </div>
-      <div className="lg:w-2/8 flex flex-col gap-8">
+      <div className="lg:w-2/8 flex flex-col gap-2">
       <p>
         Table of contents
       </p>
