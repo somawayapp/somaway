@@ -34,38 +34,37 @@ const SinglePostPage = () => {
           {data.img && (
             <div className="w-full md:w-1/4 flex justify-center md:block">
              <Image
-                src={data.img}
-                className="w-full sm:w-150 md:w-[400px] rounded-2xl"
+             src={data.img}
+                className=" sm:w-80 md:w-[400px] rounded-2xl"
                 />
 
              </div>
           )}
 
-          <div className="flex flex-col gap-2 items-center md:items-start md:w-2/4">
+          <div className="flex flex-col gap-1 md:gap-2 items-center md:items-start md:w-2/4">
             <p className="text-[var(--softTextColor2)] text-center md:text-left">
               SUMMARY OF
             </p>
             <h1 className="text-xl md:text-4xl font-semibold text-center md:text-left">
               {data.title}
             </h1>
-            <div className="flex flex-col md:flex-row items-center gap-2 text-[var(--softTextColor)] text-md md:text-lg">
-              <div className="flex gap-2">
+            <div className="flex flex-col md:flex-row items-center gap-1 md:gap-2 text-[var(--softTextColor)] text-md md:text-lg">
+              <div className="flex  gap-1 md:gap-2">
                 <span>Book by</span>
                 <Link>{data.user.username}</Link>
-              </div>
-              <div className="flex gap-2">
+             
                 <span>Category</span>
                 <Link>{data.category}</Link>
               </div>
             </div>
             <div className="flex flex-row justify-center md:justify-start mt-2">
-              <FaStar className="text-orange-500 w-[40px] ml-[-5px]" />
-              <FaStar className="text-orange-500 w-[40px] ml-[-5px]" />
-              <FaStar className="text-orange-500 w-[40px] ml-[-5px]" />
-              <FaStar className="text-orange-500 w-[40px] ml-[-5px]" />
-              <FaStar className="text-orange-500 w-[40px] ml-[-5px]" />
+              <FaStar className="text-orange-500 w-[40px] ml-[-25px]" />
+              <FaStar className="text-orange-500 w-[40px] ml-[-25px]" />
+              <FaStar className="text-orange-500 w-[40px] ml-[-25px]" />
+              <FaStar className="text-orange-500 w-[40px] ml-[-25px]" />
+              <FaStar className="text-orange-500 w-[40px] ml-[-25px]" />
             </div>
-            <p className="mt-5 text-xl md:text-2xl font-bold">
+            <p className="mt-5 text-xl md:text-2xl text-left font-bold">
               Short summary
             </p>
             <p
