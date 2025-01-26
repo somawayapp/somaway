@@ -33,7 +33,7 @@ const SinglePostPage = () => {
     <div>
      <Navbar/>
 
-    <div className="flex flex-col  mt-[20px] gap-4">
+    <div className="flex flex-col shadow-2xl p-[1px] md:p-5 mt-[20px] gap-4">
         
 
       <div className="flex gap-4 md:gap-8">
