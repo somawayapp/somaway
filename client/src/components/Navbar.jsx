@@ -30,7 +30,7 @@ const Navbar = () => {
 
     
      // Modify or remove z-index here
-     <div style={{ zIndex: 100004 }}  className="relative w-full h-[45px] gap-4 flex items-center text-[var(--TextColor)]
+     <div style={{ zIndex: 100004 }}  className="relative w-full h-[45px] md:h-[55px] gap-4 flex items-center text-[var(--TextColor)]
       sticky top-0 justify-between bg-[var(--bg)]">
    
    
@@ -61,7 +61,7 @@ const Navbar = () => {
         
         {/* MOBILE BUTTON */}
         <div
-          className="cursor-pointer text-[var(--textColor)] mt-6 text-sm"
+          className="cursor-pointer text-[var(--textColor)]  text-sm"
           onClick={() => setOpen((prev) => !prev)}
         >
           <div className="flex flex-col gap-1">
@@ -190,7 +190,7 @@ const Navbar = () => {
           <Link className="hover:text-blue-700 " to="/about" onClick={() => setOpen(false)}>About Us</Link>
           <Link
             to="/login"
-            className="w-full text-center mt-3 md:mt-0 sm:w-auto px-4 py-3 md:py-2 bg-blue-600 text-white
+            className="w-full text-center mt-0 sm:w-auto px-4 py-3 md:py-2 bg-blue-600 text-white
             text-sm font-semibold rounded-md hover:bg-blue-700"
           >
             Get Started
