@@ -35,7 +35,7 @@ const SinglePostPage = () => {
             <div className="w-full md:w-1/4 flex justify-center md:block">
              <Image
              src={data.img}
-                className=" w-[140px] md:w-[400px] rounded-2xl"
+                className=" w-[250px] md:w-[400px] rounded-2xl"
                 />
 
              </div>
