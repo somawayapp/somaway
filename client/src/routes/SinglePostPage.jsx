@@ -29,13 +29,13 @@ const SinglePostPage = () => {
     <div>
       <Navbar />
 
-      <div className="flex flex-col shadow-2xl p-[1px] md:p-8 mt-[10px] gap-4">
+      <div className="flex flex-col p-2 md:p-8 mt-[10px] gap-4">
         <div className="flex flex-col md:flex-row gap-4 md:gap-8">
           {data.img && (
             <div className="w-full md:w-1/4 flex justify-center md:block">
              <Image
              src={data.img}
-                className=" sm:w-80 md:w-[400px] rounded-2xl"
+                className=" sm:w-140 md:w-[400px] rounded-2xl"
                 />
 
              </div>
@@ -58,13 +58,13 @@ const SinglePostPage = () => {
               </div>
             </div>
             <div className="flex flex-row justify-center md:justify-start mt-2">
-              <FaStar className="text-orange-500 w-[40px] ml-[-25px]" />
-              <FaStar className="text-orange-500 w-[40px] ml-[-25px]" />
-              <FaStar className="text-orange-500 w-[40px] ml-[-25px]" />
-              <FaStar className="text-orange-500 w-[40px] ml-[-25px]" />
-              <FaStar className="text-orange-500 w-[40px] ml-[-25px]" />
+              <FaStar className="text-orange-500 w-[40px] " />
+              <FaStar className="text-orange-500 w-[40px] ml-[-15px]" />
+              <FaStar className="text-orange-500 w-[40px] ml-[-15px]" />
+              <FaStar className="text-orange-500 w-[40px] ml-[-15px]" />
+              <FaStar className="text-orange-500 w-[40px] ml-[-15px]" />
             </div>
-            <p className="mt-5 text-xl md:text-2xl text-left font-bold">
+            <p className="mt-5 text-xl md:text-2xl text-justify font-bold">
               Short summary
             </p>
             <p
