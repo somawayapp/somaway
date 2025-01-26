@@ -36,7 +36,7 @@ const SinglePostPage = () => {
 
       {data.img && (
           <div className="hidden lg:block w-2/5">
-            <Image src={data.img} w="30" className="rounded-2xl" />
+            <Image src={data.img} w="300" className="rounded-2xl" />
           </div>
         )}
 
