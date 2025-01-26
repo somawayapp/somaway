@@ -33,7 +33,7 @@ const SinglePostPage = () => {
     <div>
      <Navbar/>
 
-    <div className="flex flex-col shadow-2xl p-[1px] md:p-5 mt-[20px] gap-4">
+    <div className="flex flex-col shadow-3xl p-[1px] md:p-8 mt-[10px] gap-4">
         
 
       <div className="flex gap-4 md:gap-8">
@@ -54,12 +54,12 @@ const SinglePostPage = () => {
             <span>Category</span>
             <Link>{data.category}</Link>
           </div>
-           <div className="flex gap-1 flex-row">
-               <FaStar  className="text-orange-500 w-[30px] text-orange-500"  />
-               <FaStar  className="text-orange-500 w-[30px] text-orange-500"  />
-               <FaStar  className="text-orange-500 w-[30px] text-orange-500"  />
-               <FaStar  className="text-orange-500 w-[30px] text-orange-500"  />
-               <FaStar  className="text-orange-500 w-[30px] text-orange-500"  />
+           <div className="flex flex-row">
+               <FaStar  className="text-orange-500 w-[40px] text-orange-500"  />
+               <FaStar  className="text-orange-500 w-[40px] text-orange-500"  />
+               <FaStar  className="text-orange-500 w-[40px] text-orange-500"  />
+               <FaStar  className="text-orange-500 w-[40px] text-orange-500"  />
+               <FaStar  className="text-orange-500 w-[40px] text-orange-500"  />
 
            </div>
            <p className="mt-5 text-lg md:text-xl font-bold">
@@ -73,7 +73,7 @@ const SinglePostPage = () => {
 
       </div>
       <div className="lg:w-1/4 flex flex-col gap-2">
-      <p className="text-md md:text-xl mt-2 font-bold ">
+      <p className="text-md md:text-xl  font-bold ">
         Table of contents
       </p>
 
