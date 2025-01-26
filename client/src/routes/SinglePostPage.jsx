@@ -10,7 +10,7 @@ import { useQuery } from "@tanstack/react-query";
 import { format } from "timeago.js";
 import MainCategories from "../components/MainCategories";
 import Navbar from "../components/Navbar";
-
+import { FaStar } from "react-icons/fa";
 
 const fetchPost = async (slug) => {
   const res = await axios.get(`${import.meta.env.VITE_API_URL}/posts/${slug}`);
@@ -33,10 +33,10 @@ const SinglePostPage = () => {
     <div>
      <Navbar/>
 
-    <div className="flex flex-col  mt-[50px] gap-4">
+    <div className="flex flex-col  mt-[20px] gap-4">
         
 
-      <div className="flex gap-2">
+      <div className="flex gap-4 md:gap-8">
 
       {data.img && (
           <div className=" w-1/4">
@@ -45,25 +45,40 @@ const SinglePostPage = () => {
         )}
 
         <div className="lg:w-2/4 flex flex-col gap-2">
-          <h1 className="text-xl md:text-3xl font-semibold">
+          <h1 className="text-xl md:text-4xl font-semibold">
             {data.title}
           </h1>
-          <div className="flex items-center gap-2 text-gray-400 text-sm">
+          <div className="flex items-center gap-2 text-gray-400 text-sm md:text-md ">
             <span>Book by</span>
-            <Link className="text-blue-800">{data.user.username}</Link>
+            <Link >{data.user.username}</Link>
             <span>Category</span>
-            <Link className="text-blue-800">{data.category}</Link>
+            <Link>{data.category}</Link>
           </div>
+           <div className="flex gap-2 flex-row">
+               <FaStar  className="text-yellow-500 w-[25px] text-orange-500"  />
+               <FaStar  className="text-yellow-500 w-[25px] text-orange-500"  />
+               <FaStar  className="text-yellow-500 w-[25px] text-orange-500"  />
+               <FaStar  className="text-yellow-500 w-[25px] text-orange-500"  />
+               <FaStar  className="text-yellow-500 w-[25px] text-orange-500"  />
+
+           </div>
+          <p className="mt-5  text-md md:text-lg text-bold">
+           A short summary
+          </p>
 
           <p
-          className="text-[var(--textColor)] text-[14px] mb-[50px] md:text-[16px] text-justify mt-2"
+          className="text-[var(--textColor)] text-[16px] mb-[50px] md:text-[20px] text-justify mt-2"
           dangerouslySetInnerHTML={{ __html: data.desc }} 
          />      
 
       </div>
       <div className="lg:w-1/4 flex flex-col gap-2">
-      <p>
+      <p className="text-sm md:text-md text-bold ">
         Table of contents
+      </p>
+
+      <p className="text-sm md:text-md mt-[20px] text-bold ">
+        What you  will learn
       </p>
         </div>
      
