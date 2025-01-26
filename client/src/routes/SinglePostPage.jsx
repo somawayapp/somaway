@@ -33,7 +33,7 @@ const SinglePostPage = () => {
     <div>
      <Navbar/>
 
-    <div className="flex flex-col shadow-t-2xl p-[1px] md:p-8 mt-[10px] gap-4">
+    <div className="flex flex-col shadow-2xl p-[1px] md:p-8 mt-[10px] gap-4">
         
 
       <div className="flex gap-4 md:gap-8">
@@ -45,6 +45,9 @@ const SinglePostPage = () => {
         )}
 
         <div className="lg:w-2/4 flex flex-col gap-2">
+        <p className="  text-[var(--softerTextColor)]  ">
+          SUMMARY OF
+        </p>
           <h1 className="text-xl md:text-4xl font-semibold">
             {data.title}
           </h1>
@@ -54,7 +57,7 @@ const SinglePostPage = () => {
             <span>Category</span>
             <Link>{data.category}</Link>
           </div>
-           <div className="flex gap-[0.5px] flex-row">
+           <div className="flex gap-0 flex-row">
                <FaStar  className="text-orange-500 w-[40px] text-orange-500"  />
                <FaStar  className="text-orange-500 w-[40px] text-orange-500"  />
                <FaStar  className="text-orange-500 w-[40px] text-orange-500"  />
