@@ -29,7 +29,7 @@ const SinglePostPage = () => {
     <div>
       <Navbar />
 
-      <div className="flex flex-col p-2 md:p-8 mt-[10px] border-t border-t-[var(--textColor)] gap-4">
+      <div className="flex flex-col p-2 md:p-8 mt-[10px] border-t border-t-[var(--textColore)] gap-4">
       <div className="flex flex-col md:flex-row gap-4 md:gap-8">
           {data.img && (
             <div className="w-full md:w-1/4 flex justify-center md:block">
