@@ -33,18 +33,22 @@ const SinglePostPage = () => {
         <div className="flex flex-col md:flex-row gap-4 md:gap-8">
           {data.img && (
             <div className="w-full md:w-1/4 flex justify-center md:block">
-              <Image src={data.img} w="400" className="rounded-2xl" />
-            </div>
+             <Image
+                src={data.img}
+                className="w-full sm:w-150 md:w-[400px] rounded-2xl"
+                />
+
+             </div>
           )}
 
           <div className="flex flex-col gap-2 items-center md:items-start md:w-2/4">
-            <p className="text-[var(--softTextColor3)] text-center md:text-left">
+            <p className="text-[var(--softTextColor2)] text-center md:text-left">
               SUMMARY OF
             </p>
             <h1 className="text-xl md:text-4xl font-semibold text-center md:text-left">
               {data.title}
             </h1>
-            <div className="flex flex-col md:flex-row items-center gap-2 text-[var(--textColor)] text-md md:text-lg">
+            <div className="flex flex-col md:flex-row items-center gap-2 text-[var(--softTextColor)] text-md md:text-lg">
               <div className="flex gap-2">
                 <span>Book by</span>
                 <Link>{data.user.username}</Link>
@@ -61,7 +65,7 @@ const SinglePostPage = () => {
               <FaStar className="text-orange-500 w-[40px] ml-[-5px]" />
               <FaStar className="text-orange-500 w-[40px] ml-[-5px]" />
             </div>
-            <p className="mt-5 text-xl md:text-2xl font-bold text-center md:text-left">
+            <p className="mt-5 text-xl md:text-2xl font-bold">
               Short summary
             </p>
             <p
@@ -73,7 +77,7 @@ const SinglePostPage = () => {
           <div className="flex flex-col gap-2 items-center md:items-start md:w-1/4">
             <p className="text-md md:text-xl font-bold">Table of contents</p>
             <PostMenuActions post={data} />
-            <p className="text-md md:text-xl mt-[20px] font-bold">What you wil learn</p>
+            <p className="text-md md:text-xl mt-[20px] font-bold">What you will learn</p>
             <Comments postId={data._id} />
           </div>
         </div>
