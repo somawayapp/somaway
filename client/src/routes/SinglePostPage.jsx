@@ -8,6 +8,7 @@ import { format } from "timeago.js";
 import MainCategories from "../components/MainCategories";
 import Navbar from "../components/Navbar";
 
+
 const fetchPost = async (slug) => {
   const res = await axios.get(`${import.meta.env.VITE_API_URL}/posts/${slug}`);
   return res.data;
@@ -26,82 +27,62 @@ const SinglePostPage = () => {
   if (!data) return "Post not found!";
 
   return (
-<div>
-  <Navbar/>   
-<div className="relative mx-auto p-0 md:p-4 flex flex-col items-center gap-4 md:gap-8">
-  <div className="absolute top-0 left-0 mb-4 md:mb-0 w-full h-[1px] bg-gradient-to-r from-[var(--bg)] via-[var(--softTextColor7)]  via-[var(--softTextColor7)] to-[var(--bg)]"></div>
-
-
-
-      {/* Content container */}
-      <div className="w-full  max-w-[700px]">
-        {/* Title */}
-        <h1 className="text-[15px] md:text-2xl mt-3 md:mt-[6] font-semibold">{data.title}</h1>
-      </div>
-
-      {/* Image */}
-      {data.img && (
-        <div className="w-full max-h-[700px]  sm:block md:hidden   max-w-[900px]">
-          <Image src={data.img} w="900"  h={"700"} />
-        </div>
-      )}
-
-      {/* Image */}
-      {data.img && (
-        <div className="w-full max-h-[500px] hidden sm:hidden md:block   max-w-[900px]">
-          <Image src={data.img} w="900"  h={"500"} />
-        </div>
-      )}
-
-
-      {/* Author Info and Other Content */}
-      <div className="w-full max-w-[700px]">
-        <div className="flex items-center gap-2 text-sm text-[var(--softTextColor)] mt-2">
-          {data.user.img && (
-            <Image
-              src={data.user.img}
-              className="w-10 h-10 object-cover rounded-full"
-              w="40"
-              h="40"
-            />
-          )}
-          <div className="flex flex-col">
-            <span>
-              Written by <Link className="text-[#1DA1F2]">{data.user.username}</Link>
-              <span className="pl-1 pr-1 ">
-                on
-              </span>
-           
-              <Link className="text-[#1DA1F2]">{data.category}</Link> -{" "}
-              {format(data.createdAt)}
-            </span>
-
-           
-
-
-
+    <div className="flex flex-col gap-8">
+      {/* detail */}
+      <div className="flex gap-8">
+        <div className="lg:w-3/5 flex flex-col gap-8">
+          <h1 className="text-xl md:text-3xl xl:text-4xl 2xl:text-5xl font-semibold">
+            {data.title}
+          </h1>
+          <div className="flex items-center gap-2 text-gray-400 text-sm">
+            <span>Written by</span>
+            <Link className="text-blue-800">{data.user.username}</Link>
+            <span>on</span>
+            <Link className="text-blue-800">{data.category}</Link>
+            <span>{format(data.createdAt)}</span>
           </div>
-          <div className="absolute  right-0 top-0">
-            <PostMenuActions post={data} />
-            </div>
+          <p className="text-gray-500 font-medium">{data.desc}</p>
         </div>
-
-        <div className="w-full mt-2  max-w-[1000px]">
-        <Comments postId={data._id} />
-
+        {data.img && (
+          <div className="hidden lg:block w-2/5">
+            <Image src={data.img} w="600" className="rounded-2xl" />
+          </div>
+        )}
+      </div>
+      {/* content */}
+      <div className="flex flex-col md:flex-row gap-12 justify-between">
+        {/* text */}
+        <div className="lg:text-lg flex flex-col gap-6 text-justify">
+         
+      
+        </div>
+        {/* menu */}
+        <div className="px-4 h-max sticky top-8">
+          <h1 className="mb-4 text-sm font-medium">Author</h1>
+          <div className="flex flex-col gap-4">
+            <div className="flex items-center gap-8">
+              {data.user.img && (
+                <Image
+                  src={data.user.img}
+                  className="w-12 h-12 rounded-full object-cover"
+                  w="48"
+                  h="48"
+                />
+              )}
+              <Link className="text-blue-800">{data.user.username}</Link>
             </div>
-
-
-            <p
-  className="text-[var(--textColor)] text-[14px] mb-[50px] md:text-[16px] text-justify mt-2"
-  dangerouslySetInnerHTML={{ __html: data.desc }} 
-/>
-
+            <p className="text-sm text-gray-500">
+              Lorem ipsum dolor sit amet consectetur
+            </p>
+            <div className="flex gap-2">
+            
+            </div>
+          </div>
+          <PostMenuActions post={data}/>
+         
+        </div>
       </div>
-
-      {/* Comments */}
-     
-      </div>
+      <Comments postId={data._id}/>
     </div>
   );
 };
