@@ -48,36 +48,36 @@ const SinglePostPage = () => {
           <h1 className="text-xl md:text-4xl font-semibold">
             {data.title}
           </h1>
-          <div className="flex items-center gap-2 text-gray-400 text-sm md:text-md ">
+          <div className="flex items-center gap-2 text-[var(--textColor)] text-md md:text-lg ">
             <span>Book by</span>
             <Link >{data.user.username}</Link>
             <span>Category</span>
             <Link>{data.category}</Link>
           </div>
-           <div className="flex gap-2 flex-row">
-               <FaStar  className="text-yellow-500 w-[25px] text-orange-500"  />
-               <FaStar  className="text-yellow-500 w-[25px] text-orange-500"  />
-               <FaStar  className="text-yellow-500 w-[25px] text-orange-500"  />
-               <FaStar  className="text-yellow-500 w-[25px] text-orange-500"  />
-               <FaStar  className="text-yellow-500 w-[25px] text-orange-500"  />
+           <div className="flex gap-1 flex-row">
+               <FaStar  className="text-orange-500 w-[30px] text-orange-500"  />
+               <FaStar  className="text-orange-500 w-[30px] text-orange-500"  />
+               <FaStar  className="text-orange-500 w-[30px] text-orange-500"  />
+               <FaStar  className="text-orange-500 w-[30px] text-orange-500"  />
+               <FaStar  className="text-orange-500 w-[30px] text-orange-500"  />
 
            </div>
-          <p className="mt-5  text-md md:text-lg text-bold">
+           <p className="mt-5 text-lg md:text-xl font-bold">
            A short summary
           </p>
 
           <p
-          className="text-[var(--textColor)] text-[16px] mb-[50px] md:text-[20px] text-justify mt-2"
+          className="text-[var(--textColor)] text-[15px] mb-[50px] md:text-[18px] text-justify "
           dangerouslySetInnerHTML={{ __html: data.desc }} 
          />      
 
       </div>
       <div className="lg:w-1/4 flex flex-col gap-2">
-      <p className="text-sm md:text-md text-bold ">
+      <p className="text-md md:text-xl mt-2 font-bold ">
         Table of contents
       </p>
 
-      <p className="text-sm md:text-md mt-[20px] text-bold ">
+      <p className="text-md md:text-xl mt-[20px] font-bold ">
         What you  will learn
       </p>
         </div>
