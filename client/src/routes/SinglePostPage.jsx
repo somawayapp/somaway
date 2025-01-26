@@ -74,7 +74,7 @@ const SinglePostPage = () => {
           </div>
 
           <div className="flex flex-col gap-2 items-center md:items-start md:w-1/4">
-            <p className="text-md md:text-xl mt-1 font-bold">Table of cotents</p>
+            <p className="text-md md:text-xl mt-1 font-bold">Table of contents</p>
             <PostMenuActions post={data} />
             <p className="text-md md:text-xl mt-[20px] font-bold">What you will learn</p>
             <Comments postId={data._id} />
