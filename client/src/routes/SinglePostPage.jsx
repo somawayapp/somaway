@@ -30,18 +30,22 @@ const SinglePostPage = () => {
   if (!data) return "Post not found!";
 
   return (
+    <div>
+     <Navbar/>
+
     <div className="flex flex-col gap-8">
-      {/* detail */}
-      <div className="flex gap-8">
+        
+
+      <div className="flex gap-2">
 
       {data.img && (
-          <div className="hidden lg:block w-2/5">
+          <div className=" w-2/8">
             <Image src={data.img} w="300" className="rounded-2xl" />
           </div>
         )}
 
-        <div className="lg:w-3/5 flex flex-col gap-8">
-          <h1 className="text-xl md:text-3xl xl:text-4xl 2xl:text-5xl font-semibold">
+        <div className="lg:w-4/8 flex flex-col gap-8">
+          <h1 className="text-xl md:text-3xl font-semibold">
             {data.title}
           </h1>
           <div className="flex items-center gap-2 text-gray-400 text-sm">
@@ -57,6 +61,11 @@ const SinglePostPage = () => {
          />      
 
       </div>
+      <div className="lg:w-2/8 flex flex-col gap-8">
+      <p>
+        Table of contents
+      </p>
+        </div>
      
       </div>
       {/* content */}
@@ -94,6 +103,8 @@ const SinglePostPage = () => {
       </div>
       <Comments postId={data._id}/>
     </div>
+    </div>
+
   );
 };
 
