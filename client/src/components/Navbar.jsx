@@ -48,15 +48,13 @@ const Navbar = () => {
 <div className="md:hidden  ">
 <div className="flex flex-row mb-3 gap-2">
 
-     <SignedOut>
      <Link
-            to="/login"
+            to="/discover"
             className="w-full text-center mt-3 md:mt-0 sm:w-auto px-4 py-2 md:py-2 bg-blue-600 text-white
             text-xs font-semibold rounded-md hover:bg-blue-700"
           >
             Get Started
           </Link>
-        </SignedOut>
 
       {/* MOBILE MENU */}
         
