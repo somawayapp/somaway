@@ -7,6 +7,7 @@ import { useQuery } from "@tanstack/react-query";
 import { format } from "timeago.js";
 import Navbar from "../components/Navbar";
 import { FaStar } from "react-icons/fa";
+import Footer from "../components/Footer";
 
 const fetchPost = async (slug) => {
   const res = await axios.get(`${import.meta.env.VITE_API_URL}/posts/${slug}`);
