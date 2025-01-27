@@ -2,7 +2,7 @@ import { useInfiniteQuery } from "@tanstack/react-query";
 import axios from "axios";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { useSearchParams } from "react-router-dom";
-import PopularItem from "./PopularItem";
+import ExploreItem from "./ExploreItem";
 import React, { useRef, useState, useEffect } from "react";
 
 
@@ -120,7 +120,7 @@ const PopularPosts = () => {
         className="flex gap-3 md:gap-4 scrollbar-hide"
         >
         {allPosts.length > 0 ? (
-          allPosts.map((post) => <PopularItem key={post._id} post={post} />)
+          allPosts.map((post) => <ExploreItem key={post._id} post={post} />)
         ) : (
           <p> </p>
         )}
