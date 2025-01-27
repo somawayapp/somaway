@@ -1,26 +1,49 @@
 import React from "react";
+import Link from "next/link";
+import { useRouter } from "next/router";
 import { Home, Compass, User } from "lucide-react";
 
 const MobileControls = () => {
+  const router = useRouter();
+  const { pathname } = router;
+
   return (
-    <div className="fixed bottom-10 left-1/2 transform -translate-x-1/2 flex justify-between bg-gray-800 p-4 rounded-2xl shadow-lg w-[90%] max-w-md">
+    <div className="fixed bottom-0 left-1/2 transform -translate-x-1/2 flex justify-between bg-[var(--bg)] p-4 rounded-2xl shadow-lg w-[100%] max-w-sm">
       {/* Home Button */}
-      <button className="flex flex-col items-center text-white hover:text-orange-500 transition">
-        <Home className="h-6 w-6" />
-        <span className="text-sm mt-1">Home</span>
-      </button>
+      <Link href="/" passHref>
+        <button
+          className={`flex flex-col items-center ${
+            pathname === "/" ? "text-blue-700" : "text-[var(--textColor)]"
+          } hover:text-blue-700 transition`}
+        >
+          <Home className="h-6 w-6" />
+          <span className="text-xs mt-1">Home</span>
+        </button>
+      </Link>
 
       {/* Explore Button */}
-      <button className="flex flex-col items-center text-white hover:text-orange-500 transition">
-        <Compass className="h-6 w-6" />
-        <span className="text-sm mt-1">Explore</span>
-      </button>
+      <Link href="/discover" passHref>
+        <button
+          className={`flex flex-col items-center ${
+            pathname === "/explore" ? "text-blue-700" : "text-[var(--textColor)]"
+          } hover:text-blue-700 transition`}
+        >
+          <Compass className="h-6 w-6" />
+          <span className="text-xs mt-1">Explore</span>
+        </button>
+      </Link>
 
       {/* Profile Button */}
-      <button className="flex flex-col items-center text-white hover:text-orange-500 transition">
-        <User className="h-6 w-6" />
-        <span className="text-sm mt-1">Profile</span>
-      </button>
+      <Link href="/settings" passHref>
+        <button
+          className={`flex flex-col items-center ${
+            pathname === "/profile" ? "text-blue-700" : "text-[var(--textColor)]"
+          } hover:text-blue-700 transition`}
+        >
+          <User className="h-6 w-6" />
+          <span className="text-xs mt-1">Profile</span>
+        </button>
+      </Link>
     </div>
   );
 };
