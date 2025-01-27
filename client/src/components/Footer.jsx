@@ -64,7 +64,7 @@ const Footer = () => {
         <p className="text-[var(--softTextColor)]">
           © {currentYear}, SomaAI App Limited, Waiyaki way , 1st floor, Westend towers, Westlands, Nairobi
        
-          <a href="mailto:support@soma.ia.com" className="text-[var(--softTextColor)] pl-1 mb-[50px] md:mb-0 hover:text-[var(--softTextColor)]">
+          <a href="mailto:support@soma.ia.com" className="text-[var(--softTextColor)] pl-1 mb-[80px] md:mb-0 hover:text-[var(--softTextColor)]">
             support@soma.ai.com
           </a>
         </p>

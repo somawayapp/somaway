@@ -5,7 +5,7 @@ import { Home, Compass, User } from "lucide-react";
 const MobileControls = () => {
   return (
 <div className="fixed bottom-0 left-1/2 transform -translate-x-1/2 flex justify-between bg-[var(--bg)] 
-    pl-4 pr-4 pt-2 pb-2 rounded-2xl shadow-lg w-[100%] md:hidden">
+    pl-4 pr-4 pt-1  rounded-2xl shadow-lg w-[100%] md:hidden">
     
 
       {/* Home Button */}
