@@ -1,18 +1,16 @@
 import { Link } from "react-router-dom";
-import Image from "./Image";
-import { format } from "timeago.js";
 
 const ExploreItem = ({ post }) => {
   return (
     <div className="flex flex-col">
       <Link
-        to={`/discover?=${post.title}`}
-        className="text-[var(--textColor)] ml-2 font-semibold flex items-center"
+        to={`/=${post.slug}`}
+        className="text-[var(--textColor)] ml-2 flex items-center break-words overflow-hidden"
       >
         {/* Blue tick icon */}
         <svg
           xmlns="http://www.w3.org/2000/svg"
-          className="h-4 w-4 text-blue-500 mr-1"
+          className="h-7 w-5 text-blue-700 mr-1"
           viewBox="0 0 24 24"
           fill="currentColor"
         >
