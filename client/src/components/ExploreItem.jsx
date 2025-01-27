@@ -5,7 +5,7 @@ const ExploreItem = ({ post }) => {
     <div className="flex flex-col">
       <Link
         to={`/=${post.slug}`}
-        className="text-[var(--textColor)] ml-2 flex items-start break-words overflow-hidden"
+        className="text-[var(--textColor)]  flex items-start break-words overflow-hidden"
         style={{
           wordWrap: "break-word", // Ensures words break to the next line if needed
           whiteSpace: "normal",   // Allows wrapping instead of keeping all text in one line
@@ -25,7 +25,7 @@ const ExploreItem = ({ post }) => {
           />
         </svg>
         <span
-          className="pl-3" // Indent wrapped lines to align properly
+          className="pl-6" // Indent wrapped lines to align properly
           style={{
             textIndent: "-1.5rem", // Moves the first line back slightly
             display: "inline-block", // Keeps the alignment consistent
