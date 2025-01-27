@@ -8,6 +8,7 @@ import { format } from "timeago.js";
 import Navbar from "../components/Navbar";
 import { FaStar } from "react-icons/fa";
 import Footer from "../components/Footer";
+import ExplorePosts from "../components/ExplorePosts";
 
 const fetchPost = async (slug) => {
   const res = await axios.get(`${import.meta.env.VITE_API_URL}/posts/${slug}`);
@@ -75,7 +76,12 @@ const SinglePostPage = () => {
           </div>
 
           <div className="flex flex-col gap-2 items-start md:w-1/4">
-            <p className="text-[var(--softTextColor2)] mt-2 ">COMMENTS</p>
+          <p className="text-[var(--softTextColor2)] mt-2 ">Explore</p>
+
+          <ExplorePosts/>
+
+
+            <p className="text-[var(--softTextColor2)] mt-20 ">COMMENTS</p>
 
             <Comments postId={data._id} />
             <PostMenuActions post={data} />
