@@ -85,7 +85,6 @@ const SinglePostPage = () => {
             <p className="text-[var(--softTextColor2)] mt-5 ">Comments</p>
 
             <Comments postId={data._id} />
-            <PostMenuActions post={data} />
 
           </div>
         </div>
@@ -97,6 +96,7 @@ const SinglePostPage = () => {
     <p className="mt-2 text-sm md:text-lg">
       Contact us @soma.ai@gmail.com or call +254 703 394794
     </p>
+    <PostMenuActions post={data} />
     <button
     to="discover"
       className="mt-9 bg-[var(--textColor)] text-[var(--bg)] py-4 text-extrabold text-xl md:text-3xl 

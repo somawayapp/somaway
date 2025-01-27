@@ -87,7 +87,7 @@ const Comments = ({ postId }) => {
           <h1 className="text-md text-[var(--textColor)]">Comments</h1>
           <form
             onSubmit={handleSubmit}
-            className="flex items-center bg-[var(--textColore)] text-[var(--textColor)] justify-between gap-1 w-full"
+            className="flex items-center bg-[var(--textColore)] text-[var(--textColor)] rounded-xl justify-between gap-1 w-full"
           >
             <textarea
               name="desc"
