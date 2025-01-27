@@ -1,7 +1,7 @@
 import React from "react";
-import Link from "next/link";
 import { useRouter } from "next/router";
 import { Home, Compass, User } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const MobileControls = () => {
   const router = useRouter();
