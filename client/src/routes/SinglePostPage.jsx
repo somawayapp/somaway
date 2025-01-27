@@ -78,13 +78,13 @@ const SinglePostPage = () => {
 
                <div className=" text-[var(--textColor)] gap-1 md:gap-2">
                 <span className="font-bold">Author: </span>
-                <Link>{data.user.username}</Link>
+                <Link className="text-orange-500">{data.user.username}</Link>
                 </div>
 
                 <div className=" text-[var(--textColor)] gap-1 md:gap-2">
 
                 <span className="font-bold">Category: </span>
-                <Link>{data.category}</Link>
+                <Link className="text-orange-500">{data.category}</Link>
               </div>
 
             <p className="text-md md:text-lg mt-[20px] font-bold">What others say</p>
