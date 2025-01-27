@@ -5,7 +5,7 @@ const ExploreItem = ({ post }) => {
     <div className="flex flex-col">
       <Link
         to={`/=${post.slug}`}
-        className="text-[var(--textColor)] ml-2 flex items-center break-words overflow-hidden"
+        className="text-[var(--textColor)] ml-2 flex items-start break-words overflow-hidden"
         style={{
           wordWrap: "break-word", // Ensures words break to the next line if needed
           whiteSpace: "normal",   // Allows wrapping instead of keeping all text in one line
@@ -14,7 +14,7 @@ const ExploreItem = ({ post }) => {
         {/* Blue tick icon */}
         <svg
           xmlns="http://www.w3.org/2000/svg"
-          className="h-7 w-5 text-blue-700 mr-1"
+          className="h-7 w-5 text-blue-700 mr-1 flex-shrink-0"
           viewBox="0 0 24 24"
           fill="currentColor"
         >
@@ -24,7 +24,15 @@ const ExploreItem = ({ post }) => {
             clipRule="evenodd"
           />
         </svg>
-        {post.title}
+        <span
+          className="pl-6" // Indent wrapped lines to align properly
+          style={{
+            textIndent: "-1.5rem", // Moves the first line back slightly
+            display: "inline-block", // Keeps the alignment consistent
+          }}
+        >
+          {post.title}
+        </span>
       </Link>
     </div>
   );
