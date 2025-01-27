@@ -113,7 +113,7 @@ const Comments = ({ postId }) => {
               {data.slice(0, visibleComments).map((comment) => (
                 <div
                   key={comment._id}
-                  className="bg-[var(--bd)] p-4 rounded-2xl shadow-2xl mt-3"
+                  className=" p-2 rounded-2xl shadow-2xl mt-3"
                 >
                   <Comment comment={comment} postId={postId} />
                 </div>
