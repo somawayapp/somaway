@@ -28,7 +28,7 @@ const SubscriptionPage = () => {
   return (
 
 
-  <div className="flex flex-col max-w-[1200px]  rounded-3xl md:rounded-[20px] bg-[var(--softBg)]  mx-auto mt-0 md:mt-4">
+  <div className="flex flex-col max-w-[1200px]  rounded-3xl md:rounded-[20px] bg-[var(--softBg)] mb-[80px]  mx-auto mt-0 md:mt-4">
       <div className="flex flex-col lg:flex-row  min-h-[93vh] gap-[100px] ">
         {/* Left Section */}
         <div className="lg:w-1/2 flex flex-col pl-2 pr-2 pb-20 pt-4 md:p-[50px]  bg-[#7a00da]  items-center md:items-start gap-1 md:gap-4 

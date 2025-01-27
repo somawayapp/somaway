@@ -4,7 +4,7 @@ import { SignedIn, SignedOut, UserButton } from "@clerk/clerk-react";
 import Navbar from "../components/Navbar";
 const SettingsPage = () => {
   return (
-    <div>
+    <div className="mb-[80px] ">
     <Navbar/>
 
 
