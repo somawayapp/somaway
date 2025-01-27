@@ -16,6 +16,7 @@ import PopularPosts from "../components/PopularPosts";
 import TrendingPosts from "../components/TrendingPosts";
 import StoryLine from "../components/StoryLine";
 import Footer from "../components/Footer";
+import MobileControls from "../components/MobileControls";
 
 const Homepage = () => {
   const [isVisible, setIsVisible] = useState(true);
@@ -217,6 +218,7 @@ const Homepage = () => {
 
       <Footer />
 
+      <MobileControls/> 
 
     
       </div>

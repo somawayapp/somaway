@@ -9,6 +9,7 @@ import Navbar from "../components/Navbar";
 import { FaStar } from "react-icons/fa";
 import Footer from "../components/Footer";
 import ExplorePosts from "../components/ExplorePosts";
+import MobileControls from "../components/MobileControls";
 
 const fetchPost = async (slug) => {
   const res = await axios.get(`${import.meta.env.VITE_API_URL}/posts/${slug}`);
@@ -110,8 +111,7 @@ const SinglePostPage = () => {
          
    </div>
    <Footer/>     
-
-    </div>
+   </div>
   );
 };
 
