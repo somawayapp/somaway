@@ -4,7 +4,9 @@ import { Home, Compass, User } from "lucide-react";
 
 const MobileControls = () => {
   return (
-    <div className="fixed bottom-0 left-1/2 transform -translate-x-1/2 flex justify-between bg-[var(--bg)] p-4 rounded-2xl shadow-lg w-[100%] max-w-sm">
+<div className="fixed bottom-0 left-1/2 transform -translate-x-1/2 flex justify-between bg-[var(--bg)] 
+    pl-4 pr-4 pt-2 pb-2 rounded-2xl shadow-lg w-[100%]  hidden sm:block">
+
       {/* Home Button */}
       <NavLink
         to="/"
@@ -15,7 +17,7 @@ const MobileControls = () => {
         }
       >
         <Home className="h-6 w-6" />
-        <span className="text-xs mt-1">Home</span>
+        <span className="text-2xs mt-1">Home</span>
       </NavLink>
 
       {/* Explore Button */}
@@ -28,7 +30,7 @@ const MobileControls = () => {
         }
       >
         <Compass className="h-6 w-6" />
-        <span className="text-xs mt-1">Explore</span>
+        <span className="text-2xs mt-1">Explore</span>
       </NavLink>
 
       {/* Profile Button */}
@@ -41,7 +43,7 @@ const MobileControls = () => {
         }
       >
         <User className="h-6 w-6" />
-        <span className="text-xs mt-1">Profile</span>
+        <span className="text-2xs mt-1">Profile</span>
       </NavLink>
     </div>
   );

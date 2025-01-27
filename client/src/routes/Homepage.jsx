@@ -218,7 +218,6 @@ const Homepage = () => {
 
       <Footer />
 
-      <MobileControls/> 
 
     
       </div>
