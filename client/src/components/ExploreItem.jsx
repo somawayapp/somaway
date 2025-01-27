@@ -13,16 +13,14 @@ const ExploreItem = ({ post }) => {
   
   
    
-      <div className="flex gap-2 md:gap-4 overflow-x-auto scrollbar-hide">
         
           
             <Link
-              to={`/discover?category=${post.title}`}
+              to={`/discover?=${post.title}`}
               className="text-[var(--textColor)] ml-2 mt-1 text-xs font-semibold"
             >
               {post.title}
             </Link>
-      </div>
   </div>
   );
 };
