@@ -98,7 +98,7 @@ const ExplorePosts = () => {
         next={fetchNextPage}
         hasMore={!!hasNextPage}
         loader={<h4>Loading more posts...</h4>}
-        className="flex  flex-col gap-3 md:gap-4 scrollbar-hide"
+        className="flex  flex-col overflow-hiden break-words  gap-1 md:gap-2 scrollbar-hide"
         >
         {allPosts.length > 0 ? (
           allPosts.map((post) => <ExploreItem key={post._id} post={post} />)
