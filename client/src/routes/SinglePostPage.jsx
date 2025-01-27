@@ -35,7 +35,7 @@ const SinglePostPage = () => {
             <div className="w-full md:w-1/4 mt-2 md:mt-0 flex justify-center md:block">
              <Image
              src={data.img}
-                className=" w-[250px] md:w-[400px] rounded-2xl"
+                className=" w-[250px] md:w-[400px] rounded-xl"
                 />
 
              </div>
@@ -68,13 +68,13 @@ const SinglePostPage = () => {
               Short summary
             </p>
             <p
-              className="text-[var(--textColor)] text-[15px] md:text-[18px] text-justify"
+              className="text-[var(--textColor)] text-[14px] md:text-[18px] text-justify"
               dangerouslySetInnerHTML={{ __html: data.desc }}
             />
           </div>
 
           <div className="flex flex-col gap-2 items-center md:items-start md:w-1/4">
-            <p className="text-md md:text-lg text-[var(--softTextColor2)] mt-1 font-bold">ABOUT THE BOOK</p>
+            <p className="text-md md:text-lg text-[var(--softTextColor2)] mt-1 ">ABOUT THE BOOK</p>
 
                <div className=" text-[var(--textColor)] gap-1 md:gap-2">
                 <span className="font-bold">Author: </span>
@@ -87,7 +87,7 @@ const SinglePostPage = () => {
                 <Link>{data.category}</Link>
               </div>
 
-            <p className="text-md md:text-lg mt-[20px] font-bold">What others say about this book</p>
+            <p className="text-md md:text-lg mt-[20px] font-bold">What others say</p>
             <Comments postId={data._id} />
             <PostMenuActions post={data} />
 

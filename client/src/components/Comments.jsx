@@ -65,7 +65,7 @@ const Comments = ({ postId }) => {
   };
 
   return (
-    <div className="flex flex-col gap-1 lg:w-3/5 mb-2">
+    <div className="flex flex-col gap-1  mb-2">
       {/* Comments Section */}
       <h1 className="text-md text-[var(--softTextColor2)]">Comments</h1>
       <form
