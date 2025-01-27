@@ -60,7 +60,7 @@ const Footer = () => {
       </div>
 
       {/* Bottom Info Section */}
-      <div className="mt-8 text-center border-t border-[var(--softBg)]  mb-[150px] md:mb-0  pt-4">
+      <div className="mt-8 text-center border-t border-[var(--softBg)]  mb-[100px] md:mb-0  pt-4">
         <p className="text-[var(--softTextColor)]">
           © {currentYear}, SomaAI App Limited, Waiyaki way , 1st floor, Westend towers, Westlands, Nairobi
        
