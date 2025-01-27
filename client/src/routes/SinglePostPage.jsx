@@ -77,6 +77,7 @@ const SinglePostPage = () => {
 
           <div className="flex flex-col gap-2 items-start md:w-1/4">
           <p className="text-[var(--softTextColor2)] mt-2 ">Explore</p>
+          <p className="text-[var(--softTextColor2)] font-bold mt-2 ">More Books like this</p>
 
           <ExplorePosts/>
 
