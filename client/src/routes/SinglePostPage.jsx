@@ -74,7 +74,7 @@ const SinglePostPage = () => {
           </div>
 
           <div className="flex flex-col gap-2 items-center md:items-start md:w-1/4">
-            <p className="text-md md:text-lg text-[var(--softTextColor2)] mt-1 ">ABOUT THE BOOK</p>
+            <p className="text-[var(--softTextColor2)] mt-1 ">ABOUT THE BOOK</p>
 
                <div className=" text-[var(--textColor)] gap-1 md:gap-2">
                 <span className="font-bold">Author: </span>
