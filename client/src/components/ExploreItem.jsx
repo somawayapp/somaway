@@ -6,6 +6,10 @@ const ExploreItem = ({ post }) => {
       <Link
         to={`/=${post.slug}`}
         className="text-[var(--textColor)] ml-2 flex items-center break-words overflow-hidden"
+        style={{
+          wordWrap: "break-word", // Ensures words break to the next line if needed
+          whiteSpace: "normal",   // Allows wrapping instead of keeping all text in one line
+        }}
       >
         {/* Blue tick icon */}
         <svg
