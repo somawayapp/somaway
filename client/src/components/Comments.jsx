@@ -67,7 +67,7 @@ const Comments = ({ postId }) => {
   return (
     <div className="flex flex-col gap-1 lg:w-3/5 mb-2">
       {/* Comments Section */}
-      <h1 className="text-md text-[var(--softTextColor2)]">COMMENTS</h1>
+      <h1 className="text-md text-[var(--softTextColor2)]">Comments</h1>
       <form
         onSubmit={handleSubmit}
         className="flex items-center bg-[var(--textColore)] text-[var(--textColor)] justify-between gap-1 w-full"
@@ -78,7 +78,7 @@ const Comments = ({ postId }) => {
           className="w-full pt-1 bg-[var(--textColore)] border-none text-sm mb-[-2px]
                pl-4 text-[var(--textColor)] rounded-xl"
         />
-        <button className="bg-blue-700 px-4 py-3 text-white text-sm rounded-xl">
+        <button className="bg-blue-700 px-4 ml-1 py-3 text-white text-sm rounded-xl">
           Send
         </button>
       </form>

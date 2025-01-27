@@ -43,10 +43,8 @@ const Comment = ({ comment, postId }) => {
             w="40"
           />
         )}
-        <span className="font-medium">{comment.user.username}</span>
-        <span className="text-sm text-text-[var(--textColor)]">
-          {format(comment.createdAt)}
-        </span>
+        <span className=" text-[var(--softTextColor2)] font-medium">{comment.user.username}</span>
+    
         {user &&
           (comment.user.username === user.username || role === "admin") && (
             <span
