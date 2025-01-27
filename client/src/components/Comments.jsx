@@ -67,7 +67,7 @@ const Comments = ({ postId }) => {
   return (
     <div className="flex flex-col gap-1 lg:w-4/5 mb-2">
       {/* Comments Section */}
-      <h1 className="text-md text-[var(--softTextColor2)]">Comments</h1>
+      <h1 className="text-md font-bold text-[var(--textColor)]">What others say</h1>
       <form
         onSubmit={handleSubmit}
         className="flex items-center bg-[var(--textColore)] text-[var(--textColor)] justify-between gap-1 w-full"
