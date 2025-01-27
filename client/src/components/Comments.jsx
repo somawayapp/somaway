@@ -4,7 +4,7 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useAuth, useUser } from "@clerk/clerk-react";
 import { toast } from "react-toastify";
 import { useState } from "react";
-import { FaCommentAlt } from "react-icons/fa";
+import { BiCommentDetail } from "react-icons/bi";
 
 const fetchComments = async (postId) => {
   const res = await axios.get(
@@ -72,14 +72,13 @@ const Comments = ({ postId }) => {
   };
 
   return (
-    <div className="flex flex-col gap-1  mb-2">
-      {/* Comment Icon */}
+    <div className="flex flex-col gap-1 mb-2">
+      {/* Modern Comment Icon */}
       <div
-        className="cursor-pointer flex flex-row gap-4 text-blue-700 text-2xl"
+        className="cursor-pointer flex flex-row gap-4 text-blue-700 text-3xl"
         onClick={() => setShowComments((prev) => !prev)}
       >
-        <FaCommentAlt />
-
+        <BiCommentDetail />
       </div>
 
       {/* Comments Section */}
@@ -88,15 +87,15 @@ const Comments = ({ postId }) => {
           <h1 className="text-md text-[var(--textColor)]">Comments</h1>
           <form
             onSubmit={handleSubmit}
-            className="flex items-centerbg-[var(--textColore)] text-[var(--textColor)] justify-between gap-1 w-full"
+            className="flex items-center bg-[var(--textColore)] text-[var(--textColor)] justify-between gap-1 w-full"
           >
             <textarea
               name="desc"
               placeholder="Write a comment..."
-              className="w-full pt-1 bg-[var(--textColore)] border-none text-sm  mb-[-2px]
+              className="w-full pt-1 bg-[var(--textColore)] border-none text-sm mb-[-2px]
                pl-4 text-[var(--textColor)] rounded-xl"
             />
-            <button className="bg-blue-700 px-4 py-3 text-white text-sm rounded-xl">
+            <button className="bg-blue-700 px-4 ml-5 py-3 text-white text-sm rounded-xl">
               Send
             </button>
           </form>
@@ -112,7 +111,12 @@ const Comments = ({ postId }) => {
           ) : (
             <>
               {data.slice(0, visibleComments).map((comment) => (
-                <Comment key={comment._id} comment={comment} postId={postId} />
+                <div
+                  key={comment._id}
+                  className="bg-[var(--bd)] p-4 rounded-2xl shadow-2xl mb-3"
+                >
+                  <Comment comment={comment} postId={postId} />
+                </div>
               ))}
 
               {visibleComments < data.length && (
@@ -138,4 +142,3 @@ const Comments = ({ postId }) => {
 };
 
 export default Comments;
-

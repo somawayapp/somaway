@@ -1,31 +1,26 @@
-import { useInfiniteQuery } from "@tanstack/react-query";
+import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
-import InfiniteScroll from "react-infinite-scroll-component";
 import { useSearchParams } from "react-router-dom";
 import ExploreItem from "./ExploreItem";
 import React, { useRef, useState, useEffect } from "react";
 
+const fetchPosts = async (searchParams) => {
+  const searchParamsObj = Object.fromEntries([...searchParams]);
 
-
-const fetchPosts = async (pageParam, searchParams) => {
-    const searchParamsObj = Object.fromEntries([...searchParams]);
-  
-    const res = await axios.get(`${import.meta.env.VITE_API_URL}/posts?limit=4&sort=popular`, {
-      params: { page: pageParam, limit: 4, ...searchParamsObj }, // Changed limit to 30
-    });
-    return res.data;
-  };
-  
-
+  const res = await axios.get(`${import.meta.env.VITE_API_URL}/posts?limit=4&sort=popular`, {
+    params: { limit: 4, ...searchParamsObj }, // Limit set to 4 posts
+  });
+  return res.data;
+};
 
 const ExplorePosts = () => {
   const [searchParams] = useSearchParams();
   const containerRef = useRef(null);
   const [showLeftButton, setShowLeftButton] = useState(false);
-  const [showRightButton, setShowRightButton] = useState(true); // Always true initially
+  const [showRightButton, setShowRightButton] = useState(true);
 
   const scroll = (direction) => {
-    const scrollAmount = 200; // Adjust this value based on how much you want to scroll
+    const scrollAmount = 200;
     if (direction === "left") {
       containerRef.current.scrollBy({ left: -scrollAmount, behavior: "smooth" });
     } else {
@@ -38,22 +33,17 @@ const ExplorePosts = () => {
 
     const { scrollLeft, scrollWidth, clientWidth } = containerRef.current;
 
-    // Show or hide left button
     setShowLeftButton(scrollLeft > 0);
 
-    // Ensure the right button is only hidden when scrolled to the end
     if (scrollWidth > clientWidth) {
       setShowRightButton(scrollLeft + clientWidth < scrollWidth);
     } else {
-      setShowRightButton(true); // Ensure it's visible when there's no overflow
+      setShowRightButton(true);
     }
   };
 
   useEffect(() => {
-    // Check scroll position initially
     checkScrollPosition();
-
-    // Add scroll event listener to container
     const container = containerRef.current;
     container.addEventListener("scroll", checkScrollPosition);
 
@@ -62,62 +52,36 @@ const ExplorePosts = () => {
     };
   }, []);
 
-  const {
-    data,
-    error,
-    fetchNextPage,
-    hasNextPage,
-    isFetchingNextPage,
-    status,
-  } = useInfiniteQuery({
-    queryKey: ["posts", "popular", searchParams.toString()], // Add "popular" to the queryKey
-    queryFn: ({ pageParam = 1 }) => fetchPosts(pageParam, searchParams),
-    initialPageParam: 1,
-    getNextPageParam: (lastPage, pages) =>
-      lastPage.hasMore ? pages.length + 1 : undefined,
-    staleTime: 1000 * 60 * 10, // Data stays fresh for 10 minutes
-    cacheTime: 1000 * 60 * 30, // Cache remains available for 30 minutes
+  const { data, error, status } = useQuery({
+    queryKey: ["posts", "popular", searchParams.toString()],
+    queryFn: () => fetchPosts(searchParams),
+    staleTime: 1000 * 60 * 10,
+    cacheTime: 1000 * 60 * 30,
   });
-  if (status === "loading") return <p>Loading...</p>; // Show a loading spinner or message
-  if (error) return <p>Something went wrong!</p>; // Handle errors gracefully
-  
-  const allPosts = data?.pages?.flatMap((page) => page.posts) || [];
-  
+
+  if (status === "loading") return <p>Loading...</p>;
+  if (error) return <p>Something went wrong!</p>;
+
+  const posts = data?.posts || [];
+
   return (
     <div className="relative">
- 
-
-    {/* Categories Container */}
-    <div
-      ref={containerRef}
-      className="flex scrollbar-hide overflow-x-auto"
-      style={{ whiteSpace: "nowrap" }}
-    >
-      <InfiniteScroll
-        dataLength={allPosts.length}
-        next={fetchNextPage}
-        hasMore={!!hasNextPage}
-        loader={<h4>Loading more posts...</h4>}
-        className="flex  flex-col overflow-hiden break-words  gap-1 md:gap-2 scrollbar-hide"
-        >
-        {allPosts.length > 0 ? (
-          allPosts.map((post) => <ExploreItem key={post._id} post={post} />)
-        ) : (
-          <p> </p>
-        )}
-      </InfiniteScroll>
+      {/* Categories Container */}
+      <div
+        ref={containerRef}
+        className="flex scrollbar-hide overflow-x-auto"
+        style={{ whiteSpace: "nowrap" }}
+      >
+        <div className="flex flex-col overflow-hidden break-words gap-1 md:gap-2 scrollbar-hide">
+          {posts.length > 0 ? (
+            posts.map((post) => <ExploreItem key={post._id} post={post} />)
+          ) : (
+            <p></p>
+          )}
+        </div>
+      </div>
     </div>
-  </div>
-    
-     
-  
   );
-  
 };
 
-
-
 export default ExplorePosts;
-
-
-
