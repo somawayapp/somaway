@@ -18,7 +18,7 @@ const MobileControls = () => {
         }
       >
         <Home className="h-6 w-6" />
-        <span className="text-2xs mt-1">Home</span>
+        <span className="text-xs mt-1">Home</span>
       </NavLink>
 
       {/* Explore Button */}
@@ -31,7 +31,7 @@ const MobileControls = () => {
         }
       >
         <Compass className="h-6 w-6" />
-        <span className="text-2xs mt-1">Explore</span>
+        <span className="text-xs mt-1">Explore</span>
       </NavLink>
 
       {/* Profile Button */}
@@ -44,7 +44,7 @@ const MobileControls = () => {
         }
       >
         <User className="h-6 w-6" />
-        <span className="text-2xs mt-1">Profile</span>
+        <span className="text-xs mt-1">Profile</span>
       </NavLink>
     </div>
   );
