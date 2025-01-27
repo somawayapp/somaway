@@ -27,7 +27,6 @@ const ExploreItem = ({ post }) => {
         <span
           className="pl-6" // Indent wrapped lines to align properly
           style={{
-            textIndent: "-1.5rem", // Moves the first line back slightly
             display: "inline-block", // Keeps the alignment consistent
           }}
         >
