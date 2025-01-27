@@ -4,7 +4,6 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useAuth, useUser } from "@clerk/clerk-react";
 import { toast } from "react-toastify";
 import { useState } from "react";
-import { FaCommentAlt } from "react-icons/fa";
 
 const fetchComments = async (postId) => {
   const res = await axios.get(
@@ -18,7 +17,6 @@ const Comments = ({ postId }) => {
   const { getToken } = useAuth();
   const queryClient = useQueryClient();
 
-  const [showComments, setShowComments] = useState(false); // Toggle comment box
   const [visibleComments, setVisibleComments] = useState(3); // Initial visible comments
   const [commentSuccess, setCommentSuccess] = useState(false); // Temporary success message
 
@@ -66,70 +64,46 @@ const Comments = ({ postId }) => {
     setVisibleComments((prev) => prev + 5); // Load 5 more comments
   };
 
-  const closeComments = () => {
-    setShowComments(false);
-    setVisibleComments(3); // Reset to initial state
-  };
-
   return (
     <div className="flex flex-col gap-1 lg:w-3/5 mb-2">
-      {/* Comment Icon */}
-      <div
-        className="cursor-pointer flex flex-row gap-4 text-[#1DA1F2] text-2xl"
-        onClick={() => setShowComments((prev) => !prev)}
-      >
-        <FaCommentAlt />
-
-      </div>
-
       {/* Comments Section */}
-      {showComments && (
-        <>
-          <h1 className="text-md text-[var(--textColor)]">Comments</h1>
-          <form
-            onSubmit={handleSubmit}
-            className="flex items-centerbg-[var(--textColore)] text-[var(--textColor)] justify-between gap-1 w-full"
-          >
-            <textarea
-              name="desc"
-              placeholder="Write a comment..."
-              className="w-full pt-1 bg-[var(--textColore)] border-none text-sm  mb-[-2px]
+      <h1 className="text-md text-[var(--softTextColor2)]">COMMENTS</h1>
+      <form
+        onSubmit={handleSubmit}
+        className="flex items-center bg-[var(--textColore)] text-[var(--textColor)] justify-between gap-1 w-full"
+      >
+        <textarea
+          name="desc"
+          placeholder="Write a comment..."
+          className="w-full pt-1 bg-[var(--textColore)] border-none text-sm mb-[-2px]
                pl-4 text-[var(--textColor)] rounded-xl"
-            />
-            <button className="bg-[#1DA1F2] px-4 py-3 text-white text-sm rounded-xl">
-              Send
+        />
+        <button className="bg-blue-700 px-4 py-3 text-white text-sm rounded-xl">
+          Send
+        </button>
+      </form>
+
+      {commentSuccess && (
+        <p className="text-green-500">Commented successfully!</p>
+      )}
+
+      {isPending ? (
+        "Loading..."
+      ) : error ? (
+        "Error loading comments!"
+      ) : (
+        <>
+          {data.slice(0, visibleComments).map((comment) => (
+            <Comment key={comment._id} comment={comment} postId={postId} />
+          ))}
+
+          {visibleComments < data.length && (
+            <button
+              onClick={loadMoreComments}
+              className="text-sm text-blue-700"
+            >
+              Show More
             </button>
-          </form>
-
-          {commentSuccess && (
-            <p className="text-green-500">Commented successfully!</p>
-          )}
-
-          {isPending ? (
-            "Loading..."
-          ) : error ? (
-            "Error loading comments!"
-          ) : (
-            <>
-              {data.slice(0, visibleComments).map((comment) => (
-                <Comment key={comment._id} comment={comment} postId={postId} />
-              ))}
-
-              {visibleComments < data.length && (
-                <button
-                  onClick={loadMoreComments}
-                  className=" text-sm text-[#1DA1F2]"
-                >
-                  Show More
-                </button>
-              )}
-              <button
-                onClick={closeComments}
-                className="text-[#1DA1F2] text-sm mt-2"
-              >
-                Close Comments
-              </button>
-            </>
           )}
         </>
       )}
@@ -138,4 +112,3 @@ const Comments = ({ postId }) => {
 };
 
 export default Comments;
-

@@ -74,10 +74,23 @@ const SinglePostPage = () => {
           </div>
 
           <div className="flex flex-col gap-2 items-center md:items-start md:w-1/4">
-            <p className="text-md md:text-xl mt-1 font-bold">Table of contents</p>
-            <PostMenuActions post={data} />
-            <p className="text-md md:text-xl mt-[20px] font-bold">What you will learn</p>
+            <p className="text-md md:text-xl mt-1 font-bold">ABOUT THE BOOK</p>
+
+               <div className="  gap-1 md:gap-2">
+                <span>Author: </span>
+                <Link>{data.user.username}</Link>
+                </div>
+
+                <div className="  gap-1 md:gap-2">
+
+                <span>Category: </span>
+                <Link>{data.category}</Link>
+              </div>
+
+            <p className="text-md md:text-xl mt-[20px] font-bold">What others say</p>
             <Comments postId={data._id} />
+            <PostMenuActions post={data} />
+
           </div>
         </div>
       </div>
