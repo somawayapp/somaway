@@ -2,7 +2,7 @@ import { useInfiniteQuery } from "@tanstack/react-query";
 import axios from "axios";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { useSearchParams } from "react-router-dom";
-import PopularItem from "./PopularItem";
+import ExploreItem from "./ExploreItem";
 import React, { useRef, useState, useEffect } from "react";
 
 
@@ -85,26 +85,7 @@ const ExplorePosts = () => {
   
   return (
     <div className="relative">
-    {/* Scroll Buttons */}
-    {showLeftButton && (
-      <button
-        onClick={() => scroll("left")}
-        className="absolute left-1 top-1/2 transform -translate-y-1/2 hidden md:block bg-[var(--shadow-color)] bg-opacity-5 rounded-full py-2 px-4 z-10"
-        style={{ border: "none" }}
-      >
-        <span className="text-white font-bold">&lt;</span>
-      </button>
-    )}
-    {showRightButton && (
-      <button
-        onClick={() => scroll("right")}
-        className="absolute right-1 top-1/2 transform -translate-y-1/2 hidden md:block bg-[var(--shadow-color)] bg-opacity-50 
-        rounded-full py-2 px-4 z-10"
-        style={{ border: "none" }}
-      >
-        <span className="text-white font-bold">&gt;</span>
-      </button>
-    )}
+ 
 
     {/* Categories Container */}
     <div
@@ -117,10 +98,10 @@ const ExplorePosts = () => {
         next={fetchNextPage}
         hasMore={!!hasNextPage}
         loader={<h4>Loading more posts...</h4>}
-        className="flex gap-3 md:gap-4 scrollbar-hide"
+        className="flex  flex-col gap-3 md:gap-4 scrollbar-hide"
         >
         {allPosts.length > 0 ? (
-          allPosts.map((post) => <PopularItem key={post._id} post={post} />)
+          allPosts.map((post) => <ExploreItem key={post._id} post={post} />)
         ) : (
           <p> </p>
         )}
