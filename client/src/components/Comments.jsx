@@ -72,7 +72,7 @@ const Comments = ({ postId }) => {
   };
 
   return (
-    <div className="flex flex-col gap-1 lg:w-3/5 mb-2">
+    <div className="flex flex-col gap-1  mb-2">
       {/* Comment Icon */}
       <div
         className="cursor-pointer flex flex-row gap-4 text-blue-700 text-2xl"
