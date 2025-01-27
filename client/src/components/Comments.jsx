@@ -78,7 +78,7 @@ const Comments = ({ postId }) => {
           className="w-full pt-1 bg-[var(--textColore)] border-none text-sm mb-[-2px]
                pl-4 text-[var(--textColor)] rounded-xl"
         />
-        <button className="bg-blue-700 px-4 ml-1 py-3 text-white text-sm rounded-xl">
+        <button className="bg-blue-700 px-4 ml-5 py-3 text-white text-sm rounded-xl">
           Send
         </button>
       </form>

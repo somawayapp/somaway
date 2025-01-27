@@ -74,20 +74,20 @@ const SinglePostPage = () => {
           </div>
 
           <div className="flex flex-col gap-2 items-center md:items-start md:w-1/4">
-            <p className="text-sm md:text-md text-[var(--softTextColor2)] mt-1 font-bold">ABOUT THE BOOK</p>
+            <p className="text-md md:text-lg text-[var(--softTextColor2)] mt-1 font-bold">ABOUT THE BOOK</p>
 
                <div className=" text-[var(--textColor)] gap-1 md:gap-2">
-                <span>Author: </span>
+                <span className="font-bold">Author: </span>
                 <Link>{data.user.username}</Link>
                 </div>
 
                 <div className=" text-[var(--textColor)] gap-1 md:gap-2">
 
-                <span>Category: </span>
+                <span className="font-bold">Category: </span>
                 <Link>{data.category}</Link>
               </div>
 
-            <p className="text-sm md:text-md mt-[20px] font-bold">What others say</p>
+            <p className="text-md md:text-lg mt-[20px] font-bold">What others say about this book</p>
             <Comments postId={data._id} />
             <PostMenuActions post={data} />
 
