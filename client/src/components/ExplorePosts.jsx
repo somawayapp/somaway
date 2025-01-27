@@ -116,7 +116,7 @@ const ExplorePosts = () => {
         dataLength={allPosts.length}
         next={fetchNextPage}
         hasMore={!!hasNextPage}
-        loader={<h4>Loading more psts...</h4>}
+        loader={<h4>Loading more posts...</h4>}
         className="flex gap-3 md:gap-4 scrollbar-hide"
         >
         {allPosts.length > 0 ? (
