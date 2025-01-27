@@ -73,7 +73,7 @@ const SinglePostPage = () => {
             />
           </div>
 
-          <div className="flex flex-col gap-2 items-center md:items-start md:w-1/4">
+          <div className="flex flex-col gap-2 items-start md:w-1/4">
             <p className="text-[var(--softTextColor2)] mt-2 ">COMMENTS</p>
 
             <Comments postId={data._id} />
