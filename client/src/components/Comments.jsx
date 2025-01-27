@@ -75,7 +75,7 @@ const Comments = ({ postId }) => {
     <div className="flex flex-col gap-1 lg:w-3/5 mb-2">
       {/* Comment Icon */}
       <div
-        className="cursor-pointer flex flex-row gap-4 text-blue-700text-2xl"
+        className="cursor-pointer flex flex-row gap-4 text-blue-700 text-2xl"
         onClick={() => setShowComments((prev) => !prev)}
       >
         <FaCommentAlt />
@@ -96,7 +96,7 @@ const Comments = ({ postId }) => {
               className="w-full pt-1 bg-[var(--textColore)] border-none text-sm  mb-[-2px]
                pl-4 text-[var(--textColor)] rounded-xl"
             />
-            <button className="bg-blue-700px-4 py-3 text-white text-sm rounded-xl">
+            <button className="bg-blue-700 px-4 py-3 text-white text-sm rounded-xl">
               Send
             </button>
           </form>
@@ -125,7 +125,7 @@ const Comments = ({ postId }) => {
               )}
               <button
                 onClick={closeComments}
-                className="text-blue-700text-sm mt-2"
+                className="text-blue-700 text-sm mt-2"
               >
                 Close Comments
               </button>

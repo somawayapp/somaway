@@ -77,12 +77,12 @@ const SinglePostPage = () => {
 
           <div className="flex flex-col gap-2 items-start md:w-1/4">
           <p className="text-[var(--softTextColor2)] mt-2 ">Explore</p>
-          <p className="text-[var(--softTextColor2)] font-bold mt-2 ">More Books like this</p>
+          <p className="text-[var(--textColor)] font-bold ">More Books like this</p>
 
           <ExplorePosts/>
 
 
-            <p className="text-[var(--softTextColor2)] mt-20 ">COMMENTS</p>
+            <p className="text-[var(--softTextColor2)] mt-5 ">Comments</p>
 
             <Comments postId={data._id} />
             <PostMenuActions post={data} />
