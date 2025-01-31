@@ -62,7 +62,7 @@ const ExplorePosts = () => {
   if (status === "loading") return <p>Loading...</p>;
   if (error) return <p>Something went wrong!</p>;
 
-  const posts = data?.posts || [];
+  const posts = data && data.posts ? data.posts : []; // Ensure `data.posts` is available
 
   return (
     <div className="relative">
@@ -76,7 +76,7 @@ const ExplorePosts = () => {
           {posts.length > 0 ? (
             posts.map((post) => <ExploreItem key={post._id} post={post} />)
           ) : (
-            <p></p>
+            <p>No posts available.</p>
           )}
         </div>
       </div>
