@@ -9,7 +9,7 @@ import React, { useRef, useState, useEffect } from "react";
 const fetchPosts = async (pageParam, searchParams) => {
     const searchParamsObj = Object.fromEntries([...searchParams]);
   
-    const res = await axios.get(`${import.meta.env.VITE_API_URL}/limit=30&sort=trending`, {
+    const res = await axios.get(`${import.meta.env.VITE_API_URL}/posts?limit=30&sort=trending`, {
       params: { page: pageParam, limit: 30, ...searchParamsObj }, // Changed limit to 30
     });
     return res.data;
