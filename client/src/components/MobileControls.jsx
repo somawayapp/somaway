@@ -13,8 +13,8 @@ const MobileControls = () => {
         to="/"
         className={({ isActive }) =>
           `flex flex-col items-center ${
-            isActive ? "text-[#01274f]   " : "text-[var(--textColor)]"
-          } hover:text-[#01274f]    transition`
+            isActive ? "text-[#01274f]   " : "text-[var(--softTextColor2)]"
+          } hover:text-[#003266]    transition`
         }
       >
         <Home className="h-6 w-6" />
