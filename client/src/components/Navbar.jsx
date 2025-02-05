@@ -37,7 +37,7 @@ const Navbar = () => {
 
       {/* LOGO */}
       <Link to="/" className="flex items-center gap-1 text-lg font-bold md:text-2xl">
-      <img src="/logo7.png" alt="Logo" className="w-7 h-7 md:w-8 md:h-8" />
+      <img src="/296.png" alt="Logo" className="w-7 h-7 md:w-8 md:h-8" />
       <span className="bg-clip-text text-[#01274f]  pl-1  font-impact">soma</span>
 
       {/*   <span className="bg-clip-text text-[#1ADAff] font-impact"></span> */}
