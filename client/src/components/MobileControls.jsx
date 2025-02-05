@@ -26,7 +26,7 @@ const MobileControls = () => {
         to="/discover"
         className={({ isActive }) =>
           `flex flex-col items-center ${
-            isActive ? "text-[#01274f]   " : "text-[var(--textColor)]"
+            isActive ? "text-[#01274f]   " : "text-[var(--softTextColor2)]"
           } hover:text-[#01274f]    transition`
         }
       >
@@ -39,7 +39,7 @@ const MobileControls = () => {
         to="/settings"
         className={({ isActive }) =>
           `flex flex-col items-center ${
-            isActive ? "text-[#01274f]   " : "text-[var(--textColor)]"
+            isActive ? "text-[#01274f]   " : "text-[var(--softTextColor2)]"
           } hover:text-[#01274f]    transition`
         }
       >
