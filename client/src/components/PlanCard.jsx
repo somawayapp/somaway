@@ -28,37 +28,37 @@ const PlanCard = () => {
               <p className="mt-3 text-md text-[var(--softTextColor)] mb-2 border border-2 border-[var(--softTextColor)] py-2 px-3 rounded-[20px] font-semibold">
                 Monthly Plan
               </p>
-              <p className="text-xl md:text-2xl mb-2 mt-3 font-semibold text-blue-700   border-b pb-2">
+              <p className="text-xl md:text-2xl mb-2 mt-3 font-semibold text-[#01274f]    border-b pb-2">
                 $4.99/month
               </p>
               <div className="mt-4 text-sm md:text-md space-y-2 text-[var(--bg)]">
                 <div className="flex text-[var(--textColor)] items-center gap-2">
-                  <span className="bg-blue-700   text-white rounded-full w-6 h-6 flex items-center justify-center">✓</span>
+                  <span className="bg-[#01274f]    text-white rounded-full w-6 h-6 flex items-center justify-center">✓</span>
                   Access unlimited book summaries.
                 </div>
                 <div className="flex text-[var(--textColor)] items-center gap-2">
-                  <span className="bg-blue-700   text-white rounded-full w-6 h-6 flex items-center justify-center">✓</span>
+                  <span className="bg-[#01274f]    text-white rounded-full w-6 h-6 flex items-center justify-center">✓</span>
                   7,500+ book and podcast summaries.
                 </div>
                 <div className="flex text-[var(--textColor)] items-center gap-2">
-                  <span className="bg-blue-700   text-white rounded-full w-6 h-6 flex items-center justify-center">✓</span>
+                  <span className="bg-[#01274f]    text-white rounded-full w-6 h-6 flex items-center justify-center">✓</span>
                   <span className="line-through">Save more with annual billing.</span>
                 </div>
                 <div className="flex text-[var(--textColor)] items-center gap-2">
-                  <span className="bg-blue-700   text-white rounded-full w-6 h-6 flex items-center justify-center">✓</span>
+                  <span className="bg-[#01274f]    text-white rounded-full w-6 h-6 flex items-center justify-center">✓</span>
                   Cancel anytime.
                 </div>
               </div>
 
               <SignedIn>
                 <button     onClick={() => handleSelectPlan({ name: 'Monthly Plan', price: 4.99 })}
-           className="mt-6 bg-blue-700   text-white py-3 px-6 w-full rounded-lg font-bold hover:bg-blue-700   transition">
+           className="mt-6 bg-[#01274f]    text-white py-3 px-6 w-full rounded-lg font-bold hover:bg-[#01274f]    transition">
                   Subscribe Now
                 </button>
               </SignedIn>
 
               <SignedOut>
-  <Link to="/login"  className="mt-6 bg-blue-700   text-white py-3 px-6 w-full rounded-lg font-bold hover:bg-blue-700   transition">
+  <Link to="/login"  className="mt-6 bg-[#01274f]    text-white py-3 px-6 w-full rounded-lg font-bold hover:bg-[#01274f]    transition">
       Login to Subscribe
   </Link>
 </SignedOut>
@@ -83,36 +83,36 @@ const PlanCard = () => {
                   Most Popular
                 </span>
               </div>
-              <p className="text-xl md:text-2xl mb-2 font-semibold text-blue-700   border-b pb-2">
+              <p className="text-xl md:text-2xl mb-2 font-semibold text-[#01274f]    border-b pb-2">
                 $49.99/year
               </p>
               <div className="mt-4 text-sm md:text-md space-y-2 text-[var(--bg)]">
                 <div className="flex text-[var(--textColor)] items-center gap-2">
-                  <span className="bg-blue-700   text-white rounded-full w-6 h-6 flex items-center justify-center">✓</span>
+                  <span className="bg-[#01274f]    text-white rounded-full w-6 h-6 flex items-center justify-center">✓</span>
                   Access unlimited book summaries.
                 </div>
                 <div className="flex text-[var(--textColor)] items-center gap-2">
-                  <span className="bg-blue-700   text-white rounded-full w-6 h-6 flex items-center justify-center">✓</span>
+                  <span className="bg-[#01274f]    text-white rounded-full w-6 h-6 flex items-center justify-center">✓</span>
                   7,500+ book and podcast summaries.
                 </div>
                 <div className="flex text-[var(--textColor)] items-center gap-2">
-                  <span className="bg-blue-700   text-white rounded-full w-6 h-6 flex items-center justify-center">✓</span>
+                  <span className="bg-[#01274f]    text-white rounded-full w-6 h-6 flex items-center justify-center">✓</span>
                   Save more with annual billing.
                 </div>
                 <div className="flex text-[var(--textColor)] items-center gap-2">
-                  <span className="bg-blue-700   text-white rounded-full w-6 h-6 flex items-center justify-center">✓</span>
+                  <span className="bg-[#01274f]    text-white rounded-full w-6 h-6 flex items-center justify-center">✓</span>
                   Cancel anytime.
                 </div>
               </div>
 
               <SignedIn>
-                <button   onClick={() => handleSelectPlan({ name: 'Annual Plan', price: 49.99 })} className="mt-6 bg-blue-700   text-white py-3 px-6 w-full rounded-lg font-bold hover:bg-blue-700   transition">
+                <button   onClick={() => handleSelectPlan({ name: 'Annual Plan', price: 49.99 })} className="mt-6 bg-[#01274f]    text-white py-3 px-6 w-full rounded-lg font-bold hover:bg-[#01274f]    transition">
                   Subscribe Now
                 </button>
               </SignedIn>
 
               <SignedOut>
-  <Link to="/login" className="mt-6 bg-blue-700   text-white py-3 px-6 w-full rounded-lg font-bold hover:bg-blue-700   transition">
+  <Link to="/login" className="mt-6 bg-[#01274f]    text-white py-3 px-6 w-full rounded-lg font-bold hover:bg-[#01274f]    transition">
       Login to Subscribe
   </Link>
 </SignedOut>

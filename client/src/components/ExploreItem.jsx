@@ -14,7 +14,7 @@ const ExploreItem = ({ post }) => {
         {/* Blue tick icon */}
         <svg
           xmlns="http://www.w3.org/2000/svg"
-          className="h-7 w-5 text-blue-700   mr-1 flex-shrink-0"
+          className="h-7 w-5 text-[#01274f]    mr-1 flex-shrink-0"
           viewBox="0 0 24 24"
           fill="currentColor"
         >

@@ -38,7 +38,7 @@ const Navbar = () => {
       {/* LOGO */}
       <Link to="/" className="flex items-center gap-1 text-lg font-bold md:text-2xl">
       <img src="/296.png" alt="Logo" className="w-7 h-7 md:w-8 md:h-8" />
-      <span className="bg-clip-text text-[#01274f]  pl-1  font-impact">soma</span>
+      <span className="bg-clip-text text-[#003266]  pl-1  font-impact">soma</span>
 
       {/*   <span className="bg-clip-text text-[#1ADAff] font-impact"></span> */}
 
@@ -51,8 +51,8 @@ const Navbar = () => {
 
      <Link
             to="/discover"
-            className="w-full text-center mt-3 md:mt-0 sm:w-auto px-4 py-2 md:py-2 bg-[#01274f]   text-white
-            text-xs font-semibold rounded-md hover:bg-blue-700  "
+            className="w-full text-center mt-3 md:mt-0 sm:w-auto px-4 py-2 md:py-2 bg-[#003266]   text-white
+            text-xs font-semibold rounded-md hover:bg-[#01274f]   "
           >
             Get Started
           </Link>
@@ -167,8 +167,8 @@ const Navbar = () => {
           <Link
             to="/login"
             className="w-full items-center  md:ml-2 mr-4 text-center  text-md md:text-xl sm:w-auto px-4 md:px-6  py-3 md:py-3
-             bg-[#01274f]  text-white font-semibold 
-            rounded-md hover:bg-blue-700  "
+             bg-[#003266]  text-white font-semibold 
+            rounded-md hover:bg-[#01274f]   "
           >
           Login     
                </Link>
@@ -182,16 +182,16 @@ const Navbar = () => {
       {/* DESKTOP MENU */}
       <div className="hidden md:flex items-center gap-8 xl:gap-12  font-medium">
 
-          <Link className="hover:text-blue-700   " to="/" onClick={() => setOpen(false)} >Home</Link>
-           <Link className="hover:text-blue-700   " to="/discover" onClick={() => setOpen(false)}> Discover</Link>
-          <Link className="hover:text-blue-700   " to="/premium" onClick={() => setOpen(false)}> Premium</Link>
-          <Link className="hover:text-blue-700   " to="/settings" onClick={() => setOpen(false)}>Settings</Link>
-          <Link className="hover:text-blue-700   " to="/write" onClick={() => setOpen(false)}>Write</Link>
-          <Link className="hover:text-blue-700   " to="/about" onClick={() => setOpen(false)}>About Us</Link>
+          <Link className="hover:text-[#01274f]    " to="/" onClick={() => setOpen(false)} >Home</Link>
+           <Link className="hover:text-[#01274f]    " to="/discover" onClick={() => setOpen(false)}> Discover</Link>
+          <Link className="hover:text-[#01274f]    " to="/premium" onClick={() => setOpen(false)}> Premium</Link>
+          <Link className="hover:text-[#01274f]    " to="/settings" onClick={() => setOpen(false)}>Settings</Link>
+          <Link className="hover:text-[#01274f]    " to="/write" onClick={() => setOpen(false)}>Write</Link>
+          <Link className="hover:text-[#01274f]    " to="/about" onClick={() => setOpen(false)}>About Us</Link>
           <Link
             to="/login"
-            className="w-full text-center mt-3 md:mt-0 sm:w-auto px-4 py-3 md:py-2 bg-[#01274f]   text-white
-            text-sm font-semibold rounded-md hover:bg-blue-700  "
+            className="w-full text-center mt-3 md:mt-0 sm:w-auto px-4 py-3 md:py-2 bg-[#003266]   text-white
+            text-sm font-semibold rounded-md hover:bg-[#01274f]   "
           >
             Get Started
           </Link>
@@ -200,7 +200,7 @@ const Navbar = () => {
         <Link
             to="/login"
             className="w-full text-center mt-3 md:mt-0 sm:w-auto px-4 py-3 md:py-2 bg-[var(--textColore3)] text-sm text-[var(--textColor)] 
-            font-semibold rounded-md hover:text-white hover:bg-[#01274f]  "
+            font-semibold rounded-md hover:text-white hover:bg-[#003266]  "
           >
             Login
           </Link>

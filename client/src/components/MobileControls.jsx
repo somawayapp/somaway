@@ -13,8 +13,8 @@ const MobileControls = () => {
         to="/"
         className={({ isActive }) =>
           `flex flex-col items-center ${
-            isActive ? "text-blue-700  " : "text-[var(--textColor)]"
-          } hover:text-blue-700   transition`
+            isActive ? "text-[#01274f]   " : "text-[var(--textColor)]"
+          } hover:text-[#01274f]    transition`
         }
       >
         <Home className="h-6 w-6" />
@@ -26,8 +26,8 @@ const MobileControls = () => {
         to="/discover"
         className={({ isActive }) =>
           `flex flex-col items-center ${
-            isActive ? "text-blue-700  " : "text-[var(--textColor)]"
-          } hover:text-blue-700   transition`
+            isActive ? "text-[#01274f]   " : "text-[var(--textColor)]"
+          } hover:text-[#01274f]    transition`
         }
       >
         <Compass className="h-6 w-6" />
@@ -39,8 +39,8 @@ const MobileControls = () => {
         to="/settings"
         className={({ isActive }) =>
           `flex flex-col items-center ${
-            isActive ? "text-blue-700  " : "text-[var(--textColor)]"
-          } hover:text-blue-700   transition`
+            isActive ? "text-[#01274f]   " : "text-[var(--textColor)]"
+          } hover:text-[#01274f]    transition`
         }
       >
         <User className="h-6 w-6" />
