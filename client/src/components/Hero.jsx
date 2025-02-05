@@ -16,18 +16,18 @@ const Hero = () => {
             #1 most
           </h1>
           <h1 className="text-4xl lg:text-5xl font-bold text-[var(--textColor)]">
-            popular <span className="text-blue-600">book </span>
+            popular <span className="text-[#01274f]  ">book </span>
           </h1>
           <h1 className="text-4xl lg:text-5xl font-bold text-[var(--textColor)]">
-            <span className="text-blue-600">summary</span> app
+            <span className="text-[#01274f]  ">summary</span> app
           </h1>
           <p className="text-md md:text-xl text-[var(--textColor)]">
             Achieve your goals with somaAI by listening and reading the world’s best ideas
           </p>
           <Link
             to="/login"
-            className="w-full text-center mt-3 md:mt-0 sm:w-auto px-4 md:px-12 py-3 md:py-3 bg-blue-600 text-white font-semibold
-             rounded-md hover:bg-[#01274f] "
+            className="w-full text-center mt-3 md:mt-0 sm:w-auto px-4 md:px-12 py-3 md:py-3 bg-[#01274f]   text-white font-semibold
+             rounded-md hover:bg-blue-700  "
           >
             Get Started
           </Link>

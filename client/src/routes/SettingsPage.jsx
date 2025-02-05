@@ -54,7 +54,7 @@ const SettingsPage = () => {
                 {name}
               </h3>
               <p className="text-sm text-[var(--bg)] text-center italic">
-             Click on the profile image to edit your profile/ <span className=" text-[var(--textColor)]  hover:text-[#01274f] ]">  
+             Click on the profile image to edit your profile/ <span className=" text-[var(--textColor)]  hover:text-blue-700  ]">  
               <Link to="/login">  Login</Link>   </span>               </p>
             </div>
           ))}

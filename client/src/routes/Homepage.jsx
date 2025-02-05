@@ -195,8 +195,8 @@ const Homepage = () => {
       <p className="text-[var(--textColore2)] pl-2 md:pl-0 ml-2 text-md mb-5 md:mb-7 md:text-xl">Enjoy summarized nonfiction bestsellers</p>
       <Link
             to="/discover"
-            className="w-full ml-4 md:ml-2 text-center  text-md md:text-xl sm:w-auto px-4 md:px-6  py-3 md:py-3 bg-blue-600 text-white font-semibold 
-            rounded-md hover:bg-[#01274f] "
+            className="w-full ml-4 md:ml-2 text-center  text-md md:text-xl sm:w-auto px-4 md:px-6  py-3 md:py-3 bg-[#01274f]   text-white font-semibold 
+            rounded-md hover:bg-blue-700  "
           >
             Discover    
                   </Link>
