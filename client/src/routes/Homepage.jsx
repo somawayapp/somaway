@@ -196,7 +196,7 @@ const Homepage = () => {
       <Link
             to="/discover"
             className="w-full ml-4 md:ml-2 text-center  text-md md:text-xl sm:w-auto px-4 md:px-6  py-3 md:py-3 bg-blue-600 text-white font-semibold 
-            rounded-md hover:bg-blue-700"
+            rounded-md hover:bg-[#01274f] "
           >
             Discover    
                   </Link>
