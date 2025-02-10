@@ -93,11 +93,11 @@ const SinglePostPage = () => {
       
    
 <div className="flex items-center justify-center text-[var(--textColor)] mx-auto">
-  <div className="text-center flex items-center justify-center mx-auto">
+  <div className="text-center">
     <p className="mt-2 text-sm md:text-lg">
       Contact us @soma.ai@gmail.com or call +254 703 394794
     </p>
-    <div className="flex items-center justify-center mx-auto">
+    <div>
     <PostMenuActions post={data} />
 
     </div>

@@ -29,7 +29,6 @@ const AboutPage = () => {
          </div>
          <img
            src="/summary.png"
-           alt="Centered Illustration"
            className="h-[100px] md:h-[400px] mx-auto "
          />
        </div>
@@ -86,9 +85,12 @@ const AboutPage = () => {
 
   <div className="flex flex-col pl-2 pr-2 pt-12 md:pt-0  md:pl-[100px] lg:pl-[200px] md:flex-row items-center justify-between  z-10 text-black">
     <div className="flex-1  text-center  md:text-left">
-      <h3 className="text-3xl md:text-5xl font-bold mb-4">How did the idea of SomaAI come?</h3>
+    <h3 className="text-3xl md:text-5xl font-bold mb-4">How did the idea of SomaAI come?</h3>
       <p className="text-sm md:text-lg max-w-md mb-6">
-        Ever since I can remember, self-education has been a significant part of my life. I wanted to learn so many things but couldn’t find the most efficient, productive, and enjoyable tool for self-growth. Also, I’ve realized that there’re millions of inquiring minds with the same problem as mine. So what was the best solution? To create such a tool for each of us. That's how the SomaAI app appeared. Later on, we grew into a multiproduct startup.
+        Ever since I can remember, self-education has been a significant part of my life. I wanted to learn so many things but couldn’t
+         find the most efficient, productive, and enjoyable tool for self-growth. Also, I’ve realized that there’re millions of inquiring
+          minds with the same problem as mine. So what was the best solution? To create such a tool for each of us. That's how the SomaAI
+           app appeared. Later on, we grew into a multiproduct startup.
       </p>
       <img 
   src="/love.svg" 
@@ -102,16 +104,17 @@ const AboutPage = () => {
 
     {/* Adjust vertical alignment with self-start or self-end */}
     <div className=" self-end  z-10">
-      <img src="/ceo.png" alt="CEO" className=" h-[500px] top-[115px] md:top-[153px]  mt-0 md:mt-[300px] object-cover" />
+      <img src="/ceo.png" alt="CEO" className=" h-[500px] top-0 md:top-[150px] rounded-md  mt-0 md:mt-[300px] object-cover" />
     </div>
   </div>
 
 
 </div>
 
-<div className= "bg-[#7a00da] rounded-b-2xl h-[20vh]">
+<div className= "bg-[#014f30]  rounded-b-2xl hidden md:block  h-[25vh]">
 
 </div>
+
 
    
    
