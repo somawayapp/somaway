@@ -114,7 +114,7 @@ const AboutPage = () => {
 
 </div>
 
-<div className= "bg-[#003266]  rounded-b-2xl hidden md:block  h-[23vh]">
+<div className= "bg-purple-700 rounded-b-2xl hidden md:block  h-[23vh]">
 
 </div>
 

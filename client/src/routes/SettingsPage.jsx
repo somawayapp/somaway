@@ -19,7 +19,7 @@ const SettingsPage = () => {
              Settings
            </h1>
 
-         <div className="h-full p-2 bg-[#003266]  mx-auto w-full max-w-[1200px] mt-[20px] md:mt-[70px] rounded-md md:rounded-[30px] shadow-md  box-border">
+         <div className="h-full p-2 bg-purple-700 mx-auto w-full max-w-[1200px] mt-[20px] md:mt-[70px] rounded-md md:rounded-[30px] shadow-md  box-border">
          
            <p className="mt-2 text-md text-white   mt-[20px] md:mt-[50px] md:text-xl">
            Click the profile image to edit your info or logout!
@@ -57,7 +57,7 @@ const SettingsPage = () => {
                 {name}
               </h3>
               <p className="text-sm text-white  text-center italic">
-             Click on the profile image to edit your profile/ <span className=" text-[var(--textColor)]  hover:text-[#003266]  ]">  
+             Click on the profile image to edit your profile/ <span className=" text-[var(--textColor)]  hover:text-[var(--bg)] ]">  
               <Link to="/login">  Login</Link>   </span>               </p>
             </div>
           ))}
@@ -67,7 +67,7 @@ const SettingsPage = () => {
          </div>
 
 
-         <div className="bg-[#003266]  mx-auto w-full  max-w-[1200px] mb-[70px]  mt-[20px] md:mt-[70px] rounded-md md:rounded-[30px] shadow-md text-center">
+         <div className="bg-purple-700  mx-auto w-full  max-w-[1200px] mb-[70px]  mt-[20px] md:mt-[70px] rounded-md md:rounded-[30px] shadow-md text-center">
         <h3 className="text-white  mt-[20px] md:mt-[70px]  text-xl font-semibold mb-2">
           Change color theme?
         </h3>
