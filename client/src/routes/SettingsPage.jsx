@@ -16,7 +16,7 @@ const SettingsPage = () => {
            text-white  text-center animate-fadeIn flex flex-col items-center justify-center"
        >
           <h1 className="text-3xl md:text-6xl text-[var(--textColor)]  mt-[20px] md:mt-[50px] font-bold">
-             Settings
+            Profile Settings
            </h1>
 
          <div className="h-full p-2 bg-[#6402db] mx-auto w-full max-w-[1200px] mt-[20px] md:mt-[70px] rounded-md md:rounded-[30px] shadow-md  box-border">
