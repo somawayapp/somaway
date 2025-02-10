@@ -79,7 +79,7 @@ const AboutPage = () => {
    
     
    
-<div className=" bg-[#7e02fa]  bg-cover bg-no-repeat" style={{ backgroundImage: "url('/bg.svg')" }}>
+<div className=" bg-[#6402db]  bg-cover bg-no-repeat" style={{ backgroundImage: "url('/bg.svg')" }}>
 
 
   <div className="flex flex-col pl-2 pr-2 pt-12 md:pt-0  md:pl-[100px] lg:pl-[200px] md:flex-row items-center justify-between  z-10 text-black">
@@ -112,7 +112,7 @@ const AboutPage = () => {
 
 </div>
 
-<div className= "bg-[#7e02fa] rounded-b-2xl hidden md:block  h-[23vh]">
+<div className= "bg-[#6402db] rounded-b-2xl hidden md:block  h-[23vh]">
 
 </div>
 
