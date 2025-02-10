@@ -83,7 +83,6 @@ const SubscriptionPage = () => {
           <div className=" flex flex-col  mb-8 hidden sm:block   p-2 md:p-20 md:mb-0 top-0">
           <img
                 src="/desktop.webp"
-                alt="Newsletter illustration"
                 className=" w-full object-cover rounded-lg"
               />
               <Paypal price={planPrice} />
@@ -95,7 +94,6 @@ const SubscriptionPage = () => {
 
               <img
                 src="/mobile.webp"
-                alt="Newsletter illustration"
                 className=" w-full object-cover rounded-lg"
               />
 

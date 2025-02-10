@@ -62,7 +62,6 @@ const StoryLine = () => {
       </div>
       <img
         src="/pic3.svg"
-        alt="Centered Illustration"
         className="max-w-full h-auto mx-auto mt-8"
       />
     </div>
@@ -78,7 +77,6 @@ const StoryLine = () => {
         <div className="flex flex-col items-center justify-center mt-[60px] md:mt-[120px] mb-[40px] pt-9 pb-9 rounded-2xl gap-5">
           <img
             src="/group-16087.svg"
-            alt="illustration"
             className="w-50 md:w-100 h-20 md:h-40 object-cover"
           />
     
@@ -101,12 +99,10 @@ const StoryLine = () => {
             <div className="flex justify-center gap-4 mt-6">
               <img
                 src="/google-play.svg"
-                alt="Google Play Store"
                 className="h-5 border border-2 border-[var(--textColore)]  rounded-lg h-auto object-contain"
               />
               <img
                 src="/app-store.svg"
-                alt="Apple Store"
                 className="h-5 h-auto border border-2 border-[var(--textColore)]  rounded-lg object-contain"
               />
             </div>
@@ -180,7 +176,6 @@ const StoryLine = () => {
       </div>
       <img
         src="/illustration.svg"
-        alt="Centered Illustration"
         className="max-w-full h-auto mx-auto mt-8"
       />
     </div>

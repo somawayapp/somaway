@@ -77,7 +77,6 @@ const PlanCard = () => {
                 <span className="flex bg-orange-500 text-white text-md px-3 py-2 rounded-full">
                   <img
                     src="/fire.webp"
-                    alt="Most Popular"
                     className="h-5 object-contain"
                   />
                   Most Popular

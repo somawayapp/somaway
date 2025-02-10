@@ -90,7 +90,7 @@ const MainCategories = () => {
         to="/login" 
         className={`px-1 py-3 md:py-2 flex flex-row items-center border-white text-xs md:text-sm text-white ${isSearchOpen ? "hidden" : "block"}`}
       >         
-        <img src="/user.png" alt="search toggle" width={24} height={24} />
+        <img src="/user.png" width={24} height={24} />
         <span className="whitespace-nowrap">Sign In</span>
         </Link>
     </SignedOut>
@@ -101,7 +101,7 @@ const MainCategories = () => {
         to="/profile" 
         className={`px-1 py-3 md:py-2 flex flex-row items-center border-white text-xs md:text-sm text-white ${isSearchOpen ? "hidden" : "block"}`}
       >         
-        <img src="/user.png" alt="search toggle" width={24} height={24} />
+        <img src="/user.png"  width={24} height={24} />
         <span className="whitespace-nowrap">Profile</span>
 
    </Link> 
@@ -116,7 +116,6 @@ const MainCategories = () => {
     {isSearchOpen ? <FaTimes/> : 
       <img
         src="/search.png"
-        alt="search toggle"
         width={24}
         height={24}
       />

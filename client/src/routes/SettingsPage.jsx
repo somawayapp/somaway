@@ -19,7 +19,7 @@ const SettingsPage = () => {
              Settings
            </h1>
 
-         <div className="h-full p-2 bg-purple-700 mx-auto w-full max-w-[1200px] mt-[20px] md:mt-[70px] rounded-md md:rounded-[30px] shadow-md  box-border">
+         <div className="h-full p-2 bg-[#8d02fa] mx-auto w-full max-w-[1200px] mt-[20px] md:mt-[70px] rounded-md md:rounded-[30px] shadow-md  box-border">
          
            <p className="mt-2 text-md text-white   mt-[20px] md:mt-[50px] md:text-xl">
            Click the profile image to edit your info or logout!
@@ -67,7 +67,7 @@ const SettingsPage = () => {
          </div>
 
 
-         <div className="bg-purple-700  mx-auto w-full  max-w-[1200px] mb-[70px]  mt-[20px] md:mt-[70px] rounded-md md:rounded-[30px] shadow-md text-center">
+         <div className="bg-[#8d02fa]  mx-auto w-full  max-w-[1200px] mb-[70px]  mt-[20px] md:mt-[70px] rounded-md md:rounded-[30px] shadow-md text-center">
         <h3 className="text-white  mt-[20px] md:mt-[70px]  text-xl font-semibold mb-2">
           Change color theme?
         </h3>

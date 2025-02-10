@@ -61,7 +61,6 @@ const AboutPage = () => {
             {/* Icon */}
             <img
               src={item.icon}
-              alt="icon"
               className="absolute top-4 left-4 w-12 h-12 md:w-20 md;h-20"
             />
             {/* Text */}
@@ -80,7 +79,7 @@ const AboutPage = () => {
    
     
    
-<div className=" bg-[#7a00da]  bg-cover bg-no-repeat" style={{ backgroundImage: "url('/bg.svg')" }}>
+<div className=" bg-[#8d02fa]  bg-cover bg-no-repeat" style={{ backgroundImage: "url('/bg.svg')" }}>
 
 
   <div className="flex flex-col pl-2 pr-2 pt-12 md:pt-0  md:pl-[100px] lg:pl-[200px] md:flex-row items-center justify-between  z-10 text-black">
@@ -97,7 +96,6 @@ const AboutPage = () => {
       </p>
       <img 
   src="/love.svg" 
-  alt="Love" 
   className="w-8 h-8 mb-6 mx-auto md:mx-0 md:ml-0" 
 />
 
@@ -107,14 +105,14 @@ const AboutPage = () => {
 
     {/* Adjust vertical alignment with self-start or self-end */}
     <div className=" self-end  z-10">
-      <img src="/ceo.png" alt="CEO" className=" h-[500px] top-0 md:top-[150px] mt-0 md:mt-[300px] object-cover" />
+      <img src="/ceo.png" className=" h-[500px] top-0 md:top-[150px] mt-0 md:mt-[300px] object-cover" />
     </div>
   </div>
 
 
 </div>
 
-<div className= "bg-purple-700 rounded-b-2xl hidden md:block  h-[23vh]">
+<div className= "bg-[#8d02fa] rounded-b-2xl hidden md:block  h-[23vh]">
 
 </div>
 
@@ -146,7 +144,6 @@ const AboutPage = () => {
             {/* Icon */}
             <img
               src={item.icon}
-              alt="icon"
               className="absolute top-4 left-4 w-12 h-18 md:w-20 md;h-30"
             />
             {/* Text */}

@@ -20,7 +20,6 @@ const AdChanger = () => {
   return (
     <img
       src={ads[currentAd]}
-      alt="ads"
       className="w-full mt-10 h-full"
     />
   );

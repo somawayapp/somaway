@@ -109,7 +109,6 @@ const CategoriesScroll = ({ setOpen }) => {
                   .toLowerCase()
                   .replace(/\s+/g, "-")
                   .replace(/&/g, "and")}.webp`}
-                alt={category}
                 className="w-5 h-5 md:w-8 md:h-8 object-cover rounded-full"
               />
               <span className="text-sm md:text-md">{category}</span>

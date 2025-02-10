@@ -82,7 +82,7 @@ const Homepage = () => {
         {/* 
 
         <Link to="/" className="flex items-center mt-[10px] gap-1 text-lg font-bold md:text-2xl">
-        <img src="/x.png" alt="Logo" className="w-50 h-20 lg:w-50 lg:h-20" />
+        <img src="/x.png"  className="w-50 h-20 lg:w-50 lg:h-20" />
 
 <span className="text-[var(--textLogo)] text-[30px] lg:text-[90px]"></span>
 
@@ -157,7 +157,6 @@ const Homepage = () => {
 
      <img
             src="/group.svg"
-            alt="Newsletter illustration"
             className="w-100 md:w-180  h-40 md:h-80  md:mr-[40px] mr-0 object-cover "
           />   
           
@@ -204,7 +203,6 @@ const Homepage = () => {
 
      <img
             src="/summary.svg"
-            alt="Newsletter illustration"
             className="w-100 md:w-180  h-40 md:h-80 mr-0  md:mr-[-100px] object-cover "
           />   
           

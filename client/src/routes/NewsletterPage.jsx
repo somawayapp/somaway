@@ -29,7 +29,6 @@ const NewsletterPage = () => {
         <div className="lg:w-1/3 w-full">
           <img
             src="/newsletter.jpg"
-            alt="Newsletter illustration"
             className="w-full h-full object-cover rounded-t-lg lg:rounded-l-lg lg:rounded-r-none "
           />
         </div>
