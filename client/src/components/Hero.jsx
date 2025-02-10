@@ -39,12 +39,10 @@ const Hero = () => {
           <div className="flex mb-8 md:mb-0 top-0">
               <img
                 src="/desktop.webp"
-                alt="Newsletter illustration"
                 className="hidden sm:block w-full object-cover rounded-lg"
               />
               <img
                 src="/mobile.webp"
-                alt="Newsletter illustration"
                 className="block sm:hidden w-full object-cover rounded-lg"
               />
           </div>
