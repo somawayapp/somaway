@@ -16,7 +16,7 @@ const Hero = () => {
             #1 most
           </h1>
           <h1 className="text-4xl lg:text-5xl font-bold text-[var(--textColor)]">
-            popular <span className="text-[#003266]  ">book </span>
+            growth <span className="text-[#003266]  ">self </span>
           </h1>
           <h1 className="text-4xl lg:text-5xl font-bold text-[var(--textColor)]">
             <span className="text-[#003266]  ">summary</span> app
