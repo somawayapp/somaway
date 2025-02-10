@@ -26,7 +26,7 @@ const PremiumPage = () => {
            Experience unlimited acces to our exclusive book summaries 
                  </p>
            <p className="mt-2 text-md md:text-xl">
-             on a premium model for only $4.99 per month :
+             on a premium model for only $4.99 per month
            </p>
            <button
              className="mt-9 bg-black text-white py-4 text-extrabold text-2xl md:text-5xl 

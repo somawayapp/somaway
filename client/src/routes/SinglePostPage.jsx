@@ -67,6 +67,14 @@ const SinglePostPage = () => {
               <FaStar className="text-orange-500 w-[40px] ml-[-15px]" />
               <FaStar className="text-orange-500 w-[40px] ml-[-15px]" />
             </div>
+            
+          <div className="block md:hidden text-center">
+          <p className="text-[var(--softTextColor2)] mt-5">Comments</p>
+          <div className="flex justify-center">
+          <Comments postId={data._id} />
+          </div>
+          </div>
+
             <p className="mt-5 text-xl md:text-2xl text-justify font-bold">
               Short summary
             </p>
@@ -82,10 +90,11 @@ const SinglePostPage = () => {
 
           <ExplorePosts/>
 
-
+           <div className="hidden md:block">
             <p className="text-[var(--softTextColor2)] mt-5 ">Comments</p>
-
             <Comments postId={data._id} />
+            </div>
+
 
           </div>
         </div>
