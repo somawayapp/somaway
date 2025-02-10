@@ -22,7 +22,7 @@ const Hero = () => {
             <span className="text-[#003266]  ">summary</span> app
           </h1>
           <p className="text-md md:text-xl text-[var(--textColor)]">
-            Achieve your goals with somaAI by listening and reading the world’s best ideas
+            Achieve your goals with  SomaApp by listening and reading the world’s best ideas
           </p>
           <Link
             to="/login"

@@ -11,9 +11,9 @@ const Footer = () => {
           <h4 className="text-lg font-semibold mb-4">Home</h4>
           <nav>
             <ul className="space-y-2">
-              <li><a href="/home" className="text-[var(--softTextColor)] hover:text-[var(--softTextColor)]">Home</a></li>
+              <li><a href="/" className="text-[var(--softTextColor)] hover:text-[var(--softTextColor)]">Home</a></li>
               <li><a href="/premium" className="text-[var(--softTextColor)] hover:text-[var(--softTextColor)]">Pricing</a></li>
-              <li><a href="/premium" className="text-[var(--softTextColor)] hover:text-[var(--softTextColor)]">Gift somaAI</a></li>
+              <li><a href="/premium" className="text-[var(--softTextColor)] hover:text-[var(--softTextColor)]">Gift  SomaApp</a></li>
             </ul>
           </nav>
         </div>
@@ -24,10 +24,10 @@ const Footer = () => {
           <nav>
             <ul className="space-y-2">
               <li><a href="/about" className="text-[var(--softTextColor)] hover:text-[var(--softTextColor)]">About</a></li>
-              <li><a href="/" className="text-[var(--softTextColor)] hover:text-[var(--softTextColor)]">Careers</a></li>
-              <li><a href="/" className="text-[var(--softTextColor)] hover:text-[var(--softTextColor)]">Family</a></li>
+              <li><a href="/about" className="text-[var(--softTextColor)] hover:text-[var(--softTextColor)]">Careers</a></li>
+              <li><a href="/about" className="text-[var(--softTextColor)] hover:text-[var(--softTextColor)]">Family</a></li>
               <li><a href="/about" className="text-[var(--softTextColor)] hover:text-[var(--softTextColor)]">Press Info</a></li>
-              <li><a href="/" className="text-[var(--softTextColor)] hover:text-[var(--softTextColor)]">Affiliates</a></li>
+              <li><a href="/about" className="text-[var(--softTextColor)] hover:text-[var(--softTextColor)]">Affiliates</a></li>
             </ul>
           </nav>
         </div>
@@ -62,10 +62,10 @@ const Footer = () => {
       {/* Bottom Info Section */}
       <div className="mt-8 text-center border-t border-[var(--softBg)]  mb-[100px] md:mb-0  pt-4">
         <p className="text-[var(--softTextColor)]">
-          © {currentYear}, SomaAI App Limited, Waiyaki way , 1st floor, Westend towers, Westlands, Nairobi
+          © {currentYear},  SomaApp App Limited, Waiyaki way , 1st floor, Westend towers, Westlands, Nairobi
        
           <a href="mailto:support@soma.ia.com" className="text-[var(--softTextColor)] pl-1 hover:text-[var(--softTextColor)]">
-            support@soma.ai.com
+            support@somaapp.com
           </a>
         </p>
       </div>
