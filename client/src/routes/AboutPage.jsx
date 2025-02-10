@@ -29,6 +29,7 @@ const AboutPage = () => {
          </div>
          <img
            src="/summary.png"
+           alt="Centered Illustration"
            className="h-[100px] md:h-[400px] mx-auto "
          />
        </div>
