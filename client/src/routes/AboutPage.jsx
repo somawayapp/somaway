@@ -87,10 +87,13 @@ const AboutPage = () => {
     <div className="flex-1  text-center  md:text-left">
     <h3 className="text-3xl md:text-5xl font-bold mb-4">How did the idea of SomaAI come?</h3>
       <p className="text-sm md:text-lg max-w-md mb-6">
-        Ever since I can remember, self-education has been a significant part of my life. I wanted to learn so many things but couldn’t
-         find the most efficient, productive, and enjoyable tool for self-growth. Also, I’ve realized that there’re millions of inquiring
-          minds with the same problem as mine. So what was the best solution? To create such a tool for each of us. That's how the SomaAI
-           app appeared. Later on, we grew into a multiproduct startup.
+      
+         For years, I searched for the hidden secrets of success, the ones they never teach us. I always believed there was a shortcut,
+          and I was right. The secrets are hidden in plain sight, written in books by those who have already made it.
+          That’s why I devoted myself to reading—not because I love it, but because knowledge is the key to success.
+          I wanted to learn so many things-as fast as i could  but couldn’t find the most efficient, productive, and enjoyable tool for self-growth.
+           Also, I’ve realized that there’re millions of inquiring minds with the same problem as mine. So what was the best solution? 
+           To create such a tool for each of us. That's how the SomaAI app appeared. A community where we can all grow together .
       </p>
       <img 
   src="/love.svg" 
@@ -104,17 +107,16 @@ const AboutPage = () => {
 
     {/* Adjust vertical alignment with self-start or self-end */}
     <div className=" self-end  z-10">
-      <img src="/ceo.png" alt="CEO" className=" h-[500px] top-0 md:top-[150px] rounded-md  mt-0 md:mt-[300px] object-cover" />
+      <img src="/ceo.png" alt="CEO" className=" h-[500px] top-0 md:top-[150px] mt-0 md:mt-[300px] object-cover" />
     </div>
   </div>
 
 
 </div>
 
-<div className= "bg-[#014f30]  rounded-b-2xl hidden md:block  h-[25vh]">
+<div className= "bg-[#014f30]  rounded-b-2xl hidden md:block  h-[23vh]">
 
 </div>
-
 
    
    
