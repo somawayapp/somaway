@@ -69,13 +69,13 @@ const SinglePostPage = () => {
             </div>
             
           <div className="block md:hidden text-center">
-          <p className="text-[var(--softTextColor2)] mt-5">Comments</p>
+          <p className="text-[var(--softTextColor2)] mt-2">Comments</p>
           <div className="flex justify-center">
           <Comments postId={data._id} />
           </div>
           </div>
 
-            <p className="mt-5 text-xl md:text-2xl text-justify font-bold">
+            <p className="mt-2 text-xl md:text-2xl text-justify font-bold">
               Short summary
             </p>
             <p
