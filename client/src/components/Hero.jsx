@@ -16,10 +16,10 @@ const Hero = () => {
             #1 most
           </h1>
           <h1 className="text-4xl lg:text-5xl font-bold text-[var(--textColor)]">
-            growth <span className="text-[#003266]  ">self </span>
+          popular   <span className="text-[#003266]  ">self </span>
           </h1>
           <h1 className="text-4xl lg:text-5xl font-bold text-[var(--textColor)]">
-            <span className="text-[#003266]  ">summary</span> app
+            <span className="text-[#003266]  ">growth</span> app
           </h1>
           <p className="text-md md:text-xl text-[var(--textColor)]">
             Achieve your goals with somaAI by listening and reading the world’s best ideas

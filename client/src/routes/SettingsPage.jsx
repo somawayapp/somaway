@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import ThemeToggler from "../components/Theme";
 import { SignedIn, SignedOut, UserButton } from "@clerk/clerk-react";
 import Navbar from "../components/Navbar";
+import Footer from "../components/Footer";
 const SettingsPage = () => {
   return (
     <div className="mb-[80px] ">
@@ -11,17 +12,19 @@ const SettingsPage = () => {
 
 
     <div
-         className="relative bg-[#7a00da] mt-[20px] md:mt-[50px] w-full rounded-md md:rounded-[30px] shadow-md 
-           text-[var(--bg)] text-center animate-fadeIn flex flex-col items-center justify-center"
+         className="relative  w-full  
+           text-white  text-center animate-fadeIn flex flex-col items-center justify-center"
        >
-         <div className="h-full p-2  box-border">
-           <h1 className="text-3xl md:text-6xl  mt-[20px] md:mt-[70px] font-bold">
+          <h1 className="text-3xl md:text-6xl text-[var(--textColor)]  mt-[20px] md:mt-[50px] font-bold">
              Settings
            </h1>
-           <p className="mt-2 text-md md:text-xl">
+
+         <div className="h-full p-2 bg-[#014f30]  mx-auto w-full max-w-[1200px] mt-[20px] md:mt-[70px] rounded-md md:rounded-[30px] shadow-md  box-border">
+         
+           <p className="mt-2 text-md text-white   mt-[20px] md:mt-[50px] md:text-xl">
            Click the profile image to edit your info or logout!
                  </p>
-           <p className="mt-2 text-md md:text-xl">
+           <p className="mt-2 text-white   text-md md:text-xl">
              Profile settings
            </p>
 
@@ -39,7 +42,7 @@ const SettingsPage = () => {
               <SignedOut>
           <Link to="/login">
             <button     className="bg-[var(--bg)] text-[var(--textColor)] py-4 text-extrabold text-xl md:text-2xl 
-               px-8 rounded-[40px] cursor-pointer hover:bg-[var(--textColor)] hover:text-[var(--bg)] ">
+               px-8 rounded-[40px] cursor-pointer hover:bg-[var(--textColor)] hover:text-[var(--textColor)] ">
               Login 
             </button>
           </Link>
@@ -50,11 +53,11 @@ const SettingsPage = () => {
         </SignedIn>
               </div>
 
-              <h3 className="text-lg font-medium text-[var(--bg)] text-center">
+              <h3 className="text-lg font-medium text-[var(--textColor)] text-center">
                 {name}
               </h3>
-              <p className="text-sm text-[var(--bg)] text-center italic">
-             Click on the profile image to edit your profile/ <span className=" text-[var(--textColor)]  hover:text-[#01274f]   ]">  
+              <p className="text-sm text-white  text-center italic">
+             Click on the profile image to edit your profile/ <span className=" text-[var(--textColor)]  hover:text-[#014f30]  ]">  
               <Link to="/login">  Login</Link>   </span>               </p>
             </div>
           ))}
@@ -62,11 +65,13 @@ const SettingsPage = () => {
       </div>
           
          </div>
-         <div className="mt-6 text-center">
-        <h3 className="text-[var(--bg)] text-xl font-semibold mb-2">
+
+
+         <div className="bg-[#014f30]  mx-auto w-full  max-w-[1200px] mb-[70px]  mt-[20px] md:mt-[70px] rounded-md md:rounded-[30px] shadow-md text-center">
+        <h3 className="text-white  mt-[20px] md:mt-[70px]  text-xl font-semibold mb-2">
           Change color theme?
         </h3>
-        <p className="text-md text-[var(--bg)] leading-relaxed">
+        <p className="text-md text-white  leading-relaxed">
 Click on the toogle button below to the chnage the theme between light mode and dark mode        </p>
         <Link
           className="mt-4 inline-block  mb-[35px]  font-medium  transition duration-300"
@@ -81,6 +86,7 @@ Click on the toogle button below to the chnage the theme between light mode and 
        </div>
    
 
+       <Footer/>
 
         </div>
 

@@ -19,7 +19,7 @@ const AboutPage = () => {
            text-white text-center animate-fadeIn flex flex-col items-center justify-center"
        >
          <div className="h-full p-2  max-w-[900px] mx-auto box-border">
-           <h1 className="text-3xl md:text-6xl mt-[20px] md:mt-[70px] font-bold">
+         <h1 className="text-3xl md:text-6xl mt-[20px] md:mt-[70px] font-bold">
             About SomaAI
                    </h1>
            <p className="mt-2 text-md md:text-xl">
@@ -29,11 +29,9 @@ const AboutPage = () => {
          </div>
          <img
            src="/summary.png"
-           alt="Centered Illustration"
            className="h-[100px] md:h-[400px] mx-auto "
          />
        </div>
-   
 
    <div >
   
