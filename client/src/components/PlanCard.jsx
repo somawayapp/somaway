@@ -28,7 +28,7 @@ const PlanCard = () => {
               <p className="mt-3 text-md text-[var(--softTextColor)] mb-2 border border-2 border-[var(--softTextColor)] py-2 px-3 rounded-[20px] font-semibold">
                 Monthly Plan
               </p>
-              <p className="text-xl md:text-2xl mb-2 mt-3 font-semibold text-[#01274f]    border-b pb-2">
+              <p className="text-xl md:text-2xl mb-2 mt-3 font-semibold text-orange-500    border-b pb-2">
                 $4.99/month
               </p>
               <div className="mt-4 text-sm md:text-md space-y-2 text-[var(--bg)]">
@@ -82,7 +82,7 @@ const PlanCard = () => {
                   Most Popular
                 </span>
               </div>
-              <p className="text-xl md:text-2xl mb-2 font-semibold text-[#01274f]    border-b pb-2">
+              <p className="text-xl md:text-2xl mb-2 font-semibold text-orange-500   border-b pb-2">
                 $49.99/year
               </p>
               <div className="mt-4 text-sm md:text-md space-y-2 text-[var(--bg)]">

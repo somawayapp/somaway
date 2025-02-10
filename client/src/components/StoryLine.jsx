@@ -29,7 +29,7 @@ const StoryLine = () => {
       </h1>
       <h1 className="text-3xl md:text-6xl font-bold">bestsellers</h1>
       <p className="mt-2 text-md md:text-xl">
-        Grasp the book’s key ideas in less than 15 minutes
+        Grasp the book’s key ideas in less than 5 minutes
       </p>
       <button className="mt-9 bg-white text-black py-3 text-bold px-6 rounded-lg cursor-pointer hover:bg-gray-200">
         Get Started
