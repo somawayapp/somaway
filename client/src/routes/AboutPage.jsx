@@ -20,10 +20,10 @@ const AboutPage = () => {
        >
          <div className="h-full p-2  max-w-[900px] mx-auto box-border">
          <h1 className="text-3xl md:text-6xl mt-[20px] md:mt-[70px] font-bold">
-            About  SomaApp
+            About  Somaway
                    </h1>
            <p className="mt-2 text-md md:text-xl">
-             SomaApp is a global EdTech startup with african roots. We are mission driven and passionate about self-improvement                  </p>
+             Somaway is a global EdTech startup with african roots. We are mission driven and passionate about self-improvement                  </p>
         
         
          </div>
@@ -42,15 +42,15 @@ const AboutPage = () => {
       <div className="grid grid-cols-1 mx-auto md:grid-cols-3 gap-6 mt-8 w-full px-4">
         {[
           {
-            text: "2021 –  SomaApp founded by Lexanda Mbelenzi",
+            text: "2021 –  Somaway founded by Lexanda Mbelenzi",
             icon: "rocket.svg",
           },
           {
-            text: " SomaApp has grown from a 3-person startup into a team of 250+ people in 3 years",
+            text: " Somaway has grown from a 3-person startup into a team of 250+ people in 3 years",
             icon: "smile.svg",
           },
           {
-            text: "Now,  SomaApp has offices in London, Nairobi, and San Francisco.",
+            text: "Now,  Somaway has offices in London, Nairobi, and San Francisco.",
             icon: "pin.svg",
           },
         ].map((item, index) => (
@@ -84,7 +84,7 @@ const AboutPage = () => {
 
   <div className="flex flex-col pl-2 pr-2 pt-12 md:pt-0  md:pl-[100px] lg:pl-[200px] md:flex-row items-center justify-between  z-10 text-black">
     <div className="flex-1  text-center  md:text-left">
-    <h3 className="text-3xl md:text-5xl font-bold mb-4">How did the idea of  SomaApp come?</h3>
+    <h3 className="text-3xl md:text-5xl font-bold mb-4">How did the idea of  Somaway come?</h3>
       <p className="text-sm md:text-lg max-w-md mb-6">
       
          For years, I searched for the hidden secrets of success, the ones they never teach us. I always believed there was a shortcut,
@@ -92,7 +92,7 @@ const AboutPage = () => {
           That’s why I devoted myself to reading—not because I love it, but because knowledge is the key to success.
           I wanted to learn so many things-as fast as i could  but couldn’t find the most efficient, productive, and enjoyable tool for self-growth.
            Also, I’ve realized that there’re millions of inquiring minds with the same problem as mine. So what was the best solution? 
-           To create such a tool for each of us. That's how the  SomaApp app appeared. A community where we can all grow together .
+           To create such a tool for each of us. That's how the  Somaway app appeared. A community where we can all grow together .
       </p>
       <img 
   src="/love.svg" 
@@ -100,7 +100,7 @@ const AboutPage = () => {
 />
 
        <p className="font-semibold text-md">Lexanda Mbelenzi</p>
-      <p className="text-sm text-opacity-80"> SomaApp CEO and founder</p>
+      <p className="text-sm text-opacity-80"> Somaway CEO and founder</p>
     </div>
 
     {/* Adjust vertical alignment with self-start or self-end */}
@@ -125,7 +125,7 @@ const AboutPage = () => {
       <div className="grid grid-cols-1 mx-auto md:grid-cols-3 gap-6 mt-8 w-full px-4">
         {[
           {
-            text: "Who we are –  SomaApp is a non-fiction book summary app",
+            text: "Who we are –  Somaway is a non-fiction book summary app",
             icon: "negotiation.webp",
           },
           {
