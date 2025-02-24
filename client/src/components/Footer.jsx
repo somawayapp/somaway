@@ -65,7 +65,7 @@ const Footer = () => {
           © {currentYear},  Somaway App Limited, Waiyaki way , 1st floor, Westend towers, Westlands, Nairobi
        
           <a href="mailto:support@soma.ia.com" className="text-[var(--softTextColor)] pl-1 hover:text-[var(--softTextColor)]">
-            support@Somaway.com
+            support@ makesomaway@gmail.com
           </a>
         </p>
       </div>

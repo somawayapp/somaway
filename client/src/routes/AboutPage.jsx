@@ -23,7 +23,7 @@ const AboutPage = () => {
             About  Somaway
                    </h1>
            <p className="mt-2 text-md md:text-xl">
-             Somaway is a global EdTech startup with african roots. We are mission driven and passionate about self-improvement                  </p>
+             Somaway is a global EdTech startup with kenyan roots. We are mission driven and passionate about self-improvement                  </p>
         
         
          </div>
@@ -160,7 +160,7 @@ const AboutPage = () => {
 <div className="flex items-center justify-center text-[var(--textColor)] mx-auto">
   <div className="text-center">
     <p className="mt-2 text-sm md:text-lg">
-      Contact us @soma.ai@gmail.com or call +254 703 394794
+      Contact us makesomaway@gmail.com or call +254 703 394794
     </p>
     <button
     to="discover"
