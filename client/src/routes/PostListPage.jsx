@@ -29,7 +29,7 @@ const PostListPage = () => {
     cat ? `Category: ${cat}` : "", // Display 'cat' if present
   ]
     .filter(Boolean) // Remove empty strings
-    .join(" | ") || "All books"; // Default to "All Books" if no filters are applied
+    .join(" | ") || "All book summaries"; // Default to "All Books" if no filters are applied
 
   return (
     <div  className=" mb-[80px]  ">
