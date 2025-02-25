@@ -11,14 +11,14 @@ const Hero = () => {
     <div className="flex mb-0 md:mb-[50px] flex-col mt-0 md:mt-4">
       <div className="flex flex-col lg:flex-row lg:h-[60vh] gap-[100px] mt-4">
         {/* Left Section */}
-        <div className="lg:w-1/4 flex flex-col mt-0 md:mt-9 items-start gap-1 md:gap-4 rounded-md">
+        <div className="lg:w-2/6 flex flex-col mt-0 md:mt-9 items-start gap-1 md:gap-4 rounded-md">
           <h1 className="text-4xl lg:text-5xl font-bold text-[var(--textColor)]">
             #1 most
           </h1>
-          <h1 className="text-4xl lg:text-5xl font-bold text-[var(--textColor)]">
+          <h1 className="text-4xl md:text-6xl font-bold text-[var(--textColor)]">
           popular   <span className="text-[#0062e3]  ">book </span>
           </h1>
-          <h1 className="text-4xl lg:text-5xl font-bold text-[var(--textColor)]">
+          <h1 className="text-4xl md:text-6xl font-bold text-[var(--textColor)]">
             <span className="text-[#0062e3]  ">summary</span> app
           </h1>
           <p className="text-md md:text-xl text-[var(--textColor)]">
@@ -32,9 +32,10 @@ const Hero = () => {
             Get Started
           </Link>
         </div>
-
+        <div className="lg:w-1/6 flex mt-[-53px] md:mt-[-40px] flex-col">
+          </div>
         {/* Right Section */}
-        <div className="lg:w-2/4 flex mt-[-53px] md:mt-[-30px] flex-col">
+        <div className="lg:w-3/6flex mt-[-53px] md:mt-[-40px] flex-col">
           {/* First Featured Post */}
           <div className="flex mb-8 md:mb-[50px] top-0">
               <img
