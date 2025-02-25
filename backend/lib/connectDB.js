@@ -3,7 +3,7 @@ import mongoose from "mongoose";
 // This function is used to connect to MongoDB using Mongoose
 const connectDB = async () => {
   try {
-    const uri =  "mongodb+srv://airnesyinfo:airnesyinfo@cluster0.54a22.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0&dbName=blog"; // Get the DB connection URI from environment variables
+    const uri =  "mongodb+srv://makesomaway:makesomaway@cluster0.movbe.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0&dbName=app "; // Get the DB connection URI from environment variables
     if (!uri) {
       throw new Error("DATABASE_URL is missing in environment variables.");
     }
