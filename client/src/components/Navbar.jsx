@@ -36,9 +36,9 @@ const Navbar = () => {
    
 
       {/* LOGO */}
-      <Link to="/" className="flex items-center gap-1 text-lg font-bold md:text-2xl">
-      <img src="/logo7.png"  className="w-7 h-7 md:w-8 md:h-8" />
-      <span className="bg-clip-text text-[#0062e3]  pl-1 text-xl md:text-2xl  font-impact">Somaway</span>
+      <Link to="/" className="flex items-center gap-1 text-xl font-bold md:text-3xl">
+      <img src="/logo7.png"  className="w-7 h-7 md:w-9 md:h-9" />
+      <span className="bg-clip-text text-[#0062e3]  pl-1 text-xl md:text-2xl  font-bold">Somaway</span>
 
       {/*   <span className="bg-clip-text text-[#1ADAff] font-impact"></span> */}
 
