@@ -16,18 +16,18 @@ const Hero = () => {
             #1 most
           </h1>
           <h1 className="text-4xl lg:text-5xl font-bold text-[var(--textColor)]">
-          popular   <span className="text-[#003266]  ">book </span>
+          popular   <span className="text-[#0062e3]  ">book </span>
           </h1>
           <h1 className="text-4xl lg:text-5xl font-bold text-[var(--textColor)]">
-            <span className="text-[#003266]  ">summary</span> app
+            <span className="text-[#0062e3]  ">summary</span> app
           </h1>
           <p className="text-md md:text-xl text-[var(--textColor)]">
             Achieve your goals with  Somaway by listening and reading the world’s best ideas
           </p>
           <Link
             to="/login"
-            className="w-full text-center mt-3 md:mt-0 sm:w-auto px-4 md:px-12 py-3 md:py-3 bg-[#003266]   text-white font-semibold
-             rounded-md hover:bg-[#01274f]   "
+            className="w-full text-center mt-3 md:mt-0 sm:w-auto px-4 md:px-12 py-3 md:py-3 bg-[#0062e3]   text-white font-semibold
+             rounded-md hover:bg-[#0053bf]   "
           >
             Get Started
           </Link>

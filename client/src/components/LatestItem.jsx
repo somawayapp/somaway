@@ -18,7 +18,7 @@ const LatestItem = ({ post }) => {
             <Link to={`/${post.slug}`} className="relative w-full" style={{ paddingTop: "150%" }}>
               <Image
                 src={post.img}
-                className="absolute top-0  left-0 w-full h-full object-cover rounded-xl"
+                className="absolute top-0  left-0 w-full h-full object-cover rounded-lg"
               />
             </Link>
           
