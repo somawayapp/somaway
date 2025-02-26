@@ -6,14 +6,14 @@ import { useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
-import "react-quill-new/dist/quill.snow.css";
+import 'react-quill-new/dist/quill.snow.css';
 
 const Write = () => {
   const { isLoaded, isSignedIn } = useUser();
   const [title, setTitle] = useState("");
   const [desc, setDesc] = useState("");
   const [category, setCategory] = useState("");
-  const [cover, setCover] = useState({ file: null, previewUrl: "", filePath: "" });
+  const [cover, setCover] = useState(null);
   const [author, setAuthor] = useState("");
   const [progress, setProgress] = useState(0);
   const [error, setError] = useState("");
@@ -54,7 +54,7 @@ const Write = () => {
     if (!title) return setError("Please include a title for your post.");
     if (!desc) return setError("Please include a description for your post.");
     if (!category) return setError("Please select a category for your post.");
-    if (!cover.filePath) return setError("Please upload a cover image for your post.");
+    if (!cover?.filePath) return setError("Please upload a cover image for your post.");
     if (!author) return setError("Please enter the author's name.");
 
     const timestamp = Date.now();
@@ -78,12 +78,12 @@ const Write = () => {
     if (!file) return;
 
     const previewUrl = URL.createObjectURL(file);
-    setCover({ file, previewUrl, filePath: "" });
+    setCover({ file, previewUrl, filePath: null });
 
     try {
       const formData = new FormData();
       formData.append("image", file);
-
+      
       const token = await getToken();
       const uploadResponse = await axios.post(
         `${import.meta.env.VITE_API_URL}/upload`,
@@ -96,16 +96,16 @@ const Write = () => {
           },
         }
       );
-
-      if (!uploadResponse.data || !uploadResponse.data.filePath) {
-        throw new Error("Invalid server response: Missing filePath.");
+      
+      if (uploadResponse.data?.filePath) {
+        setCover((prev) => ({ ...prev, filePath: uploadResponse.data.filePath }));
+        toast.success("Image uploaded successfully");
+      } else {
+        throw new Error("Image upload failed");
       }
-
-      setCover((prev) => ({ ...prev, filePath: uploadResponse.data.filePath }));
-      toast.success("Image uploaded successfully");
     } catch (error) {
       toast.error("Image upload failed. Try again.");
-      setCover({ file: null, previewUrl: "", filePath: "" });
+      setCover(null);
       setProgress(0);
     }
   };
@@ -123,7 +123,7 @@ const Write = () => {
         <button type="button" onClick={() => fileInputRef.current.click()} className="p-3 bg-blue-500 text-white rounded-lg">
           {progress > 0 && progress < 100 ? `Uploading... (${progress}%)` : "Add a Cover Image"}
         </button>
-        {cover.previewUrl && <img src={cover.previewUrl} alt="Cover Preview" className="max-w-xs rounded-md" />}
+        {cover?.previewUrl && <img src={cover.previewUrl} alt="Cover Preview" className="max-w-xs rounded-md" />}
         
         <input type="text" value={title} onChange={(e) => setTitle(e.target.value.slice(0, 150))} placeholder="Enter Post Title" className="p-3 border rounded-lg" />
         
