@@ -75,7 +75,7 @@ const Write = () => {
   if (!isSignedIn) return <div>You need to sign in to create a post!</div>;
 
   return (
-<div className="max-w-[1200px] mx-auto flex flex-col  px-4 py-6 justify-center items-center min-h-screen">
+<div className="max-w-[900px] mx-auto flex flex-col  px-4 py-6 justify-center items-center min-h-screen">
 <h1 className="text-3xl mb-[30px] font-semibold">Create a New Post</h1>
       {error && <div className="text-red-600">{error}</div>}
       <form onSubmit={handleSubmit} className="flex flex-col gap-6">
@@ -83,16 +83,10 @@ const Write = () => {
         <Upload type="image" setProgress={setProgress} setData={setCover}>
           <button className="p-2 bg-gray-200 rounded-lg">Upload Cover Image</button>
         </Upload>
-        {cover && (
-  <div className="w-full h-55 bg-[var(--textcolor)] rounded-lg flex items-center justify-center overflow-hidden">
-    <img
-      src={cover.url}
-      alt="Cover Preview"
-      className="h-full object-cover aspect-[3/4] rounded-lg"
-    />
-  </div>
-)}
+        <div  className="w-full h-50 object-cover rounded-lg" >
+        {cover && <img src={cover.url} alt="Cover Preview" className="h-full  object-cover rounded-lg" />}
 
+        </div >
 
         {/* Title Input */}
         <input type="text" placeholder="Enter Post Title" value={title} onChange={(e) => setTitle(e.target.value.slice(0, 150))} className="p-2 border rounded" />
