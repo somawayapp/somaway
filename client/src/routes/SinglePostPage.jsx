@@ -54,11 +54,11 @@ const SinglePostPage = () => {
             <div className="flex flex-col md:flex-row items-center gap-1 md:gap-2 text-[var(--softTextColor)] text-md md:text-lg">
               <div className="flex  gap-1 md:gap-2">
                 <span>Book by</span>
-                <Link>{data.user.username}</Link>
+                <Link>{data.author}</Link>
              
                 <span>Category</span>
-                <Link>{data.category}</Link>
-              </div>
+                <Link className="capitalize">{data.category}</Link>
+                </div>
             </div>
             <div className="flex flex-row justify-center md:justify-start mt-2">
               <FaStar className="text-orange-500 w-[40px] " />
