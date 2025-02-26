@@ -2,7 +2,6 @@
 import { Link } from "react-router-dom";
 import Image from "./Image";
 import { format } from "timeago.js";
-import Search from "./Search2";
 
 const FeaturedItem = ({ post }) => {
   // Truncate title based on screen size
