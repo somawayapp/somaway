@@ -16,6 +16,8 @@ const Write = () => {
   const [category, setCategory] = useState("");
   const [cover, setCover] = useState(null);
   const [progress, setProgress] = useState(0);
+  const [titleRemainingChars, setTitleRemainingChars] = useState(150);
+  const [descRemainingChars, setDescRemainingChars] = useState(10000);
   const [error, setError] = useState("");
   const [isFeatured, setIsFeatured] = useState(false);
 
@@ -43,11 +45,15 @@ const Write = () => {
 
   const clearError = () => setError("");
 
-  const generateSlug = (title) => {
-    return title
-      .replace(/\s+/g, "-")
-      .replace(/[^a-zA-Z0-9-]/g, "") // Remove special characters
-      .toLowerCase();
+  const handleTitleChange = (e) => {
+    const value = e.target.value.slice(0, 150);
+    setTitle(value);
+    setTitleRemainingChars(150 - value.length);
+  };
+
+  const handleDescChange = (value) => {
+    setDesc(value);
+    setDescRemainingChars(10000 - value.length);
   };
 
   const handleSubmit = (e) => {
@@ -60,14 +66,14 @@ const Write = () => {
     if (!cover) return setError("Please upload a cover image for your post.");
 
     const timestamp = Date.now();
-    const slug = `${generateSlug(title)}-${timestamp}`;
+    let slug = title.replace(/\s+/g, "-").toLowerCase().replace(/[^a-z0-9-]+$/, "");
 
     const data = {
       img: cover.filePath,
       title,
       category,
       desc,
-      slug,
+      slug: `${slug}-${timestamp}`,
       isFeatured,
       author: user?.fullName || "Anonymous",
     };
@@ -76,11 +82,11 @@ const Write = () => {
   };
 
   if (!isLoaded) {
-    return <div className="text-center text-gray-600 mt-8">Loading...</div>;
+    return <div className="text-center text-[var(--textColor)] mt-8">Loading...</div>;
   }
 
   if (isLoaded && !isSignedIn) {
-    return <div className="text-center text-gray-600 mt-8">You need to sign in to create a post!</div>;
+    return <div className="text-center text-[var(--textColor)] mt-8">You need to sign in to create a post!</div>;
   }
 
   const handleImageChange = (e) => {
@@ -92,57 +98,49 @@ const Write = () => {
   };
 
   return (
-    <div className="max-w-3xl mx-auto py-6">
-      <h1 className="text-3xl font-semibold">Create a New Post</h1>
-      {error && <div className="text-red-600 bg-red-100 p-2 rounded">{error}</div>}
-      <form onSubmit={handleSubmit} className="flex flex-col gap-4">
-        <Upload type="image" setProgress={setProgress} setData={setCover}>
-          <input
-            type="file"
-            accept="image/*"
-            onChange={handleImageChange}
-            className="hidden"
-            ref={fileInputRef}
-            id="coverImageInput"
-          />
-          <label htmlFor="coverImageInput" className="cursor-pointer bg-blue-500 text-white px-4 py-2 rounded">
-            {progress > 0 && progress < 100 ? "Uploading..." : "Add a cover image"}
-          </label>
-        </Upload>
-
+    <div className="h-[calc(100vh-64px)] max-w-[900px] flex flex-col top-[20px] gap-6 px-4 py-6">
+      <h1 className="text-3xl font-semibold text-[var(--textColor)]">Create a New Post</h1>
+      {error && <div className="p-4 text-red-700 bg-red-100 rounded-lg">{error}</div>}
+      <form onSubmit={handleSubmit} className="flex flex-col gap-6 flex-1">
+        <div>
+          <Upload type="image" setProgress={setProgress} setData={setCover}>
+            <input
+              type="file"
+              accept="image/*"
+              onChange={handleImageChange}
+              className="hidden"
+              ref={fileInputRef}
+              id="coverImageInput"
+            />
+            <label
+              htmlFor="coverImageInput"
+              className="w-max p-3 shadow-md rounded-xl cursor-pointer"
+            >
+              {progress > 0 && progress < 100 ? "Uploading..." : "Add a cover image"}
+            </label>
+          </Upload>
+        </div>
         {cover && cover.previewUrl && (
-          <div className="relative">
-            <img src={cover.previewUrl} alt="Cover preview" className="w-40 h-24 object-cover rounded" />
-            <button type="button" onClick={() => setCover(null)} className="absolute top-1 right-1 bg-red-500 text-white px-2 py-1 text-xs rounded">
+          <div className="relative w-full max-w-[250px] h-[150px] mx-auto">
+            <img src={cover.previewUrl} className="w-full h-full object-cover rounded-md" />
+            <button
+              type="button"
+              onClick={() => setCover(null)}
+              className="absolute top-2 right-2 bg-red-500 text-white p-1 rounded-full"
+            >
               ✕
             </button>
           </div>
         )}
-
-        <input
-          type="text"
-          placeholder="Enter Post Title"
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
-          className="border p-2 rounded"
-        />
-
-        <select value={category} onChange={(e) => setCategory(e.target.value)} className="border p-2 rounded">
-          <option value="" disabled>Select a category</option>
+        <input type="text" placeholder="Title" value={title} onChange={handleTitleChange} className="p-3 w-full border rounded-xl" />
+        <select value={category} onChange={(e) => setCategory(e.target.value)} className="p-3 w-full border rounded-xl">
+          <option value="">Select a category</option>
           <option value="general">General</option>
         </select>
-
-        <ReactQuill value={desc} onChange={setDesc} className="border rounded" placeholder="A Short Description" />
-
-        <div className="flex items-center gap-2">
-          <input type="checkbox" id="isFeatured" checked={isFeatured} onChange={() => setIsFeatured(!isFeatured)} />
-          <label htmlFor="isFeatured">Is this post featured?</label>
-        </div>
-
-        <button
-          disabled={mutation.isPending || (progress > 0 && progress < 100)}
-          className="bg-blue-500 text-white px-4 py-2 rounded disabled:bg-gray-400"
-        >
+        <ReactQuill value={desc} onChange={handleDescChange} placeholder="Description" className="border rounded-xl" />
+        <input type="checkbox" id="isFeatured" checked={isFeatured} onChange={() => setIsFeatured(!isFeatured)} />
+        <label htmlFor="isFeatured">Is this post featured?</label>
+        <button disabled={mutation.isPending || (progress > 0 && progress < 100)} className="bg-blue-500 text-white p-3 rounded-xl">
           {mutation.isPending ? "Publishing..." : "Publish Post"}
         </button>
       </form>
