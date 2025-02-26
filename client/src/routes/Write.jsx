@@ -83,7 +83,7 @@ const Write = () => {
         <Upload type="image" setProgress={setProgress} setData={setCover}>
           <button className="p-2 bg-gray-200 rounded-lg">Upload Cover Image</button>
         </Upload>
-        <div  className="w-full h-50 object-cover rounded-lg" >
+        <div  className="w-full h-50  bg-[var(--textColore)] rounded-lg" >
         {cover && <img src={cover.url} alt="Cover Preview" className="h-full  object-cover rounded-lg" />}
 
         </div >
@@ -97,7 +97,22 @@ const Write = () => {
         {/* Category Selection */}
         <select value={category} onChange={(e) => setCategory(e.target.value)} className="p-2 border rounded">
           <option value="" disabled>Select a category</option>
-          <option value="general">General</option>
+          <option value="self-growth">Self-Growth</option>
+<option value="business-career">Business & Career</option>
+<option value="fiction">Fiction</option>
+<option value="productivity">Productivity</option>
+<option value="home-environment">Home & Environment</option>
+<option value="society-tech">Society & Tech</option>
+<option value="health">Health</option>
+<option value="family">Family</option>
+<option value="sports-fitness">Sports & Fitness</option>
+<option value="personalities">Personalities</option>
+<option value="happiness">Happiness</option>
+<option value="spirituality">Spirituality</option>
+<option value="leadership">Leadership</option>
+<option value="love-sex">Love & Sex</option>
+<option value="money-investments">Money & Investments</option>
+<option value="negotiation">Negotiation</option>
         </select>
 
         {/* Rich Text Editor */}
