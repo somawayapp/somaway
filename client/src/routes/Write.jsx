@@ -95,10 +95,10 @@ const Write = () => {
 
 
         {/* Title Input */}
-        <input type="text" placeholder="Enter Post Title" value={title} onChange={(e) => setTitle(e.target.value.slice(0, 150))} className="p-2 border rounded" />
+        <input type="text" placeholder="Enter Post Title" value={title} onChange={(e) => setTitle(e.target.value.slice(0, 150))} className="p-2 bg-[var(--textColore) text-[var(--textColor) border  rounded" />
         
         {/* Author Input */}
-        <input type="text" placeholder="Author Name" value={author} onChange={(e) => setAuthor(e.target.value)} className="p-2 border rounded" />
+        <input type="text" placeholder="Author Name" value={author} onChange={(e) => setAuthor(e.target.value)} className="p-2 border rounded bg-[var(--textColore) text-[var(--textColor)" />
 
         {/* Category Selection */}
         <select value={category} onChange={(e) => setCategory(e.target.value)} className="p-2 border rounded">
