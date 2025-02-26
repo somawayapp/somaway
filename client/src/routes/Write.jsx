@@ -83,15 +83,16 @@ const Write = () => {
         <Upload type="image" setProgress={setProgress} setData={setCover}>
           <button className="p-2 bg-gray-200 rounded-lg">Upload Cover Image</button>
         </Upload>
-        <div className="w-full max-h-50 bg-[var(--textColore)] rounded-lg flex items-center justify-center">
+        <div className="w-full max-h-[50px] max-h-[100px] bg-[var(--textColore)] rounded-lg flex items-center justify-center">
   {cover && (
     <img
       src={cover.url}
       alt="Cover Preview"
-      className=" max-h-50 w-[50%] object-cover rounded-lg"
+      className="max-h-[50px] md:max-h-[100px] w-[50%] object-cover"
     />
   )}
 </div>
+
 
 
         {/* Title Input */}
