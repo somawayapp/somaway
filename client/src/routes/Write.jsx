@@ -2,42 +2,38 @@ import { useAuth, useUser } from "@clerk/clerk-react";
 import { useMutation } from "@tanstack/react-query";
 import axios from "axios";
 import ReactQuill from "react-quill-new";
-import { useState, useRef } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import Upload from "../components/Upload"; // Assuming this component handles file uploads and provides preview
-import { useEffect } from "react";
-import 'react-quill-new/dist/quill.snow.css'; // Import Quill styles
+import Upload from "../components/Upload";
+import 'react-quill-new/dist/quill.snow.css';
 
 const Write = () => {
   const { isLoaded, isSignedIn } = useUser();
   const [title, setTitle] = useState("");
   const [desc, setDesc] = useState("");
   const [category, setCategory] = useState("");
-  const [img, setImg] = useState("");
-  const [cover, setCover] = useState("");
-
+  const [img, setImg] = useState(null);
+  const [cover, setCover] = useState(null);
+  const [author, setAuthor] = useState("");
   const [progress, setProgress] = useState(0);
-  const [titleRemainingChars, setTitleRemainingChars] = useState(150);
-  const [descRemainingChars, setDescRemainingChars] = useState(10000);
   const [error, setError] = useState("");
-  const [isFeatured, setIsFeatured] = useState(false); // Track if the post is featured
+  const [isFeatured, setIsFeatured] = useState(false);
 
   useEffect(() => {
-    img && setValue((prev) => prev + `<p><image src="${img.url}"/></p>`);
+    if (img) {
+      setDesc(prev => prev + `<p><img src="${img.url}"/></p>`);
+    }
   }, [img]);
 
   const navigate = useNavigate();
   const { getToken } = useAuth();
-  
 
   const mutation = useMutation({
     mutationFn: async (newPost) => {
       const token = await getToken();
       return axios.post(`${import.meta.env.VITE_API_URL}/posts`, newPost, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
+        headers: { Authorization: `Bearer ${token}` },
       });
     },
     onSuccess: (res) => {
@@ -51,160 +47,82 @@ const Write = () => {
 
   const clearError = () => setError("");
 
-  const handleTitleChange = (e) => {
-    const value = e.target.value.slice(0, 150);
-    setTitle(value);
-    setTitleRemainingChars(150 - value.length);
-  };
-
-  const handleDescChange = (value) => {
-    setDesc(value);
-    setDescRemainingChars(10000 - value.length);
-  };
-
   const handleSubmit = (e) => {
     e.preventDefault();
     clearError();
 
-    // Validation
-    if (!title) return setError("Please include a title for your post.");
-    if (!desc) return setError("Please include a description for your post.");
-    if (!category) return setError("Please select a category for your post.");
-    if (!img) return setError("Please upload a cover image for your post.");
+    if (!title || !desc || !category || !cover || !author) {
+      return setError("All fields are required, including author name.");
+    }
 
-    // Slug generation
-    const timestamp = Date.now();
-    const slug = `${title.replace(/\s+/g, "-").toLowerCase()}-${timestamp}`;
+    let slug = title.trim().replace(/\s+/g, "-").toLowerCase();
+    slug = slug.replace(/[^a-z0-9-]/g, "").replace(/-+$/, "");
 
     const data = {
-      img: cover.filePath || "",
       title,
-      category,
       desc,
+      category,
+      img: cover?.filePath || "",
+      author,
       slug,
-      isFeatured, // Add the "isFeatured" flag to the request data
+      isFeatured,
     };
 
     mutation.mutate(data);
   };
 
-  if (!isLoaded) {
-    return <div className="text-center text-[var(--textColor)] mt-8">Loading...</div>;
-  }
-
-  if (isLoaded && !isSignedIn) {
-    return <div className="text-center text-[var(--textColor)] mt-8">You need to sign in to create a post!</div>;
-  }
-
+  if (!isLoaded) return <div>Loading...</div>;
+  if (!isSignedIn) return <div>You need to sign in to create a post!</div>;
 
   return (
-    <div className="h-[calc(100vh-64px)] max-w-[900px] md:h-[calc(100vh-80px)] flex flex-col top-[20px] lg:top-[100px] gap-6 px-4 py-6">
-      <h1 className="text-3xl font-semibold text-[var(--textColor)]">Create a New Post</h1>
-      {error && (
-        <div className="p-4 text-sm text-red-700 bg-red-100 rounded-lg shadow-md">
-          {error}
-        </div>
-      )}
-      <form onSubmit={handleSubmit} className="flex flex-col gap-6 flex-1">
-      <Upload type="image" setProgress={setProgress} setData={setCover}>
-          <button className="w-max p-2 shadow-md rounded-xl text-sm text-gray-500 bg-white">
-            Add a cover image
-          </button>
+    <div className="max-w-[900px] px-4 py-6">
+      <h1 className="text-3xl font-semibold">Create a New Post</h1>
+      {error && <div className="text-red-600">{error}</div>}
+      <form onSubmit={handleSubmit} className="flex flex-col gap-6">
+        {/* Cover Image Upload & Preview */}
+        <Upload type="image" setProgress={setProgress} setData={setCover}>
+          <button className="p-2 bg-gray-200 rounded-lg">Upload Cover Image</button>
         </Upload>
+        {cover && <img src={cover.url} alt="Cover Preview" className="w-full h-48 object-cover rounded-lg" />}
 
+        {/* Title Input */}
+        <input type="text" placeholder="Enter Post Title" value={title} onChange={(e) => setTitle(e.target.value.slice(0, 150))} className="p-2 border rounded" />
+        
+        {/* Author Input */}
+        <input type="text" placeholder="Author Name" value={author} onChange={(e) => setAuthor(e.target.value)} className="p-2 border rounded" />
 
-      {/* Title Input */}
-      <div>
-        <input
-          className="text-md font-semibold rounded-xl bg-transparent outline-none p-3 w-full border border-1 border-[var(--textColore)]"
-          type="text"
-          placeholder="Enter Post Title"
-          value={title}
-          onChange={handleTitleChange}
-          name="title"
-        />
-        <span className="text-sm text-[var(--textColor)]">{titleRemainingChars} characters remaining</span>
-      </div>
-
-      {/* Category Selection */}
-      <div className="flex items-center gap-4">
-        <label htmlFor="category" className="text-sm text-[var(--textColor)]">Choose a category:</label>
-        <select
-          name="category"
-          id="category"
-          value={category}
-          onChange={(e) => setCategory(e.target.value)}
-          className="p-3 rounded-xl bg-[var(--textColore)] text-[var(--textColor)] shadow-md w-full max-w-xs"
-        >
+        {/* Category Selection */}
+        <select value={category} onChange={(e) => setCategory(e.target.value)} className="p-2 border rounded">
           <option value="" disabled>Select a category</option>
           <option value="general">General</option>
-          {/* Add other categories as needed */}
         </select>
-      </div>
 
-      {/* Rich Text Description Input using ReactQuill */}
-      <div>
-        <ReactQuill 
-          value={desc} 
-          onChange={handleDescChange} 
-          className="border border-1 border-[var(--textColore)] rounded-xl text-[var(--textColor)]"
-          placeholder="A Short Description" 
-          modules={{
-            toolbar: [
-              [{ 'header': '1'}, { 'header': '2'}, { 'font': [] }],
-              [{ 'list': 'ordered'}, { 'list': 'bullet' }],
-              ['bold', 'italic', 'underline'],
-              ['link'],
-              [{ 'align': [] }],
-              ['image'] // To allow image insertion
-            ],
-          }} 
-          formats={['header', 'font', 'list', 'bold', 'italic', 'underline', 'link', 'align', 'image']} 
-        />
-        <span className="text-sm text-[var(--textColor)]">{descRemainingChars} characters remaining</span>
-      </div>
+        {/* Rich Text Editor */}
+        <ReactQuill value={desc} onChange={setDesc} placeholder="Write something..." className="border rounded" />
+        
+        {/* Image Upload & Preview */}
+        <Upload type="image" setProgress={setProgress} setData={setImg}>
+          <button className="p-2 bg-gray-200 rounded-lg">Upload Image</button>
+        </Upload>
+        {img && <img src={img.url} alt="Image Preview" className="w-full h-48 object-cover rounded-lg" />}
+        
+        {/* Featured Checkbox */}
+        <label className="flex items-center gap-2">
+          <input type="checkbox" checked={isFeatured} onChange={() => setIsFeatured(!isFeatured)} />
+          Mark as Featured
+        </label>
 
-      {/* Is Featured Button */}
-      <div className="flex items-center gap-4">
-        <label htmlFor="isFeatured" className="text-sm text-[var(--textColor)]">Is this post featured?</label>
-        <input
-          type="checkbox"
-          id="isFeatured"
-          checked={isFeatured}
-          onChange={() => setIsFeatured(!isFeatured)}
-          className="w-4 h-4"
-        />
-      </div>
-
-      <div className="flex flex-1 ">
-          <div className="flex flex-col gap-2 mr-2">
-            <Upload type="image" setProgress={setProgress} setData={setImg}>
-              🌆
-            </Upload>
-          
-          </div>
-      
-        </div>
-
-      <button
-        disabled={mutation.isPending || (progress > 0 && progress < 100)}
-        className="bg-[#1da1f2] hover:bg-[#0875b9] text-white font-medium rounded-xl mt-4 p-3 w-full disabled:bg-blue-400 disabled:cursor-not-allowed"
-      >
-        {mutation.isPending ? "Publishing..." : "Publish Post"}
-      </button>
-      <span className="text-sm text-[var(--textColor)]">Progress: {progress}%</span>
-    </form>
-  </div>
-);
+        {/* Submit Button */}
+        <button disabled={mutation.isPending || (progress > 0 && progress < 100)} className="bg-blue-500 text-white p-2 rounded">
+          {mutation.isPending ? "Publishing..." : "Publish Post"}
+        </button>
+        <span>Upload Progress: {progress}%</span>
+      </form>
+    </div>
+  );
 };
 
-
-
-
 export default Write;
-
-
-
 
 
 

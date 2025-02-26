@@ -93,7 +93,7 @@ app.use((err, req, res, next) => {
 
 // MongoDB connection
 const mongoURI =
-  'mongodb+srv://makesomaway:makesomaway@cluster0.movbe.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0&dbName=app ';
+  'mongodb+srv://airnesyinfo:airnesyinfo@cluster0.54a22.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0&dbName=blog  ';
 
 if (!mongoURI) {
   console.error('DATABASE_URL is missing in .env');
