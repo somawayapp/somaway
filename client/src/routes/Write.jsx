@@ -112,11 +112,9 @@ const Write = () => {
       )}
 
       <form onSubmit={handleSubmit} className="flex flex-col gap-6 flex-1">
-      <Upload type="image" setProgress={setProgress} setData={setCover}>
       <div>
-            <div>
-              {/* The file input is now handled with a ref to avoid re-render */}
-              <input
+            <Upload type="image" setProgress={setProgress} setData={setCover}>
+            <input
                 type="file"
                 accept="image/*"
                 onChange={handleImageChange}
@@ -124,6 +122,8 @@ const Write = () => {
                 ref={fileInputRef}  // Set the reference
                 id="coverImageInput"
               />
+                      </Upload>
+
               <label
                 htmlFor="coverImageInput"
                 className="w-max p-3 shadow-md rounded-xl text-sm text-[var(--textColor)] bg-[var(--textColore)] cursor-pointer"
@@ -131,9 +131,7 @@ const Write = () => {
                 {progress > 0 && progress < 100 ? "Uploading..." : "Add a cover image"}
               </label>
             </div>
-        </div>
 
-        </Upload>
 
 
 
