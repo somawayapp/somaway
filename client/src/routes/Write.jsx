@@ -112,7 +112,6 @@ const Write = () => {
       )}
 
       <form onSubmit={handleSubmit} className="flex flex-col gap-6 flex-1">
-      <div>
             <Upload type="image" setProgress={setProgress} setData={setCover}>
             <input
                 type="file"
@@ -130,7 +129,6 @@ const Write = () => {
               >
                 {progress > 0 && progress < 100 ? "Uploading..." : "Add a cover image"}
               </label>
-            </div>
 
 
 
