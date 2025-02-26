@@ -23,11 +23,11 @@ const LatestItem = ({ post }) => {
             </Link>
           
             <Link
-              to={`/discover?category=${post.category}`}
-              className="text-[var(--textColor)] capitalize ml-3 mt-2 text-xs font-semibold"
+              to={`/discover?category=${post.author}`}
+              className="text-[var(--softTextColor)] mt-2 ml-3 capitalize text-xs  font-semibold"
             >
-              {post.author}
-            </Link>
+  {post.author.split(" ").slice(0, 12).join(" ")}
+  </Link>
           </div>
       </div>
   </div>

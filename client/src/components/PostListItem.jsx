@@ -17,11 +17,11 @@ const PostListItem = ({ post }) => {
         </div>
       </Link>
       <Link
-        to={`/discover?category=${post.category}`}
-        className="text-xs text-[var(--softTextColor)] capitalize ml-3 font-semibold mt-2 block"
-      >
-        {post.author}
-      </Link>
+              to={`/discover?category=${post.author}`}
+              className="text-[var(--softTextColor)] mt-2 ml-3 capitalize text-xs  font-semibold"
+            >
+  {post.author.split(" ").slice(0, 12).join(" ")}
+  </Link>
     </div>
     </div>
 
