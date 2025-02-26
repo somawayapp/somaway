@@ -25,14 +25,9 @@ export const getPosts = async (req, res) => {
   }
 
   if (author) {
-    const user = await User.findOne({ username: author }).select("_id");
-
-    if (!user) {
-      return res.status(404).json("No post found!");
-    }
-
-    query.user = user._id;
+    query.author = author; // Use author directly from Post model
   }
+
 
   let sortObj = { createdAt: -1 };
 
