@@ -7,6 +7,7 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import Upload from "../components/Upload";
 import 'react-quill-new/dist/quill.snow.css';
+import Navbar from "../components/Navbar";
 
 const Write = () => {
   const { isLoaded, isSignedIn } = useUser();
@@ -75,7 +76,9 @@ const Write = () => {
   if (!isSignedIn) return <div>You need to sign in to create a post!</div>;
 
   return (
-<div className="max-w-[900px] mx-auto flex flex-col  px-4 py-6 justify-center items-center min-h-screen">
+    <div>
+            <Navbar/>
+<div className="max-w-[900px] mx-auto flex flex-col mb-[100px]  px-2 justify-center items-center  overflow-x-scroll">
 <h1 className="text-3xl mb-[30px] text-[var(--textColor)] font-semibold">Create a New Post</h1>
       {error && <div className="text-red-600">{error}</div>}
       <form onSubmit={handleSubmit} className="flex flex-col gap-6">
@@ -83,12 +86,12 @@ const Write = () => {
         <Upload type="image" setProgress={setProgress} setData={setCover}>
           <button className="p-2 bg-[var(--textColore)] text-[var(--textColor)] rounded-lg">Upload Cover Image</button>
         </Upload>
-        <div className="w-full max-h-[100px] md:max-h-[200px] bg-[var(--textColore)] rounded-lg flex items-center justify-center">
+        <div className="w-full max-h-[200px] bg-[var(--textColore)] rounded-lg flex items-center justify-center">
   {cover && (
     <img
       src={cover.url}
       alt="Cover Preview"
-      className="max-h-[100px] md:max-h-[200px] w-[50%] object-contain"
+      className=" max-h-[200px] w-[50%] object-contain"
     />
   )}
 </div>
@@ -140,6 +143,8 @@ const Write = () => {
         <span>Upload Progress: {progress}%</span>
       </form>
     </div>
+    </div>
+
   );
 };
 
