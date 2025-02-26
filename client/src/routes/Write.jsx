@@ -79,7 +79,7 @@ const Write = () => {
     <div>
             <Navbar/>
 <div className="max-w-[900px] mx-auto flex flex-col mb-[100px]  px-2 justify-center items-center  overflow-x-scroll">
-<h1 className="text-3xl mb-[30px] text-[var(--textColor)] font-semibold">Create a New Post</h1>
+<h1 className="text-xl md:text-3xl mt-[20p] mb-[30px] text-[var(--textColor)] font-semibold">Create a New Post</h1>
       {error && <div className="text-red-600">{error}</div>}
       <form onSubmit={handleSubmit} className="flex flex-col gap-6">
         {/* Cover Image Upload & Preview */}
