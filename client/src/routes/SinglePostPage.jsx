@@ -54,7 +54,7 @@ const SinglePostPage = () => {
             <div className="flex flex-col md:flex-row items-center gap-1 md:gap-2 text-[var(--softTextColor)] text-md md:text-lg">
               <div className="flex  gap-1 md:gap-2">
                 <span>Book by</span>
-                <Link   to={`/discover?category=${post.author}`} >{data.author}</Link>
+                <Link   to={`/discover?category=${data.author}`} >{data.author}</Link>
              
                 <span>Category</span>
                 <Link className="capitalize">{data.category}</Link>
