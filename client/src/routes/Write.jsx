@@ -76,33 +76,34 @@ const Write = () => {
 
   return (
 <div className="max-w-[900px] mx-auto flex flex-col  px-4 py-6 justify-center items-center min-h-screen">
-<h1 className="text-3xl mb-[30px] font-semibold">Create a New Post</h1>
+<h1 className="text-3xl mb-[30px] text-[var(--textColor)] font-semibold">Create a New Post</h1>
       {error && <div className="text-red-600">{error}</div>}
       <form onSubmit={handleSubmit} className="flex flex-col gap-6">
         {/* Cover Image Upload & Preview */}
         <Upload type="image" setProgress={setProgress} setData={setCover}>
-          <button className="p-2 bg-gray-200 rounded-lg">Upload Cover Image</button>
+          <button className="p-2 bg-[var(--textColore)] text-[var(--textColor)] rounded-lg">Upload Cover Image</button>
         </Upload>
-        <div className="w-full max-h-[50px] max-h-[100px] bg-[var(--textColore)] rounded-lg flex items-center justify-center">
+        <div className="w-full max-h-[200px] md:max-h-[100px] bg-[var(--textColore)] rounded-lg flex items-center justify-center">
   {cover && (
     <img
       src={cover.url}
       alt="Cover Preview"
-      className="max-h-[50px] md:max-h-[100px] w-[50%] object-cover"
+      className="max-h-[100px] md:max-h-[200px] w-[50%] object-contain"
     />
   )}
 </div>
 
 
 
+
         {/* Title Input */}
-        <input type="text" placeholder="Enter Post Title" value={title} onChange={(e) => setTitle(e.target.value.slice(0, 150))} className="p-2 bg-[var(--textColore) text-[var(--textColor) border  rounded" />
+        <input type="text" placeholder="Enter Post Title" value={title} onChange={(e) => setTitle(e.target.value.slice(0, 150))} className="p-2 bg-[var(--textColore)] text-[var(--textColor)] border  rounded" />
         
         {/* Author Input */}
-        <input type="text" placeholder="Author Name" value={author} onChange={(e) => setAuthor(e.target.value)} className="p-2 border rounded bg-[var(--textColore) text-[var(--textColor)" />
+        <input type="text" placeholder="Author Name" value={author} onChange={(e) => setAuthor(e.target.value)} className="p-2 border rounded bg-[var(--textColore)] text-[var(--textColor)]" />
 
         {/* Category Selection */}
-        <select value={category} onChange={(e) => setCategory(e.target.value)} className="p-2 border rounded">
+        <select value={category} onChange={(e) => setCategory(e.target.value)} className="p-2 border bg-[var(--textColore)] text-[var(--textColor)] rounded">
           <option value="" disabled>Select a category</option>
           <option value="self-growth">Self-Growth</option>
 <option value="business-career">Business & Career</option>
