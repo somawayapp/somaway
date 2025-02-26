@@ -75,7 +75,7 @@ const Write = () => {
   if (!isSignedIn) return <div>You need to sign in to create a post!</div>;
 
   return (
-<div className="max-w-[900px] mx-auto flex flex-col  px-4 py-6 justify-center items-center min-h-screen">
+<div className="max-w-[1200px] mx-auto flex flex-col  px-4 py-6 justify-center items-center min-h-screen">
 <h1 className="text-3xl mb-[30px] font-semibold">Create a New Post</h1>
       {error && <div className="text-red-600">{error}</div>}
       <form onSubmit={handleSubmit} className="flex flex-col gap-6">
