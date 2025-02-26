@@ -84,7 +84,7 @@ const Write = () => {
           <button className="p-2 bg-gray-200 rounded-lg">Upload Cover Image</button>
         </Upload>
         <div  className="w-full h-50  bg-[var(--textColore)] rounded-lg" >
-        {cover && <img src={cover.url} alt="Cover Preview" className="h-full  object-cover rounded-lg" />}
+        {cover && <img src={cover.url} alt="Cover Preview" className="h-full w-[50%]  object-cover rounded-lg" />}
 
         </div >
 
