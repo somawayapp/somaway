@@ -75,8 +75,8 @@ const Write = () => {
   if (!isSignedIn) return <div>You need to sign in to create a post!</div>;
 
   return (
-    <div className="max-w-[900px] px-4 py-6">
-      <h1 className="text-3xl font-semibold">Create a New Post</h1>
+<div className="max-w-[900px] mx-auto flex px-4 py-6 justify-center items-center min-h-screen">
+<h1 className="text-3xl mb-[30px] font-semibold">Create a New Post</h1>
       {error && <div className="text-red-600">{error}</div>}
       <form onSubmit={handleSubmit} className="flex flex-col gap-6">
         {/* Cover Image Upload & Preview */}
@@ -100,12 +100,7 @@ const Write = () => {
         {/* Rich Text Editor */}
         <ReactQuill value={desc} onChange={setDesc} placeholder="Write something..." className="border rounded" />
         
-        {/* Image Upload & Preview */}
-        <Upload type="image" setProgress={setProgress} setData={setImg}>
-          <button className="p-2 bg-gray-200 rounded-lg">Upload Image</button>
-        </Upload>
-        {img && <img src={img.url} alt="Image Preview" className="w-full h-48 object-cover rounded-lg" />}
-        
+     
         {/* Featured Checkbox */}
         <label className="flex items-center gap-2">
           <input type="checkbox" checked={isFeatured} onChange={() => setIsFeatured(!isFeatured)} />
