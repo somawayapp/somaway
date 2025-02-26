@@ -6,7 +6,7 @@ import { useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import Upload from "../components/Upload"; // Assuming this component handles file uploads and provides preview
-
+import { useEffect } from "react";
 import 'react-quill-new/dist/quill.snow.css'; // Import Quill styles
 
 const Write = () => {
