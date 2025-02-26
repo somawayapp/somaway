@@ -20,10 +20,10 @@ const FeaturedItem = ({ post }) => {
             </Link>
           
             <Link
-  to={`/discover?category=${post.category}`}
+  to={`/discover?author=${post.author}`}
   className="text-[var(--softTextColor)] mt-2 ml-3 capitalize text-xs font-semibold"
 >
-  {post.author ? post.author.split(" ").slice(0, 12).join(" ") : ""}
+{post.author ? post.author.slice(0, 12) : ""}
 </Link>
 
           </div>
