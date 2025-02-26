@@ -83,10 +83,16 @@ const Write = () => {
         <Upload type="image" setProgress={setProgress} setData={setCover}>
           <button className="p-2 bg-gray-200 rounded-lg">Upload Cover Image</button>
         </Upload>
-        <div  className="w-full h-50  bg-[var(--textColore)] rounded-lg" >
-        {cover && <img src={cover.url} alt="Cover Preview" className="h-full w-[50%]  object-cover rounded-lg" />}
+        <div className="w-full h-50 bg-[var(--textColore)] rounded-lg flex items-center justify-center">
+  {cover && (
+    <img
+      src={cover.url}
+      alt="Cover Preview"
+      className="h-50 w-[50%] object-cover rounded-lg"
+    />
+  )}
+</div>
 
-        </div >
 
         {/* Title Input */}
         <input type="text" placeholder="Enter Post Title" value={title} onChange={(e) => setTitle(e.target.value.slice(0, 150))} className="p-2 border rounded" />
