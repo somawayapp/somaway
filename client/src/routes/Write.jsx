@@ -10,19 +10,18 @@ import Upload from "../components/Upload";
 import 'react-quill-new/dist/quill.snow.css';
 
 const Write = () => {
-  const { isLoaded, isSignedIn, user } = useUser();
+  const { isLoaded, isSignedIn } = useUser();
   const [title, setTitle] = useState("");
   const [desc, setDesc] = useState("");
   const [category, setCategory] = useState("");
   const [cover, setCover] = useState(null);
+  const [author, setAuthor] = useState(""); // Manually input author
   const [progress, setProgress] = useState(0);
-  const [titleRemainingChars, setTitleRemainingChars] = useState(150);
-  const [descRemainingChars, setDescRemainingChars] = useState(10000);
   const [error, setError] = useState("");
   const [isFeatured, setIsFeatured] = useState(false);
-
   const navigate = useNavigate();
   const { getToken } = useAuth();
+
   const fileInputRef = useRef(null);
 
   const mutation = useMutation({
@@ -45,15 +44,11 @@ const Write = () => {
 
   const clearError = () => setError("");
 
-  const handleTitleChange = (e) => {
-    const value = e.target.value.slice(0, 150);
-    setTitle(value);
-    setTitleRemainingChars(150 - value.length);
-  };
-
-  const handleDescChange = (value) => {
-    setDesc(value);
-    setDescRemainingChars(10000 - value.length);
+  const generateSlug = (title) => {
+    return title
+      .replace(/\s+/g, "-")
+      .replace(/[^a-zA-Z0-9-]/g, "")
+      .toLowerCase();
   };
 
   const handleSubmit = (e) => {
@@ -64,83 +59,89 @@ const Write = () => {
     if (!desc) return setError("Please include a description for your post.");
     if (!category) return setError("Please select a category for your post.");
     if (!cover) return setError("Please upload a cover image for your post.");
+    if (!author) return setError("Please enter the author's name.");
 
     const timestamp = Date.now();
-    let slug = title.replace(/\s+/g, "-").toLowerCase().replace(/[^a-z0-9-]+$/, "");
+    const slug = `${generateSlug(title)}-${timestamp}`;
 
     const data = {
       img: cover.filePath,
       title,
       category,
       desc,
-      slug: `${slug}-${timestamp}`,
+      slug,
+      author,
       isFeatured,
-      author: user?.fullName || "Anonymous",
     };
 
     mutation.mutate(data);
   };
 
-  if (!isLoaded) {
-    return <div className="text-center text-[var(--textColor)] mt-8">Loading...</div>;
-  }
-
-  if (isLoaded && !isSignedIn) {
-    return <div className="text-center text-[var(--textColor)] mt-8">You need to sign in to create a post!</div>;
-  }
-
-  const handleImageChange = (e) => {
+  const handleImageChange = async (e) => {
     const file = e.target.files[0];
     if (file) {
       const previewUrl = URL.createObjectURL(file);
       setCover({ file, previewUrl });
+
+      try {
+        const formData = new FormData();
+        formData.append("image", file);
+        
+        const token = await getToken();
+        const uploadResponse = await axios.post(`${import.meta.env.VITE_API_URL}/upload`, formData, {
+          headers: { Authorization: `Bearer ${token}` },
+          onUploadProgress: (progressEvent) => {
+            const percentCompleted = Math.round((progressEvent.loaded * 100) / progressEvent.total);
+            setProgress(percentCompleted);
+          },
+        });
+        
+        setCover({ filePath: uploadResponse.data.filePath, previewUrl });
+      } catch (error) {
+        toast.error("Image upload failed. Try again.");
+        setCover(null);
+      }
     }
   };
 
+  if (!isLoaded) return <div>Loading...</div>;
+  if (isLoaded && !isSignedIn) return <div>You need to sign in to create a post!</div>;
+
   return (
-    <div className="h-[calc(100vh-64px)] max-w-[900px] flex flex-col top-[20px] gap-6 px-4 py-6">
-      <h1 className="text-3xl font-semibold text-[var(--textColor)]">Create a New Post</h1>
+    <div className="max-w-[900px] flex flex-col gap-6 px-4 py-6">
+      <h1 className="text-3xl font-semibold">Create a New Post</h1>
       {error && <div className="p-4 text-red-700 bg-red-100 rounded-lg">{error}</div>}
-      <form onSubmit={handleSubmit} className="flex flex-col gap-6 flex-1">
-        <div>
-          <Upload type="image" setProgress={setProgress} setData={setCover}>
-            <input
-              type="file"
-              accept="image/*"
-              onChange={handleImageChange}
-              className="hidden"
-              ref={fileInputRef}
-              id="coverImageInput"
-            />
-            <label
-              htmlFor="coverImageInput"
-              className="w-max p-3 shadow-md rounded-xl cursor-pointer"
-            >
-              {progress > 0 && progress < 100 ? "Uploading..." : "Add a cover image"}
-            </label>
-          </Upload>
-        </div>
-        {cover && cover.previewUrl && (
-          <div className="relative w-full max-w-[250px] h-[150px] mx-auto">
-            <img src={cover.previewUrl} className="w-full h-full object-cover rounded-md" />
-            <button
-              type="button"
-              onClick={() => setCover(null)}
-              className="absolute top-2 right-2 bg-red-500 text-white p-1 rounded-full"
-            >
-              ✕
-            </button>
-          </div>
-        )}
-        <input type="text" placeholder="Title" value={title} onChange={handleTitleChange} className="p-3 w-full border rounded-xl" />
-        <select value={category} onChange={(e) => setCategory(e.target.value)} className="p-3 w-full border rounded-xl">
-          <option value="">Select a category</option>
+
+      <form onSubmit={handleSubmit} className="flex flex-col gap-6">
+        {/* Upload */}
+        <input type="file" accept="image/*" onChange={handleImageChange} ref={fileInputRef} className="hidden" />
+        <button type="button" onClick={() => fileInputRef.current.click()} className="p-3 bg-blue-500 text-white rounded-lg">
+          {progress > 0 && progress < 100 ? "Uploading..." : "Add a Cover Image"}
+        </button>
+        {cover?.previewUrl && <img src={cover.previewUrl} alt="Cover Preview" className="max-w-xs rounded-md" />}
+        
+        {/* Title */}
+        <input type="text" value={title} onChange={(e) => setTitle(e.target.value.slice(0, 150))} placeholder="Enter Post Title" className="p-3 border rounded-lg" />
+        
+        {/* Author */}
+        <input type="text" value={author} onChange={(e) => setAuthor(e.target.value)} placeholder="Author Name" className="p-3 border rounded-lg" />
+        
+        {/* Category */}
+        <select value={category} onChange={(e) => setCategory(e.target.value)} className="p-3 border rounded-lg">
+          <option value="" disabled>Select a category</option>
           <option value="general">General</option>
         </select>
-        <ReactQuill value={desc} onChange={handleDescChange} placeholder="Description" className="border rounded-xl" />
-        <input type="checkbox" id="isFeatured" checked={isFeatured} onChange={() => setIsFeatured(!isFeatured)} />
-        <label htmlFor="isFeatured">Is this post featured?</label>
-        <button disabled={mutation.isPending || (progress > 0 && progress < 100)} className="bg-blue-500 text-white p-3 rounded-xl">
+        
+        {/* Description */}
+        <ReactQuill value={desc} onChange={setDesc} placeholder="A Short Description" className="border rounded-lg" />
+        
+        {/* Featured Checkbox */}
+        <label className="flex gap-2">
+          <input type="checkbox" checked={isFeatured} onChange={() => setIsFeatured(!isFeatured)} /> Is this post featured?
+        </label>
+        
+        {/* Submit */}
+        <button disabled={mutation.isPending || (progress > 0 && progress < 100)} className="p-3 bg-blue-600 text-white rounded-lg">
           {mutation.isPending ? "Publishing..." : "Publish Post"}
         </button>
       </form>
