@@ -5,9 +5,9 @@ import ReactQuill from "react-quill-new";
 import { useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import Upload from "../components/Upload";
+import Upload from "../components/Upload"; // Assumes this handles file uploads
 
-import 'react-quill-new/dist/quill.snow.css';
+import "react-quill-new/dist/quill.snow.css";
 
 const Write = () => {
   const { isLoaded, isSignedIn } = useUser();
@@ -42,7 +42,10 @@ const Write = () => {
   const clearError = () => setError("");
 
   const generateSlug = (title) => {
-    return title.replace(/\s+/g, "-").replace(/[^a-zA-Z0-9-]/g, "").toLowerCase();
+    return title
+      .replace(/\s+/g, "-")
+      .replace(/[^a-zA-Z0-9-]/g, "")
+      .toLowerCase();
   };
 
   const handleSubmit = (e) => {
@@ -52,7 +55,7 @@ const Write = () => {
     if (!title) return setError("Please include a title for your post.");
     if (!desc) return setError("Please include a description for your post.");
     if (!category) return setError("Please select a category for your post.");
-    if (!cover?.filePath) return setError("Please upload a cover image for your post.");
+    if (!cover?.filePath) return setError("Please upload a cover image.");
     if (!author) return setError("Please enter the author's name.");
 
     const timestamp = Date.now();
@@ -71,11 +74,42 @@ const Write = () => {
     mutation.mutate(data);
   };
 
-  const handleImageChange = (e) => {
+  const handleImageChange = async (e) => {
     const file = e.target.files[0];
-    if (file) {
-      const previewUrl = URL.createObjectURL(file);
-      setCover({ file, previewUrl });
+    if (!file) return;
+
+    const previewUrl = URL.createObjectURL(file);
+    setCover({ file, previewUrl });
+
+    try {
+      const formData = new FormData();
+      formData.append("image", file);
+
+      const token = await getToken();
+      const uploadResponse = await axios.post(
+        `${import.meta.env.VITE_API_URL}/upload`,
+        formData,
+        {
+          headers: { Authorization: `Bearer ${token}` },
+          onUploadProgress: (progressEvent) => {
+            const percentCompleted = Math.round(
+              (progressEvent.loaded * 100) / progressEvent.total
+            );
+            setProgress(percentCompleted);
+          },
+        }
+      );
+
+      if (uploadResponse.data?.filePath) {
+        setCover((prev) => ({ ...prev, filePath: uploadResponse.data.filePath }));
+        toast.success("Image uploaded successfully");
+      } else {
+        throw new Error("Image upload failed");
+      }
+    } catch (error) {
+      toast.error("Image upload failed. Try again.");
+      setCover((prev) => ({ ...prev, filePath: null }));
+      setProgress(0);
     }
   };
 
@@ -100,31 +134,55 @@ const Write = () => {
             />
             <label
               htmlFor="coverImageInput"
-              className="w-max p-3 shadow-md rounded-xl text-sm text-[var(--textColor)] bg-[var(--textColore)] cursor-pointer"
+              className="w-max p-3 shadow-md rounded-xl text-sm bg-gray-200 cursor-pointer"
             >
               {progress > 0 && progress < 100 ? "Uploading..." : "Add a cover image"}
             </label>
           </div>
         </Upload>
 
-        {cover?.previewUrl && <img src={cover.previewUrl} alt="Cover Preview" className="max-w-xs rounded-md" />}
+        {cover?.previewUrl && (
+          <img src={cover.previewUrl} alt="Cover Preview" className="max-w-xs rounded-md" />
+        )}
 
-        <input type="text" value={title} onChange={(e) => setTitle(e.target.value.slice(0, 150))} placeholder="Enter Post Title" className="p-3 border rounded-lg" />
+        <input
+          type="text"
+          value={title}
+          onChange={(e) => setTitle(e.target.value.slice(0, 150))}
+          placeholder="Enter Post Title"
+          className="p-3 border rounded-lg"
+        />
 
-        <input type="text" value={author} onChange={(e) => setAuthor(e.target.value)} placeholder="Author Name" className="p-3 border rounded-lg" />
+        <input
+          type="text"
+          value={author}
+          onChange={(e) => setAuthor(e.target.value)}
+          placeholder="Author Name"
+          className="p-3 border rounded-lg"
+        />
 
-        <select value={category} onChange={(e) => setCategory(e.target.value)} className="p-3 border rounded-lg">
-          <option value="" disabled>Select a category</option>
+        <select
+          value={category}
+          onChange={(e) => setCategory(e.target.value)}
+          className="p-3 border rounded-lg"
+        >
+          <option value="" disabled>
+            Select a category
+          </option>
           <option value="general">General</option>
         </select>
 
         <ReactQuill value={desc} onChange={setDesc} placeholder="A Short Description" className="border rounded-lg" />
 
         <label className="flex gap-2">
-          <input type="checkbox" checked={isFeatured} onChange={() => setIsFeatured(!isFeatured)} /> Is this post featured?
+          <input type="checkbox" checked={isFeatured} onChange={() => setIsFeatured(!isFeatured)} /> Is this post
+          featured?
         </label>
 
-        <button disabled={mutation.isPending || (progress > 0 && progress < 100)} className="p-3 bg-blue-600 text-white rounded-lg">
+        <button
+          disabled={mutation.isPending || (progress > 0 && progress < 100)}
+          className="p-3 bg-blue-600 text-white rounded-lg"
+        >
           {mutation.isPending ? "Publishing..." : "Publish Post"}
         </button>
       </form>
@@ -133,3 +191,8 @@ const Write = () => {
 };
 
 export default Write;
+
+
+
+
+
