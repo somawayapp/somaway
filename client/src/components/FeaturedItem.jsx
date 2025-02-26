@@ -18,13 +18,17 @@ const FeaturedItem = ({ post }) => {
                 className="absolute top-0  left-0 w-full h-full object-cover rounded-lg"
               />
             </Link>
-          
             <Link
   to={`/discover?author=${post.author}`}
   className="text-[var(--softTextColor)] mt-2 ml-3 capitalize text-xs font-semibold"
 >
-{post.author ? post.author.slice(0, 12) : ""}
+  {post.author
+    ? window.innerWidth >= 768
+      ? post.author.slice(0, 20)
+      : post.author.slice(0, 12)
+    : ""}
 </Link>
+
 
           </div>
   );

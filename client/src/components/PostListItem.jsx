@@ -20,7 +20,7 @@ const PostListItem = ({ post }) => {
   to={`/discover?author=${post.author}`}
   className="text-[var(--softTextColor)] mt-2 ml-3 capitalize text-xs font-semibold"
 >
-{post.author ? post.author.slice(0, 12) : ""}
+{post.author ? post.author.slice(0, 20) : ""}
 </Link>
 
     </div>
