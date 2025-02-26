@@ -24,9 +24,9 @@ const PopularItem = ({ post }) => {
           
             <Link
               to={`/discover?category=${post.category}`}
-              className="text-[var(--textColor)] ml-2 capitalize mt-1 text-xs font-semibold"
+              className="text-[var(--textColor)] ml-3 capitalize mt-3 text-xs font-semibold"
             >
-              {post.category}
+              {post.author}
             </Link>
           </div>
       </div>

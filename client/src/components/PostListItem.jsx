@@ -18,9 +18,9 @@ const PostListItem = ({ post }) => {
       </Link>
       <Link
         to={`/discover?category=${post.category}`}
-        className="text-xs text-[var(--softTextColor)] capitalize ml-2 font-semibold mt-1 block"
+        className="text-xs text-[var(--softTextColor)] capitalize ml-3 font-semibold mt-2 block"
       >
-        {post.category}
+        {post.author}
       </Link>
     </div>
     </div>

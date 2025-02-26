@@ -24,9 +24,9 @@ const LatestItem = ({ post }) => {
           
             <Link
               to={`/discover?category=${post.category}`}
-              className="text-[var(--textColor)] capitalize ml-2 mt-1 text-xs font-semibold"
+              className="text-[var(--textColor)] capitalize ml-3 mt-2 text-xs font-semibold"
             >
-              {post.category}
+              {post.author}
             </Link>
           </div>
       </div>
