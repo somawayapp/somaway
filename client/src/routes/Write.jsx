@@ -15,6 +15,8 @@ const Write = () => {
   const [desc, setDesc] = useState("");
   const [category, setCategory] = useState("");
   const [img, setImg] = useState("");
+  const [cover, setCover] = useState("");
+
   const [progress, setProgress] = useState(0);
   const [titleRemainingChars, setTitleRemainingChars] = useState(150);
   const [descRemainingChars, setDescRemainingChars] = useState(10000);
