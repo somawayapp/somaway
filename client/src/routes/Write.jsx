@@ -52,7 +52,10 @@ const Write = () => {
     e.preventDefault();
     clearError();
   
-    // Track missing fields
+    // Ensure only the Submit button triggers validation
+    const submitButton = e.nativeEvent.submitter; // Get the clicked button
+    if (!submitButton || submitButton.name !== "submitPost") return;
+  
     let missingFields = [];
   
     if (!title.trim()) missingFields.push("Title");
@@ -61,7 +64,7 @@ const Write = () => {
     if (!cover) missingFields.push("Cover Image");
     if (!author.trim()) missingFields.push("Author Name");
   
-    // If any field is missing, show the error and prevent submission
+    // If any field is missing, show error and prevent submission
     if (missingFields.length > 0) {
       setError(`Missing fields: ${missingFields.join(", ")}`);
       return;
@@ -151,10 +154,15 @@ const Write = () => {
           Mark as Featured
         </label>
 
-        {/* Submit Button */}
-        <button disabled={mutation.isPending || (progress > 0 && progress < 100)} className="bg-blue-500 text-white p-2 rounded">
-          {mutation.isPending ? "Publishing..." : "Publish Post"}
-        </button>
+        <button 
+  name="submitPost" 
+  type="submit" 
+  disabled={mutation.isPending || (progress > 0 && progress < 100)}
+  className="bg-blue-500 text-white p-2 rounded"
+>
+  {mutation.isPending ? "Publishing..." : "Publish Post"}
+</button>
+
         <span>Upload Progress: {progress}%</span>
       </form>
     </div>
