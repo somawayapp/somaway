@@ -46,19 +46,27 @@ const Write = () => {
     },
   });
 
-  const clearError = () => setError("");
-
+  const [errors, setErrors] = useState({});
+  const [isSubmitted, setIsSubmitted] = useState(false);
+  
   const handleSubmit = (e) => {
     e.preventDefault();
-    clearError();
-
-    if (!title || !desc || !category || !cover || !author) {
-      return setError("All fields are required, including author name.");
-    }
-
+    setIsSubmitted(true);
+  
+    const newErrors = {};
+    if (!title) newErrors.title = "Title is required.";
+    if (!desc) newErrors.desc = "Description is required.";
+    if (!category) newErrors.category = "Category is required.";
+    if (!cover) newErrors.cover = "Cover image is required.";
+    if (!author) newErrors.author = "Author name is required.";
+  
+    setErrors(newErrors);
+  
+    if (Object.keys(newErrors).length > 0) return;
+  
     let slug = title.trim().replace(/\s+/g, "-").toLowerCase();
     slug = slug.replace(/[^a-z0-9-]/g, "").replace(/-+$/, "");
-
+  
     const data = {
       title,
       desc,
@@ -68,9 +76,19 @@ const Write = () => {
       slug,
       isFeatured,
     };
-
+  
     mutation.mutate(data);
   };
+  
+  {/* Error Messages Display (only after the button is clicked) */}
+  {isSubmitted && Object.keys(errors).length > 0 && (
+    <div className="text-red-600">
+      {Object.values(errors).map((error, index) => (
+        <p key={index}>{error}</p>
+      ))}
+    </div>
+  )}
+
 
   if (!isLoaded) return <div>Loading...</div>;
   if (!isSignedIn) return <div>You need to sign in to create a post!</div>;
@@ -78,7 +96,7 @@ const Write = () => {
   return (
     <div>
             <Navbar/>
-<div className="max-w-[900px] mx-auto flex flex-col mb-[100px]  px-2 justify-center items-center  overflow-x-scroll">
+<div className="max-w-1200px] mx-auto flex flex-col mb-[100px]  px-2 justify-center items-center  overflow-x-scroll">
 <h1 className="text-xl md:text-3xl mt-[30px] mb-[30px] text-[var(--textColor)] font-semibold">Create a New Post</h1>
       {error && <div className="text-red-600">{error}</div>}
       <form onSubmit={handleSubmit} className="flex flex-col gap-6">
