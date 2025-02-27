@@ -132,7 +132,7 @@ const Write = () => {
 
           <label className="flex items-center gap-2">
             <input type="checkbox" checked={isFeatured} onChange={() => setIsFeatured(!isFeatured)} />
-            Mark as Featured
+            Mark as Feature
           </label>
 
           <button disabled={mutation.isPending || (progress > 0 && progress < 100)} className="bg-blue-500 text-white p-2 rounded">
