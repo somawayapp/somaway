@@ -18,9 +18,8 @@ const Write = () => {
   const [cover, setCover] = useState(null);
   const [author, setAuthor] = useState("");
   const [progress, setProgress] = useState(0);
+  const [error, setError] = useState("");
   const [isFeatured, setIsFeatured] = useState(false);
-  const [errors, setErrors] = useState({});
-  const [submitted, setSubmitted] = useState(false);
 
   useEffect(() => {
     if (img) {
@@ -47,27 +46,16 @@ const Write = () => {
     },
   });
 
-  const validateFields = () => {
-    const newErrors = {};
-    if (!title) newErrors.title = "Title is required";
-    if (!desc) newErrors.desc = "Description is required";
-    if (!category) newErrors.category = "Category is required";
-    if (!cover) newErrors.cover = "Cover image is required";
-    if (!author) newErrors.author = "Author name is required";
-    return newErrors;
-  };
+  const clearError = () => setError("");
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setSubmitted(true);
-    
-    const newErrors = validateFields();
-    if (Object.keys(newErrors).length > 0) {
-      setErrors(newErrors);
-      return;
+    clearError();
+
+    if (!title || !desc || !category || !cover || !author) {
+      return setError("All fields are required, including author name.");
     }
-    
-    setErrors({});
+
     let slug = title.trim().replace(/\s+/g, "-").toLowerCase();
     slug = slug.replace(/[^a-z0-9-]/g, "").replace(/-+$/, "");
 
@@ -89,60 +77,79 @@ const Write = () => {
 
   return (
     <div>
-      <Navbar />
-      <div className="max-w-[1200px] mx-auto flex flex-col mb-[100px] px-2 justify-center items-center overflow-x-scroll">
-        <h1 className="text-xl md:text-3xl mt-[30px] mb-[30px] text-[var(--textColor)] font-semibold">Create a New Post</h1>
-        <form onSubmit={handleSubmit} className="flex flex-col gap-6">
-          <Upload type="image" setProgress={setProgress} setData={setCover}>
-            <button className="p-2 bg-[var(--textColore)] text-[var(--textColor)] rounded-lg">Upload Cover Image</button>
-          </Upload>
-          {submitted && errors.cover && <div className="text-red-600">{errors.cover}</div>}
+            <Navbar/>
+<div className="max-w-[900px] mx-auto flex flex-col mb-[100px]  px-2 justify-center items-center  overflow-x-scroll">
+<h1 className="text-xl md:text-3xl mt-[30px] mb-[30px] text-[var(--textColor)] font-semibold">Create a New Post</h1>
+      {error && <div className="text-red-600">{error}</div>}
+      <form onSubmit={handleSubmit} className="flex flex-col gap-6">
+        {/* Cover Image Upload & Preview */}
+        <Upload type="image" setProgress={setProgress} setData={setCover}>
+          <button className="p-2 bg-[var(--textColore)] text-[var(--textColor)] rounded-lg">Upload Cover Image</button>
+        </Upload>
+        <div className="w-full max-h-[200px] bg-[var(--textColore)] rounded-lg flex items-center justify-center">
+  {cover && (
+    <img
+      src={cover.url}
+      alt="Cover Preview"
+      className=" max-h-[200px] w-[50%] object-contain"
+    />
+  )}
+</div>
 
-          {cover && <img src={cover.url} alt="Cover Preview" className="max-h-[200px] w-[50%] object-contain" />}
 
-          <input type="text" placeholder="Enter Post Title" value={title} onChange={(e) => setTitle(e.target.value.slice(0, 150))} className="p-2 bg-[var(--textColore)] text-[var(--textColor)] rounded" />
-          {submitted && errors.title && <div className="text-red-600">{errors.title}</div>}
 
-          <input type="text" placeholder="Author Name" value={author} onChange={(e) => setAuthor(e.target.value)} className="p-2 bg-[var(--textColore)] text-[var(--textColor)] rounded" />
-          {submitted && errors.author && <div className="text-red-600">{errors.author}</div>}
 
-          <select value={category} onChange={(e) => setCategory(e.target.value)} className="p-2 bg-[var(--textColore)] text-[var(--textColor)] rounded">
-            <option value="" disabled>Select a category</option>
-            <option value="self-growth">Self-Growth</option>
-            <option value="business-career">Business & Career</option>
-            <option value="fiction">Fiction</option>
-            <option value="productivity">Productivity</option>
-            <option value="home-environment">Home & Environment</option>
-            <option value="society-tech">Society & Tech</option>
-            <option value="health">Health</option>
-            <option value="family">Family</option>
-            <option value="sports-fitness">Sports & Fitness</option>
-            <option value="personalities">Personalities</option>
-            <option value="happiness">Happiness</option>
-            <option value="spirituality">Spirituality</option>
-            <option value="leadership">Leadership</option>
-            <option value="love-sex">Love & Sex</option>
-            <option value="money-investments">Money & Investments</option>
-            <option value="negotiation">Negotiation</option>
-          </select>
-          {submitted && errors.category && <div className="text-red-600">{errors.category}</div>}
+        {/* Title Input */}
+        <input type="text" placeholder="Enter Post Title" value={title} onChange={(e) => setTitle(e.target.value.slice(0, 150))} className="p-2 bg-[var(--textColore)] text-[var(--textColor)]  rounded" />
+        
+        {/* Author Input */}
+        <input type="text" placeholder="Author Name" value={author} onChange={(e) => setAuthor(e.target.value)} className="p-2  rounded bg-[var(--textColore)] text-[var(--textColor)]" />
 
-          <ReactQuill value={desc} onChange={setDesc} placeholder="Write something..." className="bg-[var(--textColore)] text-[var(--textColor)] rounded" />
-          {submitted && errors.desc && <div className="text-red-600">{errors.desc}</div>}
+        {/* Category Selection */}
+        <select value={category} onChange={(e) => setCategory(e.target.value)} className="p-2 bg-[var(--textColore)] text-[var(--textColor)] rounded">
+          <option value="" disabled>Select a category</option>
+          <option value="self-growth">Self-Growth</option>
+<option value="business-career">Business & Career</option>
+<option value="fiction">Fiction</option>
+<option value="productivity">Productivity</option>
+<option value="home-environment">Home & Environment</option>
+<option value="society-tech">Society & Tech</option>
+<option value="health">Health</option>
+<option value="family">Family</option>
+<option value="sports-fitness">Sports & Fitness</option>
+<option value="personalities">Personalities</option>
+<option value="happiness">Happiness</option>
+<option value="spirituality">Spirituality</option>
+<option value="leadership">Leadership</option>
+<option value="love-sex">Love & Sex</option>
+<option value="money-investments">Money & Investments</option>
+<option value="negotiation">Negotiation</option>
+        </select>
 
-          <label className="flex items-center gap-2">
-            <input type="checkbox" checked={isFeatured} onChange={() => setIsFeatured(!isFeatured)} />
-            Mark as Featured
-          </label>
+        {/* Rich Text Editor */}
+        <ReactQuill value={desc} onChange={setDesc} placeholder="Write something..." className=" bg-[var(--textColore)] text-[var(--textColor)] rounded" />
+        
+     
+        {/* Featured Checkbox */}
+        <label className="flex items-center gap-2">
+          <input type="checkbox" checked={isFeatured} onChange={() => setIsFeatured(!isFeatured)} />
+          Mark as Featured
+        </label>
 
-          <button disabled={mutation.isPending || (progress > 0 && progress < 100)} className="bg-blue-500 text-white p-2 rounded">
-            {mutation.isPending ? "Publishing..." : "Publish Post"}
-          </button>
-          <span>Upload Progress: {progress}%</span>
-        </form>
-      </div>
+        {/* Submit Button */}
+        <button disabled={mutation.isPending || (progress > 0 && progress < 100)} className="bg-blue-500 text-white p-2 rounded">
+          {mutation.isPending ? "Publishing..." : "Publish Post"}
+        </button>
+        <span>Upload Progress: {progress}%</span>
+      </form>
     </div>
+    </div>
+
   );
 };
 
 export default Write;
+
+
+
+
