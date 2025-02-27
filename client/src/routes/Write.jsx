@@ -6,7 +6,7 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import Upload from "../components/Upload";
-import 'react-quill-new/dist/quill.snow.css';
+import "react-quill-new/dist/quill.snow.css";
 import Navbar from "../components/Navbar";
 
 const Write = () => {
@@ -18,13 +18,13 @@ const Write = () => {
   const [cover, setCover] = useState(null);
   const [author, setAuthor] = useState("");
   const [progress, setProgress] = useState(0);
-  const [isFeatured, setIsFeatured] = useState(false);
   const [errors, setErrors] = useState({});
-  const [publishClicked, setPublishClicked] = useState(false);
+  const [showErrors, setShowErrors] = useState(false);
+  const [isFeatured, setIsFeatured] = useState(false);
 
   useEffect(() => {
     if (img) {
-      setDesc(prev => prev + `<p><img src="${img.url}"/></p>`);
+      setDesc((prev) => prev + `<p><img src="${img.url}"/></p>`);
     }
   }, [img]);
 
@@ -49,21 +49,20 @@ const Write = () => {
 
   const validateFields = () => {
     const newErrors = {};
-    if (!title) newErrors.title = "Title is required";
-    if (!desc) newErrors.desc = "Description is required";
-    if (!category) newErrors.category = "Category is required";
-    if (!cover) newErrors.cover = "Cover image is required";
-    if (!author) newErrors.author = "Author name is required";
+    if (!title) newErrors.title = "Title is required.";
+    if (!desc) newErrors.desc = "Description is required.";
+    if (!category) newErrors.category = "Category is required.";
+    if (!cover) newErrors.cover = "Cover image is required.";
+    if (!author) newErrors.author = "Author name is required.";
     return newErrors;
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setPublishClicked(true);
+    setShowErrors(true);
 
     const newErrors = validateFields();
     setErrors(newErrors);
-
     if (Object.keys(newErrors).length > 0) return;
 
     let slug = title.trim().replace(/\s+/g, "-").toLowerCase();
@@ -89,38 +88,42 @@ const Write = () => {
     <div>
       <Navbar />
       <div className="max-w-[1200px] mx-auto flex flex-col mb-[100px] px-2 justify-center items-center overflow-x-scroll">
-        <h1 className="text-xl md:text-3xl mt-[30px] mb-[30px] text-[var(--textColor)] font-semibold">Create a New Post</h1>
+        <h1 className="text-xl md:text-3xl mt-[30px] mb-[30px] text-[var(--textColor)] font-semibold">
+          Create a New Post
+        </h1>
         <form onSubmit={handleSubmit} className="flex flex-col gap-6">
           <Upload type="image" setProgress={setProgress} setData={setCover}>
-            <button className="p-2 bg-[var(--textColore)] text-[var(--textColor)] rounded-lg">Upload Cover Image</button>
+            <button className="p-2 bg-[var(--textColore)] text-[var(--textColor)] rounded-lg">
+              Upload Cover Image
+            </button>
           </Upload>
-          {publishClicked && errors.cover && <div className="text-red-600">{errors.cover}</div>}
-          <div className="w-full max-h-[200px] bg-[var(--textColore)] rounded-lg flex items-center justify-center">
-            {cover && <img src={cover.url} alt="Cover Preview" className="max-h-[200px] w-[50%] object-contain" />}
-          </div>
-          
+          {showErrors && errors.cover && <div className="text-red-600">{errors.cover}</div>}
+
           <input type="text" placeholder="Enter Post Title" value={title} onChange={(e) => setTitle(e.target.value.slice(0, 150))} className="p-2 bg-[var(--textColore)] text-[var(--textColor)] rounded" />
-          {publishClicked && errors.title && <div className="text-red-600">{errors.title}</div>}
-          
-          <input type="text" placeholder="Author Name" value={author} onChange={(e) => setAuthor(e.target.value)} className="p-2 bg-[var(--textColore)] text-[var(--textColor)] rounded" />
-          {publishClicked && errors.author && <div className="text-red-600">{errors.author}</div>}
-          
+          {showErrors && errors.title && <div className="text-red-600">{errors.title}</div>}
+
+          <input type="text" placeholder="Author Name" value={author} onChange={(e) => setAuthor(e.target.value)} className="p-2 rounded bg-[var(--textColore)] text-[var(--textColor)]" />
+          {showErrors && errors.author && <div className="text-red-600">{errors.author}</div>}
+
           <select value={category} onChange={(e) => setCategory(e.target.value)} className="p-2 bg-[var(--textColore)] text-[var(--textColor)] rounded">
-            <option value="" disabled>Select a category</option>
+            <option value="" disabled>
+              Select a category
+            </option>
             <option value="self-growth">Self-Growth</option>
             <option value="business-career">Business & Career</option>
             <option value="fiction">Fiction</option>
+            <option value="productivity">Productivity</option>
           </select>
-          {publishClicked && errors.category && <div className="text-red-600">{errors.category}</div>}
-          
+          {showErrors && errors.category && <div className="text-red-600">{errors.category}</div>}
+
           <ReactQuill value={desc} onChange={setDesc} placeholder="Write something..." className="bg-[var(--textColore)] text-[var(--textColor)] rounded" />
-          {publishClicked && errors.desc && <div className="text-red-600">{errors.desc}</div>}
-          
+          {showErrors && errors.desc && <div className="text-red-600">{errors.desc}</div>}
+
           <label className="flex items-center gap-2">
             <input type="checkbox" checked={isFeatured} onChange={() => setIsFeatured(!isFeatured)} />
             Mark as Featured
           </label>
-          
+
           <button type="submit" disabled={mutation.isPending || (progress > 0 && progress < 100)} className="bg-blue-500 text-white p-2 rounded">
             {mutation.isPending ? "Publishing..." : "Publish Post"}
           </button>
