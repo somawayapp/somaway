@@ -2,11 +2,11 @@ import { useAuth, useUser } from "@clerk/clerk-react";
 import { useMutation } from "@tanstack/react-query";
 import axios from "axios";
 import ReactQuill from "react-quill-new";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import Upload from "../components/Upload";
-import "react-quill-new/dist/quill.snow.css";
+import 'react-quill-new/dist/quill.snow.css';
 import Navbar from "../components/Navbar";
 
 const Write = () => {
@@ -14,6 +14,7 @@ const Write = () => {
   const [title, setTitle] = useState("");
   const [desc, setDesc] = useState("");
   const [category, setCategory] = useState("");
+  const [img, setImg] = useState(null);
   const [cover, setCover] = useState(null);
   const [author, setAuthor] = useState("");
   const [progress, setProgress] = useState(0);
@@ -43,9 +44,7 @@ const Write = () => {
     e.preventDefault();
     setShowErrors(true);
 
-    if (!title || !desc || !category || !cover || !author) {
-      return;
-    }
+    if (!title || !desc || !category || !cover || !author) return;
 
     let slug = title.trim().replace(/\s+/g, "-").toLowerCase();
     slug = slug.replace(/[^a-z0-9-]/g, "").replace(/-+$/, "");
@@ -70,30 +69,28 @@ const Write = () => {
     <div>
       <Navbar />
       <div className="max-w-[1200px] mx-auto flex flex-col mb-[100px] px-2 justify-center items-center overflow-x-scroll">
-        <h1 className="text-xl md:text-3xl mt-[30px] mb-[30px] text-[var(--textColor)] font-semibold">
-          Create a New Post
-        </h1>
+        <h1 className="text-xl md:text-3xl mt-[30px] mb-[30px] text-[var(--textColor)] font-semibold">Create a New Post</h1>
         <form onSubmit={handleSubmit} className="flex flex-col gap-6">
+          {/* Cover Image Upload & Preview */}
           <Upload type="image" setProgress={setProgress} setData={setCover}>
-            <button type="button" className="p-2 bg-[var(--textColore)] text-[var(--textColor)] rounded-lg">
-              Upload Cover Image
-            </button>
+            <button className="p-2 bg-[var(--textColore)] text-[var(--textColor)] rounded-lg">Upload Cover Image</button>
           </Upload>
-          {showErrors && !cover && <div className="text-red-600">Cover image is required.</div>}
-          {cover && (
-            <img src={cover.url} alt="Cover Preview" className="max-h-[200px] w-[50%] object-contain" />
-          )}
+          {showErrors && !cover && <div className="text-red-600">Cover image is required</div>}
+          <div className="w-full max-h-[200px] bg-[var(--textColore)] rounded-lg flex items-center justify-center">
+            {cover && <img src={cover.url} alt="Cover Preview" className="max-h-[200px] w-[50%] object-contain" />}
+          </div>
 
+          {/* Title Input */}
           <input type="text" placeholder="Enter Post Title" value={title} onChange={(e) => setTitle(e.target.value.slice(0, 150))} className="p-2 bg-[var(--textColore)] text-[var(--textColor)] rounded" />
-          {showErrors && !title && <div className="text-red-600">Title is required.</div>}
+          {showErrors && !title && <div className="text-red-600">Title is required</div>}
 
+          {/* Author Input */}
           <input type="text" placeholder="Author Name" value={author} onChange={(e) => setAuthor(e.target.value)} className="p-2 rounded bg-[var(--textColore)] text-[var(--textColor)]" />
-          {showErrors && !author && <div className="text-red-600">Author name is required.</div>}
+          {showErrors && !author && <div className="text-red-600">Author name is required</div>}
 
+          {/* Category Selection */}
           <select value={category} onChange={(e) => setCategory(e.target.value)} className="p-2 bg-[var(--textColore)] text-[var(--textColor)] rounded">
-            <option value="" disabled>
-              Select a category
-            </option>
+            <option value="" disabled>Select a category</option>
             <option value="self-growth">Self-Growth</option>
             <option value="business-career">Business & Career</option>
             <option value="fiction">Fiction</option>
@@ -111,17 +108,20 @@ const Write = () => {
             <option value="money-investments">Money & Investments</option>
             <option value="negotiation">Negotiation</option>
           </select>
-          {showErrors && !category && <div className="text-red-600">Category is required.</div>}
+          {showErrors && !category && <div className="text-red-600">Category is required</div>}
 
+          {/* Rich Text Editor */}
           <ReactQuill value={desc} onChange={setDesc} placeholder="Write something..." className="bg-[var(--textColore)] text-[var(--textColor)] rounded" />
-          {showErrors && !desc && <div className="text-red-600">Description is required.</div>}
+          {showErrors && !desc && <div className="text-red-600">Description is required</div>}
 
+          {/* Featured Checkbox */}
           <label className="flex items-center gap-2">
             <input type="checkbox" checked={isFeatured} onChange={() => setIsFeatured(!isFeatured)} />
             Mark as Featured
           </label>
 
-          <button type="submit" disabled={mutation.isPending || (progress > 0 && progress < 100)} className="bg-blue-500 text-white p-2 rounded">
+          {/* Submit Button */}
+          <button disabled={mutation.isPending || (progress > 0 && progress < 100)} className="bg-blue-500 text-white p-2 rounded">
             {mutation.isPending ? "Publishing..." : "Publish Post"}
           </button>
           <span>Upload Progress: {progress}%</span>
