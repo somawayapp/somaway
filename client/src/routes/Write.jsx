@@ -14,7 +14,6 @@ const Write = () => {
   const [title, setTitle] = useState("");
   const [desc, setDesc] = useState("");
   const [category, setCategory] = useState("");
-  const [img, setImg] = useState(null);
   const [cover, setCover] = useState(null);
   const [author, setAuthor] = useState("");
   const [progress, setProgress] = useState(0);
@@ -76,7 +75,7 @@ const Write = () => {
         </h1>
         <form onSubmit={handleSubmit} className="flex flex-col gap-6">
           <Upload type="image" setProgress={setProgress} setData={setCover}>
-            <button className="p-2 bg-[var(--textColore)] text-[var(--textColor)] rounded-lg">
+            <button type="button" className="p-2 bg-[var(--textColore)] text-[var(--textColor)] rounded-lg">
               Upload Cover Image
             </button>
           </Upload>
@@ -122,7 +121,7 @@ const Write = () => {
             Mark as Featured
           </label>
 
-          <button disabled={mutation.isPending || (progress > 0 && progress < 100)} className="bg-blue-500 text-white p-2 rounded">
+          <button type="submit" disabled={mutation.isPending || (progress > 0 && progress < 100)} className="bg-blue-500 text-white p-2 rounded">
             {mutation.isPending ? "Publishing..." : "Publish Post"}
           </button>
           <span>Upload Progress: {progress}%</span>
