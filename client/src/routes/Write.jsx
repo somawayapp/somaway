@@ -20,8 +20,7 @@ const Write = () => {
   const [author, setAuthor] = useState("");
   const [progress, setProgress] = useState(0);
   const [isFeatured, setIsFeatured] = useState(false);
-  const [errors, setErrors] = useState({});
-  const [publishClicked, setPublishClicked] = useState(false);
+  const [showErrors, setShowErrors] = useState(false);
 
   useEffect(() => {
     if (img) {
@@ -95,7 +94,6 @@ const Write = () => {
           <input type="text" placeholder="Enter Post Title" value={title} onChange={(e) => setTitle(e.target.value.slice(0, 150))} className="p-2 bg-[var(--textColore)] text-[var(--textColor)] rounded" />
           
           <input type="text" placeholder="Author Name" value={author} onChange={(e) => setAuthor(e.target.value)} className="p-2 bg-[var(--textColore)] text-[var(--textColor)] rounded" />
-          {publishClicked && errors.author && <div className="text-red-600">{errors.author}</div>}
           
           <select value={category} onChange={(e) => setCategory(e.target.value)} className="p-2 bg-[var(--textColore)] text-[var(--textColor)] rounded">
           <option value="" disabled>Select a category</option>
