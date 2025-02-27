@@ -1,4 +1,3 @@
-
 import { useAuth, useUser } from "@clerk/clerk-react";
 import { useMutation } from "@tanstack/react-query";
 import axios from "axios";
@@ -20,7 +19,8 @@ const Write = () => {
   const [author, setAuthor] = useState("");
   const [progress, setProgress] = useState(0);
   const [isFeatured, setIsFeatured] = useState(false);
-  const [showErrors, setShowErrors] = useState(false);
+  const [errors, setErrors] = useState({});
+  const [submitted, setSubmitted] = useState(false);
 
   useEffect(() => {
     if (img) {
@@ -47,18 +47,27 @@ const Write = () => {
     },
   });
 
+  const validateFields = () => {
+    const newErrors = {};
+    if (!title) newErrors.title = "Title is required";
+    if (!desc) newErrors.desc = "Description is required";
+    if (!category) newErrors.category = "Category is required";
+    if (!cover) newErrors.cover = "Cover image is required";
+    if (!author) newErrors.author = "Author name is required";
+    return newErrors;
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setShowErrors(true);
-
-    if (!title || !desc || !category || !cover || !author) {
+    setSubmitted(true);
+    
+    const newErrors = validateFields();
+    if (Object.keys(newErrors).length > 0) {
+      setErrors(newErrors);
       return;
     }
-
-
-    if (Object.keys(newErrors).length > 0) return;
-
+    
+    setErrors({});
     let slug = title.trim().replace(/\s+/g, "-").toLowerCase();
     slug = slug.replace(/[^a-z0-9-]/g, "").replace(/-+$/, "");
 
@@ -87,16 +96,18 @@ const Write = () => {
           <Upload type="image" setProgress={setProgress} setData={setCover}>
             <button className="p-2 bg-[var(--textColore)] text-[var(--textColor)] rounded-lg">Upload Cover Image</button>
           </Upload>
-          <div className="w-full max-h-[200px] bg-[var(--textColore)] rounded-lg flex items-center justify-center">
-            {cover && <img src={cover.url} alt="Cover Preview" className="max-h-[200px] w-[50%] object-contain" />}
-          </div>
-          
+          {submitted && errors.cover && <div className="text-red-600">{errors.cover}</div>}
+
+          {cover && <img src={cover.url} alt="Cover Preview" className="max-h-[200px] w-[50%] object-contain" />}
+
           <input type="text" placeholder="Enter Post Title" value={title} onChange={(e) => setTitle(e.target.value.slice(0, 150))} className="p-2 bg-[var(--textColore)] text-[var(--textColor)] rounded" />
-          
+          {submitted && errors.title && <div className="text-red-600">{errors.title}</div>}
+
           <input type="text" placeholder="Author Name" value={author} onChange={(e) => setAuthor(e.target.value)} className="p-2 bg-[var(--textColore)] text-[var(--textColor)] rounded" />
-          
+          {submitted && errors.author && <div className="text-red-600">{errors.author}</div>}
+
           <select value={category} onChange={(e) => setCategory(e.target.value)} className="p-2 bg-[var(--textColore)] text-[var(--textColor)] rounded">
-          <option value="" disabled>Select a category</option>
+            <option value="" disabled>Select a category</option>
             <option value="self-growth">Self-Growth</option>
             <option value="business-career">Business & Career</option>
             <option value="fiction">Fiction</option>
@@ -114,29 +125,20 @@ const Write = () => {
             <option value="money-investments">Money & Investments</option>
             <option value="negotiation">Negotiation</option>
           </select>
-          
+          {submitted && errors.category && <div className="text-red-600">{errors.category}</div>}
+
           <ReactQuill value={desc} onChange={setDesc} placeholder="Write something..." className="bg-[var(--textColore)] text-[var(--textColor)] rounded" />
-          
+          {submitted && errors.desc && <div className="text-red-600">{errors.desc}</div>}
+
           <label className="flex items-center gap-2">
             <input type="checkbox" checked={isFeatured} onChange={() => setIsFeatured(!isFeatured)} />
             Mark as Featured
           </label>
-          
-          <button type="submit" disabled={mutation.isPending || (progress > 0 && progress < 100)} className="bg-blue-500 text-white p-2 rounded">
+
+          <button disabled={mutation.isPending || (progress > 0 && progress < 100)} className="bg-blue-500 text-white p-2 rounded">
             {mutation.isPending ? "Publishing..." : "Publish Post"}
           </button>
-
-          
           <span>Upload Progress: {progress}%</span>
-          {showErrors && (
-            <div className="text-red-600 mt-4">
-              {!title && <p>Title is required.</p>}
-              {!desc && <p>Description is required.</p>}
-              {!category && <p>Category is required.</p>}
-              {!cover && <p>Cover image is required.</p>}
-              {!author && <p>Author name is required.</p>}
-            </div>
-          )}
         </form>
       </div>
     </div>
