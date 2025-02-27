@@ -163,7 +163,7 @@ const Write = () => {
   {mutation.isPending ? "Publishing..." : "Publish Post"}
 </button>
 
-        <span>Upload Progress: {progress}%</span>
+        <span>Upload Progres: {progress}%</span>
       </form>
     </div>
     </div>
