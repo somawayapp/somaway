@@ -51,14 +51,25 @@ const Write = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     clearError();
-
-    if (!title || !desc || !category || !cover || !author) {
-      return setError("All fields are required, including author name.");
+  
+    // Track missing fields
+    let missingFields = [];
+  
+    if (!title.trim()) missingFields.push("Title");
+    if (!desc.trim()) missingFields.push("Description");
+    if (!category) missingFields.push("Category");
+    if (!cover) missingFields.push("Cover Image");
+    if (!author.trim()) missingFields.push("Author Name");
+  
+    // If any field is missing, show the error and prevent submission
+    if (missingFields.length > 0) {
+      setError(`Missing fields: ${missingFields.join(", ")}`);
+      return;
     }
-
+  
     let slug = title.trim().replace(/\s+/g, "-").toLowerCase();
     slug = slug.replace(/[^a-z0-9-]/g, "").replace(/-+$/, "");
-
+  
     const data = {
       title,
       desc,
@@ -68,9 +79,13 @@ const Write = () => {
       slug,
       isFeatured,
     };
-
+  
     mutation.mutate(data);
   };
+  
+ 
+
+  
 
   if (!isLoaded) return <div>Loading...</div>;
   if (!isSignedIn) return <div>You need to sign in to create a post!</div>;
