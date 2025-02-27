@@ -164,7 +164,7 @@ const Write = () => {
 </button>
 
 
-        <span>Upload Progress: {progress}%</span>
+        <span>Upload Progrss: {progress}%</span>
       </form>
     </div>
     </div>
