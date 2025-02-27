@@ -51,28 +51,14 @@ const Write = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     clearError();
-  
-    // Ensure only the Submit button triggers validation
-    const submitButton = e.nativeEvent.submitter; // Get the clicked button
-    if (!submitButton || submitButton.name !== "submitPost") return;
-  
-    let missingFields = [];
-  
-    if (!title.trim()) missingFields.push("Title");
-    if (!desc.trim()) missingFields.push("Description");
-    if (!category) missingFields.push("Category");
-    if (!cover) missingFields.push("Cover Image");
-    if (!author.trim()) missingFields.push("Author Name");
-  
-    // If any field is missing, show error and prevent submission
-    if (missingFields.length > 0) {
-      setError(`Missing fields: ${missingFields.join(", ")}`);
-      return;
+
+    if (!title || !desc || !category || !cover || !author) {
+      return setError("All fields are required, including author name.");
     }
-  
+
     let slug = title.trim().replace(/\s+/g, "-").toLowerCase();
     slug = slug.replace(/[^a-z0-9-]/g, "").replace(/-+$/, "");
-  
+
     const data = {
       title,
       desc,
@@ -82,13 +68,9 @@ const Write = () => {
       slug,
       isFeatured,
     };
-  
+
     mutation.mutate(data);
   };
-  
- 
-
-  
 
   if (!isLoaded) return <div>Loading...</div>;
   if (!isSignedIn) return <div>You need to sign in to create a post!</div>;
@@ -154,15 +136,10 @@ const Write = () => {
           Mark as Featured
         </label>
 
-        <button 
-  name="submitPost" 
-  type="submit" 
-  disabled={mutation.isPending || (progress > 0 && progress < 100)}
-  className="bg-blue-500 text-white p-2 rounded"
->
-  {mutation.isPending ? "Publishing..." : "Publish Post"}
-</button>
-
+        {/* Submit Button */}
+        <button disabled={mutation.isPending || (progress > 0 && progress < 100)} className="bg-blue-500 text-white p-2 rounded">
+          {mutation.isPending ? "Publishing..." : "Publish Post"}
+        </button>
         <span>Upload Progress: {progress}%</span>
       </form>
     </div>
@@ -172,8 +149,6 @@ const Write = () => {
 };
 
 export default Write;
-
-
 
 
 
