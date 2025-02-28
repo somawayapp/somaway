@@ -37,7 +37,6 @@ app.use(
       const allowedOrigins = [
         'https://www.makesomaway.com',
         'https://somawayclient.vercel.app',
-        'http://localhost:5173',
       ];
 
       if (allowedOrigins.indexOf(origin) !== -1 || !origin) {
