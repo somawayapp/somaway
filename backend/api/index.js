@@ -35,8 +35,8 @@ app.use(
   cors({
     origin: function (origin, callback) {
       const allowedOrigins = [
-        'https://www.xtechnewsletter.com',
-        'https://blogifiyclient.vercel.app',
+        'https://www.makesomaway.com',
+        'https://somawayclient.vercel.app',
         'http://localhost:5173',
       ];
 
@@ -93,7 +93,7 @@ app.use((err, req, res, next) => {
 
 // MongoDB connection
 const mongoURI =
-  'mongodb+srv://airnesyinfo:airnesyinfo@cluster0.54a22.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0&dbName=blog  ';
+  'mongodb+srv://makesomaway:makesomaway@cluster0.movbe.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0&dbName=app  ';
 
 if (!mongoURI) {
   console.error('DATABASE_URL is missing in .env');
