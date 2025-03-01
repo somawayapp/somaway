@@ -35,7 +35,7 @@ app.use(
   cors({
     origin: function (origin, callback) {
       const allowedOrigins = [
-        'https://www.makesomaway.com',
+        'https://makesomaway.com',
         'https://somawayclient.vercel.app',
         'http://localhost:5173',
       ];
