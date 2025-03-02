@@ -29,7 +29,7 @@ const Homepage = () => {
 
          
 
-      {/* Floating Section */}
+      {/* Floating Section 
       
       <div
   className={` flex items-center hidden sm:block  mx-auto justify-between px-5 py-3 transition-opacity 
@@ -37,20 +37,19 @@ const Homepage = () => {
  
 >
 
-        {/* 
 
         <Link to="/" className="flex items-center mt-[10px] gap-1 text-lg font-bold md:text-2xl">
         <img src="/x.png"  className="w-50 h-20 lg:w-50 lg:h-20" />
 
 <span className="text-[var(--textLogo)] text-[30px] lg:text-[90px]"></span>
 
-</Link>  */}
+</Link> 
 
       
 
  
       </div>
-
+      */}
 
    {/*
 
