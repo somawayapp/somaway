@@ -35,9 +35,11 @@ app.use(
   cors({
     origin: function (origin, callback) {
       const allowedOrigins = [
-        'https://www.xtechnewsletter.com/',
+        'https://xtechnewsletter.com',
+        'https://www.xtechnewsletter.com', // Added this
         'https://blogifiyclient.vercel.app',
         'http://localhost:5173',
+    
       ];
 
       if (allowedOrigins.indexOf(origin) !== -1 || !origin) {
