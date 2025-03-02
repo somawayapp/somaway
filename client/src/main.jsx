@@ -24,7 +24,7 @@ import SubscriptionPage from "./routes/SubscriptionPage.jsx";
 const queryClient = new QueryClient();
 
 // Hardcoded Clerk publishable key
-const PUBLISHABLE_KEY = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY;
+const PUBLISHABLE_KEY = "pk_live_Y2xlcmsubWFrZXNvbWF3YXkuY29tJA";
 
 if (!PUBLISHABLE_KEY) {
   throw new Error("Add your Clerk publishable key to the .env.local file");
