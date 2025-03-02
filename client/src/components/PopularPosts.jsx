@@ -81,7 +81,7 @@ const PopularPosts = () => {
   if (status === "loading") return <p>Loading...</p>; // Show a loading spinner or message
   if (error) return <p>Something went wrong!</p>; // Handle errors gracefully
   
-  const allPosts = data?.pages?.flatMap((page) => page.posts) || [];
+  const allPosts = data?.pages?.flatMap((page) => page.posts || []) || [];
   
   return (
     <div className="relative">
