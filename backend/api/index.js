@@ -91,8 +91,6 @@ app.use((err, req, res, next) => {
   res.status(err.status || 500).json({ message: err.message || 'Internal server error' });
 });
 
-// MongoDB connection
-require('dotenv').config(); // Load environment variables from .env
 
 const mongoURI = process.env.DATABASE_URL;
 
