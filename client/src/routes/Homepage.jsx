@@ -26,11 +26,46 @@ const Homepage = () => {
   const searchRef = useRef(null);
   const shareRef = useRef(null);
 
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollY = window.scrollY;
+      setIsVisible(scrollY <=600);
+    };
 
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
 
+  // Close popups when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (
+        searchRef.current &&
+        !searchRef.current.contains(event.target) &&
+        showSearch
+      ) {
+        setShowSearch(false);
+      }
+      if (
+        shareRef.current &&
+        !shareRef.current.contains(event.target) &&
+        showShare
+      ) {
+        setShowShare(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [showSearch, showShare]);
 
   return (
       <div>
+            <Navbar/>
 
     <div className="mb-9   flex flex-col gap-0">
 
@@ -66,7 +101,9 @@ const Homepage = () => {
 </div>
      */}
      
-        
+        <Hero />
+
+   <CategoriesScroll />
 
 
    <div className=" bg-[var(--textColore)]  rounded-2xl p-3  md:p-6 mt-0 md:mt-4">
@@ -78,9 +115,11 @@ const Homepage = () => {
        Featured book summaries
      </h3>
      <div className="mb-3">
+     <Search />
 
      </div>
    </div>
+   <FeaturedPosts />
 
    </div>
 
@@ -90,6 +129,7 @@ const Homepage = () => {
       <h3 className="text-xl md:text-2xl mt-7  md:mt-10 font-extrabold text-[var(--textColor)]">
      Trending Book summaries    </h3>
     </div>
+    <TrendingPosts/>
 </div>
 
 
@@ -128,6 +168,7 @@ const Homepage = () => {
     <div className=" bg-[var(--textColore)] rounded-2xl p-3 mt-10 md:mt-4 md:mt-8 md:p-6 ">
     <h3 className="text-xl md:text-2xl  font-extrabold text-[var(--textColor)]">
      Most popular Books      </h3>
+    <PopularPosts/>
     </div>
 
 
