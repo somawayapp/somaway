@@ -35,10 +35,7 @@ app.use(
   cors({
     origin: function (origin, callback) {
       const allowedOrigins = [
-        'https://www.makesomaway.com', 
-
-        'https://makesomaway.com',
-    
+        'https://www.makesomaway.com'    
       ];
 
       if (allowedOrigins.indexOf(origin) !== -1 || !origin) {
