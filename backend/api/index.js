@@ -1,5 +1,6 @@
 
 import { clerkMiddleware, requireAuth } from '@clerk/express';
+import dotenv from 'dotenv';
 
 
 import express from 'express';
@@ -35,8 +36,8 @@ app.use(
   cors({
     origin: function (origin, callback) {
       const allowedOrigins = [
-        'https://makesomaway.com',
-        'https://somawayclient.vercel.app',
+        'https://xtechnewsletter.com',
+        'https://blogifiyclient.vercel.app',
         'http://localhost:5173',
       ];
 
@@ -92,13 +93,16 @@ app.use((err, req, res, next) => {
 });
 
 // MongoDB connection
-const mongoURI =
-  'mongodb+srv://makesomaway:makesomaway@cluster0.movbe.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0&dbName=app  ';
+require('dotenv').config(); // Load environment variables from .env
+
+const mongoURI = process.env.DATABASE_URL;
 
 if (!mongoURI) {
   console.error('DATABASE_URL is missing in .env');
   process.exit(1);
 }
+
+console.log('MongoDB URI:', mongoURI);
 
 mongoose
   .connect(mongoURI, { useNewUrlParser: true, useUnifiedTopology: true })
