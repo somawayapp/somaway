@@ -1,6 +1,5 @@
 
 import { clerkMiddleware, requireAuth } from '@clerk/express';
-import dotenv from 'dotenv';
 
 
 import express from 'express';
@@ -93,6 +92,7 @@ app.use((err, req, res, next) => {
 });
 
 // MongoDB connection
+require('dotenv').config(); // Load environment variables from .env
 
 const mongoURI = process.env.DATABASE_URL;
 
