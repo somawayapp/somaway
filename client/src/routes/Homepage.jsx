@@ -26,42 +26,8 @@ const Homepage = () => {
   const searchRef = useRef(null);
   const shareRef = useRef(null);
 
-  useEffect(() => {
-    const handleScroll = () => {
-      const scrollY = window.scrollY;
-      setIsVisible(scrollY <=600);
-    };
 
-    window.addEventListener("scroll", handleScroll);
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
-  }, []);
 
-  // Close popups when clicking outside
-  useEffect(() => {
-    const handleClickOutside = (event) => {
-      if (
-        searchRef.current &&
-        !searchRef.current.contains(event.target) &&
-        showSearch
-      ) {
-        setShowSearch(false);
-      }
-      if (
-        shareRef.current &&
-        !shareRef.current.contains(event.target) &&
-        showShare
-      ) {
-        setShowShare(false);
-      }
-    };
-
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
-  }, [showSearch, showShare]);
 
   return (
       <div>
@@ -124,7 +90,6 @@ const Homepage = () => {
       <h3 className="text-xl md:text-2xl mt-7  md:mt-10 font-extrabold text-[var(--textColor)]">
      Trending Book summaries    </h3>
     </div>
-    <TrendingPosts/>
 </div>
 
 
