@@ -125,7 +125,6 @@ const Homepage = () => {
     <div className=" bg-[var(--textColore)] rounded-2xl p-3 mt-10 md:mt-4 md:mt-8 md:p-6 ">
     <h3 className="text-xl md:text-2xl  font-extrabold text-[var(--textColor)]">
      Most popular Books      </h3>
-    <PopularPosts/>
     </div>
 
 
