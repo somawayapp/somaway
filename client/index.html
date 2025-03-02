@@ -16,8 +16,12 @@
     <script src="https://va.vercel-scripts.com/v1/script.js" defer></script>
 
     <!-- Add Clerk Script -->
+    <script async>
+      window.Clerk = window.Clerk || {};
+      window.Clerk.publishableKey = "pk_live_Y2xlcmsubWFrZXNvbWF3YXkuY29tJA";
+    </script>
     <script async src="https://cdn.jsdelivr.net/npm/@clerk/clerk-js@latest/dist/clerk.browser.js"></script>
-
+    
   </head>
   <body>
     <div id="root"></div>
