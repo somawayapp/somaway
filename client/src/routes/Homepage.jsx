@@ -43,7 +43,7 @@ const Homepage = () => {
 
 <span className="text-[var(--textLogo)] text-[30px] lg:text-[90px]"></span>
 
-</Link> 
+</Link>  
 
       
 

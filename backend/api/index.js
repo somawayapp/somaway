@@ -35,9 +35,9 @@ app.use(
   cors({
     origin: function (origin, callback) {
       const allowedOrigins = [
-        'https://xtechnewsletter.com',
-        'https://www.xtechnewsletter.com', // Added this
-        'https://blogifiyclient.vercel.app',
+        'https://makesomaway.com',
+        'https://www.makesomaway.com', // Added this
+        'https://somawayclient.vercel.app',
         'http://localhost:5173',
     
       ];
@@ -118,4 +118,3 @@ const port = process.env.PORT || 3000;
 app.listen(port, () => {
   console.log(`Server listening at http://localhost:${port}`);
 });
-
