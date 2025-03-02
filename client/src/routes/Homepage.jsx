@@ -65,7 +65,6 @@ const Homepage = () => {
 
   return (
       <div>
-            <Navbar/>
 
     <div className="mb-9   flex flex-col gap-0">
 
@@ -101,9 +100,7 @@ const Homepage = () => {
 </div>
      */}
      
-        <Hero />
-
-   <CategoriesScroll />
+        
 
 
    <div className=" bg-[var(--textColore)]  rounded-2xl p-3  md:p-6 mt-0 md:mt-4">
@@ -115,11 +112,9 @@ const Homepage = () => {
        Featured book summaries
      </h3>
      <div className="mb-3">
-     <Search />
 
      </div>
    </div>
-   <FeaturedPosts />
 
    </div>
 
