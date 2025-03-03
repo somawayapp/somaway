@@ -20,7 +20,6 @@ import PremiumPage from "./routes/PremiumPage.jsx";
 import { Settings } from "@mui/icons-material";
 import SettingsPage from "./routes/SettingsPage.jsx";
 import SubscriptionPage from "./routes/SubscriptionPage.jsx";
-import { Clerk } from '@clerk/clerk-js'
 
 const queryClient = new QueryClient();
 
@@ -28,10 +27,9 @@ const queryClient = new QueryClient();
 
 const publishableKey = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY
 
-const clerk = new Clerk(publishableKey)
-await clerk.load({
-  // Set load options here
-})
+if (!publishableKey) {
+  throw new Error('Missing publishableKey')
+}
 
 const router = createBrowserRouter([
   {
