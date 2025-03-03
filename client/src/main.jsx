@@ -11,7 +11,7 @@ import SinglePostPage from "./routes/SinglePostPage.jsx";
 import AboutPage from "./routes/AboutPage.jsx";
 import NewsletterPage from "./routes/NewsletterPage.jsx";
 import MainLayout from "./layouts/MainLayout.jsx";
-import { ClerkProvider } from '@clerk/react-router'
+import { ClerkProvider } from "@clerk/clerk-react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -25,12 +25,11 @@ const queryClient = new QueryClient();
 
 // Hardcoded Clerk publishable key
 
-const publishableKey = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY
+const clerkPublishableKey = process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY || "pk_live_Y2xlcmsubWFrZXNvbWF3YXkuY29tJA";
 
-if (!publishableKey) {
-  throw new Error('Missing publishableKey')
+if (!clerkPublishableKey) {
+    throw new Error("Missing Clerk Publishable Key!");
 }
-
 const router = createBrowserRouter([
   {
     element: <MainLayout />,
@@ -83,19 +82,14 @@ const router = createBrowserRouter([
   },
 ]);
 
-  createRoot(document.getElementById("root")).render(
-    <StrictMode>
-      <ClerkProvider
-        publishableKey={publishableKey}
-        signInFallbackRedirectUrl="/"
-        signInForceRedirectUrl="/"
-      >
-        <QueryClientProvider client={queryClient}>
-          <RouterProvider router={router} />
-          <ToastContainer position="bottom-right" />
-          <Analytics />
-        </QueryClientProvider>
-      </ClerkProvider>
-    </StrictMode>
-
+createRoot(document.getElementById("root")).render(
+  <StrictMode>
+    <ClerkProvider publishableKey={clerkPublishableKey}>
+      <QueryClientProvider client={queryClient}>
+        <RouterProvider router={router} />
+        <ToastContainer position="bottom-right" />
+        <Analytics />
+      </QueryClientProvider>
+    </ClerkProvider>
+  </StrictMode>
 );
