@@ -20,10 +20,9 @@ const app = express();
 
 // Initialize Clerk Client
 const clerkClient = createClerkClient({
-  secretKey: "sk_live_uzkcb7FOpZPqLu0rdsjERKecSqo2IMtGt5VSYRjZAM",
-  publishableKey: "pk_live_Y2xlcmsubWFrZXNvbWF3YXkuY29tJA",
+  secretKey: process.env.CLERK_SECRET_KEY,
+  publishableKey: process.env.VITE_CLERK_PUBLISHABLE_KEY,
 });
-
 
 // Use Clerk middleware
 app.use(clerkMiddleware({ clerkClient }));
