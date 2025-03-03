@@ -20,16 +20,19 @@ import PremiumPage from "./routes/PremiumPage.jsx";
 import { Settings } from "@mui/icons-material";
 import SettingsPage from "./routes/SettingsPage.jsx";
 import SubscriptionPage from "./routes/SubscriptionPage.jsx";
+import { Clerk } from '@clerk/clerk-js'
 
 const queryClient = new QueryClient();
 
 // Hardcoded Clerk publishable key
 
-const clerkPubKey = process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY || "pk_live_Y2xlcmsubWFrZXNvbWF3YXkuY29tJA";
+const publishableKey = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY
 
-if (!clerkPubKey) {
-    throw new Error("Missing Clerk Publishable Key!");
-}
+const clerk = new Clerk(publishableKey)
+await clerk.load({
+  // Set load options here
+})
+
 const router = createBrowserRouter([
   {
     element: <MainLayout />,
@@ -84,7 +87,7 @@ const router = createBrowserRouter([
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
-    <ClerkProvider publishableKey={"pk_live_Y2xlcmsubWFrZXNvbWF3YXkuY29tJA"}>
+    <ClerkProvider publishableKey={publishableKey}>
       <QueryClientProvider client={queryClient}>
         <RouterProvider router={router} />
         <ToastContainer position="bottom-right" />
