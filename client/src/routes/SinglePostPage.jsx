@@ -51,9 +51,9 @@ const SinglePostPage = () => {
             <h1 className="text-xl md:text-4xl font-semibold text-center md:text-left">
               {data.title}
             </h1>
-            <div className="flex flex-col md:flex-row items-center gap-1 md:gap-2 text-[var(--softTextColor)] text-md md:text-lg">
-              <div className="flex flex-col gap-1 md:gap-2">
-                <span  className=" font-semibold">Book by:</span>
+            <div className="flex flex-col items-center gap-1 md:gap-2 text-[var(--softTextColor)] text-md md:text-lg">
+              <div className="gap-1 md:gap-2">
+                <span  className=" flex font-semibold">Book by:</span>
                 <Link   to={`/discover?author=${data.author}`} className="text-[var(--softTextColor2)]" >{data.author}</Link>
                 </div>
                 <div className="flex mt-1 gap-1 md:gap-2">
