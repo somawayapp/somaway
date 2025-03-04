@@ -52,11 +52,11 @@ const SinglePostPage = () => {
               {data.title}
             </h1>
             <div className="flex flex-col md:flex-row items-center gap-1 md:gap-2 text-[var(--softTextColor)] text-md md:text-lg">
-              <div className="flex  gap-1 md:gap-2">
+              <div className="flex-col  gap-1 md:gap-2">
                 <span  className=" font-semibold">Book by:</span>
                 <Link   to={`/discover?author=${data.author}`} className="text-[var(--softTextColor2)]" >{data.author}</Link>
                 </div>
-                <div className="flex mt-2  gap-1 md:gap-2">
+                <div className="flex mt-1 gap-1 md:gap-2">
                 <span className="font-semibold">Category:</span>
                 <Link to={`/discover?cat=${data.category}`}  className="capitalize text-[var(--softTextColor2)]">{data.category}</Link>
                 </div>
