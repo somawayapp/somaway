@@ -25,7 +25,7 @@ const FeaturedItem = ({ post }) => {
   {post.author
     ? window.innerWidth >= 768
       ? post.author.slice(0, 20)
-      : post.author.slice(0, 12)
+      : post.author.slice(0, 15)
     : ""}
 </Link>
 
