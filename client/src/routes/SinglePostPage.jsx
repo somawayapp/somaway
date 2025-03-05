@@ -33,7 +33,7 @@ const SinglePostPage = () => {
       <Navbar />
 
       <div className="flex flex-col p-3 md:p-9 gap-4">
-        <div  className=" w-full mt-[-13px] flex pb-2  pt-4 text-[var(--textColor)] )">
+        <div  className=" w-full mt-[-13px] flex pb-2  pt-4 md:pt-2 text-[var(--textColor)] )">
         <h1 className="text-md md:text-xl font-semibold  text-left"> Library /
          <span className=" pl-1 font-normal">
          {data.title}
@@ -68,7 +68,7 @@ const SinglePostPage = () => {
             <h1 className="text-2xl md:text-5xl font-bold text-center md:text-left">
               {data.title}
             </h1>
-            <div className="flex flex-row  items-center gap-1 text-[var(--textColor)] text-sm md:text-lg">
+            <div className="flex flex-row  items-center gap-1 text-[var(--textColor)] text-md md:text-lg">
               <div className=" flex gap-1 md:gap-2">
                 <span  className=" ">Book by </span>
                 <Link   to={`/discover?author=${data.author}`} className="" >{data.author}</Link>
@@ -106,8 +106,8 @@ const SinglePostPage = () => {
 
            <Link
             to="/login"
-            className="w-full text-center mt-3  sm:w-auto px-4 md:px-12 py-4  bg-[#0062e3]   text-white font-semibold
-             rounded-md hover:bg-[#0053bf]   "
+            className="w-full text-center mt-3  sm:w-auto px-4 md:px-12 py-4  bg-[#007aff]   text-white font-semibold
+             rounded-md hover:bg-[#0062e3]   "
           >
            Try Somaway app
 
