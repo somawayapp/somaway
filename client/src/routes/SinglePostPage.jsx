@@ -29,7 +29,7 @@ const SinglePostPage = () => {
   if (!data) return "Post not found!";
 
   return (
-    <div className=" bg-[var(--navBgr)]">
+    <div className=" bg-[var(--navBg)]">
       <Navbar />
 
       <div className="flex flex-col p-2 md:p-8 gap-4">
