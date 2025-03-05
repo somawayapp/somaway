@@ -32,13 +32,13 @@ const SinglePostPage = () => {
     <div className=" bg-[var(--navBg)]">
       <Navbar />
 
-      <div className="flex flex-col p-2 md:p-8 gap-4">
-        <div  className=" w-full mt-[-15px] flex pb-2  text-[var(--textColor)] )">
+      <div className="flex flex-col p-3 md:p-[12px] gap-4">
+        <div  className=" w-full mt-[-13px] flex pb-2  pt-2 text-[var(--textColor)] )">
         <h1 className="text-lg md:text-xl font-semibold  text-left"> Library /
          <span className=" pl-1 font-normal">
          {data.title}
           </span >     
-         <span className=" pl-1 font-normal">
+         <span className="  font-normal">
             Summary       
                </span >  
           
@@ -47,13 +47,13 @@ const SinglePostPage = () => {
 
 
 
-      <div className="flex flex-col bg-[var(--bg2)]  border border-[var(--softBg4)] shadow-md rounded-3xl  p-2 md:p-8
+      <div className="flex flex-col bg-[var(--bg2)]  border border-[var(--softBg4)]  rounded-3xl  p-2 md:p-8
        md:flex-row gap-4 md:gap-8">
           {data.img && (
             <div className="w-full md:w-1/4 mt-2 md:mt-0 flex justify-center md:block">
              <Image
              src={data.img}
-                className=" w-[250px] md:w-[400px] rounded-2xl"
+                className=" w-[180px] md:w-[400px] rounded-2xl"
                 />
 
              </div>
@@ -68,7 +68,7 @@ const SinglePostPage = () => {
             <h1 className="text-2xl md:text-5xl font-bold text-center md:text-left">
               {data.title}
             </h1>
-            <div className="flex flex-row items-center gap-1 text-[var(--textColor)] text-md md:text-lg">
+            <div className="flex flex-row  items-center gap-1 text-[var(--textColor)] text-md md:text-lg">
               <div className=" flex gap-1 md:gap-2">
                 <span  className=" ">Book by </span>
                 <Link   to={`/discover?author=${data.author}`} className="" >{data.author}</Link>
@@ -93,12 +93,7 @@ const SinglePostPage = () => {
 
 
             
-          <div className="block md:hidden text-center">
-          <p className="text-[var(--softTextColor2)] mt-2">Comments</p>
-          <div className="flex justify-center">
-          <Comments postId={data._id} />
-          </div>
-          </div>
+        
 
             <p className="mt-2 text-xl mt-1 md:mt-2 md:text-2xl text-justify font-bold">
             What’s inside
@@ -122,14 +117,15 @@ const SinglePostPage = () => {
           <div className="flex flex-col gap-2 items-start md:w-1/4">
           <p className="text-[var(--softTextColor2)] mt-2 ">Explore</p>
           <p className="text-[var(--textColor)] text-lg md:text-xl  font-semibold ">More Books like this</p>
-
+          <div className="pb-4">
           <ExplorePosts/>
+          </div>
 
            <div className="hidden md:block">
             <p className="text-[var(--softTextColor2)] mt-5 ">Comments</p>
             <Comments postId={data._id} />
             </div>
-
+          
 
           </div>
         </div>
@@ -140,8 +136,7 @@ const SinglePostPage = () => {
 
 
 
-      <div className="flex flex-col p-2 
-       md:flex-row gap-4 md:px-8 md:pb-8 md:gap-8"> 
+      <div className="flex flex-col p-4  md:flex-row gap-4 md:px-[12px] md:pb-[12px] md:gap-8"> 
 
             <div className="w-full md:w-1/4 mt-2 md:mt-0 flex justify-center md:block">
           
@@ -152,6 +147,12 @@ const SinglePostPage = () => {
               className="text-[var(--textColor)] text-[14px] md:text-[18px] text-justify"
               dangerouslySetInnerHTML={{ __html: data.desc }}
             />
+              <div className="block md:hidden text-center">
+          <p className="text-[var(--softTextColor2)] mt-2">Comments</p>
+          <div className="flex justify-center">
+          <Comments postId={data._id} />
+          </div>
+          </div>
           </div>
 
 
