@@ -33,7 +33,7 @@ const SinglePostPage = () => {
       <Navbar />
 
       <div className="flex flex-col p-2 md:p-8 gap-4">
-        <div  className=" w-full h-[10px] flex  text-[var(--textColor)] )">
+        <div  className=" w-full h-[4px] flex  text-[var(--textColor)] )">
         <h1 className="text-lg md:text-xl font-semibold  text-left"> Library /
          <span className=" pl-1 font-normal">
          {data.title}
@@ -80,7 +80,7 @@ const SinglePostPage = () => {
             </div>
             <div className="flex flex-row items-center mt-2 text-lg">
   {[...Array(5)].map((_, index) => (
-    <FaStar key={index} className="text-orange-500 w-[40px] ml-[-20px] first:ml-0" />
+    <FaStar key={index} className="text-orange-500 w-[40px] ml-[-15px] " />
   ))}
   <span className="pl-2 font-normal flex items-center">
     <span className="ml-[-10px]">4.8</span>
@@ -99,7 +99,7 @@ const SinglePostPage = () => {
           </div>
           </div>
 
-            <p className="mt-2 text-xl md:text-2xl text-justify font-bold">
+            <p className="mt-2 text-xl mt-1 md:mt-2 md:text-2xl text-justify font-bold">
             What’s inside
             </p>
             <p
