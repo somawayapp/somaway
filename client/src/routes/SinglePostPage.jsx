@@ -32,8 +32,8 @@ const SinglePostPage = () => {
     <div className=" bg-[var(--navBg)]">
       <Navbar />
 
-      <div className="flex flex-col p-3 md:p-[12px] gap-4">
-        <div  className=" w-full mt-[-13px] flex pb-2  pt-2 text-[var(--textColor)] )">
+      <div className="flex flex-col p-3 md:p-9 gap-4">
+        <div  className=" w-full mt-[-13px] flex pb-2  pt-4 text-[var(--textColor)] )">
         <h1 className="text-md md:text-xl font-semibold  text-left"> Library /
          <span className=" pl-1 font-normal">
          {data.title}
@@ -79,7 +79,7 @@ const SinglePostPage = () => {
                 <Link to={`/discover?cat=${data.category}`}  className="capitalize ">{data.category}</Link>
                 </div>
             </div>
-            <div className="flex flex-row items-center mt-2 text-sm text-lg">
+            <div className="flex flex-row items-center mt-2 text-sm md:text-lg">
   {[...Array(5)].map((_, index) => (
     <FaStar key={index} className="text-orange-500 w-[40px] ml-[-15px] " />
   ))}
@@ -99,7 +99,7 @@ const SinglePostPage = () => {
             What’s inside
             </p>
             <p
-              className="text-[var(--textColor)] text-[15px] md:text-[19px] text-justify"
+              className="text-[var(--textColor)] text-[16px] md:text-[20px] text-justify"
             >                { data.summary }
 
             </p>
@@ -136,7 +136,7 @@ const SinglePostPage = () => {
 
 
 
-      <div className="flex flex-col p-4  md:flex-row gap-4 md:px-[12px] md:pb-[12px] md:gap-8"> 
+      <div className="flex flex-col p-4  md:flex-row gap-4 md:px-9 md:pb-9 md:gap-8"> 
 
             <div className="w-full md:w-1/4 mt-2 md:mt-0 flex justify-center md:block">
           
@@ -144,7 +144,7 @@ const SinglePostPage = () => {
 
           <div className="flex flex-col gap-1 md:gap-2 items-center md:items-start md:w-2/4">
           <p
-              className="text-[var(--textColor)] text-[15px] md:text-[19px] text-justify"
+              className="text-[var(--textColor)] text-[16px] md:text-[20px] text-justify"
               dangerouslySetInnerHTML={{ __html: data.desc }}
             />
               <div className="block md:hidden text-center">
