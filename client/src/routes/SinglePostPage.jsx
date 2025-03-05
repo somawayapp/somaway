@@ -134,14 +134,37 @@ const SinglePostPage = () => {
           </div>
         </div>
       </div>
-      
-   <div>
-   <p
+
+
+
+
+
+
+      <div className="flex flex-col p-2 md:p-8
+       md:flex-row gap-4 md:gap-8">
+
+            <div className="w-full md:w-1/4 mt-2 md:mt-0 flex justify-center md:block">
+          
+             </div>
+
+          <div className="flex flex-col gap-1 md:gap-2 items-center md:items-start md:w-2/4">
+          <p
               className="text-[var(--textColor)] text-[14px] md:text-[18px] text-justify"
               dangerouslySetInnerHTML={{ __html: data.desc }}
             />
-   </div>
+          </div>
 
+
+          <div className="flex flex-col gap-2 items-start md:w-1/4">
+
+          </div>
+        </div>
+
+
+
+
+      
+  
 
 
 
