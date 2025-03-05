@@ -43,9 +43,10 @@ a {
 }
 
 .dark {
-  --bg: black;
-  --textColor: #ffffff;
-  --TextColor: #ffffff;
+  --bg: #020203;
+  --textColor: #dfecf5;
+  --TextColor: #dfecf5;
+
 
   --bg-image: var(--bg-image-dark);
 
@@ -91,7 +92,7 @@ a {
 }
 
 .light {
-  --bg:white ;
+  --bg:#f8f8ff ;
   --textColor: #000000;
   --TextColor: #000000;
   --textColore: #dfecf5;
