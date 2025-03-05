@@ -73,19 +73,20 @@ const SinglePostPage = () => {
                 <span  className=" ">Book by </span>
                 <Link   to={`/discover?author=${data.author}`} className="" >{data.author}</Link>
                 </div>
-                <div className="flex gap-1 md:gap-2">
+                <div className="flex gap-1 md:gap-2"> |
                 <span className=" ">Category </span>
                 <Link to={`/discover?cat=${data.category}`}  className="capitalize ">{data.category}</Link>
                 </div>
             </div>
             <div className="flex flex-row items-center mt-2 text-lg">
   {[...Array(5)].map((_, index) => (
-    <FaStar key={index} className="text-orange-500 w-[80px] ml-[-20px] first:ml-0" />
+    <FaStar key={index} className="text-orange-500 w-[40px] ml-[-20px] first:ml-0" />
   ))}
   <span className="pl-2 font-normal flex items-center">
     <span className="ml-[-10px]">4.8</span>
-    <span className="mx-2 flex items-center">•</span>
-    {data.visit * 14} <span className="ml-1">reviews</span>
+    <span className="mx-2 flex items-center">·</span>
+    {data.visit * 
+    42} <span className="ml-1">reviews</span>
   </span>
 </div>
 
