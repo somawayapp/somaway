@@ -58,7 +58,7 @@ a {
 
   --textLogo: #ffffff;
 
-  --navbarbg: #020100;
+  --navColor: rgba(2, 1, 0);
 
 
   --bg2: #050505;
@@ -97,7 +97,7 @@ a {
   --textColore3: #d1d9df;
 
   --textColore2: #ffffff;
-  --navbarbg: #f7f7f7;
+  --navbarbg: rgba(252, 246, 241);
 
 
   --textLogo: #000000;

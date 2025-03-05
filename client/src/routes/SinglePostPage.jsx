@@ -29,7 +29,7 @@ const SinglePostPage = () => {
   if (!data) return "Post not found!";
 
   return (
-    <div className="bg-[var(--navbarbg )]">
+    <div className=" bg-[var(--navColor)]">
       <Navbar />
 
       <div className="flex flex-col p-2 md:p-8 gap-4">
@@ -67,7 +67,7 @@ const SinglePostPage = () => {
                 <Link   to={`/discover?author=${data.author}`} className="" >{data.author}</Link>
                 </div>
                 <div className="flex mt-1 gap-1 md:gap-2">
-                <span className="font-semibold">Category </span>
+                <span className=" ">Category </span>
                 <Link to={`/discover?cat=${data.category}`}  className="capitalize ">{data.category}</Link>
                 </div>
             </div>
