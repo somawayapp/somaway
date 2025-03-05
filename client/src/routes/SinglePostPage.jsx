@@ -34,7 +34,7 @@ const SinglePostPage = () => {
 
       <div className="flex flex-col p-3 md:p-[12px] gap-4">
         <div  className=" w-full mt-[-13px] flex pb-2  pt-2 text-[var(--textColor)] )">
-        <h1 className="text-lg md:text-xl font-semibold  text-left"> Library /
+        <h1 className="text-md md:text-xl font-semibold  text-left"> Library /
          <span className=" pl-1 font-normal">
          {data.title}
           </span >     
@@ -60,7 +60,7 @@ const SinglePostPage = () => {
           )}
 
           <div className="flex flex-col gap-1 md:gap-2 items-center md:items-start md:w-2/4">
-            <p className="text-[var(--softTextColor2)]  text-center md:text-left">
+            <p className="text-[var(--softTextColor2)] text-sm text-lg  text-center md:text-left">
             SUMMARY OF
 
 
@@ -68,7 +68,7 @@ const SinglePostPage = () => {
             <h1 className="text-2xl md:text-5xl font-bold text-center md:text-left">
               {data.title}
             </h1>
-            <div className="flex flex-row  items-center gap-1 text-[var(--textColor)] text-md md:text-lg">
+            <div className="flex flex-row  items-center gap-1 text-[var(--textColor)] text-sm md:text-lg">
               <div className=" flex gap-1 md:gap-2">
                 <span  className=" ">Book by </span>
                 <Link   to={`/discover?author=${data.author}`} className="" >{data.author}</Link>
@@ -79,7 +79,7 @@ const SinglePostPage = () => {
                 <Link to={`/discover?cat=${data.category}`}  className="capitalize ">{data.category}</Link>
                 </div>
             </div>
-            <div className="flex flex-row items-center mt-2 text-lg">
+            <div className="flex flex-row items-center mt-2 text-sm text-lg">
   {[...Array(5)].map((_, index) => (
     <FaStar key={index} className="text-orange-500 w-[40px] ml-[-15px] " />
   ))}
@@ -99,7 +99,7 @@ const SinglePostPage = () => {
             What’s inside
             </p>
             <p
-              className="text-[var(--textColor)] text-[14px] md:text-[18px] text-justify"
+              className="text-[var(--textColor)] text-[15px] md:text-[19px] text-justify"
             >                { data.summary }
 
             </p>
@@ -144,7 +144,7 @@ const SinglePostPage = () => {
 
           <div className="flex flex-col gap-1 md:gap-2 items-center md:items-start md:w-2/4">
           <p
-              className="text-[var(--textColor)] text-[14px] md:text-[18px] text-justify"
+              className="text-[var(--textColor)] text-[15px] md:text-[19px] text-justify"
               dangerouslySetInnerHTML={{ __html: data.desc }}
             />
               <div className="block md:hidden text-center">
