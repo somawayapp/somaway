@@ -42,8 +42,8 @@ a {
 
 .dark {
   --bg: #020203;
-  --textColor: #dfecf5;
-  --TextColor: #dfecf5;
+  --textColor: #ffffff;
+  --TextColor: #ffffff;
 
   --bg-image: var(--bg-image-dark);
 
@@ -59,6 +59,7 @@ a {
   --textLogo: #ffffff;
 
   --navBg: rgba(2, 1, 0);
+  --bgs: rgb(0, 0, 0);
 
 
   --bg2: #050505;
@@ -88,9 +89,9 @@ a {
 }
 
 .light {
-  --bg:#ffffff ;
-  --textColor: #0F1419;
-  --TextColor: #0F1419;
+  --bg:#f8f8ff ;
+  --textColor: #000000;
+  --TextColor: #000000;
   --textColore: #dfecf5;
   --textColore4: #f3f6f8;
 
@@ -98,6 +99,7 @@ a {
 
   --textColore2: #ffffff;
   --navBg: rgba(252, 246, 241);
+  --bgs: rgb(255, 255, 255);
 
 
   --textLogo: #000000;
