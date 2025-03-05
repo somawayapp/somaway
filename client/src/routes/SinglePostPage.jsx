@@ -33,7 +33,7 @@ const SinglePostPage = () => {
       <Navbar />
 
       <div className="flex flex-col p-2 md:p-8 gap-4">
-        <div  className=" w-full h-[4px] flex  text-[var(--textColor)] )">
+        <div  className=" w-full mt-[-20px] flex  text-[var(--textColor)] )">
         <h1 className="text-lg md:text-xl font-semibold  text-left"> Library /
          <span className=" pl-1 font-normal">
          {data.title}
@@ -47,7 +47,7 @@ const SinglePostPage = () => {
 
 
 
-      <div className="flex flex-col bg-[var(--bg)]  border border-[var(--softBg1)] shadow-2xl rounded-3xl  p-2 md:p-8
+      <div className="flex flex-col bg-[var(--bg2)]  border border-[var(--softBg)] shadow-2xl rounded-3xl  p-2 md:p-8
        md:flex-row gap-4 md:gap-8">
           {data.img && (
             <div className="w-full md:w-1/4 mt-2 md:mt-0 flex justify-center md:block">
@@ -68,12 +68,13 @@ const SinglePostPage = () => {
             <h1 className="text-2xl md:text-5xl font-bold text-center md:text-left">
               {data.title}
             </h1>
-            <div className="flex flex-col md:flex-row items-center gap-1 text-[var(--textColor)] text-md md:text-lg">
+            <div className="flex flex-row items-center gap-1 text-[var(--textColor)] text-md md:text-lg">
               <div className=" flex gap-1 md:gap-2">
                 <span  className=" ">Book by </span>
                 <Link   to={`/discover?author=${data.author}`} className="" >{data.author}</Link>
                 </div>
-                <div className="flex gap-1 md:gap-2"> |
+                <div className="flex gap-1 md:gap-2"> 
+                <span className=" "> | </span>
                 <span className=" ">Category </span>
                 <Link to={`/discover?cat=${data.category}`}  className="capitalize ">{data.category}</Link>
                 </div>
@@ -83,7 +84,7 @@ const SinglePostPage = () => {
     <FaStar key={index} className="text-orange-500 w-[40px] ml-[-15px] " />
   ))}
   <span className="pl-2 font-normal flex items-center">
-    <span className="ml-[-10px]">4.8</span>
+    <span className="ml-[-5px]">4.8</span>
     <span className="mx-2 flex items-center">·</span>
     {data.visit * 
     42} <span className="ml-1">reviews</span>
