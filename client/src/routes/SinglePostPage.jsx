@@ -34,7 +34,7 @@ const SinglePostPage = () => {
 
       <div className="flex flex-col p-2 md:p-8 gap-4">
         <div  className=" w-full   flex  text-[var(--textColor)] )">
-        <h1 className="text-lg md:text-xl pb-4 pt-3 font-semibold  text-left"> Library /
+        <h1 className="text-lg md:text-xl pb-2 pt-1 font-semibold  text-left"> Library /
          <span className=" pl-1 font-normal">
          {data.title}
           </span >     
@@ -77,20 +77,15 @@ const SinglePostPage = () => {
                 <Link to={`/discover?cat=${data.category}`}  className="capitalize ">{data.category}</Link>
                 </div>
             </div>
-            <div className="flex flex-row justify-center md:justify-start mt-2">
-              <FaStar className="text-orange-500 w-[40px] " />
-              <FaStar className="text-orange-500 w-[40px] ml-[-15px]" />
-              <FaStar className="text-orange-500 w-[40px] ml-[-15px]" />
-              <FaStar className="text-orange-500 w-[40px] ml-[-15px]" />
-              <FaStar className="text-orange-500 w-[40px] ml-[-15px]" />
-              <span className=" pl-1 font-normal">
-         {data.visit} 
-         .
-         <p className="ml-1">
-         reviews
-         </p>
-          </span >
-            </div>
+            <div className="flex flex-row items-center mt-2">
+  {[...Array(5)].map((_, index) => (
+    <FaStar key={index} className="text-orange-500 w-[40px] ml-[-8px] first:ml-0" />
+  ))}
+  <span className="pl-2 font-normal flex items-center">
+    {data.visit * 100} <span className="ml-1">reviews</span>
+  </span>
+</div>
+
             
           <div className="block md:hidden text-center">
           <p className="text-[var(--softTextColor2)] mt-2">Comments</p>
