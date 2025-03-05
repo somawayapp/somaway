@@ -60,7 +60,7 @@ const SinglePostPage = () => {
           )}
 
           <div className="flex flex-col gap-1 md:gap-2 items-center md:items-start md:w-2/4">
-            <p className="text-[var(--softTextColor2)] font-semibold text-center md:text-left">
+            <p className="text-[var(--softTextColor2)]  text-center md:text-left">
             SUMMARY OF
 
 
@@ -80,7 +80,7 @@ const SinglePostPage = () => {
             </div>
             <div className="flex flex-row items-center mt-2 text-lg">
   {[...Array(5)].map((_, index) => (
-    <FaStar key={index} className="text-orange-500 w-[50px] ml-[-20px] first:ml-0" />
+    <FaStar key={index} className="text-orange-500 w-[80px] ml-[-20px] first:ml-0" />
   ))}
   <span className="pl-2 font-normal flex items-center">
     <span className="ml-[-10px]">4.8</span>
