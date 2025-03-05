@@ -29,7 +29,7 @@ const SinglePostPage = () => {
   if (!data) return "Post not found!";
 
   return (
-    <div className=" bg-[var(--navBg)]">
+    <div className=" left-0 right-0 top-0  bg-[var(--navBg)]">
       <Navbar />
 
       <div className="flex flex-col p-2 md:p-8 gap-4">
@@ -39,7 +39,7 @@ const SinglePostPage = () => {
          {data.title}
           </span >     
          <span className=" pl-1 font-normal">
-            Summar 
+            Summary       
                </span >  
           
             </h1>
