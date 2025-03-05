@@ -140,8 +140,8 @@ const SinglePostPage = () => {
 
 
 
-      <div className="flex flex-col p-2 md:p-8
-       md:flex-row gap-4 md:gap-8">
+      <div className="flex flex-col p-2 
+       md:flex-row gap-4 md:px-8 md:pb-8 md:gap-8"> 
 
             <div className="w-full md:w-1/4 mt-2 md:mt-0 flex justify-center md:block">
           
