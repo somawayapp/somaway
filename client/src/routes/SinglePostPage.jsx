@@ -39,7 +39,7 @@ const SinglePostPage = () => {
          {data.title}
           </span >     
          <span className=" pl-1 font-normal">
-            Summary       
+            Summar 
                </span >  
           
             </h1>
