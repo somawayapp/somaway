@@ -333,3 +333,36 @@ body {
   opacity: 1; /* Brighten button on hover */
 }
 
+.desc-content h1 {
+  font-size: 24px;
+}
+
+.desc-content h2 {
+  font-size: 22px;
+}
+
+.desc-content h3 {
+  font-size: 20px;
+}
+
+.desc-content p {
+  font-size: 16px;
+}
+
+@media (min-width: 768px) {
+  .desc-content h1 {
+    font-size: 32px;
+  }
+
+  .desc-content h2 {
+    font-size: 28px;
+  }
+
+  .desc-content h3 {
+    font-size: 24px;
+  }
+
+  .desc-content p {
+    font-size: 20px;
+  }
+}

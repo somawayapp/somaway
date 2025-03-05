@@ -166,9 +166,10 @@ const SinglePostPage = () => {
 
           <div className="flex flex-col gap-1 md:gap-2 items-center md:items-start md:w-2/4">
           <p
-              className="text-[var(--textColor)] text-[16px] md:text-[20px] text-justify"
-              dangerouslySetInnerHTML={{ __html: data.desc }}
-            />
+        className="desc-content text-[var(--textColor)] text-justify"
+        dangerouslySetInnerHTML={{ __html: data.desc }}
+        />
+
               <div className="block md:hidden text-center">
           <p className="text-[var(--softTextColor2)] mt-2">Comments</p>
           <div className="flex justify-center">
