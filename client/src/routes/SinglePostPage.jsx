@@ -32,7 +32,7 @@ const SinglePostPage = () => {
     <div className=" bg-[var(--navBg)]">
       <Navbar />
 
-      <div className="flex flex-col p-2 md:p-8 gap-4">
+      <div className="flex flex-col p-2 md:p-8 gap-2">
         <div  className=" w-full h-[30px]  gap-4 flex  text-[var(--textColor)] )">
         <h1 className="text-lg md:text-xl font-semibold  text-left"> Library /
          <span className=" pl-1 font-normal">
@@ -102,7 +102,7 @@ const SinglePostPage = () => {
 
           <div className="flex flex-col gap-2 items-start md:w-1/4">
           <p className="text-[var(--softTextColor2)] mt-2 ">Explore</p>
-          <p className="text-[var(--textColor)] font-bold ">More Books like this</p>
+          <p className="text-[var(--textColor)] text-lg md:text-xl  font-semibold ">More Books like this</p>
 
           <ExplorePosts/>
 
