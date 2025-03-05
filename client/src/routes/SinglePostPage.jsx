@@ -82,6 +82,12 @@ const SinglePostPage = () => {
     <FaStar key={index} className="text-orange-500 w-[40px] ml-[-8px] first:ml-0" />
   ))}
   <span className="pl-2 font-normal flex items-center">
+    <span  className="ml-1">
+    4.8
+    </span>
+    <span  className="ml-1 mt-[-1] ">
+    .
+    </span> 
     {data.visit * 100} <span className="ml-1">reviews</span>
   </span>
 </div>
