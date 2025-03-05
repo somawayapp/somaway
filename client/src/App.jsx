@@ -14,7 +14,7 @@ const App = () => {
     <div className={zIndexObsolete ? 'z-index-obsolete' : ''}>
       <UserButton onClick={toggleZIndex} />
 
-      <div  >
+      <div >
         {/* NAVBAR */}
         <Navbar />
         {/* BREADCRUMB */}
@@ -27,5 +27,7 @@ const App = () => {
 };
 
 export default App;
+
+ 
 
  

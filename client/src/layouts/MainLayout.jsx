@@ -48,7 +48,6 @@ return (
 
   <div className="container  mx-auto  ">
     <Outlet />
-<MobileControls/>
   </div>
   </ThemeProvider>
 
