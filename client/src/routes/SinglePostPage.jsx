@@ -103,6 +103,33 @@ const SinglePostPage = () => {
             >                { data.summary }
 
             </p>
+            <div className="flex flex-row">
+
+              <div className="flex flex row">
+              <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="none" width="24px" height="24px">
+             <path d="M12.75 7a.75.75 0 0 0-1.5 0v5a.75.75 0 0 0 .352.636l3 1.875a.75.75 0 1 0 .796-1.272l-2.648-1.655V7z" fill="#000" fill-opacity="0.5">
+           </path><path fill-rule="evenodd" clip-rule="evenodd" d="M12 3.25a8.75 8.75 0 1 0 0 17.5 8.75 8.75 0 0 0 0-17.5zM4.75 12a7.25 7.25 0 1 1 14.5 0 7.25 7.25 0 0 1-14.5 0z" fill="#06F" fill-opacity="0.5"></path></svg>
+            <span className=" text-[var(--textColor)] text-[16px] md:text-[20px] text-justify ">
+              15 min read
+            </span>
+              </div>
+
+              <div className="flex flex row">
+              <svg viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg" width="24px" height="24px"><path d="M4.29 7a1 1 0 1 0 0 2 1 1 0 0 0 0-2ZM8.29 7a1 1 0 1 0 0 2h12a1 1 0 1 0 0-2h-12ZM3.29 12a1 1 0 1 1 2 0 1 1 0 0 1-2 0ZM4.29 15a1 1 0 1 0 0 2 1 1 0 0 0 0-2ZM7.29 12a1 1 0 0 1 1-1h12a1 1 0 1 1 0 2h-12a1 1 0 0 1-1-1ZM8.29 15a1 1 0 1 0 0 2h12a1 1 0 1 0 0-2h-12Z" fill="#06F"></path></svg>
+              <span className=" text-[var(--textColor)] text-[16px] md:text-[20px] text-justify ">
+               Key points
+            </span>
+              </div>
+
+              <div className="flex flex row">
+              <svg viewBox="0 0 21 21" fill="none" xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" color="#06F"><path clip-rule="evenodd" d="M12.08 2.358c.334-.435 1.024-.09.877.439L11.333 8.66h3.985a.5.5 0 0 1 .396.805l-6.793 8.832c-.335.435-1.025.09-.878-.438l1.624-5.865H5.682a.5.5 0 0 1-.396-.805l6.793-8.832Z"></path></svg>
+              <span className=" text-[var(--textColor)] text-[16px] md:text-[20px] text-justify ">
+              Key insights
+            </span>
+              </div>
+
+
+            </div>
 
            <Link
             to="/login"
