@@ -38,6 +38,7 @@ app.use(
         'https://makesomaway.com',
         'https://www.makesomaway.com', // Added this
         'https://somawayclient.vercel.app',
+        'https://blogifiyclient.vercel.app',
         'http://localhost:5173',
     
       ];

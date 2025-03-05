@@ -108,12 +108,13 @@ const SinglePostPage = () => {
               dangerouslySetInnerHTML={{ __html: data.desc }}
             />
 
-            <Link
-            to="/discover"
-            className="w-full text-center mt-3 md:mt-0 sm:w-auto px-6 py-3 md:py-2 bg-[#0062e3]   text-white
-            text-md md:text-lg font-semibold rounded-md hover:bg-[#0053bf]   "
+           <Link
+            to="/login"
+            className="w-full text-center mt-3 md:mt-0 sm:w-auto px-4 md:px-12 py-3 md:py-3 bg-[#0062e3]   text-white font-semibold
+             rounded-md hover:bg-[#0053bf]   "
           >
-            Try Somaway app
+           Try Somaway app
+
           </Link>
           </div>
 
