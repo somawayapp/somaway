@@ -33,15 +33,17 @@ const SinglePostPage = () => {
       <Navbar />
 
       <div className="flex flex-col p-2 md:p-8 gap-4">
-        <div  className=" w-full h-[45px] md:h-[55px] gap-4 flex  text-[var(--textColor)]
-      justify-between bg-[var(--navbarbg)">
-        <h1 className="text-2xl md:text-5xl font-semibold text-left"> Library /
+        <div  className=" w-full h-[45px] md:h-[55px] gap-4 flex  text-[var(--textColor)] bg-[var(--navbarbg)">
+        <h1 className="text-lg md:text-xl font-semibold text-left"> Library /
          <span className=" font-normal">
          {data.title}
           </span >      
             </h1>
         </div>
-      <div className="flex flex-col md:flex-row gap-4 md:gap-8">
+
+
+
+      <div className="flex flex-col p-2 md:p-4 md:flex-row gap-4 md:gap-8">
           {data.img && (
             <div className="w-full md:w-1/4 mt-2 md:mt-0 flex justify-center md:block">
              <Image
@@ -61,11 +63,11 @@ const SinglePostPage = () => {
             </h1>
             <div className="flex flex-col items-center gap-1 text-[var(--textColor)] text-md md:text-lg">
               <div className=" flex gap-1 md:gap-2">
-                <span  className=" ">Book by:</span>
+                <span  className=" ">Book by </span>
                 <Link   to={`/discover?author=${data.author}`} className="" >{data.author}</Link>
                 </div>
                 <div className="flex mt-1 gap-1 md:gap-2">
-                <span className="font-semibold">Category:</span>
+                <span className="font-semibold">Category </span>
                 <Link to={`/discover?cat=${data.category}`}  className="capitalize ">{data.category}</Link>
                 </div>
             </div>
