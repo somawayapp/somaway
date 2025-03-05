@@ -75,7 +75,7 @@ const Comments = ({ postId }) => {
     <div className="flex flex-col gap-1 mb-2">
       {/* Modern Comment Icon */}
       <div
-        className="cursor-pointer flex flex-row gap-4 text-[#0053bf]    text-3xl"
+        className="cursor-pointer flex flex-row gap-4 text-[#0062e3]    text-3xl"
         onClick={() => setShowComments((prev) => !prev)}
       >
         <BiCommentDetail />

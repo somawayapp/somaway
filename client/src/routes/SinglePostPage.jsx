@@ -33,7 +33,7 @@ const SinglePostPage = () => {
       <Navbar />
 
       <div className="flex flex-col p-3 md:p-9 gap-4">
-        <div  className=" w-full mt-[-13px] flex pb-2  pt-4 md:pt-2 text-[var(--textColor)] )">
+        <div  className=" w-full mt-[-13px] flex pb-2  pt-4 md:pt-1 text-[var(--textColor)] )">
         <h1 className="text-md md:text-xl font-semibold  text-left"> Library /
          <span className=" pl-1 font-normal">
          {data.title}
