@@ -34,7 +34,7 @@ const SinglePostPage = () => {
 
       <div className="flex flex-col p-2 md:p-8 gap-4">
         <div  className=" w-full   flex  text-[var(--textColor)] )">
-        <h1 className="text-lg md:text-xl pb-2 pt-1 font-semibold  text-left"> Library /
+        <h1 className="text-lg md:text-xl font-semibold  text-left"> Library /
          <span className=" pl-1 font-normal">
          {data.title}
           </span >     
