@@ -77,19 +77,17 @@ const SinglePostPage = () => {
                 <Link to={`/discover?cat=${data.category}`}  className="capitalize ">{data.category}</Link>
                 </div>
             </div>
-            <div className="flex flex-row items-center mt-2">
+            <div className="flex flex-row items-center mt-2 text-lg">
   {[...Array(5)].map((_, index) => (
-    <FaStar key={index} className="text-orange-500 w-[50px] ml-[-15px] first:ml-0" />
+    <FaStar key={index} className="text-orange-500 w-[50px] ml-[-10px] first:ml-0" />
   ))}
   <span className="pl-2 font-normal flex items-center">
-    <span  className="ml-[-15px]">
-    4.8
-    </span>
-    <span className="ml-1 flex items-center">.</span>
-
+    <span className="ml-[-10px]">4.8</span>
+    <span className="mx-2 flex items-center">•</span>
     {data.visit * 100} <span className="ml-1">reviews</span>
   </span>
 </div>
+
 
             
           <div className="block md:hidden text-center">
