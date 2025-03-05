@@ -32,8 +32,8 @@ const SinglePostPage = () => {
     <div className=" bg-[var(--navBg)]">
       <Navbar />
 
-      <div className="flex flex-col  gap-4">
-        <div  className=" w-full h-[35px]  gap-4 flex  text-[var(--textColor)] )">
+      <div className="flex flex-col p-2 md:p-8 gap-4">
+        <div  className=" w-full h-[45px]  gap-4 flex  text-[var(--textColor)] )">
         <h1 className="text-lg md:text-xl font-semibold  text-left"> Library /
          <span className=" pl-1 font-normal">
          {data.title}
@@ -47,7 +47,7 @@ const SinglePostPage = () => {
 
 
 
-      <div className="flex flex-col bg-white border border-[var(--softBg1)] shadow-2xl rounded-3xl  p-2 md:p-8
+      <div className="flex flex-col bg-[var(--bg)]  border border-[var(--softBg1)] shadow-2xl rounded-3xl  p-2 md:p-8
        md:flex-row gap-4 md:gap-8">
           {data.img && (
             <div className="w-full md:w-1/4 mt-2 md:mt-0 flex justify-center md:block">
