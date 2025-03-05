@@ -79,15 +79,14 @@ const SinglePostPage = () => {
             </div>
             <div className="flex flex-row items-center mt-2">
   {[...Array(5)].map((_, index) => (
-    <FaStar key={index} className="text-orange-500 w-[40px] ml-[-8px] first:ml-0" />
+    <FaStar key={index} className="text-orange-500 w-[50px] ml-[-15px] first:ml-0" />
   ))}
   <span className="pl-2 font-normal flex items-center">
-    <span  className="ml-1">
+    <span  className="ml-[-15px]">
     4.8
     </span>
-    <span  className="ml-1 mt-[-1] ">
-    .
-    </span> 
+    <span className="ml-1 flex items-center">.</span>
+
     {data.visit * 100} <span className="ml-1">reviews</span>
   </span>
 </div>
