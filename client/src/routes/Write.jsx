@@ -17,6 +17,7 @@ const Write = () => {
   const [img, setImg] = useState(null);
   const [cover, setCover] = useState(null);
   const [author, setAuthor] = useState("");
+  const [summary, setSummary] = useState("");
   const [progress, setProgress] = useState(0);
   const [error, setError] = useState("");
   const [isFeatured, setIsFeatured] = useState(false);
@@ -59,6 +60,7 @@ const Write = () => {
     let missingFields = [];
   
     if (!title.trim()) missingFields.push("Title");
+    if (!summary.trim()) missingFields.push("Summary");
     if (!desc.trim()) missingFields.push("Description");
     if (!category) missingFields.push("Category");
     if (!cover) missingFields.push("Cover Image");
@@ -72,13 +74,15 @@ const Write = () => {
   
     let slug = title.trim().replace(/\s+/g, "-").toLowerCase();
     slug = slug.replace(/[^a-z0-9-]/g, "").replace(/-+$/, "");
-  
+    slug += "-summary";
+    
     const data = {
       title,
       desc,
       category,
       img: cover?.filePath || "",
       author,
+      summary,
       slug,
       isFeatured,
     };
@@ -119,6 +123,8 @@ const Write = () => {
         {/* Title Input */}
         <input type="text" placeholder="Enter Post Title" value={title} onChange={(e) => setTitle(e.target.value.slice(0, 150))} className="p-2 bg-[var(--textColore)] text-[var(--textColor)]  rounded" />
         
+        <input type="text" placeholder="What's inside" value={summaryf} onChange={(e) => setSummary(e.target.value.slice(0, 300))} className="p-2 bg-[var(--textColore)] text-[var(--textColor)]  rounded" />
+
         {/* Author Input */}
         <input type="text" placeholder="Author Name" value={author} onChange={(e) => setAuthor(e.target.value)} className="p-2  rounded bg-[var(--textColore)] text-[var(--textColor)]" />
 
@@ -144,7 +150,7 @@ const Write = () => {
         </select>
 
         {/* Rich Text Editor */}
-        <ReactQuill value={desc} onChange={setDesc} placeholder="Write something..." className=" bg-[var(--textColore)] text-[var(--textColor)] rounded" />
+        <ReactQuill value={desc} onChange={setDesc} placeholder="book summary..." className=" bg-[var(--textColore)] text-[var(--textColor)] rounded" />
         
      
         {/* Featured Checkbox */}

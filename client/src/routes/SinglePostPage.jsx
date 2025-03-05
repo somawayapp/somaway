@@ -33,7 +33,7 @@ const SinglePostPage = () => {
       <Navbar />
 
       <div className="flex flex-col p-2 md:p-8 gap-4">
-        <div  className=" w-full mt-[-18px] flex pb-2  text-[var(--textColor)] )">
+        <div  className=" w-full mt-[-15px] flex pb-2  text-[var(--textColor)] )">
         <h1 className="text-lg md:text-xl font-semibold  text-left"> Library /
          <span className=" pl-1 font-normal">
          {data.title}
@@ -105,12 +105,13 @@ const SinglePostPage = () => {
             </p>
             <p
               className="text-[var(--textColor)] text-[14px] md:text-[18px] text-justify"
-              dangerouslySetInnerHTML={{ __html: data.desc }}
-            />
+            >                { data.summary }
+
+            </p>
 
            <Link
             to="/login"
-            className="w-full text-center mt-4 md:mt-0 sm:w-auto px-4 md:px-12 py-4  bg-[#0062e3]   text-white font-semibold
+            className="w-full text-center mt-3  sm:w-auto px-4 md:px-12 py-4  bg-[#0062e3]   text-white font-semibold
              rounded-md hover:bg-[#0053bf]   "
           >
            Try Somaway app
@@ -134,7 +135,16 @@ const SinglePostPage = () => {
         </div>
       </div>
       
-   
+   <div>
+   <p
+              className="text-[var(--textColor)] text-[14px] md:text-[18px] text-justify"
+              dangerouslySetInnerHTML={{ __html: data.desc }}
+            />
+   </div>
+
+
+
+
 <div className="flex items-center justify-center text-[var(--textColor)] mx-auto">
   <div className="text-center">
     <p className="mt-2 text-sm md:text-lg">
