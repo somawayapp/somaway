@@ -30,7 +30,7 @@ const Navbar = () => {
 
     
      // Modify or remove z-index here
-     <div style={{ zIndex: 100004 }}  className="relative w-full h-[45px] md:h-[55px]  px-2 md:px-8 gap-4 flex items-center text-[var(--TextColor)]
+     <div style={{ zIndex: 100004 }}  className="relative w-full h-[45px] md:h-[60px]  px-2 md:px-8 gap-4 flex items-center text-[var(--TextColor)]
       sticky top-0 justify-between bg-[var(--navBg)] border-b border-b-[var(--softBg)] ">
    
    

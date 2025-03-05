@@ -33,7 +33,7 @@ const SinglePostPage = () => {
       <Navbar />
 
       <div className="flex flex-col p-2 md:p-8 gap-4">
-        <div  className=" w-full mt-[-20px] flex  text-[var(--textColor)] )">
+        <div  className=" w-full mt-[-18px] flex pb-2  text-[var(--textColor)] )">
         <h1 className="text-lg md:text-xl font-semibold  text-left"> Library /
          <span className=" pl-1 font-normal">
          {data.title}
@@ -47,7 +47,7 @@ const SinglePostPage = () => {
 
 
 
-      <div className="flex flex-col bg-[var(--bg2)]  border border-[var(--softBg)] shadow-2xl rounded-3xl  p-2 md:p-8
+      <div className="flex flex-col bg-[var(--bg2)]  border border-[var(--softBg)] shadow-md rounded-3xl  p-2 md:p-8
        md:flex-row gap-4 md:gap-8">
           {data.img && (
             <div className="w-full md:w-1/4 mt-2 md:mt-0 flex justify-center md:block">
@@ -107,6 +107,14 @@ const SinglePostPage = () => {
               className="text-[var(--textColor)] text-[14px] md:text-[18px] text-justify"
               dangerouslySetInnerHTML={{ __html: data.desc }}
             />
+
+            <Link
+            to="/discover"
+            className="w-full text-center mt-3 md:mt-0 sm:w-auto px-6 py-3 md:py-2 bg-[#0062e3]   text-white
+            text-md md:text-lg font-semibold rounded-md hover:bg-[#0053bf]   "
+          >
+            Try Somaway app
+          </Link>
           </div>
 
           <div className="flex flex-col gap-2 items-start md:w-1/4">
