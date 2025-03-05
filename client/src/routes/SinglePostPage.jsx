@@ -67,24 +67,24 @@ const SinglePostPage = () => {
             <h1 className="text-2xl md:text-5xl font-bold text-center md:text-left">
               {data.title}
             </h1>
-            <div className="flex flex- row md:flex-col items-center gap-1 text-[var(--textColor)] text-md md:text-lg">
+            <div className="flex flex-col md:flex-row items-center gap-1 text-[var(--textColor)] text-md md:text-lg">
               <div className=" flex gap-1 md:gap-2">
                 <span  className=" ">Book by </span>
                 <Link   to={`/discover?author=${data.author}`} className="" >{data.author}</Link>
                 </div>
-                <div className="flex mt-1 gap-1 md:gap-2">
+                <div className="flex gap-1 md:gap-2">
                 <span className=" ">Category </span>
                 <Link to={`/discover?cat=${data.category}`}  className="capitalize ">{data.category}</Link>
                 </div>
             </div>
             <div className="flex flex-row items-center mt-2 text-lg">
   {[...Array(5)].map((_, index) => (
-    <FaStar key={index} className="text-orange-500 w-[50px] ml-[-20px] first:ml-0" />
+    <FaStar key={index} className="text-orange-500 w-[70px] ml-[-35px] first:ml-0" />
   ))}
   <span className="pl-2 font-normal flex items-center">
     <span className="ml-[-10px]">4.8</span>
     <span className="mx-2 flex items-center">•</span>
-    {data.visit * 100} <span className="ml-1">reviews</span>
+    {data.visit * 14} <span className="ml-1">reviews</span>
   </span>
 </div>
 
