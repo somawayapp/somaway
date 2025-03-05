@@ -29,7 +29,7 @@ const SinglePostPage = () => {
   if (!data) return "Post not found!";
 
   return (
-    <div className=" bg-[var(--navColor)]">
+    <div className=" bg-[var(--navBgr)]">
       <Navbar />
 
       <div className="flex flex-col p-2 md:p-8 gap-4">
@@ -43,7 +43,7 @@ const SinglePostPage = () => {
 
 
 
-      <div className="flex flex-col bg-[var(--bg )] rounded-2xl  p-2 md:p-4 md:flex-row gap-4 md:gap-8">
+      <div className="flex flex-col bg-white rounded-2xl  p-2 md:p-4 md:flex-row gap-4 md:gap-8">
           {data.img && (
             <div className="w-full md:w-1/4 mt-2 md:mt-0 flex justify-center md:block">
              <Image
