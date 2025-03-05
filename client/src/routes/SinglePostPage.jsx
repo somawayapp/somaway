@@ -33,7 +33,7 @@ const SinglePostPage = () => {
       <Navbar />
 
       <div className="flex flex-col p-2 md:p-8 gap-4">
-        <div  className=" w-full mt-[-20px] flex pb-2  text-[var(--textColor)] )">
+        <div  className=" w-full mt-[-18px] flex pb-2  text-[var(--textColor)] )">
         <h1 className="text-lg md:text-xl font-semibold  text-left"> Library /
          <span className=" pl-1 font-normal">
          {data.title}
@@ -110,7 +110,7 @@ const SinglePostPage = () => {
 
            <Link
             to="/login"
-            className="w-full text-center mt-3 md:mt-0 sm:w-auto px-4 md:px-12 py-3 md:py-3 bg-[#0062e3]   text-white font-semibold
+            className="w-full text-center mt-4 md:mt-0 sm:w-auto px-4 md:px-12 py-4  bg-[#0062e3]   text-white font-semibold
              rounded-md hover:bg-[#0053bf]   "
           >
            Try Somaway app
