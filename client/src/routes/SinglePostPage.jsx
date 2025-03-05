@@ -60,8 +60,9 @@ const SinglePostPage = () => {
           )}
 
           <div className="flex flex-col gap-1 md:gap-2 items-center md:items-start md:w-2/4">
-            <p className="text-[var(--textColor)] font-semibold text-center md:text-left">
-            What’s inside
+            <p className="text-[var(--softTextColor2)] font-semibold text-center md:text-left">
+            SUMMARY OF
+
 
             </p>
             <h1 className="text-2xl md:text-5xl font-bold text-center md:text-left">
@@ -98,7 +99,7 @@ const SinglePostPage = () => {
           </div>
 
             <p className="mt-2 text-xl md:text-2xl text-justify font-bold">
-              Short summary
+            What’s inside
             </p>
             <p
               className="text-[var(--textColor)] text-[14px] md:text-[18px] text-justify"
