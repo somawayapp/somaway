@@ -5,7 +5,7 @@ import Comments from "../components/Comments";
 import axios from "axios";
 import { useQuery } from "@tanstack/react-query";
 import { format } from "timeago.js";
-import Navbar from "../components/Navbar";
+import Navbar from "../components/navbar2";
 import { FaStar } from "react-icons/fa";
 import Footer from "../components/Footer";
 import ExplorePosts from "../components/ExplorePosts";
@@ -32,7 +32,15 @@ const SinglePostPage = () => {
     <div>
       <Navbar />
 
-      <div className="flex flex-col p-2 md:p-8 mt-[10px] gap-4">
+      <div className="flex flex-col p-2 md:p-8 gap-4">
+        <div  className=" w-full h-[45px] md:h-[55px] gap-4 flex  text-[var(--textColor)]
+      justify-between bg-[var(--navbarbg)">
+        <h1 className="text-2xl md:text-5xl font-semibold text-left"> Library /
+         <span className=" font-normal">
+         {data.title}
+          </span >      
+            </h1>
+        </div>
       <div className="flex flex-col md:flex-row gap-4 md:gap-8">
           {data.img && (
             <div className="w-full md:w-1/4 mt-2 md:mt-0 flex justify-center md:block">
@@ -48,17 +56,17 @@ const SinglePostPage = () => {
             <p className="text-[var(--softTextColor2)] text-center md:text-left">
               SUMMARY OF
             </p>
-            <h1 className="text-xl md:text-4xl font-semibold text-center md:text-left">
+            <h1 className="text-2xl md:text-5xl font-bold text-center md:text-left">
               {data.title}
             </h1>
-            <div className="flex flex-col items-center gap-1 md:gap-2 text-[var(--softTextColor)] text-md md:text-lg">
+            <div className="flex flex-col items-center gap-1 text-[var(--textColor)] text-md md:text-lg">
               <div className=" flex gap-1 md:gap-2">
-                <span  className="  font-semibold">Book by:</span>
-                <Link   to={`/discover?author=${data.author}`} className="text-[var(--softTextColor2)]" >{data.author}</Link>
+                <span  className=" ">Book by:</span>
+                <Link   to={`/discover?author=${data.author}`} className="" >{data.author}</Link>
                 </div>
                 <div className="flex mt-1 gap-1 md:gap-2">
                 <span className="font-semibold">Category:</span>
-                <Link to={`/discover?cat=${data.category}`}  className="capitalize text-[var(--softTextColor2)]">{data.category}</Link>
+                <Link to={`/discover?cat=${data.category}`}  className="capitalize ">{data.category}</Link>
                 </div>
             </div>
             <div className="flex flex-row justify-center md:justify-start mt-2">

@@ -42,11 +42,11 @@ const AboutPage = () => {
       <div className="grid grid-cols-1 mx-auto md:grid-cols-3 gap-6 mt-8 w-full px-4">
         {[
           {
-            text: "2021 –  Somaway founded by Lexanda Mbelenzi",
+            text: "2024 –  Somaway founded by Lexanda Mbelenzi",
             icon: "rocket.svg",
           },
           {
-            text: " Somaway has grown from a 3-person startup into a team of 250+ people in 3 years",
+            text: " Somaway has grown from a 1-person startup into a team of 5+ people in 3 months",
             icon: "smile.svg",
           },
           {
