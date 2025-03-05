@@ -60,8 +60,9 @@ const SinglePostPage = () => {
           )}
 
           <div className="flex flex-col gap-1 md:gap-2 items-center md:items-start md:w-2/4">
-            <p className="text-[var(--softTextColor2)] text-center md:text-left">
-              SUMMARY OF
+            <p className="text-[var(--textColor)] font-semibold text-center md:text-left">
+            What’s inside
+
             </p>
             <h1 className="text-2xl md:text-5xl font-bold text-center md:text-left">
               {data.title}
@@ -83,7 +84,11 @@ const SinglePostPage = () => {
               <FaStar className="text-orange-500 w-[40px] ml-[-15px]" />
               <FaStar className="text-orange-500 w-[40px] ml-[-15px]" />
               <span className=" pl-1 font-normal">
-         {data.visit}
+         {data.visit} 
+         .
+         <p className="ml-1">
+         reviews
+         </p>
           </span >
             </div>
             
