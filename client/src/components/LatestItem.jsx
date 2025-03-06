@@ -12,7 +12,7 @@ const LatestItem = ({ post }) => {
    
       <div className="flex gap-2 md:gap-4 overflow-x-auto scrollbar-hide">
           <div
-            className="flex flex-col  flex-shrink-0 w-[100px] sm:w-[200px] lg:w-[250px]"
+            className="flex flex-col  flex-shrink-0 w-[100px] w-[190px] md:w-[240px]"
           >
             <Link to={`/${post.slug}`} className="relative w-full" style={{ paddingTop: "150%" }}>
               <Image
