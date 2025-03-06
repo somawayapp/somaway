@@ -12,7 +12,6 @@ import LatestPosts from "../components/LatestPosts";
 import TrendingPosts from "../components/TrendingPosts";
 import FeaturedPosts from "../components/FeaturedPosts";
 import PostList from "../components/PostList";
-import Footer from "../components/Footer";
 
 const PostListPage = () => {
   const [open, setOpen] = useState(false);
