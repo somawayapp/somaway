@@ -37,13 +37,16 @@ const PostListPage = () => {
        <Navbar/>
        
        <div className="px-3 pt-4 md:pt-6 md:px-9 ">
-       <h3 className="text-4xl md:text-6xl ml-1 mb-1  font-bold text-[var(--textColor)]">
+       <h3 className="text-4xl md:text-6xl ml-1 mb-1 mt-5  font-bold text-[var(--textColor)]">
          Book Summaries Library
         </h3>
-         <h3 className="text-lg md:text-xl ml-1 mb-5 md:mb-9  font-bold text-[var(--textColor)]">
+        <div className="max-w-[700px] mb-5 md:mb-9">
+        <h3 className="text-lg md:text-xl ml-1 mb-5 md:mb-9 text-[var(--textColor)]">
          Dive into 15-minute nonfiction book summaries crafted for the curious mind. Insights in minutes, wisdom for a lifetime.
          Are you ready to make Somaway? Get started!
         </h3>
+        </div>
+      
       
        <CategoriesScroll/>
 
