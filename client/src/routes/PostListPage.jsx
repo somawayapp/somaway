@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 import CategoriesScroll from "../components/CategoriesScroll";
 import Discover from "../components/Discover";
 import Footer from "../components/Footer";
-import Navbar from "../components/Navbar";
+import Navbar from "../components/navbar2";
 import PopularPosts from "../components/PopularPosts";
 
 const PostListPage = () => {
@@ -33,7 +33,7 @@ const PostListPage = () => {
     .join(" | ") || "All book summaries"; // Default to "All Books" if no filters are applied
 
   return (
-    <div  className=" mb-[80px]  ">
+    <div  className=" bg-[var(--navBg)] mb-[80px]  ">
        <Navbar/>
        <div className="px-3 pt-4 md:pt-6 md:px-9 ">
        <CategoriesScroll/>
@@ -59,7 +59,7 @@ const PostListPage = () => {
 <div className="flex flex-col md:hidden block  items-center justify-center mb-5 pl-1  pr-1 ">
 
   
-<h1 style={{  zIndex: "10000"}} className=" lg:text-[30px] mb-2  md:mb-[30px] text-xl ml-2 text-[var(--textColor)] font-bold">
+<h1 style={{  zIndex: "10000"}} className=" lg:text-[30px] mb-2  md:mb-[30px] text-xl ml-2 text-[var(--bg)] font-bold">
         {`Book liblary - ${displayText}`}
       </h1>
       <Search />
@@ -71,7 +71,11 @@ const PostListPage = () => {
     </div>
 
 </div>
+
+<div className=" mt-4 mt-8 p-2 md:p-8">
 <Discover />
+
+</div>
 
  </div>
   );

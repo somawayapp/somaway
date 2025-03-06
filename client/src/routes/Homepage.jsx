@@ -121,14 +121,14 @@ const Homepage = () => {
 
     <div className=" bg-[var(--bodyBg)] rounded-2xl p-3 mt-4 md:mt-8  mb-4 md:mb-8 md:p-6 ">
     <h3 className="text-xl md:text-3xl   font-semibold text-[var(--bg)]">
-     Most popular Books      </h3>
+     Most popular summaries      </h3>
     <PopularPosts/>
     </div>
 
 
 <div className="mb-0 md:mb-[20px] ">
 <div>
-      <h3 className="text-xl md:text-3xl ml-2 mt-7 mb-3 md:mb-6 md:mt-10 font-semibold text-[var(--textColor)]">
+      <h3 className="text-xl md:text-3xl ml-2 mt-5 mb-5 md:mb-9 md:mt-9 font-semibold text-[var(--textColor)]">
      Latest Book summaries     </h3>
     </div>
    <LatestPosts />
