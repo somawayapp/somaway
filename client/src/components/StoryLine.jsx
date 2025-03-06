@@ -72,7 +72,7 @@ const StoryLine = () => {
 
 
 
-    <div className="flex flex-col items-center justify-center">
+    <div className="flex flex-col px-3 md:px-9 items-center justify-center">
       <div className="mt-0 mb:mt-[45px]">
         <div className="flex flex-col items-center justify-center mt-[60px] md:mt-[120px] mb-[40px] pt-9 pb-9 rounded-2xl gap-5">
           <img
@@ -149,7 +149,7 @@ const StoryLine = () => {
 
 
     <div
-      className="relative bg-[#7a00da] w-full rounded-3xl md:rounded-[30px] shadow-md 
+      className="relative bg-[#7a00da] w-full  shadow-md 
         text-white text-center animate-fadeIn flex flex-col items-center justify-center"
     >
       <div className="h-full p-2  box-border">
