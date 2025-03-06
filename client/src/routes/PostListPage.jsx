@@ -12,7 +12,7 @@ import LatestPosts from "../components/LatestPosts";
 import TrendingPosts from "../components/TrendingPosts";
 import FeaturedPosts from "../components/FeaturedPosts";
 import PostList from "../components/PostList";
-
+import Footer from "../components/Footer";
 
 const PostListPage = () => {
   const [open, setOpen] = useState(false);
@@ -62,7 +62,7 @@ const PostListPage = () => {
        
   
 
-      <div className="flex  flex-row   px-3 md:px-8 text-[var(--textColor)] justify-between">
+      <div className="flex  flex-row   px-3 md:px-9 text-[var(--textColor)] justify-between">
       <div className="w-full  pr-0 bg-[var(--bodyBg)]  p-2 md:p-8  rounded-3xl text-[var(--bg)] ">
      
       <div className="flex hidden md:flex mb-[30px] justify-between ">
@@ -79,7 +79,7 @@ const PostListPage = () => {
 
   
 <h1 style={{  zIndex: "10000"}} className=" lg:text-[30px] mb-2  md:mb-[30px] text-xl ml-2 text-[var(--bg)] font-bold">
-        {`Book  Library - ${displayText}`}
+        {`Book Library - ${displayText}`}
       </h1>
       <Search />
 
@@ -97,7 +97,7 @@ const PostListPage = () => {
   
 <div >
       <h3 className="text-xl md:text-3xl mt-7  md:mt-10 font-semibold text-[var(--textColor)]">
-     Trending Book summaries    </h3>
+     Trending summaries    </h3>
     </div>
     <TrendingPosts/>
 </div>
@@ -105,7 +105,7 @@ const PostListPage = () => {
 
 
     <div className="mt-0 mb:mt-[45px] ">
-      <div className="flex justify-between  mt-4 mb-15  md:mb-[40px] pt-5 pl-0  md:pl-5 overflow-x-hidden  rounded-2xl bg-[#7a00da] 
+      <div className="flex justify-between  mt-4 mb-15  md:mb-[40px] pt-5 pl-0  md:pl-5 overflow-x-hidden   bg-[#7a00da] 
         items-center gap-5 flex-col md:flex-row">
       <div>
       <h1 className="my-8 text-center lg:text-5xl text-2xl ml-2 pl-2 md:pl-0 mb-2 mt-4 lg:mb-5 lg:mt-8 text-white font-bold">
@@ -134,8 +134,18 @@ const PostListPage = () => {
       </div>
 
 
+<div className="mb-0  px-3 md:px-9 md:mb-[20px] ">
+<div>
+      <h3 className="text-xl md:text-3xl ml-2 mt-5 mb-5 md:mb-9 md:mt-9 font-semibold text-[var(--textColor)]">
+      New releases
+      </h3>
+    </div>
+   <LatestPosts />
+</div>
+   
 
-    <div className=" bg-[var(--bodyBg)] rounded-2xl p-3 mt-4 md:mt-8  mb-4 md:mb-8 md:p-6 ">
+
+    <div className=" bg-[var(--bodyBg)]  rounded-2xl p-3 mt-4 md:mt-8  mb-4 md:mb-8 md:p-9 ">
     <h3 className="text-xl md:text-3xl  mt-5 mb-5 md:mb-9 md:mt-9   font-semibold text-[var(--bg)]">
      Most popular summaries      </h3>
     <PopularPosts/>
@@ -144,14 +154,7 @@ const PostListPage = () => {
 
  
 
-<div className="mb-0 md:mb-[20px] ">
-<div>
-      <h3 className="text-xl md:text-3xl ml-2 mt-5 mb-5 md:mb-9 md:mt-9 font-semibold text-[var(--textColor)]">
-     Latest Book summaries     </h3>
-    </div>
-   <LatestPosts />
-</div>
-   
+
 
 
 
@@ -159,7 +162,7 @@ const PostListPage = () => {
 
       {/* Recent Posts */}
       <div>
-      <div className="flex justify-between  mt-10 mb-10 md:mt[60px] md:mb-[75px] pt-5 pl-0  md:pl-5 overflow-x-hidden  rounded-2xl bg-[var(--textLogo)] 
+      <div className="flex justify-between  mt-10 mb-10 md:mt[60px] md:mb-[75px] pt-5 pl-0  md:pl-5 overflow-x-hidden  bg-[var(--textLogo)] 
         items-center gap-5 flex-col md:flex-row">
       <div>
       <h1 className="my-8 lg:text-6xl text-3xl ml-2 pl-2 md:pl-0 mb-2 mt-4 lg:mb-5 lg:mt-8 text-[var(--textColore2)] font-bold"> Book summaries library</h1>
@@ -180,11 +183,14 @@ const PostListPage = () => {
           
           </div>
 
-    
-          <h3 className="text-2xl md:text-4xl ml-2 mt-5 mb-5 md:mb-9 md:mt-9 font-semibold text-[var(--textColor)]">
-          All book summaries     </h3>
+    <div className=" px-3 md:px-9">
+    <h3 className="text-2xl md:text-4xl ml-2 mt-5 mb-5 md:mb-9 md:mt-9 font-semibold text-[var(--textColor)]">
+          All  summaries     </h3>
       <PostList />
+    </div>
+      
 </div>
+<Footer/>
 
  </div>
   );

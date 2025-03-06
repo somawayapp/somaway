@@ -63,7 +63,6 @@ const Homepage = () => {
    <CategoriesScroll />
 
 
-   <div className=" bg-[var(--bodyBg)]  rounded-2xl p-3  md:p-6 mt-0 md:mt-4">
      
 
 
@@ -74,7 +73,6 @@ const Homepage = () => {
 
 
     
-      </div>
     </div>
     </div>
 
