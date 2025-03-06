@@ -81,7 +81,13 @@ const Homepage = () => {
           className="mt-5 mb-5 bg-[var(--bd2)] text-[var(--bg)] py-3 text-semibold text-xs md:text-sm 
             px-9 rounded-[10px] cursor-pointer hover:bg-[#0053bf]   "
         >
-          Log In now!
+          Log In 
+        </button>  
+         <button
+          className="mt-5 hidden md:block mb-5 bg-[var(--bd2)] text-[var(--bg)] py-3 text-semibold text-xs md:text-sm 
+            px-9 rounded-[10px] cursor-pointer hover:bg-[#0053bf]   "
+        >
+          Get started 
         </button>  
 
     </div>
@@ -94,9 +100,15 @@ const Homepage = () => {
            src="/heropic.jpg"
            className="w-[200px] rounded-lg md:rounded-[20px]  md:w-[300px]  mx-auto "
          />
-         <div>
+         <div className="bg-[var(--softTextColor)]">
+          <p className=" text-sm md:text-xl font-semibold">
+            ABOUT US
+          </p>
           <p className=" text-md md:text-2xl font-semibold">
-            No one will know what you want unless you say it 
+            Still wondering what is Somaway app?
+          </p>  <p className=" text-md md:text-2xl ">
+          Somaway is a global EdTech startup with kenyan roots. Somaway app offers 15 minute bit sized non-fiction book summaries catered
+           for your everyday needs.  We are mission driven and passionate about self-improvement
           </p>
          </div>
          </div>
