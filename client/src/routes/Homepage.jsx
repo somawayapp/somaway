@@ -71,22 +71,35 @@ const Homepage = () => {
          <h1 className="text-2xl md:text-5xl mt-[20px] md:mt-[70px] font-bold">
          Set your goal and start your self-growth journey
                    </h1>
-
-                   <button
-          className="mt-4 mb-4 bg-black text-white py-4 text-semibold text-lg md:text-2xl 
+    <div className="flex gap-2 md:gap-4 flex-row">
+    <button
+          className="mt-5 mb-5 bg-[var(--bd2)] text-[var(--textColor)] py-4 text-semibold text-lg md:text-2xl 
+            px-9 rounded-[20px] cursor-pointer hover:bg-[#0053bf]   "
+        >
+          Find success
+        </button>  <button
+          className="mt-5 mb-5 bg-[var(--bd2)] text-[var(--textColor)] py-4 text-semibold text-lg md:text-2xl 
             px-9 rounded-[20px] cursor-pointer hover:bg-[#0053bf]   "
         >
           Start now!
+        </button>  <button
+          className="mt-5 mb-5 bg-[var(--bd2)] text-[var(--textColor)] py-4 text-semibold text-lg md:text-2xl 
+            px-9 rounded-[20px] cursor-pointer hover:bg-[#0053bf]   "
+        >
+          Find happiness
         </button>
+
+    </div>
+                 
          
          </div >
-         <div className="flex bg-[var(--bd2)] flex-col rounded-sm md:rounded-[20px] p-2 md:p-6 md:flex-row">
+         <div className="flex bg-[var(--bd2)] flex-col gap-2 md:gap-4 rounded-sm md:rounded-[20px] p-2 md:p-6 md:flex-row">
          <img
-           src="/heropic.webp"
-           className="w-[200px] md:w-[400px] mx-auto "
+           src="/heropic.jpg"
+           className="w-[200px] rounded-sm md:rounded-[20px]  md:w-[400px]  mx-auto "
          />
          <div>
-          <p>
+          <p className=" text-md md:text-2xl font-semibold">
             No one will know what you want unless you say it 
           </p>
          </div>
