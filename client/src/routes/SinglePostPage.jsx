@@ -181,7 +181,7 @@ const SinglePostPage = () => {
 
 
 
-      <div className="flex flex-col gap-6 w-full px-1 md:px-0 mt-9">
+      <div className="flex flex-col gap-9 w-full px-1 md:px-0 mt-9">
       
           <div
             className="bg-[var(--bd)] text-[16px] md:text-[20px] shadow-2xl rounded-2xl md:rounded-[20px] p-4 md:px-9 flex flex-col items-start text-left relative"
@@ -237,7 +237,7 @@ const SinglePostPage = () => {
 
 
       
- <div className="mb-[20px] ">
+ <div className="mb-[20px] px-3 md:px-9  ">
 <div>
       <h3 className="text-xl md:text-3xl ml-2 mt-7 mb-3 md:mb-6 md:mt-10 font-bold text-[var(--textColor)]">
       We also recommend     </h3>

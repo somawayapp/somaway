@@ -7,7 +7,6 @@ const LatestItem = ({ post }) => {
   // Truncate title based on screen size
 
   return (
-    <div className="bg-[var(--textColore)]  rounded-2xl p-2 md:p-4 ">
   
   
    
@@ -35,7 +34,6 @@ const LatestItem = ({ post }) => {
 
           </div>
       </div>
-  </div>
   );
 };
 
