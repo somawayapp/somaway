@@ -95,23 +95,24 @@ const Homepage = () => {
          
          </div >
 
-         <div className="flex bg-[var(--bd2)] flex-col gap-2 md:gap-4 rounded-lg md:rounded-[20px] p-2 md:p-6 md:flex-row">
-         <img
-           src="/heropic.jpg"
-           className="w-[200px] rounded-lg md:rounded-[20px]  md:w-[300px]  mx-auto "
-         />
-         <div className=" items-start justify-start gap-2 md:gap-4 text-[var(--softTextColor)]">
-          <p className=" text-sm mt-5 md:mt-9 md:text-xl font-semibold">
-            ABOUT US
-          </p>
-          <p className=" text-md md:text-2xl font-semibold">
-            Still wondering what is Somaway app?
-          </p>  <p className=" text-sm md:text-xl ">
-          Somaway is a global EdTech startup with kenyan roots. Somaway app offers 15 minute bit sized non-fiction book summaries catered
-           for your everyday needs.  We are mission driven and passionate about self-improvement
-          </p>
-         </div>
-         </div>
+         <div className="flex bg-[var(--bd2)] flex-col max-w-full md:max-w-[900px] m gap-2 md:gap-4 rounded-lg md:rounded-[20px] p-2 md:p-6 md:flex-row">
+  <img
+    src="/heropic.jpg"
+    className="w-[200px] rounded-lg md:rounded-[20px] md:w-1/4 mx-auto md:mx-0"
+  />
+  <div className="md:w-3/4 items-start justify-start md:text-left">
+    <p className="text-sm mt-5 md:mt-9 md:text-xl font-semibold">ABOUT US</p>
+    <p className="text-md mt-1 md:mt-2 md:text-2xl font-semibold">
+      Still wondering what is Somaway app?
+    </p>
+    <p className="text-sm mt-1 md:mt-2 md:text-xl">
+      Somaway is a global EdTech startup with Kenyan roots. Somaway app offers
+      15-minute bite-sized non-fiction book summaries catered to your everyday
+      needs. We are mission-driven and passionate about self-improvement.
+    </p>
+  </div>
+</div>
+
        
        </div>
 
