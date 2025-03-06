@@ -64,10 +64,10 @@ const Homepage = () => {
 
 
    <div
-         className="bg-[var(--bodyBg)] pb-3 md:pb-9 mt-[10px] md:mt-[25px] w-full rounded-md md:rounded-[30px]
+         className="bg-[var(--bodyBg)] p-3 md:p-9 mt-[10px] md:mt-[25px] w-full rounded-md md:rounded-[30px]
            text-white text-center animate-fadeIn flex flex-col items-center justify-center"
        >
-         <div className="h-full p-4 max-w-full md:max-w-[700px] mx-auto box-border">
+         <div className="h-full p-2 max-w-full md:max-w-[700px] mx-auto box-border">
          <h1 className="text-2xl md:text-5xl mt-[15px] md:mt-[50px] font-bold">
          Set your goal and start your self-growth journey
                    </h1>
@@ -82,18 +82,14 @@ const Homepage = () => {
             px-9 rounded-[10px] cursor-pointer hover:bg-[#0053bf]   "
         >
           Start now!
-        </button>  <button
-          className="mt-5 mb-5 bg-[var(--bd2)] text-[var(--bg)] py-3 text-semibold text-xs md:text-sm 
-            px-9 rounded-[10px] cursor-pointer hover:bg-[#0053bf]   "
-        >
-          Find happiness
-        </button>
+        </button>  
 
     </div>
                  
          
          </div >
-         <div className="flex bg-[var(--bd2)] flex-col gap-2 md:gap-4 rounded-sm md:rounded-[20px] p-4 md:p-6 md:flex-row">
+
+         <div className="flex bg-[var(--bd2)] flex-col gap-2 md:gap-4 rounded-sm md:rounded-[20px] p-2 md:p-6 md:flex-row">
          <img
            src="/heropic.jpg"
            className="w-[200px] rounded-lg md:rounded-[20px]  md:w-[300px]  mx-auto "
