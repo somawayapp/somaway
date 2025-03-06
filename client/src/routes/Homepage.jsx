@@ -25,7 +25,7 @@ const Homepage = () => {
       <div>
             <Navbar/>
 
-    <div className="mb-9  px-3 md:px-9  flex flex-col gap-0">
+    <div className="mb-9  flex flex-col gap-0">
 
          
 
@@ -63,7 +63,36 @@ const Homepage = () => {
    <CategoriesScroll />
 
 
-     
+   <div
+         className="relative px-3 md:px-9 bg-[var(--navBg)] mt-[20px] md:mt-[50px] w-full rounded-md md:rounded-[30px] shadow-md 
+           text-white text-center animate-fadeIn flex flex-col items-center justify-center"
+       >
+         <div className="h-full p-2  max-w-[700px] mx-auto box-border">
+         <h1 className="text-2xl md:text-5xl mt-[20px] md:mt-[70px] font-bold">
+         Set your goal and start your self-growth journey
+                   </h1>
+
+                   <button
+          className="mt-9 bg-black text-white py-4 text-extrabold text-2xl md:text-5xl 
+            px-8 rounded-[40px] cursor-pointer hover:bg-[#0053bf]   "
+        >
+          Start now!
+        </button>
+         
+         </div >
+         <div className="flex flex-col md:flex-row">
+         <img
+           src="/summary.png"
+           className="w-[200px] md:h-[300px] mx-auto "
+         />
+         <div>
+          <p>
+            No one will know what you want unless you say it 
+          </p>
+         </div>
+         </div>
+       
+       </div>
 
 
 

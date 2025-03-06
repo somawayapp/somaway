@@ -95,7 +95,7 @@ const PostListPage = () => {
 
   
 <div >
-      <h3 className="text-xl md:text-3xl mt-7  md:mt-10 font-semibold text-[var(--textColor)]">
+      <h3 className="text-xl md:text-3xl font-semibold text-[var(--textColor)]">
      Trending summaries    </h3>
     </div>
     <TrendingPosts/>
@@ -156,9 +156,9 @@ const PostListPage = () => {
 
 
 
-    <div className="p-3 md:p-9">
+    <div className="p-3 mb-3 md:mb-9 md:p-9">
     <h3 className="text-lg md:text-2xl mb-3 md:mb-9 font-semibold text-[var(--textColor)]">
-       [Pick your category]     </h3>
+       Pick your category    </h3>
         <CategoriesScroll/>
 
         </div>

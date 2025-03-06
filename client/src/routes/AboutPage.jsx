@@ -15,7 +15,7 @@ const AboutPage = () => {
 
 
       <div
-         className="relative px-3 md:px-9 bg-[#7a00da] mt-[20px] md:mt-[50px] w-full rounded-md md:rounded-[30px] shadow-md 
+         className="relative bg-[#7a00da] mt-[20px] md:mt-[50px] w-full shadow-md 
            text-white text-center animate-fadeIn flex flex-col items-center justify-center"
        >
          <div className="h-full p-2  max-w-[900px] mx-auto box-border">
@@ -36,7 +36,7 @@ const AboutPage = () => {
    <div >
   
    
-   <div className="flex flex-col items-center justify-center">
+   <div className="flex  px-3 md:px-9 flex-col items-center justify-center">
   <div>
     <div className="flex flex-col items-center justify-center mb-[40px] pt-9 pb-9 rounded-2xl gap-5">
       <div className="grid grid-cols-1 mx-auto md:grid-cols-3 gap-6 mt-8 w-full px-4">
@@ -79,10 +79,10 @@ const AboutPage = () => {
    
     
    
-<div className=" bg-[#6402db]  bg-cover bg-no-repeat" style={{ backgroundImage: "url('/bg.svg')" }}>
+<div className=" bg-[#6402db]   bg-cover bg-no-repeat" style={{ backgroundImage: "url('/bg.svg')" }}>
 
 
-  <div className="flex flex-col pl-2 pr-2 pt-12 md:pt-0  md:pl-[100px] lg:pl-[200px] md:flex-row items-center justify-between  z-10 text-black">
+  <div className="flex flex-col pl-3 pr-3 pt-12 md:pt-0  md:pl-[100px] lg:pl-[200px] md:flex-row items-center justify-between  z-10 text-black">
     <div className="flex-1  text-center  md:text-left">
     <h3 className="text-3xl md:text-5xl font-bold mb-4">How did the idea of  Somaway come?</h3>
       <p className="text-sm md:text-lg max-w-md mb-6">
@@ -119,7 +119,7 @@ const AboutPage = () => {
    
    
 
-<div className="flex flex-col items-center justify-center">
+<div className="flex flex-col px-3 md:px-9 items-center justify-center">
   <div>
     <div className="flex flex-col items-center justify-center mb-[40px] pt-9 pb-9 rounded-2xl gap-5">
       <div className="grid grid-cols-1 mx-auto md:grid-cols-3 gap-6 mt-8 w-full px-4">
