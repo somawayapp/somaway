@@ -181,13 +181,11 @@ const SinglePostPage = () => {
 
 
 
-          <div className="flex flex-col items-center justify-center">
   <div>
-    <div className="flex flex-col items-center justify-center mb-[40px] pt-9 pb-9 rounded-2xl gap-5">
-      <div className="flex flex-col gap-6 mt-8 w-full px-4">
+      <div className="flex flex-col gap-6 w-full px-4">
       
           <div
-            className="bg-[var(--bd)] shadow-2xl rounded-2xl md:rounded-[20px] p-4 md:px-8 flex flex-col items-start text-left relative"
+            className="bg-[var(--bd)] shadow-2xl rounded-2xl md:rounded-[20px] p-4 md:px-9 flex flex-col items-start text-left relative"
           >
             <h1 className=" text-xl mt-1 md:mt-2 md:text-2xl text-justify font-bold">
             About the author, <span className="pl-1"> {data.author} </span>
@@ -200,7 +198,7 @@ const SinglePostPage = () => {
           </div>
 
           <div
-            className="bg-[var(--bd)] shadow-2xl rounded-2xl md:rounded-[20px] p-4 md:px-8 flex flex-col items-start text-left relative"
+            className="bg-[var(--bd)] shadow-2xl rounded-2xl md:rounded-[20px] p-4 md:px-9 flex flex-col items-start text-left relative"
           >
                <h1 className=" text-xl mt-1 md:mt-2 md:text-2xl text-justify font-bold">
             What is <span className="pl-1 pr-1"> {data.title} </span> about?
@@ -213,7 +211,7 @@ const SinglePostPage = () => {
           </div>
 
           <div
-            className="bg-[var(--bd)] shadow-2xl rounded-2xl md:rounded-[20px] p-4 md:px-8 flex flex-col items-start text-left relative"
+            className="bg-[var(--bd)] shadow-2xl rounded-2xl md:rounded-[20px] p-4 md:px-9 flex flex-col items-start text-left relative"
           >
               <h1 className=" text-xl mt-1 md:mt-2 md:text-2xl text-justify font-bold">
             Who should read <span className="pl-1"> {data.title} </span> 
@@ -224,8 +222,6 @@ const SinglePostPage = () => {
         dangerouslySetInnerHTML={{ __html: data.summary }}
         />
           </div>
-      </div>
-    </div>
   </div>
 </div>
 
