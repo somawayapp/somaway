@@ -12,8 +12,7 @@ const SettingsPage = () => {
 
 
     <div
-         className="relative  w-full  
-           text-white  text-center animate-fadeIn flex flex-col items-center justify-center"
+         className="relative  w-full  px-3 md:px-9 text-white  text-center animate-fadeIn flex flex-col items-center justify-center"
        >
           <h1 className="text-3xl md:text-6xl text-[var(--textColor)]  mt-[20px] md:mt-[50px] font-bold">
             Profile Settings

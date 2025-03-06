@@ -25,7 +25,7 @@ const Homepage = () => {
       <div>
             <Navbar/>
 
-    <div className="mb-9   flex flex-col gap-0">
+    <div className="mb-9  px-3 md:px-9  flex flex-col gap-0">
 
          
 

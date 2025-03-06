@@ -191,7 +191,7 @@ const SinglePostPage = () => {
             </h1>
          
          <p
-        className="desc-content pb-2 text-[var(--textColor)] text-justify"
+        className="desc-content pb-2 md:pb-4 text-[var(--textColor)] text-justify"
         dangerouslySetInnerHTML={{ __html: data.summary }}
         />
           </div>
@@ -204,7 +204,7 @@ const SinglePostPage = () => {
             </h1>
          
          <p
-        className="desc-content pb-2 text-[var(--textColor)] text-justify"
+        className="desc-content pb-2 md:pb-4 text-[var(--textColor)] text-justify"
         dangerouslySetInnerHTML={{ __html: data.summary }}
         />
           </div>
@@ -217,7 +217,7 @@ const SinglePostPage = () => {
             </h1>
          
          <p
-        className="desc-content  pb-2 text-[var(--textColor)] text-justify"
+        className="desc-content  pb-2 md:pb-4 text-[var(--textColor)] text-justify"
         dangerouslySetInnerHTML={{ __html: data.summary }}
         />
           </div>
