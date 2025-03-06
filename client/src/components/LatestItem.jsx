@@ -12,7 +12,7 @@ const LatestItem = ({ post }) => {
    
       <div className="flex gap-2 md:gap-4 overflow-x-auto scrollbar-hide">
           <div
-            className="flex flex-col  flex-shrink-0 w-[100px] w-[130px] md:w-[240px]"
+            className="flex flex-col  flex-shrink-0 w-[100px] w-[115px] md:w-[240px]"
           >
             <Link to={`/${post.slug}`} className="relative w-full" style={{ paddingTop: "150%" }}>
               <Image
@@ -22,7 +22,7 @@ const LatestItem = ({ post }) => {
             </Link>
             <Link
   to={`/discover?author=${post.author}`}
-  className="text-[var(--softTextColor)] mt-2 ml-3 capitalize text-sm md:text-lg font-semibold"
+  className="text-[var(--textColor)] mt-2 ml-3 capitalize text-sm md:text-lg font-semibold"
 >
   {post.author
     ? window.innerWidth >= 768
