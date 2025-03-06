@@ -73,17 +73,17 @@ const Homepage = () => {
                    </h1>
 
                    <button
-          className="mt-9 bg-black text-white py-6 text-semibold text-lg md:text-2xl 
-            px-9 rounded-[40px] cursor-pointer hover:bg-[#0053bf]   "
+          className="mt-4 mb-4 bg-black text-white py-4 text-semibold text-lg md:text-2xl 
+            px-9 rounded-[20px] cursor-pointer hover:bg-[#0053bf]   "
         >
           Start now!
         </button>
          
          </div >
-         <div className="flex bg-[var(--bd)] flex-col rounded-sm md:rounded-[20px] p-2 md:p-6 md:flex-row">
+         <div className="flex bg-[var(--bd2)] flex-col rounded-sm md:rounded-[20px] p-2 md:p-6 md:flex-row">
          <img
            src="/heropic.webp"
-           className="w-[200px] md:h-[400px] mx-auto "
+           className="w-[200px] md:w-[400px] mx-auto "
          />
          <div>
           <p>
