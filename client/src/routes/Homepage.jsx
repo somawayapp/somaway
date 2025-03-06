@@ -100,13 +100,13 @@ const Homepage = () => {
            src="/heropic.jpg"
            className="w-[200px] rounded-lg md:rounded-[20px]  md:w-[300px]  mx-auto "
          />
-         <div className="bg-[var(--softTextColor)]">
-          <p className=" text-sm md:text-xl font-semibold">
+         <div className=" items-start justify-start gap-2 md:gap-4 text-[var(--softTextColor)]">
+          <p className=" text-sm mt-5 md:mt-9 md:text-xl font-semibold">
             ABOUT US
           </p>
           <p className=" text-md md:text-2xl font-semibold">
             Still wondering what is Somaway app?
-          </p>  <p className=" text-md md:text-2xl ">
+          </p>  <p className=" text-sm md:text-xl ">
           Somaway is a global EdTech startup with kenyan roots. Somaway app offers 15 minute bit sized non-fiction book summaries catered
            for your everyday needs.  We are mission driven and passionate about self-improvement
           </p>
