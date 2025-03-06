@@ -3,10 +3,10 @@ import { useState } from "react";
 import { useLocation } from "react-router-dom"; // Import useLocation from react-router-dom
 import Search from "../components/Search";
 import { Link } from "react-router-dom";
-import Navbar from "../components/Navbar";
 import CategoriesScroll from "../components/CategoriesScroll";
 import Discover from "../components/Discover";
 import Footer from "../components/Footer";
+import Navbar from "../components/navbar2";
 
 const PostListPage = () => {
   const [open, setOpen] = useState(false);
@@ -32,7 +32,7 @@ const PostListPage = () => {
     .join(" | ") || "All book summaries"; // Default to "All Books" if no filters are applied
 
   return (
-    <div  className=" mb-[80px]  ">
+    <div  className=" bg-[var(--navBg)] mb-[80px]  ">
        <Navbar/>
        <div className="mt-2 md:mt-5">
        <CategoriesScroll/>
@@ -46,10 +46,10 @@ const PostListPage = () => {
  <MainCategories/>
 </div>
      */}
-<div   className="mb-[22px] px-3 md:px-9 md:mb-[25px] mt-[15px] md:mt-[20px] sticky top-0.5 md:top-2 "></div>
+<div   className="mb-[22px]  md:mb-[25px] mt-[15px] md:mt-[20px] sticky top-0.5 md:top-2 "></div>
 
-      <div className="flex flex-row  text-[var(--textColor)] justify-between">
-      <div className="w-full  pr-0  text-[var(--textColor)] ">
+      <div className="flex  p-3 md:p-9 flex-row  text-[var(--textColor)] justify-between">
+      <div className="w-full  pr-0 bg-[var(--bg2)]  p-2 md:p-8  rounded-3xl text-[var(--textColor)] ">
      
       <div className="flex hidden md:flex mb-[30px] justify-between ">
 

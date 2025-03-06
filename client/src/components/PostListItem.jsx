@@ -5,7 +5,6 @@ import { format } from "timeago.js";
 const PostListItem = ({ post }) => {
   // Truncate title based on screen size
   return (
-    <div className=" bg-[var(--textColore)] rounded-xl p-2 md:p-4 mt-0 ">
 
     <div className="relative">
       <Link to={`/${post.slug}`} className="block relative">
@@ -18,12 +17,11 @@ const PostListItem = ({ post }) => {
       </Link>
       <Link
   to={`/discover?author=${post.author}`}
-  className="text-[var(--softTextColor)] mt-2 ml-3 capitalize text-xs font-semibold"
+  className="text-[var(--textColor)] mt-2 ml-3 capitalize text-sm md:text-lg font-semibold "
 >
 {post.author ? post.author.slice(0, 20) : ""}
 </Link>
 
-    </div>
     </div>
 
   );

@@ -7,36 +7,30 @@ const PopularItem = ({ post }) => {
   // Truncate title based on screen size
 
   return (
-    <div className="flex flex-col mt-4 md:mt-6">
-  
-  
-   
-      <div className="flex gap-2 md:gap-4 overflow-x-auto scrollbar-hide">
-          <div
-            className="flex flex-col  flex-shrink-0 w-[100px] w-[115px] lg:w-[240px]"
-          >
-            <Link to={`/${post.slug}`} className="relative w-full" style={{ paddingTop: "150%" }}>
-              <Image
-                src={post.img}
-                className="absolute top-0  left-0 w-full h-full object-cover rounded-lg"
-              />
-            </Link>
-          
-            <Link
-  to={`/discover?author=${post.author}`}
-  className="text-[var(--softTextColor)] mt-2 ml-3 capitalize text-xs font-semibold"
+    <div className="flex gap-2 md:gap-4 overflow-x-auto scrollbar-hide">
+    <div
+      className="flex flex-col  flex-shrink-0 w-[100px] w-[122px] md:w-[240px]"
+    >
+      <Link to={`/${post.slug}`} className="relative w-full" style={{ paddingTop: "150%" }}>
+        <Image
+          src={post.img}
+          className="absolute top-0  left-0 w-full h-full object-cover rounded-lg"
+        />
+      </Link>
+      <Link
+to={`/discover?author=${post.author}`}
+className="text-[var(--textColor)] mt-2 ml-3 capitalize text-sm md:text-lg font-semibold"
 >
-  {post.author
-    ? window.innerWidth >= 768
-      ? post.author.slice(0, 20)
-      : post.author.slice(0, 15)
-    : ""}
+{post.author
+? window.innerWidth >= 768
+? post.author.slice(0, 20)
+: post.author.slice(0, 15)
+: ""}
 </Link>
 
 
-          </div>
-      </div>
-  </div>
+    </div>
+</div>
   );
 };
 
