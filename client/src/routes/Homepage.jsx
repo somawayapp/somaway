@@ -68,13 +68,10 @@ const Homepage = () => {
 
      {/* Featured Section Title */}
    <div className="flex justify-between mb-3 md:mb-6 items-center gap-2 flex-col md:flex-row">
-     <h3 className="text-xl md:text-3xl font-semibold text-[var(--textColor)]">
+     <h3 className="text-xl md:text-3xl font-semibold text-[var(--bg)]">
        Featured book summaries
      </h3>
-     <div className="mb-3">
-     <Search />
-
-     </div>
+   
    </div>
    <FeaturedPosts />
 
@@ -122,8 +119,8 @@ const Homepage = () => {
 
 
 
-    <div className=" bg-[var(--bodyBg)] rounded-2xl p-3 mt-10 md:mt-4 md:mt-8 md:p-6 ">
-    <h3 className="text-xl md:text-3xl  font-semibold text-[var(--textColor)]">
+    <div className=" bg-[var(--bodyBg)] rounded-2xl p-3 mt-4 md:mt-8  mb-4 md:mb-8 md:p-6 ">
+    <h3 className="text-xl md:text-3xl   font-semibold text-[var(--bg)]">
      Most popular Books      </h3>
     <PopularPosts/>
     </div>
@@ -166,7 +163,7 @@ const Homepage = () => {
           </div>
 
     
-          <h3 className="text-xl md:text-3xl ml-2 mt-7 mb-3 md:mb-6 md:mt-10 font-semibold text-[var(--textColor)]">
+          <h3 className="text-2xl md:text-4xl ml-2 mt-5 mb-5 md:mb-9 md:mt-9 font-semibold text-[var(--textColor)]">
           All book summaries     </h3>
       <PostList />
 

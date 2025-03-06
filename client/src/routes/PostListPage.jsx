@@ -7,6 +7,7 @@ import CategoriesScroll from "../components/CategoriesScroll";
 import Discover from "../components/Discover";
 import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
+import PopularPosts from "../components/PopularPosts";
 
 const PostListPage = () => {
   const [open, setOpen] = useState(false);
@@ -43,7 +44,7 @@ const PostListPage = () => {
   
 
       <div className="flex  flex-row   px-2 md:px-8 text-[var(--textColor)] justify-between">
-      <div className="w-full  pr-0 bg-[var(--bodyBg)]  p-2 md:p-8  rounded-3xl text-[var(--textColor)] ">
+      <div className="w-full  pr-0 bg-[var(--bodyBg)]  p-2 md:p-8  rounded-3xl text-[var(--bg)] ">
      
       <div className="flex hidden md:flex mb-[30px] justify-between ">
 
@@ -64,12 +65,14 @@ const PostListPage = () => {
       <Search />
 
 </div>
-   
+<PopularPosts />
 
-      <Discover />
+
     </div>
 
 </div>
+<Discover />
+
  </div>
   );
 };
