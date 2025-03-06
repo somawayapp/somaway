@@ -104,7 +104,7 @@ const PostListPage = () => {
 
 
     <div className="mt-0 mb:mt-[45px] ">
-      <div className="flex justify-between  mt-4 mb-15  md:mb-[40px] pt-5 pl-0  md:pl-5 overflow-x-hidden   bg-[#7a00da] 
+      <div className="flex justify-between  mt-4 mb-15  md:mb-[40px] pt-5 p-3  md:p-9 overflow-x-hidden   bg-[#7a00da] 
         items-center gap-5 flex-col md:flex-row">
       <div>
       <h1 className="my-8 text-center lg:text-5xl text-2xl ml-2 pl-2 md:pl-0 mb-2 mt-4 lg:mb-5 lg:mt-8 text-white font-bold">
@@ -144,7 +144,7 @@ const PostListPage = () => {
    
 
 
-    <div className=" bg-[var(--bodyBg)]  rounded-2xl p-3 mt-4 md:mt-8  mb-4 md:mb-8 md:p-9 ">
+    <div className=" bg-[var(--bodyBg)]   p-3 mt-4 md:mt-8 md:p-9 ">
     <h3 className="text-xl md:text-3xl  mt-5 mb-5 md:mb-9 md:mt-9   font-semibold text-[var(--bg)]">
      Most popular summaries      </h3>
     <PopularPosts/>
@@ -161,7 +161,7 @@ const PostListPage = () => {
 
       {/* Recent Posts */}
       <div>
-      <div className="flex justify-between  mt-10 mb-10 md:mt[60px] md:mb-[75px] pt-5 pl-0  md:pl-5 overflow-x-hidden  bg-[var(--textLogo)] 
+      <div className="flex justify-between mb-10 md:mb-[75px] pt-5 p-3 p-9 overflow-x-hidden  bg-[var(--textLogo)] 
         items-center gap-5 flex-col md:flex-row">
       <div>
       <h1 className="my-8 lg:text-6xl text-3xl ml-2 pl-2 md:pl-0 mb-2 mt-4 lg:mb-5 lg:mt-8 text-[var(--textColore2)] font-bold"> Book summaries library</h1>
