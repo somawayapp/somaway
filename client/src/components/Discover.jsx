@@ -47,7 +47,7 @@ return (
   next={fetchNextPage}
   hasMore={!!hasNextPage}
   loader={<h4>Loading more posts...</h4>}
-  className="gap-3 md:gap-6 grid grid-cols-2 sm:grid-cols-2 md:grid-cols-6  scrollbar-hide"
+  className="gap-3 md:gap-6 grid grid-cols-3 sm:grid-cols-3 md:grid-cols-6  scrollbar-hide"
 
 >
   {allPosts.length > 0 ? (

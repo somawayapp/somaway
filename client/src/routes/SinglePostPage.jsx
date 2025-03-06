@@ -248,21 +248,11 @@ const SinglePostPage = () => {
 
 
 <div className="flex items-center justify-center text-[var(--textColor)] mx-auto">
-  <div className="text-center">
-    <p className="mt-2 text-sm md:text-lg">
-      Contact us makesomaway@gmail.com or call +254 703 394794
-    </p>
+
     <div className="flex justify-center ">
       <PostMenuActions post={data} />
     </div>
-    <button
-    to="discover"
-      className="mt-9 bg-[var(--textColor)] text-[var(--bg)] py-4 text-extrabold text-xl md:text-3xl 
-        px-8 rounded-[40px] cursor-pointer hover:bg-white hover:text-black"
-    >
-      Discover
-    </button>
-  </div>
+
 
     
          
