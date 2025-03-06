@@ -36,8 +36,8 @@ const PostListPage = () => {
     <div  className=" bg-[var(--navBg)] mb-[80px]  ">
        <Navbar/>
        
-       <div className="px-3 pt-4 md:pt-6 md:px-9 ">
-       <h3 className="text-4xl md:text-6xl ml-1 mb-1 mt-5  font-bold text-[var(--textColor)]">
+       <div className="px-3 pt-4 mb-3 md:pt-6 md:px-9 ">
+       <h3 className="text-4xl md:text-6xl ml-1 mb-1 mt-3  font-bold text-[var(--textColor)]">
          Book Summaries Library
         </h3>
         <div className="max-w-[700px] mb-5 md:mb-9">
@@ -47,7 +47,9 @@ const PostListPage = () => {
         </h3>
         </div>
       
-      
+        <div>
+
+        </div>
        <CategoriesScroll/>
 
        </div>
