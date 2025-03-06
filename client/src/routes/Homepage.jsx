@@ -63,12 +63,12 @@ const Homepage = () => {
    <CategoriesScroll />
 
 
-   <div className=" bg-[var(--textColore)]  rounded-2xl p-3  md:p-6 mt-0 md:mt-4">
+   <div className=" bg-[var(--bodyBg)]  rounded-2xl p-3  md:p-6 mt-0 md:mt-4">
      
 
      {/* Featured Section Title */}
    <div className="flex justify-between mb-3 md:mb-6 items-center gap-2 flex-col md:flex-row">
-     <h3 className="text-xl md:text-2xl font-extrabold text-[var(--textColor)]">
+     <h3 className="text-xl md:text-3xl font-semibold text-[var(--textColor)]">
        Featured book summaries
      </h3>
      <div className="mb-3">
@@ -83,7 +83,7 @@ const Homepage = () => {
 <div className="mb-0 md:mb-[50px] ">
   
 <div >
-      <h3 className="text-xl md:text-2xl mt-7  md:mt-10 font-extrabold text-[var(--textColor)]">
+      <h3 className="text-xl md:text-3xl mt-7  md:mt-10 font-semibold text-[var(--textColor)]">
      Trending Book summaries    </h3>
     </div>
     <TrendingPosts/>
@@ -122,8 +122,8 @@ const Homepage = () => {
 
 
 
-    <div className=" bg-[var(--textColore)] rounded-2xl p-3 mt-10 md:mt-4 md:mt-8 md:p-6 ">
-    <h3 className="text-xl md:text-2xl  font-extrabold text-[var(--textColor)]">
+    <div className=" bg-[var(--bodyBg)] rounded-2xl p-3 mt-10 md:mt-4 md:mt-8 md:p-6 ">
+    <h3 className="text-xl md:text-3xl  font-semibold text-[var(--textColor)]">
      Most popular Books      </h3>
     <PopularPosts/>
     </div>
@@ -131,7 +131,7 @@ const Homepage = () => {
 
 <div className="mb-0 md:mb-[20px] ">
 <div>
-      <h3 className="text-xl md:text-2xl ml-2 mt-7 mb-3 md:mb-6 md:mt-10 font-extrabold text-[var(--textColor)]">
+      <h3 className="text-xl md:text-3xl ml-2 mt-7 mb-3 md:mb-6 md:mt-10 font-semibold text-[var(--textColor)]">
      Latest Book summaries     </h3>
     </div>
    <LatestPosts />
@@ -166,7 +166,8 @@ const Homepage = () => {
           </div>
 
     
-      
+          <h3 className="text-xl md:text-3xl ml-2 mt-7 mb-3 md:mb-6 md:mt-10 font-semibold text-[var(--textColor)]">
+          All book summaries     </h3>
       <PostList />
 
       <StoryLine />

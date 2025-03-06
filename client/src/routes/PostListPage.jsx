@@ -43,7 +43,7 @@ const PostListPage = () => {
   
 
       <div className="flex  flex-row   px-2 md:px-8 text-[var(--textColor)] justify-between">
-      <div className="w-full  pr-0 bg-[var(--bd)]  shadow-2xl  p-2 md:p-8  rounded-3xl text-[var(--textColor)] ">
+      <div className="w-full  pr-0 bg-[var(--bodyBg)]  p-2 md:p-8  rounded-3xl text-[var(--textColor)] ">
      
       <div className="flex hidden md:flex mb-[30px] justify-between ">
 
