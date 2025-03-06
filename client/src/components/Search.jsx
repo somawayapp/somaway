@@ -18,8 +18,7 @@ const Search = () => {
 
   return (
     <div
-      className="bg-[var(--textColori)] p-2 rounded-xl  border border-[var(--textColorei)] flex items-center gap-2 
-      focus-within:ring-1 focus-within:ring-border-[var(--textColorei)]"
+      className="bg-[var(--textColori)] p-2 rounded-xl  border border-[var(--textColorei)] flex items-center gap-2 )]"
       style={{
         maxWidth: "550px",
         minWidth: "50px",

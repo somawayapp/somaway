@@ -30,7 +30,7 @@ const PostListPage = () => {
     cat ? `Category: ${cat}` : "", // Display 'cat' if present
   ]
     .filter(Boolean) // Remove empty strings
-    .join(" | ") || "All book summaries"; // Default to "All Books" if no filters are applied
+    .join(" | ") || "All  summaries"; // Default to "All Books" if no filters are applied
 
   return (
     <div  className=" bg-[var(--navBg)] mb-[80px]  ">
@@ -43,7 +43,7 @@ const PostListPage = () => {
        
   
 
-      <div className="flex  flex-row   px-2 md:px-8 text-[var(--textColor)] justify-between">
+      <div className="flex  flex-row   px-3 md:px-8 text-[var(--textColor)] justify-between">
       <div className="w-full  pr-0 bg-[var(--bodyBg)]  p-2 md:p-8  rounded-3xl text-[var(--bg)] ">
      
       <div className="flex hidden md:flex mb-[30px] justify-between ">
@@ -60,7 +60,7 @@ const PostListPage = () => {
 
   
 <h1 style={{  zIndex: "10000"}} className=" lg:text-[30px] mb-2  md:mb-[30px] text-xl ml-2 text-[var(--bg)] font-bold">
-        {`Book Summaries Library - ${displayText}`}
+        {`Book  Library - ${displayText}`}
       </h1>
       <Search />
 
@@ -72,7 +72,7 @@ const PostListPage = () => {
 
 </div>
 
-<div className=" mt-4 mt-8 p-2 md:p-8">
+<div className=" mt-4 mt-8 p-3 md:p-8">
 <h3 className="text-3xl md:text-5xl ml-2 mt-5 mb-5 md:mb-9 md:mt-9 font-bold text-[var(--textColor)]">
 All new releases
 </h3>
