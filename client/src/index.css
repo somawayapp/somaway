@@ -68,6 +68,8 @@ a {
   --bg2: #050505;
   --bd: #303030;
   --transparentBg: rgba(1, 1, 2, 0.7);
+  --bodyBg: rgba(255, 255, 254.1);
+
 
   --softBg1: rgb(85, 86, 87);
   --softBg4: rgb(32, 32, 32);
@@ -104,6 +106,7 @@ a {
   --textColore2: #ffffff;
   --navBg: rgba(252, 246, 241);
   --bgs: rgb(255, 255, 255);
+  --bodyBg: rgba(0, 0, 0.1);
 
 
   --textLogo: #000000;

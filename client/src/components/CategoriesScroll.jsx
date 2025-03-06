@@ -100,7 +100,7 @@ const CategoriesScroll = ({ setOpen }) => {
               key={category}
               to={`/discover?cat=${slug}`}
               className="flex  flex-col items-center  gap-2 md:gap-4 justify-center text-[var(--textColor)] text-sm
-              md:text-lg bg-[var(--bd)] shadow-2xl rounded-3xl
+              md:text-lg bg-[var(--bd)] shadow-md rounded-2xl
                px-5 py-2 md:px-7 transition-all"
               onClick={() => setOpen(false)}
             >
