@@ -64,27 +64,27 @@ const Homepage = () => {
 
 
    <div
-         className="mx-3 md:mx-9 bg-[var(--bodyBg)] pb-3 md:pb-9 mt-[10px] md:mt-[25px] w-full rounded-md md:rounded-[30px]
+         className="bg-[var(--bodyBg)] pb-3 md:pb-9 mt-[10px] md:mt-[25px] w-full rounded-md md:rounded-[30px]
            text-white text-center animate-fadeIn flex flex-col items-center justify-center"
        >
          <div className="h-full p-2  max-w-[700px] mx-auto box-border">
-         <h1 className="text-2xl md:text-5xl mt-[20px] md:mt-[70px] font-bold">
+         <h1 className="text-2xl md:text-5xl mt-[15px] md:mt-[50px] font-bold">
          Set your goal and start your self-growth journey
                    </h1>
     <div className="flex gap-2 md:gap-4 flex-row">
     <button
-          className="mt-5 mb-5 bg-[var(--bd2)] text-[var(--textColor)] py-4 text-semibold text-lg md:text-2xl 
-            px-9 rounded-[20px] cursor-pointer hover:bg-[#0053bf]   "
+          className="mt-5 mb-5 bg-[var(--bd2)] text-[var(--bg)] py-3 text-semibold text-md md:text-xl 
+            px-9 rounded-[10px] cursor-pointer hover:bg-[#0053bf]   "
         >
           Find success
         </button>  <button
-          className="mt-5 mb-5 bg-[var(--bd2)] text-[var(--textColor)] py-4 text-semibold text-lg md:text-2xl 
-            px-9 rounded-[20px] cursor-pointer hover:bg-[#0053bf]   "
+          className="mt-5 mb-5 bg-[var(--bd2)] text-[var(--bg)] py-3 text-semibold text-md md:text-xl 
+            px-9 rounded-[10px] cursor-pointer hover:bg-[#0053bf]   "
         >
           Start now!
         </button>  <button
-          className="mt-5 mb-5 bg-[var(--bd2)] text-[var(--textColor)] py-4 text-semibold text-lg md:text-2xl 
-            px-9 rounded-[20px] cursor-pointer hover:bg-[#0053bf]   "
+          className="mt-5 mb-5 bg-[var(--bd2)] text-[var(--bg)] py-3 text-semibold text-md md:text-xl 
+            px-9 rounded-[10px] cursor-pointer hover:bg-[#0053bf]   "
         >
           Find happiness
         </button>
@@ -96,7 +96,7 @@ const Homepage = () => {
          <div className="flex bg-[var(--bd2)] flex-col gap-2 md:gap-4 rounded-sm md:rounded-[20px] p-2 md:p-6 md:flex-row">
          <img
            src="/heropic.jpg"
-           className="w-[200px] rounded-sm md:rounded-[20px]  md:w-[400px]  mx-auto "
+           className="w-[200px] rounded-sm md:rounded-[20px]  md:w-[300px]  mx-auto "
          />
          <div>
           <p className=" text-md md:text-2xl font-semibold">
