@@ -181,17 +181,17 @@ const SinglePostPage = () => {
 
 
 
-      <div className="flex flex-col gap-9 w-full px-1 md:px-0 mt-9">
+      <div className="flex flex-col gap-9 w-full mt-9">
       
           <div
             className="bg-[var(--bd)] text-[16px] md:text-[20px] shadow-2xl rounded-2xl md:rounded-[20px] p-4 md:px-9 flex flex-col items-start text-left relative"
           >
             <h1 className=" text-xl mt-1 md:mt-2 md:text-2xl text-justify font-bold">
-            About the author, <span className="pl-1"> {data.author} </span>
+            About the author - <span className="pl-1"> {data.author} </span>
             </h1>
          
          <p
-        className="desc-content text-[var(--textColor)] text-justify"
+        className="desc-content pb-2 text-[var(--textColor)] text-justify"
         dangerouslySetInnerHTML={{ __html: data.summary }}
         />
           </div>
@@ -204,7 +204,7 @@ const SinglePostPage = () => {
             </h1>
          
          <p
-        className="desc-content text-[var(--textColor)] text-justify"
+        className="desc-content pb-2 text-[var(--textColor)] text-justify"
         dangerouslySetInnerHTML={{ __html: data.summary }}
         />
           </div>
@@ -217,7 +217,7 @@ const SinglePostPage = () => {
             </h1>
          
          <p
-        className="desc-content text-[var(--textColor)] text-justify"
+        className="desc-content  pb-2 text-[var(--textColor)] text-justify"
         dangerouslySetInnerHTML={{ __html: data.summary }}
         />
           </div>
