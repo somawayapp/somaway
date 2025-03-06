@@ -64,7 +64,7 @@ const Homepage = () => {
 
 
    <div
-         className="relative px-3 md:px-9 bg-[var(--navBg)] mt-[20px] md:mt-[50px] w-full rounded-md md:rounded-[30px] shadow-md 
+         className="mx-3 md:mx-9 bg-[var(--bodyBg)] pb-3 md:pb-9 mt-[10px] md:mt-[25px] w-full rounded-md md:rounded-[30px]
            text-white text-center animate-fadeIn flex flex-col items-center justify-center"
        >
          <div className="h-full p-2  max-w-[700px] mx-auto box-border">
@@ -73,17 +73,17 @@ const Homepage = () => {
                    </h1>
 
                    <button
-          className="mt-9 bg-black text-white py-4 text-extrabold text-2xl md:text-5xl 
-            px-8 rounded-[40px] cursor-pointer hover:bg-[#0053bf]   "
+          className="mt-9 bg-black text-white py-6 text-semibold text-lg md:text-2xl 
+            px-9 rounded-[40px] cursor-pointer hover:bg-[#0053bf]   "
         >
           Start now!
         </button>
          
          </div >
-         <div className="flex flex-col md:flex-row">
+         <div className="flex bg-[var(--bd)] flex-col rounded-sm md:rounded-[20px] p-2 md:p-6 md:flex-row">
          <img
-           src="/summary.png"
-           className="w-[200px] md:h-[300px] mx-auto "
+           src="/heropic.webp"
+           className="w-[200px] md:h-[400px] mx-auto "
          />
          <div>
           <p>
