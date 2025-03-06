@@ -99,7 +99,7 @@ const SinglePostPage = () => {
             What’s inside
             </p>
             <p
-              className="text-[var(--textColor)] text-[16px] md:text-[20px] text-justify"
+              className="text-[var(--textColor)] text-[16px] md:text-[19px] text-justify"
             >                { data.summary }
 
             </p>
@@ -176,6 +176,60 @@ const SinglePostPage = () => {
           <Comments postId={data._id} />
           </div>
           </div>
+
+
+
+
+          <div className="flex flex-col items-center justify-center">
+  <div>
+    <div className="flex flex-col items-center justify-center mb-[40px] pt-9 pb-9 rounded-2xl gap-5">
+      <div className="flex flex-col gap-6 mt-8 w-full px-4">
+      
+          <div
+            className="bg-[var(--bd)] shadow-2xl rounded-2xl md:rounded-[20px] p-4 md:px-8 flex flex-col items-start text-left relative"
+          >
+            <h1 className=" text-xl mt-1 md:mt-2 md:text-2xl text-justify font-bold">
+            About the author, <span className="pl-1"> {data.author} </span>
+            </h1>
+         
+         <p
+        className="desc-content text-[var(--textColor)] text-justify"
+        dangerouslySetInnerHTML={{ __html: data.summary }}
+        />
+          </div>
+
+          <div
+            className="bg-[var(--bd)] shadow-2xl rounded-2xl md:rounded-[20px] p-4 md:px-8 flex flex-col items-start text-left relative"
+          >
+               <h1 className=" text-xl mt-1 md:mt-2 md:text-2xl text-justify font-bold">
+            What is <span className="pl-1 pr-1"> {data.title} </span> about?
+            </h1>
+         
+         <p
+        className="desc-content text-[var(--textColor)] text-justify"
+        dangerouslySetInnerHTML={{ __html: data.summary }}
+        />
+          </div>
+
+          <div
+            className="bg-[var(--bd)] shadow-2xl rounded-2xl md:rounded-[20px] p-4 md:px-8 flex flex-col items-start text-left relative"
+          >
+              <h1 className=" text-xl mt-1 md:mt-2 md:text-2xl text-justify font-bold">
+            Who should read <span className="pl-1"> {data.title} </span> 
+            </h1>
+         
+         <p
+        className="desc-content text-[var(--textColor)] text-justify"
+        dangerouslySetInnerHTML={{ __html: data.summary }}
+        />
+          </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
           </div>
 
 
@@ -188,7 +242,13 @@ const SinglePostPage = () => {
 
 
       
-  
+ <div className="mb-0 md:mb-[20px] ">
+<div>
+      <h3 className="text-xl md:text-2xl ml-2 mt-7 mb-3 md:mb-6 md:mt-10 font-extrabold text-[var(--textColor)]">
+      We also recommend     </h3>
+    </div>
+   <LatestPosts />
+</div>
 
 
 

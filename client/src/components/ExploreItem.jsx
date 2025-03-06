@@ -15,7 +15,7 @@ const ExploreItem = ({ post }) => {
   }}
 >
   {/* Blue tick icon */}
-  <svg width="24px"  height="24px" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <svg width="24px" height="24px" fill="none" xmlns="http://www.w3.org/2000/svg">
     <path 
       fillRule="evenodd" 
       clipRule="evenodd"
@@ -27,8 +27,7 @@ const ExploreItem = ({ post }) => {
   <span
     className="text-[16px] md:text-[20px] leading-tight"
     style={{
-      display: "block", 
-      marginLeft: "2px"// Ensures the whole span behaves like a block
+      display: "block", // Ensures the whole span behaves like a block
     }}
   >
     {post.title}
