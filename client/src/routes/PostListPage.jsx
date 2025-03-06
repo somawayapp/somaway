@@ -48,7 +48,7 @@ const PostListPage = () => {
      
       <div className="flex hidden md:flex mb-[30px] justify-between ">
 
-<h1 style={{  zIndex: "10000"}} className=" lg:text-[30px] mb-[30px] text-xl ml-2 text-[var(--textColor)] font-bold">
+<h1 style={{  zIndex: "10000"}} className=" lg:text-[30px] mb-[30px] text-xl ml-2 text-[var(--bg)] font-bold">
         {`Book liblary - ${displayText}`}
       </h1>
       <Search />
@@ -60,7 +60,7 @@ const PostListPage = () => {
 
   
 <h1 style={{  zIndex: "10000"}} className=" lg:text-[30px] mb-2  md:mb-[30px] text-xl ml-2 text-[var(--bg)] font-bold">
-        {`Book liblary - ${displayText}`}
+        {`Book Summaries Library - ${displayText}`}
       </h1>
       <Search />
 
@@ -73,6 +73,9 @@ const PostListPage = () => {
 </div>
 
 <div className=" mt-4 mt-8 p-2 md:p-8">
+<h3 className="text-3xl md:text-5xl ml-2 mt-5 mb-5 md:mb-9 md:mt-9 font-bold text-[var(--textColor)]">
+All new releases
+</h3>
 <Discover />
 
 </div>

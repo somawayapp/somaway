@@ -120,11 +120,13 @@ const Homepage = () => {
 
 
     <div className=" bg-[var(--bodyBg)] rounded-2xl p-3 mt-4 md:mt-8  mb-4 md:mb-8 md:p-6 ">
-    <h3 className="text-xl md:text-3xl   font-semibold text-[var(--bg)]">
+    <h3 className="text-xl md:text-3xl  mt-5 mb-5 md:mb-9 md:mt-9   font-semibold text-[var(--bg)]">
      Most popular summaries      </h3>
     <PopularPosts/>
     </div>
 
+
+ 
 
 <div className="mb-0 md:mb-[20px] ">
 <div>
