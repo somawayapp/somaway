@@ -34,7 +34,7 @@ const PostListPage = () => {
   return (
     <div  className=" bg-[var(--navBg)] mb-[80px]  ">
        <Navbar/>
-       <div className="mt-2 p-3 md:p-9 md:mt-5">
+       <div className="px-3 md:px-9 ">
        <CategoriesScroll/>
 
        </div>
