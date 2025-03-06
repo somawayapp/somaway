@@ -98,9 +98,9 @@ const Homepage = () => {
          <div className="flex bg-[var(--bd2)] flex-col max-w-full md:max-w-[900px] m gap-2 md:gap-4 rounded-lg md:rounded-[20px] p-2 md:p-6 md:flex-row">
   <img
     src="/heropic.jpg"
-    className="w-[200px] rounded-lg md:rounded-[20px] md:w-1/4 mx-auto md:mx-0"
+    className="w-[200px] rounded-lg md:rounded-[20px] md:w-2/5 mx-auto md:mx-0"
   />
-  <div className="md:w-3/4 items-start justify-start md:text-left">
+  <div className="md:w-3/5 items-start justify-start md:text-left">
     <p className="text-sm mt-5 md:mt-9 md:text-xl font-semibold">ABOUT US</p>
     <p className="text-md mt-1 md:mt-2 md:text-2xl font-semibold">
       Still wondering what is Somaway app?
