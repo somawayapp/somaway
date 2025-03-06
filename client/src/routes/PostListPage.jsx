@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 import CategoriesScroll from "../components/CategoriesScroll";
 import Discover from "../components/Discover";
 import Footer from "../components/Footer";
-import Navbar from "../components/navbar2";
+import Navbar from "../components/Navbar";
 
 const PostListPage = () => {
   const [open, setOpen] = useState(false);
@@ -32,7 +32,7 @@ const PostListPage = () => {
     .join(" | ") || "All book summaries"; // Default to "All Books" if no filters are applied
 
   return (
-    <div  className=" bg-[var(--navBg)] mb-[80px]  ">
+    <div  className=" mb-[80px]  ">
        <Navbar/>
        <div className="px-3 pt-4 md:pt-6 md:px-9 ">
        <CategoriesScroll/>
@@ -43,7 +43,7 @@ const PostListPage = () => {
   
 
       <div className="flex  flex-row   px-2 md:px-8 text-[var(--textColor)] justify-between">
-      <div className="w-full  pr-0 bg-[var(--bodyBg)]  border border-[var(--softBg4)]  p-2 md:p-8  rounded-3xl text-[var(--textColor)] ">
+      <div className="w-full  pr-0 bg-[var(--bd)]  shadow-2xl  p-2 md:p-8  rounded-3xl text-[var(--textColor)] ">
      
       <div className="flex hidden md:flex mb-[30px] justify-between ">
 
