@@ -30,12 +30,21 @@ const PostListPage = () => {
     cat ? `Category: ${cat}` : "", // Display 'cat' if present
   ]
     .filter(Boolean) // Remove empty strings
-    .join(" | ") || "All  summaries"; // Default to "All Books" if no filters are applied
+    .join(" | ") || "Most popular summaries"; // Default to "All Books" if no filters are applied
 
   return (
     <div  className=" bg-[var(--navBg)] mb-[80px]  ">
        <Navbar/>
+       
        <div className="px-3 pt-4 md:pt-6 md:px-9 ">
+       <h3 className="text-4xl md:text-6xl ml-2 mb-1  font-bold text-[var(--textColor)]">
+         Book Summaries Library
+        </h3>
+         <h3 className="text-4xl md:text-6xl ml-2 mb-5 md:mb-9  font-bold text-[var(--textColor)]">
+         Dive into 15-minute nonfiction book summaries crafted for the curious mind. Insights in minutes, wisdom for a lifetime.
+         Are you ready to make Somaway? Get started!
+        </h3>
+      
        <CategoriesScroll/>
 
        </div>
@@ -73,7 +82,7 @@ const PostListPage = () => {
 </div>
 
 <div className=" mt-4 mt-8 p-3 md:p-8">
-<h3 className="text-3xl md:text-5xl ml-2 mt-5 mb-5 md:mb-9 md:mt-9 font-bold text-[var(--textColor)]">
+<h3 className="text-3xl md:text-5xl ml-2 mb-5 md:mb-9  font-bold text-[var(--textColor)]">
 All new releases
 </h3>
 <Discover />
