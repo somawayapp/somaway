@@ -34,7 +34,7 @@ const PostListPage = () => {
   return (
     <div  className=" bg-[var(--navBg)] mb-[80px]  ">
        <Navbar/>
-       <div className="px-3 pt-3 md:pt-6 md:px-9 ">
+       <div className="px-3 pt-4 md:pt-6 md:px-9 ">
        <CategoriesScroll/>
 
        </div>
@@ -43,7 +43,7 @@ const PostListPage = () => {
   
 
       <div className="flex  flex-row   px-2 md:px-8 text-[var(--textColor)] justify-between">
-      <div className="w-full  pr-0 bg-[var(--bg2)]  border border-[var(--softBg4)]  p-2 md:p-8  rounded-3xl text-[var(--textColor)] ">
+      <div className="w-full  pr-0 bg-[var(--bg2)]   p-2 md:p-8  rounded-3xl text-[var(--textColor)] ">
      
       <div className="flex hidden md:flex mb-[30px] justify-between ">
 
