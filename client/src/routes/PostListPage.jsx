@@ -156,7 +156,12 @@ const PostListPage = () => {
 
 
 
+    <div className="p-3 md:p-9">
+    <h3 className="text-lg md:text-2xl mb-3 md:mb-9 font-semibold text-[var(--textColor)]">
+       [Pick your category]     </h3>
+        <CategoriesScroll/>
 
+        </div>
 
 
       {/* Recent Posts */}
