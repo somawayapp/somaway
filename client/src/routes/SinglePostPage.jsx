@@ -181,11 +181,10 @@ const SinglePostPage = () => {
 
 
 
-  <div>
-      <div className="flex flex-col gap-6 w-full px-4">
+      <div className="flex flex-col gap-6 w-full px-1 md:px-0 mt-9">
       
           <div
-            className="bg-[var(--bd)] shadow-2xl rounded-2xl md:rounded-[20px] p-4 md:px-9 flex flex-col items-start text-left relative"
+            className="bg-[var(--bd)] text-[16px] md:text-[20px] shadow-2xl rounded-2xl md:rounded-[20px] p-4 md:px-9 flex flex-col items-start text-left relative"
           >
             <h1 className=" text-xl mt-1 md:mt-2 md:text-2xl text-justify font-bold">
             About the author, <span className="pl-1"> {data.author} </span>
@@ -198,7 +197,7 @@ const SinglePostPage = () => {
           </div>
 
           <div
-            className="bg-[var(--bd)] shadow-2xl rounded-2xl md:rounded-[20px] p-4 md:px-9 flex flex-col items-start text-left relative"
+            className="bg-[var(--bd)] text-[16px] md:text-[20px] shadow-2xl rounded-2xl md:rounded-[20px] p-4 md:px-9 flex flex-col items-start text-left relative"
           >
                <h1 className=" text-xl mt-1 md:mt-2 md:text-2xl text-justify font-bold">
             What is <span className="pl-1 pr-1"> {data.title} </span> about?
@@ -211,7 +210,7 @@ const SinglePostPage = () => {
           </div>
 
           <div
-            className="bg-[var(--bd)] shadow-2xl rounded-2xl md:rounded-[20px] p-4 md:px-9 flex flex-col items-start text-left relative"
+            className="bg-[var(--bd)] text-[16px] md:text-[20px] shadow-2xl rounded-2xl md:rounded-[20px] p-4 md:px-9 flex flex-col items-start text-left relative"
           >
               <h1 className=" text-xl mt-1 md:mt-2 md:text-2xl text-justify font-bold">
             Who should read <span className="pl-1"> {data.title} </span> 
@@ -223,7 +222,6 @@ const SinglePostPage = () => {
         />
           </div>
   </div>
-</div>
 
 
 
@@ -239,9 +237,9 @@ const SinglePostPage = () => {
 
 
       
- <div className="mb-0 md:mb-[20px] ">
+ <div className="mb-[20px] ">
 <div>
-      <h3 className="text-xl md:text-2xl ml-2 mt-7 mb-3 md:mb-6 md:mt-10 font-extrabold text-[var(--textColor)]">
+      <h3 className="text-xl md:text-3xl ml-2 mt-7 mb-3 md:mb-6 md:mt-10 font-bold text-[var(--textColor)]">
       We also recommend     </h3>
     </div>
    <LatestPosts />
