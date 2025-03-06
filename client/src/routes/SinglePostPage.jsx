@@ -213,7 +213,7 @@ const SinglePostPage = () => {
             className="bg-[var(--bd)] text-[16px] md:text-[20px] shadow-2xl rounded-2xl md:rounded-[20px] p-4 md:px-9 flex flex-col items-start text-left relative"
           >
               <h1 className=" text-xl mt-1 md:mt-2 md:text-2xl text-justify font-bold">
-            Who should read <span className="pl-1"> {data.title} </span> 
+            Who should read <span className="pl-1"> {data.who} </span> 
             </h1>
          
          <p
