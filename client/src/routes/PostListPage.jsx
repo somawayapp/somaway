@@ -47,7 +47,7 @@ const PostListPage = () => {
         </h3>
         </div>
       
-        <div className="mb-2 md:mb-4">
+        <div className="mb-4 md:mb-9">
         <CategoriesScroll/>
 
         </div>
