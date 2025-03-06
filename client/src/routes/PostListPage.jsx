@@ -46,7 +46,7 @@ const PostListPage = () => {
  <MainCategories/>
 </div>
      */}
-<div   className="mb-[22px]  md:mb-[25px] mt-[15px] md:mt-[20px] sticky top-0.5 md:top-2 "></div>
+<div   className="mt-[15px] md:mt-[20px] sticky top-0.5 md:top-2 "></div>
 
       <div className="flex  p-3 md:p-9 flex-row  text-[var(--textColor)] justify-between">
       <div className="w-full  pr-0 bg-[var(--bg2)]  border border-[var(--softBg4)]  p-2 md:p-8  rounded-3xl text-[var(--textColor)] ">
