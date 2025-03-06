@@ -10,6 +10,7 @@ import { FaStar } from "react-icons/fa";
 import Footer from "../components/Footer";
 import ExplorePosts from "../components/ExplorePosts";
 import MobileControls from "../components/MobileControls";
+import LatestPosts from "../components/LatestPosts";
 
 const fetchPost = async (slug) => {
   const res = await axios.get(`${import.meta.env.VITE_API_URL}/posts/${slug}`);
