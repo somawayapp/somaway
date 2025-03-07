@@ -131,15 +131,15 @@ const Write = () => {
 
         {/* Title Input */}
         <input type="text" placeholder="Enter Post Title" value={title} onChange={(e) => setTitle(e.target.value.slice(0, 150))} className="p-2 bg-[var(--textColore)] text-[var(--textColor)]  rounded" />
-        
-        <input type="text" placeholder=" Who should read this book" value={whoshouldread} onChange={(e) => setWhoshouldread(e.target.value.slice(0, 150))} className="p-2 bg-[var(--textColore)] text-[var(--textColor)]  rounded" />
-        <input type="text" placeholder="About the author" value={aboutauthor} onChange={(e) => setAboutauthor(e.target.value.slice(0, 150))} className="p-2 bg-[var(--textColore)] text-[var(--textColor)]  rounded" />
-        <input type="text" placeholder="About this book" value={aboutbook} onChange={(e) => setAboutbook(e.target.value.slice(0, 150))} className="p-2 bg-[var(--textColore)] text-[var(--textColor)]  rounded" />
+        <input type="text" placeholder="Author Name" value={author} onChange={(e) => setAuthor(e.target.value)} className="p-2  rounded bg-[var(--textColore)] text-[var(--textColor)]" />
+        <input type="text" placeholder="What's inside, short summary" value={summary} onChange={(e) => setSummary(e.target.value.slice(0, 350))} className="p-2 bg-[var(--textColore)] text-[var(--textColor)]  rounded" />
 
-        <input type="text" placeholder="What's inside, short summary" value={summary} onChange={(e) => setSummary(e.target.value.slice(0, 300))} className="p-2 bg-[var(--textColore)] text-[var(--textColor)]  rounded" />
+        <input type="text" placeholder="About the author" value={aboutauthor} onChange={(e) => setAboutauthor(e.target.value.slice(0, 350))} className="p-2 bg-[var(--textColore)] text-[var(--textColor)]  rounded" />
+        <input type="text" placeholder="About this book" value={aboutbook} onChange={(e) => setAboutbook(e.target.value.slice(0, 350))} className="p-2 bg-[var(--textColore)] text-[var(--textColor)]  rounded" />
+        <input type="text" placeholder=" Who should read this book" value={whoshouldread} onChange={(e) => setWhoshouldread(e.target.value.slice(0, 350))} className="p-2 bg-[var(--textColore)] text-[var(--textColor)]  rounded" />
+
 
         {/* Author Input */}
-        <input type="text" placeholder="Author Name" value={author} onChange={(e) => setAuthor(e.target.value)} className="p-2  rounded bg-[var(--textColore)] text-[var(--textColor)]" />
 
         {/* Category Selection */}
         <select value={category} onChange={(e) => setCategory(e.target.value)} className="p-2 bg-[var(--textColore)] text-[var(--textColor)] rounded">
@@ -172,7 +172,7 @@ const Write = () => {
   className="bg-[var(--textColore)] text-[var(--textColor)] rounded"
   modules={{
     toolbar: [
-      [{ header: [1, 2, false] }],
+      [{ header: [3, 2, 1, false] }],
       ["bold", "italic", "underline", "strike"],
       [{ list: "ordered" }, { list: "bullet" }],
       ["blockquote", "code-block"],
