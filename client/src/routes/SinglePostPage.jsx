@@ -69,13 +69,13 @@ const SinglePostPage = () => {
             <h1 className="text-2xl md:text-5xl font-bold text-center md:text-left">
               {data.title}
             </h1>
-            <div className="flex flex-row  items-center gap-1 text-[var(--textColor)] text-md md:text-lg">
+            <div className="flex flex-col md:flex-row  items-center gap-1 text-[var(--textColor)] text-md md:text-lg">
               <div className=" flex gap-1 md:gap-2">
                 <span  className=" ">Book by </span>
                 <Link   to={`/discover?author=${data.author}`} className="" >{data.author}</Link>
                 </div>
                 <div className="flex gap-1 md:gap-2"> 
-                <span className=" "> | </span>
+                <span className="hidden md:block "> | </span>
                 <span className=" ">Category </span>
                 <Link to={`/discover?cat=${data.category}`}  className="capitalize ">{data.category}</Link>
                 </div>
