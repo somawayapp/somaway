@@ -78,7 +78,7 @@ const Navbar = () => {
           className="cursor-pointer text-[var(--textColor)] text-sm"
           onClick={() => setOpen((prev) => !prev)}
         >
-          <div className="flex flex-col gap-1 md:gap-[5px]">
+          <div className="flex flex-col gap-1 md:gap-[6px]">
             <div
               className={`h-[1px] md:h-[2px] rounded-md w-5 md:w-9 bg-[var(--textColor)] origin-left transition-all ease-in-out ${
                 open && "rotate-45"

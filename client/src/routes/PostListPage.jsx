@@ -34,7 +34,7 @@ const PostListPage = () => {
     cat ? `Category: ${cat}` : "", // Display 'cat' if present
   ]
     .filter(Boolean) // Remove empty strings
-    .join(" | ") || "Featured book summaries"; // Default to "All Books" if no filters are applied
+    .join(" | ") || "All summaries"; // Default to "All Books" if no filters are applied
 
   return (
     <div  className=" bg-[var(--bg)] mb-[80px]  ">
@@ -83,7 +83,7 @@ const PostListPage = () => {
       <Search />
 
 </div>   
-   <FeaturedPosts />
+<PostList />
 
     </div>
 

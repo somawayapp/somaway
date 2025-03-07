@@ -19,7 +19,7 @@ const Search = () => {
 
   return (
     <div
-      className="bg-[var(--bg)] p-2 rounded-xl  border-none flex items-center gap-2 )]"
+      className="bg-[var(--bg)] text-[var(--textColor)] p-2 rounded-xl  border-none flex items-center gap-2 )]"
       style={{
         maxWidth: "550px",
         minWidth: "50px",
@@ -42,7 +42,7 @@ const Search = () => {
       <input
         type="text"
         placeholder="search a post..."
-        className="bg-transparent text-sm outline-none w-full"
+        className="bg-transparent  text-[var(--textColor)] text-sm outline-none w-full"
         onKeyDown={handleKeyPress}
       />
     </div>
