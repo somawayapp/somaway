@@ -40,12 +40,16 @@ const Navbar = () => {
       <span className="bg-clip-text text-[#0062e3]  pl-1 text-xl md:text-2xl  font-extrabold">Somaway</span>
 
       {/*   <span className="bg-clip-text text-[#1ADAff] font-impact"></span> */}
+    
 
 </Link>
+<div className="hidden md:block gap-4">
+      <Link className="hover:text-[#0053bf] font-bold    " to="/" onClick={() => setOpen(false)} >Home</Link>
+      <Link className="hover:text-[#0053bf] font-bold    " to="/discover" onClick={() => setOpen(false)}> Discover</Link>
+      </div>
 
-
-<div className="md:hidden">
-<div className="md:hidden  ">
+<div >
+<div >
 <div className="flex flex-row mb-3 gap-2">
 
      <Link
@@ -65,17 +69,17 @@ const Navbar = () => {
         >
           <div className="flex flex-col gap-1">
             <div
-              className={`h-[1px] rounded-md w-5 bg-[var(--textColor)] origin-left transition-all ease-in-out ${
+              className={`h-[1px] md:h-2 rounded-md w-5 md:w-9 bg-[var(--textColor)] origin-left transition-all ease-in-out ${
                 open && "rotate-45"
               }`}
             ></div>
             <div
-              className={`h-[1px] rounded-md w-5 bg-[var(--textColor)] transition-all ease-in-out ${
+              className={`h-[1px] md:h-2 rounded-md w-5 md:w-9bg-[var(--textColor)] transition-all ease-in-out ${
                 open && "opacity-0"
               }`}
             ></div>
             <div
-              className={`h-[1px] rounded-md w-5 bg-[var(--textColor)] origin-left transition-all ease-in-out ${
+              className={`h-[1px] md:h-2 rounded-md w-5 md:w-9 bg-[var(--textColor)] origin-left transition-all ease-in-out ${
                 open && "-rotate-45"
               }`}
             ></div>
@@ -178,22 +182,7 @@ const Navbar = () => {
       </div>
 
 
-      {/* DESKTOP MENU */}
-      <div className="hidden md:flex items-center gap-8 xl:gap-12  font-medium">
-
-          <Link className="hover:text-[#0053bf] font-bold    " to="/" onClick={() => setOpen(false)} >Home</Link>
-           <Link className="hover:text-[#0053bf] font-bold    " to="/discover" onClick={() => setOpen(false)}> Discover</Link>
-          <Link className="hover:text-[#0053bf]  font-bold   " to="/premium" onClick={() => setOpen(false)}> Premium</Link>
-          <Link className="hover:text-[#0053bf] font-bold    " to="/settings" onClick={() => setOpen(false)}>Settings</Link>
-          <Link className="hover:text-[#0053bf] font-bold    " to="/write" onClick={() => setOpen(false)}>Write</Link>
-          <Link className="hover:text-[#0053bf]  font-bold   " to="/about" onClick={() => setOpen(false)}>About Us</Link>
-          <Link
-            to="/login"
-            className="w-full text-center mt-3 md:mt-0 sm:w-auto px-4 py-3 md:py-2 bg-[#0062e3]   text-white
-            text-sm font-semibold rounded-md hover:bg-[#0053bf]   "
-          >
-            Get Started
-          </Link>
+   
 
         <SignedOut>
         <Link
