@@ -90,39 +90,12 @@ const PostListPage = () => {
 </div>
 
 <div className=" mt-2 md:mt-4  p-3 md:p-8">
-
-   
-
-  
-<div >
-      <h3 className="text-xl md:text-3xl font-semibold text-[var(--textColor)]">
-     Trending summaries    </h3>
-    </div>
-    <TrendingPosts/>
+ 
 </div>
 
 
 
-
-
-
-
-
-
-    <div className=" bg-[var(--bodyBg)]   p-3 mt-4 md:mt-8 md:p-9 ">
-    <h3 className="text-xl md:text-3xl  mt-5 mb-5 md:mb-9 md:mt-9   font-semibold text-[var(--bg)]">
-     Most popular summaries      </h3>
-    <PopularPosts/>
-    </div>
-
-
  
-
-
-
-
- 
-
 
       {/* Recent Posts */}
       <div>
@@ -147,12 +120,7 @@ const PostListPage = () => {
           
           </div>
 
-    <div className=" px-3 md:px-9">
-    <h3 className="text-2xl md:text-4xl ml-2 mt-5 mb-5 md:mb-9 md:mt-9 font-semibold text-[var(--textColor)]">
-          All  summaries     </h3>
-      <PostList />
-    </div>
-      
+
 </div>
 <Footer/>
 
