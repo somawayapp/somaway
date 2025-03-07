@@ -33,13 +33,13 @@ const Navbar = () => {
      <div style={{ zIndex: 100004 }}  className="relative w-full h-[50px] md:h-[70px]  px-3 md:px-9 gap-4 flex items-center text-[var(--TextColor)]
       sticky top-0 justify-between bg-[var(--navBg)] border-b border-b-[var(--softBg4)] ">
 
-<div className="flex items-center justify-between gap-16">
+<div className="flex items-center justify-between gap-12">
   <Link to="/" className="flex items-center gap-1 text-xl font-bold md:text-3xl">
     <img src="/logo7.png" className="w-7 h-7 md:w-9 md:h-9" />
     <span className="bg-clip-text text-[#0062e3] pl-1 text-xl md:text-2xl font-extrabold">Somaway</span>
   </Link>
   
-  <div className="hidden md:flex flex-1 justify-center space-x-16">
+  <div className="hidden md:flex flex-1 justify-center space-x-12">
     <Link className="hover:text-[#0053bf] font-bold" to="/" onClick={() => setOpen(false)}>Home</Link>
     <Link className="hover:text-[#0053bf] font-bold" to="/discover" onClick={() => setOpen(false)}>Discover</Link>
   </div>
@@ -52,8 +52,8 @@ const Navbar = () => {
 
      <Link
             to="/discover"
-            className="text-center px-4 md:px-6 py-2 md:py-4 bg-[#0062e3]   text-white
-            text-xs md:text-lg font-semibold rounded-md hover:bg-[#0053bf]   "
+            className="text-center px-4 md:px-6 py-2 md:py-3 bg-[#0062e3]   text-white
+            text-xs md:text-md font-semibold rounded-md hover:bg-[#0053bf]   "
           > Summaries
             
           </Link>
@@ -61,8 +61,8 @@ const Navbar = () => {
           <SignedOut>
         <Link
             to="/login"
-            className="text-center px-4 md:px-6 py-2 md:py-4 bg-[var(--textColore3)] text-xs md:text-md text-[var(--textColor)] 
-            font-semibold  text-xs md:text-lg rounded-md hover:text-white hover:bg-[#0062e3]  "
+            className="text-center px-4 md:px-6 py-2 md:py-3 bg-[var(--textColore3)] text-xs md:text-md text-[var(--textColor)] 
+            font-semibold  text-xs md:text-md rounded-md hover:text-white hover:bg-[#0062e3]  "
           >
             Login
           </Link>
@@ -78,7 +78,7 @@ const Navbar = () => {
           className="cursor-pointer text-[var(--textColor)] text-sm"
           onClick={() => setOpen((prev) => !prev)}
         >
-          <div className="flex flex-col gap-1">
+          <div className="flex flex-col gap-1 md:gap-2">
             <div
               className={`h-[1px] md:h-[2px] rounded-md w-5 md:w-9 bg-[var(--textColor)] origin-left transition-all ease-in-out ${
                 open && "rotate-45"
