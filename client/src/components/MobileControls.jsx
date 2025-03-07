@@ -44,7 +44,7 @@ const MobileControls = () => {
         }
       >
         <Settings className="h-5 w-5" />
-        <span className="text-xs mt-1">Profile</span>
+        <span className="text-xs mt-1">Settings</span>
       </NavLink>
     </div>
   );
