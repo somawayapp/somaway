@@ -68,21 +68,21 @@ const Homepage = () => {
            text-white text-center animate-fadeIn flex flex-col items-center justify-center"
        >
          <div className="h-full p-2 max-w-full md:max-w-[700px] mx-auto box-border">
-         <h1 className="text-2xl md:text-5xl mt-[15px] md:mt-[50px] font-bold">
+         <h1 className="text-2xl md:text-5xl mt-[15px] text-[var(--bg)] md:mt-[50px] font-bold">
          Set your goal and start your self-growth journey
                    </h1>
     <div className="flex gap-2 items-center justify-center md:gap-4 flex-row">
     <button
-          className="mt-5 mb-5 flex flex-row border border-[var(--softBg)] bg-[var(--bd2)] text-[var(--bg)] py-3 font-semibold text-xs md:text-sm 
-            px-9 rounded-[10px] cursor-pointer hover:bg-[#0053bf]   "
+          className="mt-5 mb-5 flex flex-row border border-[var(--softBgMenu)] bg-[var(--bd2)] text-[var(--bg)] py-3 font-semibold text-xs md:text-sm 
+            px-4 gap-1 md:gap-2 rounded-[10px] cursor-pointer hover:bg-[#0053bf]   "
         >   <img
         src="/fiction.webp"
         className="w-5 h-5 md:w-8 md:h-8 object-cover rounded-full"
           />
           Summaries
         </button>  <button
-          className="mt-5 mb-5 flex flex-row border border-[var(--softBg)] bg-[var(--bd)] text-[var(--textColor)] py-3 font-semibold text-xs md:text-sm 
-            px-9 rounded-[10px] cursor-pointer hover:bg-[#0053bf]   "
+          className="mt-5 mb-5 flex flex-row border border-[var(--softBgMenu)] bg-[var(--bd)] text-[var(--textColor)] py-3 font-semibold text-xs md:text-sm 
+            px-4 gap-1 md:gap-2 rounded-[10px] cursor-pointer hover:bg-[#0053bf]   "
         >
                  <img
             src="/self-growth.webp"
@@ -91,8 +91,8 @@ const Homepage = () => {
           Log In 
         </button>  
          <button
-          className="mt-5 flex flex-row border border-[var(--softBg)] hidden md:block mb-5 bg-[var(--bd2)] text-[var(--bg)] py-3 font-semibold text-xs md:text-sm 
-            px-9 rounded-[10px] cursor-pointer hover:bg-[#0053bf]   "
+          className="mt-5 flex flex-row border border-[var(--softBgMenu)] hidden md:block mb-5 bg-[var(--bd2)] text-[var(--bg)] py-3 font-semibold text-xs md:text-sm 
+            px-4 gap-1 md:gap-2 rounded-[10px] cursor-pointer hover:bg-[#0053bf]   "
         >        <img
         src="/negotiation.webp"
         className="w-5 h-5 md:w-8 md:h-8 object-cover rounded-full"
