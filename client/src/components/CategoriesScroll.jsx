@@ -100,7 +100,7 @@ const CategoriesScroll = ({ setOpen }) => {
               key={category}
               to={`/discover?cat=${slug}`}
               className="flex  flex-col items-center  gap-2 md:gap-4 justify-center text-[var(--textColor)] text-sm
-              md:text-lg bg-[var(--bg2)]  border border-[var(--softBg4)] hover:bg-[var(--softTextColor7)] rounded-xl
+              md:text-lg bg-[var(--bg2)] shadow-lg hover:bg-[var(--softTextColor7)] rounded-xl
                px-5 py-2 md:px-7 transition-all"
               onClick={() => setOpen(false)}
             >
@@ -110,7 +110,7 @@ const CategoriesScroll = ({ setOpen }) => {
                   .toLowerCase()
                   .replace(/\s+/g, "-")
                   .replace(/&/g, "and")}.webp`}
-                className="w-9 h-9 md:w-[40px] md:h-[40px] object-cover rounded-full"
+                className="w-9 h-9 md:w-[50px] md:h-[50px] object-cover rounded-full"
               />
               <span className="text-sm font-semibold md:text-md">{category}</span>
             </Link>

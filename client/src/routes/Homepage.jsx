@@ -78,7 +78,7 @@ const Homepage = () => {
         >
           Summaries
         </button>  <button
-          className="mt-5 mb-5 bg-[var(--bd2)] text-[var(--bg)] py-3 text-semibold text-xs md:text-sm 
+          className="mt-5 mb-5 bg-[var(--bd)] text-[var(--textColor)] py-3 text-semibold text-xs md:text-sm 
             px-9 rounded-[10px] cursor-pointer hover:bg-[#0053bf]   "
         >
           Log In 

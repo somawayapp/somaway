@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 import CategoriesScroll from "../components/CategoriesScroll";
 import Discover from "../components/Discover";
 import Footer from "../components/Footer";
-import Navbar from "../components/navbar2";
+import Navbar from "../components/Navbar";
 import PopularPosts from "../components/PopularPosts";
 import LatestPosts from "../components/LatestPosts";
 import TrendingPosts from "../components/TrendingPosts";
@@ -37,7 +37,7 @@ const PostListPage = () => {
     .join(" | ") || "Featured book summaries"; // Default to "All Books" if no filters are applied
 
   return (
-    <div  className=" bg-[var(--navBg)] mb-[80px]  ">
+    <div  className=" bg-[var(--bg)] mb-[80px]  ">
        <Navbar/>
        
        <div className="px-3 pt-4 md:pt-6 md:px-9 ">
@@ -45,7 +45,7 @@ const PostListPage = () => {
          Book Summaries Library
         </h3>
         <div className="max-w-[700px] mb-5 md:mb-9">
-        <h3 className="text-md md:text-xl ml-1 mb-5 md:mb-9 text-[var(--textColor)]">
+        <h3 className="text-sm md:text-lg ml-1 mb-5 md:mb-9 text-[var(--textColor)]">
          Dive into 15-minute nonfiction book summaries crafted for the curious mind. Insights in minutes, wisdom for a lifetime.
          Are you ready to make Somaway? Get started!
         </h3>
@@ -61,8 +61,8 @@ const PostListPage = () => {
        
   
 
-      <div className="flex  flex-row   px-3 md:px-9 text-[var(--textColor)] justify-between">
-      <div className="w-full  pr-0 bg-[var(--bodyBg)]  p-2 md:p-8  rounded-3xl text-[var(--bg)] ">
+      <div className="flex  flex-row   text-[var(--textColor)] justify-between">
+      <div className="w-full  pr-0 bg-[#7a00da]   py-2 md:py-8  text-[var(--bg)] ">
      
       <div className="flex hidden md:flex mb-[30px] justify-between ">
 

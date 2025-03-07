@@ -125,29 +125,29 @@ const Navbar = () => {
         <div >
         <Link
             to="/discover"
-            className="block py-2 text-[var(--TextColor)]  hover:bg-gray-500 p-2 rounded-xl"
+            className="block py-2 text-[var(--TextColor)] font-bold  hover:bg-gray-500 p-2 rounded-xl"
    onClick={() => setOpen(false)}          > Discover          </Link>
           <Link
             to="/premium"
-            className="block py-2 text-[var(--TextColor)]  hover:bg-gray-500 p-2 rounded-xl"
+            className="block py-2 text-[var(--TextColor)] font-bold   hover:bg-gray-500 p-2 rounded-xl"
    onClick={() => setOpen(false)}          > Premium          </Link>
           <Link
             to="/about"
-            className="block py-2 text-[var(--TextColor)]  hover:bg-gray-500 p-2 rounded-xl"
+            className="block py-2 text-[var(--TextColor)] font-bold  hover:bg-gray-500 p-2 rounded-xl"
    onClick={() => setOpen(false)}          > About Us 
           </Link>
           <Link
             to="/settings"
-            className="block py-2 text-[var(--TextColor)]  hover:bg-gray-500 p-2 rounded-xl"
+            className="block py-2 text-[var(--TextColor)] font-bold   hover:bg-gray-500 p-2 rounded-xl"
    onClick={() => setOpen(false)}              > Settings          </Link>
            <Link
             to="/write"
-            className="block py-2 text-[var(--TextColor)]  hover:bg-gray-500 p-2 rounded-xl"
+            className="block py-2 text-[var(--TextColor)] font-bold   hover:bg-gray-500 p-2 rounded-xl"
    onClick={() => setOpen(false)}              > Write          </Link>
      <Link
             to="/premium"
-            className="block py-2 text-[var(--TextColor)]  hover:bg-gray-500 p-2 rounded-xl"
-   onClick={() => setOpen(false)}              > Pricing          </Link>
+            className="block py-2 text-[var(--TextColor)] font-bold  hover:bg-gray-500 p-2 rounded-xl"
+   onClick={() => setOpen(false)}              > Pricing           </Link>
         </div>
         
         </div>
@@ -181,12 +181,12 @@ const Navbar = () => {
       {/* DESKTOP MENU */}
       <div className="hidden md:flex items-center gap-8 xl:gap-12  font-medium">
 
-          <Link className="hover:text-[#0053bf]    " to="/" onClick={() => setOpen(false)} >Home</Link>
-           <Link className="hover:text-[#0053bf]    " to="/discover" onClick={() => setOpen(false)}> Discover</Link>
-          <Link className="hover:text-[#0053bf]    " to="/premium" onClick={() => setOpen(false)}> Premium</Link>
-          <Link className="hover:text-[#0053bf]    " to="/settings" onClick={() => setOpen(false)}>Settings</Link>
-          <Link className="hover:text-[#0053bf]    " to="/write" onClick={() => setOpen(false)}>Write</Link>
-          <Link className="hover:text-[#0053bf]    " to="/about" onClick={() => setOpen(false)}>About Us</Link>
+          <Link className="hover:text-[#0053bf] font-bold    " to="/" onClick={() => setOpen(false)} >Home</Link>
+           <Link className="hover:text-[#0053bf] font-bold    " to="/discover" onClick={() => setOpen(false)}> Discover</Link>
+          <Link className="hover:text-[#0053bf]  font-bold   " to="/premium" onClick={() => setOpen(false)}> Premium</Link>
+          <Link className="hover:text-[#0053bf] font-bold    " to="/settings" onClick={() => setOpen(false)}>Settings</Link>
+          <Link className="hover:text-[#0053bf] font-bold    " to="/write" onClick={() => setOpen(false)}>Write</Link>
+          <Link className="hover:text-[#0053bf]  font-bold   " to="/about" onClick={() => setOpen(false)}>About Us</Link>
           <Link
             to="/login"
             className="w-full text-center mt-3 md:mt-0 sm:w-auto px-4 py-3 md:py-2 bg-[#0062e3]   text-white
