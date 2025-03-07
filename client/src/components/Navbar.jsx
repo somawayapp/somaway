@@ -32,21 +32,23 @@ const Navbar = () => {
      // Modify or remove z-index here
      <div style={{ zIndex: 100004 }}  className="relative w-full h-[50px] md:h-[70px]  px-3 md:px-9 gap-4 flex items-center text-[var(--TextColor)]
       sticky top-0 justify-between bg-[var(--bg)] border-b border-b-[var(--softBg4)] ">
-   
-
-      {/* LOGO */}
-      <Link to="/" className="flex items-center gap-1 text-xl font-bold md:text-3xl">
+      <div className="flex">
+     <Link to="/" className="flex items-center gap-1 text-xl font-bold md:text-3xl">
       <img src="/logo7.png"  className="w-7 h-7 md:w-9 md:h-9" />
       <span className="bg-clip-text text-[#0062e3]  pl-1 text-xl md:text-2xl  font-extrabold">Somaway</span>
 
       {/*   <span className="bg-clip-text text-[#1ADAff] font-impact"></span> */}
     
 
-</Link>
-<div className="hidden md:block gap-4">
+      </Link>
+      <div className="hidden flex md:block gap-9">
       <Link className="hover:text-[#0053bf] font-bold    " to="/" onClick={() => setOpen(false)} >Home</Link>
       <Link className="hover:text-[#0053bf] font-bold    " to="/discover" onClick={() => setOpen(false)}> Discover</Link>
       </div>
+
+   </div>
+
+     
 
 <div >
 <div >
@@ -60,7 +62,20 @@ const Navbar = () => {
             Get Started
           </Link>
 
-      {/* MOBILE MENU */}
+          <SignedOut>
+        <Link
+            to="/login"
+            className="w-full text-center mt-3 md:mt-0 sm:w-auto px-4 py-3 md:py-2 bg-[var(--textColore3)] text-sm text-[var(--textColor)] 
+            font-semibold rounded-md hover:text-white hover:bg-[#0062e3]  "
+          >
+            Login
+          </Link>
+        </SignedOut>
+
+        <SignedIn>
+          <UserButton />
+        </SignedIn>
+
         
         {/* MOBILE BUTTON */}
         <div
@@ -69,17 +84,17 @@ const Navbar = () => {
         >
           <div className="flex flex-col gap-1">
             <div
-              className={`h-[1px] md:h-2 rounded-md w-5 md:w-9 bg-[var(--textColor)] origin-left transition-all ease-in-out ${
+              className={`h-[1px] md:h-1 rounded-md w-5 md:w-9 bg-[var(--textColor)] origin-left transition-all ease-in-out ${
                 open && "rotate-45"
               }`}
             ></div>
             <div
-              className={`h-[1px] md:h-2 rounded-md w-5 md:w-9bg-[var(--textColor)] transition-all ease-in-out ${
+              className={`h-[1px] md:h-1 rounded-md w-5 md:w-9bg-[var(--textColor)] transition-all ease-in-out ${
                 open && "opacity-0"
               }`}
             ></div>
             <div
-              className={`h-[1px] md:h-2 rounded-md w-5 md:w-9 bg-[var(--textColor)] origin-left transition-all ease-in-out ${
+              className={`h-[1px] md:h-1 rounded-md w-5 md:w-9 bg-[var(--textColor)] origin-left transition-all ease-in-out ${
                 open && "-rotate-45"
               }`}
             ></div>
@@ -183,19 +198,7 @@ const Navbar = () => {
 
    
 
-        <SignedOut>
-        <Link
-            to="/login"
-            className="w-full text-center mt-3 md:mt-0 sm:w-auto px-4 py-3 md:py-2 bg-[var(--textColore3)] text-sm text-[var(--textColor)] 
-            font-semibold rounded-md hover:text-white hover:bg-[#0062e3]  "
-          >
-            Login
-          </Link>
-        </SignedOut>
-
-        <SignedIn>
-          <UserButton />
-        </SignedIn>
+     
       </div>
     </div>
   );
