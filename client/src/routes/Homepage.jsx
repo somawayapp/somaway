@@ -73,20 +73,30 @@ const Homepage = () => {
                    </h1>
     <div className="flex gap-2 items-center justify-center md:gap-4 flex-row">
     <button
-          className="mt-5 mb-5 bg-[var(--bd2)] text-[var(--bg)] py-3 font-semibold text-xs md:text-sm 
+          className="mt-5 mb-5 border border-[var(--softBg4)] bg-[var(--bd2)] text-[var(--bg)] py-3 font-semibold text-xs md:text-sm 
             px-9 rounded-[10px] cursor-pointer hover:bg-[#0053bf]   "
-        >
+        >   <img
+        src="/fiction.webp"
+        className="w-4 h-4 md:w-8 md:h-8 object-cover rounded-full"
+          />
           Summaries
         </button>  <button
-          className="mt-5 mb-5 bg-[var(--bd)] text-[var(--textColor)] py-3 font-semibold text-xs md:text-sm 
+          className="mt-5 mb-5 border border-[var(--softBg4)] bg-[var(--bd)] text-[var(--textColor)] py-3 font-semibold text-xs md:text-sm 
             px-9 rounded-[10px] cursor-pointer hover:bg-[#0053bf]   "
         >
+                 <img
+            src="/self-growth.webp"
+            className="w-4 h-4 md:w-8 md:h-8 object-cover rounded-full"
+              />
           Log In 
         </button>  
          <button
-          className="mt-5 hidden md:block mb-5 bg-[var(--bd2)] text-[var(--bg)] py-3 font-semibold text-xs md:text-sm 
+          className="mt-5 border border-[var(--softBg4)] hidden md:block mb-5 bg-[var(--bd2)] text-[var(--bg)] py-3 font-semibold text-xs md:text-sm 
             px-9 rounded-[10px] cursor-pointer hover:bg-[#0053bf]   "
-        >
+        >        <img
+        src="/negotiation.webp"
+        className="w-4 h-4 md:w-8 md:h-8 object-cover rounded-full"
+          />
           Get started 
         </button>  
 
@@ -101,7 +111,7 @@ const Homepage = () => {
     className="w-[200px] rounded-lg md:rounded-[20px] md:w-2/5 mx-auto md:mx-0"
   />
   <div className="md:w-3/5 items-start justify-start md:text-left">
-    <p className="text-sm mt-5 md:mt-9 md:text-xl font-semibold">ABOUT US</p>
+    <p className="text-xs mt-5 md:mt-9  text-[var(--softTextColor)] md:text-md">ABOUT US</p>
     <p className="text-md mt-1 md:mt-2 md:text-2xl font-semibold">
       Still wondering what is Somaway app?
     </p>
