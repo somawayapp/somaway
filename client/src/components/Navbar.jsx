@@ -34,14 +34,14 @@ const Navbar = () => {
       sticky top-0 justify-between bg-[var(--bg)] border-b border-b-[var(--softBg4)] ">
         
 <div className="flex items-center justify-between gap-9">
-  <Link to="/" className="flex items-center gap-1 text-xl font-bold md:text-3xl">
+  <Link to="/" className="flex items-center gap-2 text-xl font-bold md:text-3xl">
     <img src="/logo7.png" className="w-7 h-7 md:w-9 md:h-9" />
-    <span className="bg-clip-text text-[#0062e3] pl-1 text-xl md:text-2xl font-extrabold">Somaway</span>
+    <span className="bg-clip-text text-[#0062e3] text-xl md:text-2xl font-extrabold">Somaway</span>
   </Link>
   
-  <div className="hidden md:flex flex-1 justify-center space-x-16">
-    <Link className="hover:text-[#0053bf] font-bold" to="/" onClick={() => setOpen(false)}>Home</Link>
-    <Link className="hover:text-[#0053bf] font-bold" to="/discover" onClick={() => setOpen(false)}>Discover</Link>
+  <div className="hidden md:flex flex-1 justify-center items-center space-x-16">
+    <Link className="hover:text-[#0053bf] font-bold text-xl md:text-2xl" to="/" onClick={() => setOpen(false)}>Home</Link>
+    <Link className="hover:text-[#0053bf] font-bold text-xl md:text-2xl" to="/discover" onClick={() => setOpen(false)}>Discover</Link>
   </div>
 </div>
 
@@ -50,11 +50,11 @@ const Navbar = () => {
 
 <div >
 <div >
-<div className="flex flex-row mb-3 gap-2 md:gap-8">
+<div className="flex flex-row gap-2 md:gap-9">
 
      <Link
             to="/discover"
-            className="w-full text-center mt-3 md:mt-0 sm:w-auto px-4 py-2 md:py-2 bg-[#0062e3]   text-white
+            className="w-full text-center sm:w-auto px-4 py-2 md:py-2 bg-[#0062e3]   text-white
             text-xs md:text-md font-semibold rounded-md hover:bg-[#0053bf]   "
           > Summaries
             
@@ -77,7 +77,7 @@ const Navbar = () => {
         
         {/* MOBILE BUTTON */}
         <div
-          className="cursor-pointer text-[var(--textColor)] mt-6 text-sm"
+          className="cursor-pointer text-[var(--textColor)] text-sm"
           onClick={() => setOpen((prev) => !prev)}
         >
           <div className="flex flex-col gap-1">
