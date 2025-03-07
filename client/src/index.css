@@ -62,13 +62,13 @@ a {
 
   --textLogo: #ffffff;
 
-  --navBg: rgba(2, 1, 0);
+  --navBg: rgb(0, 0, 0);
   --bgs: rgb(0, 0, 0);
 
 
   --bg2: #050505;
   --bd: #303030;
-  --bd3: #000000;
+  --bd3: #131313;
 
   --bd2:#fcfeff ;
 
