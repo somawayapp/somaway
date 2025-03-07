@@ -68,6 +68,8 @@ a {
 
   --bg2: #050505;
   --bd: #303030;
+  --bd3: #0a0a0a;
+
   --bd2:#fcfeff ;
 
   --transparentBg: rgba(1, 1, 2, 0.7);
@@ -123,6 +125,8 @@ a {
 
   --bg2:#ffffff ;
   --bd:#fcfeff ;
+  --bd3:#ffffff ;
+
   --bd2: #303030;
 
   --softBg1: #c1c2c4;
