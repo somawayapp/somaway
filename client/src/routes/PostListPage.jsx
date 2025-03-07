@@ -66,7 +66,7 @@ const PostListPage = () => {
      
       <div className="flex hidden md:flex mb-[30px] justify-between ">
 
-<h1 style={{  zIndex: "10000"}} className=" lg:text-[30px] mb-[30px] text-xl ml-2 text-[var(--bg)] font-bold">
+<h1 style={{  zIndex: "10000"}} className=" lg:text-[30px] mb-[30px] text-xl ml-2 text-[#f8f8ff] font-bold">
         {`Book liblary - ${displayText}`}
       </h1>
       <Search />
