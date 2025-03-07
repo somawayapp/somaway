@@ -73,18 +73,18 @@ const Homepage = () => {
                    </h1>
     <div className="flex gap-2 items-center justify-center md:gap-4 flex-row">
     <button
-          className="mt-5 mb-5 bg-[var(--bd2)] text-[var(--bg)] py-3 text-semibold text-xs md:text-sm 
+          className="mt-5 mb-5 bg-[var(--bd2)] text-[var(--bg)] py-3 font-semibold text-xs md:text-sm 
             px-9 rounded-[10px] cursor-pointer hover:bg-[#0053bf]   "
         >
           Summaries
         </button>  <button
-          className="mt-5 mb-5 bg-[var(--bd)] text-[var(--textColor)] py-3 text-semibold text-xs md:text-sm 
+          className="mt-5 mb-5 bg-[var(--bd)] text-[var(--textColor)] py-3 font-semibold text-xs md:text-sm 
             px-9 rounded-[10px] cursor-pointer hover:bg-[#0053bf]   "
         >
           Log In 
         </button>  
          <button
-          className="mt-5 hidden md:block mb-5 bg-[var(--bd2)] text-[var(--bg)] py-3 text-semibold text-xs md:text-sm 
+          className="mt-5 hidden md:block mb-5 bg-[var(--bd2)] text-[var(--bg)] py-3 font-semibold text-xs md:text-sm 
             px-9 rounded-[10px] cursor-pointer hover:bg-[#0053bf]   "
         >
           Get started 
@@ -105,7 +105,7 @@ const Homepage = () => {
     <p className="text-md mt-1 md:mt-2 md:text-2xl font-semibold">
       Still wondering what is Somaway app?
     </p>
-    <p className="text-sm mt-1 md:mt-2 md:text-xl">
+    <p className="text-sm mt-1 md:mt-2 md:text-lg">
       Somaway is a global EdTech startup with Kenyan roots. Somaway app offers
       15-minute bite-sized non-fiction book summaries catered to your everyday
       needs. We are mission-driven and passionate about self-improvement.

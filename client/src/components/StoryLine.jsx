@@ -144,7 +144,34 @@ const StoryLine = () => {
     </div>
 
 
+    <div className="mt-0 mb:mt-[45px] ">
+      <div className="flex justify-between  mt-4 mb-15  md:mb-[40px] pt-5 p-3  md:p-9 overflow-x-hidden   bg-[#7a00da] 
+        items-center gap-5 flex-col md:flex-row">
+      <div>
+      <h1 className="my-8 text-center lg:text-5xl text-2xl ml-2 pl-2 md:pl-0 mb-2 mt-4 lg:mb-5 lg:mt-8 text-white font-bold">
+      Get smarter in just 5 minutes</h1>
+      <p className="text-white pl-2 md:pl-0 text-center md:text-left pr-4 ml-2 text-md mb-5 md:mb-7 md:text-xl">Grasp the book’s key ideas in less than 5 minutes
 
+</p>
+<div className="flex justify-center md:justify-start">
+<Link
+            to="/login"
+            className="w-full items-center ml-4 md:ml-2 mr-4 text-center  text-md md:text-xl sm:w-auto px-4 md:px-6  py-3 md:py-3 bg-white 
+            text-black font-semibold  rounded-md hover:text-white hover:bg-black"
+          >
+            Get Started    
+          </Link>
+</div>
+    
+    </div>
+
+     <img
+            src="/group.svg"
+            className="w-100 md:w-180  h-40 md:h-80  md:mr-[40px] mr-0 object-cover "
+          />   
+          
+          </div>
+      </div>
  
 
 

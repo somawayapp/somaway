@@ -62,7 +62,7 @@ const PostListPage = () => {
   
 
       <div className="flex  flex-row   text-[var(--textColor)] justify-between">
-      <div className="w-full  pr-0 bg-[#7a00da]   py-2 md:py-8  text-[var(--bg)] ">
+      <div className="w-full  pr-0 bg-[#7a00da]   p-3 md:p-9  text-[var(--bg)] ">
      
       <div className="flex hidden md:flex mb-[30px] justify-between ">
 
@@ -103,45 +103,10 @@ const PostListPage = () => {
 
 
 
-    <div className="mt-0 mb:mt-[45px] ">
-      <div className="flex justify-between  mt-4 mb-15  md:mb-[40px] pt-5 p-3  md:p-9 overflow-x-hidden   bg-[#7a00da] 
-        items-center gap-5 flex-col md:flex-row">
-      <div>
-      <h1 className="my-8 text-center lg:text-5xl text-2xl ml-2 pl-2 md:pl-0 mb-2 mt-4 lg:mb-5 lg:mt-8 text-white font-bold">
-      Get smarter in just 5 minutes</h1>
-      <p className="text-white pl-2 md:pl-0 text-center md:text-left pr-4 ml-2 text-md mb-5 md:mb-7 md:text-xl">Grasp the book’s key ideas in less than 5 minutes
-
-</p>
-<div className="flex justify-center md:justify-start">
-<Link
-            to="/login"
-            className="w-full items-center ml-4 md:ml-2 mr-4 text-center  text-md md:text-xl sm:w-auto px-4 md:px-6  py-3 md:py-3 bg-white 
-            text-black font-semibold  rounded-md hover:text-white hover:bg-black"
-          >
-            Get Started    
-          </Link>
-</div>
-    
-    </div>
-
-     <img
-            src="/group.svg"
-            className="w-100 md:w-180  h-40 md:h-80  md:mr-[40px] mr-0 object-cover "
-          />   
-          
-          </div>
-      </div>
 
 
-<div className="mb-0  px-3 md:px-9 md:mb-[20px] ">
-<div>
-      <h3 className="text-xl md:text-3xl ml-2 mt-5 mb-5 md:mb-9 md:mt-9 font-semibold text-[var(--textColor)]">
-      New releases
-      </h3>
-    </div>
-   <LatestPosts />
-</div>
-   
+
+
 
 
     <div className=" bg-[var(--bodyBg)]   p-3 mt-4 md:mt-8 md:p-9 ">
@@ -156,12 +121,7 @@ const PostListPage = () => {
 
 
 
-    <div className="p-3 mb-3 md:mb-9 md:p-9">
-    <h3 className="text-lg md:text-2xl mb-3 md:mb-9 font-semibold text-[var(--textColor)]">
-       Pick your category    </h3>
-        <CategoriesScroll/>
-
-        </div>
+ 
 
 
       {/* Recent Posts */}
