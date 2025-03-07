@@ -2,7 +2,7 @@ import React from "react";
 
 const Partners = () => {
   return (
-    <div className="overflow-hidden  border-t border-t-[var(--softBg4)] whitespace-nowrap py-4 bg-white">
+    <div className="overflow-hidden  border-t border-t-[var(--softBg4)] whitespace-nowrap py-4 ">
       <div className="flex  gap-9  md:gap-[80px] animate-scroll">
         <img src="/enterpreneur.svg" className="h-6 md:h-[30px]" />
         <img src="/euronews.svg" className="h-6 md:h-[30px]" />
