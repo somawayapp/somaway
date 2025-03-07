@@ -123,7 +123,7 @@ const Write = () => {
         {/* Title Input */}
         <input type="text" placeholder="Enter Post Title" value={title} onChange={(e) => setTitle(e.target.value.slice(0, 150))} className="p-2 bg-[var(--textColore)] text-[var(--textColor)]  rounded" />
         
-        <input type="text" placeholder="What's inside" value={summaryf} onChange={(e) => setSummary(e.target.value.slice(0, 300))} className="p-2 bg-[var(--textColore)] text-[var(--textColor)]  rounded" />
+        <input type="text" placeholder="What's inside" value={summary} onChange={(e) => setSummary(e.target.value.slice(0, 300))} className="p-2 bg-[var(--textColore)] text-[var(--textColor)]  rounded" />
 
         {/* Author Input */}
         <input type="text" placeholder="Author Name" value={author} onChange={(e) => setAuthor(e.target.value)} className="p-2  rounded bg-[var(--textColore)] text-[var(--textColor)]" />
