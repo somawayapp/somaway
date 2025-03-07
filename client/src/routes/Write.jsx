@@ -10,6 +10,10 @@ import 'react-quill-new/dist/quill.snow.css';
 import Navbar from "../components/Navbar";
 
 const Write = () => {
+  useEffect(() => {
+    window.scrollTo(0, 0); // Scrolls to the top when this component mounts
+  }, []);
+  
   const { isLoaded, isSignedIn } = useUser();
   const [aboutbook, setAboutbook] = useState("");
   const [aboutauthor, setAboutauthor] = useState("");

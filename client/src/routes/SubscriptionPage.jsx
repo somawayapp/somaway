@@ -6,8 +6,13 @@ import { SignedIn, SignedOut, UserButton } from "@clerk/clerk-react";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowLeft} from '@fortawesome/free-solid-svg-icons';
 import Navbar from '../components/Navbar';
+import { useEffect } from 'react';
+
 
 const SubscriptionPage = () => {
+  useEffect(() => {
+    window.scrollTo(0, 0); // Scrolls to the top when this component mounts
+  }, []);
   const location = useLocation();
   const { planPrice, planName } = location.state || {};
 

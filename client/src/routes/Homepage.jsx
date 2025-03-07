@@ -18,9 +18,13 @@ import TrendingPosts from "../components/TrendingPosts";
 import StoryLine from "../components/StoryLine";
 import Footer from "../components/Footer";
 import MobileControls from "../components/MobileControls";
+import { useEffect } from "react";
+
 
 const Homepage = () => {
- 
+  useEffect(() => {
+    window.scrollTo(0, 0); // Scrolls to the top when this component mounts
+  }, []);
 
   return (
       <div>

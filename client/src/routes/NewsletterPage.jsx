@@ -1,6 +1,9 @@
 import { Link } from "react-router-dom";
-
+import { useEffect } from "react";
 const NewsletterPage = () => {
+  useEffect(() => {
+    window.scrollTo(0, 0); // Scrolls to the top when this component mounts
+  }, []);
   return (
     <div className="mt-4 flex px-3 md:px-9 flex-col gap-12">
       {/* BREADCRUMB */}

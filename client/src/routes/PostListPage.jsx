@@ -13,7 +13,13 @@ import TrendingPosts from "../components/TrendingPosts";
 import FeaturedPosts from "../components/FeaturedPosts";
 import PostList from "../components/PostList";
 
+import { useEffect } from "react";
+
 const PostListPage = () => {
+  useEffect(() => {
+    window.scrollTo(0, 0); // Scrolls to the top when this component mounts
+  }, []);
+  
   const [open, setOpen] = useState(false);
   const location = useLocation(); // Get the current location object
 

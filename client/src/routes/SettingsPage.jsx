@@ -3,7 +3,13 @@ import ThemeToggler from "../components/Theme";
 import { SignedIn, SignedOut, UserButton } from "@clerk/clerk-react";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
+import { useEffect } from "react";
 const SettingsPage = () => {
+
+  useEffect(() => {
+    window.scrollTo(0, 0); // Scrolls to the top when this component mounts
+  }, []);
+  
   return (
     <div className="mb-[80px] ">
     <Navbar/>

@@ -3,10 +3,12 @@ import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import { FaStar } from 'react-icons/fa';
 import PlanCard from "../components/PlanCard";
-
+import { useEffect } from "react";
 
 const AboutPage = () => {
-
+  useEffect(() => {
+    window.scrollTo(0, 0); // Scrolls to the top when this component mounts
+  }, []);
 
   return (
     <div>
