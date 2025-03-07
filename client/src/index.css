@@ -347,15 +347,15 @@ body {
 }
 
 .desc-content h1 {
-  font-size: 22px;
+  font-size: 26px;
 }
 
 .desc-content h2 {
-  font-size: 20px;
+  font-size: 23px;
 }
 
 .desc-content h3 {
-  font-size: 18px;
+  font-size: 19px;
 }
 
 .desc-content p {
@@ -364,15 +364,15 @@ body {
 
 @media (min-width: 768px) {
   .desc-content h1 {
-    font-size: 26px;
+    font-size: 32px;
   }
 
   .desc-content h2 {
-    font-size: 24px;
+    font-size: 28px;
   }
 
   .desc-content h3 {
-    font-size: 22px;
+    font-size: 24px;
   }
 
   .desc-content p {
