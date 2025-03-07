@@ -1,11 +1,11 @@
 import React from "react";
 import { NavLink } from "react-router-dom"; // Use NavLink for active link styling
-import { Home, Compass, User } from "lucide-react";
+import { Home, Compass, User, Settings } from "lucide-react";
 
 const MobileControls = () => {
   return (
 <div className="fixed bottom-0 left-1/2 transform -translate-x-1/2 flex justify-between bg-[var(--bg)] 
-    pl-4 pr-4 pt-2 rounded-2xl shadow-lg w-[100%] md:hidden">
+    pl-4 pr-4 pt-3 shadow-lg w-[100%] md:hidden">
     
 
       {/* Home Button */}
@@ -17,7 +17,7 @@ const MobileControls = () => {
           } hover:text-[#0062e3]    transition`
         }
       >
-        <Home className="h-6 w-6" />
+        <Home className="h-5 w-5" />
         <span className="text-xs mt-1">Home</span>
       </NavLink>
 
@@ -30,7 +30,7 @@ const MobileControls = () => {
           } hover:text-[#0053bf]    transition`
         }
       >
-        <Compass className="h-6 w-6" />
+        <Compass className="h-5 w-5" />
         <span className="text-xs mt-1">Explore</span>
       </NavLink>
 
@@ -43,7 +43,7 @@ const MobileControls = () => {
           } hover:text-[#0053bf]    transition`
         }
       >
-        <User className="h-6 w-6" />
+        <Settings className="h-5 w-5" />
         <span className="text-xs mt-1">Profile</span>
       </NavLink>
     </div>
