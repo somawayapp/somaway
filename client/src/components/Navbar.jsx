@@ -52,8 +52,8 @@ const Navbar = () => {
 
      <Link
             to="/discover"
-            className="text-center px-4 py-2 md:py-2 bg-[#0062e3]   text-white
-            text-xs md:text-md font-semibold rounded-md hover:bg-[#0053bf]   "
+            className="text-center px-4 md:px-6 py-2 md:py-4 bg-[#0062e3]   text-white
+            text-xs md:text-lg font-semibold rounded-md hover:bg-[#0053bf]   "
           > Summaries
             
           </Link>
@@ -61,8 +61,8 @@ const Navbar = () => {
           <SignedOut>
         <Link
             to="/login"
-            className="text-center px-4 py-3 md:py-2 bg-[var(--textColore3)] text-xs md:text-md text-[var(--textColor)] 
-            font-semibold rounded-md hover:text-white hover:bg-[#0062e3]  "
+            className="text-center px-4 md:px-6 py-2 md:py-4 bg-[var(--textColore3)] text-xs md:text-md text-[var(--textColor)] 
+            font-semibold  text-xs md:text-lg rounded-md hover:text-white hover:bg-[#0062e3]  "
           >
             Login
           </Link>
@@ -80,17 +80,17 @@ const Navbar = () => {
         >
           <div className="flex flex-col gap-1">
             <div
-              className={`h-[1px] md:h-1 rounded-md w-5 md:w-9 bg-[var(--textColor)] origin-left transition-all ease-in-out ${
+              className={`h-[1px] md:h-[2px] rounded-md w-5 md:w-9 bg-[var(--textColor)] origin-left transition-all ease-in-out ${
                 open && "rotate-45"
               }`}
             ></div>
             <div
-              className={`h-[1px] md:h-1 rounded-md w-5 md:w-9 bg-[var(--textColor)] origin-left  transition-all ease-in-out ${
+              className={`h-[1px] md:h-[2px] rounded-md w-5 md:w-9 bg-[var(--textColor)] origin-left  transition-all ease-in-out ${
                 open && "opacity-0"
               }`}
             ></div>
             <div
-              className={`h-[1px] md:h-1 rounded-md w-5 md:w-9 bg-[var(--textColor)] origin-left transition-all ease-in-out ${
+              className={`h-[1px] md:h-[2px] rounded-md w-5 md:w-9 bg-[var(--textColor)] origin-left transition-all ease-in-out ${
                 open && "-rotate-45"
               }`}
             ></div>
