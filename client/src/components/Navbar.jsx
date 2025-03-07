@@ -53,7 +53,7 @@ const Navbar = () => {
      <Link
             to="/discover"
             className="text-center px-4 md:px-6 py-2 md:py-3 bg-[#0062e3]   text-white
-            text-xs md:text-[18px] font-semibold rounded-md hover:bg-[#0053bf]   "
+            text-xs md:text-[16px] font-semibold rounded-md hover:bg-[#0053bf]   "
           > Summaries
             
           </Link>
@@ -62,7 +62,7 @@ const Navbar = () => {
         <Link
             to="/login"
             className="text-center px-4 md:px-6 py-2 md:py-3 bg-[var(--textColore3)] text-xs md:text-md text-[var(--textColor)] 
-            font-semibold  text-xs md:text-[18px] rounded-md hover:text-white hover:bg-[#0062e3]  "
+            font-semibold  text-xs md:text-[16px] rounded-md hover:text-white hover:bg-[#0062e3]  "
           >
             Login
           </Link>

@@ -104,7 +104,7 @@ const Homepage = () => {
       className="w-5 h-5 md:w-8 md:h-8 object-cover rounded-full"
     />
     <span className="hidden md:block">Get Started</span>
-    <span className=" block md:hidden" >Start</span>
+    <span className=" block md:hidden" >S</span>
 
   </button>
 </div>
