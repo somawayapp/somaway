@@ -218,7 +218,7 @@ const StoryLine = () => {
   </div>
 </div>
 
-    <div className="flex justify-between  mt-4 mb-15  md:mb-[40px] pt-5 p-3  md:p-9 overflow-x-hidden   bg-[#7a00da] 
+    <div className="flex justify-between  mb-15  md:mb-[40px] pt-5 p-3  md:p-9 overflow-x-hidden   bg-[#7a00da] 
         items-center gap-5 flex-col md:flex-row">
       <div>
       <h1 className="my-8 text-center lg:text-5xl text-2xl ml-2 pl-2 md:pl-0 mb-2 mt-4 lg:mb-5 lg:mt-8 text-white font-bold">

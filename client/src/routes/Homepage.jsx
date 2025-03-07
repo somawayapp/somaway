@@ -73,8 +73,8 @@ const Homepage = () => {
                    </h1>
                    <div className="flex gap-2 items-center justify-center md:gap-4 flex-row">
   <button
-    className="mt-5 mb-5 flex items-center border border-[var(--textColori)] bg-[var(--bd2)] text-[var(--bg)] 
-    font-semibold text-xs md:text-sm  py-2 px-2 md:px-4 md:py-3 gap-2 rounded-[10px] cursor-pointer hover:bg-[#0053bf]"
+    className="mt-5 mb-5 flex items-center border border-[var(--textLogo)] bg-[var(--bd2)] text-[var(--bg)] 
+    font-semibold text-xs md:text-sm  py-2 px-2 md:px-6 md:py-3 gap-2 rounded-[10px] cursor-pointer hover:bg-[#0053bf]"
   >
     <img
       src="/fiction.webp"
@@ -85,7 +85,7 @@ const Homepage = () => {
 
   <button
     className="mt-5 mb-5 flex items-center border border-[var(--textColore)] bg-[var(--bd)] text-[var(--textColor)]
-     font-semibold text-xs md:text-sm  py-2 px-2 md:px-4 md:py-3 gap-2 rounded-[10px] cursor-pointer hover:bg-[#0053bf]"
+     font-semibold text-xs md:text-sm  py-2 px-2 md:px-6 md:py-3 gap-2 rounded-[10px] cursor-pointer hover:bg-[#0053bf]"
   >
     <img
       src="/self-growth.webp"
@@ -95,7 +95,7 @@ const Homepage = () => {
   </button>
 
   <button
-    className="mt-5 mb-5  md:flex items-center border border-[var(--textColori)] bg-[var(--bd2)] text-[var(--bg)] py-2 px-2 md:px-4 md:py-3
+    className="mt-5 mb-5  md:flex items-center border border-[var(--textLogo)] bg-[var(--bd2)] text-[var(--bg)] py-2 px-2 md:px-6 md:py-3
      font-semibold text-xs md:text-sm px-2 md:px-4 gap-2 rounded-[10px] cursor-pointer hover:bg-[#0053bf]"
   >
     <img
