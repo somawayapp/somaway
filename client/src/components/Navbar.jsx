@@ -32,18 +32,19 @@ const Navbar = () => {
      // Modify or remove z-index here
      <div style={{ zIndex: 100004 }}  className="relative w-full h-[50px] md:h-[70px]  px-3 md:px-9 gap-4 flex items-center text-[var(--TextColor)]
       sticky top-0 justify-between bg-[var(--bg)] border-b border-b-[var(--softBg4)] ">
-      <div className="flex flex-row gap-9 ">
-     <Link to="/" className="flex items-center gap-1 text-xl font-bold md:text-3xl">
-      <img src="/logo7.png"  className="w-7 h-7 md:w-9 md:h-9" />
-      <span className="bg-clip-text text-[#0062e3]  pl-1 text-xl md:text-2xl  font-extrabold">Somaway</span>
+        
+<div className="flex items-center justify-between gap-9">
+  <Link to="/" className="flex items-center gap-1 text-xl font-bold md:text-3xl">
+    <img src="/logo7.png" className="w-7 h-7 md:w-9 md:h-9" />
+    <span className="bg-clip-text text-[#0062e3] pl-1 text-xl md:text-2xl font-extrabold">Somaway</span>
+  </Link>
+  
+  <div className="hidden md:flex flex-1 justify-center space-x-16">
+    <Link className="hover:text-[#0053bf] font-bold" to="/" onClick={() => setOpen(false)}>Home</Link>
+    <Link className="hover:text-[#0053bf] font-bold" to="/discover" onClick={() => setOpen(false)}>Discover</Link>
+  </div>
+</div>
 
-      </Link>
-      <div className="hidden flex md:block gap-9">
-      <Link className="hover:text-[#0053bf] font-bold    " to="/" onClick={() => setOpen(false)} >Home</Link>
-      <Link className="hover:text-[#0053bf] font-bold    " to="/discover" onClick={() => setOpen(false)}> Discover</Link>
-      </div>
-
-   </div>
 
      
 
