@@ -3,79 +3,86 @@ import Post from "../models/post.model.js";
 import User from "../models/user.model.js";
 
 export const getPosts = async (req, res) => {
-  const page = parseInt(req.query.page) || 1;
-  const limit = parseInt(req.query.limit) || 2;
+  try {
+    const page = parseInt(req.query.page) || 1;
+    const limit = parseInt(req.query.limit) || 2;
+    const query = {};
 
-  const query = {};
+    console.log(req.query);
 
-  console.log(req.query);
+    const cat = req.query.cat;
+    const author = req.query.author;
+    const searchQuery = req.query.search;
+    const sortQuery = req.query.sort;
+    const featured = req.query.featured;
 
-  const cat = req.query.cat;
-  const author = req.query.author;
-  const searchQuery = req.query.search;
-  const sortQuery = req.query.sort;
-  const featured = req.query.featured;
-
-  if (cat) {
-    query.category = cat;
-  }
-
-  if (searchQuery) {
-    query.title = { $regex: searchQuery, $options: "i" };
-  }
-
-  if (author) {
-    query.author = author; // Use author directly from Post model
-  }
-
-
-  let sortObj = { createdAt: -1 };
-
-  if (sortQuery) {
-    switch (sortQuery) {
-      case "newest":
-        sortObj = { createdAt: -1 };
-        break;
-      case "oldest":
-        sortObj = { createdAt: 1 };
-        break;
-      case "popular":
-        sortObj = { visit: -1 };
-        break;
-      case "trending":
-        sortObj = { visit: -1 };
-        query.createdAt = {
-          $gte: new Date(new Date().getTime() - 7 * 24 * 60 * 60 * 1000),
-        };
-        break;
-      default:
-        break;
+    if (cat) {
+      query.category = cat;
     }
+
+    if (searchQuery) {
+      query.$or = [
+        { title: { $regex: searchQuery, $options: "i" } }, // Search in title
+        { desc: { $regex: searchQuery, $options: "i" } }, // Search in description
+      ];
+    }
+
+ 
+    
+
+    if (author) {
+      // Search for author's name in the populated user field
+      const authorRegex = new RegExp(author, "i");
+      const users = await User.find({ username: authorRegex }).select("_id");
+      const userIds = users.map((user) => user._id);
+      query.user = { $in: userIds };
+    }
+
+    let sortObj = { createdAt: -1 };
+
+    if (sortQuery) {
+      switch (sortQuery) {
+        case "newest":
+          sortObj = { createdAt: -1 };
+          break;
+        case "oldest":
+          sortObj = { createdAt: 1 };
+          break;
+        case "popular":
+          sortObj = { visit: -1 };
+          break;
+        case "trending":
+          sortObj = { visit: -1 };
+          query.createdAt = {
+            $gte: new Date(new Date().getTime() - 7 * 24 * 60 * 60 * 1000),
+          };
+          break;
+        default:
+          break;
+      }
+    }
+
+    if (featured) {
+      query.isFeatured = true;
+    }
+
+    // Fetch posts with search query
+    const posts = await Post.find(query)
+      .populate("user", "username") // Populate username for author search
+      .sort(sortObj)
+      .limit(limit)
+      .skip((page - 1) * limit);
+
+    const totalPosts = await Post.countDocuments(query);
+    const hasMore = page * limit < totalPosts;
+
+    res.status(200).json({ posts, hasMore });
+  } catch (error) {
+    console.error("Error fetching posts:", error);
+    res.status(500).json("Internal server error!");
   }
-
-  if (featured) {
-    query.isFeatured = true;
-  }
-
-  const posts = await Post.find(query)
-    .populate("user", "username")
-    .sort(sortObj)
-    .limit(limit)
-    .skip((page - 1) * limit);
-
-  const totalPosts = await Post.countDocuments();
-  const hasMore = page * limit < totalPosts;
-
-  res.status(200).json({ posts, hasMore });
 };
 
-export const getPost = async (req, res) => {
-  const post = await Post.findOne({ slug: req.params.slug }).populate(
-    "user",
-    "username img"
-  );
-  res.status(200).json(post);
-};
 
 export const createPost = async (req, res) => {
   try {
