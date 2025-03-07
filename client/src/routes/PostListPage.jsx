@@ -61,8 +61,8 @@ const PostListPage = () => {
        
   
 
-      <div className="flex  flex-row   text-[var(--textColor)] justify-between">
-      <div className="w-full bg-[#7a00da]   p-3 md:p-9  text-[var(--bg)] ">
+      <div className="flex  flex-row  justify-between">
+      <div className="w-full bg-[#7a00da]   p-3 md:p-9   ">
      
       <div className="flex hidden md:flex mb-[30px] justify-between ">
 
@@ -77,7 +77,7 @@ const PostListPage = () => {
 <div className="flex flex-col md:hidden block  items-center justify-center mb-5 pl-1  pr-1 ">
 
   
-<h1 style={{  zIndex: "10000"}} className=" lg:text-[30px] mb-2  md:mb-[30px] text-xl ml-2 text-[var(--bg)] font-bold">
+<h1 style={{  zIndex: "10000"}} className=" lg:text-[30px] mb-2  md:mb-[30px] text-xl ml-2 text-[#f8f8ff] font-bold">
         {`Book Library - ${displayText}`}
       </h1>
       <Search />
@@ -99,7 +99,7 @@ const PostListPage = () => {
 
       {/* Recent Posts */}
       <div>
-      <div className="flex justify-between mb-10 md:mb-[75px] pt-5 p-3 p-9 overflow-x-hidden  bg-[var(--textLogo)] 
+      <div className="flex justify-between mb-10 md:mb-[75px] pt-5 overflow-x-hidden  bg-[var(--textLogo)] 
         items-center gap-5 flex-col md:flex-row">
       <div>
       <h1 className="my-8 lg:text-6xl text-3xl ml-2 pl-2 md:pl-0 mb-2 mt-4 lg:mb-5 lg:mt-8 text-[var(--textColore2)] font-bold"> Book summaries library</h1>
