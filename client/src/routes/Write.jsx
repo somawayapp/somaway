@@ -172,7 +172,7 @@ const Write = () => {
   className="bg-[var(--textColore)] text-[var(--textColor)] rounded"
   modules={{
     toolbar: [
-      [{ header: [3, 2, 1, false] }],
+      [{ header: [1, 2, 3, false] }],
       ["bold", "italic", "underline", "strike"],
       [{ list: "ordered" }, { list: "bullet" }],
       ["blockquote", "code-block"],

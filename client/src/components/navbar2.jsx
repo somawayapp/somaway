@@ -138,6 +138,13 @@ const Navbar = () => {
 
 
         <div >
+             <Link
+                      to="/discover"
+                      className="block py-2 text-[var(--TextColor)] font-bold  hover:bg-gray-500 p-2 rounded-xl"
+             onClick={() => setOpen(false)}          > Home           </Link>     <Link
+             to="/discover"
+             className="block py-2 text-[var(--TextColor)] font-bold  hover:bg-gray-500 p-2 rounded-xl"
+          onClick={() => setOpen(false)}          > Book summaries          </Link>
         <Link
             to="/discover"
             className="block py-2 text-[var(--TextColor)] font-bold  hover:bg-gray-500 p-2 rounded-xl"
