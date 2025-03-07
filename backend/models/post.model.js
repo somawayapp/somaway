@@ -15,6 +15,18 @@ const postSchema = new Schema(
       type: String,
       required: true,
     },
+    whoshouldread: {
+      type: String,
+      required: false,
+    },  
+     aboutauthor: {
+      type: String,
+      required: false,
+    },  
+     aboutbook: {
+      type: String,
+      required: false,
+    },
     summary: {
       type: String,
       required: true,
@@ -34,7 +46,7 @@ const postSchema = new Schema(
     },
     category: {
       type: String,
-      default: "general",
+      default: "self-growth",
     },
     isFeatured: {
       type: Boolean,

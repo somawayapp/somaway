@@ -11,7 +11,9 @@ import Navbar from "../components/Navbar";
 
 const Write = () => {
   const { isLoaded, isSignedIn } = useUser();
-  const [title, setTitle] = useState("");
+  const [aboutbook, setaboutbook] = useState("");
+  const [aboutauthor, setaboutauthor] = useState("");
+  const [whoshouldread, setwhoshouldread] = useState("");
   const [desc, setDesc] = useState("");
   const [category, setCategory] = useState("");
   const [img, setImg] = useState(null);
@@ -60,6 +62,9 @@ const Write = () => {
     let missingFields = [];
   
     if (!title.trim()) missingFields.push("Title");
+    if (!whoshouldread.trim()) missingFields.push("whoshouldread");
+    if (!aboutauthor.trim()) missingFields.push("aboutauthor");
+    if (!aboutbook.trim()) missingFields.push("aboutbook");
     if (!summary.trim()) missingFields.push("Summary");
     if (!desc.trim()) missingFields.push("Description");
     if (!category) missingFields.push("Category");
@@ -78,6 +83,9 @@ const Write = () => {
     
     const data = {
       title,
+      whoshouldread,
+      aboutbook,
+      aboutauthor,
       desc,
       category,
       img: cover?.filePath || "",
@@ -123,7 +131,11 @@ const Write = () => {
         {/* Title Input */}
         <input type="text" placeholder="Enter Post Title" value={title} onChange={(e) => setTitle(e.target.value.slice(0, 150))} className="p-2 bg-[var(--textColore)] text-[var(--textColor)]  rounded" />
         
-        <input type="text" placeholder="What's inside" value={summary} onChange={(e) => setSummary(e.target.value.slice(0, 300))} className="p-2 bg-[var(--textColore)] text-[var(--textColor)]  rounded" />
+        <input type="text" placeholder=" Who should read this book" value={title} onChange={(e) => setwhoshouldread(e.target.value.slice(0, 150))} className="p-2 bg-[var(--textColore)] text-[var(--textColor)]  rounded" />
+        <input type="text" placeholder="About the author" value={title} onChange={(e) => setaboutauthor(e.target.value.slice(0, 150))} className="p-2 bg-[var(--textColore)] text-[var(--textColor)]  rounded" />
+        <input type="text" placeholder="About this book" value={title} onChange={(e) => setaboutbook(e.target.value.slice(0, 150))} className="p-2 bg-[var(--textColore)] text-[var(--textColor)]  rounded" />
+
+        <input type="text" placeholder="What's inside, short summary" value={summary} onChange={(e) => setSummary(e.target.value.slice(0, 300))} className="p-2 bg-[var(--textColore)] text-[var(--textColor)]  rounded" />
 
         {/* Author Input */}
         <input type="text" placeholder="Author Name" value={author} onChange={(e) => setAuthor(e.target.value)} className="p-2  rounded bg-[var(--textColore)] text-[var(--textColor)]" />
@@ -150,8 +162,31 @@ const Write = () => {
         </select>
 
         {/* Rich Text Editor */}
-        <ReactQuill value={desc} onChange={setDesc} placeholder="book summary..." className=" bg-[var(--textColore)] text-[var(--textColor)] rounded" />
         
+
+        <ReactQuill 
+  value={desc} 
+  onChange={setDesc} 
+  placeholder="Book summary..."
+  className="bg-[var(--textColore)] text-[var(--textColor)] rounded"
+  modules={{
+    toolbar: [
+      [{ header: [1, 2, false] }],
+      ["bold", "italic", "underline", "strike"],
+      [{ list: "ordered" }, { list: "bullet" }],
+      ["blockquote", "code-block"],
+      [{ align: [] }],
+      ["link", "image"], // Removed color options
+      ["clean"],
+    ],
+  }}
+  formats={[
+    "header", "bold", "italic", "underline", "strike",
+    "list", "bullet", "blockquote", "code-block",
+    "align", "link", "image"
+  ]}
+/>
+
      
         {/* Featured Checkbox */}
         <label className="flex items-center gap-2">

@@ -192,7 +192,7 @@ const SinglePostPage = () => {
          
          <p
         className="desc-content pb-2 md:pb-4 text-[var(--textColor)] text-justify"
-        dangerouslySetInnerHTML={{ __html: data.summary }}
+        dangerouslySetInnerHTML={{ __html: data.aboutauthor }}
         />
           </div>
 
@@ -205,7 +205,7 @@ const SinglePostPage = () => {
          
          <p
         className="desc-content pb-2 md:pb-4 text-[var(--textColor)] text-justify"
-        dangerouslySetInnerHTML={{ __html: data.summary }}
+        dangerouslySetInnerHTML={{ __html: data.aboutbook }}
         />
           </div>
 
@@ -213,12 +213,12 @@ const SinglePostPage = () => {
             className="bg-[var(--bd)] text-[16px] md:text-[20px] shadow-2xl rounded-2xl md:rounded-[20px] p-4 md:px-9 flex flex-col items-start text-left relative"
           >
               <h1 className=" text-xl mt-1 md:mt-2 md:text-2xl text-justify font-bold">
-            Who should read <span className="pl-1"> {data.who} </span> 
+            Who should read <span className="pl-1"> {data.title} </span> 
             </h1>
          
          <p
         className="desc-content  pb-2 md:pb-4 text-[var(--textColor)] text-justify"
-        dangerouslySetInnerHTML={{ __html: data.summary }}
+        dangerouslySetInnerHTML={{ __html: data.whoshouldread }}
         />
           </div>
   </div>
