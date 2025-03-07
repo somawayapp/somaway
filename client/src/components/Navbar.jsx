@@ -110,7 +110,7 @@ const Navbar = () => {
 
         {/* MOBILE LINK LIST */}
         <div
-          className={`w-[80%] md:w-[20%]  overflow-y-auto h-cover bg-[var(--bg)] flex flex-col p-5  mb-[60px]items-left justify-left  text-[var(--TextColor)] 
+          className={`w-[80%] md:w-[20%]  overflow-y-auto h-cover bg-[var(--bg)] flex flex-col p-5  mb-[60px] items-left justify-left  text-[var(--TextColor)] 
             gap-8 font-sm text-md fixed top-0 right-0  bottom-0 overflow-x-hidden transition-transform ease-in-out z-50 ${
             open ? "translate-x-0" : "translate-x-full"
           }`}   style={{ maxHeight: "100vh" }}

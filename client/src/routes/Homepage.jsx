@@ -96,15 +96,14 @@ const Homepage = () => {
   </button>
 
   <button
-    className="mt-5 mb-5  md:flex items-center border border-[var(--softTextColor)] bg-[var(--bd2)] text-[var(--bg)] py-2 px-2 md:px-6 md:py-3
+    className="mt-5 mb-5 flex items-center border border-[var(--softTextColor)] bg-[var(--bd2)] text-[var(--bg)] py-2 px-2 md:px-6 md:py-3
      font-semibold text-xs md:text-sm  gap-2 rounded-[10px] cursor-pointer hover:bg-[#0053bf]"
   >
     <img
       src="/negotiation.webp"
       className="w-5 h-5 md:w-8 md:h-8 object-cover rounded-full"
     />
-    <span className="hidden md:block">Get Started</span>
-    <span className=" block md:hidden" >S</span>
+    <span className=" ">Get Started</span>
 
   </button>
 </div>
