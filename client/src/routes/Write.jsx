@@ -11,9 +11,10 @@ import Navbar from "../components/Navbar";
 
 const Write = () => {
   const { isLoaded, isSignedIn } = useUser();
-  const [aboutbook, setaboutbook] = useState("");
-  const [aboutauthor, setaboutauthor] = useState("");
-  const [whoshouldread, setwhoshouldread] = useState("");
+  const [aboutbook, setAboutbook] = useState("");
+  const [aboutauthor, setAboutauthor] = useState("");
+  const [title, setTitle] = useState("");
+  const [whoshouldread, setWhoshouldread] = useState("");
   const [desc, setDesc] = useState("");
   const [category, setCategory] = useState("");
   const [img, setImg] = useState(null);
@@ -131,9 +132,9 @@ const Write = () => {
         {/* Title Input */}
         <input type="text" placeholder="Enter Post Title" value={title} onChange={(e) => setTitle(e.target.value.slice(0, 150))} className="p-2 bg-[var(--textColore)] text-[var(--textColor)]  rounded" />
         
-        <input type="text" placeholder=" Who should read this book" value={title} onChange={(e) => setwhoshouldread(e.target.value.slice(0, 150))} className="p-2 bg-[var(--textColore)] text-[var(--textColor)]  rounded" />
-        <input type="text" placeholder="About the author" value={title} onChange={(e) => setaboutauthor(e.target.value.slice(0, 150))} className="p-2 bg-[var(--textColore)] text-[var(--textColor)]  rounded" />
-        <input type="text" placeholder="About this book" value={title} onChange={(e) => setaboutbook(e.target.value.slice(0, 150))} className="p-2 bg-[var(--textColore)] text-[var(--textColor)]  rounded" />
+        <input type="text" placeholder=" Who should read this book" value={whoshouldread} onChange={(e) => setWhoshouldread(e.target.value.slice(0, 150))} className="p-2 bg-[var(--textColore)] text-[var(--textColor)]  rounded" />
+        <input type="text" placeholder="About the author" value={aboutauthor} onChange={(e) => setAboutauthor(e.target.value.slice(0, 150))} className="p-2 bg-[var(--textColore)] text-[var(--textColor)]  rounded" />
+        <input type="text" placeholder="About this book" value={aboutbook} onChange={(e) => setAboutbook(e.target.value.slice(0, 150))} className="p-2 bg-[var(--textColore)] text-[var(--textColor)]  rounded" />
 
         <input type="text" placeholder="What's inside, short summary" value={summary} onChange={(e) => setSummary(e.target.value.slice(0, 300))} className="p-2 bg-[var(--textColore)] text-[var(--textColor)]  rounded" />
 
