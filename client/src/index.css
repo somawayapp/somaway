@@ -43,7 +43,7 @@ a {
 }
 
 .dark {
-  --bg: #060608;
+  --bg: #0b0b0f;
   --textColor: #dfecf5;
   --TextColor: #dfecf5;
 
@@ -62,7 +62,7 @@ a {
 
   --textLogo: #ffffff;
 
-  --navBg: rgb(7, 5, 0);
+  --navBg: #0b0b0f;
   --bgs: rgb(0, 0, 0);
 
 
