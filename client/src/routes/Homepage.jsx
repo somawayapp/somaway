@@ -103,7 +103,8 @@ const Homepage = () => {
       src="/negotiation.webp"
       className="w-5 h-5 md:w-8 md:h-8 object-cover rounded-full"
     />
-    <span className=" ">Get Started</span>
+    <span className="hidden md:block">Get Started</span>
+    <span className=" block md:hidden" >Start</span>
 
   </button>
 </div>
