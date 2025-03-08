@@ -78,36 +78,35 @@ const Homepage = () => {
                    <div className="flex gap-2 items-center justify-center md:gap-4 flex-row">
   <button
     className="mt-5 mb-5 flex items-center border border-[var(--softTextColor)] bg-[var(--bd2)] text-[var(--bg)] 
-    font-semibold text-xs md:text-sm  py-2 px-2 md:px-6 md:py-3 gap-2 rounded-[10px] cursor-pointer hover:bg-[#0053bf]"
+    font-semibold text-xs md:text-sm  py-2 px-2 md:px-6 md:py-3 gap-2 rounded-[10px] cursor-pointer hover:bg-blue-500"
   >
     <img
       src="/fiction.webp"
-      className="w-5 h-5 md:w-8 md:h-8 object-cover rounded-full"
-    />
-    <span>Summaries</span>
-  </button>
-
-  <button
-    className="mt-5 mb-5 flex items-center border border-[var(--textColore)] bg-[var(--bd)] text-[var(--textColor)]
-     font-semibold text-xs md:text-sm  py-2 px-2 md:px-6 md:py-3 gap-2 rounded-[10px] cursor-pointer hover:bg-[#0053bf]"
-  >
-    <img
-      src="/self-growth.webp"
       className="w-5 h-5 md:w-8 md:h-8 object-cover rounded-full"
     />
     <span>Log In</span>
   </button>
 
   <button
+    className="mt-5 mb-5 flex items-center border border-[var(--textColore)] bg-[var(--bd)] text-[var(--textColor)]
+     font-semibold text-xs md:text-sm  py-2 px-2 md:px-6 md:py-3 gap-2 rounded-[10px] cursor-pointer hover:bg-blue-500"
+  >
+    <img
+      src="/self-growth.webp"
+      className="w-5 h-5 md:w-8 md:h-8 object-cover rounded-full"
+    />
+    <span> Summaries</span>
+  </button>
+
+  <button
     className="mt-5 mb-5 flex items-center border border-[var(--softTextColor)] bg-[var(--bd2)] text-[var(--bg)] py-2 px-2 md:px-6 md:py-3
-     font-semibold text-xs md:text-sm  gap-2 rounded-[10px] cursor-pointer hover:bg-[#0053bf]"
+     font-semibold text-xs md:text-sm  gap-2 rounded-[10px] cursor-pointer hover:bg-blue-500"
   >
     <img
       src="/negotiation.webp"
       className="w-5 h-5 md:w-8 md:h-8 object-cover rounded-full"
     />
-    <span className="hidden md:block">Get Started</span>
-    <span className=" block md:hidden" >Start</span>
+    <span className=" " >Start</span>
 
   </button>
 </div>

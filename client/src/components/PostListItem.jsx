@@ -17,7 +17,7 @@ const PostListItem = ({ post }) => {
       </Link>
       <Link
   to={`/discover?author=${post.author}`}
-  className="text-[#f8f8ff] mt-2 ml-3 capitalize text-sm md:text-lg "
+  className="text-[#f8f8ff] mt-3 ml-3 capitalize text-sm md:text-lg "
 >
 {post.author ? post.author.slice(0, 20) : ""}
 </Link>
