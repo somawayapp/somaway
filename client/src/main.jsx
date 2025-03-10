@@ -37,7 +37,7 @@ const router = createBrowserRouter([
       {
         path: "/",
         element: <Homepage />,
-      },A
+      },
       {
         path: "/discover",
         element: <PostListPage />,
