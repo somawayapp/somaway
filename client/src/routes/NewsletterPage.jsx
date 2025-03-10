@@ -8,7 +8,7 @@ const NewsletterPage = () => {
     <div className="mt-4 flex px-3 md:px-9 flex-col gap-12">
       {/* BREADCRUMB */}
       <div className="flex gap-2 text-sm text-[var(--textColor)]">
-        <Link to="/" className="hover:text-blue-800">
+        <Link className="hover:text-blue-800">
           Home
         </Link>
         <span>•</span>

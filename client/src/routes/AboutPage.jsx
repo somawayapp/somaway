@@ -165,7 +165,7 @@ const AboutPage = () => {
       Contact us makesomaway@gmail.com or call +254 703 394794
     </p>
     <button
-    to="discover"
+    to="/discover"
       className="mt-9 bg-[var(--textColor)] text-[var(--bg)] py-4 text-extrabold text-xl md:text-3xl 
         px-8 rounded-[40px] cursor-pointer hover:bg-white hover:text-black"
     >
