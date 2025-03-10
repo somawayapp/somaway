@@ -35,7 +35,7 @@ const Navbar = () => {
 
 <div className="flex items-center justify-between gap-12">
   <Link to="/" className="flex items-center gap-1 text-xl font-bold md:text-3xl">
-    <img src="/somawaylogo.jpg" className="w-7 h-7 md:w-9 md:h-9" />
+    <img src="/somawaylogo.jpg" className="w-7 h-7 rounded-lg md:w-9 md:h-9" />
     <span className="bg-clip-text text-[#0062e3] pl-1 text-xl md:text-2xl font-extrabold">Somaway</span>
   </Link>
   
