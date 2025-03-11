@@ -20,6 +20,7 @@ import PremiumPage from "./routes/PremiumPage.jsx";
 import { Settings } from "@mui/icons-material";
 import SettingsPage from "./routes/SettingsPage.jsx";
 import SubscriptionPage from "./routes/SubscriptionPage.jsx";
+import LandingPage from "./routes/LandingPage.jsx";
 
 const queryClient = new QueryClient();
 
@@ -40,7 +41,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/",
-        element: <PostListPage />,
+        element: <LandingPage />,
       },
       {
         path: "/discover",
