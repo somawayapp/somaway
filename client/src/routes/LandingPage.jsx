@@ -68,7 +68,7 @@ const LandingPage = () => {
   
 
       <div className="flex  flex-row   text-[var(--textColor)] justify-between">
-      <div className="w-full  bg-[var(--bd3)] shadow-lg  p-3 md:p-9  text-[var(--bg)] ">
+      <div className="w-full  bg-[var(--bd3)]  border border-[var(--softBg4)] shadow-sm p-3 md:p-9  text-[var(--bg)] ">
      
       <div className="flex hidden md:flex mb-[30px] justify-between ">
 
