@@ -100,7 +100,7 @@ a {
 }
 
 .light {
-  --bg:#f2f2ff ;
+  --bg:#efeffd ;
   --textColor: #000000;
   --TextColor: #000000;
   --textColore: #dfecf5;
@@ -347,11 +347,11 @@ body {
 }
 
 .desc-content h1 {
-  font-size: 26px;
+  font-size: 25px;
 }
 
 .desc-content h2 {
-  font-size: 23px;
+  font-size: 22px;
 }
 
 .desc-content h3 {

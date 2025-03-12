@@ -52,7 +52,7 @@ const Navbar = () => {
      <SignedOut>
 
      <Link
-            to="/discover"
+            to="/"
             className="text-center px-4 md:px-6 py-2 md:py-3 bg-[#0062e3]   text-white
             text-xs md:text-[16px] font-semibold rounded-md hover:bg-[#0053bf]   "
           > Summaries
@@ -141,14 +141,15 @@ const Navbar = () => {
 
         <div >
         <Link
-            to="/discover"
+            to="/home"
             className="block py-2 text-[var(--TextColor)] font-bold  hover:text-[#0062e3] p-2 rounded-xl"
-   onClick={() => setOpen(false)}          > Home           </Link>     <Link
-   to="/discover"
+   onClick={() => setOpen(false)}          > Home           </Link>   
+     <Link
+   to="/"
    className="block py-2 text-[var(--TextColor)] font-bold  hover:text-[#0062e3]  p-2 rounded-xl"
 onClick={() => setOpen(false)}          > Book summaries          </Link>
         <Link
-            to="/discover"
+            to="/"
             className="block py-2 text-[var(--TextColor)] font-bold  hover:text-[#0062e3]  p-2 rounded-xl"
    onClick={() => setOpen(false)}          > Discover          </Link>
           <Link

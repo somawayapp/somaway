@@ -23,7 +23,7 @@ const MobileControls = () => {
 
       {/* Explore Button */}
       <NavLink
-        to="/discover"
+        to="/"
         className={({ isActive }) =>
           `flex flex-col items-center ${
             isActive ? "text-[#0053bf]   " : "text-[var(--softTextColor2)]"
