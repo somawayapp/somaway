@@ -78,12 +78,12 @@ const SinglePostPage = () => {
             <div className="flex flex-col md:flex-row  items-center gap-1 text-[var(--textColor)] text-md md:text-lg">
               <div className=" flex gap-1 md:gap-2">
                 <span  className=" ">Book by
-                <Link   to={`/discover?author=${data.author}`} className="" >{data.author}</Link>  </span>
+                <Link   to={`/discover?author=${data.author}`} className=" ml-1" >{data.author}</Link>  </span>
                 </div>
                 <div className="flex gap-1 md:gap-2"> 
                 <span className="hidden md:block "> | </span>
                 <span className=" ">Category 
-                <Link to={`/discover?cat=${data.category}`}  className="capitalize ">{data.category}</Link> </span>
+                <Link to={`/discover?cat=${data.category}`}  className="capitalize ml-1 ">{data.category}</Link> </span>
                 </div>
             </div>
             <div className="flex flex-row items-center mt-2 text-sm md:text-lg">

@@ -11,7 +11,7 @@ const categories = [
   "Health",
   "Family",
   "Sports & Fitness",
-  "Personalities",
+  "Biography",
   "Happiness",
   "Spirituality",
   "Leadership",

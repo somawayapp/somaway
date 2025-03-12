@@ -157,7 +157,7 @@ const Write = () => {
 <option value="health">Health</option>
 <option value="family">Family</option>
 <option value="sports-fitness">Sports & Fitness</option>
-<option value="personalities">Personalities</option>
+<option value="Biography">Biography</option>
 <option value="happiness">Happiness</option>
 <option value="spirituality">Spirituality</option>
 <option value="leadership">Leadership</option>
