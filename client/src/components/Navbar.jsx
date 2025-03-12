@@ -49,6 +49,7 @@ const Navbar = () => {
      
 
      <div className="flex items-center justify-between flex-row gap-2 md:gap-9">
+     <SignedOut>
 
      <Link
             to="/discover"
@@ -57,6 +58,7 @@ const Navbar = () => {
           > Summaries
             
           </Link>
+          </SignedOut>
 
           <SignedOut>
         <Link
@@ -140,35 +142,35 @@ const Navbar = () => {
         <div >
         <Link
             to="/discover"
-            className="block py-2 text-[var(--TextColor)] font-bold  hover:bg-gray-500 p-2 rounded-xl"
+            className="block py-2 text-[var(--TextColor)] font-bold  hover:bg-[var(--TextColore)]  p-2 rounded-xl"
    onClick={() => setOpen(false)}          > Home           </Link>     <Link
    to="/discover"
-   className="block py-2 text-[var(--TextColor)] font-bold  hover:bg-gray-500 p-2 rounded-xl"
+   className="block py-2 text-[var(--TextColor)] font-bold  hover:bg-[var(--TextColore)]  p-2 rounded-xl"
 onClick={() => setOpen(false)}          > Book summaries          </Link>
         <Link
             to="/discover"
-            className="block py-2 text-[var(--TextColor)] font-bold  hover:bg-gray-500 p-2 rounded-xl"
+            className="block py-2 text-[var(--TextColor)] font-bold  hover:bg-[var(--TextColore)]  p-2 rounded-xl"
    onClick={() => setOpen(false)}          > Discover          </Link>
           <Link
             to="/premium"
-            className="block py-2 text-[var(--TextColor)] font-bold   hover:bg-gray-500 p-2 rounded-xl"
+            className="block py-2 text-[var(--TextColor)] font-bold   hover:bg-[var(--TextColore)]  p-2 rounded-xl"
    onClick={() => setOpen(false)}          > Premium          </Link>
           <Link
             to="/about"
-            className="block py-2 text-[var(--TextColor)] font-bold  hover:bg-gray-500 p-2 rounded-xl"
+            className="block py-2 text-[var(--TextColor)] font-bold  hover:bg-[var(--TextColore)]  p-2 rounded-xl"
    onClick={() => setOpen(false)}          > About Us 
           </Link>
           <Link
             to="/settings"
-            className="block py-2 text-[var(--TextColor)] font-bold   hover:bg-gray-500 p-2 rounded-xl"
+            className="block py-2 text-[var(--TextColor)] font-bold   hover:bg-[var(--TextColore)]  p-2 rounded-xl"
    onClick={() => setOpen(false)}              > Settings          </Link>
            <Link
             to="/write"
-            className="block py-2 text-[var(--TextColor)] font-bold   hover:bg-gray-500 p-2 rounded-xl"
+            className="block py-2 text-[var(--TextColor)] font-bold   hover:bg-[var(--TextColore)]  p-2 rounded-xl"
    onClick={() => setOpen(false)}              > Write          </Link>
      <Link
             to="/premium"
-            className="block py-2 text-[var(--TextColor)] font-bold  hover:bg-gray-500 p-2 rounded-xl"
+            className="block py-2 text-[var(--TextColor)] font-bold  hover:bg-[var(--TextColore)]  p-2 rounded-xl"
    onClick={() => setOpen(false)}              > Pricing           </Link>
         </div>
         
