@@ -40,7 +40,7 @@ const LandingPage = () => {
     cat ? `Category: ${cat}` : "", // Display 'cat' if present
   ]
     .filter(Boolean) // Remove empty strings
-    .join(" | ") || "Most popular summaries  "; // Default to "All Books" if no filters are applied
+    .join(" | ") || "Popular summaries  "; // Default to "All Books" if no filters are applied
 
   return (
     <div  className=" bg-[var(--bg)] mb-[80px]  ">
