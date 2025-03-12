@@ -11,6 +11,7 @@ import Footer from "../components/Footer";
 import ExplorePosts from "../components/ExplorePosts";
 import MobileControls from "../components/MobileControls";
 import LatestPosts from "../components/LatestPosts";
+import { useEffect } from "react";
 
 const fetchPost = async (slug) => {
     useEffect(() => {
