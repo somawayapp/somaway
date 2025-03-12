@@ -68,7 +68,7 @@ const LandingPage = () => {
   
 
       <div className="flex  flex-row   text-[var(--textColor)] justify-between">
-      <div className="w-full  bg-[var(--bd3)]  border border-[var(--softBg4)] shadow-sm p-3 md:p-9  text-[var(--bg)] ">
+      <div className="w-full  bg-[var(--bd3)] border-none  md:border md:border-[var(--softBg4)] shadow-sm p-3 md:p-9  text-[var(--bg)] ">
      
       <div className="flex hidden md:flex mb-[30px] justify-between ">
 
@@ -83,7 +83,7 @@ const LandingPage = () => {
 <div className="flex flex-col md:hidden block  items-center justify-center mb-5 pl-1  pr-1 ">
 
   
-<h1 style={{  zIndex: "10000"}} className=" lg:text-[30px] mb-2  md:mb-[30px] text-xl ml-2 text-[var(--textColor)] font-bold">
+<h1 style={{  zIndex: "10000"}} className=" lg:text-[30px] mb-4 mt-2  md:mb-[30px] text-xl ml-2 text-[var(--textColor)] font-bold">
         {`Book Library - ${displayText}`}
       </h1>
       <Search />
