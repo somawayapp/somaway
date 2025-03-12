@@ -13,7 +13,9 @@ import MobileControls from "../components/MobileControls";
 import LatestPosts from "../components/LatestPosts";
 
 const fetchPost = async (slug) => {
-
+    useEffect(() => {
+       window.scrollTo(0, 0); // Scrolls to the top when this component mounts
+     }, []);
 
   const res = await axios.get(`${import.meta.env.VITE_API_URL}/posts/${slug}`);
   return res.data;
