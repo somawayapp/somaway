@@ -14,15 +14,16 @@ import LatestPosts from "../components/LatestPosts";
 import { useEffect } from "react";
 
 const fetchPost = async (slug) => {
-    useEffect(() => {
-       window.scrollTo(0, 0); // Scrolls to the top when this component mounts
-     }, []);
+   
 
   const res = await axios.get(`${import.meta.env.VITE_API_URL}/posts/${slug}`);
   return res.data;
 };
 
 const SinglePostPage = () => {
+  useEffect(() => {
+    window.scrollTo(0, 0); // Scrolls to the top when this component mounts
+  }, []);
   const { slug } = useParams();
 
   const { isPending, error, data } = useQuery({
