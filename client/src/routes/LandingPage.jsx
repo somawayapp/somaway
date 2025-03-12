@@ -40,7 +40,7 @@ const LandingPage = () => {
     cat ? `Category: ${cat}` : "", // Display 'cat' if present
   ]
     .filter(Boolean) // Remove empty strings
-    .join(" | ") || "All summaries"; // Default to "All Books" if no filters are applied
+    .join(" | ") || "Most popular summaries  "; // Default to "All Books" if no filters are applied
 
   return (
     <div  className=" bg-[var(--bg)] mb-[80px]  ">
@@ -67,12 +67,12 @@ const LandingPage = () => {
        
   
 
-      <div className="flex  flex-row  justify-between">
-      <div className="w-full bg-[#7a00da]   p-3 md:p-9   ">
+      <div className="flex  flex-row   text-[var(--textColor)] justify-between">
+      <div className="w-full  bg-[var(--bd3)]   p-3 md:p-9  text-[var(--bg)] ">
      
       <div className="flex hidden md:flex mb-[30px] justify-between ">
 
-<h1 style={{  zIndex: "10000"}} className=" lg:text-[30px] mb-[30px] text-xl ml-2 text-[#f8f8ff] font-bold">
+<h1 style={{  zIndex: "10000"}} className=" lg:text-[30px] mb-[30px] text-xl ml-2 text-[var(--textColor)] font-bold">
         {`Book liblary - ${displayText}`}
       </h1>
       <Search />
@@ -83,29 +83,66 @@ const LandingPage = () => {
 <div className="flex flex-col md:hidden block  items-center justify-center mb-5 pl-1  pr-1 ">
 
   
-<h1 style={{  zIndex: "10000"}} className=" lg:text-[30px] mb-2  md:mb-[30px] text-xl ml-2 text-[#f8f8ff] font-bold">
+<h1 style={{  zIndex: "10000"}} className=" lg:text-[30px] mb-2  md:mb-[30px] text-xl ml-2 text-[var(--textColor)] font-bold">
         {`Book Library - ${displayText}`}
       </h1>
       <Search />
 
 </div>   
-<FeaturedPosts />
+   <PopularPosts/>
 
     </div>
 
 </div>
 
 <div className=" mt-2 md:mt-4  p-3 md:p-8">
- 
+
+   
+
+  
+<div >
+      <h3 className="text-xl md:text-3xl font-semibold text-[var(--textColor)]">
+     Trending summaries    </h3>
+    </div>
+    <TrendingPosts/>
 </div>
 
 
 
+
+
+
+
+
+
+    <div className=" bg-[var(--bodyBg)]   p-3 mt-4 md:mt-8 md:p-9 ">
+    <h3 className="text-xl md:text-3xl  mt-5 mb-5 md:mb-9 md:mt-9   font-semibold text-[var(--bg)]">
+     Featured summaries      </h3>
+      <FeaturedPosts />
+    
+    </div>
+
+
  
+
+
+
+
+ 
+
 
       {/* Recent Posts */}
       <div>
-      <div className="flex justify-between mb-10 md:mb-[75px] pt-5 overflow-x-hidden  bg-[var(--textLogo)] 
+    
+
+    <div className=" px-3 md:px-9">
+    <h3 className="text-2xl md:text-4xl ml-2 mt-8 mb-6 md:mb-9 md:mt-9 font-semibold text-[var(--textColor)]">
+          All  summaries     </h3>
+      <PostList />
+    </div>
+
+
+    <div className="flex justify-between mb-10 md:mb-[75px] pt-5 overflow-x-hidden  bg-[var(--textLogo)] 
         items-center gap-5 flex-col md:flex-row">
       <div>
       <h1 className="my-8 lg:text-6xl text-3xl ml-2 pl-2 md:pl-0 mb-2 mt-4 lg:mb-5 lg:mt-8 text-[var(--textColore2)] font-bold"> Book summaries library</h1>
@@ -125,13 +162,14 @@ const LandingPage = () => {
           />   
           
           </div>
-
-
+      
 </div>
 <Footer/>
 
  </div>
   );
 };
+
+
 
 export default LandingPage;
