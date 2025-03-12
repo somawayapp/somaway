@@ -136,7 +136,7 @@ const PostListPage = () => {
     
 
     <div className=" px-3 md:px-9">
-    <h3 className="text-2xl md:text-4xl ml-2 mt-5 mb-5 md:mb-9 md:mt-9 font-semibold text-[var(--textColor)]">
+    <h3 className="text-2xl md:text-4xl ml-2 mt-8 mb-6 md:mb-9 md:mt-9 font-semibold text-[var(--textColor)]">
           All  summaries     </h3>
       <PostList />
     </div>

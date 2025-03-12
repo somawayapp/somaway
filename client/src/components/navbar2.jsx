@@ -49,14 +49,16 @@ const Navbar = () => {
      
 
      <div className="flex items-center justify-between flex-row gap-2 md:gap-9">
-
-     <Link
+      
+         <SignedOut >
+          <Link
             to="/discover"
-            className="text-center px-4 md:px-6 py-2 md:py-3 bg-[#0062e3]   text-white
+            className="text-center px-4  md:px-6 py-2 md:py-3 bg-[#0062e3]   text-white
             text-xs md:text-[16px] font-semibold rounded-md hover:bg-[#0053bf]   "
           > Summaries
             
           </Link>
+          </SignedOut>
 
           <SignedOut>
         <Link
