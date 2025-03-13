@@ -47,7 +47,7 @@ return (
   next={fetchNextPage}
   hasMore={!!hasNextPage}
   loader={<h4>Loading more posts...</h4>}
-  className="gap-3 md:gap-4 grid grid-cols-2 mb-9 md:mb-[30px] sm:grid-cols-2 md:grid-cols-6  scrollbar-hide"
+  className="gap-3 md:gap-4 grid grid-cols-2 mb-9 md:mb-[60px] sm:grid-cols-2 md:grid-cols-7  scrollbar-hide"
 >
   {allPosts.length > 0 ? (
     allPosts.map((post) => <PostListItem key={post._id} post={post} />)
