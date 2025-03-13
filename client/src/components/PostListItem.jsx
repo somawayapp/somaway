@@ -7,7 +7,7 @@ const PostListItem = ({ post }) => {
   return (
 
     <div className="relative  mb-9 md:mb-[30px]">
-      <Link to={`/${post.slug}`} className="block mb-4 md:mb-8 relative">
+      <Link to={`/${post.slug}`} className="block mb-2 md:mb-4 relative">
         <div className="relative rounded-xl w-full" style={{ paddingTop: "150%" }}>
           <Image
             src={post.img}
