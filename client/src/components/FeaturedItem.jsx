@@ -11,17 +11,17 @@ const FeaturedItem = ({ post }) => {
   
     <div className="flex gap-2 md:gap-4 overflow-x-auto scrollbar-hide">
     <div
-      className="flex flex-col  flex-shrink-0 w-[100px] w-[122px] md:w-[240px]"
+      className="flex flex-col  flex-shrink-0 w-[100px] w-[122px] md:w-[200px]"
     >
       <Link to={`/${post.slug}`} className="relative w-full" style={{ paddingTop: "150%" }}>
         <Image
           src={post.img}
-          className="absolute top-0  left-0 w-full h-full object-cover rounded-lg rounded-2xl"
+          className="absolute top-0  left-0 w-full h-full object-cover rounded-lg md:rounded-2xl"
         />
       </Link>
       <Link
 to={`/discover?author=${post.author}`}
-className="text-[var(--bg)] mt-3 md:mt-6 ml-3 capitalize text-sm md:text-lg "
+className="text-[var(--bg)] mt-3 md:mt-5 ml-3 capitalize text-sm md:text-lg "
 >
 {post.author
 ? window.innerWidth >= 768

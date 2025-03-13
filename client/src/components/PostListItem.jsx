@@ -6,7 +6,7 @@ const PostListItem = ({ post }) => {
   // Truncate title based on screen size
   return (
 
-    <div className="relative mb-9 md:mb-[40px]">
+    <div className="relative mb-9 md:mb-[30px]">
       <Link to={`/${post.slug}`} className="block relative">
         <div className="relative rounded-xl w-full" style={{ paddingTop: "150%" }}>
           <Image
@@ -17,7 +17,7 @@ const PostListItem = ({ post }) => {
       </Link>
       <Link
   to={`/discover?author=${post.author}`}
-  className="text-[var(--textColor)] mt-3 md:mt-6 ml-3 capitalize text-sm md:text-lg "
+  className="text-[var(--textColor)] mt-3 md:mt-5 ml-3 capitalize text-sm md:text-lg "
 >
 {post.author ? post.author.slice(0, 20) : ""}
 </Link>
