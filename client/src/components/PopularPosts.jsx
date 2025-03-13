@@ -117,7 +117,7 @@ const PopularPosts = () => {
         next={fetchNextPage}
         hasMore={!!hasNextPage}
         loader={<h4>Loading more posts...</h4>}
-        className="flex gap-3 md:gap-4 scrollbar-hide"
+        className="flex gap-3 md:gap-6 scrollbar-hide"
         >
         {allPosts.length > 0 ? (
           allPosts.map((post) => <PopularItem key={post._id} post={post} />)

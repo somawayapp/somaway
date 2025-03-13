@@ -16,12 +16,12 @@ const FeaturedItem = ({ post }) => {
       <Link to={`/${post.slug}`} className="relative w-full" style={{ paddingTop: "150%" }}>
         <Image
           src={post.img}
-          className="absolute top-0  left-0 w-full h-full object-cover rounded-lg"
+          className="absolute top-0  left-0 w-full h-full object-cover rounded-lg rounded-2xl"
         />
       </Link>
       <Link
 to={`/discover?author=${post.author}`}
-className="text-[var(--bg)] mt-2 ml-3 capitalize text-sm md:text-lg "
+className="text-[var(--bg)] mt-3 md:mt-6 ml-3 capitalize text-sm md:text-lg "
 >
 {post.author
 ? window.innerWidth >= 768
