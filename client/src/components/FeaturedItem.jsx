@@ -21,7 +21,7 @@ const FeaturedItem = ({ post }) => {
       </Link>
       <Link
 to={`/discover?author=${post.author}`}
-className="text-[var(--bg)] mt-3 md:mt-5 ml-3 capitalize text-sm md:text-lg "
+className="text-[var(--bg)] mt-3 ml-3 capitalize text-sm md:text-lg "
 >
 {post.author
 ? window.innerWidth >= 768
