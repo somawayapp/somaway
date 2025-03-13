@@ -6,7 +6,7 @@ const PostListItem = ({ post }) => {
   // Truncate title based on screen size
   return (
 
-    <div className="relative">
+    <div className="relative  mb-[100px]">
       <Link to={`/${post.slug}`} className="block relative">
         <div className="relative rounded-xl w-full" style={{ paddingTop: "150%" }}>
           <Image
