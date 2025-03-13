@@ -11,7 +11,7 @@ const PostListItem = ({ post }) => {
         <div className="relative rounded-xl w-full" style={{ paddingTop: "150%" }}>
           <Image
             src={post.img}
-            className="absolute top-0 rounded-lg left-0 w-full h-full object-cover"
+            className="absolute top-0 rounded-lg md:rounded-xl left-0 w-full h-full object-cover"
           />
         </div>
       </Link>
