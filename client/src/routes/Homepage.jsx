@@ -28,9 +28,13 @@ const Homepage = () => {
   return (
       <div>
         <Helmet>
-  <meta name="description" content="Experience revolutionary self-growth with Somaway. The world's best book summaries, distilled for unstoppable success." />
-  <meta name="keywords" content="ultimate book summaries, personal growth, success mindset, life-changing books, Somaway" />
-  
+        <title>All Somaway Book Summaries - Transform Your Mind and Dominate Knowledge</title>
+
+<meta name="description" content="Unleash the power of knowledge with Somaway's comprehensive book summaries. Discover insights from bestselling authors across all industries. Stay ahead of the curve with transformative ideas, life-changing concepts, and wisdom from thought leaders. Dive into summaries that shape your future." />
+
+<meta name="keywords" content="book summaries, knowledge empowerment, bestselling books, transformative ideas, thought leadership, business books, self-help summaries, industry insights, personal growth, productivity hacks, motivation, innovation strategies, creative thinking, mind mastery, leadership skills, financial wisdom, success mindset, breakthrough thinking, wisdom for life, practical knowledge, learning shortcuts, brain boost, rapid reading, book digest, quick reads, success stories, entrepreneurial mindset, modern wisdom, elite knowledge, mastery techniques, global perspectives, future readiness, book analysis, idea extraction, in-depth reviews, concise knowledge, summary breakdowns, book wisdom, mental expansion, critical thinking, intellectual growth, top books, influential reads, advanced thinking, ultimate book digest, life hacks, professional growth, career mastery, mindset shift, paradigm transformation, unconventional wisdom, practical insights, top nonfiction books, skill enhancement, brain optimization, cognitive skills, mind enhancement, top book reviews, wisdom harvesting, fast knowledge, core ideas, rapid insights, strategic intelligence, innovation fuel, personal development, growth mindset, self-mastery, breakthrough books, smart reading, fast tracking wisdom, peak performance, visionary thinking, knowledge domination, unbeatable learning" />
+
+ 
   <meta property="og:title" content="Somaway - Elevate Your Mind" />
   <meta property="og:description" content="Achieve greatness with Somaway. Explore groundbreaking book summaries that transform your life." />
   <meta property="og:image" content="/images/somaway-og.jpg" />
@@ -60,6 +64,7 @@ const Homepage = () => {
   
   <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
 </Helmet>
+
 
             <Navbar/>
 
