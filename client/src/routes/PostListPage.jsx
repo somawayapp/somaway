@@ -47,10 +47,11 @@ const PostListPage = () => {
   return (
     <div  className=" bg-[var(--bg)] mb-[80px]  ">
 <Helmet>
-  <title>Unlock the Secrects of the Top bestselling non-fiction books - A Game-Changing Summary | Somaway</title>
+  <title>Bestselling {cat} books Library - A Game-Changing Book Summaries | Somaway</title>
   <meta 
     name="description" 
-    content={`Delve into this book summary by ${author} - A deep dive into ${cat} that challenges conventional wisdom. Experience revolutionary self-growth with Somaway. The world's best book summaries, distilled for unstoppable success.`} 
+    content={`Delve into this book summary by ${author} - A deep dive into ${cat} that challenges conventional wisdom. Experience revolutionary
+     self-growth with Somaway. The world's best book summaries, distilled for unstoppable success.`} 
   />
 <meta name="keywords" content="ultimate book summaries, personal growth, success mindset, life-changing books, Somaway" />
   
