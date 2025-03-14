@@ -40,15 +40,16 @@ const SinglePostPage = () => {
     <div className=" bg-[var(--navBg)]">
 
 <Helmet>
-        <title>{data.title} - Book Summary | Somaway</title>
-        <meta name="description" content={data.summary.slice(0, 160)} />
-        <meta name="keywords" content={`${data.title}, ${data.author}, ${data.category}, book summary, Somaway`} />
-        <meta property="og:title" content={`${data.title} - Book Summary | Somaway`} />
-        <meta property="og:description" content={data.summary.slice(0, 160)} />
-        <meta property="og:image" content={data.img} />
-        <meta property="og:url" content={`${window.location.href}`} />
-        <link rel="canonical" href={`${window.location.href}`} />
-      </Helmet>
+    <title>Unlock the Secrets of {data.title} - A Game-Changing Summary | Somaway</title>
+    <meta name="description" content={`Delve into ${data.title} by ${data.author} - A deep dive into ${data.category} that challenges conventional wisdom. Somaway's unique summary reveals the essence in a way you've never seen.`} />
+    <meta name="keywords" content="{data.title}, {data.author}, {data.category}, book analysis, thought-provoking summary, Somaway book insights" />
+    <meta property="og:title" content={`The Ultimate Breakdown of ${data.title} | Somaway`} />
+    <meta property="og:description" content={`Experience the most profound interpretation of ${data.title} - A book summary that redefines insight and analysis.`} />
+    <meta property="og:image" content={data.img} />
+    <meta property="og:url" content={`${window.location.href}`} />
+    <link rel="canonical" href={`${window.location.href}`} />
+</Helmet>
+
       <Navbar />
 
       <div className="flex flex-col p-3 md:p-9 gap-4">
