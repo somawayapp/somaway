@@ -40,7 +40,7 @@ const SinglePostPage = () => {
     <div className=" bg-[var(--navBg)]">
 
 <Helmet>
-        <title>{data.title} - Summary | Somaway</title>
+        <title>{data.title} - Book Summary | Somaway</title>
         <meta name="description" content={data.summary.slice(0, 160)} />
         <meta name="keywords" content={`${data.title}, ${data.author}, ${data.category}, book summary, Somaway`} />
         <meta property="og:title" content={`${data.title} - Book Summary | Somaway`} />
