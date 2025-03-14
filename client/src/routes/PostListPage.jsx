@@ -46,9 +46,13 @@ const PostListPage = () => {
 
   return (
     <div  className=" bg-[var(--bg)] mb-[80px]  ">
-          <Helmet>
-  <meta name="description" content="Experience revolutionary self-growth with Somaway. The world's best book summaries, distilled for unstoppable success." />
-  <meta name="keywords" content="ultimate book summaries, personal growth, success mindset, life-changing books, Somaway" />
+<Helmet>
+  <title>Unlock the Secrets of {data.title} - A Game-Changing Summary | Somaway</title>
+  <meta 
+    name="description" 
+    content={`Delve into ${data.title} by ${data.author} - A deep dive into ${data.category} that challenges conventional wisdom. Experience revolutionary self-growth with Somaway. The world's best book summaries, distilled for unstoppable success.`} 
+  />
+<meta name="keywords" content="ultimate book summaries, personal growth, success mindset, life-changing books, Somaway" />
   
   <meta property="og:title" content="Somaway - Elevate Your Mind" />
   <meta property="og:description" content="Achieve greatness with Somaway. Explore groundbreaking book summaries that transform your life." />
