@@ -1,11 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+<head>
     <meta charset="UTF-8" />
-
     <link rel="icon" type="image/svg+xml" href="/somawaylogo.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>somaway app</title>
+
+    <!-- Dynamic Title -->
+    <title>{{ post.title }} - Somaway</title>
+
+    <!-- Meta Description -->
+    <meta name="description" content="{{ post.desc }}" />
 
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet" />
@@ -15,13 +19,23 @@
 
     <script src="https://va.vercel-scripts.com/v1/script.js" defer></script>
 
-    <!-- Add Clerk Script -->
- 
+    <!-- Clerk Script -->
     <script async src="https://cdn.jsdelivr.net/npm/@clerk/clerk-js@latest/dist/clerk.browser.js"></script>
-    
-  </head>
-  <body>
+</head>
+<body>
+    <!-- Article Content -->
+    <header>
+        <h1>{{ post.title }}</h1>
+        <h2>About the Book</h2>
+        <p>{{ post.about }}</p>
+        <h2>Summary</h2>
+        <p>{{ post.summary }}</p>
+    </header>
+
+    <!-- React Root -->
     <div id="root"></div>
+    
+    <!-- React Script -->
     <script type="module" src="/src/main.jsx"></script>
-  </body>
+</body>
 </html>
