@@ -47,7 +47,7 @@ const PostListPage = () => {
   return (
     <div  className=" bg-[var(--bg)] mb-[80px]  ">
 <Helmet>
-  <title>Bestselling {cat} books Library - A Game-Changing Book Summaries | Somaway</title>
+  <title>Bestselling {cat} Books Library - A Game-Changing Book Summaries | Somaway</title>
   <meta 
     name="description" 
     content={`Delve into this book summary by ${author} - A deep dive into ${cat} that challenges conventional wisdom. Experience revolutionary
