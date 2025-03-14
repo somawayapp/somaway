@@ -18,15 +18,32 @@ import TrendingPosts from "../components/TrendingPosts";
 import StoryLine from "../components/StoryLine";
 import Footer from "../components/Footer";
 import MobileControls from "../components/MobileControls";
-
+import { Helmet } from "react-helmet";
 
 const Homepage = () => {
   useEffect(() => {
     window.scrollTo(0, 0); // Scrolls to the top when this component mounts
   }, []);
 
+  
+  const res = await axios.get(`${import.meta.env.VITE_API_URL}/posts/`);
+  return res.data;
+};
+
   return (
       <div>
+
+<Helmet>
+        <title>{data.title} - Book Summaries | Somaway</title>
+        <meta name="description" content={data.summary.slice(0, 160)} />
+        <meta name="keywords" content={`${data.title}, ${data.author}, ${data.category}, book summary, Somaway`} />
+        <meta property="og:title" content={`${data.title} - Book Summary | Somaway`} />
+        <meta property="og:description" content={data.summary.slice(0, 160)} />
+        <meta property="og:image" content={data.img} />
+        <meta property="og:url" content={`${window.location.href}`} />
+        <link rel="canonical" href={`${window.location.href}`} />
+      </Helmet>
+
             <Navbar/>
 
     <div className="mb-9  flex flex-col gap-0">
