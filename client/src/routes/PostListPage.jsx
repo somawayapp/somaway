@@ -47,14 +47,16 @@ const PostListPage = () => {
   return (
     <div  className=" bg-[var(--bg)] mb-[80px]  ">
 <Helmet>
-  <title>Bestselling {cat} Books Library - A Game-Changing Book Summaries | Somaway</title>
+  <title>{cat ? `${cat} Books Library` : 'Book Summaries'} | Somaway - Empower Your Knowledge</title>
   <meta 
     name="description" 
-    content={`Delve into this book summary by ${author} - A deep dive into ${cat} that challenges conventional wisdom. Experience revolutionary
-     self-growth with Somaway. The world's best book summaries, distilled for unstoppable success.`} 
+    content={`Explore top-quality book summaries in the ${cat || 'literature'} category. Discover insightful perspectives and ideas from bestselling authors like ${author || 'various industry leaders'}. Elevate your knowledge and stay ahead with Somaway.`} 
   />
-<meta name="keywords" content="ultimate book summaries, personal growth, success mindset, life-changing books, Somaway" />
-  
+  <meta 
+    name="keywords" 
+    content={`book summaries, ${cat ? `${cat} books, ` : ''}${author ? `${author} books, ` : ''}bestselling books, knowledge empowerment, Somaway`} 
+  />
+ 
   <meta property="og:title" content="Somaway - Elevate Your Mind" />
   <meta property="og:description" content="Achieve greatness with Somaway. Explore groundbreaking book summaries that transform your life." />
   <meta property="og:image" content="/images/somaway-og.jpg" />
