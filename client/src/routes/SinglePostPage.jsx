@@ -12,6 +12,7 @@ import ExplorePosts from "../components/ExplorePosts";
 import MobileControls from "../components/MobileControls";
 import LatestPosts from "../components/LatestPosts";
 import { useEffect } from "react";
+import { Helmet } from "react-helmet";
 
 const fetchPost = async (slug) => {
    
