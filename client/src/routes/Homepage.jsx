@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import FeaturedPosts from "../components/FeaturedPosts";
 import PostList from "../components/PostList";
 import { Link } from "react-router-dom";
@@ -19,82 +19,168 @@ import StoryLine from "../components/StoryLine";
 import Footer from "../components/Footer";
 import MobileControls from "../components/MobileControls";
 import { Helmet } from "react-helmet";
-import axios from "axios"; // Don't forget to import axios!
 
 const Homepage = () => {
-  const [data, setData] = useState({});
-  const [isLoading, setIsLoading] = useState(true);
-
-  // Fetch post data dynamically
   useEffect(() => {
-    const fetchPost = async () => {
-      try {
-        const slug = "dynamic-slug"; // Replace with actual logic to get the slug
-        const res = await axios.get(`${import.meta.env.VITE_API_URL}/posts/${slug}`);
-        setData(res.data);
-        setIsLoading(false);
-      } catch (error) {
-        console.error("Error fetching post data:", error);
-        setIsLoading(false);
-      }
-    };
-    fetchPost();
-    window.scrollTo(0, 0); // Scroll to top on page load
+    window.scrollTo(0, 0); // Scrolls to the top when this component mounts
   }, []);
 
   return (
-    <div>
-      <Helmet>
-        <title>
-          {isLoading
-            ? "Loading... - Book Summaries | Somaway"
-            : `${data.title} - Book Summaries | Somaway`}
-        </title>
-        <meta
-          name="description"
-          content={
-            isLoading
-              ? "Explore book summaries and grow with Somaway."
-              : data.summary?.slice(0, 160) || "Discover insightful book summaries."
-          }
-        />
-        <meta
-          name="keywords"
-          content={
-            isLoading
-              ? "book summaries, Somaway, self-growth"
-              : `${data.title}, ${data.author}, ${data.category}, book summary, Somaway`
-          }
-        />
-        <meta
-          property="og:title"
-          content={
-            isLoading
-              ? "Book Summaries | Somaway"
-              : `${data.title} - Book Summary | Somaway`
-          }
-        />
-        <meta
-          property="og:description"
-          content={
-            isLoading
-              ? "Discover insightful book summaries and self-growth resources."
-              : data.summary?.slice(0, 160)
-          }
-        />
-        <meta property="og:image" content={data.img || "/default-image.jpg"} />
-        <meta property="og:url" content={`${window.location.href}`} />
-        <link rel="canonical" href={`${window.location.href}`} />
-      </Helmet>
+      <div>
+        <Helmet>
+  <meta name="description" content="Experience revolutionary self-growth with Somaway. The world's best book summaries, distilled for unstoppable success." />
+  <meta name="keywords" content="ultimate book summaries, personal growth, success mindset, life-changing books, Somaway" />
+  
+  <meta property="og:title" content="Somaway - Elevate Your Mind" />
+  <meta property="og:description" content="Achieve greatness with Somaway. Explore groundbreaking book summaries that transform your life." />
+  <meta property="og:image" content="/images/somaway-og.jpg" />
+  <meta property="og:url" content={`${window.location.href}`} />
+  <meta property="og:type" content="website" />
+  
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Somaway - Elevate Your Mind" />
+  <meta name="twitter:description" content="Revolutionize your thinking with powerful book insights on Somaway." />
+  <meta name="twitter:image" content="/images/somaway-twitter.jpg" />
+  
+  <script type="application/ld+json">
+    {`{
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": "Somaway",
+      "url": "${window.location.href}",
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": "${window.location.href}/search?q={search_term_string}",
+        "query-input": "required name=search_term_string"
+      }
+    }`}
+  </script>
+  
+  <link rel="canonical" href={`${window.location.href}`} />
+  
+  <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
+</Helmet>
 
-      <Navbar />
-      <div className="mb-9 flex flex-col gap-0">
-        <Hero />
-        <Partners />
-        <StoryLine />
-        <Footer />
+            <Navbar/>
+
+    <div className="mb-9  flex flex-col gap-0">
+
+         
+
+      {/* Floating Section 
+      
+      <div
+  className={` flex items-center hidden sm:block  mx-auto justify-between px-5 py-3 transition-opacity 
+    duration-300 ${isVisible ? "opacity-100" : "opacity-0 pointer-events-none"} sm:opacity-100 sm:pointer-events-auto  `}
+ 
+>
+
+
+        <Link to="/" className="flex items-center mt-[10px] gap-1 text-lg font-bold md:text-2xl">
+        <img src="/x.png"  className="w-50 h-20 lg:w-50 lg:h-20" />
+
+<span className="text-[var(--textLogo)] text-[30px] lg:text-[90px]"></span>
+
+</Link>  
+
+      
+
+ 
       </div>
+      */}
+
+   {/*
+
+      <div  style={{ zIndex: 100004 }} className="mb-[45px] md:mb-[30px] mt-[15px] md:mt-[20px] sticky top-0.5 md:top-2 ">
+  <Maincategories />
+</div>
+     */}
+     
+        <Hero />
+
+   <Partners />
+
+
+   <div
+         className="bg-[var(--bodyBg)] p-4 md:p-9 mt-[10px] mx-3 md:mx-9 rounded-lg md:rounded-[30px]
+           text-white text-center animate-fadeIn flex flex-col items-center justify-center"
+       >
+         <div className="h-full max-w-full md:max-w-[700px] mx-auto box-border">
+         <h1 className="text-2xl md:text-5xl mt-[15px] text-[var(--bg)] px-2 md:mt-[50px] font-bold">
+         Set your goal and start your self-growth journey
+                   </h1>
+                   <div className="flex gap-2 items-center justify-center md:gap-4 flex-row">
+  <button
+    className="mt-5 mb-5 flex items-center border border-[var(--softTextColor)] bg-[var(--bd2)] text-[var(--bg)] 
+    font-semibold text-xs md:text-sm  py-2 px-2 md:px-6 md:py-3 gap-2 rounded-[10px] cursor-pointer hover:bg-blue-500"
+  >
+    <img
+      src="/fiction.webp"
+      className="w-5 h-5 md:w-8 md:h-8 object-cover rounded-full"
+    />
+    <span>Log In</span>
+  </button>
+
+  <button
+    className="mt-5 mb-5 flex items-center border border-[var(--textColore)] bg-[var(--bd)] text-[var(--textColor)]
+     font-semibold text-xs md:text-sm  py-2 px-2 md:px-6 md:py-3 gap-2 rounded-[10px] cursor-pointer hover:bg-blue-500"
+  >
+    <img
+      src="/self-growth.webp"
+      className="w-5 h-5 md:w-8 md:h-8 object-cover rounded-full"
+    />
+    <span> Summaries</span>
+  </button>
+
+  <button
+    className="mt-5 mb-5 flex items-center border border-[var(--softTextColor)] bg-[var(--bd2)] text-[var(--bg)] py-2 px-2 md:px-6 md:py-3
+     font-semibold text-xs md:text-sm  gap-2 rounded-[10px] cursor-pointer hover:bg-blue-500"
+  >
+    <img
+      src="/negotiation.webp"
+      className="w-5 h-5 md:w-8 md:h-8 object-cover rounded-full"
+    />
+    <span className=" " >Start</span>
+
+  </button>
+</div>
+
+                 
+         
+         </div >
+
+         <div className="flex bg-[var(--bd2)] flex-col max-w-full md:max-w-[900px] m gap-2 md:gap-4 rounded-lg md:rounded-[20px] p-2 md:p-6 md:flex-row">
+  <img
+    src="/heropic.jpg"
+    className="w-[200px] rounded-lg md:rounded-[20px] md:w-2/5 mx-auto md:mx-0"
+  />
+  <div className="md:w-3/5 items-start justify-start md:text-left">
+    <p className="text-xs mt-5 md:mt-9 text-[var(--bg2)]  md:text-md">ABOUT US</p>
+    <p className="text-md mt-1 md:mt-2 text-[var(--bg)] md:text-2xl font-semibold">
+      Still wondering what is Somaway app?
+    </p>
+    <p className="text-sm text-[var(--bg)] mt-1 md:mt-2 md:text-lg">
+      Somaway is a global EdTech startup with Kenyan roots. Somaway app offers
+      15-minute bite-sized non-fiction book summaries catered to your everyday
+      needs. We are mission-driven and passionate about self-improvement.
+    </p>
+  </div>
+</div>
+
+       
+       </div>
+
+
+
+      <StoryLine />
+
+      <Footer />
+
+
+    
     </div>
+    </div>
+
   );
 };
 

@@ -12,7 +12,7 @@ import LatestPosts from "../components/LatestPosts";
 import TrendingPosts from "../components/TrendingPosts";
 import FeaturedPosts from "../components/FeaturedPosts";
 import PostList from "../components/PostList";
-
+import { Helmet } from "react-helmet";
 import { useEffect } from "react";
 
 const LandingPage = () => {
@@ -44,6 +44,39 @@ const LandingPage = () => {
 
   return (
     <div  className=" bg-[var(--bg)] mb-[80px]  ">
+          <Helmet>
+  <meta name="description" content="Experience revolutionary self-growth with Somaway. The world's best book summaries, distilled for unstoppable success." />
+  <meta name="keywords" content="ultimate book summaries, personal growth, success mindset, life-changing books, Somaway" />
+  
+  <meta property="og:title" content="Somaway - Elevate Your Mind" />
+  <meta property="og:description" content="Achieve greatness with Somaway. Explore groundbreaking book summaries that transform your life." />
+  <meta property="og:image" content="/images/somaway-og.jpg" />
+  <meta property="og:url" content={`${window.location.href}`} />
+  <meta property="og:type" content="website" />
+  
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Somaway - Elevate Your Mind" />
+  <meta name="twitter:description" content="Revolutionize your thinking with powerful book insights on Somaway." />
+  <meta name="twitter:image" content="/images/somaway-twitter.jpg" />
+  
+  <script type="application/ld+json">
+    {`{
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": "Somaway",
+      "url": "${window.location.href}",
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": "${window.location.href}/search?q={search_term_string}",
+        "query-input": "required name=search_term_string"
+      }
+    }`}
+  </script>
+  
+  <link rel="canonical" href={`${window.location.href}`} />
+  
+  <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
+</Helmet>
        <Navbar/>
        
        <div className="px-3 pt-4 md:pt-6 md:px-9 ">
