@@ -37,6 +37,17 @@ const SinglePostPage = () => {
 
   return (
     <div className=" bg-[var(--navBg)]">
+
+<Helmet>
+        <title>{data.title} - Summary | Somaway</title>
+        <meta name="description" content={data.summary.slice(0, 160)} />
+        <meta name="keywords" content={`${data.title}, ${data.author}, ${data.category}, book summary, Somaway`} />
+        <meta property="og:title" content={`${data.title} - Summary | Somaway`} />
+        <meta property="og:description" content={data.summary.slice(0, 160)} />
+        <meta property="og:image" content={data.img} />
+        <meta property="og:url" content={`${window.location.href}`} />
+        <link rel="canonical" href={`${window.location.href}`} />
+      </Helmet>
       <Navbar />
 
       <div className="flex flex-col p-3 md:p-9 gap-4">
