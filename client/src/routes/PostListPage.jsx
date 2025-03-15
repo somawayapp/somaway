@@ -47,10 +47,17 @@ const PostListPage = () => {
   return (
     <div  className=" bg-[var(--bg)] mb-[80px]  ">
 <Helmet>
-<title>{cat ? `${cat} Books Library` : 'Book Summaries'} | Somaway - Empower Your Knowledge</title>
+<title>
+  {cat && author 
+    ? `${cat} Book Summary by ${author} | Unlock Key Insights` 
+    : cat 
+      ? `${cat} Book Summaries | Learn from the Best` 
+      : author 
+        ? `Book Summary by ${author} | Must-Read Summaries` 
+        : 'Book Summaries'} | Somaway
+</title>
 
-<meta name="description"   content={`Explore top-quality book summaries in the ${cat || 'literature'} category. Discover insightful perspectives and ideas from bestselling authors like ${author || 'various industry leaders'}. Elevate your knowledge and stay ahead with Somaway.Unleash the power of knowledge with Somaway's comprehensive book summaries. Discover insights from bestselling authors across all industries. Stay ahead of the curve with transformative ideas, life-changing concepts, and wisdom from thought leaders. Dive into summaries that shape your future.`}  />
-<meta name="keywords"  content={` author ${author} category ${cat},  knowledge empowerment, Somaway, book summaries, knowledge empowerment, bestselling books, transformative ideas, thought leadership, business books, self-help summaries, industry insights, personal growth, productivity hacks, motivation, innovation strategies, creative thinking, mind mastery, leadership skills, financial wisdom, success mindset, breakthrough thinking, wisdom for life, practical knowledge, learning shortcuts, brain boost, rapid reading, book digest, quick reads, success stories, entrepreneurial mindset, modern wisdom, elite knowledge, mastery techniques, global perspectives, future readiness, book analysis, idea extraction, in-depth reviews, concise knowledge, summary breakdowns, book wisdom, mental expansion, critical thinking, intellectual growth, top books, influential reads, advanced thinking, ultimate book digest, life hacks, professional growth, career mastery, mindset shift, paradigm transformation, unconventional wisdom, practical insights, top nonfiction books, skill enhancement, brain optimization, cognitive skills, mind enhancement, top book reviews, wisdom harvesting, fast knowledge, core ideas, rapid insights, strategic intelligence, innovation fuel, personal development, growth mindset, self-mastery, breakthrough books, smart reading, fast tracking wisdom, peak performance, visionary thinking, knowledge domination, unbeatable learning.`} />
+<meta name="description"   content={` Explore top book summaries in the ${cat || 'self-growth'} category. Gain insights from ${author || 'top authors'}in minutes. Elevate your mind—only on Somaway!`} />
 
 
  
