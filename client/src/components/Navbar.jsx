@@ -41,7 +41,7 @@ const Navbar = () => {
   
   <div className="hidden md:flex flex-1 justify-center space-x-12">
     <Link className="hover:text-[#0053bf] font-bold" to="/home" onClick={() => setOpen(false)}>Home</Link>
-    <Link className="hover:text-[#0053bf] font-bold" to="/discover" onClick={() => setOpen(false)}>Discover</Link>
+    <Link className="hover:text-[#0053bf] font-bold" to="/" onClick={() => setOpen(false)}>Discover</Link>
   </div>
 </div>
 
