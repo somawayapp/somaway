@@ -113,6 +113,7 @@ const LandingPage = () => {
 <h1 style={{  zIndex: "10000"}} className=" lg:text-[30px] mb-[30px] text-xl ml-2 text-[var(--textColor)] font-bold">
         {`Book liblary - ${displayText}`}
       </h1>
+      <Search />
 
 </div>
 
@@ -123,7 +124,6 @@ const LandingPage = () => {
 <h1 style={{  zIndex: "10000"}} className=" lg:text-[30px] mb-4 mt-2  md:mb-[30px] text-xl ml-2 text-[var(--textColor)] font-bold">
         {`Book Library - ${displayText}`}
       </h1>
-      <Search />
 
 </div>   
    <PopularPosts/>

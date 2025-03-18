@@ -17,7 +17,7 @@ const MobileControls = () => {
           } hover:text-[#0062e3]    transition`
         }
       >
-        <Home className="h-6 w-6" />
+        <Home className="h-5 w-5" />
       </NavLink>
 
       {/* Explore Button */}
@@ -29,7 +29,7 @@ const MobileControls = () => {
           } hover:text-[#0053bf]    transition`
         }
       >
-        <Compass className="h-6 w-6" />
+        <Compass className="h-5 w-5" />
       </NavLink>
       {/* Search Button */}
       <NavLink
@@ -40,7 +40,7 @@ const MobileControls = () => {
           } hover:text-[#0053bf]    transition`
         }
       >
-        <Search className="h-6 w-6" />
+        <Search className="h-5 w-5" />
       </NavLink>
 
       {/* Profile Button */}
@@ -52,7 +52,7 @@ const MobileControls = () => {
           } hover:text-[#0053bf]    transition`
         }
       >
-        <User className="h-6 w-6" />
+        <User className="h-5 w-5" />
       </NavLink>
     </div>
   );

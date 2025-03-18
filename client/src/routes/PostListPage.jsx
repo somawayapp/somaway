@@ -103,20 +103,22 @@ const PostListPage = () => {
 
        </div>
 
-       
+     
   
 
       <div className="flex  flex-row  justify-between">
       <div className="w-full bg-[var(--bd3)]   p-3 md:p-9   ">
-     <div>
-     <Search />
+      <div className="md:hidden pt-1 pb-2 block">
+       <Search />
 
-     </div>
+       </div>
+     
       <div className="flex hidden md:flex mb-[30px] justify-between ">
 
 <h1 style={{  zIndex: "10000"}} className=" lg:text-[30px] mb-[30px] text-xl ml-2 text-[var(--textColor)] font-bold">
         {`Book liblary - ${displayText}`}
       </h1>
+      <Search />
 
 </div>
 
@@ -127,7 +129,6 @@ const PostListPage = () => {
 <h1 style={{  zIndex: "10000"}} className=" lg:text-[30px] mb-2  md:mb-[30px] text-xl ml-2 text-[var(--textColor)] font-bold">
         {`Book Library - ${displayText}`}
       </h1>
-      <Search />
 
 </div>   
 <PostList />
