@@ -108,7 +108,7 @@ const PostListPage = () => {
 
       <div className="flex  flex-row  justify-between">
       <div className="w-full bg-[var(--bd3)]   p-3 md:p-9   ">
-      <div className="md:hidden pt-1 pb-2 block">
+      <div className="md:hidden pt-3 pb-5 block">
        <Search />
 
        </div>
