@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 import CategoriesScroll from "../components/CategoriesScroll";
 import Discover from "../components/Discover";
 import Footer from "../components/Footer";
-import Navbar from "../components/Navbar";
+import Navbar from "../components/navbar2";
 import PopularPosts from "../components/PopularPosts";
 import LatestPosts from "../components/LatestPosts";
 import TrendingPosts from "../components/TrendingPosts";
@@ -113,7 +113,6 @@ const LandingPage = () => {
 <h1 style={{  zIndex: "10000"}} className=" lg:text-[30px] mb-[30px] text-xl ml-2 text-[var(--textColor)] font-bold">
         {`Book liblary - ${displayText}`}
       </h1>
-      <Search />
 
 </div>
 

@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 import CategoriesScroll from "../components/CategoriesScroll";
 import Discover from "../components/Discover";
 import Footer from "../components/Footer";
-import Navbar from "../components/Navbar";
+import Navbar from "../components/navbar2";
 import PopularPosts from "../components/PopularPosts";
 import LatestPosts from "../components/LatestPosts";
 import TrendingPosts from "../components/TrendingPosts";
@@ -94,15 +94,7 @@ const PostListPage = () => {
        <Navbar/>
        
        <div className="px-3 pt-4 md:pt-6 md:px-9 ">
-       <h3 className="text-4xl md:text-6xl ml-1 mb-1  font-bold text-[var(--textColor)]">
-         Book Summaries Library
-        </h3>
-        <div className="max-w-[700px] mb-5 md:mb-9">
-        <h3 className="text-sm md:text-lg ml-1 mb-5 md:mb-9 text-[var(--textColor)]">
-         Dive into 15-minute nonfiction book summaries crafted for the curious mind. Insights in minutes, wisdom for a lifetime.
-         Are you ready to make Somaway? Get started!
-        </h3>
-        </div>
+    
       
         <div className="mb-4 md:mb-9">
         <CategoriesScroll/>
@@ -116,13 +108,15 @@ const PostListPage = () => {
 
       <div className="flex  flex-row  justify-between">
       <div className="w-full bg-[var(--bd3)]   p-3 md:p-9   ">
-     
+     <div>
+     <Search />
+
+     </div>
       <div className="flex hidden md:flex mb-[30px] justify-between ">
 
 <h1 style={{  zIndex: "10000"}} className=" lg:text-[30px] mb-[30px] text-xl ml-2 text-[var(--textColor)] font-bold">
         {`Book liblary - ${displayText}`}
       </h1>
-      <Search />
 
 </div>
 
