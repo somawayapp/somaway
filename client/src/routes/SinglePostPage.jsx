@@ -71,15 +71,25 @@ const SinglePostPage = () => {
       <div className="flex flex-col bg-[var(--bd3)]  border border-[var(--softBg4)]  rounded-3xl  p-2 md:p-8
        md:flex-row gap-4 md:gap-8">
  
-          {data.img && (
-            <div className="w-full md:w-1/4 mt-2 md:mt-0 flex justify-center md:block">
-             <Image
-             src={data.img}
-                className=" w-[180px] md:w-[400px] rounded-2xl"
-                />
+ {data.img && (
+  <div className="w-full md:w-1/4 mt-2 md:mt-0 flex justify-center md:block">
+    {Array.isArray(data.img) ? (
+      data.img.map((img, index) => (
+        <Image
+          key={index}
+          src={img}
+          className="w-[180px] md:w-[400px] rounded-2xl mb-2 last:mb-0"
+        />
+      ))
+    ) : (
+      <Image
+        src={data.img}
+        className="w-[180px] md:w-[400px] rounded-2xl"
+      />
+    )}
+  </div>
+)}
 
-             </div>
-          )}
 
 
           <div className="flex flex-col gap-1 md:gap-2 items-center md:items-start md:w-2/4">
