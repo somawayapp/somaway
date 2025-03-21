@@ -74,14 +74,16 @@ const SinglePostPage = () => {
  {data?.img && data.img.length > 0 ? (
   <div className="w-full md:w-1/4 mt-2 md:mt-0 flex flex-wrap justify-center md:block">
     {data.img.map((img, index) => (
-      <Image
-        key={index}
-        src={img}
-        className="w-[180px] md:w-[400px] rounded-2xl mb-2 last:mb-0"
-        alt={`Image ${index + 1}`}
-        onError={() => console.log(`Failed to load: ${img}`)}
-      />
-    ))}
+   <Image
+   key={index}
+   src={img}
+   className="w-[180px] md:w-[400px] rounded-2xl mb-2 last:mb-0"
+   alt={`Image ${index + 1}`}
+   onError={() => console.log(`Failed to load: ${img}`)}
+   unoptimized
+ />
+ 
+    ))}           
   </div>
 ) : (
   <p>No images found</p>
