@@ -10,9 +10,7 @@ const authenticator = async () => {
 
     if (!response.ok) {
       const errorText = await response.text();
-      throw new Error(
-        `Request failed with status ${response.status}: ${errorText}`
-      );
+      throw new Error(`Request failed with status ${response.status}: ${errorText}`);
     }
 
     const data = await response.json();
@@ -23,19 +21,23 @@ const authenticator = async () => {
   }
 };
 
-const Upload = ({ children, type, setProgress, setData }) => {
+const Upload = ({ children, type, setProgress, images, setImages }) => {
   const ref = useRef(null);
 
   const onError = (err) => {
     console.log(err);
     toast.error("Image upload failed!");
   };
+
   const onSuccess = (res) => {
-    console.log(res);
-    setData(res);
+    if (images.length >= 10) {
+      toast.error("You can only upload up to 10 images.");
+      return;
+    }
+    setImages((prev) => [...prev, res]);
   };
+
   const onUploadProgress = (progress) => {
-    console.log(progress);
     setProgress(Math.round((progress.loaded / progress.total) * 100));
   };
 
