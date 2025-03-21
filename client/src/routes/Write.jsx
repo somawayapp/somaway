@@ -22,7 +22,6 @@ const Write = () => {
   const [desc, setDesc] = useState("");
   const [category, setCategory] = useState("");
   const [images, setImages] = useState([]); // Store multiple images
-  const [cover, setCover] = useState(null);
   const [author, setAuthor] = useState("");
   const [summary, setSummary] = useState("");
   const [progress, setProgress] = useState(0);
@@ -72,7 +71,6 @@ const Write = () => {
     if (!summary.trim()) missingFields.push("Summary");
     if (!desc.trim()) missingFields.push("Description");
     if (!category) missingFields.push("Category");
-    if (!cover) missingFields.push("Cover Image");
     if (!author.trim()) missingFields.push("Author Name");
 
     if (missingFields.length > 0) {
@@ -91,7 +89,6 @@ const Write = () => {
       aboutauthor,
       desc,
       category,
-      img: cover?.filePath || "",
       images: images.map((img) => img.url), // Store image URLs
       author,
       summary,
@@ -113,11 +110,7 @@ const Write = () => {
           Create a New Post
         </h1>
         <form onSubmit={handleSubmit} className="flex flex-col gap-6">
-          <Upload type="image" setProgress={setProgress} setData={setCover}>
-            <button className="p-2 bg-[var(--textColore)] text-[var(--textColor)] rounded-lg">
-              Upload Cover Image
-            </button>
-          </Upload>
+      
 
           <Upload type="image" setProgress={setProgress} setData={setImages}>
             <button className="p-2 bg-[var(--textColore)] text-[var(--textColor)] rounded-lg">
