@@ -1,218 +1,225 @@
-import { Link, useParams } from "react-router-dom";
-import Image from "../components/Image";
-import PostMenuActions from "../components/PostMenuActions";
-import Comments from "../components/Comments";
-import axios from "axios";
-import { useQuery } from "@tanstack/react-query";
-import { format } from "timeago.js";
-import Navbar from "../components/navbar2";
-import { FaStar } from "react-icons/fa";
-import Footer from "../components/Footer";
-import ExplorePosts from "../components/ExplorePosts";
-import MobileControls from "../components/MobileControls";
-import LatestPosts from "../components/LatestPosts";
-import { useEffect } from "react";
-import { Helmet } from "react-helmet";
-import { useState } from "react";
 
-const fetchPost = async (slug) => {
-   
-
-  const res = await axios.get(`${import.meta.env.VITE_API_URL}/posts/${slug}`);
-  return res.data;
-};
-
-const SinglePostPage = () => {
-  useEffect(() => {
-    window.scrollTo(0, 0); // Scrolls to the top when this component mounts
-  }, []);
-  const { slug } = useParams();
-
-  const { isPending, error, data } = useQuery({
-    queryKey: ["post", slug],
-    queryFn: () => fetchPost(slug),
-  });
-
-
-  const [popupImage, setPopupImage] = useState(null);
-
-  // Prevent scrolling when popup is open
-  useEffect(() => {
-    if (popupImage) {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "auto";
-    }
-  }, [popupImage]);
-  
-  const images = data?.img || []; // Ensure img is used
-  const mainImage = images.length > 0 ? images[0] : null;
-  const secondMainImage = images.length > 1 ? images[1] : null;
-  const thirdMainImage = images.length > 2 ? images[2] : null;
-  const fourthMainImage = images.length > 3 ? images[3] : null;
-
-
-  if (isPending) return "loading...";
-  if (error) return "Something went wrong!" + error.message;
-  if (!data) return "Post not found!";
-
-  return (
-    <div className=" bg-[var(--navBg)]">
-
-
-
-      <Navbar />
-
-      <div className="flex flex-col p-3 md:p-9 gap-4">
-
-      <div className="max-w-[1200px] mx-auto">
-
-
-
-      <div style={{ display: 'flex' }}className="
-          w-full
-        
-          overflow-hidden 
-          rounded-xl
-          aspect
-          relative
-           transition duration-300`
-        "  >
-      {/* Left Div */}
-      <div style={{ width: '75%',marginRight: '1%' }}className="
-          w-full
-          h-full
-          overflow-hidden 
+          import { Link, useParams } from "react-router-dom";
+          import Image from "../components/Image";
+          import PostMenuActions from "../components/PostMenuActions";
+          import Comments from "../components/Comments";
+          import axios from "axios";
+          import { useQuery } from "@tanstack/react-query";
+          import { format } from "timeago.js";
+          import Navbar from "../components/navbar2";
+          import { FaStar } from "react-icons/fa";
+          import Footer from "../components/Footer";
+          import ExplorePosts from "../components/ExplorePosts";
+          import MobileControls from "../components/MobileControls";
+          import LatestPosts from "../components/LatestPosts";
+          import { useEffect } from "react";
+          import { Helmet } from "react-helmet";
+          import { useState } from "react";
           
-          relative
-        "  >
-
+          const fetchPost = async (slug) => {
+             
           
-       {mainImage  (
-        <img
-          src={mainImage}
-          fill
-          className="object-cover w-full"
-          alt="Image"
-        />
-     
-         )}
-      </div>
-
-      {/* Right Div */}
-      <div style={{ width: '25%',  }}>
-        {/* Nested Divs */}
-        <div style={{ height: '25%', marginBottom: '2%'  }}className="
-          w-full
-          h-full
-          overflow-hidden 
+            const res = await axios.get(`${import.meta.env.VITE_API_URL}/posts/${slug}`);
+            return res.data;
+          };
           
-          relative
-        "  >
-
-        {mainImage  (
-        <img
-          src={mainImage}
-          fill
-          className="object-cover w-full"
-          alt="Image"
-        />
-     
-         )}
-     
+          const SinglePostPage = () => {
+            useEffect(() => {
+              window.scrollTo(0, 0); // Scrolls to the top when this component mounts
+            }, []);
+            const { slug } = useParams();
           
-        </div>
-        <div style={{ height: '25%', marginBottom: '2%' }}className="
-          w-full
-          h-full
-          overflow-hidden 
+            const { isPending, error, data } = useQuery({
+              queryKey: ["post", slug],
+              queryFn: () => fetchPost(slug),
+            });
           
-          relative
-        "  >
-          {secondMainImage  (
-        <img
-          src={mainImage}
-          fill
-          className="object-cover w-full"
-          alt="Image"
-        />
-     
-         )}
-        </div>
-        <div style={{ height: '25%', marginBottom: '2%' }}className="
-          w-full
-          h-full
-          overflow-hidden 
           
-          relative
-        "  >
-           {thirdMainImage  (
-        <img
-          src={mainImage}
-          fill
-          className="object-cover w-full"
-          alt="Image"
-        />
-     
-         )}
-        </div>
-        <div style={{ height: '25%', marginBottom: '2%' }}className="
-          w-full
-          h-full
-          overflow-hidden 
+            const [popupImage, setPopupImage] = useState(null);
           
-          relative
-        "  >
-           {fourthMainImage  (
-        <img
-          src={mainImage}
-          fill
-          className="object-cover w-full"
-          alt="Image"
-        />
-     
-         )}
-        </div>
-        {popupImage && (
-      <div
-        className="fixed inset-0 bg-black bg-opacity-80 flex items-center justify-center z-50"
-        onClick={() => setPopupImage(null)} // Closes on clicking outside
-      >
-        <div
-          className="relative w-full h-1/2 md:w-3/4 md:h-3/4"
-          onClick={(e) => e.stopPropagation()} // Prevents closing when clicking the image
-        >
-          <button
-            className="absolute top-2 right-2 bg-gray-800 text-white rounded-full p-3 md:p-9"
-            onClick={() => setPopupImage(null)}
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="w-4 h-4"
-              viewBox="0 0 24 24"
-              fill="red"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            >
-              <line x1="18" y1="6" x2="6" y2="18" />
-              <line x1="6" y1="6" x2="18" y2="18" />
-            </svg>
-          </button>
-          <img
-            src={popupImage}
-            className="w-full h-3/4 object-cover rounded-xl"
-            alt="Popup"
-          />
-        </div>
-      </div>
-    )}
-      </div>
-    </div>
-
-
-</div>
+            // Prevent scrolling when popup is open
+            useEffect(() => {
+              if (popupImage) {
+                document.body.style.overflow = "hidden";
+              } else {
+                document.body.style.overflow = "auto";
+              }
+            }, [popupImage]);
+            
+            const images = data?.img || []; // Ensure img is used
+            const mainImage = images.length > 0 ? images[0] : null;
+            const secondMainImage = images.length > 1 ? images[1] : null;
+            const thirdMainImage = images.length > 2 ? images[2] : null;
+            const fourthMainImage = images.length > 3 ? images[3] : null;
+          
+          
+            if (isPending) return "loading...";
+            if (error) return "Something went wrong!" + error.message;
+            if (!data) return "Post not found!";
+          
+            return (
+              <div className=" bg-[var(--navBg)]">
+          
+          
+          
+                <Navbar />
+          
+                <div className="flex flex-col p-3 md:p-9 gap-4">
+          
+                <div className="max-w-[1200px] mx-auto">
+          
+          
+          
+                <div style={{ display: 'flex' }}className="
+                    w-full
+                  
+                    overflow-hidden 
+                    rounded-xl
+                    aspect
+                    relative
+                     transition duration-300`
+                  "  >
+                {/* Left Div */}
+                <div style={{ width: '75%',marginRight: '1%' }}className="
+                    w-full
+                    h-full
+                    overflow-hidden 
+                    
+                    relative
+                  "  >
+          
+                    
+                 {mainImage  (
+                  <img
+                    src={mainImage}
+                    fill
+                    className="object-cover w-full"
+                    alt="Image"
+                  />
+               
+                   )}
+                </div>
+          
+                {/* Right Div */}
+                <div style={{ width: '25%',  }}>
+                  {/* Nested Divs */}
+                  <div  style={{ height: '25%', marginBottom: '2%'  }}className=" 
+                    w-full
+                    h-full
+                    overflow-hidden 
+                    
+                    relative
+                  "            onClick={() => setPopupImage(img)}
+                  >
+          
+                  {mainImage  (
+                  <img
+                    src={mainImage}
+                    fill
+                    className="object-cover w-full"
+                    alt="Image"
+                  />
+               
+                   )}
+               
+                    
+                  </div>
+                  <div style={{ height: '25%', marginBottom: '2%' }}className="
+                    w-full
+                    h-full
+                    overflow-hidden 
+                    
+                    relative
+                  "            onClick={() => setPopupImage(img)}
+                  >
+                    {secondMainImage  (
+                  <img
+                    src={mainImage}
+                    fill
+                    className="object-cover w-full"
+                    alt="Image"
+                  />
+               
+                   )}
+                  </div>
+                  <div style={{ height: '25%', marginBottom: '2%' }}className="
+                    w-full
+                    h-full
+                    overflow-hidden 
+                    
+                    relative
+                  "            onClick={() => setPopupImage(img)}
+                  >
+                     {thirdMainImage  (
+                  <img
+                    src={mainImage}
+                    fill
+                    className="object-cover w-full"
+                    alt="Image"
+                  />
+               
+                   )}
+                  </div>
+                  <div style={{ height: '25%', marginBottom: '2%' }}className="
+                    w-full
+                    h-full
+                    overflow-hidden 
+                    
+                    relative
+                  "            onClick={() => setPopupImage(img)}
+                  >
+                     {fourthMainImage  (
+                  <img
+                    src={mainImage}
+                    fill
+                    className="object-cover w-full"
+                    alt="Image"
+                  />
+               
+                   )}
+                  </div>
+                  
+                  {popupImage && (
+                <div
+                  className="fixed inset-0 bg-black bg-opacity-80 flex items-center justify-center z-50"
+                  onClick={() => setPopupImage(null)} // Closes on clicking outside
+                >
+                  <div
+                    className="relative w-full h-1/2 md:w-3/4 md:h-3/4"
+                    onClick={(e) => e.stopPropagation()} // Prevents closing when clicking the image
+                  >
+                    <button
+                      className="absolute top-2 right-2 bg-gray-800 text-white rounded-full p-3 md:p-9"
+                      onClick={() => setPopupImage(null)}
+                    >
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        className="w-4 h-4"
+                        viewBox="0 0 24 24"
+                        fill="red"
+                        stroke="currentColor"
+                        strokeWidth="2"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      >
+                        <line x1="18" y1="6" x2="6" y2="18" />
+                        <line x1="6" y1="6" x2="18" y2="18" />
+                      </svg>
+                    </button>
+                    <img
+                      src={popupImage}
+                      className="w-full h-3/4 object-cover rounded-xl"
+                      alt="Popup"
+                    />
+                  </div>
+                </div>
+              )}
+                </div>
+              </div>
+          
+          
+          </div>
+          
 
 
 
