@@ -139,16 +139,16 @@ const Write = () => {
         {/* Category Selection */}
         <select value={category} onChange={(e) => setCategory(e.target.value)} className="p-2 bg-[var(--textColore)] text-[var(--textColor)] rounded">
           <option value="" disabled>Select a category</option>
-          <option value="self-growth">Self-Growth</option>
-<option value="business-career">Business & Career</option>
-<option value="fiction">Fiction</option>
-<option value="productivity">Productivity</option>
-<option value="home-environment">Home & Environment</option>
-<option value="society-tech">Society & Tech</option>
-<option value="health">Health</option>
-<option value="family">Family</option>
-<option value="sports-fitness">Sports & Fitness</option>
-<option value="Biography">Biography</option>
+          <option value="self-growth">Appartment/Flat</option>
+<option value="business-career">Bedsitter</option>
+<option value="fiction">Single Room</option>
+<option value="productivity">Town House</option>
+<option value="home-environment">Bungalow</option>
+<option value="society-tech">Mansionatte</option>
+<option value="health">Villa</option>
+<option value="family">Container</option>
+<option value="sports-fitness">Office</option>
+<option value="Biography">Shop</option>
 <option value="happiness">Happiness</option>
 <option value="spirituality">Spirituality</option>
 <option value="leadership">Leadership</option>
