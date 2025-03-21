@@ -53,7 +53,7 @@ const SinglePostPage = () => {
 
       <div className="flex flex-col p-3 md:p-9 gap-4">
 
-  <div>
+  <div className="max-w-[1200px] max-h-[600px] mx-auto">
 
     
   <div className="relative w-full flex">
@@ -73,7 +73,7 @@ const SinglePostPage = () => {
     </div>
 
     {/* Side Images */}
-    <div className="w-1/4 flex flex-col gap-2">
+    <div className="w-1/4 flex flex-col gap-2 md:gap-6">
       {images.slice(1, 5).map((img, index) => (
         <div
           key={index}
@@ -106,22 +106,32 @@ const SinglePostPage = () => {
 
     {/* Popup Image */}
     {popupImage && (
-      <div className="fixed inset-0 bg-black bg-opacity-80 flex items-center justify-center z-50">
-        <div className="relative w-3/4 h-3/4">
-          <button
-            className="absolute top-2 right-2 text-white text-xl"
-            onClick={() => setPopupImage(null)}
-          >
-            ×
-          </button>
-          <img
-            src={popupImage}
-            className="w-full h-full object-cover rounded-xl"
-            alt="Popup"
-          />
-        </div>
-      </div>
-    )}
+  <div 
+    className="fixed inset-0 bg-black bg-opacity-80 flex items-center justify-center z-50"
+    onClick={() => setPopupImage(null)} // Closes on clicking outside
+  >
+    <div 
+      className="relative w-3/4 h-3/4"
+      onClick={(e) => e.stopPropagation()} // Prevents closing when clicking the image
+    >
+      <button
+        className="absolute top-2 right-2 bg-gray-800 text-white rounded-full p-1"
+        onClick={() => setPopupImage(null)}
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+          <line x1="18" y1="6" x2="6" y2="18" />
+          <line x1="6" y1="6" x2="18" y2="18" />
+        </svg>
+      </button>
+      <img
+        src={popupImage}
+        className="w-full h-full object-cover rounded-xl"
+        alt="Popup"
+      />
+    </div>
+  </div>
+)}
+
   </div>
 
 
