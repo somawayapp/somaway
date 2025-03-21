@@ -47,7 +47,10 @@ const SinglePostPage = () => {
   
   const images = data?.img || []; // Ensure img is used
   const mainImage = images.length > 0 ? images[0] : null;
-  
+  const secondMainImage = images.length > 1 ? images[1] : null;
+  const thirdMainImage = images.length > 2 ? images[2] : null;
+  const fourthMainImage = images.length > 3 ? images[3] : null;
+
 
   if (isPending) return "loading...";
   if (error) return "Something went wrong!" + error.message;
@@ -63,60 +66,114 @@ const SinglePostPage = () => {
       <div className="flex flex-col p-3 md:p-9 gap-4">
 
       <div className="max-w-[1200px] mx-auto">
-  <div className="relative w-full gap-0 md:gap-4 h-full flex">
-    {/* Main Image */}
-    <div className="w-3/4 mr-2 relative overflow-hidden rounded-xl max-h-[500px] h-full">
-      {mainImage ? (
+
+
+
+      <div style={{ display: 'flex' }}className="
+          w-full
+        
+          overflow-hidden 
+          rounded-xl
+          aspect
+          relative
+           transition duration-300`
+        "  >
+      {/* Left Div */}
+      <div style={{ width: '75%',marginRight: '1%' }}className="
+          w-full
+          h-full
+          overflow-hidden 
+          
+          relative
+        "  >
+
+          
+       {mainImage  (
         <img
           src={mainImage}
-          className="w-full h-full object-cover rounded-xl"
-          alt="Main Image"
+          fill
+          className="object-cover w-full"
+          alt="Image"
         />
-      ) : (
-        <div className="w-full h-full bg-gray-300 rounded-xl flex items-center justify-center">
-          No Image
-        </div>
-      )}
-    </div>
+     
+         )}
+      </div>
 
-    {/* Side Images */}
-    <div className="w-1/4 flex flex-col gap-2 md:gap-4 h-[500px]">
-      {images.slice(1, 4).map((img, index) => (
-        <div
-          key={index}
-          className="relative w-full overflow-hidden rounded-xl cursor-pointer"
-          onClick={() => setPopupImage(img)}
-          style={{ height: "calc((500px - 3 * 8px) / 4)" }} // Adjust height dynamically
-        >
-          <img
-            src={img}
-            className="w-full h-full object-cover rounded-xl"
-            alt={`Image ${index + 2}`}
-          />
-        </div>
-      ))}
-      {images.length > 4 && (
-        <div
-          className="relative w-full overflow-hidden rounded-xl cursor-pointer"
-          style={{ height: "calc((500px - 3 * 8px) / 4)" }}
-        >
-          <img
-            src={images[4]}
-            className="w-full h-full object-cover rounded-xl"
-            alt="More Images"
-          />
-          <a
-            href="/showmore"
-            className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 text-white font-bold rounded-xl"
-          >
-            Show More
-          </a>
-        </div>
-      )}
-    </div>
+      {/* Right Div */}
+      <div style={{ width: '25%',  }}>
+        {/* Nested Divs */}
+        <div style={{ height: '25%', marginBottom: '2%'  }}className="
+          w-full
+          h-full
+          overflow-hidden 
+          
+          relative
+        "  >
 
-    {/* Popup Image */}
-    {popupImage && (
+        {mainImage  (
+        <img
+          src={mainImage}
+          fill
+          className="object-cover w-full"
+          alt="Image"
+        />
+     
+         )}
+     
+          
+        </div>
+        <div style={{ height: '25%', marginBottom: '2%' }}className="
+          w-full
+          h-full
+          overflow-hidden 
+          
+          relative
+        "  >
+          {secondMainImage  (
+        <img
+          src={mainImage}
+          fill
+          className="object-cover w-full"
+          alt="Image"
+        />
+     
+         )}
+        </div>
+        <div style={{ height: '25%', marginBottom: '2%' }}className="
+          w-full
+          h-full
+          overflow-hidden 
+          
+          relative
+        "  >
+           {thirdMainImage  (
+        <img
+          src={mainImage}
+          fill
+          className="object-cover w-full"
+          alt="Image"
+        />
+     
+         )}
+        </div>
+        <div style={{ height: '25%', marginBottom: '2%' }}className="
+          w-full
+          h-full
+          overflow-hidden 
+          
+          relative
+        "  >
+           {fourthMainImage  (
+        <img
+          src={mainImage}
+          fill
+          className="object-cover w-full"
+          alt="Image"
+        />
+     
+         )}
+        </div>
+        {popupImage && (
       <div
         className="fixed inset-0 bg-black bg-opacity-80 flex items-center justify-center z-50"
         onClick={() => setPopupImage(null)} // Closes on clicking outside
@@ -151,7 +208,10 @@ const SinglePostPage = () => {
         </div>
       </div>
     )}
-  </div>
+      </div>
+    </div>
+
+
 </div>
 
 
