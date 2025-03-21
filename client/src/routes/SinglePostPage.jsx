@@ -103,7 +103,7 @@
       onClick={() => setPopupImage(null)}
     >
       <div
-        className="relative w-full  p-3 md:p-9 h-1/2  md:w-3/4 md:h-full"
+        className="relative w-full  p-3 md:p-9 h-1/2 mt-0 md:mt-[25%] md:w-3/4 md:h-full"
         onClick={(e) => e.stopPropagation()} // Prevents closing when clicking the image
       >
         <button
