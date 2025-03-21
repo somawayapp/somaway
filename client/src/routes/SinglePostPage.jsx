@@ -36,8 +36,8 @@ const SinglePostPage = () => {
 
   const [popupImage, setPopupImage] = useState(null);
 
-const images = data?.images || []; // Ensure images exist
-const mainImage = images[0]; // First image as main
+  const images = data?.img || []; // Ensure img is used
+  const mainImage = images.length > 0 ? images[0] : null;
   
 
   if (isPending) return "loading...";
@@ -47,17 +47,7 @@ const mainImage = images[0]; // First image as main
   return (
     <div className=" bg-[var(--navBg)]">
 
-<Helmet>
-    <title>{`${data.title || 'Best '} by ${data.author || 'Somaway'} Book Summary`}</title>
 
-    <meta name="description" content={` ${data.summary} `} />
-    <meta name="keywords"  content={`book title ${data.title}, author ${data.author} category ${data.category},  knowledge empowerment, Somaway, book summaries, knowledge empowerment, bestselling books, transformative ideas, thought leadership, business books, self-help summaries, industry insights, personal growth, productivity hacks, motivation, innovation strategies, creative thinking, mind mastery, leadership skills, financial wisdom, success mindset, breakthrough thinking, wisdom for life, practical knowledge, learning shortcuts, brain boost, Best book summaries, rapid reading, book digest, quick reads, success stories, entrepreneurial mindset, modern wisdom, elite knowledge, mastery techniques, global perspectives, future readiness, book analysis, idea extraction, in-depth reviews, concise knowledge, summary breakdowns, book wisdom, mental expansion, critical thinking, intellectual growth, top books, influential reads, advanced thinking, ultimate book digest, life hacks, professional growth, career mastery, mindset shift, paradigm transformation, unconventional wisdom, practical insights, top nonfiction books, skill enhancement, brain optimization, cognitive skills, mind enhancement, top book reviews, wisdom harvesting, fast knowledge, core ideas, rapid insights, strategic intelligence, innovation fuel, personal development, growth mindset, self-mastery, breakthrough books, smart reading, fast tracking wisdom, peak performance, visionary thinking, knowledge domination, unbeatable learning.`} />
-
-    <meta property="og:description" content={`Experience the most profound interpretation of ${data.title} - A book summary that redefines insight and analysis.`} />
-    <meta property="og:image" content={data.img} />
-    <meta property="og:url" content={`${window.location.href}`} />
-    <link rel="canonical" href={`${window.location.href}`} />
-</Helmet>
 
       <Navbar />
 
