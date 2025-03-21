@@ -51,7 +51,8 @@
             const secondMainImage = images.length > 1 ? images[1] : null;
             const thirdMainImage = images.length > 2 ? images[2] : null;
             const fourthMainImage = images.length > 3 ? images[3] : null;
-          
+            const fifthMainImage = images.length > 4 ? images[4] : null;
+
           
             if (isPending) return "loading...";
             if (error) return "Something went wrong!" + error.message;
@@ -89,7 +90,8 @@
                   "  >
           
                     
-                 {mainImage  (
+          {mainImage && (
+
                   <img
                     src={mainImage}
                     fill
@@ -112,9 +114,9 @@
                   "            onClick={() => setPopupImage(img)}
                   >
           
-                  {mainImage  (
+                  {secondMainImage &&  (
                   <img
-                    src={mainImage}
+                    src={secondMainImage}
                     fill
                     className="object-cover w-full"
                     alt="Image"
@@ -132,9 +134,9 @@
                     relative
                   "            onClick={() => setPopupImage(img)}
                   >
-                    {secondMainImage  (
+                    {thirdMainImage  && (
                   <img
-                    src={mainImage}
+                    src={thirdMainImage}
                     fill
                     className="object-cover w-full"
                     alt="Image"
@@ -150,9 +152,9 @@
                     relative
                   "            onClick={() => setPopupImage(img)}
                   >
-                     {thirdMainImage  (
+                     {fourthMainImage  && (
                   <img
-                    src={mainImage}
+                    src={fourthMainImage}
                     fill
                     className="object-cover w-full"
                     alt="Image"
@@ -168,9 +170,9 @@
                     relative
                   "            onClick={() => setPopupImage(img)}
                   >
-                     {fourthMainImage  (
+                     {fifthMainImage  &&  (
                   <img
-                    src={mainImage}
+                    src={fifthMainImage}
                     fill
                     className="object-cover w-full"
                     alt="Image"
