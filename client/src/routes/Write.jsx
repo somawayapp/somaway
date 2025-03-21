@@ -21,19 +21,14 @@ const Write = () => {
   const [whoshouldread, setWhoshouldread] = useState("");
   const [desc, setDesc] = useState("");
   const [category, setCategory] = useState("");
-  const [images, setImages] = useState([]); // Store multiple images
+  const [img, setImg] = useState([]); 
   const [author, setAuthor] = useState("");
   const [summary, setSummary] = useState("");
   const [progress, setProgress] = useState(0);
   const [error, setError] = useState("");
   const [isFeatured, setIsFeatured] = useState(false);
 
-  useEffect(() => {
-    if (images.length > 0) {
-      const imgTags = images.map((img) => `<p><img src="${img.url}" /></p>`).join("");
-      setDesc((prev) => prev + imgTags);
-    }
-  }, [images]);
+
 
   const navigate = useNavigate();
   const { getToken } = useAuth();
@@ -89,7 +84,7 @@ const Write = () => {
       aboutauthor,
       desc,
       category,
-      images: images.map((img) => img.url), // Store image URLs
+      img: img.map((img) => img.url), 
       author,
       summary,
       slug,
@@ -112,15 +107,15 @@ const Write = () => {
         <form onSubmit={handleSubmit} className="flex flex-col gap-6">
       
 
-          <Upload type="image" setProgress={setProgress} setData={setImages}>
+          <Upload type="image" setProgress={setProgress} setData={setImg}>
             <button className="p-2 bg-[var(--textColore)] text-[var(--textColor)] rounded-lg">
               Upload Additional Images
             </button>
           </Upload>
 
-          {images.length > 0 && (
+          {img.length > 0 && (
             <div className="flex flex-wrap gap-2">
-              {images.map((img, index) => (
+              {img.map((img, index) => (
                 <img key={index} src={img.url} alt="Uploaded" className="w-[100px] h-[100px] object-cover" />
               ))}
             </div>
