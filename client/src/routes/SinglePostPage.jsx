@@ -95,7 +95,7 @@
                   <img
                     src={mainImage}
                     fill
-                    className="object-cover w-full"
+                    className="object-cover h-full w-full"
                     alt="Image"
                   />
                
@@ -105,7 +105,7 @@
                 {/* Right Div */}
                 <div style={{ width: '25%',  }}>
                   {/* Nested Divs */}
-                  <div  style={{ height: '25%', marginBottom: '2%'  }}className=" 
+                  <div  style={{ height: '25%', marginBottom: '1%'  }}className=" 
                     w-full
                     h-full
                     overflow-hidden 
@@ -126,7 +126,7 @@
                
                     
                   </div>
-                  <div style={{ height: '25%', marginBottom: '2%' }}className="
+                  <div style={{ height: '25%', marginBottom: '1%' }}className="
                     w-full
                     h-full
                     overflow-hidden 
