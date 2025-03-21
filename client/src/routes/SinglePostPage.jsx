@@ -45,6 +45,7 @@
                 document.body.style.overflow = "auto";
               }
             }, [popupImage]);
+
             
             const images = data?.img || []; // Ensure img is used
             const mainImage = images.length > 0 ? images[0] : null;
@@ -71,153 +72,64 @@
           
           
           
-                <div style={{ display: 'flex' }}className="
-                    w-full
-                  
-                    overflow-hidden 
-                    rounded-xl
-                    aspect
-                    relative
-                     transition duration-300`
-                  "  >
-                {/* Left Div */}
-                <div style={{ width: '75%',marginRight: '1%' }}className="
-                    w-full
-                    h-full
-                    overflow-hidden 
-                    
-                    relative
-                  "  >
-          
-                    
-          {mainImage && (
+           <div className="w-full flex overflow-hidden rounded-xl aspect relative transition duration-300">
+  {/* Left Div */}
+  <div className="w-3/4 h-full overflow-hidden relative mr-1">
+    {mainImage && (
+      <img src={mainImage} className="object-cover h-full w-full" alt="Image" />
+    )}
+  </div>
 
-                  <img
-                    src={mainImage}
-                    fill
-                    className="object-cover h-full w-full"
-                    alt="Image"
-                  />
-               
-                   )}
-                </div>
-          
-                {/* Right Div */}
-                <div style={{ width: '25%',  }}>
-                  {/* Nested Divs */}
-                  <div  style={{ height: '25%', marginBottom: '1%'  }}className=" 
-                    w-full
-                    h-full
-                    overflow-hidden 
-                    
-                    relative
-                  "            onClick={() => setPopupImage(img)}
-                  >
-          
-                  {secondMainImage &&  (
-                  <img
-                    src={secondMainImage}
-                    fill
-                    className="object-cover w-full"
-                    alt="Image"
-                  />
-               
-                   )}
-               
-                    
-                  </div>
-                  <div style={{ height: '25%', marginBottom: '1%' }}className="
-                    w-full
-                    h-full
-                    overflow-hidden 
-                    
-                    relative
-                  "            onClick={() => setPopupImage(img)}
-                  >
-                    {thirdMainImage  && (
-                  <img
-                    src={thirdMainImage}
-                    fill
-                    className="object-cover w-full"
-                    alt="Image"
-                  />
-               
-                   )}
-                  </div>
-                  <div style={{ height: '25%', marginBottom: '2%' }}className="
-                    w-full
-                    h-full
-                    overflow-hidden 
-                    
-                    relative
-                  "            onClick={() => setPopupImage(img)}
-                  >
-                     {fourthMainImage  && (
-                  <img
-                    src={fourthMainImage}
-                    fill
-                    className="object-cover w-full"
-                    alt="Image"
-                  />
-               
-                   )}
-                  </div>
-                  <div style={{ height: '25%', marginBottom: '2%' }}className="
-                    w-full
-                    h-full
-                    overflow-hidden 
-                    
-                    relative
-                  "            onClick={() => setPopupImage(img)}
-                  >
-                     {fifthMainImage  &&  (
-                  <img
-                    src={fifthMainImage}
-                    fill
-                    className="object-cover w-full"
-                    alt="Image"
-                  />
-               
-                   )}
-                  </div>
-                  
-                  {popupImage && (
-                <div
-                  className="fixed inset-0 bg-black bg-opacity-80 flex items-center justify-center z-50"
-                  onClick={() => setPopupImage(null)} // Closes on clicking outside
-                >
-                  <div
-                    className="relative w-full h-1/2 md:w-3/4 md:h-3/4"
-                    onClick={(e) => e.stopPropagation()} // Prevents closing when clicking the image
-                  >
-                    <button
-                      className="absolute top-2 right-2 bg-gray-800 text-white rounded-full p-3 md:p-9"
-                      onClick={() => setPopupImage(null)}
-                    >
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        className="w-4 h-4"
-                        viewBox="0 0 24 24"
-                        fill="red"
-                        stroke="currentColor"
-                        strokeWidth="2"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      >
-                        <line x1="18" y1="6" x2="6" y2="18" />
-                        <line x1="6" y1="6" x2="18" y2="18" />
-                      </svg>
-                    </button>
-                    <img
-                      src={popupImage}
-                      className="w-full h-3/4 object-cover rounded-xl"
-                      alt="Popup"
-                    />
-                  </div>
-                </div>
-              )}
-                </div>
-              </div>
+  {/* Right Div */}
+  <div className="w-1/4 h-full flex flex-col">
+    {[secondMainImage, thirdMainImage, fourthMainImage, fifthMainImage].map(
+      (image, index) =>
+        image && (
+          <div
+            key={index}
+            className="w-full h-1/4 overflow-hidden relative cursor-pointer"
+            onClick={() => setPopupImage(image)}
+          >
+            <img src={image} className="object-cover h-full w-full" alt="Image" />
+          </div>
+        )
+    )}
+  </div>
+
+  {/* Popup Modal */}
+  {popupImage && (
+    <div
+      className="fixed inset-0 bg-black bg-opacity-80 flex items-center justify-center z-50"
+      onClick={() => setPopupImage(null)}
+    >
+      <div
+        className="relative w-full h-1/2 md:w-3/4 md:h-3/4"
+        onClick={(e) => e.stopPropagation()} // Prevents closing when clicking the image
+      >
+        <button
+          className="absolute top-2 right-2 bg-gray-800 text-white rounded-full p-3 md:p-9"
+          onClick={() => setPopupImage(null)}
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            className="w-4 h-4"
+            viewBox="0 0 24 24"
+            fill="red"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          >
+            <line x1="18" y1="6" x2="6" y2="18" />
+            <line x1="6" y1="6" x2="18" y2="18" />
+          </svg>
+        </button>
+        <img src={popupImage} className="w-full h-3/4 object-cover rounded-xl" alt="Popup" />
+      </div>
+    </div>
+  )}
+</div>
+
           
           
           </div>
