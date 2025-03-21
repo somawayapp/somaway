@@ -36,6 +36,15 @@ const SinglePostPage = () => {
 
   const [popupImage, setPopupImage] = useState(null);
 
+  // Prevent scrolling when popup is open
+  useEffect(() => {
+    if (popupImage) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "auto";
+    }
+  }, [popupImage]);
+  
   const images = data?.img || []; // Ensure img is used
   const mainImage = images.length > 0 ? images[0] : null;
   
@@ -53,50 +62,52 @@ const SinglePostPage = () => {
 
       <div className="flex flex-col p-3 md:p-9 gap-4">
 
-  <div className="max-w-[1200px] mx-auto">
-
-    
-  <div className="relative w-full gap-0 md:gap-4 sm:h-full  flex">
+      <div className="max-w-[1200px] mx-auto">
+  <div className="relative w-full gap-0 md:gap-4 h-full flex">
     {/* Main Image */}
-    <div className="w-3/4 mr-2 relative overflow-hidden rounded-xl">
+    <div className="w-3/4 mr-2 relative overflow-hidden rounded-xl max-h-[500px] h-full">
       {mainImage ? (
         <img
           src={mainImage}
-          className="w-full  object-cover rounded-xl"
+          className="w-full h-full object-cover rounded-xl"
           alt="Main Image"
         />
       ) : (
-        <div className="w-full  bg-gray-300 rounded-xl flex items-center justify-center">
+        <div className="w-full h-full bg-gray-300 rounded-xl flex items-center justify-center">
           No Image
         </div>
       )}
     </div>
 
     {/* Side Images */}
-    <div className="w-1/4 flex flex-col gap-2 md:gap-4">
+    <div className="w-1/4 flex flex-col gap-2 md:gap-4 h-[500px]">
       {images.slice(1, 4).map((img, index) => (
         <div
           key={index}
           className="relative w-full overflow-hidden rounded-xl cursor-pointer"
           onClick={() => setPopupImage(img)}
+          style={{ height: "calc((500px - 3 * 8px) / 4)" }} // Adjust height dynamically
         >
           <img
             src={img}
-            className="w-full  object-cover rounded-xl"
+            className="w-full h-full object-cover rounded-xl"
             alt={`Image ${index + 2}`}
           />
         </div>
       ))}
       {images.length > 4 && (
-        <div className="relative w-full h-1/4 overflow-hidden rounded-xl cursor-pointer">
+        <div
+          className="relative w-full overflow-hidden rounded-xl cursor-pointer"
+          style={{ height: "calc((500px - 3 * 8px) / 4)" }}
+        >
           <img
             src={images[4]}
-            className="w-full object-cover rounded-xl"
+            className="w-full h-full object-cover rounded-xl"
             alt="More Images"
           />
           <a
             href="/showmore"
-            className="absolute inset-0 flex items-center text-xs md:textmd justify-center bg-black bg-opacity-50 text-white font-bold rounded-xl"
+            className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 text-white font-bold rounded-xl"
           >
             Show More
           </a>
@@ -106,36 +117,42 @@ const SinglePostPage = () => {
 
     {/* Popup Image */}
     {popupImage && (
-  <div 
-    className="fixed inset-0 bg-black bg-opacity-80 flex items-center justify-center z-50"
-    onClick={() => setPopupImage(null)} // Closes on clicking outside
-  >
-    <div 
-      className="relative w-full h-1/2 md:w-3/4 md:h-3/4"
-      onClick={(e) => e.stopPropagation()} // Prevents closing when clicking the image
-    >
-      <button
-        className="absolute top-2 right-2 bg-gray-800 text-white rounded-full p-1"
-        onClick={() => setPopupImage(null)}
+      <div
+        className="fixed inset-0 bg-black bg-opacity-80 flex items-center justify-center z-50"
+        onClick={() => setPopupImage(null)} // Closes on clicking outside
       >
-        <svg xmlns="http://www.w3.org/2000/svg" className="w-4 h-4" viewBox="0 0 24 24" fill="red" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-          <line x1="18" y1="6" x2="6" y2="18" />
-          <line x1="6" y1="6" x2="18" y2="18" />
-        </svg>
-      </button>
-      <img
-        src={popupImage}
-        className="w-full h-3/4 object-cover rounded-xl"
-        alt="Popup"
-      />
-    </div>
+        <div
+          className="relative w-full h-1/2 md:w-3/4 md:h-3/4"
+          onClick={(e) => e.stopPropagation()} // Prevents closing when clicking the image
+        >
+          <button
+            className="absolute top-2 right-2 bg-gray-800 text-white rounded-full p-3 md:p-9"
+            onClick={() => setPopupImage(null)}
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="w-4 h-4"
+              viewBox="0 0 24 24"
+              fill="red"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
+              <line x1="18" y1="6" x2="6" y2="18" />
+              <line x1="6" y1="6" x2="18" y2="18" />
+            </svg>
+          </button>
+          <img
+            src={popupImage}
+            className="w-full h-3/4 object-cover rounded-xl"
+            alt="Popup"
+          />
+        </div>
+      </div>
+    )}
   </div>
-)}
-
-  </div>
-
-
-  </div>
+</div>
 
 
 
