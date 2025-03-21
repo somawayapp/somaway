@@ -68,48 +68,69 @@
           
                 <div className="flex flex-col p-3 md:p-9 gap-4">
           
-                <div className="max-w-[1200px] mx-auto">
-          
-          
-          
-                <div className="w-full flex h-[250px] md:h-[500px] overflow-hidden rounded-xl aspect relative transition duration-300">
-  {/* Left Div */}
-  <div className="flex-1 h-full overflow-hidden relative mr-1">
-    {mainImage && (
-      <img src={mainImage} className="object-cover h-full w-full" alt="Image" />
-    )}
-  </div>
+            
 
-  {/* Right Div */}
-  <div className="w-1/4 h-full flex gap-1 flex-col">
-    {[secondMainImage, thirdMainImage, fourthMainImage, fifthMainImage].map(
-      (image, index) =>
-        image && (
-          <div
-            key={index}
-            className="w-full h-1/4  overflow-hidden relative cursor-pointer"
-            onClick={() => setPopupImage(image)}
-          >
-            <img src={image} className="object-cover h-full w-full" alt="Image" />
+
+     <div className="w-full mt-[-13px] flex items-center justify-between pb-2 pt-4 md:pt-1 text-[var(--textColor)]">
+  <h1 className="text-md md:text-xl font-semibold text-left">
+    Property /
+    <span className="pl-1 font-normal">{data.title}</span>
+  </h1>
+  <button className="flex items-center gap-1 text-[var(--textColor)] text-xl" onClick={() => window.history.back()}>
+    ← <span className="text-md md:text-lg">Back</span>
+  </button>
+</div>
+
+
+
+
+
+        
+<div className="bg-[var(--bd3)] ">
+<div className="max-w-[1200px] mx-auto">
+          
+          
+          
+          <div className="w-full flex h-[250px] md:h-[500px] overflow-hidden rounded-xl aspect relative transition duration-300">
+          {/* Left Div */}
+          <div className="flex-1 h-full overflow-hidden relative mr-1">
+          {mainImage && (
+          <img src={mainImage} className="object-cover h-full w-full" alt="Image" />
+          )}
           </div>
-        )
-    )}
-  </div>
-
-  {/* Popup Modal */}
-  {popupImage && (
-    <div
-      className="fixed inset-0 bg-black bg-opacity-80 flex items-center justify-center " style={{ zIndex: 100014 }}
-      onClick={() => setPopupImage(null)}
-    >
-      <div
-        className="relative w-full  p-3 md:p-9 h-1/2 mt-0 md:mt-[25%] md:w-3/4 md:h-full"
-        onClick={(e) => e.stopPropagation()} // Prevents closing when clicking the image
-      >
-        <button
+          
+          {/* Right Div */}
+          <div className="w-1/4 h-full flex gap-1 flex-col">
+          {[secondMainImage, thirdMainImage, fourthMainImage, fifthMainImage].map(
+          (image, index) =>
+            image && (
+              <div
+                key={index}
+                className="w-full h-1/4  overflow-hidden relative cursor-pointer"
+                onClick={() => setPopupImage(image)}
+              >
+                <img src={image} className="object-cover h-full w-full" alt="Image" />
+              </div>
+            )
+          )}
+          </div>
+          
+          {/* Popup Modal */}
+          {popupImage && (
+          <div
+          className="fixed inset-0 bg-black bg-opacity-80 flex items-center justify-center " style={{ zIndex: 100014 }}
+          onClick={() => setPopupImage(null)}
+          >
+          <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50" onClick={() => setPopupImage(null)}>
+          <div
+          className="relative w-full p-3 md:p-9 md:w-3/4"
+          onClick={(e) => e.stopPropagation()} // Prevents closing when clicking the image
+          >
+          <button
           className="absolute top-2 right-2 bg-gray-800 text-white rounded-full"
-          onClick={() => setPopupImage(null)}  style={{ zIndex: 100024 }}
-        >
+          onClick={() => setPopupImage(null)}  
+          style={{ zIndex: 100024 }}
+          >
           <svg
             xmlns="http://www.w3.org/2000/svg"
             className="w-4 h-4"
@@ -123,31 +144,33 @@
             <line x1="18" y1="6" x2="6" y2="18" />
             <line x1="6" y1="6" x2="18" y2="18" />
           </svg>
-        </button>
-        <img src={popupImage} className="w-full h-3/4 object-cover rounded-xl" alt="Popup" />
-      </div>
-    </div>
-  )}
-</div>
-
-          
-          
+          </button>
+          <img src={popupImage} className="w-full h-auto max-h-[80vh] object-cover rounded-xl" alt="Popup" />
+          </div>
           </div>
           
-
-
-
-        <div  className=" w-full mt-[-13px] flex pb-2  pt-4 md:pt-1 text-[var(--textColor)] )">
-        <h1 className="text-md md:text-xl font-semibold  text-left"> Library /
-         <span className=" pl-1 font-normal">
-         {data.title}
-          </span >     
-         <span className="  font-normal">
-            Summary       
-               </span >  
+          </div>
+          )}
+          </div>
           
-            </h1>
-        </div>
+              
+              
+              </div>
+</div>
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
