@@ -73,13 +73,18 @@ const SinglePostPage = () => {
  
  {data.img && (
   <div className="w-full md:w-1/4 mt-2 md:mt-0 flex justify-center md:block">
+    {console.log("Image URL from DB:", data.img)}
     <Image
       src={Array.isArray(data.img) ? data.img[0] : data.img} // Ensure the correct format
       className="w-[180px] md:w-[400px] rounded-2xl"
       unoptimized // Prevents Next.js from modifying the URL
     />
+    <p className="text-center mt-2 break-all text-sm">
+      {Array.isArray(data.img) ? data.img[0] : data.img}
+    </p>
   </div>
 )}
+
 
 
           <div className="flex flex-col gap-1 md:gap-2 items-center md:items-start md:w-2/4">
