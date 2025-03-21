@@ -13,6 +13,7 @@ import MobileControls from "../components/MobileControls";
 import LatestPosts from "../components/LatestPosts";
 import { useEffect } from "react";
 import { Helmet } from "react-helmet";
+import { useState } from "react";
 
 const fetchPost = async (slug) => {
    
@@ -31,6 +32,13 @@ const SinglePostPage = () => {
     queryKey: ["post", slug],
     queryFn: () => fetchPost(slug),
   });
+
+
+  const [popupImage, setPopupImage] = useState(null);
+
+const images = data?.images || []; // Ensure images exist
+const mainImage = images[0]; // First image as main
+  
 
   if (isPending) return "loading...";
   if (error) return "Something went wrong!" + error.message;
@@ -54,6 +62,83 @@ const SinglePostPage = () => {
       <Navbar />
 
       <div className="flex flex-col p-3 md:p-9 gap-4">
+
+  <div>
+
+    
+  <div className="relative w-full flex">
+    {/* Main Image */}
+    <div className="w-3/4 mr-2 relative overflow-hidden rounded-xl">
+      {mainImage ? (
+        <img
+          src={mainImage}
+          className="w-full h-full object-cover rounded-xl"
+          alt="Main Image"
+        />
+      ) : (
+        <div className="w-full h-full bg-gray-300 rounded-xl flex items-center justify-center">
+          No Image
+        </div>
+      )}
+    </div>
+
+    {/* Side Images */}
+    <div className="w-1/4 flex flex-col gap-2">
+      {images.slice(1, 5).map((img, index) => (
+        <div
+          key={index}
+          className="relative w-full h-1/4 overflow-hidden rounded-xl cursor-pointer"
+          onClick={() => setPopupImage(img)}
+        >
+          <img
+            src={img}
+            className="w-full h-full object-cover rounded-xl"
+            alt={`Image ${index + 2}`}
+          />
+        </div>
+      ))}
+      {images.length > 5 && (
+        <div className="relative w-full h-1/4 overflow-hidden rounded-xl cursor-pointer">
+          <img
+            src={images[4]}
+            className="w-full h-full object-cover rounded-xl"
+            alt="More Images"
+          />
+          <a
+            href="/showmore"
+            className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 text-white font-bold rounded-xl"
+          >
+            Show More
+          </a>
+        </div>
+      )}
+    </div>
+
+    {/* Popup Image */}
+    {popupImage && (
+      <div className="fixed inset-0 bg-black bg-opacity-80 flex items-center justify-center z-50">
+        <div className="relative w-3/4 h-3/4">
+          <button
+            className="absolute top-2 right-2 text-white text-xl"
+            onClick={() => setPopupImage(null)}
+          >
+            ×
+          </button>
+          <img
+            src={popupImage}
+            className="w-full h-full object-cover rounded-xl"
+            alt="Popup"
+          />
+        </div>
+      </div>
+    )}
+  </div>
+
+
+  </div>
+
+
+
         <div  className=" w-full mt-[-13px] flex pb-2  pt-4 md:pt-1 text-[var(--textColor)] )">
         <h1 className="text-md md:text-xl font-semibold  text-left"> Library /
          <span className=" pl-1 font-normal">
@@ -72,7 +157,7 @@ const SinglePostPage = () => {
        md:flex-row gap-4 md:gap-8">
  
  {data?.img && data.img.length > 0 ? (
-  <div className="w-full md:w-1/4 mt-2 md:mt-0 flex flex-wrap justify-center md:block">
+  <div className="w-full k">
     {data.img.map((img, index) => (
  
    <img src={img}    className="w-[180px] md:w-[400px] rounded-2xl mb-2 last:mb-0"
