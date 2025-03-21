@@ -15,6 +15,7 @@
           import { useEffect } from "react";
           import { Helmet } from "react-helmet";
           import { useState } from "react";
+          import BackButton from "../components/BackButton";
           
           const fetchPost = async (slug) => {
              
@@ -71,14 +72,13 @@
             
 
 
-     <div className="w-full mt-[-13px] flex items-center justify-between pb-2 pt-4 md:pt-1 text-[var(--textColor)]">
+     <div className="w-full mt-[-13px] max-w-[1200px] mx-auto flex items-center justify-between  p-2 md:p-8 pb-2 pt-4 md:pt-1 text-[var(--textColor)]">
   <h1 className="text-md md:text-xl font-semibold text-left">
     Property /
     <span className="pl-1 font-normal">{data.title}</span>
   </h1>
-  <button className="flex items-center gap-1 text-[var(--textColor)] text-xl" onClick={() => window.history.back()}>
-    ← <span className="text-md md:text-lg">Back</span>
-  </button>
+
+  <BackButton/>
 </div>
 
 
@@ -86,8 +86,7 @@
 
 
         
-<div className="bg-[var(--bd3)] ">
-<div className="max-w-[1200px] mx-auto">
+<div className="max-w-[1200px] bg-[var(--bd3)]  border border-[var(--softBg4)]  rounded-3xl  p-2 md:p-8 mx-auto">
           
           
           
@@ -156,7 +155,6 @@
               
               
               </div>
-</div>
 
     
 
