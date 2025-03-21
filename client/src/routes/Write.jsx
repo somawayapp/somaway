@@ -353,7 +353,7 @@
         <div className="p-4 bg-[var(--softBg)] text-[var(--textColor)] rounded-lg shadow-md space-y-4">
           {/* Price Input */}
           <div>
-            <label className="block text-sm font-medium mb-1">Price ({transactionType === "for-rent" ? "per month" : "total"})</label>
+            <label className="block text-sm font-medium mb-1">Price </label>
             <input
               type="number"
               placeholder="Enter price"
