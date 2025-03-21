@@ -135,11 +135,11 @@
         
         
         
-                {/* Category Selection */}
+                {/*  property type Selection */}
                 <h1>
                   which one best describes your proprty type
                 </h1>
-                <select value={category} onChange={(e) => setPropertyType(e.target.value)} className="p-2 bg-[var(--textColore)] text-[var(--textColor)] rounded">
+                <select value={propertytype} onChange={(e) => setPropertyType(e.target.value)} className="p-2 bg-[var(--textColore)] text-[var(--textColor)] rounded">
                   <option value="" disabled> select Your property type</option>
                   <option value="self-growth">Appartment/Flat</option>
                   <option value="happiness">Studio Apartment</option>
@@ -218,7 +218,7 @@
         
                 {/*  Model */}
                
-                <select value={category} onChange={(e) => setModel(e.target.value)} className="p-2 bg-[var(--textColore)] text-[var(--textColor)] rounded">
+                <select value={model} onChange={(e) => setModel(e.target.value)} className="p-2 bg-[var(--textColore)] text-[var(--textColor)] rounded">
                   <option value="" disabled>     For sale/ for rent     </option>
                   <option value="self-growth">For Rent</option>
                   <option value="happiness">For Sale </option>
