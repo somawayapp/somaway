@@ -27,6 +27,8 @@ const SinglePostPage = () => {
   }, []);
   const { slug } = useParams();
 
+  const cleanUrl = img.replace(/tr::[^/]+\//, "");
+
   const { isPending, error, data } = useQuery({
     queryKey: ["post", slug],
     queryFn: () => fetchPost(slug),
@@ -73,13 +75,19 @@ const SinglePostPage = () => {
  
  {data?.img && data.img.length > 0 ? (
   <div className="w-full md:w-1/4 mt-2 md:mt-0 flex flex-wrap justify-center md:block">
-    {data.img.map((img, index) => (
- 
-   <img src={img}    className="w-[180px] md:w-[400px] rounded-2xl mb-2 last:mb-0"
-   alt={`Image ${index + 1}`} />
+    {data.img.map((img, index) => {
+      // Remove any unwanted transformations from ImageKit
+      const cleanUrl = img.replace(/tr::[^/]+\//, "");
 
- 
-    ))}           
+      return (
+        <Image
+          key={index}
+          src={cleanUrl}
+          alt={`Image ${index + 1}`}
+          className="w-[180px] md:w-[400px] rounded-2xl mb-2 last:mb-0"
+        />
+      );
+    })}
   </div>
 ) : (
   <p>No images found</p>
