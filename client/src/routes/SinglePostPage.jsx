@@ -70,13 +70,13 @@ const SinglePostPage = () => {
 
       <div className="flex flex-col bg-[var(--bd3)]  border border-[var(--softBg4)]  rounded-3xl  p-2 md:p-8
        md:flex-row gap-4 md:gap-8">
-       {Array.isArray(data.img) && data.img.length > 0 && (
-  <div className="w-full md:w-1/4 mt-2 md:mt-0 flex overflow-x-auto space-x-2">
-    {data.img.map((image, index) => (
+       {data.images && Array.isArray(data.images) && data.images.length > 0 && (
+  <div className="w-full md:w-1/4 mt-2 md:mt-0 flex justify-center md:block">
+    {data.images.map((img, index) => (
       <Image
         key={index}
-        src={image}
-        className="w-[180px] md:w-[400px] rounded-2xl"
+        src={img}
+        className="w-[180px] md:w-[400px] rounded-2xl mb-2"
       />
     ))}
   </div>
