@@ -10,7 +10,9 @@ const authenticator = async () => {
 
     if (!response.ok) {
       const errorText = await response.text();
-      throw new Error(`Request failed with status ${response.status}: ${errorText}`);
+      throw new Error(
+        `Request failed with status ${response.status}: ${errorText}`
+      );
     }
 
     const data = await response.json();
@@ -21,7 +23,7 @@ const authenticator = async () => {
   }
 };
 
-const Upload = ({ children, type, setProgress, images, setImages }) => {
+const Upload = ({ children, type, setProgress, setData }) => {
   const ref = useRef(null);
 
   const onError = (err) => {
@@ -30,14 +32,12 @@ const Upload = ({ children, type, setProgress, images, setImages }) => {
   };
 
   const onSuccess = (res) => {
-    if (images.length >= 10) {
-      toast.error("You can only upload up to 10 images.");
-      return;
-    }
-    setImages((prev) => [...prev, res]);
+    console.log(res);
+    setData((prev) => [...prev, res]); // Append new image to array
   };
 
   const onUploadProgress = (progress) => {
+    console.log(progress);
     setProgress(Math.round((progress.loaded / progress.total) * 100));
   };
 
@@ -55,6 +55,7 @@ const Upload = ({ children, type, setProgress, images, setImages }) => {
         className="hidden"
         ref={ref}
         accept={`${type}/*`}
+        multiple // Allow multiple uploads
       />
       <div className="cursor-pointer" onClick={() => ref.current.click()}>
         {children}
