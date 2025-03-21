@@ -137,27 +137,138 @@ const Write = () => {
         {/* Author Input */}
 
         {/* Category Selection */}
-        <select value={category} onChange={(e) => setCategory(e.target.value)} className="p-2 bg-[var(--textColore)] text-[var(--textColor)] rounded">
-          <option value="" disabled>Select a category</option>
+        <h1>
+          which one best describes your proprty type
+        </h1>
+        <select value={category} onChange={(e) => setPropertyType(e.target.value)} className="p-2 bg-[var(--textColore)] text-[var(--textColor)] rounded">
+          <option value="" disabled> select Your property type</option>
           <option value="self-growth">Appartment/Flat</option>
-<option value="business-career">Bedsitter</option>
-<option value="fiction">Single Room</option>
-<option value="productivity">Town House</option>
-<option value="home-environment">Bungalow</option>
-<option value="society-tech">Mansionatte</option>
-<option value="health">Villa</option>
-<option value="family">Container</option>
-<option value="sports-fitness">Office</option>
-<option value="Biography">Shop</option>
-<option value="happiness">Happiness</option>
-<option value="spirituality">Spirituality</option>
-<option value="leadership">Leadership</option>
-<option value="love-sex">Love & Sex</option>
-<option value="money-investments">Money & Investments</option>
-<option value="negotiation">Negotiation</option>
+          <option value="happiness">Studio Apartment</option>
+          <option value="business-career">Bedsitter</option>
+          <option value="fiction">Single Room</option>
+          <option value="productivity">Town House</option>
+          <option value="home-environment">Bungalow</option>
+          <option value="society-tech">Mansionatte</option>
+          <option value="health">Villa</option>
+          <option value="family">Container</option>
+          <option value="sports-fitness">Office</option>
+          <option value="Biography">Shop</option>
+          <option value="spirituality">Warehouse</option>
+
         </select>
 
-        {/* Rich Text Editor */}
+        
+  {/* Bsics */}
+
+<div className="p-2 bg-[var(--textColor)] text-[var(--textColor)] rounded">
+
+  {category === "basics" && (
+    <div className="mt-2 space-y-2">
+      <input
+        type="number"
+        placeholder="Number of Bathrooms"
+        value={bathrooms}
+        onChange={(e) => setBathrooms(e.target.value)}
+        className="p-2 w-full bg-[var(--softBg)] text-[var(--textColor)] rounded"
+      />
+      <input
+        type="number"
+        placeholder="Number of Bedrooms"
+        value={bedrooms}
+        onChange={(e) => setBedrooms(e.target.value)}
+        className="p-2 w-full bg-[var(--softBg)] text-[var(--textColor)] rounded"
+      />
+      <input
+        type="number"
+        placeholder="Property Size (sq ft)"
+        value={propertySize}
+        onChange={(e) => setPropertySize(e.target.value)}
+        className="p-2 w-full bg-[var(--softBg)] text-[var(--textColor)] rounded"
+      />
+    </div>
+  )}
+</div>
+<div className="p-4 bg-[var(--softBg)] text-[var(--textColor)] rounded-lg shadow-md space-y-4">
+
+
+  
+  {/* Specification Dropdown */}
+  <div>
+    <label className="block text-sm font-medium mb-1">Select a Specification</label>
+    <select
+      value={category}
+      onChange={(e) => setCategory(e.target.value)}
+      className="p-3 w-full bg-[var(--textColor)] text-[var(--softBg)] rounded border border-gray-300 focus:ring-2 focus:ring-orange-500"
+    >
+      <option value="" disabled>Select an option</option>
+      <option value="entire-place">An Entire Place</option>
+      <option value="room">A Room</option>
+      <option value="shared-room">A Shared Room</option>
+      <option value="basics">Basics</option>
+    </select>
+  </div>
+
+  {/* Number of Bathrooms */}
+  <div>
+    <label className="block text-sm font-medium mb-1">Number of Bathrooms</label>
+    <input
+      type="number"
+      placeholder="Enter number of bathrooms"
+      value={bathrooms}
+      onChange={(e) => setBathrooms(e.target.value)}
+      className="p-3 w-full bg-[var(--textColor)] text-[var(--softBg)] rounded border border-gray-300 focus:ring-2 focus:ring-orange-500"
+    />
+  </div>
+
+  {/* Number of Bedrooms */}
+  <div>
+    <label className="block text-sm font-medium mb-1">Number of Bedrooms</label>
+    <input
+      type="number"
+      placeholder="Enter number of bedrooms"
+      value={bedrooms}
+      onChange={(e) => setBedrooms(e.target.value)}
+      className="p-3 w-full bg-[var(--textColor)] text-[var(--softBg)] rounded border border-gray-300 focus:ring-2 focus:ring-orange-500"
+    />
+  </div>
+
+  {/* Property Size */}
+  <div>
+    <label className="block text-sm font-medium mb-1">Property Size (sq ft)</label>
+    <input
+      type="number"
+      placeholder="Enter property size in sq ft"
+      value={propertySize}
+      onChange={(e) => setPropertySize(e.target.value)}
+      className="p-3 w-full bg-[var(--textColor)] text-[var(--softBg)] rounded border border-gray-300 focus:ring-2 focus:ring-orange-500"
+    />
+  </div>
+</div>
+
+
+
+
+        {/*  Specification */}
+     
+        <select value={category} onChange={(e) => setCategory(e.target.value)} className="p-2 bg-[var(--textColore)] text-[var(--textColor)] rounded">
+          <option value="" disabled> select a specification</option>
+          <option value="self-growth">An entire place</option>
+          <option value="happiness">A room</option>
+          <option value="business-career">A shared room</option>
+
+
+        </select>
+
+
+        {/*  Model */}
+       
+        <select value={category} onChange={(e) => setModel(e.target.value)} className="p-2 bg-[var(--textColore)] text-[var(--textColor)] rounded">
+          <option value="" disabled>     For sale/ for rent     </option>
+          <option value="self-growth">For Rent</option>
+          <option value="happiness">For Sale </option>
+
+        </select>
+
         
 
         <ReactQuill 
@@ -177,13 +288,156 @@ const Write = () => {
     ],
   }}
   formats={[
-    "header", "bold", "italic", "underline", "strike",
+    "header", "bold", "italic", 
     "list", "bullet", "blockquote", "code-block",
-    "align", "link", "image"
+    "align", 
   ]}
 />
 
-     
+       {/* Amenities Amenities */}
+
+<div className="p-4 bg-[var(--softBg)] text-[var(--textColor)] rounded-lg shadow-md space-y-6">
+  {/* Internal Amenities */}
+  <div>
+    <label className="block text-lg font-semibold mb-2">Internal Amenities</label>
+    <div className="grid grid-cols-2 gap-3">
+      <label className="flex items-center space-x-2">
+        <input type="checkbox" value="lift" onChange={handleAmenities} />
+        <span>Lift</span>
+      </label>
+      <label className="flex items-center space-x-2">
+        <input type="checkbox" value="balcony" onChange={handleAmenities} />
+        <span>Balcony</span>
+      </label>
+      <label className="flex items-center space-x-2">
+        <input type="checkbox" value="air-conditioning" onChange={handleAmenities} />
+        <span>Air Conditioning</span>
+      </label>
+      <label className="flex items-center space-x-2">
+        <input type="checkbox" value="gym" onChange={handleAmenities} />
+        <span>Gym</span>
+      </label>
+      <label className="flex items-center space-x-2">
+        <input type="checkbox" value="swimming-pool" onChange={handleAmenities} />
+        <span>Swimming Pool</span>
+      </label>
+      <label className="flex items-center space-x-2">
+        <input type="checkbox" value="wifi" onChange={handleAmenities} />
+        <span>WiFi</span>
+      </label>
+    </div>
+  </div>
+
+  {/* External Amenities */}
+  <div>
+    <label className="block text-lg font-semibold mb-2">External Amenities</label>
+    <div className="grid grid-cols-2 gap-3">
+      <label className="flex items-center space-x-2">
+        <input type="checkbox" value="parking" onChange={handleAmenities} />
+        <span>Parking</span>
+      </label>
+      <label className="flex items-center space-x-2">
+        <input type="checkbox" value="security" onChange={handleAmenities} />
+        <span>24/7 Security</span>
+      </label>
+      <label className="flex items-center space-x-2">
+        <input type="checkbox" value="garden" onChange={handleAmenities} />
+        <span>Garden</span>
+      </label>
+      <label className="flex items-center space-x-2">
+        <input type="checkbox" value="playground" onChange={handleAmenities} />
+        <span>Children’s Playground</span>
+      </label>
+      <label className="flex items-center space-x-2">
+        <input type="checkbox" value="backup-generator" onChange={handleAmenities} />
+        <span>Backup Generator</span>
+      </label>
+      <label className="flex items-center space-x-2">
+        <input type="checkbox" value="clubhouse" onChange={handleAmenities} />
+        <span>Clubhouse</span>
+      </label>
+    </div>
+  </div>
+
+  {/* Nearby Amenities */}
+  <div>
+    <label className="block text-lg font-semibold mb-2">Nearby Amenities</label>
+    <div className="grid grid-cols-2 gap-3">
+      <label className="flex items-center space-x-2">
+        <input type="checkbox" value="bus-stop" onChange={handleAmenities} />
+        <span>Bus Stop</span>
+      </label>
+      <label className="flex items-center space-x-2">
+        <input type="checkbox" value="airport" onChange={handleAmenities} />
+        <span>Airport</span>
+      </label>
+      <label className="flex items-center space-x-2">
+        <input type="checkbox" value="school" onChange={handleAmenities} />
+        <span>School</span>
+      </label>
+      <label className="flex items-center space-x-2">
+        <input type="checkbox" value="hospital" onChange={handleAmenities} />
+        <span>Hospital</span>
+      </label>
+      <label className="flex items-center space-x-2">
+        <input type="checkbox" value="shopping-mall" onChange={handleAmenities} />
+        <span>Shopping Mall</span>
+      </label>
+      <label className="flex items-center space-x-2">
+        <input type="checkbox" value="train-station" onChange={handleAmenities} />
+        <span>Train Station</span>
+      </label>
+    </div>
+  </div>
+</div>
+
+
+
+<div className="p-4 bg-[var(--softBg)] text-[var(--textColor)] rounded-lg shadow-md space-y-4">
+  {/* Price Input */}
+  <div>
+    <label className="block text-sm font-medium mb-1">Price ({transactionType === "for-rent" ? "per month" : "total"})</label>
+    <input
+      type="number"
+      placeholder="Enter price"
+      value={price}
+      onChange={(e) => setPrice(e.target.value)}
+      className="p-3 w-full bg-[var(--textColor)] text-[var(--softBg)] rounded border border-gray-300 focus:ring-2 focus:ring-orange-500"
+    />
+  </div>
+
+  {/* Phone Number Input */}
+  <div>
+    <label className="block text-sm font-medium mb-1">Phone Number</label>
+    <div className="flex items-center border border-gray-300 rounded overflow-hidden">
+      <span className="p-3 bg-gray-200 text-gray-700">+254</span>
+      <input
+        type="tel"
+        placeholder="Enter phone number"
+        value={phone}
+        onChange={(e) => setPhone(e.target.value)}
+        className="p-3 w-full bg-[var(--textColor)] text-[var(--softBg)] focus:ring-2 focus:ring-orange-500"
+      />
+    </div>
+  </div>
+
+  {/* WhatsApp Number Input */}
+  <div>
+    <label className="block text-sm font-medium mb-1">WhatsApp Number</label>
+    <div className="flex items-center border border-gray-300 rounded overflow-hidden">
+      <span className="p-3 bg-gray-200 text-gray-700">+254</span>
+      <input
+        type="tel"
+        placeholder="Enter WhatsApp number"
+        value={whatsapp}
+        onChange={(e) => setWhatsapp(e.target.value)}
+        className="p-3 w-full bg-[var(--textColor)] text-[var(--softBg)] focus:ring-2 focus:ring-orange-500"
+      />
+    </div>
+  </div>
+</div>
+
+
         {/* Featured Checkbox */}
         <label className="flex items-center gap-2">
           <input type="checkbox" checked={isFeatured} onChange={() => setIsFeatured(!isFeatured)} />
