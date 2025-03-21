@@ -10,12 +10,6 @@ const postSchema = new Schema(
     },
     images: {
       type: [String], 
-      validate: {
-        validator: function (arr) {
-          return arr.length >= 5 && arr.length <= 10;
-        },
-        message: "A post must have between 5 and 10 images.",
-      },
       required: true, 
     },
     
