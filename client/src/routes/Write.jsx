@@ -204,7 +204,7 @@
             <input
               type="number"
               placeholder="Enter property size in sq ft"
-              value={propertySize}
+              value={propertysize}
               onChange={(e) => setPropertySize(e.target.value)}
               className="p-3 w-full bg-[var(--textColor)] text-[var(--softBg)] rounded border border-gray-300 focus:ring-2 focus:ring-orange-500"
             />
