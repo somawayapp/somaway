@@ -72,7 +72,7 @@
           
           
           
-                <div className="w-full flex h-[500px] overflow-hidden rounded-xl aspect relative transition duration-300">
+                <div className="w-full flex h-[250px] md:h-[500px] overflow-hidden rounded-xl aspect relative transition duration-300">
   {/* Left Div */}
   <div className="flex-1 h-full overflow-hidden relative mr-1">
     {mainImage && (
@@ -87,7 +87,7 @@
         image && (
           <div
             key={index}
-            className="w-full h-1/4 overflow-hidden relative cursor-pointer"
+            className="w-full h-1/4 mb-1 overflow-hidden relative cursor-pointer"
             onClick={() => setPopupImage(image)}
           >
             <img src={image} className="object-cover h-full w-full" alt="Image" />
@@ -99,15 +99,15 @@
   {/* Popup Modal */}
   {popupImage && (
     <div
-      className="fixed inset-0 bg-black bg-opacity-80 flex items-center justify-center z-50"
+      className="fixed inset-0 bg-black bg-opacity-80 flex items-center justify-center " style={{ zIndex: 100014 }}
       onClick={() => setPopupImage(null)}
     >
       <div
-        className="relative w-full h-1/2 md:w-3/4 md:h-3/4"
+        className="relative w-full  p-3 md:p-9 h-1/2 md:w-3/4 md:h-3/4"
         onClick={(e) => e.stopPropagation()} // Prevents closing when clicking the image
       >
         <button
-          className="absolute top-2 right-2 bg-gray-800 text-white rounded-full p-3 md:p-9"
+          className="absolute top-2 right-2 bg-gray-800 text-white rounded-full"
           onClick={() => setPopupImage(null)}
         >
           <svg
