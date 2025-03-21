@@ -21,7 +21,7 @@
           const [title, setTitle] = useState("");
           const [price, setPrice] = useState("");
           const [desc, setDesc] = useState("");
-          const [amenities, setAmenities] = useState("");
+          const [amenities, setSelectedAmenities] = useState([]);
           const [img, setImg] = useState([]); 
           const [model, setModel] = useState("");
           const [propertysize, setPropertySize] = useState("");
@@ -39,6 +39,15 @@
           const navigate = useNavigate();
           const { getToken } = useAuth();
         
+          const handleAmenities = (event) => {
+            const { value, checked } = event.target;
+          
+            setSelectedAmenities((prevAmenities) =>
+              checked ? [...prevAmenities, value] : prevAmenities.filter((amenity) => amenity !== value)
+            );
+          };
+          
+
           const mutation = useMutation({
             mutationFn: async (newPost) => {
               const token = await getToken();
