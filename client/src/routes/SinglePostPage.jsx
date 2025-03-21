@@ -75,10 +75,9 @@
      <div className="w-full mt-[-13px] max-w-[1200px] mx-auto flex items-center justify-between  pb-2 pt-4 md:pt-1 text-[var(--textColor)]">
       <div>
       <h1 className="text-md md:text-xl font-semibold text-left">
-    Property /
-    <span className="pl-1 font-normal">{data.title}</span>
+        {data.title}
   </h1>
-  <h1 className="text-md md:text-xl font-normal text-left">
+  <h1 className="text-sm md:text-lg text-[var(--softTextColor)] font-normal text-left">
     {data.bedrooms}
     <span className="pl-1 font-normal">Bedroom</span>
     <span className="pl-1 font-normal">{data.propertytype}</span>
