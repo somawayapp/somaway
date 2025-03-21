@@ -53,10 +53,10 @@ const SinglePostPage = () => {
 
       <div className="flex flex-col p-3 md:p-9 gap-4">
 
-  <div className="max-w-[1200px] max-h-[600px] gap-2 md:gap-4 mx-auto">
+  <div className="max-w-[1200px] mx-auto">
 
     
-  <div className="relative w-full flex">
+  <div className="relative w-full gap-0 md:gap-4 sm:h-full  flex">
     {/* Main Image */}
     <div className="w-3/4 mr-2 relative overflow-hidden rounded-xl">
       {mainImage ? (
@@ -96,7 +96,7 @@ const SinglePostPage = () => {
           />
           <a
             href="/showmore"
-            className="absolute inset-0 flex items-center text-sm md:textmd justify-center bg-black bg-opacity-50 text-white font-bold rounded-xl"
+            className="absolute inset-0 flex items-center text-xs md:textmd justify-center bg-black bg-opacity-50 text-white font-bold rounded-xl"
           >
             Show More
           </a>
@@ -111,21 +111,21 @@ const SinglePostPage = () => {
     onClick={() => setPopupImage(null)} // Closes on clicking outside
   >
     <div 
-      className="relative w-3/4 h-3/4"
+      className="relative w-full h-1/2 md:w-3/4 md:h-3/4"
       onClick={(e) => e.stopPropagation()} // Prevents closing when clicking the image
     >
       <button
         className="absolute top-2 right-2 bg-gray-800 text-white rounded-full p-1"
         onClick={() => setPopupImage(null)}
       >
-        <svg xmlns="http://www.w3.org/2000/svg" className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <svg xmlns="http://www.w3.org/2000/svg" className="w-4 h-4" viewBox="0 0 24 24" fill="red" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
           <line x1="18" y1="6" x2="6" y2="18" />
           <line x1="6" y1="6" x2="18" y2="18" />
         </svg>
       </button>
       <img
         src={popupImage}
-        className="w-full h-full object-cover rounded-xl"
+        className="w-full h-3/4 object-cover rounded-xl"
         alt="Popup"
       />
     </div>
