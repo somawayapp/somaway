@@ -73,13 +73,11 @@ const SinglePostPage = () => {
       {data.images && (
   <div className="w-full md:w-1/4 mt-2 md:mt-0 flex justify-center md:block">
     {data.images.map((img, index) => {
-      // Remove unwanted prefix if it exists
-      const cleanImg = img.replace("https://ik.imagekit.io/somaway/tr::q-20,bl-6/", "https://ik.imagekit.io/somaway/");
       
       return (
         <Image
           key={index}
-          src={cleanImg}
+          src={img}
           className="w-[180px] md:w-[400px] rounded-2xl"
           alt={`image-${index}`}
         />
