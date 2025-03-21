@@ -32,6 +32,15 @@ const SinglePostPage = () => {
     queryFn: () => fetchPost(slug),
   });
 
+  const imageLoader = ({ src }) => {
+    // If the URL starts with ImageKit's transformation, remove it
+    if (src.includes("tr::")) {
+      src = src.split("/https:/")[1]; // Remove transformation prefix
+      src = "https://" + src; // Rebuild proper URL
+    }
+    return src;
+  };
+
   if (isPending) return "loading...";
   if (error) return "Something went wrong!" + error.message;
   if (!data) return "Post not found!";
@@ -73,12 +82,15 @@ const SinglePostPage = () => {
  
  {data.img && (
   <div className="w-full md:w-1/4 mt-2 md:mt-0 flex justify-center md:block">
-  <Image
-  loader={({ src }) => src} // Ensures the URL remains unchanged
-  src={Array.isArray(data.img) ? data.img[0] : data.img}
-  className="w-[180px] md:w-[400px] rounded-2xl"
-  unoptimized
-/>
+    {console.log("Image URL from DB:", data.img)}
+    <img
+      src={Array.isArray(data.img) ? data.img[0] : data.img} // Direct URL
+      className="w-[180px] md:w-[400px] rounded-2xl"
+      alt="Loaded image"
+    />
+    <p className="text-center mt-2 break-all text-sm">
+      {Array.isArray(data.img) ? data.img[0] : data.img}
+    </p>
   </div>
 )}
 
