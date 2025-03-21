@@ -61,7 +61,7 @@
             if (!data) return "Post not found!";
           
             return (
-              <div className=" bg-[var(--navBg)]">
+              <div className=" bg-[var(--bg)]">
           
           
           
@@ -72,11 +72,20 @@
             
 
 
-     <div className="w-full mt-[-13px] max-w-[1200px] mx-auto flex items-center justify-between  p-2 md:p-8 pb-2 pt-4 md:pt-1 text-[var(--textColor)]">
-  <h1 className="text-md md:text-xl font-semibold text-left">
+     <div className="w-full mt-[-13px] max-w-[1200px] mx-auto flex items-center justify-between  pb-2 pt-4 md:pt-1 text-[var(--textColor)]">
+      <div>
+      <h1 className="text-md md:text-xl font-semibold text-left">
     Property /
     <span className="pl-1 font-normal">{data.title}</span>
   </h1>
+  <h1 className="text-md md:text-xl font-normal text-left">
+    {data.bedrooms}
+    <span className="pl-1 font-normal">Bedroom</span>
+    <span className="pl-1 font-normal">{data.propertytype}</span>
+
+  </h1>
+      </div>
+ 
 
   <BackButton/>
 </div>
@@ -86,11 +95,11 @@
 
 
         
-<div className="max-w-[1200px] bg-[var(--bd3)]  border border-[var(--softBg4)]  rounded-3xl  p-2 md:p-8 mx-auto">
+<div className="max-w-[1200px] mx-auto">
           
           
           
-          <div className="w-full flex h-[250px] md:h-[500px] overflow-hidden rounded-xl aspect relative transition duration-300">
+          <div className="w-full flex h-[300px] md:h-[500px] overflow-hidden rounded-xl aspect relative transition duration-300">
           {/* Left Div */}
           <div className="flex-1 h-full overflow-hidden relative mr-1">
           {mainImage && (
@@ -172,7 +181,7 @@
 
 
 
-      <div className="flex flex-col bg-[var(--bd3)]  border border-[var(--softBg4)]  rounded-3xl  p-2 md:p-8
+      <div className="flex flex-col bg-[var(--navBG)]  border border-[var(--softBg4)]  rounded-3xl  p-2 md:p-8
        md:flex-row gap-4 md:gap-8">
  
  {data?.img && data.img.length > 0 ? (
