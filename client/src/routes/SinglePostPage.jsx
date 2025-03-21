@@ -70,16 +70,14 @@ const SinglePostPage = () => {
 
       <div className="flex flex-col bg-[var(--bd3)]  border border-[var(--softBg4)]  rounded-3xl  p-2 md:p-8
        md:flex-row gap-4 md:gap-8">
-      {data.images && Array.isArray(data.images) && data.images.length > 0 && (
-  <div className="w-full md:w-1/4 mt-2 md:mt-0 flex justify-center md:block">
-    {data.images.map((image, index) => (
+      {data.images && data.images.length > 0 && (
+  <div className="w-full md:w-1/4 mt-2 md:mt-0 flex flex-wrap justify-center md:block">
+    {data.images.map((img, index) => (
       <Image
         key={index}
-        src={image}
-        width={400} // Set explicit width
-        height={400} // Set explicit height
-        className="w-[180px] md:w-[400px] rounded-2xl"
-        alt={`Image ${index}`}
+        src={img}
+        alt={`Image ${index + 1}`}
+        className="w-[180px] md:w-[400px] rounded-2xl m-2"
       />
     ))}
   </div>
