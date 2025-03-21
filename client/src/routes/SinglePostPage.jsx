@@ -32,15 +32,6 @@ const SinglePostPage = () => {
     queryFn: () => fetchPost(slug),
   });
 
-  const imageLoader = ({ src }) => {
-    // If the URL starts with ImageKit's transformation, remove it
-    if (src.includes("tr::")) {
-      src = src.split("/https:/")[1]; // Remove transformation prefix
-      src = "https://" + src; // Rebuild proper URL
-    }
-    return src;
-  };
-
   if (isPending) return "loading...";
   if (error) return "Something went wrong!" + error.message;
   if (!data) return "Post not found!";
@@ -80,24 +71,20 @@ const SinglePostPage = () => {
       <div className="flex flex-col bg-[var(--bd3)]  border border-[var(--softBg4)]  rounded-3xl  p-2 md:p-8
        md:flex-row gap-4 md:gap-8">
  
- {data.img && (
+{data.img && Array.isArray(data.img) && data.img.length > 0 && (
   <div className="w-full md:w-1/4 mt-2 md:mt-0 flex justify-center md:block">
-    {console.log("Image URL from DB:", data.img)}
-    <img
-      src={Array.isArray(data.img) ? data.img[0] : data.img} // Direct URL
-      className="w-[180px] md:w-[400px] rounded-2xl"
-      alt="Loaded image"
-    />
-    <p className="text-center mt-2 break-all text-sm">
-      {Array.isArray(data.img) ? data.img[0] : data.img}
-    </p>
+    {data.img.map((img, index) => (
+      <Image
+        key={index}
+        src={img}
+        width={400} // Set explicit width
+        height={400} // Set explicit height
+        className="w-[180px] md:w-[400px] rounded-2xl"
+        alt={`Image ${index}`}
+      />
+    ))}
   </div>
 )}
-
-  
-
- 
-
 
           <div className="flex flex-col gap-1 md:gap-2 items-center md:items-start md:w-2/4">
             <p className="text-[var(--softTextColor2)] text-sm text-lg  text-center md:text-left">
