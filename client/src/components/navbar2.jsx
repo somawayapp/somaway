@@ -31,7 +31,7 @@ const Navbar = () => {
     
      // Modify or remove z-index here
      <div style={{ zIndex: 100004 }}  className="relative w-full h-[50px] md:h-[70px]  px-3 md:px-9 gap-4 flex items-center text-[var(--TextColor)]
-      sticky top-0 justify-between bg-[var(--navBg)] border-b border-b-[var(--softBg4)] ">
+      sticky top-0 justify-between bg-[var(--bg)] border-b border-b-[var(--softBg4)] ">
 
 <div className="flex items-center justify-between gap-12">
   <Link to="/home" className="flex items-center gap-1 text-xl font-bold md:text-3xl">
