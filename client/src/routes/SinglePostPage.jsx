@@ -53,7 +53,7 @@ const SinglePostPage = () => {
 
       <div className="flex flex-col p-3 md:p-9 gap-4">
 
-  <div className="max-w-[1200px] max-h-[600px] mx-auto">
+  <div className="max-w-[1200px] max-h-[600px] gap-2 md:gap-4 mx-auto">
 
     
   <div className="relative w-full flex">
@@ -73,11 +73,11 @@ const SinglePostPage = () => {
     </div>
 
     {/* Side Images */}
-    <div className="w-1/4 flex flex-col gap-2 md:gap-6">
-      {images.slice(1, 5).map((img, index) => (
+    <div className="w-1/4 flex flex-col gap-2 md:gap-4">
+      {images.slice(1, 4).map((img, index) => (
         <div
           key={index}
-          className="relative w-full h-1/4 overflow-hidden rounded-xl cursor-pointer"
+          className="relative w-full overflow-hidden rounded-xl cursor-pointer"
           onClick={() => setPopupImage(img)}
         >
           <img
@@ -87,7 +87,7 @@ const SinglePostPage = () => {
           />
         </div>
       ))}
-      {images.length > 5 && (
+      {images.length > 4 && (
         <div className="relative w-full h-1/4 overflow-hidden rounded-xl cursor-pointer">
           <img
             src={images[4]}
@@ -96,7 +96,7 @@ const SinglePostPage = () => {
           />
           <a
             href="/showmore"
-            className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 text-white font-bold rounded-xl"
+            className="absolute inset-0 flex items-center text-sm md:textmd justify-center bg-black bg-opacity-50 text-white font-bold rounded-xl"
           >
             Show More
           </a>
