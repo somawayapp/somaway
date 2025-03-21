@@ -81,13 +81,13 @@
   </div>
 
   {/* Right Div */}
-  <div className="w-1/4 h-full flex flex-col">
+  <div className="w-1/4 h-full flex gap-1 flex-col">
     {[secondMainImage, thirdMainImage, fourthMainImage, fifthMainImage].map(
       (image, index) =>
         image && (
           <div
             key={index}
-            className="w-full h-1/4 mb-1 overflow-hidden relative cursor-pointer"
+            className="w-full h-1/4  overflow-hidden relative cursor-pointer"
             onClick={() => setPopupImage(image)}
           >
             <img src={image} className="object-cover h-full w-full" alt="Image" />
@@ -103,12 +103,12 @@
       onClick={() => setPopupImage(null)}
     >
       <div
-        className="relative w-full  p-3 md:p-9 h-1/2 md:w-3/4 md:h-3/4"
+        className="relative w-full  p-3 md:p-9 h-1/2  md:w-3/4 md:h-full"
         onClick={(e) => e.stopPropagation()} // Prevents closing when clicking the image
       >
         <button
           className="absolute top-2 right-2 bg-gray-800 text-white rounded-full"
-          onClick={() => setPopupImage(null)}
+          onClick={() => setPopupImage(null)}  style={{ zIndex: 100024 }}
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
