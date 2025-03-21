@@ -17,22 +17,7 @@ const postSchema = new Schema(
       type: String,
       required: true,
     },
-    whoshouldread: {
-      type: String,
-      required: false,
-    },  
-     aboutauthor: {
-      type: String,
-      required: false,
-    },  
-     aboutbook: {
-      type: String,
-      required: false,
-    },
-    summary: {
-      type: String,
-      required: true,
-    },
+
     slug: {
       type: String,
       required: true,
@@ -42,13 +27,50 @@ const postSchema = new Schema(
       type: String,
       required: true,
     },
-    author: {
+
+    whatsapp: {
       type: String,
-      required: true,
+      required: false,
     },
-    category: {
+    phone: {
       type: String,
-      default: "self-growth",
+      required: false,
+    },
+    price: {
+      type: Number,
+      required: false,
+    },
+    amenities: {
+      type: [String],
+      required: false,
+    },
+    img: {
+      type: [String], // Array of image URLs
+      required: false,
+    },
+    model: {
+      type: String,
+      required: false,
+    },
+    propertytype: {
+      type: String,
+      required: false,
+    },
+    specification: {
+      type: String,
+      required: false,
+    },
+    propertysize: {
+      type: String,
+      required: false,
+    },
+    bathrooms: {
+      type: Number,
+      required: false,
+    },
+    bedrooms: {
+      type: Number,
+      required: false,
     },
     isFeatured: {
       type: Boolean,
