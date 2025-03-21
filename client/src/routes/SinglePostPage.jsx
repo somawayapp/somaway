@@ -45,7 +45,7 @@
                 document.body.style.overflow = "auto";
               }
             }, [popupImage]);
-
+            
             
             const images = data?.img || []; // Ensure img is used
             const mainImage = images.length > 0 ? images[0] : null;
@@ -72,9 +72,9 @@
           
           
           
-           <div className="w-full flex overflow-hidden rounded-xl aspect relative transition duration-300">
+                <div className="w-full flex h-[500px] overflow-hidden rounded-xl aspect relative transition duration-300">
   {/* Left Div */}
-  <div className="w-3/4 h-full overflow-hidden relative mr-1">
+  <div className="flex-1 h-full overflow-hidden relative mr-1">
     {mainImage && (
       <img src={mainImage} className="object-cover h-full w-full" alt="Image" />
     )}
