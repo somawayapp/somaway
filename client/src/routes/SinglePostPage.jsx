@@ -70,16 +70,21 @@ const SinglePostPage = () => {
 
       <div className="flex flex-col bg-[var(--bd3)]  border border-[var(--softBg4)]  rounded-3xl  p-2 md:p-8
        md:flex-row gap-4 md:gap-8">
-      {data.images && data.images.length > 0 && (
-  <div className="w-full md:w-1/4 mt-2 md:mt-0 flex flex-wrap justify-center md:block">
-    {data.images.map((img, index) => (
-      <Image
-        key={index}
-        src={img}
-        alt={`Image ${index + 1}`}
-        className="w-[180px] md:w-[400px] rounded-2xl m-2"
-      />
-    ))}
+      {data.images && (
+  <div className="w-full md:w-1/4 mt-2 md:mt-0 flex justify-center md:block">
+    {data.images.map((img, index) => {
+      // Remove unwanted prefix if it exists
+      const cleanImg = img.replace("https://ik.imagekit.io/somaway/tr::q-20,bl-6/", "https://ik.imagekit.io/somaway/");
+      
+      return (
+        <Image
+          key={index}
+          src={cleanImg}
+          className="w-[180px] md:w-[400px] rounded-2xl"
+          alt={`image-${index}`}
+        />
+      );
+    })}
   </div>
 )}
 
