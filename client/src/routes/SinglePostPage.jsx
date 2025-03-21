@@ -21,6 +21,16 @@ const fetchPost = async (slug) => {
   return res.data;
 };
 
+const imageLoader = ({ src }) => {
+  // If the URL starts with ImageKit's transformation, remove it
+  if (src.includes("tr::")) {
+    src = src.split("/https:/")[1]; // Remove transformation prefix
+    src = "https://" + src; // Rebuild proper URL
+  }
+  return src;
+};
+
+
 const SinglePostPage = () => {
   useEffect(() => {
     window.scrollTo(0, 0); // Scrolls to the top when this component mounts
@@ -71,20 +81,23 @@ const SinglePostPage = () => {
       <div className="flex flex-col bg-[var(--bd3)]  border border-[var(--softBg4)]  rounded-3xl  p-2 md:p-8
        md:flex-row gap-4 md:gap-8">
  
- {data.img && (
+{data.img && (
   <div className="w-full md:w-1/4 mt-2 md:mt-0 flex justify-center md:block">
     {console.log("Image URL from DB:", data.img)}
     <Image
-      src={Array.isArray(data.img) ? data.img[0] : data.img} // Ensure the correct format
+      loader={imageLoader}
+      src={Array.isArray(data.img) ? data.img[0] : data.img} // Ensure correct format
       className="w-[180px] md:w-[400px] rounded-2xl"
-      unoptimized // Prevents Next.js from modifying the URL
+      unoptimized
+      width={400} // Required for Next.js
+      height={300} // Required for Next.js
+      alt="Loaded image"
     />
     <p className="text-center mt-2 break-all text-sm">
       {Array.isArray(data.img) ? data.img[0] : data.img}
     </p>
   </div>
 )}
-
 
 
           <div className="flex flex-col gap-1 md:gap-2 items-center md:items-start md:w-2/4">
