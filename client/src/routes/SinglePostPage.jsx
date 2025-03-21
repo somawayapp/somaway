@@ -62,11 +62,11 @@ const SinglePostPage = () => {
       {mainImage ? (
         <img
           src={mainImage}
-          className="w-full h-full object-cover rounded-xl"
+          className="w-full  object-cover rounded-xl"
           alt="Main Image"
         />
       ) : (
-        <div className="w-full h-full bg-gray-300 rounded-xl flex items-center justify-center">
+        <div className="w-full  bg-gray-300 rounded-xl flex items-center justify-center">
           No Image
         </div>
       )}
@@ -82,7 +82,7 @@ const SinglePostPage = () => {
         >
           <img
             src={img}
-            className="w-full h-full object-cover rounded-xl"
+            className="w-full  object-cover rounded-xl"
             alt={`Image ${index + 2}`}
           />
         </div>
@@ -91,7 +91,7 @@ const SinglePostPage = () => {
         <div className="relative w-full h-1/4 overflow-hidden rounded-xl cursor-pointer">
           <img
             src={images[4]}
-            className="w-full h-full object-cover rounded-xl"
+            className="w-full object-cover rounded-xl"
             alt="More Images"
           />
           <a
