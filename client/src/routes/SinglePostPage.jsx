@@ -95,11 +95,11 @@ const icons = {
 
 // Filtering out null values (but keeping 0 values if they exist)
 const details = [
-  data.bedroom ? `${data.bedroom} bedroom` : null,
-  data.bathroom ? `${data.bathroom} bathroom` : null,
-  data.room ? `${data.room} room` : null,
+  data.bedroom ? `${data.bedrooms} bedroom` : null,
+  data.bathroom ? `${data.bathrooms} bathroom` : null,
+  data.room ? `${data.rooms} room` : null,
   data.propertysize ? `${data.propertysize} square feet` : null,
-  data.property ? `${data.property} building` : null,
+  data.property ? `${data.propertysize} building` : null,
 ].filter(Boolean);
 
           
