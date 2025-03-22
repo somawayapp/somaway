@@ -170,7 +170,7 @@ const Write = () => {
     >
       <option value="" disabled>Select a Specification</option>
       <option value="entire-place">An Entire Place</option>
-      <option value="room">A Room</option>
+      <option value="a-room">A Room</option>
       <option value="shared-room">A Shared Room</option>
     </select>
   </div>
@@ -221,8 +221,8 @@ const Write = () => {
        
         <select value={model} onChange={(e) => setModel(e.target.value)} className="p-2 bg-[var(--textColore)] text-[var(--textColor)] rounded">
           <option value="" disabled>     For sale/ for rent     </option>
-          <option value="self-growth">For Rent</option>
-          <option value="happiness">For Sale </option>
+          <option value="forrent">For Rent</option>
+          <option value="forsale">For Sale </option>
 
         </select>
 
