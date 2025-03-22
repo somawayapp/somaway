@@ -18,6 +18,7 @@
           import BackButton from "../components/BackButton";
           import SpinnerMini from "../components/Loader";
           import Button from "../components/Button";
+          import WhatsAppContact from "../components/Whatsapp";
           
           const fetchPost = async (slug) => {
              
@@ -277,62 +278,54 @@
           <div className="flex flex-col gap-2 pb-4 md:w-2/5 ">
 
 
-          <div className="  rounded-xl border-[1px] border--[var(--softBg4)] overflow-hidden">
+          <div className="  rounded-xl border-[1px] border-[var(--softBg4)] overflow-hidden">
       <div className="flex flex-row items-center gap-1 p-4">
         <span className="text-lg font-semibold">KES {data.price}</span>
-        <span className="font-light text-white">
+        <span className="font-light ">
   {data.model === "forrent" ? "/month" : data.model === "forsale" ? "for sale" : ""}
 </span>
       </div>
-      <hr />
+      <hr className="text-[var(--softBg4)]" />
 
-   <div>
-   <p className="p-4 flex items-center gap-2">
-   <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="24"
-          height="24"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="2"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        >
-          <path d="M22 16.92v3a2 2 0 0 1-2 2 19.79 19.79 0 0 1-8.63-2A19.79 19.79 0 0 1 2 6a2 2 0 0 1 2-2h3a2 2 0 0 1 2 1.72 12.34 12.34 0 0 0 .68 2.72 2 2 0 0 1-.45 2.11l-1.42 1.42a16 16 0 0 0 6 6l1.42-1.42a2 2 0 0 1 2.11-.45 12.34 12.34 0 0 0 2.72.68A2 2 0 0 1 22 16.92z" />
-        </svg>
-  Contact: <span>{data.phone}</span>
-</p>
+      <div>
+  <p
+    className="p-4 flex items-center gap-2 cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg transition"
+    onClick={() => window.location.href = `tel:${data.phone}`}
+  >
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="blue"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
+      <path d="M22 16.92v3a2 2 0 0 1-2 2 19.79 19.79 0 0 1-8.63-2A19.79 19.79 0 0 1 2 6a2 2 0 0 1 2-2h3a2 2 0 0 1 2 1.72 12.34 12.34 0 0 0 .68 2.72 2 2 0 0 1-.45 2.11l-1.42 1.42a16 16 0 0 0 6 6l1.42-1.42a2 2 0 0 1 2.11-.45 12.34 12.34 0 0 0 2.72.68A2 2 0 0 1 22 16.92z" />
+    </svg>
+    Contact: <span>{data.phone}</span>
+  </p>
+</div>
 
-<p className="p-4 flex items-center gap-2">
-<svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="24"
-          height="24"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="2"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        >
-          <path d="M21.5 12.2c0-5.2-4.3-9.5-9.5-9.5S2.5 7 2.5 12.2a9.5 9.5 0 0 0 1.3 4.9L2 22l5.2-1.7a9.5 9.5 0 0 0 4.8 1.3c5.2 0 9.5-4.3 9.5-9.5z" />
-          <path d="M16.5 15.3c-.5.3-1 .5-1.6.6-2.6.6-5.5-1.7-6.7-3.8-.3-.5-.5-1-.6-1.6 0-.5.2-.9.6-1.2.3-.2.7-.2 1.1 0l.9.4c.3.1.6.4.7.7l.2.4c.1.3 0 .6-.2.9-.1.2-.3.4-.3.4s.4.7 1 1.3c.6.6 1.3 1 1.3 1 .1 0 .2-.1.4-.3.3-.2.6-.3.9-.2l.4.2c.3.1.6.3.7.7l.4.9c.1.3.1.8-.1 1.1z" />
-        </svg>
-  WhatsApp: <span>{data.whatsapp}</span>
-</p>
+<hr className="text-[var(--softBg4)]" />
+<div>
+
+
+<WhatsAppContact/>
 
 
    </div>
 
-      <hr />
+      <hr className="text-[var(--softBg4)]" />
       <div className="p-4">
       <Button
           disabled={isLoading}
           className="flex flex-row items-center justify-center h-[42px]  rounded-xl"
           size="large"
         >
-          {isLoading ? <SpinnerMini /> : <span>Book a Tour</span>}
+          {isLoading ? <SpinnerMini /> : <span>Check Vacancy</span>}
         </Button>
       </div>
       <hr />
