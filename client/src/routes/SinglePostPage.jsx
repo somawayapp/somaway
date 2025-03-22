@@ -22,7 +22,12 @@
           import Avatar from "../components/Avatar";
           import { AiOutlineHome, AiOutlineAppstore } from "react-icons/ai";
           import { FaBed, FaBath, FaRulerCombined } from "react-icons/fa";
-          
+          import { FaBuilding, FaWarehouse, FaHome, FaTree, FaBed } from "react-icons/fa";
+          import { MdVilla, MdApartment } from "react-icons/md";
+          import { GiOfficeChair, GiShop, GiCargoCrate } from "react-icons/gi";
+
+
+
           const fetchPost = async (slug) => {
              
           
@@ -70,8 +75,35 @@
             if (isPending) return "loading...";
             if (error) return "Something went wrong!" + error.message;
             if (!data) return "Post not found!";
+            
+// Assuming `data` is available in this page
+const icons = {
+  apartment: <MdApartment />,
+  studio: <FaBed />,
+  bedsitter: <FaBed />,
+  "single-room": <FaBed />,
+  "town-house": <FaHome />,
+  bungalow: <FaHome />,
+  mansionatte: <FaBuilding />, // Using FaBuilding instead of GiMansion
+  villa: <MdVilla />,
+  container: <GiCargoCrate />,
+  office: <GiOfficeChair />,
+  shop: <GiShop />,
+  warehouse: <FaWarehouse />,
+  land: <FaTree />,
+};
+
+// Filtering out null values (but keeping 0 values if they exist)
+const details = [
+  data.bedroom ? `${data.bedroom} bedroom` : null,
+  data.bathroom ? `${data.bathroom} bathroom` : null,
+  data.room ? `${data.room} room` : null,
+  data.propertysize ? `${data.propertysize} square feet` : null,
+  data.property ? `${data.property} building` : null,
+].filter(Boolean);
+
           
-            return (
+            return details.length > 0 ? (
               <div className=" bg-[var(--bg)]">
           
           
@@ -235,14 +267,10 @@
         </div>
       </div>
       <hr className="h-[1px] bg-[var(--softBg4)] border-0" />
-      <p>
-  This is 
-  {data.bedroom ? ` a ${data.bedrooms} bedroom,` : ''}
-  {data.bathroom ? ` ${data.bathrooms} bathroom,` : ''}
-  {data.room ? ` ${data.rooms} room,` : ''}
-  {data.propertysize ? ` ${data.propertysize} square feet,` : ''}
-  {data.property ? ` ${data.propertytype} ` : ''} building
-</p> 
+  <p>
+    {icons[data.property] && <span style={{ marginRight: "8px" }}>{icons[data.property]}</span>}
+    This is a {details.join(", ")}
+  </p>
 
 
       <hr className="h-[1px] bg-[var(--softBg4)] border-0" />
@@ -487,7 +515,7 @@
    </div>
    <Footer/>     
    </div>
-  );
+) : null;
 };
 
 export default SinglePostPage;
