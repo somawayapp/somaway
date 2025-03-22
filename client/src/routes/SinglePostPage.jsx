@@ -94,7 +94,7 @@
                 <div className="max-w-[1200px] mx-auto">
 
 
-     <div className="w-full mt-[-13px]  mb-[20px] flex items-center justify-between  text-[var(--textColor)]">
+     <div className="w-full mt-0 md:mt-[-13px]  mb-[20px] flex items-center justify-between  text-[var(--textColor)]">
       <div>
       <h1 className="text-xl md:text-2xl pb-1 md:pb-2  font-semibold text-left">
         {data.title}
@@ -197,21 +197,20 @@
                
           <div className="col-span-4 flex flex-col gap-8">
       <div className="flex flex-col gap-2">
-        <div className="text-[16px] font-semibold flex flex-row items-center gap-2">
-        <span className="mr-1">Hosted by</span> 
-        <img
-  className="rounded-full w-[30px]  md:w-[40px] h-[30px]  md:h-[40px] select-none"
-  alt="Avatar"
-  src={data.user?.img || "/placeholder.jpg"} 
-/>
+      <div className="text-[16px] font-semibold flex flex-row items-center gap-2 md:justify-start justify-center">
+  <span className="mr-1">Hosted by</span> 
+  <img
+    className="rounded-full w-[30px] md:w-[40px] h-[30px] md:h-[40px] select-none"
+    alt="Avatar"
+    src={data.user?.img || "/placeholder.jpg"} 
+  />
+  <span>{data.user?.username}</span>
+</div>
 
-
-          <span> {data.user?.username}</span>
-        </div>
         <div
-          className="flex flex-row items-center mt-3 md:mt-7 gap-2 md:gap-4 font-light text-[var(--softTextColor)]
+          className="flex flex-row items-center  mt-3 md:mt-7 gap-2 md:gap-4 font-light text-[var(--softTextColor)]
           "
-        >  <div className="property-details">
+        >  <div className=" md:justify-start justify-center property-details">
         {data.bedrooms !== undefined && data.bedrooms !== null && (
           <span className="detail-item">
             <FaBed className="icon" /> {data.bedrooms} Bedrooms
@@ -235,9 +234,9 @@
       </div>
         </div>
       </div>
-      <hr />
-
-      <hr />
+      <hr className="h-[1px] bg-[var(--softBg4)] border-0" />
+       this is a ..
+      <hr className="h-[1px] bg-[var(--softBg4)] border-0" />
       <p
   className="desc-content text-[var(--textColor)]"
   dangerouslySetInnerHTML={{
@@ -245,7 +244,9 @@
       ?.replace(/&nbsp;/g, ' ') // Convert non-breaking spaces to normal spaces
       .replace(/\s{2,}/g, ' ') // Remove multiple spaces
   }}
-/>      <hr />
+/>      
+<hr className="h-[1px] bg-[var(--softBg4)] border-0" />
+
       <div className="h-[210px]">
        map
       </div>
@@ -341,7 +342,7 @@
       <div className="p-4 flex flex-row items-center justify-between font-semibold text-lg">
 
 
-      <div className="flex flex-row items-center mt-2 text-sm md:text-lg">
+      <div className="flex flex-row ml-3 items-center mt-2 text-sm md:text-lg">
   {[...Array(5)].map((_, index) => (
     <FaStar key={index} className="text-orange-500 w-[40px] ml-[-15px] " />
   ))}
