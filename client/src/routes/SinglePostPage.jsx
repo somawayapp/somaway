@@ -90,9 +90,9 @@
                 <div className="max-w-[1200px] mx-auto">
 
 
-     <div className="w-full mt-[-13px]  mb-[15px] flex items-center justify-between  text-[var(--textColor)]">
+     <div className="w-full mt-[-13px]  mb-[20px] flex items-center justify-between  text-[var(--textColor)]">
       <div>
-      <h1 className="text-xl md:text-2xl font-semibold text-left">
+      <h1 className="text-xl md:text-2xl pb-1 md:pb-2  font-semibold text-left">
         {data.title}
   </h1>
   <h1 className="text-md md:text-lg text-[var(--softTextColor)] font-normal text-left">
