@@ -400,14 +400,14 @@ const details = [
   {data.amenities.map((amenity, index) => (
     <div 
       key={index} 
-      className="flex flex-col items-center gap-1 border-[2px] border-[var(--softBg4)]  py-4 px-6 rounded-md"
+      className="flex flex-col justify-between items-center gap-1 border-[2px] border-[var(--softBg4)]  py-2  px-3  md:py-4  md:px-6  rounded-md"
     >
       <div 
-        className="text-[var(--softTextColor)] text-3xl"
+        className="text-[var(--softTextColor)] md:text-3xl text-xl"
       >
         {amenitiesIcons[amenity] || null}
       </div>
-      <span className="text-[16px] text-[var(--softTextColor)] capitalize">{amenity.replace('-', ' ')}</span>
+      <span className=" text-[14px] md:text-[16px]  text-[var(--softTextColor)] capitalize">{amenity.replace('-', ' ')}</span>
     </div>
   ))}
 </div>
