@@ -281,7 +281,6 @@ const details = [
   display: "flex", 
   alignItems: "center", 
   fontSize: "16px", // Default text size
-  fontWeight: "bold"
 }}>
   {icons[data.propertytype] && (
     <span style={{ 
@@ -293,7 +292,14 @@ const details = [
       {icons[data.propertytype]}
     </span>
   )}
+  <div>
+    <p className="capitalize font-semibold ">
+    {data.propertytype}
+
+    </p>
   <span className="desctext">This is a {details.join(", ")} building!</span>
+
+  </div>
 
  
 </p>
@@ -347,7 +353,7 @@ const details = [
 <p className="desc-content text-[var(--textColor)]">
   {data.desc?.length > 300 ? (
     <>
-      <span dangerouslySetInnerHTML={{ __html: data.desc.substring(0, 500) }} />..
+      <span dangerouslySetInnerHTML={{ __html: data.desc.substring(0, 500) }} />
       <button  
   className="text-[var(--textColor)] font-semibold  mt-2 ml-2 border-[2px]  rounded-xl py-2 px-6 border-[var(--softBg4)]"
   onClick={() => setPopupDesc(data.desc)}
