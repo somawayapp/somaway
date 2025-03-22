@@ -241,8 +241,8 @@
   {data.bathroom ? ` ${data.bathroom} bathroom,` : ''}
   {data.room ? ` ${data.room} room,` : ''}
   {data.propertysize ? ` ${data.propertysize} square feet,` : ''}
-  {data.property ? ` ${data.property} building` : ''}
-</p>
+  {data.property ? ` ${data.property} ` : ''} building
+</p> 
 
 
       <hr className="h-[1px] bg-[var(--softBg4)] border-0" />
