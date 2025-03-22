@@ -242,7 +242,7 @@ const details = [
       <div className="text-[16px] font-semibold flex flex-row items-center gap-2 md:justify-start justify-center">
   <span className="mr-1">Hosted by</span> 
   <img
-    className="rounded-full w-[30px] md:w-[40px] h-[30px] md:h-[40px] select-none"
+    className="rounded-full desctext w-[30px] md:w-[40px] h-[30px] md:h-[40px] select-none"
     alt="Avatar"
     src={data.user?.img || "/placeholder.jpg"} 
   />
@@ -254,22 +254,22 @@ const details = [
           "
         >  <div className=" md:justify-start justify-center property-details">
         {data.bedrooms !== undefined && data.bedrooms !== null && (
-          <span className="detail-item">
+          <span className="detail-item desctext">
             <FaBed className="icon" /> {data.bedrooms} Bedrooms
           </span>
         )}
         {data.bathrooms !== undefined && data.bathrooms !== null && (
-          <span className="detail-item">
+          <span className="detail-item desctext">
             <FaBath className="icon" /> {data.bathrooms} Bathrooms
           </span>
         )}
         {data.rooms !== undefined && data.rooms !== null && (
-          <span className="detail-item">
+          <span className="detail-item desctext">
             <AiOutlineAppstore className="icon" /> {data.room} Rooms
           </span>
         )}
         {data.propertysize !== undefined && data.propertysize !== null && (
-          <span className="detail-item">
+          <span className="detail-item desctext">
             <FaRulerCombined className="icon" /> {data.propertysize} sq/ft
           </span>
         )}
@@ -280,32 +280,29 @@ const details = [
       <p style={{ 
   display: "flex", 
   alignItems: "center", 
-  fontSize: "16px", // Default text size
 }}>
-{icons[data.propertytype] && (
-  <span style={{ 
-    fontSize: "68px", // Large icon for default
-    marginRight: "12px", 
-    display: "flex", 
-    alignItems: "center",
-    color: "var(--textColor)", // Apply text color variable
-    fontWeight: "normal" // Ensure it's not bold
-  }}>
-    {icons[data.propertytype]}
-  </span>
-)}
+  {icons[data.propertytype] && (
+    <span style={{ 
+      fontSize: "68px", // Large icon for default
+      marginRight: "12px", 
+      display: "flex", 
+      alignItems: "center",
+      color: "var(--textColor)", // Apply text color variable
+      fill: "var(--textColor)", // Ensure SVG icons match the text color
+      fontWeight: "normal" // Ensure it's not bold
+    }}>
+      {icons[data.propertytype]}
+    </span>
+  )}
 
   <div>
-    <p className="capitalize font-semibold ">
-    {data.propertytype}
-
+    <p className="capitalize font-semibold">
+      {data.propertytype}
     </p>
-  <span className="desctext">This is a {details.join(", ")} building!</span>
-
+    <span className="desctext">This is a {details.join(", ")} building!</span>
   </div>
-
- 
 </p>
+
 
 
 
@@ -397,8 +394,8 @@ const details = [
 
           <div className="  rounded-xl border-[1px] border-[var(--softBg4)] overflow-hidden">
       <div className="flex flex-row items-center gap-1 p-4">
-        <span className="text-lg font-semibold">KES {data.price}</span>
-        <span className="font-light ">
+        <span className="desctext font-semibold">KES {data.price}</span>
+        <span className="font-light desctext ">
   {data.model === "forrent" ? "/month" : data.model === "forsale" ? "for sale" : ""}
 </span>
       </div>
@@ -406,7 +403,7 @@ const details = [
 
       <div>
   <p
-    className="p-4 flex items-center gap-2 cursor-pointer hover:bg-[var(--softBg)] rounded-lg transition"
+    className="p-4 desctext flex items-center gap-2 cursor-pointer hover:bg-[var(--softBg)] rounded-lg transition"
     onClick={() => window.location.href = `tel:${data.phone}`}
   >
     <svg
@@ -432,7 +429,7 @@ const details = [
 
 <div>
       <p
-        className="p-4 flex items-center gap-2   cursor-pointer hover:bg-[var(--softBg)] rounded-lg transition-all"
+        className="p-4 flex items-center gap-2 desctext  cursor-pointer hover:bg-[var(--softBg)] rounded-lg transition-all"
         onClick={handleClick}
       >
         <svg
