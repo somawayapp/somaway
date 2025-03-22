@@ -142,18 +142,18 @@ const Write = () => {
         </h1>
         <select value={propertytype} onChange={(e) => setPropertyType(e.target.value)} className="p-2 bg-[var(--textColore)] text-[var(--textColor)] rounded">
           <option value="" disabled> select Your property type</option>
-          <option value="self-growth">Appartment/Flat</option>
-          <option value="happiness">Studio Apartment</option>
-          <option value="business-career">Bedsitter</option>
-          <option value="fiction">Single Room</option>
-          <option value="productivity">Town House</option>
-          <option value="home-environment">Bungalow</option>
-          <option value="society-tech">Mansionatte</option>
-          <option value="health">Villa</option>
-          <option value="family">Container</option>
-          <option value="sports-fitness">Office</option>
-          <option value="Biography">Shop</option>
-          <option value="spirituality">Warehouse</option>
+          <option value="apartment">Apartment/Flat</option>
+          <option value="studio">Studio Apartment</option>
+          <option value="bedsitter">Bedsitter</option>
+          <option value="single-room">Single Room</option>
+          <option value="town-house">Town House</option>
+          <option value="bungalow">Bungalow</option>
+          <option value="mansionatte">Mansionatte</option>
+          <option value="villa">Villa</option>
+          <option value="container">Container</option>
+          <option value="office">Office</option>
+          <option value="shop">Shop</option>
+          <option value="warehouse">Warehouse</option>
 
         </select>
 

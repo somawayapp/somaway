@@ -221,17 +221,7 @@
                 <Link to={`/discover?cat=${data.category}`}  className="capitalize ml-1 ">{data.category}</Link> </span>
                 </div>
             </div>
-            <div className="flex flex-row items-center mt-2 text-sm md:text-lg">
-  {[...Array(5)].map((_, index) => (
-    <FaStar key={index} className="text-orange-500 w-[40px] ml-[-15px] " />
-  ))}
-  <span className="pl-2 font-normal flex items-center">
-    <span className="ml-[-5px]">4.8</span>
-    <span className="mx-2 flex items-center">·</span>
-    {data.visit * 
-    42} <span className="ml-1">reviews</span>
-  </span>
-</div>
+   
 
 
             
@@ -348,14 +338,25 @@
           className="flex flex-row items-center justify-center h-[42px]  rounded-xl"
           size="large"
         >
-          {isLoading ? <SpinnerMini /> : <span>Check Vacancy</span>}
+          {isLoading ? <SpinnerMini /> : <span>Reviews <Comments postId={data._id} /></span>}
         </Button>
       </div>
       <hr className="h-[1px] bg-[var(--softBg4)] border-0" />
       <div className="p-4 flex flex-row items-center justify-between font-semibold text-lg">
-        <span>Reviews</span>
-        <span> <Comments postId={data._id} />
-        </span>
+
+
+      <div className="flex flex-row items-center mt-2 text-sm md:text-lg">
+  {[...Array(5)].map((_, index) => (
+    <FaStar key={index} className="text-orange-500 w-[40px] ml-[-15px] " />
+  ))}
+  <span className="pl-2 font-normal flex items-center">
+    <span className="ml-[-5px]">4.8</span>
+    <span className="mx-2 flex items-center">·</span>
+    {data.visit} <span className="ml-1">reviews</span>
+  </span>
+</div>
+
+
       </div>
    
    
