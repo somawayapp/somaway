@@ -136,9 +136,9 @@ const details = [
                 <div className="max-w-[1200px] mx-auto">
 
 
-     <div className="w-full mt-0 md:mt-[-13px]  mb-[20px] flex items-center justify-between  text-[var(--textColor)]">
+     <div className="w-full mt-0 md:mt-[-13px]  mb-[20px] flex items-center justify-between  ">
       <div>
-      <h1 className="text-xl md:text-2xl pb-1 md:pb-2  font-semibold text-left">
+      <h1 className="text-xl md:text-2xl pb-1 md:pb-2 text-[var(--softTextColor)]  font-semibold text-left">
         {data.title}
   </h1>
   <h1 className="text-md md:text-lg text-[var(--softTextColor)] font-normal text-left">
@@ -239,7 +239,7 @@ const details = [
                
           <div className="col-span-4 flex flex-col gap-8">
       <div className="flex flex-col gap-2">
-      <div className="text-[16px] font-semibold flex flex-row items-center gap-2 md:justify-start justify-center">
+      <div className="text-[16px] font-semibold text-[var(--softTextColor)] flex flex-row items-center gap-2 md:justify-start justify-center">
   <span className="mr-1">Hosted by</span> 
   <img
     className="rounded-full text-[14px] md:text-[16px]  w-[30px] md:w-[40px] h-[30px] md:h-[40px] select-none"
@@ -350,12 +350,13 @@ const details = [
           )}
 
 {/* Description Preview */}
-<p className="desc-content text-[var(--textColor)]">
+<p className="desc-content text-[var(--softTextColor)]">
   {data.desc?.length > 300 ? (
     <>
-      <span dangerouslySetInnerHTML={{ __html: data.desc.substring(0, 500) }} />
+<h1 className="text-[var(--softTextColor)]  text-[20px] md:text-[22px]  ">About this property </h1>    
+  <span dangerouslySetInnerHTML={{ __html: data.desc.substring(0, 500) }} />
       <button  
-  className="text-[var(--textColor)] font-semibold  mt-2  border-[2px]  rounded-xl py-2 px-6 border-[var(--softBg4)]"
+  className="text-[var(--softTextColor)]  text-[14px] md:text-[16px]  font-semibold  mt-2  border-[2px]  rounded-xl py-2 px-6 border-[var(--softBg4)]"
   onClick={() => setPopupDesc(data.desc)}
 >
   Show More
@@ -468,12 +469,12 @@ const details = [
 
       <div className="flex flex-row ml-3 items-center mt-2 text-sm md:text-lg">
   {[...Array(5)].map((_, index) => (
-    <FaStar key={index} className="text-[var(--softTextColor)] w-[40px] ml-[-15px] " />
+    <FaStar key={index} className="text-[var(--textColor)] w-[40px] ml-[-15px] " />
   ))}
   <span className="pl-2 font-normal  text-[14px] md:text-[16px]  flex items-center">
-    <span className="ml-[-5px]">4.8</span>
+    <span className=" text-[var(--softTextColor)]  text-[14px] md:text-[16px]  ml-[-5px]">4.8</span>
     <span className="mx-2 flex items-center">·</span>
-    {data.visit} <span className="ml-1">reviews</span>
+    {data.visit} <span className="ml-1 text-[var(--softTextColor)]  text-[14px] md:text-[16px]  ">reviews</span>
   </span>
 </div>
 
