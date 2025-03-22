@@ -87,7 +87,6 @@
             if (error) return "Something went wrong!" + error.message;
             if (!data) return "Post not found!";
             
-// Assuming `data` is available in this page
 const icons = {
   apartment: <MdApartment />,
   studio: <FaBed />,
@@ -95,7 +94,7 @@ const icons = {
   "single-room": <FaBed />,
   "town-house": <FaHome />,
   bungalow: <FaHome />,
-  mansionatte: <FaBuilding />, // Using FaBuilding instead of GiMansion
+  mansionatte: <FaBuilding />, 
   villa: <MdVilla />,
   container: <GiCargoCrate />,
   office: <GiOfficeChair />,
@@ -164,14 +163,14 @@ const details = [
           
           <div className="w-full flex h-[300px] md:h-[500px] overflow-hidden rounded-xl aspect relative transition duration-300">
           {/* Left Div */}
-          <div className="flex-1 h-full overflow-hidden relative mr-1">
+          <div className="flex-1 h-full overflow-hidden relative mr-1 md:mr-2">
           {mainImage && (
           <img src={mainImage} className="object-cover h-full w-full" alt="Image" />
           )}
           </div>
           
           {/* Right Div */}
-          <div className="w-1/4 h-full flex gap-1 flex-col">
+          <div className="w-1/4 h-full flex gap-1 md:gap-2 flex-col">
           {[secondMainImage, thirdMainImage, fourthMainImage, fifthMainImage].map(
           (image, index) =>
             image && (
@@ -279,7 +278,7 @@ const details = [
       </div>
       <hr className="h-[1px] bg-[var(--softBg4)] border-0" />
   <p>
-    {icons[data.propertytype] && <span style={{ marginRight: "8px" }}>{icons[data.property]}</span>}
+    {icons[data.propertytype] && <span style={{ marginRight: "8px" }}>{icons[data.propertytype]}</span>}
     This is a {details.join(", ")} building!
   </p>
 
