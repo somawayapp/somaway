@@ -19,6 +19,8 @@
           import SpinnerMini from "../components/Loader";
           import Button from "../components/Button";
           import Avatar from "../components/Avatar";
+          import { AiOutlineHome, AiOutlineAppstore } from "react-icons/ai";
+          import { FaBed, FaBath, FaRulerCombined } from "react-icons/fa";
 
           const fetchPost = async (slug) => {
              
@@ -198,7 +200,8 @@
           <div className="col-span-4 flex flex-col gap-8">
       <div className="flex flex-col gap-2">
         <div className="text-[16px] font-semibold flex flex-row items-center gap-2">
-          <span className="mr-1">Hosted by</span> <Avatar src={data.user?.img} />
+        <span className="mr-1">Hosted by</span> 
+           <Avatar src={data.user?.img || "/placeholder.webp"} />
           <span> {data.user?.username}</span>
         </div>
         <div
@@ -206,8 +209,28 @@
           "
         >
           
-          <span>{data.bedrooms} Bedrooms</span>
-          <span>{data.bathrooms} bathrooms</span>
+          <div>
+      {data.bedrooms !== undefined && data.bedrooms !== null && (
+        <span>
+          <FaBed /> {data.bedrooms} Bedrooms
+        </span>
+      )}
+      {data.bathrooms !== undefined && data.bathrooms !== null && (
+        <span>
+          <FaBath /> {data.bathrooms} Bathrooms
+        </span>
+      )}
+      {data.rooms !== undefined && data.rooms !== null && (
+        <span>
+          <AiOutlineAppstore /> {data.rooms} Rooms
+        </span>
+      )}
+      {data.propertysize !== undefined && data.propertysize !== null && (
+        <span>
+          <FaRulerCombined /> {data.propertysize} sq/ft
+        </span>
+      )}
+    </div>
         </div>
       </div>
       <hr />

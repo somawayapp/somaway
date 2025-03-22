@@ -27,6 +27,7 @@ const Write = () => {
   const [propertysize, setPropertySize] = useState("");
   const [propertytype, setPropertyType] = useState("");
   const [bedrooms, setBedrooms] = useState("");
+  const [rooms, setRooms] = useState("");
   const [bathrooms, setBathrooms] = useState("");
   const [specification, setSpecification] = useState("");
 
@@ -99,6 +100,7 @@ const Write = () => {
       specification,
       propertysize,
       bathrooms,
+      rooms,
       bedrooms,
       isFeatured,
     };
@@ -154,6 +156,7 @@ const Write = () => {
           <option value="office">Office</option>
           <option value="shop">Shop</option>
           <option value="warehouse">Warehouse</option>
+          <option value="land">Plot/Land</option>
 
         </select>
 
@@ -198,6 +201,19 @@ const Write = () => {
       className="p-3 w-full bg-[var(--textColor)] text-[var(--softBg)] rounded border border-gray-300 focus:ring-2 focus:ring-orange-500"
     />
   </div>
+
+    {/* Number of Rooms */}
+    <div>
+    <label className="block text-sm font-medium mb-1"> Total Number of Rooms</label>
+    <input
+      type="number"
+      placeholder="Enter number of Rooms"
+      value={rooms}
+      onChange={(e) => setRooms(e.target.value)}
+      className="p-3 w-full bg-[var(--textColor)] text-[var(--softBg)] rounded border border-gray-300 focus:ring-2 focus:ring-orange-500"
+    />
+  </div>
+
 
   {/* Property Size */}
   <div>
