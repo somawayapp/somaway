@@ -202,12 +202,12 @@
       <div className="flex flex-col gap-2">
         <div className="text-[16px] font-semibold flex flex-row items-center gap-2">
         <span className="mr-1">Hosted by</span> 
-     <img
-    className="rounded-full select-none"
-    height={30}
-    width={30}
-    alt="Avatar"
-     src= "/placeholder.webp" />
+        <img
+  className="rounded-full h-[20px] md:h-[30px] select-none"
+  alt="Avatar"
+  src={data.user?.img || "/placeholder.webp"} 
+/>
+
 
           <span> {data.user?.username}</span>
         </div>
