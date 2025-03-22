@@ -353,7 +353,7 @@ const details = [
 <p className="desc-content text-[var(--softTextColor)]">
   {data.desc?.length > 300 ? (
     <>
-<h1 className="text-[var(--softTextColor)]  text-[20px] md:text-[22px]  ">About this property </h1>    
+<h1 className="text-[var(--softTextColor)] font-semibold  text-[20px] md:text-[22px]  ">About this property </h1>    
   <span dangerouslySetInnerHTML={{ __html: data.desc.substring(0, 500) }} />
       <button  
   className="text-[var(--softTextColor)]  text-[14px] md:text-[16px]  font-semibold  mt-2  border-[2px]  rounded-xl py-2 px-6 border-[var(--softBg4)]"
@@ -391,7 +391,7 @@ const details = [
 
 
 
-          <div className="flex flex-col gap-2 pb-4 md:w-2/5 ">
+          <div className="flex flex-col gap-2 sticky top-[65px] pb-4 md:w-2/5 ">
 
           <div className="  rounded-xl border-[1px] border-[var(--softBg4)] overflow-hidden">
       <div className="flex text-[var(--softTextColor)] flex-row items-center gap-1 p-4">
