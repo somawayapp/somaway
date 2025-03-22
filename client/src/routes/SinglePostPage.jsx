@@ -18,7 +18,8 @@
           import BackButton from "../components/BackButton";
           import SpinnerMini from "../components/Loader";
           import Button from "../components/Button";
-          
+          import Avatar from "../components/Avatar";
+
           const fetchPost = async (slug) => {
              
           
@@ -186,90 +187,71 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
       <div className="flex flex-col bg-[var(--bg)]  mt-6 
        md:flex-row gap-4 md:gap-8">
 
 
 
           <div className="flex flex-col gap-1 md:gap-2 items-center mt-4 md:items-start md:w-3/5">
-            <p className="text-[var(--softTextColor2)] text-sm text-lg  text-center md:text-left">
-            SUMMARY OF
+          
+               
+          <div className="col-span-4 flex flex-col gap-8">
+      <div className="flex flex-col gap-2">
+        <div className="text-[16px] font-semibold flex flex-row items-center gap-2">
+          <span className="mr-1">Hosted by</span> <Avatar src={user?.image} />
+          <span> {user?.name}</span>
+        </div>
+        <div
+          className="flex flex-row items-center gap-4 font-light text-[var(--softTextColor)]
+          "
+        >
+          
+          <span>{data.bedrooms} Bedrooms</span>
+          <span>{data.bathrooms} bathrooms</span>
+        </div>
+      </div>
+      <hr />
 
+      <hr />
+      <p
+  className="desc-content text-[var(--textColor)]"
+  dangerouslySetInnerHTML={{
+    __html: data.desc
+      ?.replace(/&nbsp;/g, ' ') // Convert non-breaking spaces to normal spaces
+      .replace(/\s{2,}/g, ' ') // Remove multiple spaces
+  }}
+/>      <hr />
+      <div className="h-[210px]">
+       map
+      </div>
+    </div>
 
-            </p>
-            <h1 className="text-2xl md:text-5xl font-bold text-center md:text-left">
-              {data.title}
-            </h1>
-            <div className="flex flex-col md:flex-row  items-center gap-1 text-[var(--textColor)] text-md md:text-lg">
-              <div className=" flex gap-1 md:gap-2">
-                <span  className=" ">Book by
-                <Link   to={`/discover?author=${data.author}`} className=" ml-1" >{data.author}</Link>  </span>
-                </div>
-                <div className="flex gap-1 md:gap-2"> 
-                <span className="hidden md:block "> | </span>
-                <span className=" ">Category 
-                <Link to={`/discover?cat=${data.category}`}  className="capitalize ml-1 ">{data.category}</Link> </span>
-                </div>
-            </div>
+                <Link   to={`/discover?author=${data.author}`} className=" ml-1" >{data.author}</Link> 
+        
+                <Link to={`/discover?cat=${data.category}`}  className="capitalize ml-1 ">{data.category}</Link> 
    
 
-
-            
-        
-
-            <p className="mt-2 text-xl mt-1 md:mt-2 md:text-2xl font-bold">
-            What’s inside
-            </p>
-            <p
-              className="text-[var(--textColor)] text-[16px] md:text-[19px]"
-            >                { data.summary }
-
-            </p>
-
-
-        <div className="flex flex-row pt-2 space-x-4">
-  <div className="flex flex-row items-center space-x-2">
-    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="none" width="24px" height="24px">
-      <path d="M12.75 7a.75.75 0 0 0-1.5 0v5a.75.75 0 0 0 .352.636l3 1.875a.75.75 0 1 0 .796-1.272l-2.648-1.655V7z" fill="#06F" fill-opacity="0.5"></path>
-      <path fill-rule="evenodd" clip-rule="evenodd" d="M12 3.25a8.75 8.75 0 1 0 0 17.5 8.75 8.75 0 0 0 0-17.5zM4.75 12a7.25 7.25 0 1 1 14.5 0 7.25 7.25 0 0 1-14.5 0z" fill="#06F" fill-opacity="0.5"></path>
-    </svg>
-    <span className="text-[var(--textColor)] text-[16px] md:text-[20px]">
-      15 min read
-    </span>
-  </div>
-
-  <div className="flex flex-row items-center space-x-2">
-    <svg viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg" width="24px" height="24px">
-      <path d="M4.29 7a1 1 0 1 0 0 2 1 1 0 0 0 0-2ZM8.29 7a1 1 0 1 0 0 2h12a1 1 0 1 0 0-2h-12ZM3.29 12a1 1 0 1 1 2 0 1 1 0 0 1-2 0ZM4.29 15a1 1 0 1 0 0 2 1 1 0 0 0 0-2ZM7.29 12a1 1 0 0 1 1-1h12a1 1 0 1 1 0 2h-12a1 1 0 0 1-1-1ZM8.29 15a1 1 0 1 0 0 2h12a1 1 0 1 0 0-2h-12Z" fill="#06F"></path>
-    </svg>
-    <span className="text-[var(--textColor)] text-[16px] md:text-[20px]">
-      Key points
-    </span>
-  </div>
-</div>
-
-           <Link
-            to="/login"
-            className="w-full text-center mt-3  sm:w-auto px-4 md:px-12 py-4  bg-[#007aff]   text-white font-semibold
-             rounded-md hover:bg-[#0062e3]   "
-          >
-           Try Somaway app
-
-          </Link>
           </div>
 
-          <div className="flex flex-col gap-2 pb-4 md:w-2/5 ">
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+          <div className="flex flex-col gap-2 pb-4 md:w-2/5 ">
 
           <div className="  rounded-xl border-[1px] border-[var(--softBg4)] overflow-hidden">
       <div className="flex flex-row items-center gap-1 p-4">
