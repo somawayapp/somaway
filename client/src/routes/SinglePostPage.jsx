@@ -63,6 +63,17 @@
               }
             }, [popupImage]);
             
+
+            const [popupDesc, setPopupDesc] = useState(null);
+          
+            // Prevent scrolling when popup is open
+            useEffect(() => {
+              if (popupDesc) {
+                document.body.style.overflow = "hidden";
+              } else {
+                document.body.style.overflow = "auto";
+              }
+            }, [popupDesc]);
             
             const images = data?.img || []; // Ensure img is used
             const mainImage = images.length > 0 ? images[0] : null;
@@ -95,11 +106,11 @@ const icons = {
 
 // Filtering out null values (but keeping 0 values if they exist)
 const details = [
-  data.bedroom ? `${data.bedrooms} bedroom` : null,
-  data.bathroom ? `${data.bathrooms} bathroom` : null,
-  data.room ? `${data.rooms} room` : null,
+  data.bedrooms ? `${data.bedrooms} bedroom` : null,
+  data.bathrooms ? `${data.bathrooms} bathroom` : null,
+  data.rooms ? `${data.rooms} room` : null,
   data.propertysize ? `${data.propertysize} square feet` : null,
-  data.property ? `${data.propertysize} building` : null,
+  data.propertytype ? `${data.propertytype} building` : null,
 ].filter(Boolean);
 
           
@@ -274,14 +285,66 @@ const details = [
 
 
       <hr className="h-[1px] bg-[var(--softBg4)] border-0" />
-      <p
-  className="desc-content text-[var(--textColor)]"
-  dangerouslySetInnerHTML={{
-    __html: data.desc
-      ?.replace(/&nbsp;/g, ' ') // Convert non-breaking spaces to normal spaces
-      .replace(/\s{2,}/g, ' ') // Remove multiple spaces
-  }}
-/>      
+
+
+
+   {/* Popup Modal */}
+   {popupDesc && (
+          <div
+          className="fixed inset-0 bg-black bg-opacity-80 flex items-center justify-center " style={{ zIndex: 100014 }}
+          onClick={() => setPopupDesc(null)}
+          >
+          <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50" onClick={() => setPopupDesc(null)}>
+          <div
+          className="relative w-full p-3 md:p-9 md:w-3/4"
+          onClick={(e) => e.stopPropagation()} // Prevents closing when clicking inside
+          >
+          <button
+          className="absolute top-2 right-2 bg-gray-800 text-white rounded-full"
+          onClick={() => setPopupDesc(null)}  
+          style={{ zIndex: 100024 }}
+          >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            className="w-4 h-4"
+            viewBox="0 0 24 24"
+            fill="red"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          >
+            <line x1="18" y1="6" x2="6" y2="18" />
+            <line x1="6" y1="6" x2="18" y2="18" />
+          </svg>
+          </button>
+          <div className="w-full h-auto max-h-[80vh] overflow-auto bg-white p-5 rounded-xl">
+            <p className="text-[var(--textColor)]" dangerouslySetInnerHTML={{ __html: popupDesc }} />
+          </div>
+          </div>
+          </div>
+          </div>
+          )}
+
+{/* Description Preview */}
+<p className="desc-content text-[var(--textColor)]">
+  {data.desc?.length > 300 ? (
+    <>
+      <span dangerouslySetInnerHTML={{ __html: data.desc.substring(0, 300) }} />...
+      <button 
+        className="text-blue-500 underline ml-2"
+        onClick={() => setPopupDesc(data.desc)}
+      >
+        Show More
+      </button>
+    </>
+  ) : (
+    <span dangerouslySetInnerHTML={{ __html: data.desc }} />
+  )}
+</p>
+
+
+
 <hr className="h-[1px] bg-[var(--softBg4)] border-0" />
 
       <div className="h-[210px]">
