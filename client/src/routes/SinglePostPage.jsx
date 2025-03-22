@@ -73,9 +73,9 @@
                 <div className="max-w-[1200px] mx-auto">
 
 
-     <div className="w-full mt-[-13px] flex items-center justify-between  pb-2 pt-4 md:pt-1 text-[var(--textColor)]">
+     <div className="w-full mt-[-13px]  mb-[-13px] flex items-center justify-between  text-[var(--textColor)]">
       <div>
-      <h1 className="text-lg md:text-2xl font-semibold text-left">
+      <h1 className="text-xl md:text-2xl font-semibold text-left">
         {data.title}
   </h1>
   <h1 className="text-md md:text-lg text-[var(--softTextColor)] font-normal text-left">
@@ -162,7 +162,6 @@
           
               
               
-              </div>
 
     
 
@@ -182,25 +181,10 @@
 
       <div className="flex flex-col bg-[var(--navBG)]  border border-[var(--softBg4)]  rounded-3xl  p-2 md:p-8
        md:flex-row gap-4 md:gap-8">
- 
- {data?.img && data.img.length > 0 ? (
-  <div className="w-full k">
-    {data.img.map((img, index) => (
- 
-   <img src={img}    className="w-[180px] md:w-[400px] rounded-2xl mb-2 last:mb-0"
-   alt={`Image ${index + 1}`} />
-
- 
-    ))}           
-  </div>
-) : (
-  <p>No images found</p>
-)}
 
 
 
-
-          <div className="flex flex-col gap-1 md:gap-2 items-center md:items-start md:w-2/4">
+          <div className="flex flex-col gap-1 md:gap-2 items-center mt-4 md:items-start md:w-3/4">
             <p className="text-[var(--softTextColor2)] text-sm text-lg  text-center md:text-left">
             SUMMARY OF
 
@@ -294,6 +278,7 @@
         </div>
       </div>
 
+      </div>
 
 
 
