@@ -235,11 +235,15 @@
         </div>
       </div>
       <hr className="h-[1px] bg-[var(--softBg4)] border-0" />
-      {data.bedroom && data.bathroom && data.room && data.propertysize && data.property && (
-  <p>
-    This is a {data.bedroom} bedroom, {data.bathroom} bathroom, {data.room} room, {data.propertysize} square feet, {data.property} building
-  </p>
-)}
+      <p>
+  This is 
+  {data.bedroom ? ` a ${data.bedroom} bedroom,` : ''}
+  {data.bathroom ? ` ${data.bathroom} bathroom,` : ''}
+  {data.room ? ` ${data.room} room,` : ''}
+  {data.propertysize ? ` ${data.propertysize} square feet,` : ''}
+  {data.property ? ` ${data.property} building` : ''}
+</p>
+
 
       <hr className="h-[1px] bg-[var(--softBg4)] border-0" />
       <p
