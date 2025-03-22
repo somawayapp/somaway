@@ -297,8 +297,7 @@ const details = [
         </div>
       </div>
       <hr className="h-[1px] bg-[var(--softBg4)] border-0" />
-      <p style={{ 
-  display: "flex", 
+      <p className=" flex flex-row" style={{ 
   alignItems: "center", 
 }}>
   {icons[data.propertytype] && (
@@ -315,12 +314,13 @@ const details = [
     </span>
   )}
 
-  <div>
+  <span>
     <p className="capitalize font-semibold">
       {data.propertytype}
     </p>
     <span className=" text-[14px] md:text-[16px] text-[var(--softTextColor)] ">This is a {details.join(", ")} building!</span>
-  </div>
+  </span>
+
 </p>
 
 
@@ -433,7 +433,7 @@ const details = [
 
           <div className="flex flex-col gap-2 pb-4 w-full md:w-2/6 ">
 
-          <div className="  rounded-xl border-[1px]  border-[var(--softTextColor)]  shadow-md  overflow-hidden">
+          <div className="  rounded-xl border-[1px]  border-[var(--softBg4)]  shadow-md  overflow-hidden">
       <div className="flex text-[var(--softTextColor)] flex-row items-center gap-1 p-4">
         <span className=" text-[14px] md:text-[16px] text-[var(--softTextColor)] font-semibold">KES {data.price}</span>
         <span className="font-light text-[14px] md:text-[16px]  ">
