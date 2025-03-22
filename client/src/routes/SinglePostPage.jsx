@@ -24,7 +24,7 @@
           import { FaBath, FaRulerCombined } from "react-icons/fa";
           import { FaBuilding, FaWarehouse, FaHome, FaStore, FaTree, FaBed } from "react-icons/fa";
           import { MdVilla, MdApartment } from "react-icons/md";
-           import { GiMansion, GiOfficeChair, GiShop, GiCargoCrate } from "react-icons/gi";
+           import { GiOfficeChair, GiShop, GiCargoCrate } from "react-icons/gi";
 
           const fetchPost = async (slug) => {
              
@@ -83,7 +83,7 @@
               "single-room": <FaBed />,
               "town-house": <FaHome />,
               bungalow: <FaHome />,
-              mansionatte: <GiMansion />,
+              mansionatte: <FaBuilding />,
               villa: <MdVilla />,
               container: <GiCargoCrate />,
               office: <GiOfficeChair />,
