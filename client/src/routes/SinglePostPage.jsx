@@ -187,7 +187,7 @@
     
 
 
-          <div className="flex flex-col md:flex-row-reverse bg-[var(--bg)] mt-6 gap-4 md:gap-8">
+          <div className="flex flex-col-reverse md:flex-row bg-[var(--bg)] mt-6 gap-4 md:gap-8">
 
 
 
@@ -200,9 +200,9 @@
         <div className="text-[16px] font-semibold flex flex-row items-center gap-2">
         <span className="mr-1">Hosted by</span> 
         <img
-  className="rounded-full w-[20px]  md:w-[40px] h-[20px]  md:h-[40px] select-none"
+  className="rounded-full w-[30px]  md:w-[40px] h-[30px]  md:h-[40px] select-none"
   alt="Avatar"
-  src={data.user?.img || "/placeholder.webp"} 
+  src={data.user?.img || "/placeholder.jpg"} 
 />
 
 
