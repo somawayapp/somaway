@@ -37,7 +37,8 @@
               queryFn: () => fetchPost(slug),
             });
           
-          
+            const [isLoading, setIsLoading] = useState(false);
+
             const [popupImage, setPopupImage] = useState(null);
           
             // Prevent scrolling when popup is open
