@@ -288,11 +288,11 @@
   {data.model === "forrent" ? "/month" : data.model === "forsale" ? "for sale" : ""}
 </span>
       </div>
-      <hr className="text-[var(--softBg4)]" />
+      <hr className="h-[1px] bg-[var(--softBg4)] border-0" />
 
       <div>
   <p
-    className="p-4 flex items-center gap-2 cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg transition"
+    className="p-4 flex items-center gap-2 cursor-pointer hover:bg--[var(--softBg)] rounded-lg transition"
     onClick={() => window.location.href = `tel:${data.phone}`}
   >
     <svg
@@ -312,13 +312,13 @@
   </p>
 </div>
 
-<hr className="text-[var(--softBg4)]" />
+<hr className="h-[1px] bg-[var(--softBg4)] border-0" />
 <div>
 
 
 <div>
       <p
-        className="p-4 flex items-center gap-2 text-green-600 hover:text-green-700 cursor-pointer transition-all"
+        className="p-4 flex items-center gap-2  cursor-pointer hover:bg--[var(--softBg)] rounded-lg transition-all"
         onClick={handleClick}
       >
         <svg
@@ -327,7 +327,7 @@
           height="24"
           viewBox="0 0 24 24"
           fill="none"
-          stroke="currentColor"
+          stroke="green"
           strokeWidth="2"
           strokeLinecap="round"
           strokeLinejoin="round"
@@ -341,8 +341,8 @@
 
    </div>
 
-      <hr className="text-[var(--softBg4)]" />
-      <div className="p-4">
+   <hr className="h-[1px] bg-[var(--softBg4)] border-0" />
+   <div className="p-4">
       <Button
           disabled={isLoading}
           className="flex flex-row items-center justify-center h-[42px]  rounded-xl"
