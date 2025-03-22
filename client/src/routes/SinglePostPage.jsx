@@ -1,6 +1,5 @@
 
           import { Link, useParams } from "react-router-dom";
-          import Image from "../components/Image";
           import Image from "next/image";
 
           import PostMenuActions from "../components/PostMenuActions";
