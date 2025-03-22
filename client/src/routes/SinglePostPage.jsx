@@ -45,23 +45,26 @@
               queryFn: () => fetchPost(slug),
             });
 
-            const [isSticky, setIsSticky] = useState(false);
-            let lastScrollY = 0;
-          
-            useEffect(() => {
-              const handleScroll = () => {
-                const scrollY = window.scrollY;
-                if (scrollY < lastScrollY) {
-                  setIsSticky(true);
-                } else {
-                  setIsSticky(false);
-                }
-                lastScrollY = scrollY;
-              };
-          
-              window.addEventListener("scroll", handleScroll);
-              return () => window.removeEventListener("scroll", handleScroll);
-            }, []);
+      
+  const [isScrollingUp, setIsScrollingUp] = useState(false);
+  let lastScrollY = 0;
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollY = window.scrollY;
+
+      if (scrollY < lastScrollY) {
+        setIsScrollingUp(true);
+      } else {
+        setIsScrollingUp(false);
+      }
+
+      lastScrollY = scrollY;
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
           
           
             const [isLoading, setIsLoading] = useState(false);
@@ -410,11 +413,12 @@ const details = [
 
 
 
-          <div
-        className={`flex flex-col gap-2 pb-4 md:w-2/5 transition-all ${
-          isSticky ? "sticky top-[65px]" : ""
+      <div
+        className={`flex flex-col gap-2 pb-4 md:w-2/5 transition-all duration-300 ${
+          isScrollingUp ? "sticky top-[65px]" : "relative"
         }`}
       >
+    
 
           <div className="  rounded-xl border-[1px] shadow-md  overflow-hidden">
       <div className="flex text-[var(--softTextColor)] flex-row items-center gap-1 p-4">
