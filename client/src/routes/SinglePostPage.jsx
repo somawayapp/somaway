@@ -78,35 +78,35 @@
 
           
   
-// Assuming `data` is available in this page
-const icons = {
-  apartment: <MdApartment />,
-  studio: <FaBed />,
-  bedsitter: <FaBed />,
-  "single-room": <FaBed />,
-  "town-house": <FaHome />,
-  bungalow: <FaHome />,
-  mansionatte: <FaBuilding />, // Replaced GiMansion with FaBuilding
-  villa: <MdVilla />,
-  container: <GiCargoCrate />,
-  office: <GiOfficeChair />,
-  shop: <GiShop />,
-  warehouse: <FaWarehouse />,
-  land: <FaTree />,
-};
 
-// Filtering out null values (but keeping 0 values if they exist)
-const details = [
-  data.bedroom ? `${data.bedroom} bedroom` : null,
-  data.bathroom ? `${data.bathroom} bathroom` : null,
-  data.room ? `${data.room} room` : null,
-  data.propertysize ? `${data.propertysize} square feet` : null,
-  data.property ? `${data.property}` : null,
-].filter(Boolean);
+            const icons = {
+              apartment: <MdApartment />,
+              studio: <FaBed />,
+              bedsitter: <FaBed />,
+              "single-room": <FaBed />,
+              "town-house": <FaHome />,
+              bungalow: <FaHome />,
+              mansionatte: <FaBuilding />, // Using FaBuilding instead of GiMansion
+              villa: <MdVilla />,
+              container: <GiCargoCrate />,
+              office: <GiOfficeChair />,
+              shop: <GiShop />,
+              warehouse: <FaWarehouse />,
+              land: <FaTree />,
+            };
+            
+            // Filtering out null values (but keeping 0 values if they exist)
+            const details = [
+              data.bedroom ? `${data.bedroom} bedroom` : null,
+              data.bathroom ? `${data.bathroom} bathroom` : null,
+              data.room ? `${data.room} room` : null,
+              data.propertysize ? `${data.propertysize} square feet` : null,
+              data.property ? `${data.property} building` : null,
+            ].filter(Boolean);
+            
           
-            if (details.length === 0) return null;
+            return details.length > 0 ? (
 
-            return (
               <div className=" bg-[var(--bg)]">
           
           
@@ -258,7 +258,7 @@ const details = [
         )}
         {data.rooms !== undefined && data.rooms !== null && (
           <span className="detail-item">
-            <AiOutlineAppstore className="icon" /> {data.rooms} Rooms
+            <AiOutlineAppstore className="icon" /> {data.room} Rooms
           </span>
         )}
         {data.propertysize !== undefined && data.propertysize !== null && (
@@ -272,7 +272,7 @@ const details = [
       <hr className="h-[1px] bg-[var(--softBg4)] border-0" />
       <p>
     {icons[data.property] && <span style={{ marginRight: "8px" }}>{icons[data.property]}</span>}
-    {details.join(", ")}
+    This is a {details.join(", ")}
   </p>
       <hr className="h-[1px] bg-[var(--softBg4)] border-0" />
       <p
