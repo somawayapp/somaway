@@ -347,7 +347,7 @@ const details = [
 <p className="desc-content text-[var(--textColor)]">
   {data.desc?.length > 300 ? (
     <>
-      <span dangerouslySetInnerHTML={{ __html: data.desc.substring(0, 500) }} />...
+      <span dangerouslySetInnerHTML={{ __html: data.desc.substring(0, 500) }} />..
       <button  
   className="text-[var(--textColor)] font-semibold  mt-2 ml-2 border-[2px]  rounded-xl py-2 px-6 border-[var(--softBg4)]"
   onClick={() => setPopupDesc(data.desc)}
