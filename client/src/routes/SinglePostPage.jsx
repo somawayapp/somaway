@@ -13,9 +13,8 @@
           import ExplorePosts from "../components/ExplorePosts";
           import MobileControls from "../components/MobileControls";
           import LatestPosts from "../components/LatestPosts";
-          import { useEffect } from "react";
+          import { useState, useEffect } from "react";
           import { Helmet } from "react-helmet";
-          import { useState } from "react";
           import BackButton from "../components/BackButton";
           import SpinnerMini from "../components/Loader";
           import Button from "../components/Button";
@@ -45,6 +44,25 @@
               queryKey: ["post", slug],
               queryFn: () => fetchPost(slug),
             });
+
+            const [isSticky, setIsSticky] = useState(false);
+            let lastScrollY = 0;
+          
+            useEffect(() => {
+              const handleScroll = () => {
+                const scrollY = window.scrollY;
+                if (scrollY < lastScrollY) {
+                  setIsSticky(true);
+                } else {
+                  setIsSticky(false);
+                }
+                lastScrollY = scrollY;
+              };
+          
+              window.addEventListener("scroll", handleScroll);
+              return () => window.removeEventListener("scroll", handleScroll);
+            }, []);
+          
           
             const [isLoading, setIsLoading] = useState(false);
 
@@ -87,23 +105,7 @@
             if (error) return "Something went wrong!" + error.message;
             if (!data) return "Post not found!";
 
-              const [isSticky, setIsSticky] = useState(false);
-              let lastScrollY = 0;
-            
-              useEffect(() => {
-                const handleScroll = () => {
-                  const scrollY = window.scrollY;
-                  if (scrollY < lastScrollY) {
-                    setIsSticky(true); // Stick when scrolling up
-                  } else {
-                    setIsSticky(false); // Remove sticky when scrolling down
-                  }
-                  lastScrollY = scrollY;
-                };
-            
-                window.addEventListener("scroll", handleScroll);
-                return () => window.removeEventListener("scroll", handleScroll);
-              }, []);
+      
             
 const icons = {
   apartment: <MdApartment />,
@@ -409,7 +411,7 @@ const details = [
 
 
           <div
-        className={`pb-4 md:w-2/5 transition-all duration-300 ${
+        className={`flex flex-col gap-2 pb-4 md:w-2/5 transition-all ${
           isSticky ? "sticky top-[65px]" : ""
         }`}
       >
