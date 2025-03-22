@@ -349,7 +349,7 @@ const details = [
     <>
       <span dangerouslySetInnerHTML={{ __html: data.desc.substring(0, 500) }} />...
       <button  
-  className="text-blue-500  mt-2 ml-2 border-[2px]  rounded-xl py-2 px-6 border-[var(--softBg4)]"
+  className="text-[var(--textColor)] font-semibold  mt-2 ml-2 border-[2px]  rounded-xl py-2 px-6 border-[var(--softBg4)]"
   onClick={() => setPopupDesc(data.desc)}
 >
   Show More
