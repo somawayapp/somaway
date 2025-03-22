@@ -76,29 +76,33 @@
           
             if (!data) return null;
 
-            const icons = {
-              apartment: <MdApartment />,
-              studio: <FaBed />,
-              bedsitter: <FaBed />,
-              "single-room": <FaBed />,
-              "town-house": <FaHome />,
-              bungalow: <FaHome />,
-              mansionatte: <FaBuilding />,
-              villa: <MdVilla />,
-              container: <GiCargoCrate />,
-              office: <GiOfficeChair />,
-              shop: <GiShop />,
-              warehouse: <FaWarehouse />,
-              land: <FaTree />,
-            };
           
-            const details = [
-              data.bedroom ? `${data.bedroom} bedroom` : null,
-              data.bathroom ? `${data.bathroom} bathroom` : null,
-              data.room ? `${data.room} room` : null,
-              data.propertysize ? `${data.propertysize} square feet` : null,
-              data.property ? `${data.property}` : null,
-            ].filter(Boolean);
+  
+// Assuming `data` is available in this page
+const icons = {
+  apartment: <MdApartment />,
+  studio: <FaBed />,
+  bedsitter: <FaBed />,
+  "single-room": <FaBed />,
+  "town-house": <FaHome />,
+  bungalow: <FaHome />,
+  mansionatte: <FaBuilding />, // Replaced GiMansion with FaBuilding
+  villa: <MdVilla />,
+  container: <GiCargoCrate />,
+  office: <GiOfficeChair />,
+  shop: <GiShop />,
+  warehouse: <FaWarehouse />,
+  land: <FaTree />,
+};
+
+// Filtering out null values (but keeping 0 values if they exist)
+const details = [
+  data.bedroom ? `${data.bedroom} bedroom` : null,
+  data.bathroom ? `${data.bathroom} bathroom` : null,
+  data.room ? `${data.room} room` : null,
+  data.propertysize ? `${data.propertysize} square feet` : null,
+  data.property ? `${data.property}` : null,
+].filter(Boolean);
           
             if (details.length === 0) return null;
 
@@ -267,9 +271,9 @@
       </div>
       <hr className="h-[1px] bg-[var(--softBg4)] border-0" />
       <p>
-      {icons[data.property] && <span style={{ marginRight: "8px" }}>{icons[data.property]}</span>}
-      {details.join(", ")}
-    </p>
+    {icons[data.property] && <span style={{ marginRight: "8px" }}>{icons[data.property]}</span>}
+    {details.join(", ")}
+  </p>
       <hr className="h-[1px] bg-[var(--softBg4)] border-0" />
       <p
   className="desc-content text-[var(--textColor)]"
