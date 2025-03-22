@@ -432,17 +432,3 @@ body {
   }
 }
 
-.desctext {
-  font-size: 14px;
-}
-
-
-@media (min-width: 768px) {
- 
-  .desctext {
-    font-size: 16px; /* Adjust text size for md screens */
-  }
-
-
-  
-}

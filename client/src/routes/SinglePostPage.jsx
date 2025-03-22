@@ -396,9 +396,9 @@ const details = [
 
 <hr className="h-[1px] bg-[var(--softBg4)] border-0" />
 <h1 className="text-[var(--softTextColor)] font-semibold  text-[20px] md:text-[22px]  ">What this property offers </h1>   
-<div className="flex flex-wrap gap-2">
+<div className="flex flex-wrap detail-item gap-2">
       {data.amenities.map((amenity, index) => (
-        <div key={index} className="flex items-center gap-1 bg-gray-100 p-2 rounded-md">
+        <div key={index} className=" icon bg-[var(--softBg4)] ">
           {amenitiesIcons[amenity] || null}
           <span className="text-[16px] text-[var(--softTextColor)] capitalize">{amenity.replace('-', ' ')}</span>
         </div>
