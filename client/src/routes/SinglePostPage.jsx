@@ -22,10 +22,7 @@
           import Avatar from "../components/Avatar";
           import { AiOutlineHome, AiOutlineAppstore } from "react-icons/ai";
           import { FaBed, FaBath, FaRulerCombined } from "react-icons/fa";
-          import { FaBuilding, FaWarehouse, FaHome, FaStore, FaTree, FaBed } from "react-icons/fa";
-          import { MdVilla, MdApartment } from "react-icons/md";
-           import { GiMansion, GiOfficeChair, GiShop, GiCargoCrate } from "react-icons/gi";
-
+          
           const fetchPost = async (slug) => {
              
           
@@ -74,34 +71,6 @@
             if (error) return "Something went wrong!" + error.message;
             if (!data) return "Post not found!";
           
-            if (!data) return null;
-
-            const icons = {
-              apartment: <MdApartment />,
-              studio: <FaBed />,
-              bedsitter: <FaBed />,
-              "single-room": <FaBed />,
-              "town-house": <FaHome />,
-              bungalow: <FaHome />,
-              mansionatte: <GiMansion />,
-              villa: <MdVilla />,
-              container: <GiCargoCrate />,
-              office: <GiOfficeChair />,
-              shop: <GiShop />,
-              warehouse: <FaWarehouse />,
-              land: <FaTree />,
-            };
-          
-            const details = [
-              data.bedroom ? `${data.bedroom} bedroom` : null,
-              data.bathroom ? `${data.bathroom} bathroom` : null,
-              data.room ? `${data.room} room` : null,
-              data.propertysize ? `${data.propertysize} square feet` : null,
-              data.property ? `${data.property}` : null,
-            ].filter(Boolean);
-          
-            if (details.length === 0) return null;
-
             return (
               <div className=" bg-[var(--bg)]">
           
@@ -254,7 +223,7 @@
         )}
         {data.rooms !== undefined && data.rooms !== null && (
           <span className="detail-item">
-            <AiOutlineAppstore className="icon" /> {data.rooms} Rooms
+            <AiOutlineAppstore className="icon" /> {data.room} Rooms
           </span>
         )}
         {data.propertysize !== undefined && data.propertysize !== null && (
@@ -266,10 +235,12 @@
         </div>
       </div>
       <hr className="h-[1px] bg-[var(--softBg4)] border-0" />
-      <p>
-      This is a {data.bedroom} bedroom, {data.bathroom} bathroom, {data.room} room, {data.propertysize} square feet,  {data.property}  building
+      {data.bedroom && data.bathroom && data.room && data.propertysize && data.property && (
+  <p>
+    This is a {data.bedroom} bedroom, {data.bathroom} bathroom, {data.room} room, {data.propertysize} square feet, {data.property} building
+  </p>
+)}
 
-      </p>
       <hr className="h-[1px] bg-[var(--softBg4)] border-0" />
       <p
   className="desc-content text-[var(--textColor)]"
