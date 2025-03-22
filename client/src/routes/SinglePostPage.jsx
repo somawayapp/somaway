@@ -189,12 +189,12 @@
 
 
 
-      <div className="flex flex-col bg-[var(--bg)]  mt-6 w-full  md:w-3/5
+      <div className="flex flex-col bg-[var(--bg)]  mt-6 
        md:flex-row gap-4 md:gap-8">
 
 
 
-          <div className="flex flex-col gap-1 md:gap-2 items-center mt-4 md:items-start">
+          <div className="flex flex-col gap-1 md:gap-2  mt-4 w-full   md:w-3/5">
           
                
           <div className="col-span-4 flex flex-col gap-8">
@@ -253,17 +253,6 @@
    
 
           </div>
-
-
-
-
-
-
-
-
-
-
-
 
 
 
