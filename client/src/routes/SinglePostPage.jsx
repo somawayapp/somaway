@@ -192,12 +192,12 @@
 
 
 
-      <div className="flex flex-col bg-[var(--navBg)]  mt-4 border border-[var(--softBg4)]  rounded-3xl  p-2 md:p-8
+      <div className="flex flex-col bg-[var(--bg)]  mt-4 border border-[var(--softBg4)]  rounded-3xl  
        md:flex-row gap-4 md:gap-8">
 
 
 
-          <div className="flex flex-col gap-1 md:gap-2 items-center mt-4 md:items-start md:w-3/4">
+          <div className="flex flex-col gap-1 md:gap-2 items-center mt-4 md:items-start md:w-3/5">
             <p className="text-[var(--softTextColor2)] text-sm text-lg  text-center md:text-left">
             SUMMARY OF
 
@@ -274,22 +274,52 @@
           </Link>
           </div>
 
-          <div className="flex flex-col gap-2 items-start md:w-1/4">
+          <div className="flex flex-col gap-2 items-start md:w-2/5">
           <div className="pb-4">
 
 
-          <div className="bg-white rounded-xl border-[1px] border-neutral-200 overflow-hidden">
+          <div className=" rounded-xl border-[1px] border-neutral-200 overflow-hidden">
       <div className="flex flex-row items-center gap-1 p-4">
         <span className="text-lg font-semibold">KES {data.price}</span>
-        <span className="font-light text-neutral-600">/month</span>
+        <span className="font-light text-[var(--softTextColor)]">
+  {data.model === "forrent" ? "/month" : data.model === "forsale" ? "for sale" : ""}
+</span>
       </div>
       <hr />
 
    <div>
-<p className="p-4">
-  Contact: <span> {data.contact}
-  </span>
+   <p className="p-4 flex items-center gap-2">
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 24 24"
+    fill="currentColor"
+    className="w-5 h-5 text-blue-500"
+  >
+    <path
+      fillRule="evenodd"
+      d="M6.68 3.27a2.5 2.5 0 00-2.74-.54l-1.14.47a2.5 2.5 0 00-1.4 3.26c1.04 2.76 2.79 5.32 5.07 7.6s4.84 4.03 7.6 5.07a2.5 2.5 0 003.26-1.4l.47-1.14a2.5 2.5 0 00-.54-2.74l-2.02-2.02a2.5 2.5 0 00-2.94-.45l-1.22.62a11.07 11.07 0 01-4.81-4.81l.62-1.22a2.5 2.5 0 00-.45-2.94L6.68 3.27z"
+      clipRule="evenodd"
+    />
+  </svg>
+  Contact: <span>{data.phone}</span>
 </p>
+
+<p className="p-4 flex items-center gap-2">
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 24 24"
+    fill="currentColor"
+    className="w-5 h-5 text-green-500"
+  >
+    <path
+      fillRule="evenodd"
+      d="M12.003 2.004c5.524 0 10 4.478 10 10.002a9.963 9.963 0 01-2.922 7.073l-.184.184-2.258-.655a8.008 8.008 0 01-3.09-.07 7.938 7.938 0 01-3.637-2.18 7.93 7.93 0 01-2.178-3.637 8.008 8.008 0 01-.07-3.09l.655-2.258.184-.184A9.963 9.963 0 0112.003 2.004zm0 2a8 8 0 00-5.658 13.658l.121.127-.514 1.768 1.768-.514.127.121A7.962 7.962 0 0012.003 20c4.42 0 8-3.582 8-7.994 0-4.42-3.582-8.002-8-8.002zM9.222 7.75a.75.75 0 011.038-.196l.292.204c.42.294.985.687 1.254.825.232.118.448.119.692.041.232-.074.498-.194.817-.37.14-.073.276-.144.401-.202.358-.167.748-.075 1.018.171l.172.153c.319.282.482.76.377 1.181l-.054.224a4.977 4.977 0 01-.365 1.07c-.145.34-.32.69-.53 1.036a5.782 5.782 0 01-.869 1.15 3.432 3.432 0 01-2.229.996 3.632 3.632 0 01-2.012-.6 8.342 8.342 0 01-1.947-1.65 8.25 8.25 0 01-1.653-2.65 3.606 3.606 0 01-.186-1.96 3.372 3.372 0 01.997-2.057 5.78 5.78 0 011.15-.869c.346-.21.696-.385 1.036-.53a4.977 4.977 0 011.07-.365l.224-.054c.421-.105.899.058 1.181.377l.153.172c.246.27.338.66.171 1.018a7.487 7.487 0 01-.202.401c-.176.319-.296.585-.37.817-.078.244-.077.46.041.692.138.269.531.834.825 1.254l.204.292a.75.75 0 01-.196 1.038l-.22.154c-.39.273-.862.48-1.337.565-.477.085-.984.059-1.466-.098a9.704 9.704 0 01-1.142-.49 9.85 9.85 0 01-1.434-.925c-.103-.08-.183-.14-.237-.187a.75.75 0 01-.18-.859l.136-.312a9.75 9.75 0 011.25-2.169l.148-.208a.75.75 0 01.871-.242l.22.096c.312.135.634.325.963.575z"
+      clipRule="evenodd"
+    />
+  </svg>
+  <span>{data.whatsapp}</span>
+</p>
+
 
    </div>
 
