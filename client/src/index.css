@@ -383,7 +383,7 @@ body {
 .property-details {
   display: flex;
   flex-wrap: wrap;
-  gap: 20px; /* Increased gap for better spacing */
+  gap: 10px; /* Increased gap for better spacing */
 }
 
 .detail-item {
@@ -391,8 +391,8 @@ body {
   flex-direction: column; /* Stack icon and text */
   align-items: center;
   gap: 5px;
-  padding: 15px 20px; /* Increased padding */
-  border: 2px solid var(--softBg4);
+  padding: 11px 16px; /* Increased padding */
+  border: 1px solid var(--softBg4);
   border-radius: 8px;
   transition: transform 0.2s ease-in-out;
 }
@@ -402,7 +402,7 @@ body {
 }
 
 .icon {
-  font-size: 24px; /* Default icon size */
+  font-size: 18px; /* Default icon size */
 }
 
 .detail-text {
@@ -416,5 +416,14 @@ body {
   }
   .detail-text {
     font-size: 16px; /* Adjust text size for md screens */
+  }
+  .property-details {
+    
+    gap: 20px; /* Increased gap for better spacing */
+  }
+
+  .detail-item {
+    gap: 6px;
+    padding: 15px 20px; /* Increased padding */
   }
 }

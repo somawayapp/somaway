@@ -189,9 +189,12 @@
 
 
 
+      <div className="flex flex-col bg-[var(--bg)]  mt-6 w-full  md:w-3/5
+       md:flex-row gap-4 md:gap-8">
 
 
-          <div className="flex flex-col gap-1 md:gap-2 items-center mt-4 md:items-start md:w-3/5">
+
+          <div className="flex flex-col gap-1 md:gap-2 items-center mt-4 md:items-start">
           
                
           <div className="col-span-4 flex flex-col gap-8">
@@ -201,9 +204,8 @@
            <Avatar src={data.user?.img || "/placeholder.webp"} />
           <span> {data.user?.username}</span>
         </div>
-        
         <div
-          className="flex flex-row items-center gap-4 font-light text-[var(--softTextColor)]
+          className="flex flex-row items-center mt-5 md:mt-9 gap-2 md:gap-4 font-light text-[var(--softTextColor)]
           "
         >  <div className="property-details">
         {data.bedrooms !== undefined && data.bedrooms !== null && (
@@ -368,6 +370,7 @@
 
 
 
+        </div>
       </div>
 
       </div>
