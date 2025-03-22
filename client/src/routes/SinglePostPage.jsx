@@ -1,6 +1,6 @@
 
           import { Link, useParams } from "react-router-dom";
-          import Image from "next/image";
+          import Image from "../components/Image";
 
           import PostMenuActions from "../components/PostMenuActions";
           import Comments from "../components/Comments";
@@ -202,12 +202,12 @@
       <div className="flex flex-col gap-2">
         <div className="text-[16px] font-semibold flex flex-row items-center gap-2">
         <span className="mr-1">Hosted by</span> 
-     <Image
+     <img
     className="rounded-full select-none"
     height={30}
     width={30}
     alt="Avatar"
-     src={data.user?.img || "/placeholder.webp"} />
+     src= "/placeholder.webp" />
 
           <span> {data.user?.username}</span>
         </div>
