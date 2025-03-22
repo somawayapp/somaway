@@ -72,6 +72,10 @@ const postSchema = new Schema(
       type: Number,
       required: false,
     },
+    rooms: {
+      type: Number,
+      required: false,
+    },
     isFeatured: {
       type: Boolean,
       default: false,
