@@ -347,11 +347,11 @@ body {
 }
 
 .desc-content h1 {
-  font-size: 22px;
+  font-size: 20px;
 }
 
 .desc-content h2 {
-  font-size: 20px;
+  font-size: 18px;
 }
 
 .desc-content h3 {
@@ -364,19 +364,19 @@ body {
 
 @media (min-width: 768px) {
   .desc-content h1 {
-    font-size: 24px;
-  }
-
-  .desc-content h2 {
     font-size: 22px;
   }
 
-  .desc-content h3 {
+  .desc-content h2 {
     font-size: 20px;
   }
 
-  .desc-content p {
+  .desc-content h3 {
     font-size: 18px;
+  }
+
+  .desc-content p {
+    font-size: 16px;
   }
 }
 
@@ -391,6 +391,8 @@ body {
   flex-direction: column; /* Stack icon and text */
   align-items: center;
   gap: 5px;
+  font-size: 14px;
+
   padding: 11px 16px; /* Increased padding */
   border: 1px solid var(--softBg4);
   border-radius: 8px;
@@ -425,6 +427,8 @@ body {
   .detail-item {
     gap: 6px;
     padding: 15px 20px; /* Increased padding */
+    font-size: 16px;
+
   }
 }
 

@@ -456,7 +456,7 @@ const details = [
    <div className="p-4">
       <Button
           disabled={isLoading}
-          className="flex flex-row items-center  text-[14px] md:text-[16px]  justify-center h-[42px]  text-[var(--softTextColor)] rounded-xl"
+          className="flex flex-row items-center  text-[14px] md:text-[16px]  justify-center h-[42px]  text-white  rounded-xl"
           size="large"
         >
           {isLoading ? <SpinnerMini /> : <span>Reviews <Comments postId={data._id} /></span>}
