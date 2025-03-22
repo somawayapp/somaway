@@ -21,10 +21,10 @@
           import Button from "../components/Button";
           import Avatar from "../components/Avatar";
           import { AiOutlineHome, AiOutlineAppstore } from "react-icons/ai";
-          import { FaBath, FaRulerCombined } from "react-icons/fa";
+          import { FaBed, FaBath, FaRulerCombined } from "react-icons/fa";
           import { FaBuilding, FaWarehouse, FaHome, FaStore, FaTree, FaBed } from "react-icons/fa";
           import { MdVilla, MdApartment } from "react-icons/md";
-           import { GiOfficeChair, GiShop, GiCargoCrate } from "react-icons/gi";
+           import { GiMansion, GiOfficeChair, GiShop, GiCargoCrate } from "react-icons/gi";
 
           const fetchPost = async (slug) => {
              
@@ -76,9 +76,6 @@
           
             if (!data) return null;
 
-          
-  
-
             const icons = {
               apartment: <MdApartment />,
               studio: <FaBed />,
@@ -86,7 +83,7 @@
               "single-room": <FaBed />,
               "town-house": <FaHome />,
               bungalow: <FaHome />,
-              mansionatte: <FaBuilding />, // Using FaBuilding instead of GiMansion
+              mansionatte: <GiMansion />,
               villa: <MdVilla />,
               container: <GiCargoCrate />,
               office: <GiOfficeChair />,
@@ -94,20 +91,18 @@
               warehouse: <FaWarehouse />,
               land: <FaTree />,
             };
-            
-            // Filtering out null values (but keeping 0 values if they exist)
+          
             const details = [
               data.bedroom ? `${data.bedroom} bedroom` : null,
               data.bathroom ? `${data.bathroom} bathroom` : null,
               data.room ? `${data.room} room` : null,
               data.propertysize ? `${data.propertysize} square feet` : null,
-              data.property ? `${data.property} building` : null,
+              data.property ? `${data.property}` : null,
             ].filter(Boolean);
-            
           
-            return details.length > 0 ? (
+            if (details.length === 0) return null;
 
-
+            return (
               <div className=" bg-[var(--bg)]">
           
           
@@ -259,7 +254,7 @@
         )}
         {data.rooms !== undefined && data.rooms !== null && (
           <span className="detail-item">
-            <AiOutlineAppstore className="icon" /> {data.room} Rooms
+            <AiOutlineAppstore className="icon" /> {data.rooms} Rooms
           </span>
         )}
         {data.propertysize !== undefined && data.propertysize !== null && (
@@ -272,9 +267,9 @@
       </div>
       <hr className="h-[1px] bg-[var(--softBg4)] border-0" />
       <p>
-    {icons[data.property] && <span style={{ marginRight: "8px" }}>{icons[data.property]}</span>}
-    This is a {details.join(", ")}
-  </p>
+      This is a {data.bedroom} bedroom, {data.bathroom} bathroom, {data.room} room, {data.propertysize} square feet,  {data.property}  building
+
+      </p>
       <hr className="h-[1px] bg-[var(--softBg4)] border-0" />
       <p
   className="desc-content text-[var(--textColor)]"
@@ -517,8 +512,7 @@
    </div>
    <Footer/>     
    </div>
-  ) : null;
-
+  );
 };
 
 export default SinglePostPage;
