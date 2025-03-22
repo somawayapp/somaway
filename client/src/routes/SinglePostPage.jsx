@@ -237,11 +237,11 @@
       <hr className="h-[1px] bg-[var(--softBg4)] border-0" />
       <p>
   This is 
-  {data.bedroom ? ` a ${data.bedroom} bedroom,` : ''}
-  {data.bathroom ? ` ${data.bathroom} bathroom,` : ''}
-  {data.room ? ` ${data.room} room,` : ''}
+  {data.bedroom ? ` a ${data.bedrooms} bedroom,` : ''}
+  {data.bathroom ? ` ${data.bathrooms} bathroom,` : ''}
+  {data.room ? ` ${data.rooms} room,` : ''}
   {data.propertysize ? ` ${data.propertysize} square feet,` : ''}
-  {data.property ? ` ${data.property} ` : ''} building
+  {data.property ? ` ${data.propertytype} ` : ''} building
 </p> 
 
 
