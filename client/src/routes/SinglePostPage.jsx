@@ -250,7 +250,7 @@ const details = [
 </div>
 
         <div
-          className="flex flex-row items-center  mt-3 md:mt-7 gap-2 md:gap-4 font-light text-[var(--softTextColor)]
+          className="flex flex-row items-center  mt-3 md:mt-7 gap-2 md:gap-4 font-light text-[var(--textColor)]
           "
         >  <div className=" md:justify-start justify-center property-details">
         {data.bedrooms !== undefined && data.bedrooms !== null && (
