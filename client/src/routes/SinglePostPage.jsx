@@ -21,7 +21,7 @@
           import Button from "../components/Button";
           import Avatar from "../components/Avatar";
           import { AiOutlineHome, AiOutlineAppstore } from "react-icons/ai";
-          import { FaBed, FaBath, FaRulerCombined } from "react-icons/fa";
+          import { FaBath, FaRulerCombined } from "react-icons/fa";
           import { FaBuilding, FaWarehouse, FaHome, FaStore, FaTree, FaBed } from "react-icons/fa";
           import { MdVilla, MdApartment } from "react-icons/md";
            import { GiMansion, GiOfficeChair, GiShop, GiCargoCrate } from "react-icons/gi";
