@@ -248,7 +248,7 @@ const details = [
     
 
 
-          <div className="flex flex-col-reverse md:flex-row bg-[var(--bg)] relative h-screen overflow-auto mt-6 gap-4 md:gap-8">
+          <div className="flex flex-col-reverse md:flex-row bg-[var(--bg)]  mt-6 gap-4 md:gap-8">
 
 
 
