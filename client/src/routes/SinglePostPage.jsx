@@ -73,7 +73,7 @@
                 <div className="max-w-[1200px] mx-auto">
 
 
-     <div className="w-full mt-[-13px]  mb-[-13px] flex items-center justify-between  text-[var(--textColor)]">
+     <div className="w-full mt-[-13px]  mb-[13px] flex items-center justify-between  text-[var(--textColor)]">
       <div>
       <h1 className="text-xl md:text-2xl font-semibold text-left">
         {data.title}
@@ -179,7 +179,7 @@
 
 
 
-      <div className="flex flex-col bg-[var(--navBG)]  border border-[var(--softBg4)]  rounded-3xl  p-2 md:p-8
+      <div className="flex flex-col bg-[var(--navBg)]  mt-4 border border-[var(--softBg4)]  rounded-3xl  p-2 md:p-8
        md:flex-row gap-4 md:gap-8">
 
 
@@ -262,10 +262,42 @@
           </div>
 
           <div className="flex flex-col gap-2 items-start md:w-1/4">
-          <p className="text-[var(--softTextColor2)] mt-2 ">Explore</p>
-          <p className="text-[var(--textColor)] text-lg md:text-xl  font-semibold ">More Books like this</p>
           <div className="pb-4">
-          <ExplorePosts/>
+
+
+          <div className="bg-white rounded-xl border-[1px] border-neutral-200 overflow-hidden">
+      <div className="flex flex-row items-center gap-1 p-4">
+        <span className="text-lg font-semibold">KES {data.price}</span>
+        <span className="font-light text-neutral-600">/month</span>
+      </div>
+      <hr />
+
+   <div>
+<p className="p-4">
+  Contact: <span> {data.contact}
+  </span>
+</p>
+
+   </div>
+
+      <hr />
+      <div className="p-4">
+        <Button
+
+          className="flex flex-row items-center justify-center h-[42px]  rounded-xl"
+          size="large"
+        >
+         <span>Book a Tour</span>
+        </Button>
+      </div>
+      <hr />
+      <div className="p-4 flex flex-row items-center justify-between font-semibold text-lg">
+        <span>Total</span>
+        <span>KES</span>
+      </div>
+    </div>
+
+
           </div>
 
            <div className="hidden md:block">
