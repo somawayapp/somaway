@@ -110,7 +110,7 @@ const details = [
   data.bathrooms ? `${data.bathrooms} bathroom` : null,
   data.rooms ? `${data.rooms} room` : null,
   data.propertysize ? `${data.propertysize} square feet` : null,
-  data.propertytype ? `${data.propertytype} building` : null,
+  data.propertytype ? `${data.propertytype} ` : null,
 ].filter(Boolean);
 
           
@@ -279,8 +279,8 @@ const details = [
       </div>
       <hr className="h-[1px] bg-[var(--softBg4)] border-0" />
   <p>
-    {icons[data.property] && <span style={{ marginRight: "8px" }}>{icons[data.property]}</span>}
-    This is a {details.join(", ")}
+    {icons[data.propertytype] && <span style={{ marginRight: "8px" }}>{icons[data.property]}</span>}
+    This is a {details.join(", ")} building!
   </p>
 
 
@@ -318,7 +318,7 @@ const details = [
             <line x1="6" y1="6" x2="18" y2="18" />
           </svg>
           </button>
-          <div className="w-full h-auto max-h-[80vh] overflow-auto bg-white p-5 rounded-xl">
+          <div className="w-full h-auto max-h-[80vh] overflow-auto bg-[var(--bg)] p-5 rounded-xl">
             <p className="text-[var(--textColor)]" dangerouslySetInnerHTML={{ __html: popupDesc }} />
           </div>
           </div>
@@ -330,7 +330,7 @@ const details = [
 <p className="desc-content text-[var(--textColor)]">
   {data.desc?.length > 300 ? (
     <>
-      <span dangerouslySetInnerHTML={{ __html: data.desc.substring(0, 300) }} />...
+      <span dangerouslySetInnerHTML={{ __html: data.desc.substring(0, 500) }} />...
       <button 
         className="text-blue-500 underline ml-2"
         onClick={() => setPopupDesc(data.desc)}
