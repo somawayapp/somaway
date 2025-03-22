@@ -242,7 +242,7 @@ const details = [
       <div className="text-[16px] font-semibold flex flex-row items-center gap-2 md:justify-start justify-center">
   <span className="mr-1">Hosted by</span> 
   <img
-    className="rounded-full desctext w-[30px] md:w-[40px] h-[30px] md:h-[40px] select-none"
+    className="rounded-full text-[14px] md:text-[16px]  w-[30px] md:w-[40px] h-[30px] md:h-[40px] select-none"
     alt="Avatar"
     src={data.user?.img || "/placeholder.jpg"} 
   />
@@ -250,26 +250,26 @@ const details = [
 </div>
 
         <div
-          className="flex flex-row items-center  mt-3 md:mt-7 gap-2 md:gap-4 font-light text-[var(--textColor)]
+          className="flex flex-row items-center  mt-3 md:mt-7 gap-2 md:gap-4 font-light text-[var(--softTextColor)]
           "
         >  <div className=" md:justify-start justify-center property-details">
         {data.bedrooms !== undefined && data.bedrooms !== null && (
-          <span className="detail-item desctext">
+          <span className="detail-item text-[14px] md:text-[16px] ">
             <FaBed className="icon" /> {data.bedrooms} Bedrooms
           </span>
         )}
         {data.bathrooms !== undefined && data.bathrooms !== null && (
-          <span className="detail-item desctext">
+          <span className="detail-item text-[14px] md:text-[16px] ">
             <FaBath className="icon" /> {data.bathrooms} Bathrooms
           </span>
         )}
         {data.rooms !== undefined && data.rooms !== null && (
-          <span className="detail-item desctext">
+          <span className="detail-item text-[14px] md:text-[16px] ">
             <AiOutlineAppstore className="icon" /> {data.room} Rooms
           </span>
         )}
         {data.propertysize !== undefined && data.propertysize !== null && (
-          <span className="detail-item desctext">
+          <span className="detail-item text-[14px] md:text-[16px] ">
             <FaRulerCombined className="icon" /> {data.propertysize} sq/ft
           </span>
         )}
@@ -287,8 +287,8 @@ const details = [
       marginRight: "12px", 
       display: "flex", 
       alignItems: "center",
-      color: "var(--textColor)", // Apply text color variable
-      fill: "var(--textColor)", // Ensure SVG icons match the text color
+      color: "var(--softTextColor)", // Apply text color variable
+      fill: "var(--softTextColor)", // Ensure SVG icons match the text color
       fontWeight: "normal" // Ensure it's not bold
     }}>
       {icons[data.propertytype]}
@@ -299,7 +299,7 @@ const details = [
     <p className="capitalize font-semibold">
       {data.propertytype}
     </p>
-    <span className="desctext">This is a {details.join(", ")} building!</span>
+    <span className=" text-[14px] md:text-[16px] text-[var(--softTextColor)] ">This is a {details.join(", ")} building!</span>
   </div>
 </p>
 
@@ -371,7 +371,7 @@ const details = [
 
 <hr className="h-[1px] bg-[var(--softBg4)] border-0" />
 
-      <div className="h-[210px]">
+      <div className="h-[210px]  text-[14px] md:text-[16px]  text-[var(--softTextColor)]">
        map
       </div>
     </div>
@@ -393,9 +393,9 @@ const details = [
           <div className="flex flex-col gap-2 pb-4 md:w-2/5 ">
 
           <div className="  rounded-xl border-[1px] border-[var(--softBg4)] overflow-hidden">
-      <div className="flex flex-row items-center gap-1 p-4">
-        <span className="desctext font-semibold">KES {data.price}</span>
-        <span className="font-light desctext ">
+      <div className="flex text-[var(--softTextColor)] flex-row items-center gap-1 p-4">
+        <span className=" text-[14px] md:text-[16px] text-[var(--softTextColor)] font-semibold">KES {data.price}</span>
+        <span className="font-light text-[14px] md:text-[16px]  ">
   {data.model === "forrent" ? "/month" : data.model === "forsale" ? "for sale" : ""}
 </span>
       </div>
@@ -403,7 +403,7 @@ const details = [
 
       <div>
   <p
-    className="p-4 desctext flex items-center gap-2 cursor-pointer hover:bg-[var(--softBg)] rounded-lg transition"
+    className="p-4 text-[14px] md:text-[16px] text-[var(--softTextColor)]  flex items-center gap-2 cursor-pointer hover:bg-[var(--softBg)] rounded-lg transition"
     onClick={() => window.location.href = `tel:${data.phone}`}
   >
     <svg
@@ -412,7 +412,7 @@ const details = [
       height="24"
       viewBox="0 0 24 24"
       fill="none"
-      stroke="blue"
+      stroke="currentColor"
       strokeWidth="2"
       strokeLinecap="round"
       strokeLinejoin="round"
@@ -429,7 +429,7 @@ const details = [
 
 <div>
       <p
-        className="p-4 flex items-center gap-2 desctext  cursor-pointer hover:bg-[var(--softBg)] rounded-lg transition-all"
+        className="p-4 flex items-center text-[var(--softTextColor)] gap-2 text-[14px] md:text-[16px]   cursor-pointer hover:bg-[var(--softBg)] rounded-lg transition-all"
         onClick={handleClick}
       >
         <svg
@@ -438,7 +438,7 @@ const details = [
           height="24"
           viewBox="0 0 24 24"
           fill="none"
-          stroke="green"
+          stroke="currentColor"
           strokeWidth="2"
           strokeLinecap="round"
           strokeLinejoin="round"
@@ -456,7 +456,7 @@ const details = [
    <div className="p-4">
       <Button
           disabled={isLoading}
-          className="flex flex-row items-center justify-center h-[42px]  rounded-xl"
+          className="flex flex-row items-center  text-[14px] md:text-[16px]  justify-center h-[42px]  text-[var(--softTextColor)] rounded-xl"
           size="large"
         >
           {isLoading ? <SpinnerMini /> : <span>Reviews <Comments postId={data._id} /></span>}
@@ -468,9 +468,9 @@ const details = [
 
       <div className="flex flex-row ml-3 items-center mt-2 text-sm md:text-lg">
   {[...Array(5)].map((_, index) => (
-    <FaStar key={index} className="text-orange-500 w-[40px] ml-[-15px] " />
+    <FaStar key={index} className="text-[var(--softTextColor)] w-[40px] ml-[-15px] " />
   ))}
-  <span className="pl-2 font-normal flex items-center">
+  <span className="pl-2 font-normal  text-[14px] md:text-[16px]  flex items-center">
     <span className="ml-[-5px]">4.8</span>
     <span className="mx-2 flex items-center">·</span>
     {data.visit} <span className="ml-1">reviews</span>
