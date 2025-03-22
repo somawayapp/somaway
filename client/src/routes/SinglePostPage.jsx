@@ -207,30 +207,28 @@
         <div
           className="flex flex-row items-center gap-4 font-light text-[var(--softTextColor)]
           "
-        >
-          
-          <div>
-      {data.bedrooms !== undefined && data.bedrooms !== null && (
-        <span>
-          <FaBed /> {data.bedrooms} Bedrooms
-        </span>
-      )}
-      {data.bathrooms !== undefined && data.bathrooms !== null && (
-        <span>
-          <FaBath /> {data.bathrooms} Bathrooms
-        </span>
-      )}
-      {data.rooms !== undefined && data.rooms !== null && (
-        <span>
-          <AiOutlineAppstore /> {data.rooms} Rooms
-        </span>
-      )}
-      {data.propertysize !== undefined && data.propertysize !== null && (
-        <span>
-          <FaRulerCombined /> {data.propertysize} sq/ft
-        </span>
-      )}
-    </div>
+        >  <div className="property-details">
+        {data.bedrooms !== undefined && data.bedrooms !== null && (
+          <span className="detail-item">
+            <FaBed className="icon" /> {data.bedrooms} Bedrooms
+          </span>
+        )}
+        {data.bathrooms !== undefined && data.bathrooms !== null && (
+          <span className="detail-item">
+            <FaBath className="icon" /> {data.bathrooms} Bathrooms
+          </span>
+        )}
+        {data.rooms !== undefined && data.rooms !== null && (
+          <span className="detail-item">
+            <AiOutlineAppstore className="icon" /> {data.rooms} Rooms
+          </span>
+        )}
+        {data.propertysize !== undefined && data.propertysize !== null && (
+          <span className="detail-item">
+            <FaRulerCombined className="icon" /> {data.propertysize} sq/ft
+          </span>
+        )}
+      </div>
         </div>
       </div>
       <hr />
