@@ -62,12 +62,7 @@
               "garden": <FaLeaf />,
               "backup-generator": <MdOutlineBackup />,
               "parking": <FaParking />,
-              "school": <FaSchool />,
-              "shopping-mall": <FaShoppingCart />,
-              "airport": <MdLocalAirport />,
-              "hospital": <FaHospital />,
-              "bus-stop": <FaBusAlt />,
-              "train-station": <FaTrain />,
+            
             };
           
             const [isLoading, setIsLoading] = useState(false);
@@ -258,7 +253,7 @@ const details = [
 
 
 
-          <div className="flex flex-col gap-1 md:gap-2  mt-4 w-full   md:w-5.4/9">
+          <div className="flex flex-col gap-1 md:gap-2  mt-4 w-full   md:w-5/8">
           
                
           <div className="col-span-4 flex flex-col gap-8">
@@ -400,7 +395,7 @@ const details = [
   {data.amenities.map((amenity, index) => (
     <div 
       key={index} 
-      className="flex flex-col justify-between items-center gap-1 border-[2px] border-[var(--softBg4)]  py-2  px-3  md:py-4  md:px-6  rounded-md"
+      className="flex flex-col justify-between items-center gap-1 border-[1px] border-[var(--softBg4)]  py-2  px-3  md:py-4  md:px-6  rounded-md"
     >
       <div 
         className="text-[var(--softTextColor)] md:text-3xl text-xl"
@@ -435,7 +430,7 @@ const details = [
 
 
 
-          <div className="flex flex-col gap-2 sticky top-[65px] pb-4 md:w-3.6/9 ">
+          <div className="flex flex-col gap-2 pb-4 w-full md:w-3/8 md:sticky md:top-[150px]">
 
           <div className="  rounded-xl border-[1px] shadow-md  overflow-hidden">
       <div className="flex text-[var(--softTextColor)] flex-row items-center gap-1 p-4">

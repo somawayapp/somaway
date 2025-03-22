@@ -333,36 +333,7 @@ const Write = () => {
     </div>
   </div>
 
-  {/* Nearby Amenities */}
-  <div>
-    <label className="block text-lg font-semibold mb-2">Nearby Amenities</label>
-    <div className="grid grid-cols-2 gap-3">
-      <label className="flex items-center space-x-2">
-        <input type="checkbox" value="bus-stop" onChange={handleAmenities} />
-        <span>Bus Stop</span>
-      </label>
-      <label className="flex items-center space-x-2">
-        <input type="checkbox" value="airport" onChange={handleAmenities} />
-        <span>Airport</span>
-      </label>
-      <label className="flex items-center space-x-2">
-        <input type="checkbox" value="school" onChange={handleAmenities} />
-        <span>School</span>
-      </label>
-      <label className="flex items-center space-x-2">
-        <input type="checkbox" value="hospital" onChange={handleAmenities} />
-        <span>Hospital</span>
-      </label>
-      <label className="flex items-center space-x-2">
-        <input type="checkbox" value="shopping-mall" onChange={handleAmenities} />
-        <span>Shopping Mall</span>
-      </label>
-      <label className="flex items-center space-x-2">
-        <input type="checkbox" value="train-station" onChange={handleAmenities} />
-        <span>Train Station</span>
-      </label>
-    </div>
-  </div>
+
 </div>
 
 
