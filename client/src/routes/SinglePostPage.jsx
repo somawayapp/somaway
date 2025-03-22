@@ -13,8 +13,9 @@
           import ExplorePosts from "../components/ExplorePosts";
           import MobileControls from "../components/MobileControls";
           import LatestPosts from "../components/LatestPosts";
-          import { useState, useEffect } from "react";
+          import { useEffect } from "react";
           import { Helmet } from "react-helmet";
+          import { useState } from "react";
           import BackButton from "../components/BackButton";
           import SpinnerMini from "../components/Loader";
           import Button from "../components/Button";
@@ -44,28 +45,6 @@
               queryKey: ["post", slug],
               queryFn: () => fetchPost(slug),
             });
-
-      
-  const [isScrollingUp, setIsScrollingUp] = useState(false);
-  let lastScrollY = 0;
-
-  useEffect(() => {
-    const handleScroll = () => {
-      const scrollY = window.scrollY;
-
-      if (scrollY < lastScrollY) {
-        setIsScrollingUp(true);
-      } else {
-        setIsScrollingUp(false);
-      }
-
-      lastScrollY = scrollY;
-    };
-
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-          
           
             const [isLoading, setIsLoading] = useState(false);
 
@@ -107,8 +86,6 @@
             if (isPending) return "loading...";
             if (error) return "Something went wrong!" + error.message;
             if (!data) return "Post not found!";
-
-      
             
 const icons = {
   apartment: <MdApartment />,
@@ -257,7 +234,7 @@ const details = [
 
 
 
-          <div className="flex flex-col gap-1 md:gap-2  mt-4 w-full   md:w-3/5">
+          <div className="flex flex-col gap-1 md:gap-2  mt-4 w-full   md:w-6/9">
           
                
           <div className="col-span-4 flex flex-col gap-8">
@@ -377,7 +354,7 @@ const details = [
   {data.desc?.length > 300 ? (
     <>
 <h1 className="text-[var(--softTextColor)] font-semibold  text-[20px] md:text-[22px]  ">About this property </h1>    
-  <span dangerouslySetInnerHTML={{ __html: data.desc.substring(0, 500) }} />
+  <span dangerouslySetInnerHTML={{ __html: data.desc.substring(0, 470) }} />
       <button  
   className="text-[var(--softTextColor)]  text-[14px] md:text-[16px]  font-semibold  mt-2  border-[2px]  rounded-xl py-2 px-6 border-[var(--softBg4)]"
   onClick={() => setPopupDesc(data.desc)}
@@ -394,6 +371,12 @@ const details = [
 
 
 <hr className="h-[1px] bg-[var(--softBg4)] border-0" />
+<h1 className="text-[var(--softTextColor)] font-semibold  text-[20px] md:text-[22px]  ">What this property offers </h1>   
+<p className="  text-[14px] md:text-[16px] text-[var(--softTextColor)]  ">{data.amenities} </p>
+
+
+<hr className="h-[1px] bg-[var(--softBg4)] border-0" />
+
 
       <div className="h-[210px]  text-[14px] md:text-[16px]  text-[var(--softTextColor)]">
        map
@@ -413,12 +396,8 @@ const details = [
 
 
 
-      <div
-        className={`flex flex-col gap-2 pb-4 md:w-2/5 transition-all duration-300 ${
-          isScrollingUp ? "sticky top-[65px]" : "relative"
-        }`}
-      >
-    
+
+          <div className="flex flex-col gap-2 sticky top-[65px] pb-4 md:w-3/9 ">
 
           <div className="  rounded-xl border-[1px] shadow-md  overflow-hidden">
       <div className="flex text-[var(--softTextColor)] flex-row items-center gap-1 p-4">
@@ -525,93 +504,12 @@ const details = [
 
 
 
-      <div className="flex flex-col p-4  md:flex-row gap-4 md:px-9 md:pb-9 md:gap-8"> 
-
-            <div className="w-full md:w-1/4 mt-2 md:mt-0 flex justify-center md:block">
-          
-             </div>
-
-          <div className="flex flex-col gap-1 md:gap-2 items-center md:items-start md:w-2/4">
-          <p
-  className="desc-content text-[var(--textColor)]"
-  dangerouslySetInnerHTML={{
-    __html: data.desc
-      ?.replace(/&nbsp;/g, ' ') // Convert non-breaking spaces to normal spaces
-      .replace(/\s{2,}/g, ' ') // Remove multiple spaces
-  }}
-/>
-
-
-              <div className="block md:hidden text-center">
-          <p className="text-[var(--softTextColor2)] mt-2">Comments</p>
-          <div className="flex justify-center">
-          <Comments postId={data._id} />
-          </div>
-          </div>
-
-
-
-
-      <div className="flex flex-col gap-9 w-full mt-9">
-      
-          <div
-            className="bg-[var(--bd)] text-[16px] md:text-[20px] shadow-2xl rounded-2xl md:rounded-[20px] p-4 md:px-9 flex flex-col items-start text-left relative"
-          >
-            <h1 className=" text-xl mt-1 md:mt-2 md:text-2xl font-bold">
-            About the author - <span className="pl-1"> {data.author} </span>
-            </h1>
-         
-         <p
-        className="desc-content pb-2 md:pb-4 text-[var(--textColor)]"
-        dangerouslySetInnerHTML={{ __html: data.aboutauthor }}
-        />
-          </div>
-
-          <div
-            className="bg-[var(--bd)] text-[16px] md:text-[20px] shadow-2xl rounded-2xl md:rounded-[20px] p-4 md:px-9 flex flex-col items-start text-left relative"
-          >
-               <h1 className=" text-xl mt-1 md:mt-2 md:text-2xl font-bold">
-            What is <span className="pl-1 pr-1"> {data.title} </span> about?
-            </h1>
-         
-         <p
-        className="desc-content pb-2 md:pb-4 text-[var(--textColor)]"
-        dangerouslySetInnerHTML={{ __html: data.aboutbook }}
-        />
-          </div>
-
-          <div
-            className="bg-[var(--bd)] text-[16px] md:text-[20px] shadow-2xl rounded-2xl md:rounded-[20px] p-4 md:px-9 flex flex-col items-start text-left relative"
-          >
-              <h1 className=" text-xl mt-1 md:mt-2 md:text-2xl font-bold">
-            Who should read <span className="pl-1"> {data.title} </span> 
-            </h1>
-         
-         <p
-        className="desc-content  pb-2 md:pb-4 text-[var(--textColor)]"
-        dangerouslySetInnerHTML={{ __html: data.whoshouldread }}
-        />
-          </div>
-  </div>
-
-
-
-          </div>
-
-
-          <div className="flex flex-col gap-2 items-start md:w-1/4">
-
-          </div>
-        </div>
-
-
-
 
       
  <div className="mb-[20px] px-3 md:px-9  ">
 <div>
-      <h3 className="text-xl md:text-3xl ml-2 mt-7 mb-3 md:mb-6 md:mt-10 font-bold text-[var(--textColor)]">
-      We also recommend     </h3>
+      <h3 className="text-xl md:text-3xl ml-2 mt-7 mb-3 md:mb-6 md:mt-10 font-bold text-[var(--SoftTextColor)]">
+      Related property     </h3>
     </div>
    <LatestPosts />
 </div>
