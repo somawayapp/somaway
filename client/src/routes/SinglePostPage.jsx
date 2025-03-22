@@ -400,7 +400,7 @@ const details = [
   {data.amenities.map((amenity, index) => (
     <div 
       key={index} 
-      className="flex flex-col items-center gap-1 bg-gray-100 p-4 rounded-md"
+      className="flex flex-col items-center gap-1 border-[2px] border-[var(--softBg4)]  py-4 px-6 rounded-md"
     >
       <div 
         className="text-[var(--softTextColor)] text-3xl"
