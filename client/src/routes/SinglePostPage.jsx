@@ -282,16 +282,19 @@ const details = [
   alignItems: "center", 
   fontSize: "16px", // Default text size
 }}>
-  {icons[data.propertytype] && (
-    <span style={{ 
-      fontSize: "68px", // Large icon for default
-      marginRight: "12px", 
-      display: "flex", 
-      alignItems: "center" 
-    }}>
-      {icons[data.propertytype]}
-    </span>
-  )}
+{icons[data.propertytype] && (
+  <span style={{ 
+    fontSize: "68px", // Large icon for default
+    marginRight: "12px", 
+    display: "flex", 
+    alignItems: "center",
+    color: "var(--textColor)", // Apply text color variable
+    fontWeight: "normal" // Ensure it's not bold
+  }}>
+    {icons[data.propertytype]}
+  </span>
+)}
+
   <div>
     <p className="capitalize font-semibold ">
     {data.propertytype}
@@ -355,7 +358,7 @@ const details = [
     <>
       <span dangerouslySetInnerHTML={{ __html: data.desc.substring(0, 500) }} />
       <button  
-  className="text-[var(--textColor)] font-semibold  mt-2 ml-2 border-[2px]  rounded-xl py-2 px-6 border-[var(--softBg4)]"
+  className="text-[var(--textColor)] font-semibold  mt-2  border-[2px]  rounded-xl py-2 px-6 border-[var(--softBg4)]"
   onClick={() => setPopupDesc(data.desc)}
 >
   Show More
