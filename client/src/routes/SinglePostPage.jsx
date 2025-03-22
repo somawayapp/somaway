@@ -1,6 +1,8 @@
 
           import { Link, useParams } from "react-router-dom";
           import Image from "../components/Image";
+          import Image from "next/image";
+
           import PostMenuActions from "../components/PostMenuActions";
           import Comments from "../components/Comments";
           import axios from "axios";
@@ -201,11 +203,17 @@
       <div className="flex flex-col gap-2">
         <div className="text-[16px] font-semibold flex flex-row items-center gap-2">
         <span className="mr-1">Hosted by</span> 
-           <Avatar src={data.user?.img || "/placeholder.webp"} />
+     <Image
+    className="rounded-full select-none"
+    height={30}
+    width={30}
+    alt="Avatar"
+     src={data.user?.img || "/placeholder.webp"} />
+
           <span> {data.user?.username}</span>
         </div>
         <div
-          className="flex flex-row items-center mt-5 md:mt-9 gap-2 md:gap-4 font-light text-[var(--softTextColor)]
+          className="flex flex-row items-center mt-3 md:mt-7 gap-2 md:gap-4 font-light text-[var(--softTextColor)]
           "
         >  <div className="property-details">
         {data.bedrooms !== undefined && data.bedrooms !== null && (
