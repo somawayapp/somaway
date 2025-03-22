@@ -248,12 +248,12 @@ const details = [
     
 
 
-          <div className="flex flex-col-reverse md:flex-row bg-[var(--bg)] mt-6 gap-4 md:gap-8">
+          <div className="flex flex-col-reverse md:flex-row bg-[var(--bg)] relative h-screen overflow-auto mt-6 gap-4 md:gap-8">
 
 
 
 
-          <div className="flex flex-col gap-1 md:gap-2  mt-4 w-full   md:w-5/8">
+          <div className="flex flex-col gap-1 md:gap-2  mt-4 w-full   md:w-6/8">
           
                
           <div className="col-span-4 flex flex-col gap-8">
@@ -430,7 +430,7 @@ const details = [
 
 
 
-          <div className="flex flex-col gap-2 pb-4 w-full md:w-3/8 md:sticky md:top-[150px]">
+          <div className="flex flex-col gap-2 pb-4 w-full md:w-2/8 md:sticky md:top-[150px]">
 
           <div className="  rounded-xl border-[1px] shadow-md  overflow-hidden">
       <div className="flex text-[var(--softTextColor)] flex-row items-center gap-1 p-4">
