@@ -28,7 +28,8 @@
           import { FaSwimmingPool, FaWifi, FaParking, FaBusAlt, FaTrain, FaHospital, FaSchool, FaShoppingCart, FaLock, FaLeaf, FaBabyCarriage } from 'react-icons/fa';
           import { MdBalcony, MdAir, MdFitnessCenter, MdSecurity, MdOutlineBackup, MdLocalAirport } from 'react-icons/md';
           import { IoIosConstruct } from 'react-icons/io';
-          
+          import { ArrowUpCircle } from "lucide-react";
+
 
 
           const fetchPost = async (slug) => {
@@ -51,7 +52,7 @@
 
 
             const amenitiesIcons = {
-              "lift": <IoIosConstruct />,
+              "lift": <ArrowUpCircle />,
               "air-conditioning": <MdAir />,
               "swimming-pool": <FaSwimmingPool />,
               "balcony": <MdBalcony />,
@@ -430,9 +431,9 @@ const details = [
 
 
 
-          <div className="flex flex-col gap-2 pb-4 w-full md:w-2/6 md:sticky md:top-[150px]">
+          <div className="flex flex-col gap-2 pb-4 w-full md:w-2/6 ">
 
-          <div className="  rounded-xl border-[1px] shadow-md  overflow-hidden">
+          <div className="  rounded-xl border-[1px]  border-[var(--softTextColor)]  shadow-md  overflow-hidden">
       <div className="flex text-[var(--softTextColor)] flex-row items-center gap-1 p-4">
         <span className=" text-[14px] md:text-[16px] text-[var(--softTextColor)] font-semibold">KES {data.price}</span>
         <span className="font-light text-[14px] md:text-[16px]  ">
@@ -541,7 +542,7 @@ const details = [
       
  <div className="mb-[20px] px-3 md:px-9  ">
 <div>
-      <h3 className="text-xl md:text-3xl ml-2 mt-7 mb-3 md:mb-6 md:mt-10 font-bold text-[var(--SoftTextColor)]">
+      <h3 className="text-xl md:text-3xl ml-2 mb-3 md:mb-6  font-bold text-[var(--SoftTextColor)]">
       Related property     </h3>
     </div>
    <LatestPosts />
