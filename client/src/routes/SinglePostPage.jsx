@@ -107,6 +107,7 @@
           
             return details.length > 0 ? (
 
+
               <div className=" bg-[var(--bg)]">
           
           
@@ -516,7 +517,8 @@
    </div>
    <Footer/>     
    </div>
-  );
+  ) : null;
+
 };
 
 export default SinglePostPage;
