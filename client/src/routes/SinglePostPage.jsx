@@ -285,7 +285,7 @@ const details = [
 }}>
   {icons[data.propertytype] && (
     <span style={{ 
-      fontSize: "48px", // Large icon for default
+      fontSize: "68px", // Large icon for default
       marginRight: "12px", 
       display: "flex", 
       alignItems: "center" 
@@ -293,27 +293,9 @@ const details = [
       {icons[data.propertytype]}
     </span>
   )}
-  <span className="text">This is a {details.join(", ")} building!</span>
+  <span className="desctext">This is a {details.join(", ")} building!</span>
 
-  <style jsx>{`
-    @media (max-width: 768px) {
-      p {
-        font-size: 16px; /* Smaller text on small screens */
-      }
-      span {
-        font-size: 64px; /* Even bigger icon on small screens */
-      }
-    }
-
-    @media (min-width: 769px) {
-      p {
-        font-size: 20px; /* Larger text on medium screens */
-      }
-      span {
-        font-size: 80px; /* Huge icon on medium+ screens */
-      }
-    }
-  `}</style>
+ 
 </p>
 
 
