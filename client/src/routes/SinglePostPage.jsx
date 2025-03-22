@@ -189,9 +189,6 @@
 
 
 
-      <div className="flex flex-col bg-[var(--bg)]  mt-6 
-       md:flex-row gap-4 md:gap-8">
-
 
 
           <div className="flex flex-col gap-1 md:gap-2 items-center mt-4 md:items-start md:w-3/5">
@@ -204,6 +201,7 @@
            <Avatar src={data.user?.img || "/placeholder.webp"} />
           <span> {data.user?.username}</span>
         </div>
+        
         <div
           className="flex flex-row items-center gap-4 font-light text-[var(--softTextColor)]
           "
@@ -370,7 +368,6 @@
 
 
 
-        </div>
       </div>
 
       </div>
