@@ -55,8 +55,9 @@ export const clerkWebHook = async (req, res) => {
       clerkUserId: evt.data.id,
       username: evt.data.username || evt.data.email_addresses[0].email_address,
       email: evt.data.email_addresses[0].email_address,
-      img: evt.data.profile_img_url,
+      img: evt.data.image_url || `https://www.gravatar.com/avatar/${evt.data.email_addresses[0].email_address}?d=identicon`,
     });
+    
 
     console.log("Saving new user:", newUser);
     await newUser.save();
