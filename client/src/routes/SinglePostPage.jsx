@@ -292,7 +292,7 @@
 
       <div>
   <p
-    className="p-4 flex items-center gap-2 cursor-pointer hover:bg--[var(--softBg4)] rounded-lg transition"
+    className="p-4 flex items-center gap-2 cursor-pointer hover:bg-[var(--softBg)] rounded-lg transition"
     onClick={() => window.location.href = `tel:${data.phone}`}
   >
     <svg
@@ -318,7 +318,7 @@
 
 <div>
       <p
-        className="p-4 flex items-center gap-2  cursor-pointer hover:bg--[var(--softBg4)] rounded-lg transition-all"
+        className="p-4 flex items-center gap-2   cursor-pointer hover:bg-[var(--softBg)] rounded-lg transition-all"
         onClick={handleClick}
       >
         <svg
@@ -354,14 +354,15 @@
       <hr className="h-[1px] bg-[var(--softBg4)] border-0" />
       <div className="p-4 flex flex-row items-center justify-between font-semibold text-lg">
         <span>Reviews</span>
-        <span>  <Comments postId={data._id} />
+        <span> <Comments postId={data._id} />
         </span>
       </div>
    
    
           </div>
           
-  
+   
+    </div>
 
 
 
