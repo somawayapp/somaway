@@ -75,7 +75,7 @@ const Comments = ({ postId }) => {
     <div className="flex flex-col gap-1 mb-2">
       {/* Modern Comment Icon */}
       <div
-        className="cursor-pointer flex flex-row gap-4 text-[#0062e3]    text-3xl"
+        className="cursor-pointer flex flex-row gap-4 text-[#FF5A5F]    text-3xl"
         onClick={() => setShowComments((prev) => !prev)}
       >
         <BiCommentDetail />
@@ -95,7 +95,7 @@ const Comments = ({ postId }) => {
               className="w-full pt-1 bg-[var(--textColore)] border-none text-sm mb-[-2px]
                pl-4 text-[var(--textColor)] rounded-xl"
             />
-            <button className="bg-[#0053bf]    px-4 ml-5 py-3 text-white text-sm rounded-xl">
+            <button className="bg-[#ff4d52]    px-4 ml-5 py-3 text-white text-sm rounded-xl">
               Send
             </button>
           </form>
@@ -129,7 +129,7 @@ const Comments = ({ postId }) => {
               )}
               <button
                 onClick={closeComments}
-                className="text-[#0053bf]    text-sm mt-2"
+                className="text-[#ff4d52]    text-sm mt-2"
               >
                 Close Comments
               </button>

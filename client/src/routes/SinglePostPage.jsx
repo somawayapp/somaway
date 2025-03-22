@@ -86,6 +86,24 @@
             if (isPending) return "loading...";
             if (error) return "Something went wrong!" + error.message;
             if (!data) return "Post not found!";
+
+              const [isSticky, setIsSticky] = useState(false);
+              let lastScrollY = 0;
+            
+              useEffect(() => {
+                const handleScroll = () => {
+                  const scrollY = window.scrollY;
+                  if (scrollY < lastScrollY) {
+                    setIsSticky(true); // Stick when scrolling up
+                  } else {
+                    setIsSticky(false); // Remove sticky when scrolling down
+                  }
+                  lastScrollY = scrollY;
+                };
+            
+                window.addEventListener("scroll", handleScroll);
+                return () => window.removeEventListener("scroll", handleScroll);
+              }, []);
             
 const icons = {
   apartment: <MdApartment />,
@@ -390,10 +408,13 @@ const details = [
 
 
 
+          <div
+        className={`pb-4 md:w-2/5 transition-all duration-300 ${
+          isSticky ? "sticky top-[65px]" : ""
+        }`}
+      >
 
-          <div className="flex flex-col gap-2 sticky top-[65px] pb-4 md:w-2/5 ">
-
-          <div className="  rounded-xl border-[1px] border-[var(--softBg4)] overflow-hidden">
+          <div className="  rounded-xl border-[1px] shadow-md  overflow-hidden">
       <div className="flex text-[var(--softTextColor)] flex-row items-center gap-1 p-4">
         <span className=" text-[14px] md:text-[16px] text-[var(--softTextColor)] font-semibold">KES {data.price}</span>
         <span className="font-light text-[14px] md:text-[16px]  ">

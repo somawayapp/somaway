@@ -19,13 +19,13 @@ const Button: React.FC<ButtonProps> = ({
   return (
     <button
       className={cn(
-        `disabled:opacity-70 disabled:cursor-not-allowed rounded hover:opacity-80 transition w-full bg-[#2F74FD] text-white py-[8px] `,
+        `disabled:opacity-70 disabled:cursor-not-allowed rounded hover:opacity-80 transition w-full bg-[#FF5A5F] text-white py-[8px] `,
         size === "small"
           ? " text-[16px] font-medium "
           : " text-[18px] font-semibold",
         outline
           ? "bg-white  text-[#4e4e4e]"
-          : "bg-[#2F74FD] text-white   ",
+          : "bg-[#FF5A5F] text-white   ",
         className
       )}
       {...props}

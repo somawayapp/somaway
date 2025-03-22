@@ -13,7 +13,7 @@ const TrendingItem = ({ post }) => {
     {/* Additional Featured Posts */}
     <div className="flex  gap-1 md:gap-2 overflow-x-auto scrollbar-hide">
       <div
-          className="flex flex-col  flex-shrink-0 w-[70px] border border-2 border-[#0062e3]  rounded-2xl p-[1px]  sm:w-[90px] lg:w-[110px]"
+          className="flex flex-col  flex-shrink-0 w-[70px] border border-2 border-[#FF5A5F]  rounded-2xl p-[1px]  sm:w-[90px] lg:w-[110px]"
         >
           <Link
             to={`/${post.slug}`}

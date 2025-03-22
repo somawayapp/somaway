@@ -33,32 +33,32 @@ const PlanCard = () => {
               </p>
               <div className="mt-4 text-sm md:text-md space-y-2 text-[var(--bg)]">
                 <div className="flex text-[var(--textColor)] items-center gap-2">
-                  <span className="bg-[#0053bf]    text-white rounded-full w-6 h-6 flex items-center justify-center">✓</span>
+                  <span className="bg-[#ff4d52]    text-white rounded-full w-6 h-6 flex items-center justify-center">✓</span>
                   Access unlimited book summaries.
                 </div>
                 <div className="flex text-[var(--textColor)] items-center gap-2">
-                  <span className="bg-[#0053bf]    text-white rounded-full w-6 h-6 flex items-center justify-center">✓</span>
+                  <span className="bg-[#ff4d52]    text-white rounded-full w-6 h-6 flex items-center justify-center">✓</span>
                   7,500+ book and podcast summaries.
                 </div>
                 <div className="flex text-[var(--textColor)] items-center gap-2">
-                  <span className="bg-[#0053bf]    text-white rounded-full w-6 h-6 flex items-center justify-center">✓</span>
+                  <span className="bg-[#ff4d52]    text-white rounded-full w-6 h-6 flex items-center justify-center">✓</span>
                   <span className="line-through">Save more with annual billing.</span>
                 </div>
                 <div className="flex text-[var(--textColor)] items-center gap-2">
-                  <span className="bg-[#0053bf]    text-white rounded-full w-6 h-6 flex items-center justify-center">✓</span>
+                  <span className="bg-[#ff4d52]    text-white rounded-full w-6 h-6 flex items-center justify-center">✓</span>
                   Cancel anytime.
                 </div>
               </div>
 
               <SignedIn>
                 <button     onClick={() => handleSelectPlan({ name: 'Monthly Plan', price: 4.99 })}
-           className="mt-6 bg-[#0053bf]    text-white py-3 px-6 w-full rounded-lg font-bold hover:bg-[#0053bf]    transition">
+           className="mt-6 bg-[#ff4d52]    text-white py-3 px-6 w-full rounded-lg font-bold hover:bg-[#ff4d52]    transition">
                   Subscribe Now
                 </button>
               </SignedIn>
 
               <SignedOut>
-  <Link to="/login"  className="mt-6 bg-[#0053bf]    text-white py-3 px-6 w-full rounded-lg font-bold hover:bg-[#0053bf]    transition">
+  <Link to="/login"  className="mt-6 bg-[#ff4d52]    text-white py-3 px-6 w-full rounded-lg font-bold hover:bg-[#ff4d52]    transition">
       Login to Subscribe
   </Link>
 </SignedOut>
@@ -87,31 +87,31 @@ const PlanCard = () => {
               </p>
               <div className="mt-4 text-sm md:text-md space-y-2 text-[var(--bg)]">
                 <div className="flex text-[var(--textColor)] items-center gap-2">
-                  <span className="bg-[#0053bf]    text-white rounded-full w-6 h-6 flex items-center justify-center">✓</span>
+                  <span className="bg-[#ff4d52]    text-white rounded-full w-6 h-6 flex items-center justify-center">✓</span>
                   Access unlimited book summaries.
                 </div>
                 <div className="flex text-[var(--textColor)] items-center gap-2">
-                  <span className="bg-[#0053bf]    text-white rounded-full w-6 h-6 flex items-center justify-center">✓</span>
+                  <span className="bg-[#ff4d52]    text-white rounded-full w-6 h-6 flex items-center justify-center">✓</span>
                   7,500+ book and podcast summaries.
                 </div>
                 <div className="flex text-[var(--textColor)] items-center gap-2">
-                  <span className="bg-[#0053bf]    text-white rounded-full w-6 h-6 flex items-center justify-center">✓</span>
+                  <span className="bg-[#ff4d52]    text-white rounded-full w-6 h-6 flex items-center justify-center">✓</span>
                   Save more with annual billing.
                 </div>
                 <div className="flex text-[var(--textColor)] items-center gap-2">
-                  <span className="bg-[#0053bf]    text-white rounded-full w-6 h-6 flex items-center justify-center">✓</span>
+                  <span className="bg-[#ff4d52]    text-white rounded-full w-6 h-6 flex items-center justify-center">✓</span>
                   Cancel anytime.
                 </div>
               </div>
 
               <SignedIn>
-                <button   onClick={() => handleSelectPlan({ name: 'Annual Plan', price: 49.99 })} className="mt-6 bg-[#0053bf]    text-white py-3 px-6 w-full rounded-lg font-bold hover:bg-[#0053bf]    transition">
+                <button   onClick={() => handleSelectPlan({ name: 'Annual Plan', price: 49.99 })} className="mt-6 bg-[#ff4d52]    text-white py-3 px-6 w-full rounded-lg font-bold hover:bg-[#ff4d52]    transition">
                   Subscribe Now
                 </button>
               </SignedIn>
 
               <SignedOut>
-  <Link to="/login" className="mt-6 bg-[#0053bf]    text-white py-3 px-6 w-full rounded-lg font-bold hover:bg-[#0053bf]    transition">
+  <Link to="/login" className="mt-6 bg-[#ff4d52]    text-white py-3 px-6 w-full rounded-lg font-bold hover:bg-[#ff4d52]    transition">
       Login to Subscribe
   </Link>
 </SignedOut>

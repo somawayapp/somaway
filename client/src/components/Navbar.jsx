@@ -35,13 +35,13 @@ const Navbar = () => {
 
 <div className="flex items-center justify-between gap-12">
   <Link to="/home" className="flex items-center gap-1 text-xl font-bold md:text-3xl">
-    <img src="/somawaylogo.png" className="w-7 h-7 rounded-lg md:w-8 md:h-8" />
-    <span className="bg-clip-text text-[#0062e3] pl-1 text-xl md:text-2xl font-extrabold">Somaway</span>
+    <img src="/airlogo.png" className="w-7 h-7 rounded-lg md:w-8 md:h-8" />
+    <span className="bg-clip-text text-[#FF5A5F] pl-1 text-xl md:text-2xl font-extrabold">Somaway</span>
   </Link>
   
   <div className="hidden md:flex flex-1 justify-center space-x-12">
-    <Link className="hover:text-[#0053bf] font-bold" to="/home" onClick={() => setOpen(false)}>Home</Link>
-    <Link className="hover:text-[#0053bf] font-bold" to="/" onClick={() => setOpen(false)}>Discover</Link>
+    <Link className="hover:text-[#ff4d52] font-bold" to="/home" onClick={() => setOpen(false)}>Home</Link>
+    <Link className="hover:text-[#ff4d52] font-bold" to="/" onClick={() => setOpen(false)}>Discover</Link>
   </div>
 </div>
 
@@ -53,8 +53,8 @@ const Navbar = () => {
 
      <Link
             to="/"
-            className="text-center hidden md:block px-4 md:px-6 py-2 md:py-3 bg-[#0062e3]   text-white
-            text-xs md:text-[16px] font-semibold rounded-md hover:bg-[#0053bf]   "
+            className="text-center hidden md:block px-4 md:px-6 py-2 md:py-3 bg-[#FF5A5F]   text-white
+            text-xs md:text-[16px] font-semibold rounded-md hover:bg-[#ff4d52]   "
           > Summaries
             
           </Link>
@@ -64,7 +64,7 @@ const Navbar = () => {
         <Link
             to="/login"
             className="text-center px-4 md:px-6 py-2 md:py-3 bg-[var(--textColore3)] text-xs md:text-md text-[var(--textColor)] 
-            font-semibold  text-xs md:text-[16px] rounded-md hover:text-white hover:bg-[#0062e3]  "
+            font-semibold  text-xs md:text-[16px] rounded-md hover:text-white hover:bg-[#FF5A5F]  "
           >
             Login
           </Link>
@@ -142,33 +142,33 @@ const Navbar = () => {
         <div >
         <Link
             to="/home"
-            className="block py-2 text-[var(--TextColor)] font-bold  hover:text-[#0062e3] p-2 rounded-xl"
+            className="block py-2 text-[var(--TextColor)] font-bold  hover:text-[#FF5A5F] p-2 rounded-xl"
    onClick={() => setOpen(false)}          > Home           </Link>   
      <Link
    to="/"
-   className="block py-2 text-[var(--TextColor)] font-bold  hover:text-[#0062e3]  p-2 rounded-xl"
+   className="block py-2 text-[var(--TextColor)] font-bold  hover:text-[#FF5A5F]  p-2 rounded-xl"
 onClick={() => setOpen(false)}          > Book summaries          </Link>
         <Link
             to="/"
-            className="block py-2 text-[var(--TextColor)] font-bold  hover:text-[#0062e3]  p-2 rounded-xl"
+            className="block py-2 text-[var(--TextColor)] font-bold  hover:text-[#FF5A5F]  p-2 rounded-xl"
    onClick={() => setOpen(false)}          > Discover          </Link>
           <Link
             to="/premium"
-            className="block py-2 text-[var(--TextColor)] font-bold   hover:text-[#0062e3]  p-2 rounded-xl"
+            className="block py-2 text-[var(--TextColor)] font-bold   hover:text-[#FF5A5F]  p-2 rounded-xl"
    onClick={() => setOpen(false)}          > Premium          </Link>
           <Link
             to="/about"
-            className="block py-2 text-[var(--TextColor)] font-bold  hover:text-[#0062e3]  p-2 rounded-xl"
+            className="block py-2 text-[var(--TextColor)] font-bold  hover:text-[#FF5A5F]  p-2 rounded-xl"
    onClick={() => setOpen(false)}          > About Us 
           </Link>
           <Link
             to="/settings"
-            className="block py-2 text-[var(--TextColor)] font-bold   hover:text-[#0062e3]  p-2 rounded-xl"
+            className="block py-2 text-[var(--TextColor)] font-bold   hover:text-[#FF5A5F]  p-2 rounded-xl"
    onClick={() => setOpen(false)}              > Settings          </Link>
           
      <Link
             to="/premium"
-            className="block py-2 text-[var(--TextColor)] font-bold  hover:text-[#0062e3]  p-2 rounded-xl"
+            className="block py-2 text-[var(--TextColor)] font-bold  hover:text-[#FF5A5F]  p-2 rounded-xl"
    onClick={() => setOpen(false)}              > Pricing           </Link>
         </div>
         
@@ -188,8 +188,8 @@ onClick={() => setOpen(false)}          > Book summaries          </Link>
           <Link
             to="/login"
             className="w-full items-center  md:ml-2 mr-4 text-center  text-md md:text-xl sm:w-auto px-4 md:px-6  py-3 md:py-3
-             bg-[#0062e3]  text-white font-semibold 
-            rounded-md hover:bg-[#0053bf]   "
+             bg-[#FF5A5F]  text-white font-semibold 
+            rounded-md hover:bg-[#ff4d52]   "
           >
           Login     
                </Link>
