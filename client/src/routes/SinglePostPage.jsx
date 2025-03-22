@@ -277,14 +277,45 @@ const details = [
         </div>
       </div>
       <hr className="h-[1px] bg-[var(--softBg4)] border-0" />
-      <p style={{ display: "flex", alignItems: "center", fontSize: "24px", fontWeight: "bold" }}>
+      <p style={{ 
+  display: "flex", 
+  alignItems: "center", 
+  fontSize: "16px", // Default text size
+  fontWeight: "bold"
+}}>
   {icons[data.propertytype] && (
-    <span style={{ fontSize: "32px", marginRight: "12px", display: "flex", alignItems: "center" }}>
+    <span style={{ 
+      fontSize: "48px", // Large icon for default
+      marginRight: "12px", 
+      display: "flex", 
+      alignItems: "center" 
+    }}>
       {icons[data.propertytype]}
     </span>
   )}
-  This is a {details.join(", ")} building!
+  <span className="text">This is a {details.join(", ")} building!</span>
+
+  <style jsx>{`
+    @media (max-width: 768px) {
+      p {
+        font-size: 16px; /* Smaller text on small screens */
+      }
+      span {
+        font-size: 64px; /* Even bigger icon on small screens */
+      }
+    }
+
+    @media (min-width: 769px) {
+      p {
+        font-size: 20px; /* Larger text on medium screens */
+      }
+      span {
+        font-size: 80px; /* Huge icon on medium+ screens */
+      }
+    }
+  `}</style>
 </p>
+
 
 
 
@@ -335,8 +366,8 @@ const details = [
   {data.desc?.length > 300 ? (
     <>
       <span dangerouslySetInnerHTML={{ __html: data.desc.substring(0, 500) }} />...
-      <button 
-  className="text-blue-500  ml-2 border py-4 px-9 border-[var(--softBg4)]"
+      <button  
+  className="text-blue-500  mt-2 ml-2 border-[2px]  rounded-xl py-2 px-6 border-[var(--softBg4)]"
   onClick={() => setPopupDesc(data.desc)}
 >
   Show More
