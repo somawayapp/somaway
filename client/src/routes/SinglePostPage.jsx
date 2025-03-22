@@ -25,7 +25,10 @@
           import { FaBuilding, FaWarehouse, FaHome, FaTree, FaBed } from "react-icons/fa";
           import { MdVilla, MdApartment } from "react-icons/md";
           import { GiOfficeChair, GiShop, GiCargoCrate } from "react-icons/gi";
-
+          import { FaSwimmingPool, FaWifi, FaParking, FaBusAlt, FaTrain, FaHospital, FaSchool, FaShoppingCart, FaLock, FaLeaf, FaBabyCarriage } from 'react-icons/fa';
+          import { MdBalcony, MdAir, MdFitnessCenter, MdSecurity, MdOutlineBackup, MdLocalAirport } from 'react-icons/md';
+          import { IoIosConstruct } from 'react-icons/io';
+          
 
 
           const fetchPost = async (slug) => {
@@ -45,6 +48,27 @@
               queryKey: ["post", slug],
               queryFn: () => fetchPost(slug),
             });
+
+
+            const amenitiesIcons = {
+              "lift": <IoIosConstruct />,
+              "air-conditioning": <MdAir />,
+              "swimming-pool": <FaSwimmingPool />,
+              "balcony": <MdBalcony />,
+              "gym": <MdFitnessCenter />,
+              "wifi": <FaWifi />,
+              "security": <MdSecurity />,
+              "playground": <FaBabyCarriage />,
+              "garden": <FaLeaf />,
+              "backup-generator": <MdOutlineBackup />,
+              "parking": <FaParking />,
+              "school": <FaSchool />,
+              "shopping-mall": <FaShoppingCart />,
+              "airport": <MdLocalAirport />,
+              "hospital": <FaHospital />,
+              "bus-stop": <FaBusAlt />,
+              "train-station": <FaTrain />,
+            };
           
             const [isLoading, setIsLoading] = useState(false);
 
@@ -234,7 +258,7 @@ const details = [
 
 
 
-          <div className="flex flex-col gap-1 md:gap-2  mt-4 w-full   md:w-6/9">
+          <div className="flex flex-col gap-1 md:gap-2  mt-4 w-full   md:w-5.4/9">
           
                
           <div className="col-span-4 flex flex-col gap-8">
@@ -372,8 +396,14 @@ const details = [
 
 <hr className="h-[1px] bg-[var(--softBg4)] border-0" />
 <h1 className="text-[var(--softTextColor)] font-semibold  text-[20px] md:text-[22px]  ">What this property offers </h1>   
-<p className="  text-[14px] md:text-[16px] text-[var(--softTextColor)]  ">{data.amenities} </p>
-
+<div className="flex flex-wrap gap-2">
+      {data.amenities.map((amenity, index) => (
+        <div key={index} className="flex items-center gap-1 bg-gray-100 p-2 rounded-md">
+          {amenitiesIcons[amenity] || null}
+          <span className="text-[16px] text-[var(--softTextColor)] capitalize">{amenity.replace('-', ' ')}</span>
+        </div>
+      ))}
+    </div>
 
 <hr className="h-[1px] bg-[var(--softBg4)] border-0" />
 
@@ -397,7 +427,7 @@ const details = [
 
 
 
-          <div className="flex flex-col gap-2 sticky top-[65px] pb-4 md:w-3/9 ">
+          <div className="flex flex-col gap-2 sticky top-[65px] pb-4 md:w-3.6/9 ">
 
           <div className="  rounded-xl border-[1px] shadow-md  overflow-hidden">
       <div className="flex text-[var(--softTextColor)] flex-row items-center gap-1 p-4">
