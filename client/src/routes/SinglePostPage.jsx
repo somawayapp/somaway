@@ -213,29 +213,24 @@ const details = [
       </div>
 
       {/* Right Side Images */}
-      <div className="w-1/4 h-full flex flex-col gap-1 md:gap-2 overflow-hidden relative">
-        <button
-          className="absolute top-0 left-1/2 transform -translate-x-1/2 bg-gray-800 text-white rounded-full p-2"
-          onClick={() => scrollRightDiv("up")}
-        >
-          ▲
-        </button>
-        <div ref={rightDivRef} className="overflow-y-scroll h-full no-scrollbar">
+      <div className="w-1/4 h-full flex flex-col  overflow-hidden relative">
+      
+        <div ref={rightDivRef} className="overflow-y-scroll gap-1 md:gap-2 h-full">
           {sideImages.map((image, index) => (
             <div
               key={index}
               className="w-full h-1/4 overflow-hidden relative cursor-pointer"
               onClick={() => openPopup(index + 1)}
             >
-              <img src={image} className="object-cover h-full w-full" alt={`Image ${index + 2}`} />
-              {index === sideImages.length - 1 && (
-                <button
-                  className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 text-white text-sm"
-                  onClick={() => setShowMore(!showMore)}
-                >
-                  {showMore ? "Show Less" : "Show More Images"}
-                </button>
-              )}
+            {index === sideImages.length - 4 && (
+  <button
+    className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 text-white text-sm"
+    onClick={() => setShowMore(!showMore)}
+  >
+    {showMore ? "Show Less" : "Show More Images"}
+  </button>
+)}
+
             </div>
           ))}
         </div>
@@ -253,13 +248,13 @@ const details = [
             onClick={(e) => e.stopPropagation()}
           >
             <button
-              className="absolute top-2 right-2 bg-gray-800 text-white rounded-full p-2"
+              className="absolute top-2 right-2 bg-gray-400 text-white rounded-full p-2"
               onClick={() => setPopupImage(null)}
             >
               ✖
             </button>
             <button
-              className="absolute left-2 bg-gray-800 text-white rounded-full p-2"
+              className="absolute left-2 bg-gray-400 text-white rounded-full p-2"
               onClick={() => navigatePopup("prev")}
             >
               ◀
@@ -270,7 +265,7 @@ const details = [
               alt="Popup"
             />
             <button
-              className="absolute right-2 bg-gray-800 text-white rounded-full p-2"
+              className="absolute right-2 bg-gray-400 text-white rounded-full p-2"
               onClick={() => navigatePopup("next")}
             >
               ▶
