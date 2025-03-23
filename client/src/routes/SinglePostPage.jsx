@@ -221,23 +221,23 @@ const details = [
         onClick={() => openPopup(index + 1)}
       >
         <img src={image} className="object-cover h-full w-full" alt={`Image ${index + 1}`} />
+
+        {/* Floating Show More Button on the 8th Image */}
+        {index === 7 && !showMore && (
+          <button
+            className="absolute inset-0 m-auto flex items-center justify-center w-10 h-10 rounded-full border-2 border-white bg-black bg-opacity-60 text-white text-xs font-semibold hover:bg-opacity-80 transition"
+            onClick={() => setShowMore(true)}
+          >
+            +
+          </button>
+        )}
       </div>
     ))}
-
-    {/* Show More Button on the 8th image */}
-    {sideImages.length > 8 && !showMore && (
-      <button
-        className="w-full p-2 bg-black text-white text-sm rounded cursor-pointer"
-        onClick={() => setShowMore(true)}
-      >
-        Show More Images
-      </button>
-    )}
 
     {/* Show Less Button when expanded */}
     {showMore && (
       <button
-        className="w-full p-2 bg-black text-white text-sm rounded cursor-pointer"
+        className="w-full p-2 bg-black text-white text-sm rounded cursor-pointer mt-2"
         onClick={() => setShowMore(false)}
       >
         Show Less
