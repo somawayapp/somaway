@@ -40,15 +40,17 @@ const Navbar = () => {
 
   {/* Show on medium screens and larger */}
   <Link to="/" className="flex items-center gap-1 text-xl font-bold md:text-3xl hidden md:flex">
-    <img src="/airlogo2.png" className="md:h-9" />
+    <img src="/airlogo2.png" className="md:h-8" />
   </Link>
   
 
 </div>
 
 <div className="hidden md:flex flex-1 justify-center space-x-12">
-    <Link className="hover:text-[#ff4d52] font-bold" to="/" onClick={() => setOpen(false)}>for rent</Link>
-    <Link className="hover:text-[#ff4d52] font-bold" to="/" onClick={() => setOpen(false)}>for sale</Link>
+    <Link className=" text-[13px] md:text-[15px] cursor-pointer text-[var(--softTextColor)]
+             font-semibold hover:bg-[var(--softBg4)] bg[var(--bg)] rounded-3xl py-2 px-4" to="/" onClick={() => setOpen(false)}>for rent</Link>
+    <Link className=" text-[13px] md:text-[15px] cursor-pointer text-[var(--softTextColor)]
+             font-semibold hover:bg-[var(--softBg4)] bg[var(--bg)] rounded-3xl py-2 px-4" to="/" onClick={() => setOpen(false)}>for sale</Link>
   </div>
      
 
@@ -56,7 +58,8 @@ const Navbar = () => {
 
      <Link
             to="/"
-            className="text-center hidden md:block text-[14px] md:text-[16px] cursor-pointer text-[var(--textColor)] font-semibold hover:text-[#FF5A5F]   text-white
+            className="text-center hidden md:block text-[13px] md:text-[15px] cursor-pointer text-[var(--softTextColor)]
+             font-semibold hover:bg-[var(--softBg4)] bg[var(--bg)] rounded-3xl py-2 px-4
               "
           > airbnb your home
             
