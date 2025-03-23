@@ -6,7 +6,6 @@ import { useSearchParams } from "react-router-dom";
 import RelatedItem from "./RelatedItem";
 import React, { useRef, useState, useEffect } from "react";
 import SpinnerMini from "./Loader";
-import RelatedItem from "./Relatedtem";
 
 
 
