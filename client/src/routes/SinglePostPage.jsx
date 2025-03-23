@@ -39,27 +39,17 @@
             const res = await axios.get(`${import.meta.env.VITE_API_URL}/posts/${slug}`);
             return res.data;
           };
-
           
           const SinglePostPage = () => {
             useEffect(() => {
               window.scrollTo(0, 0); // Scrolls to the top when this component mounts
             }, []);
-          
             const { slug } = useParams();
           
             const { isPending, error, data } = useQuery({
               queryKey: ["post", slug],
               queryFn: () => fetchPost(slug),
             });
-          
-            if (isPending) {
-              return <SpinnerMini />;
-            }
-          
-            if (error) {
-              return <p>Error loading post.</p>;
-            }
 
 
             const amenitiesIcons = {
@@ -139,7 +129,7 @@
               }
             }, [popupDesc]);
      
-            
+            if (isPending) return <SpinnerMini />;
             if (error) return "Something went wrong!" + error.message;
             if (!data) return "Post not found!";
             
@@ -172,9 +162,7 @@ const details = [
             return details.length > 0 ? (
               <div className=" bg-[var(--bg)]">
           
- 
-
-
+          
           
                 <Navbar />
                 <Helmet>
