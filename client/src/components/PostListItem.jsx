@@ -62,11 +62,20 @@ const PostListItem = ({ post }) => {
 
       {/* Author */}
       <Link
-        to={`/?property=${post.propertytype}`}
-        className="text-[var(--textColor)] mt-3 ml-3 capitalize text-sm md:text-lg"
-      >
-        {post.propertytype ? post.propertytype.slice(0, 20) : ""}
-      </Link>
+
+  className="text-[var(--softTextColor)] mt-3 ml-3 capitalize text-sm md:text-lg"
+>
+  {post.bedrooms
+    ? `${post.bedrooms} Bedroom`
+    : post.rooms
+    ? `${post.rooms} Room`
+    : post.propertysize
+    ? `${post.propertysize} Sq Ft`
+    : ""}
+  {post.propertytype ? ` ${post.propertytype.slice(0, 20)}` : ""}
+  {post.model?.toLowerCase().includes("sale") ? " for Sale" : " for Rent"}
+</Link>
+
     </div>
   );
 };
