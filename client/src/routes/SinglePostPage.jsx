@@ -72,7 +72,38 @@
                 window.open(`https://wa.me/${data.whatsapp}`, "_blank");
               };
 
-          
+            const [popupImage, setPopupImage] = useState(null);
+            
+            const images = data?.img || [];
+  const [showMore, setShowMore] = useState(false);
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const rightDivRef = useRef(null);
+
+  const mainImage = images.length > 0 ? images[0] : null;
+  const sideImages = images.slice(1);
+
+  const scrollRightDiv = (direction) => {
+    if (rightDivRef.current) {
+      rightDivRef.current.scrollBy({
+        top: direction === "down" ? 100 : -100,
+        behavior: "smooth",
+      });
+    }
+  };
+
+  const openPopup = (imageIndex) => {
+    setPopupImage(images[imageIndex]);
+    setCurrentIndex(imageIndex);
+  };
+
+  const navigatePopup = (direction) => {
+    let newIndex =
+      direction === "next"
+        ? (currentIndex + 1) % images.length
+        : (currentIndex - 1 + images.length) % images.length;
+    setCurrentIndex(newIndex);
+    setPopupImage(images[newIndex]);
+  };
             // Prevent scrolling when popup is open
             useEffect(() => {
               if (popupImage) {
@@ -83,39 +114,7 @@
             }, [popupImage]);
 
 
-            const images = data?.img || [];
-            const [popupImage, setPopupImage] = useState(null);
-            const [showMore, setShowMore] = useState(false);
-            const rightDivRef = useRef(null);
-          
-            const mainImage = images[0] || null;
-            const secondMainImage = images[1] || null;
-            const thirdMainImage = images[2] || null;
-            const fourthMainImage = images[3] || null;
-            const fifthMainImage = images[4] || null;
-          
-            const scrollImages = (direction) => {
-              if (rightDivRef.current) {
-                rightDivRef.current.scrollBy({
-                  top: direction === "down" ? 100 : -100,
-                  behavior: "smooth",
-                });
-              }
-            };
-          
-            const toggleShowMore = () => {
-              setShowMore(!showMore);
-              scrollImages("down");
-            };
-          
-            const navigatePopup = (direction) => {
-              if (!popupImage) return;
-              const currentIndex = images.indexOf(popupImage);
-              const newIndex = direction === "next" ? currentIndex + 1 : currentIndex - 1;
-              if (newIndex >= 0 && newIndex < images.length) {
-                setPopupImage(images[newIndex]);
-              }
-            };
+            
             
 
             const [popupDesc, setPopupDesc] = useState(null);
@@ -209,45 +208,77 @@ const details = [
           
 <div className="w-full flex h-[300px] md:h-[500px] overflow-hidden rounded-xl relative transition duration-300">
       {/* Left Image */}
-      <div className="flex-1 h-full overflow-hidden relative mr-1 md:mr-2 cursor-pointer" onClick={() => setPopupImage(mainImage)}>
-        {mainImage && <img src={mainImage} className="object-cover h-full w-full" alt="Main" />}
+      <div className="flex-1 h-full overflow-hidden relative mr-1 md:mr-2 cursor-pointer" onClick={() => openPopup(0)}>
+        {mainImage && <img src={mainImage} className="object-cover h-full w-full" alt="Main Image" />}
       </div>
 
-      {/* Right Image Grid */}
-      <div className="w-1/4 h-full flex gap-1 md:gap-2 flex-col overflow-hidden relative" ref={rightDivRef}>
-        <button className="absolute top-2 left-1/2 transform -translate-x-1/2 bg-gray-700 p-2 rounded-full" onClick={() => scrollImages("up")}>🔼</button>
-        {[secondMainImage, thirdMainImage, fourthMainImage, fifthMainImage].map((image, index) =>
-          image && (
-            <div key={index} className="w-full h-1/4 overflow-hidden relative cursor-pointer" onClick={() => setPopupImage(image)}>
+      {/* Right Side Images */}
+      <div className="w-1/4 h-full flex flex-col gap-1 md:gap-2 overflow-hidden relative">
+        <button
+          className="absolute top-0 left-1/2 transform -translate-x-1/2 bg-gray-800 text-white rounded-full p-2"
+          onClick={() => scrollRightDiv("up")}
+        >
+          ▲
+        </button>
+        <div ref={rightDivRef} className="overflow-y-scroll h-full no-scrollbar">
+          {sideImages.map((image, index) => (
+            <div
+              key={index}
+              className="w-full h-1/4 overflow-hidden relative cursor-pointer"
+              onClick={() => openPopup(index + 1)}
+            >
               <img src={image} className="object-cover h-full w-full" alt={`Image ${index + 2}`} />
-              {index === 3 && (
-                <div
-                  className="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center text-white text-sm font-bold cursor-pointer"
-                  onClick={toggleShowMore}
+              {index === sideImages.length - 1 && (
+                <button
+                  className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 text-white text-sm"
+                  onClick={() => setShowMore(!showMore)}
                 >
                   {showMore ? "Show Less" : "Show More Images"}
-                </div>
+                </button>
               )}
             </div>
-          )
-        )}
+          ))}
+        </div>
       </div>
 
       {/* Popup Modal */}
       {popupImage && (
-        <div className="fixed inset-0 bg-black bg-opacity-80 flex items-center justify-center z-[100014]" onClick={() => setPopupImage(null)}>
-          <div className="relative w-full p-3 md:p-9 md:w-3/4 flex items-center justify-center" onClick={(e) => e.stopPropagation()}>
-            <button className="absolute top-2 right-2 bg-gray-800 text-white rounded-full" onClick={() => setPopupImage(null)}>✖</button>
-            <button className="absolute left-2 bg-gray-800 text-white rounded-full p-2" onClick={() => navigatePopup("prev")}>⬅</button>
-            <button className="absolute right-2 bg-gray-800 text-white rounded-full p-2" onClick={() => navigatePopup("next")}>➡</button>
-            <img src={popupImage} className="w-full h-auto max-h-[80vh] object-cover rounded-xl" alt="Popup" />
+        <div
+          className="fixed inset-0 bg-black bg-opacity-80 flex items-center justify-center"
+          style={{ zIndex: 100014 }}
+          onClick={() => setPopupImage(null)}
+        >
+          <div
+            className="relative w-full p-3 md:p-9 md:w-3/4 flex items-center justify-center"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <button
+              className="absolute top-2 right-2 bg-gray-800 text-white rounded-full p-2"
+              onClick={() => setPopupImage(null)}
+            >
+              ✖
+            </button>
+            <button
+              className="absolute left-2 bg-gray-800 text-white rounded-full p-2"
+              onClick={() => navigatePopup("prev")}
+            >
+              ◀
+            </button>
+            <img
+              src={popupImage}
+              className="w-full h-auto max-h-[80vh] object-cover rounded-xl"
+              alt="Popup"
+            />
+            <button
+              className="absolute right-2 bg-gray-800 text-white rounded-full p-2"
+              onClick={() => navigatePopup("next")}
+            >
+              ▶
+            </button>
           </div>
         </div>
       )}
     </div>
-
-          
-              
               
 
     
