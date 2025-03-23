@@ -75,7 +75,7 @@ const Comments = ({ postId }) => {
   };
 
   return (
-    <div className="flex flex-col gap-1 mb-2">
+    <div className="flex flex-col gap-1 p-4 mb-2">
       {/* Modern Comment Icon */}
       <Button
           onClick={() => setShowComments((prev) => !prev)}       

@@ -1,92 +1,67 @@
-import { useState, useEffect } from "react";
-import { FaStar } from "react-icons/fa";
+import { format } from "timeago.js";
+import Image from "./Image";
+import { useAuth, useUser } from "@clerk/clerk-react";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { toast } from "react-toastify";
+import axios from "axios";
 
-const Ratings = ({ postId, token }) => {
-  const [rating, setRating] = useState(0);
-  const [totalReviews, setTotalReviews] = useState(0);
-  const [hover, setHover] = useState(null);
-  const [userRating, setUserRating] = useState(null);
-  const [loading, setLoading] = useState(true);
+const Comment = ({ comment, postId }) => {
+  const { user } = useUser();
+  const { getToken } = useAuth();
+  const role = user?.publicMetadata?.role;
 
-  useEffect(() => {
-    const fetchRatings = async () => {
-      try {
-        if (!token) return;
+  const queryClient = useQueryClient();
 
-        const res = await fetch(`${import.meta.env.VITE_API_URL}/ratings?postId=${postId}`, {
+  const mutation = useMutation({
+    mutationFn: async () => {
+      const token = await getToken();
+      return axios.delete(
+        `${import.meta.env.VITE_API_URL}/comments/${comment._id}`,
+        {
           headers: {
             Authorization: `Bearer ${token}`,
           },
-        });
-
-        if (!res.ok) throw new Error("Failed to fetch ratings");
-
-        const data = await res.json();
-        setRating(parseFloat(data.averageRating) || 0);
-        setTotalReviews(data.totalRatings || 0);
-        setUserRating(data.userRating || 0);
-      } catch (err) {
-        console.error("Error fetching ratings:", err);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchRatings();
-  }, [postId, token]);
-
-  const submitRating = async (stars) => {
-    try {
-      if (!token) return;
-
-      const res = await fetch(`${import.meta.env.VITE_API_URL}/ratings`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-        body: JSON.stringify({ postId, stars }),
-      });
-
-      if (!res.ok) throw new Error("Failed to submit rating");
-
-      const newData = await res.json();
-      setUserRating(stars);
-      setRating(parseFloat(newData.newAverage));
-      setTotalReviews(newData.newTotal);
-    } catch (err) {
-      console.error("Error submitting rating:", err);
-    }
-  };
+        }
+      );
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["comments", postId] });
+      toast.success("Review deleted successfully");
+    },
+    onError: (error) => {
+      toast.error(error.response.data);
+    },
+  });
 
   return (
-    <div className="flex flex-row ml-3 items-center mt-2 text-sm md:text-lg">
-      {loading ? (
-        <p>Loading...</p>
-      ) : (
-        [...Array(5)].map((_, index) => {
-          const starValue = index + 1;
-          return (
-            <FaStar
-              key={index}
-              className="w-[40px] ml-[-15px] cursor-pointer transition-all"
-              color={starValue <= (hover || userRating || rating) ? "orange" : "var(--textColor)"}
-              onMouseEnter={() => setHover(starValue)}
-              onMouseLeave={() => setHover(null)}
-              onClick={() => submitRating(starValue)}
-            />
-          );
-        })
-      )}
-      <span className="pl-2 font-normal text-[14px] md:text-[16px] flex items-center">
-        <span className="text-[var(--softTextColor)] text-[14px] md:text-[16px] ml-[-5px]">
-          {Number(rating).toFixed(1)}
-        </span>
-        <span className="mx-2 flex items-center">·</span>
-        {totalReviews} <span className="ml-1 text-[var(--softTextColor)] text-[14px] md:text-[16px]">reviews</span>
-      </span>
+    <div className="p-2  pl-4 bg-[var(--bd)] rounded-xl mb-1">
+      <div className="flex items-center gap-1">
+        {comment.user.img && (
+            <img
+            className="rounded-full text-[14px] md:text-[16px]  w-[20px] md:w-[30px] h-[20px] md:h-[30px] select-none"
+            alt="Avatar"
+            src={comment.user.img || "/placeholder.jpg"} 
+          />
+        )}
+        <span className=" text-[var(--softTextColor2)]  text-[14px] md:text-[16px]   font-light">{comment.user.username}</span>
+    
+        {user &&
+          (comment.user.username === user.username || role === "admin") && (
+            <span
+              className="text-xs text-right align-right rounded-xl item-right text-red-300 border-[0.2px] border-red-300
+               px-1 py-[0.5px] hover:text-red-500 cursor-pointer"
+              onClick={() => mutation.mutate()}
+            >
+              delete
+              {mutation.isPending && <span>(in progress)</span>}
+            </span>
+          )}
+      </div>
+      <div className="mt-1">
+        <p className=" text-[14px] md:text-[16px]">{comment.desc}</p>
+      </div>
     </div>
   );
 };
 
-export default Ratings;
+export default Comment;

@@ -462,7 +462,7 @@ const details = [
       <hr className="h-[1px] bg-[var(--softBg4)] border-0" />
       <h1 className="text-[var(--softTextColor)] font-semibold ml-1 md:ml-5 text-[20px] md:text-[22px]  ">What others say about this property  </h1>   
 
-      <Reviews postId={data._id} /> 
+      <Comments postId={data._id} /> 
       <hr className="h-[1px] bg-[var(--softBg4)] mb-5 md:mb-9 border-0" />
 
     </div>
