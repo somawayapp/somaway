@@ -214,7 +214,7 @@ const details = [
 {/* Right Side Images */}
 <div className="w-1/4 h-full flex flex-col overflow-hidden relative">
   <div ref={rightDivRef} className="flex flex-col gap-2 h-full">
-    {sideImages.slice(0, showMore ? sideImages.length : 5).map((image, index) => (
+    {sideImages.slice(0, showMore ? sideImages.length : 4).map((image, index) => (
       <div
         key={index}
         className="w-full h-1/4 overflow-hidden relative cursor-pointer"
@@ -227,7 +227,7 @@ const details = [
    <button
    className="absolute inset-0 m-auto flex items-center justify-center w-[80px] h-[40px] px-4 py-2 rounded-xl border-[1px] border-white bg-black
    bg-opacity-60 text-white text-xs md:text-sm hover:bg-opacity-80 transition whitespace-nowrap"
-   onClick={() => openPopup(index === 7)}
+   onClick={() => openPopup(index === 5)}
  >
    show more
  </button>
