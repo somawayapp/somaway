@@ -141,7 +141,7 @@ const Comments = ({ postId }) => {
                 className="text-[#ff4d52]  border-[0.2px] border-[#ff4d52]
                px-1 py-[0.5px] rounded-xl   text-sm mt-2"
               >
-                Close reviews
+                Close review
               </button>
             </>
           )}
