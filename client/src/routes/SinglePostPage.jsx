@@ -222,15 +222,15 @@ const details = [
               className="w-full h-1/4 overflow-hidden relative cursor-pointer"
               onClick={() => openPopup(index + 1)}
             >
-            {index === sideImages.length - 4 && (
-  <button
-    className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 text-white text-sm"
-    onClick={() => setShowMore(!showMore)}
-  >
-    {showMore ? "Show Less" : "Show More Images"}
-  </button>
-)}
-
+              <img src={image} className="object-cover h-full w-full" alt={`Image ${index + 2}`} />
+              {index === sideImages.length - 2 && (
+                <button
+                  className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 text-white text-sm"
+                  onClick={() => setShowMore(!showMore)}
+                >
+                  {showMore ? "Show Less" : "Show More Images"}
+                </button>
+              )}
             </div>
           ))}
         </div>
