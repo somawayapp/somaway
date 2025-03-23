@@ -7,7 +7,7 @@ interface SpinnerMiniProps {
 }
 
 export const SpinnerMini: React.FC<SpinnerMiniProps> = ({ className }) => {
-  return <BiLoaderAlt className={`w-5 h-5 animate-spin ${className}`} />;
+  return <BiLoaderAlt className={`w-5 h-5 text-pink-500 animate-spin ${className}`} />;
 };
 
 export default SpinnerMini;
