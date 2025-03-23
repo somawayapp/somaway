@@ -213,7 +213,7 @@ const details = [
       </div>
 {/* Right Side Images */}
 <div className="w-1/4 h-full flex flex-col overflow-hidden relative">
-  <div ref={rightDivRef} className="gap-1 md:gap-2 h-full">
+  <div ref={rightDivRef} className="flex flex-col gap-2 h-full">
     {sideImages.map((image, index) => (
       <div
         key={index}
