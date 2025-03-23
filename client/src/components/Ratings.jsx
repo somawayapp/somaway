@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { FaStar } from "react-icons/fa";
 import { useAuth } from "@clerk/clerk-react";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 const Ratings = ({ postId }) => {
   const { getToken, isSignedIn } = useAuth();
@@ -12,52 +13,47 @@ const Ratings = ({ postId }) => {
   const [userRating, setUserRating] = useState(null);
   const [totalComments, setTotalComments] = useState(0);
 
-
   useEffect(() => {
-    const fetchRating = async () => {
+    if (!postId) return;
+
+    const fetchData = async () => {
       try {
+        // Fetch Ratings
         const res = await fetch(`${import.meta.env.VITE_API_URL}/ratings/${postId}`);
         if (res.ok) {
           const data = await res.json();
           setRating(parseFloat(data.averageRating) || 0);
           setTotalReviews(data.totalRatings || 0);
-          if (isSignedIn) {
-            const token = await getToken();
-            if (token) {
-              const userRes = await fetch(`${import.meta.env.VITE_API_URL}/ratings/user/${postId}`, {
-                headers: { Authorization: `Bearer ${token}` },
-              });
-              if (userRes.ok) {
-                const userData = await userRes.json();
-                setUserRating(userData.userRating || 0);
-              }
-            }
-          }
         } else {
           console.error("Failed to fetch rating", await res.text());
         }
+
+        // Fetch User Rating (Only if signed in)
+        if (isSignedIn) {
+          const token = await getToken();
+          if (token) {
+            const userRes = await fetch(`${import.meta.env.VITE_API_URL}/ratings/user/${postId}`, {
+              headers: { Authorization: `Bearer ${token}` },
+            });
+            if (userRes.ok) {
+              const userData = await userRes.json();
+              setUserRating(userData.userRating || 0);
+            }
+          }
+        }
+
+        // Fetch Comments Count
+        const commentsRes = await axios.get(`${import.meta.env.VITE_API_URL}/comments/${postId}`);
+        if (commentsRes.data) {
+          setTotalComments(Array.isArray(commentsRes.data) ? commentsRes.data.length : commentsRes.data.count || 0);
+        }
       } catch (err) {
-        console.error("Error fetching rating:", err);
+        console.error("Error fetching data:", err);
       }
     };
-    
 
-
-  const fetchCommentsCount = async () => {
-    try {
-      const res = await axios.get(`${import.meta.env.VITE_API_URL}/comments/${postId}`);
-      setTotalComments(Array.isArray(res.data) ? res.data.length : res.data.count || 0);
-    } catch (err) {
-      console.error("Error fetching comments count:", err);
-    }
-  };
-
-  if (postId) {
-    fetchCommentsCount();
-    fetchRating();
-
-  }
-}, [postId]); 
+    fetchData();
+  }, [postId, isSignedIn]);
 
   const handleRating = async (stars) => {
     if (!isSignedIn) {
@@ -71,7 +67,7 @@ const Ratings = ({ postId }) => {
         console.error("No auth token found!");
         return;
       }
-      
+
       const res = await fetch(`${import.meta.env.VITE_API_URL}/ratings/${postId}`, {
         method: "POST",
         headers: {
@@ -94,8 +90,6 @@ const Ratings = ({ postId }) => {
     }
   };
 
-
-  
   return (
     <div className="flex flex-row ml-3 items-center mt-2 text-sm md:text-lg">
       {[...Array(5)].map((_, index) => {
@@ -116,7 +110,7 @@ const Ratings = ({ postId }) => {
           {Number(rating).toFixed(1)}
         </span>
         <span className="mx-2 flex items-center">·</span>
-        {totalReviews} + {totalComments} <span className="ml-1 text-[var(--softTextColor)] text-[14px] md:text-[16px]">reviews</span>
+        {totalReviews + totalComments} <span className="ml-1 text-[var(--softTextColor)] text-[14px] md:text-[16px]">reviews</span>
       </span>
     </div>
   );
