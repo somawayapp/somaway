@@ -20,13 +20,26 @@ const PostListItem = ({ post }) => {
     <div className="relative group mb-6 md:mb-[30px] overflow-hidden rounded-xl">
       {/* Image with Link */}
       <Link to={`/${post.slug}`} className="block">
-        <div className="relative w-full aspect-[4/3] rounded-xl md:rounded-2xl overflow-hidden">
+        <div className="relative w-full aspect-[3/4] rounded-xl md:rounded-2xl overflow-hidden">
           <img
             src={images[currentIndex]}
             className="absolute top-0 left-0 w-full h-full object-cover rounded-xl md:rounded-2xl transition-all duration-300"
           />
         </div>
       </Link>
+
+
+          {/* Dots */}
+          <div className="absolute bottom-3 left-1/2 transform -translate-x-1/2 flex gap-1">
+        {images.map((_, index) => (
+          <span
+            key={index}
+            className={`h-2 w-2 rounded-full bg-white transition-all duration-300 ${
+              currentIndex === index ? "w-4 scale-110" : "opacity-50"
+            }`}
+          ></span>
+        ))}
+      </div>
 
       {/* Navigation Arrows (outside Link to prevent navigation) */}
       {images.length > 1 && (
@@ -46,17 +59,7 @@ const PostListItem = ({ post }) => {
         </>
       )}
 
-      {/* Dots */}
-      <div className="absolute bottom-3 left-1/2 transform -translate-x-1/2 flex gap-1">
-        {images.map((_, index) => (
-          <span
-            key={index}
-            className={`h-2 w-2 rounded-full bg-white transition-all duration-300 ${
-              currentIndex === index ? "w-4 scale-110" : "opacity-50"
-            }`}
-          ></span>
-        ))}
-      </div>
+  
 
       {/* Author */}
       <Link
