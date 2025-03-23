@@ -34,41 +34,35 @@ const Navbar = () => {
       sticky top-0 justify-between bg-[var(--bg)] border-b border-b-[var(--softBg4)] ">
 
 <div className="flex items-center justify-between gap-12">
-  <Link to="/" className="flex items-center gap-1 text-xl font-bold md:text-3xl">
-    <img src="/airlogo.png" className="w-7 h-7 rounded-lg md:w-8 md:h-8" />
-    <span className="bg-clip-text text-[#FF5A5F] pl-1 text-xl md:text-2xl font-extrabold">Somaway</span>
+<Link to="/" className="flex items-center text-xl font-bold md:text-3xl sm:block md:hidden">
+    <img src="/airlogo.png" className="w-8 h-8" />
+  </Link>
+
+  {/* Show on medium screens and larger */}
+  <Link to="/" className="flex items-center gap-1 text-xl font-bold md:text-3xl hidden md:flex">
+    <img src="/airlogo2.svg" className="md:h-9" />
   </Link>
   
-  <div className="hidden md:flex flex-1 justify-center space-x-12">
+
+</div>
+
+<div className="hidden md:flex flex-1 justify-center space-x-12">
     <Link className="hover:text-[#ff4d52] font-bold" to="/" onClick={() => setOpen(false)}>Home</Link>
     <Link className="hover:text-[#ff4d52] font-bold" to="/" onClick={() => setOpen(false)}>Discover</Link>
   </div>
-</div>
-
-
      
 
      <div className="flex items-center justify-between flex-row gap-2 md:gap-9">
-     <SignedOut>
 
      <Link
             to="/"
-            className="text-center hidden md:block px-4 md:px-6 py-2 md:py-3 bg-[#FF5A5F]   text-white
-            text-xs md:text-[16px] font-semibold rounded-md hover:bg-[#ff4d52]   "
-          > Summaries
+            className="text-center hidden md:block text-[14px] md:text-[16px] cursor-pointer text-[var(--textColor)] font-semibold hover:text-[#FF5A5F]   text-white
+              "
+          > airbnb your home
             
           </Link>
-          </SignedOut>
 
-          <SignedOut>
-        <Link
-            to="/login"
-            className="text-center px-4 md:px-6 py-2 md:py-3 bg-[var(--textColore3)] text-xs md:text-md text-[var(--textColor)] 
-            font-semibold  text-xs md:text-[16px] rounded-md hover:text-white hover:bg-[#FF5A5F]  "
-          >
-            Login
-          </Link>
-        </SignedOut>
+    
 
         <SignedIn>
           <UserButton />
