@@ -85,7 +85,7 @@ className="text-[var(--softTextColor)]  font-semibold capitalize text-[14px] md:
     ? `${post.propertysize} Sq Ft`
     : ""}
   {post.propertytype ? ` ${post.propertytype.slice(0, 20)}` : ""}
-  {post.model?.toLowerCase().includes("forsale") ? " for Sale" : " for Rent"}
+  {post.model?.toLowerCase().includes("forrent") ? " /month " : " /for sale"}
 </p>
 
 <p
@@ -101,7 +101,7 @@ className="text-[var(--softTextColor)]  capitalize  text-[14px] md:text-[16px] "
 className="text-[var(--softTextColor)] font-semibold capitalize  text-[14px] md:text-[16px]"
 > KSh
 {post.price ? ` ${post.price}` : ""} <span className="font-normal">
-{post.model?.toLowerCase().includes("forrent") ? " /for Sale" : " /month"}
+{post.model?.toLowerCase().includes("forrent") ? " /month " : " /for sale"}
 
 </span>
 </p>
