@@ -66,7 +66,7 @@ const PostListItem = ({ post }) => {
 
 <p
 
-className="text-[var(--softTextColor)]  font-semibold capitalize text-[12px] md:text-[14px] "
+className="text-[var(--softTextColor)]  font-semibold capitalize text-[14px] md:text-[16px] "
 > Nairobi, Kenya
 
 </p>
@@ -75,7 +75,7 @@ className="text-[var(--softTextColor)]  font-semibold capitalize text-[12px] md:
 
       <p
 
-  className="text-[var(--softTextColor)]  capitalize  text-[12px] md:text-[14px] "
+  className="text-[var(--softTextColor)]  capitalize  text-[14px] md:text-[16px] "
 >
   {post.bedrooms
     ? `${post.bedrooms} Bedroom`
@@ -85,15 +85,23 @@ className="text-[var(--softTextColor)]  font-semibold capitalize text-[12px] md:
     ? `${post.propertysize} Sq Ft`
     : ""}
   {post.propertytype ? ` ${post.propertytype.slice(0, 20)}` : ""}
-  {post.model?.toLowerCase().includes("sale") ? " for Sale" : " for Rent"}
+  {post.model?.toLowerCase().includes("forsale") ? " for Sale" : " for Rent"}
 </p>
 
 <p
 
-className="text-[var(--softTextColor)] font-semibold capitalize  text-[12px] md:text-[14px]"
+className="text-[var(--softTextColor)]  capitalize  text-[14px] md:text-[16px] "
+> +254 
+
+{post.phone ? ` ${post.phone}` : ""}
+</p>
+
+<p
+
+className="text-[var(--softTextColor)] font-semibold capitalize  text-[14px] md:text-[16px]"
 > KSh
 {post.price ? ` ${post.price}` : ""} <span className="font-normal">
-{post.model?.toLowerCase().includes("sale") ? " /for Sale" : " /month"}
+{post.model?.toLowerCase().includes("forsale") ? " /for Sale" : " /month"}
 
 </span>
 </p>
