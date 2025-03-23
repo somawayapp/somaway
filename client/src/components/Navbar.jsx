@@ -48,9 +48,9 @@ const Navbar = () => {
 
 <div className="hidden md:flex flex-1 justify-center space-x-12">
     <Link className=" text-[13px] md:text-[15px] cursor-pointer text-[var(--softTextColor)]
-             font-semibold hover:bg-[var(--softBg4)] bg[var(--bg)] rounded-3xl py-2 px-4" to="/" onClick={() => setOpen(false)}>for rent</Link>
+             font-semibold hover:bg-[var(--softBg4)] bg[var(--bg)] rounded-3xl py-2 px-4" to="/" onClick={() => setOpen(false)}>For rent</Link>
     <Link className=" text-[13px] md:text-[15px] cursor-pointer text-[var(--softTextColor)]
-             font-semibold hover:bg-[var(--softBg4)] bg[var(--bg)] rounded-3xl py-2 px-4" to="/" onClick={() => setOpen(false)}>for sale</Link>
+             font-semibold hover:bg-[var(--softBg4)] bg[var(--bg)] rounded-3xl py-2 px-4" to="/" onClick={() => setOpen(false)}>For sale</Link>
   </div>
      
 
