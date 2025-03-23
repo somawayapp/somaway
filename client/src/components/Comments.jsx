@@ -79,7 +79,7 @@ const Comments = ({ postId }) => {
       {/* Modern Comment Icon */}
       <Button
           onClick={() => setShowComments((prev) => !prev)}       
-          className="flex flex-row items-center  text-[14px] md:text-[16px]  mb-5 justify-center h-[42px]  text-white  rounded-xl"
+          className="flex flex-row items-center  text-[14px] md:text-[16px] justify-center h-[42px]  text-white  rounded-xl"
           size="large"
         >
         <span> Property Reviews</span>
@@ -93,7 +93,7 @@ const Comments = ({ postId }) => {
         <>
           <form
             onSubmit={handleSubmit}
-            className="flex items-center  text-[var(--textColor)] rounded-xl justify-between   shadow-xl  border-[0.5px] w-full border-[var(--softBg4)]"
+            className="flex items-center  text-[var(--textColor)] rounded-xl justify-between mt-5  shadow-xl  border-[0.5px] w-full border-[var(--softBg4)]"
           >
             <textarea
               name="desc"
@@ -101,7 +101,7 @@ const Comments = ({ postId }) => {
               className="w-full pt-1  text-[14px] md:text-[16px]  rounded-xl py-2 px-6   mb-[-2px]
                pl-4 text-[var(--textColor)] rounded-xl"
             />
-           <Send className="ml-2 w-4 bg-[#ff4d52] text-[#ff4d52] h-4" />
+           <Send className="ml-2 mr-2 w-8 text-[#ff4d52] h-4" />
           </form>
 
           {commentSuccess && (
