@@ -18,7 +18,7 @@ const PostListItem = ({ post }) => {
   return (
     <div className="relative group mb-6 md:mb-[30px] overflow-hidden rounded-xl">
       <Link to={`/${post.slug}`} className="block relative w-full h-0" style={{ paddingTop: "150%" }}>
-        <Image
+        <img
           src={images[currentIndex]}
           className="absolute top-0 left-0 w-full h-full object-cover rounded-lg md:rounded-2xl transition-all duration-300"
         />
