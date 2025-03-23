@@ -4,7 +4,6 @@ import { useAuth, useUser } from "@clerk/clerk-react";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { toast } from "react-toastify";
 import axios from "axios";
-import Button from "./Button";
 
 const Comment = ({ comment, postId }) => {
   const { user } = useUser();

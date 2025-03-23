@@ -6,6 +6,7 @@ import { toast } from "react-toastify";
 import { useState } from "react";
 import { BiCommentDetail } from "react-icons/bi";
 import { Send } from "lucide-react";
+import Button from "./Button";
 
 
 const fetchComments = async (postId) => {
