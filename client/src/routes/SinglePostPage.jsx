@@ -496,6 +496,7 @@ const details = [
    <hr className="h-[1px] bg-[var(--softBg4)] border-0" />
    <div className="p-4">
     <Comments postId={data._id} />
+      </div>
       <hr className="h-[1px] bg-[var(--softBg4)] border-0" />
       <div className="p-4 flex flex-row items-center justify-between font-semibold text-lg">
 
