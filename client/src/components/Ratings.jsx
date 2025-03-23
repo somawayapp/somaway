@@ -1,7 +1,9 @@
 import { useState, useEffect } from "react";
 import { FaStar } from "react-icons/fa";
+import { useAuth } from "@clerk/clerk-react";
 
-const Ratings = ({ postId, token }) => {
+const Ratings = ({ postId }) => {
+  const { getToken } = useAuth(); // Get the token dynamically
   const [rating, setRating] = useState(0);
   const [totalReviews, setTotalReviews] = useState(0);
   const [hover, setHover] = useState(null);
@@ -10,31 +12,42 @@ const Ratings = ({ postId, token }) => {
   useEffect(() => {
     const fetchRating = async () => {
       try {
+        const token = await getToken(); // Get the token before making the request
+        if (!token) {
+          console.error("No auth token found!");
+          return;
+        }
+
         const res = await fetch(`${import.meta.env.VITE_API_URL}/ratings/${postId}`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
         });
-  
+
         if (res.ok) {
           const data = await res.json();
-          setRating(parseFloat(data.averageRating) || 0); // Ensure rating is a number
+          setRating(parseFloat(data.averageRating) || 0);
           setTotalReviews(data.totalRatings || 0);
           setUserRating(data.userRating || 0);
         } else {
-          console.error("Failed to fetch rating");
+          console.error("Failed to fetch rating", await res.text());
         }
       } catch (err) {
-        console.error("Failed to fetch rating", err);
+        console.error("Error fetching rating:", err);
       }
     };
-  
+
     fetchRating();
-  }, [postId, token]);
-  
+  }, [postId, getToken]);
 
   const handleRating = async (stars) => {
     try {
+      const token = await getToken();
+      if (!token) {
+        console.error("No auth token found!");
+        return;
+      }
+
       const res = await fetch(`${import.meta.env.VITE_API_URL}/ratings/${postId}`, {
         method: "POST",
         headers: {
@@ -47,13 +60,13 @@ const Ratings = ({ postId, token }) => {
       if (res.ok) {
         const newData = await res.json();
         setUserRating(stars);
-        setRating(parseFloat(newData.newAverage)); // Ensure it's a number
+        setRating(parseFloat(newData.newAverage));
         setTotalReviews(newData.newTotal);
       } else {
-        console.error("Failed to submit rating");
+        console.error("Failed to submit rating", await res.text());
       }
     } catch (err) {
-      console.error("Failed to submit rating", err);
+      console.error("Error submitting rating:", err);
     }
   };
 
@@ -73,9 +86,9 @@ const Ratings = ({ postId, token }) => {
         );
       })}
       <span className="pl-2 font-normal text-[14px] md:text-[16px] flex items-center">
-      <span className="text-[var(--softTextColor)] text-[14px] md:text-[16px] ml-[-5px]">
-  {Number(rating).toFixed(1)}
-</span>
+        <span className="text-[var(--softTextColor)] text-[14px] md:text-[16px] ml-[-5px]">
+          {Number(rating).toFixed(1)}
+        </span>
         <span className="mx-2 flex items-center">·</span>
         {totalReviews} <span className="ml-1 text-[var(--softTextColor)] text-[14px] md:text-[16px]">reviews</span>
       </span>
