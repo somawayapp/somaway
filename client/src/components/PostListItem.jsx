@@ -17,7 +17,7 @@ const PostListItem = ({ post }) => {
   };
 
   return (
-    <div className="relative group mb-6 md:mb-[30px] overflow-hidden rounded-xl">
+    <div className="relative flex flex col gap-2 md:gap-4 group mb-6 md:mb-[30px] overflow-hidden rounded-xl">
       {/* Image with Link */}
       <Link to={`/${post.slug}`} className="block">
         <div className="relative w-full aspect-[3/3] rounded-xl md:rounded-2xl overflow-hidden">
@@ -63,14 +63,16 @@ const PostListItem = ({ post }) => {
 
 <Link
 
-className="text-[var(--softTextColor)] mt-6  font-semibold capitalize text-[14px] md:text-[16px] "
+className="text-[var(--softTextColor)] mt-6  font-semibold capitalize text-[12px] md:text-[14px] "
 > Nairobi, Kenya
 
 </Link>
 
+
+
       <Link
 
-  className="text-[var(--softTextColor)] mt-6  capitalize text-[14px] md:text-[16px] "
+  className="text-[var(--softTextColor)] mt-6  capitalize  text-[12px] md:text-[14px] "
 >
   {post.bedrooms
     ? `${post.bedrooms} Bedroom`
@@ -85,7 +87,7 @@ className="text-[var(--softTextColor)] mt-6  font-semibold capitalize text-[14px
 
 <Link
 
-className="text-[var(--softTextColor)] mt-6  font-semibold capitalize text-[14px] md:text-[16px] "
+className="text-[var(--softTextColor)] mt-6  font-semibold capitalize  text-[12px] md:text-[14px]"
 > KSh
 {post.price ? ` ${post.price}` : ""} <span className="font-normal">
 {post.model?.toLowerCase().includes("sale") ? " /for Sale" : " /month"}
