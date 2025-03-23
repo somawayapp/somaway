@@ -4,10 +4,8 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useAuth, useUser } from "@clerk/clerk-react";
 import { toast } from "react-toastify";
 import { useState } from "react";
-import { BiCommentDetail } from "react-icons/bi";
 import { Send } from "lucide-react";
 import Button from "./Button";
-
 
 const fetchComments = async (postId) => {
   const res = await axios.get(
@@ -16,13 +14,12 @@ const fetchComments = async (postId) => {
   return res.data;
 };
 
-const Reviews = ({ postId }) => {
+const Comments = ({ postId }) => {
   const { user } = useUser();
   const { getToken } = useAuth();
   const queryClient = useQueryClient();
 
-  const [showComments, setShowComments] = useState(false); // Toggle comment box
-  const [visibleComments, setVisibleComments] = useState(3); // Initial visible comments
+  const [visibleComments, setVisibleComments] = useState(6); // Increased initial visible comments
   const [commentSuccess, setCommentSuccess] = useState(false); // Temporary success message
 
   const { isPending, error, data = [] } = useQuery({
@@ -69,52 +66,39 @@ const Reviews = ({ postId }) => {
     setVisibleComments((prev) => prev + 5); // Load 5 more comments
   };
 
-  const closeComments = () => {
-    setShowComments(false);
-    setVisibleComments(3); // Reset to initial state
-  };
-
   return (
     <div className="flex flex-col gap-1 mb-2">
 
+     
+
+      {isPending ? (
+        "Loading..."
+      ) : error ? (
+        "Error loading reviews!"
+      ) : (
         <>
-  
+          {data.slice(0, visibleComments).map((comment) => (
+            <div
+              key={comment._id}
+              className="p-2 rounded-2xl text-[14px] md:text-[16px] shadow-2xl mt-3"
+            >
+              <Comment comment={comment} postId={postId} />
+            </div>
+          ))}
 
-          {isPending ? (
-            "Loading..."
-          ) : error ? (
-            "Error loading reviews!"
-          ) : (
-            <>
-              {data.slice(0, visibleComments).map((comment) => (
-                <div
-                  key={comment._id}
-                  className=" p-2 rounded-2xl  text-[14px] md:text-[16px] shadow-2xl mt-3"
-                >
-                  <Comment comment={comment} postId={postId} />
-                </div>
-              ))}
-
-              {visibleComments < data.length && (
-                <button
-                  onClick={loadMoreComments}
-                  className=" text-sm text-[#1DA1F2]"
-                >
-                  Show more reviews
-                </button>
-              )}
-              <button
-                onClick={closeComments}
-                className="text-[#ff4d52]    text-sm mt-2"
-              >
-                Close reviews
-              </button>
-            </>
+          {visibleComments < data.length && (
+            <button
+              onClick={loadMoreComments}
+              className="text-sm text-[#1DA1F2] mt-2 border-[0.2px] border-[#1DA1F2] px-1 py-[0.5px] rounded-xl"
+            >
+              Show more reviews
+            </button>
           )}
         </>
-    
+      )}
     </div>
   );
 };
+
 
 export default Reviews;

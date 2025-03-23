@@ -130,7 +130,7 @@ const Comments = ({ postId }) => {
               {visibleComments < data.length && (
                 <button
                   onClick={loadMoreComments}
-                  className=" text-sm text-[#1DA1F2]   border-[0.2px] border-[#1DA1F2]
+                  className=" text-sm text-[#1DA1F2]  mt-2  border-[0.2px] border-[#1DA1F2]
                px-1 py-[0.5px] rounded-xl  "
                 >
                   Show more reviews

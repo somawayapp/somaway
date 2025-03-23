@@ -412,10 +412,10 @@ const details = [
 <hr className="h-[1px] bg-[var(--softBg4)] border-0" />
 
 
-      <div className="h-[210px]  text-[14px] md:text-[16px]  text-[var(--softTextColor)]">
+      <div className=" text-[14px] md:text-[16px]  text-[var(--softTextColor)]">
        map
       </div>
-      
+
       <hr className="h-[1px] bg-[var(--softBg4)] border-0" />
 
       <Reviews/> 
