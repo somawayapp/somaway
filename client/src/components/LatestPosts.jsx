@@ -5,6 +5,7 @@ import InfiniteScroll from "react-infinite-scroll-component";
 import { useSearchParams } from "react-router-dom";
 import LatestItem from "./LatestItem";
 import React, { useRef, useState, useEffect } from "react";
+import SpinnerMini from "./Loader";
 
 
 
@@ -79,7 +80,7 @@ const LatestPosts = () => {
     staleTime: 1000 * 60 * 10, // Data stays fresh for 10 minutes
     cacheTime: 1000 * 60 * 30, // Cache remains available for 30 minutes
   });
-  if (status === "loading") return <p>Loading...</p>; // Show a loading spinner or message
+  if (status === "loading") return <SpinnerMini />; // Show a loading spinner or message
   if (error) return <p>Something went wrong!</p>; // Handle errors gracefully
   
   const allPosts = data?.pages?.flatMap((page) => page.posts) || [];

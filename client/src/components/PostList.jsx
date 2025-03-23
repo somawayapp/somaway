@@ -3,6 +3,7 @@ import { useInfiniteQuery } from "@tanstack/react-query";
 import axios from "axios";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { useSearchParams } from "react-router-dom";
+import SpinnerMini from "./Loader";
 
 
 
@@ -36,7 +37,7 @@ const PostList = () => {
     cacheTime: 1000 * 60 * 30, // Cache remains available for 30 minutes
   });
 
-  if (status === "loading") return <p>Loading...</p>; // Show a loading spinner or message
+  if (status === "loading") return <SpinnerMini />; // Show a loading spinner or message
 if (error) return <p>Something went wrong!</p>; // Handle errors gracefully
 
 const allPosts = data?.pages?.flatMap((page) => page.posts) || [];

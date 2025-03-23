@@ -3,6 +3,7 @@ import axios from "axios";
 import { useSearchParams } from "react-router-dom";
 import ExploreItem from "./ExploreItem";
 import React, { useRef, useState, useEffect } from "react";
+import SpinnerMini from "./Loader";
 
 const fetchPosts = async (searchParams) => {
   const searchParamsObj = Object.fromEntries([...searchParams]);
@@ -59,7 +60,7 @@ const ExplorePosts = () => {
     cacheTime: 1000 * 60 * 30,
   });
 
-  if (status === "loading") return <p>Loading...</p>;
+  if (status === "loading") return <SpinnerMini />;
   if (error) return <p>Something went wrong!</p>;
 
   const posts = data && data.posts ? data.posts : []; // Ensure `data.posts` is available

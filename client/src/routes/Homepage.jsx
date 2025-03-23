@@ -19,6 +19,7 @@ import StoryLine from "../components/StoryLine";
 import Footer from "../components/Footer";
 import MobileControls from "../components/MobileControls";
 import { Helmet } from "react-helmet";
+import SpinnerMini from "../components/Loader";
 
 const Homepage = () => {
   useEffect(() => {

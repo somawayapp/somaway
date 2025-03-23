@@ -4,6 +4,7 @@ import InfiniteScroll from "react-infinite-scroll-component";
 import { useSearchParams } from "react-router-dom";
 import FeaturedItem from "./FeaturedItem";
 import React, { useRef, useState, useEffect } from "react";
+import SpinnerMini from "./Loader";
 
 const fetchPosts = async (pageParam, searchParams) => {
   const searchParamsObj = Object.fromEntries([...searchParams]);
@@ -81,7 +82,7 @@ const FeaturedPosts = ({ setOpen }) => {
     cacheTime: 1000 * 60 * 30,
   });
 
-  if (status === "loading") return <p>Loading...</p>;
+  if (status === "loading") return <SpinnerMini />;
   if (error) return <p>Something went wrong!</p>;
 
   const allPosts = data?.pages?.flatMap((page) => page.posts) || [];
