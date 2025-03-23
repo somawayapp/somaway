@@ -14,7 +14,7 @@ const fetchComments = async (postId) => {
   return res.data;
 };
 
-const Comments = ({ postId }) => {
+const Reviews = ({ postId }) => {
   const { user } = useUser();
   const { getToken } = useAuth();
   const queryClient = useQueryClient();
