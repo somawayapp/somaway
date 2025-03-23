@@ -226,7 +226,7 @@ const details = [
         {index === 5 && !showMore && (
           <button
             className="absolute inset-0 m-auto flex items-center justify-center w-10 h-10 rounded-xl border-[1px] border-white bg-black bg-opacity-60 text-white text-xs font-semibold hover:bg-opacity-80 transition"
-            onClick={() => openPopup(index === 5 )}
+            onClick={() => openPopup(index === 6 )}
           >
             show more
           </button>
