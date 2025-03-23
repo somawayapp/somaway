@@ -226,8 +226,8 @@ const details = [
         {/* Floating Show More Button on the 8th Image */}
         {index === 4 && !showMore && (
    <button
-   className="absolute inset-0 m-auto flex items-center justify-center w-[80px] h-[40px] px-2 py-1 md:px-4 md:py-2 rounded-xl border-[1px] border-white bg-black
-   bg-opacity-60 text-white text-[9px] md:text-sm hover:bg-opacity-80 transition whitespace-nowrap"
+   className="absolute inset-0 m-auto flex items-center justify-center w-[40px] h-[20px] md:w-[80px] md:h-[40px] px-2 py-1 md:px-4 md:py-2 rounded-xl border-[1px]
+    border-white bg-black bg-opacity-60 text-white text-[9px] md:text-sm hover:bg-opacity-80 transition whitespace-nowrap"
    onClick={() => openPopup(index === 4)}
  >
    show more
@@ -460,7 +460,7 @@ const details = [
       </div>
 
       <hr className="h-[1px] bg-[var(--softBg4)] border-0" />
-      <h1 className="text-[var(--softTextColor)] font-semibold ml-1 md:ml-5 text-[20px] md:text-[22px]  ">What others say about this property  </h1>   
+      <h1 className="text-[var(--softTextColor)] font-semibold ml-1 md:ml-5 text-[20px] md:text-[22px]  ">Property reviews  </h1>   
 
       <Reviews postId={data._id} /> 
       <hr className="h-[1px] bg-[var(--softBg4)] mb-5 md:mb-9 border-0" />
