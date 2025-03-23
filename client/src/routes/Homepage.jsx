@@ -76,7 +76,7 @@ from ${author || 'top authors'}in minutes. Elevate your mind—only on Somaway!`
      
   
 
-      <div className="flex  flex-row  justify-between">
+      <div className="flex  flex-col justify-between">
        <Search />
        <PostList />
       </div>
