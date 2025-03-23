@@ -34,13 +34,13 @@ const Navbar = () => {
       sticky top-0 justify-between bg-[var(--bg)] border-b border-b-[var(--softBg4)] ">
 
 <div className="flex items-center justify-between gap-12">
-  <Link to="/home" className="flex items-center gap-1 text-xl font-bold md:text-3xl">
+  <Link to="/" className="flex items-center gap-1 text-xl font-bold md:text-3xl">
     <img src="/airlogo.png" className="w-7 h-7 rounded-lg md:w-8 md:h-8" />
     <span className="bg-clip-text text-[#FF5A5F] pl-1 text-xl md:text-2xl font-extrabold">Somaway</span>
   </Link>
   
   <div className="hidden md:flex flex-1 justify-center space-x-12">
-    <Link className="hover:text-[#ff4d52] font-bold" to="/home" onClick={() => setOpen(false)}>Home</Link>
+    <Link className="hover:text-[#ff4d52] font-bold" to="/" onClick={() => setOpen(false)}>Home</Link>
     <Link className="hover:text-[#ff4d52] font-bold" to="/" onClick={() => setOpen(false)}>Discover</Link>
   </div>
 </div>
@@ -141,7 +141,7 @@ const Navbar = () => {
 
         <div >
         <Link
-            to="/home"
+            to="/"
             className="block py-2 text-[var(--TextColor)] font-bold  hover:text-[#FF5A5F] p-2 rounded-xl"
    onClick={() => setOpen(false)}          > Home           </Link>   
      <Link

@@ -10,7 +10,7 @@ const MobileControls = () => {
 
       {/* Home Button */}
       <NavLink
-        to="/home"
+        to="/"
         className={({ isActive }) =>
           `flex flex-col items-center ${
             isActive ? "text-[#ff4d52]   " : "text-[var(--softTextColor2)]"
@@ -33,7 +33,7 @@ const MobileControls = () => {
       </NavLink>
       {/* Search Button */}
       <NavLink
-        to="/discover"
+        to="/"
         className={({ isActive }) =>
           `flex flex-col items-center ${
             isActive ? "text-[#ff4d52]   " : "text-[var(--softTextColor2)]"

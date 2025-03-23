@@ -11,7 +11,7 @@ const Search = () => {
       if (location.pathname === "/posts") {
         setSearchParams({ ...Object.fromEntries(searchParams), search: query });
       } else {
-        navigate(`/discover?search=${query}`);
+        navigate(`/r?search=${query}`);
       }
     }
   };

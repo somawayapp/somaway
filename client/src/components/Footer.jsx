@@ -37,8 +37,8 @@ const Footer = () => {
           <h4 className="text-lg font-semibold mb-4">Resources</h4>
           <nav>
             <ul className="space-y-2">
-              <li><a href="/discover" className="text-[var(--softTextColor)] hover:text-[var(--softTextColor)]">Book Summaries</a></li>
-              <li><a href="/discover" className="text-[var(--softTextColor)] hover:text-[var(--softTextColor)]">Blog</a></li>
+              <li><a href="/" className="text-[var(--softTextColor)] hover:text-[var(--softTextColor)]">Book Summaries</a></li>
+              <li><a href="/" className="text-[var(--softTextColor)] hover:text-[var(--softTextColor)]">Blog</a></li>
               <li><a href="/about" className="text-[var(--softTextColor)] hover:text-[var(--softTextColor)]">FAQ</a></li>
             </ul>
           </nav>

@@ -98,7 +98,7 @@ const CategoriesScroll = ({ setOpen }) => {
           return (
             <Link
               key={category}
-              to={`/discover?cat=${slug}`}
+              to={`/?cat=${slug}`}
               className="flex  flex-col items-center  gap-2 md:gap-4 justify-center text-[var(--textColor)] text-sm
               md:text-lg bg-[var(--bd3)] shadow-xl hover:bg-[var(--textColore)] rounded-xl
                px-5 py-2 md:px-7 transition-all"

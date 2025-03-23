@@ -20,7 +20,7 @@ const FeaturedItem = ({ post }) => {
         />
       </Link>
       <Link
-to={`/discover?author=${post.author}`}
+to={`/?author=${post.author}`}
 className="text-[var(--bg)] mt-3 ml-3 capitalize text-sm md:text-lg "
 >
 {post.author

@@ -1,55 +1,45 @@
-
-import { useState } from "react";
-import { useLocation } from "react-router-dom"; // Import useLocation from react-router-dom
-import Search from "../components/Search";
-import { Link } from "react-router-dom";
-import CategoriesScroll from "../components/CategoriesScroll";
-import Discover from "../components/Discover";
+import { useEffect, useState, useRef } from "react";
+import Navbar from "../components/Navbar";
+import Hero from "../components/Hero";
+import Partners from "../components/Patners";
+import StoryLine from "../components/StoryLine";
 import Footer from "../components/Footer";
-import Navbar from "../components/navbar2";
-import PopularPosts from "../components/PopularPosts";
-import LatestPosts from "../components/LatestPosts";
-import TrendingPosts from "../components/TrendingPosts";
-import FeaturedPosts from "../components/FeaturedPosts";
-import PostList from "../components/PostList";
 import { Helmet } from "react-helmet";
-import { useEffect } from "react";
+import SpinnerMini from "../components/Loader";
 
 const LandingPage = () => {
+  const [loading, setLoading] = useState(true);
+
   useEffect(() => {
-    window.scrollTo(0, 0); // Scrolls to the top when this component mounts
+    window.scrollTo(0, 0);
+    
+    // Simulate loading delay (you can replace this with real data fetching)
+    const timer = setTimeout(() => {
+      setLoading(false);
+    }, 1000); // Adjust time as needed
+
+    return () => clearTimeout(timer);
   }, []);
-  
-  const [open, setOpen] = useState(false);
-  const location = useLocation(); // Get the current location object
-
-  // Use URLSearchParams to extract query parameters from the URL
-  const params = new URLSearchParams(location.search);
-
-  // Extract the 'category', 'sort', 'author', 'search', and 'cat' parameters (if available)
-  const sort = params.get("sort");
-  const author = params.get("author");
-  const search = params.get("search");
-  const cat = params.get("cat"); // Extract 'cat' parameter
-
-  // Build the display string based on available parameters
-  const displayText = [
-    search ? `Search: ${search}` : "",
-    sort ? `Sort: ${sort}` : "",
-    author ? `Author: ${author}` : "",
-    cat ? `Category: ${cat}` : "", // Display 'cat' if present
-  ]
-    .filter(Boolean) // Remove empty strings
-    .join(" | ") || "Popular summaries  "; // Default to "All Books" if no filters are applied
 
   return (
-    <div  className=" bg-[var(--navBg)] mb-[80px]  ">
+    <>
+    {loading ? (
+      <div className="flex justify-center items-center h-screen">
+        <SpinnerMini />
+      </div>
+    ) : (
+      <div>
+        <Navbar />
+    
+
+
+      <div>
         <Helmet>
         <title>The #1 Free App to Unlock the Best Ideas from Top Books! - Somaway Best Book Summaries</title>
 
-<meta name="description" content="Somaway is the #1 award-winning book summary app and website, trusted by 40M+ users worldwide and 100K+ daily readers. Get smarter in just 15 minutes with our free, concise summaries of best-selling books. Join us today—learn and grow, one book summary at a time! " />
+        <meta name="description" content="Somaway is the #1 award-winning book summary app and website, trusted by 40M+ users worldwide and 100K+ daily readers. Get smarter in just 15 minutes with our free, concise summaries of best-selling books. Join us today—learn and grow, one book summary at a time! " />
 
-<meta name="keywords" content="book summaries, knowledge empowerment, bestselling books, transformative ideas, thought leadership, business books, self-help summaries, industry insights, personal growth, productivity hacks, motivation, innovation strategies, creative thinking, mind mastery, leadership skills, financial wisdom, success mindset, breakthrough thinking, wisdom for life, practical knowledge, free book summary, best book summaries, number one summary app, best app, best summary, learning shortcuts, brain boost, rapid reading, book digest, quick reads, success stories, entrepreneurial mindset, modern wisdom, elite knowledge, mastery techniques, global perspectives, future readiness, book analysis, idea extraction, in-depth reviews, concise knowledge, summary breakdowns, book wisdom, mental expansion, critical thinking, intellectual growth, top books, influential reads, advanced thinking, ultimate book digest, life hacks, professional growth, career mastery, mindset shift, paradigm transformation, unconventional wisdom, practical insights, top nonfiction books, skill enhancement, brain optimization, cognitive skills, mind enhancement, top book reviews, wisdom harvesting, fast knowledge, core ideas, rapid insights, strategic intelligence, innovation fuel, personal development, growth mindset, self-mastery, breakthrough books, smart reading, fast tracking wisdom, peak performance, visionary thinking, knowledge domination, unbeatable learning" />
+        <meta name="keywords" content="book summaries, knowledge empowerment, bestselling books, transformative ideas, thought leadership, business books, self-help summaries, industry insights, personal growth, productivity hacks, motivation, innovation strategies, creative thinking, mind mastery, leadership skills, financial wisdom, success mindset, breakthrough thinking, wisdom for life, practical knowledge, learning shortcuts, brain boost, rapid reading, book digest, quick reads, success stories, entrepreneurial mindset, modern wisdom, elite knowledge, mastery techniques, global perspectives, future readiness, book analysis, idea extraction, in-depth reviews, concise knowledge, summary breakdowns, book wisdom, mental expansion, critical thinking, intellectual growth, top books, influential reads, advanced thinking, ultimate book digest, life hacks, professional growth, career mastery, mindset shift, paradigm transformation, unconventional wisdom, practical insights, top nonfiction books, skill enhancement, brain optimization, cognitive skills, mind enhancement, top book reviews, wisdom harvesting, fast knowledge, core ideas, rapid insights, strategic intelligence, innovation fuel, personal development, growth mindset, self-mastery, breakthrough books, smart reading, fast tracking wisdom, peak performance, visionary thinking, knowledge domination, unbeatable learning" />
 
  
   <meta property="og:title" content="Somaway - Elevate Your Mind" />
@@ -82,131 +72,131 @@ const LandingPage = () => {
   <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
 </Helmet>
 
-       <Navbar/>
-       
-       <div className="px-3 pt-4 md:pt-6 md:px-9 ">
-       <h3 className="text-4xl md:text-6xl ml-1 mb-1  font-bold text-[var(--textColor)]">
-         Book Summaries Library
-        </h3>
-        <div className="max-w-[700px] mb-5 md:mb-9">
-        <h3 className="text-sm md:text-lg ml-1 mb-5 md:mb-9 text-[var(--textColor)]">
-         Dive into 15-minute nonfiction book summaries crafted for the curious mind. Insights in minutes, wisdom for a lifetime.
-         Are you ready to make Somaway? Get started!
-        </h3>
-        </div>
+
+            <Navbar/>
+
+    <div className="mb-9  flex flex-col gap-0">
+
+         
+
+      {/* Floating Section 
       
-        <div className="mb-4 md:mb-9">
-        <CategoriesScroll/>
+      <div
+  className={` flex items-center hidden sm:block  mx-auto justify-between px-5 py-3 transition-opacity 
+    duration-300 ${isVisible ? "opacity-100" : "opacity-0 pointer-events-none"} sm:opacity-100 sm:pointer-events-auto  `}
+ 
+>
 
-        </div>
 
+        <Link to="/" className="flex items-center mt-[10px] gap-1 text-lg font-bold md:text-2xl">
+        <img src="/x.png"  className="w-50 h-20 lg:w-50 lg:h-20" />
+
+<span className="text-[var(--textLogo)] text-[30px] lg:text-[90px]"></span>
+
+</Link>  
+
+      
+
+ 
+      </div>
+      */}
+
+   {/*
+
+      <div  style={{ zIndex: 100004 }} className="mb-[45px] md:mb-[30px] mt-[15px] md:mt-[20px] sticky top-0.5 md:top-2 ">
+  <Maincategories />
+</div>
+     */}
+     
+        <Hero />
+
+   <Partners />
+
+
+   <div
+         className="bg-[var(--bodyBg)] p-4 md:p-9 mt-[10px] mx-3 md:mx-9 rounded-lg md:rounded-[30px]
+           text-white text-center animate-fadeIn flex flex-col items-center justify-center"
+       >
+         <div className="h-full max-w-full md:max-w-[700px] mx-auto box-border">
+         <h1 className="text-2xl md:text-5xl mt-[15px] text-[var(--bg)] px-2 md:mt-[50px] font-bold">
+         Set your goal and start your self-growth journey
+                   </h1>
+                   <div className="flex gap-2 items-center justify-center md:gap-4 flex-row">
+  <button
+    className="mt-5 mb-5 flex items-center border border-[var(--softTextColor)] bg-[var(--bd2)] text-[var(--bg)] 
+    font-semibold text-xs md:text-sm  py-2 px-2 md:px-6 md:py-3 gap-2 rounded-[10px] cursor-pointer hover:bg-blue-500"
+  >
+    <img
+      src="/fiction.webp"
+      className="w-5 h-5 md:w-8 md:h-8 object-cover rounded-full"
+    />
+    <span>Log In</span>
+  </button>
+
+  <button
+    className="mt-5 mb-5 flex items-center border border-[var(--textColore)] bg-[var(--bd)] text-[var(--textColor)]
+     font-semibold text-xs md:text-sm  py-2 px-2 md:px-6 md:py-3 gap-2 rounded-[10px] cursor-pointer hover:bg-blue-500"
+  >
+    <img
+      src="/self-growth.webp"
+      className="w-5 h-5 md:w-8 md:h-8 object-cover rounded-full"
+    />
+    <span> Summaries</span>
+  </button>
+
+  <button
+    className="mt-5 mb-5 flex items-center border border-[var(--softTextColor)] bg-[var(--bd2)] text-[var(--bg)] py-2 px-2 md:px-6 md:py-3
+     font-semibold text-xs md:text-sm  gap-2 rounded-[10px] cursor-pointer hover:bg-blue-500"
+  >
+    <img
+      src="/negotiation.webp"
+      className="w-5 h-5 md:w-8 md:h-8 object-cover rounded-full"
+    />
+    <span className=" " >Start</span>
+
+  </button>
+</div>
+
+                 
+         
+         </div >
+
+         <div className="flex bg-[var(--bd2)] flex-col max-w-full md:max-w-[900px] m gap-2 md:gap-4 rounded-lg md:rounded-[20px] p-2 md:p-6 md:flex-row">
+  <img
+    src="/heropic.jpg"
+    className="w-[200px] rounded-lg md:rounded-[20px] md:w-2/5 mx-auto md:mx-0"
+  />
+  <div className="md:w-3/5 items-start justify-start md:text-left">
+    <p className="text-xs mt-5 md:mt-9 text-[var(--bg2)]  md:text-md">ABOUT US</p>
+    <p className="text-md mt-1 md:mt-2 text-[var(--bg)] md:text-2xl font-semibold">
+      Still wondering what is Somaway app?
+    </p>
+    <p className="text-sm text-[var(--bg)] mt-1 md:mt-2 md:text-lg">
+      Somaway is a global EdTech startup with Kenyan roots. Somaway app offers
+      15-minute bite-sized non-fiction book summaries catered to your everyday
+      needs. We are mission-driven and passionate about self-improvement.
+    </p>
+  </div>
+</div>
+
+       
        </div>
 
-       
-  
-
-      <div className="flex  flex-row   text-[var(--textColor)] justify-between">
-      <div className="w-full  bg-[var(--bd3)] border-none  md:border md:border-[var(--softBg4)] shadow-sm p-3 md:p-9  text-[var(--bg)] ">
-     
-      <div className="flex hidden md:flex mb-[30px] justify-between ">
-
-<h1 style={{  zIndex: "10000"}} className=" lg:text-[30px] mb-[30px] text-xl ml-2 text-[var(--textColor)] font-bold">
-        {`Book liblary - ${displayText}`}
-      </h1>
-      <Search />
-
-</div>
 
 
-<div className="flex flex-col md:hidden block  items-center justify-center mb-5 pl-1  pr-1 ">
+      <StoryLine />
 
-  
-<h1 style={{  zIndex: "10000"}} className=" lg:text-[30px] mb-4 mt-2  md:mb-[30px] text-xl ml-2 text-[var(--textColor)] font-bold">
-        {`Book Library - ${displayText}`}
-      </h1>
-
-</div>   
-   <PopularPosts/>
-
-    </div>
-
-</div>
-
-<div className=" mt-2 md:mt-4  p-3 md:p-8">
-
-   
-
-  
-<div >
-      <h3 className="text-xl md:text-3xl font-semibold text-[var(--textColor)]">
-     Trending summaries    </h3>
-    </div>
-    <TrendingPosts/>
-</div>
+      <Footer />
 
 
-
-
-
-
-
-
-
-    <div className=" bg-[var(--bodyBg)]   p-3 mt-4 md:mt-8 md:p-9 ">
-    <h3 className="text-xl md:text-3xl  mt-5 mb-5 md:mb-9 md:mt-9   font-semibold text-[var(--bg)]">
-     Featured summaries      </h3>
-      <FeaturedPosts />
     
     </div>
-
-
- 
-
-
-
-
- 
-
-
-      {/* Recent Posts */}
-      <div>
-    
-
-    <div className=" px-3 md:px-9">
-    <h3 className="text-2xl md:text-4xl ml-2 mt-8 mb-6 md:mb-9 md:mt-9 font-semibold text-[var(--textColor)]">
-          All  summaries     </h3>
-      <PostList />
     </div>
-
-
-    <div className="flex justify-between mb-10 md:mb-[75px] pt-5 overflow-x-hidden  bg-[var(--textLogo)] 
-        items-center gap-5 flex-col md:flex-row">
-      <div>
-      <h1 className="my-8 lg:text-6xl text-3xl ml-2 pl-2 md:pl-0 mb-2 mt-4 lg:mb-5 lg:mt-8 text-[var(--textColore2)] font-bold"> Book summaries library</h1>
-      <p className="text-[var(--textColore2)] pl-2 md:pl-0 ml-2 text-md mb-5 md:mb-7 md:text-xl">Enjoy summarized nonfiction bestsellers</p>
-      <Link
-            to="/"
-            className="w-full ml-4 md:ml-2 text-center  text-md md:text-xl sm:w-auto px-4 md:px-6  py-3 md:py-3 bg-[#FF5A5F]   text-white font-semibold 
-            rounded-md hover:bg-[#ff4d52]   "
-          >
-            Discover    
-                  </Link>
     </div>
+    )}
+  </>
 
-     <img
-            src="/summary.svg"
-            className="w-100 md:w-180  h-40 md:h-80 mr-0  md:mr-[-100px] object-cover "
-          />   
-          
-          </div>
-      
-</div>
-<Footer/>
-
- </div>
   );
 };
-
-
 
 export default LandingPage;

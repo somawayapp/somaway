@@ -12,8 +12,7 @@
           import Footer from "../components/Footer";
           import ExplorePosts from "../components/ExplorePosts";
           import MobileControls from "../components/MobileControls";
-          import LatestPosts from "../components/LatestPosts";
-          import { useEffect } from "react";
+                    import { useEffect } from "react";
           import { Helmet } from "react-helmet";
           import { useState } from "react";
           import BackButton from "../components/BackButton";
