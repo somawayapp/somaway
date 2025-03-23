@@ -41,6 +41,9 @@ app.use(
         'https://somawayclient.vercel.app',
         'https://blogifiyclient.vercel.app',
         'http://localhost:5173',
+        'https://www.xtechnewsletter.com',
+        'https://xtechnewsletter.com',
+
     
       ];
 
