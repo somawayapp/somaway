@@ -224,13 +224,14 @@ const details = [
 
         {/* Floating Show More Button on the 8th Image */}
         {index === 5 && !showMore && (
-          <button
-            className="absolute inset-0 m-auto flex-col items-center justify-center w-10 h-10 rounded-xl border-[1px] border-white bg-black
-             bg-opacity-60 text-white text-xs md:text-sm hover:bg-opacity-80 transition"
-            onClick={() => openPopup(index === 6 )}
-          >
-            show more
-          </button>
+       <button
+       className="absolute inset-0 m-auto flex-col items-center justify-center px-4 py-2 w-10 h-10 rounded-xl border-[1px] border-white bg-black
+        bg-opacity-60 text-white text-xs md:text-sm hover:bg-opacity-80 transition whitespace-nowrap"
+       onClick={() => openPopup(index === 6)}
+     >
+       show more
+     </button>
+     
         )}
       </div>
     ))}
@@ -251,20 +252,26 @@ const details = [
       className="relative w-full p-3 md:p-9 md:w-4/5 flex items-center justify-center"
       onClick={(e) => e.stopPropagation()}
     >
-      {/* Close button inside top-right of the image */}
+      {/* Close Button (Top Right) */}
       <button
-        className="absolute top-3 right-3 bg-gray-400 text-white rounded-full p-2 z-10"
+        className="absolute top-3 right-3 bg-gray-400 text-white w-10 h-10 flex items-center justify-center rounded-full z-10"
         onClick={() => setPopupImage(null)}
       >
         ✖
       </button>
 
-      {/* Left navigation button */}
+      {/* Previous and Next Buttons (Centered on Image) */}
       <button
-        className="absolute left-2 bg-gray-400 text-white rounded-full p-2"
+        className="absolute left-3 top-1/2 transform -translate-y-1/2 bg-gray-400 text-white w-10 h-10 flex items-center justify-center rounded-full z-10"
         onClick={() => navigatePopup("prev")}
       >
         ◀
+      </button>
+      <button
+        className="absolute right-3 top-1/2 transform -translate-y-1/2 bg-gray-400 text-white w-10 h-10 flex items-center justify-center rounded-full z-10"
+        onClick={() => navigatePopup("next")}
+      >
+        ▶
       </button>
 
       {/* Popup Image */}
@@ -273,14 +280,6 @@ const details = [
         className="w-full h-auto max-h-[85vh] md:max-h-[90vh] object-cover rounded-xl"
         alt="Popup"
       />
-
-      {/* Right navigation button */}
-      <button
-        className="absolute right-2 bg-gray-400 text-white rounded-full p-2"
-        onClick={() => navigatePopup("next")}
-      >
-        ▶
-      </button>
     </div>
   </div>
 )}
