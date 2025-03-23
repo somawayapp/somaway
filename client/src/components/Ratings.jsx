@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { FaStar } from "react-icons/fa";
 
-const Rating = ({ postId }) => {
+const Rating = ({ postId, token }) => {
   const [rating, setRating] = useState(0);
   const [totalReviews, setTotalReviews] = useState(0);
   const [hover, setHover] = useState(null);
@@ -10,29 +10,39 @@ const Rating = ({ postId }) => {
   useEffect(() => {
     const fetchRating = async () => {
       try {
-        const res = await fetch(`/api/ratings/${postId}`);
-        const data = await res.json();
-        setRating(data.averageRating);
-        setTotalReviews(data.totalRatings);
-        setUserRating(data.userRating); // Fetch user's existing rating
+        const res = await fetch(`${import.meta.env.VITE_API_URL}/api/ratings/${postId}`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+
+        if (res.ok) {
+          const data = await res.json();
+          setRating(data.averageRating);
+          setTotalReviews(data.totalRatings);
+          setUserRating(data.userRating); // Fetch user's existing rating
+        } else {
+          console.error("Failed to fetch rating");
+        }
       } catch (err) {
         console.error("Failed to fetch rating", err);
       }
     };
 
     fetchRating();
-  }, [postId]);
+  }, [postId, token]);
 
   const handleRating = async (stars) => {
     try {
-      const res = await fetch(`/api/ratings/${postId}`, {
+      const res = await fetch(`${import.meta.env.VITE_API_URL}/api/ratings/${postId}`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
         },
         body: JSON.stringify({ stars }),
       });
-  
+
       if (res.ok) {
         const newData = await res.json();
         setUserRating(stars);
@@ -45,7 +55,6 @@ const Rating = ({ postId }) => {
       console.error("Failed to submit rating", err);
     }
   };
-  
 
   return (
     <div className="flex flex-row ml-3 items-center mt-2 text-sm md:text-lg">
@@ -67,11 +76,10 @@ const Rating = ({ postId }) => {
           {rating.toFixed(1)}
         </span>
         <span className="mx-2 flex items-center">·</span>
-        {totalReviews} <span className="ml-1 text-[var(--softTextColor)] text-[14px] md:text-[16px]">revews</span>
+        {totalReviews} <span className="ml-1 text-[var(--softTextColor)] text-[14px] md:text-[16px]">reviews</span>
       </span>
     </div>
   );
 };
-
 
 export default Rating;
