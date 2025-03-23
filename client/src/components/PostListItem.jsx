@@ -87,7 +87,7 @@ className="text-[var(--softTextColor)] mt-6  font-semibold capitalize text-[14px
 
 className="text-[var(--softTextColor)] mt-6  font-semibold capitalize text-[14px] md:text-[16px] "
 > KSh
-{post.price ? ` ${post.price.slice(0, 20)}` : ""} <span className="font-normal">
+{post.price ? ` ${post.price}` : ""} <span className="font-normal">
 {post.model?.toLowerCase().includes("sale") ? " /for Sale" : " /month"}
 
 </span>
