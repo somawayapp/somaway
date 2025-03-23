@@ -16,9 +16,10 @@
           import { FaBuilding, FaWarehouse, FaHome, FaTree, FaBed } from "react-icons/fa";
           import { MdVilla, MdApartment } from "react-icons/md";
           import { GiOfficeChair, GiShop, GiCargoCrate } from "react-icons/gi";
-          import { FaSwimmingPool, FaWifi, FaParking,  FaLeaf, FaBabyCarriage } from 'react-icons/fa';
-          import { MdBalcony, MdAir, MdFitnessCenter, MdSecurity, MdOutlineBackup } from 'react-icons/md';
+          import { FaSwimmingPool, FaWifi, FaParking, FaLeaf, FaBabyCarriage } from 'react-icons/fa';
+          import { MdBalcony, MdAir, MdFitnessCenter, MdSecurity, MdOutlineBackup} from 'react-icons/md';
           import { ArrowUpCircle } from "lucide-react";
+          import { AiOutlineAppstore } from "react-icons/ai";
           import { useRef } from "react";
           import Ratings from "../components/Ratings";
 

@@ -71,17 +71,19 @@ from ${author || 'top authors'}in minutes. Elevate your mind—only on Somaway!`
        <Navbar/>
        <div className="px-3 pt-4 md:pt-6 md:px-9 ">
         <CategoriesScroll/>
-       </div>
 
      
   
 
-      <div className="flex  flex-col justify-between">
+      <div className="flex  gap-4 md:gap-8 flex-col justify-between">
        <Search />
        <PostList />
       </div>
+      </div>
+
        <Footer/>
        </div>
+
     )}
   </>
 
