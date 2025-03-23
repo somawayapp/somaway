@@ -102,7 +102,7 @@ const Comments = ({ postId }) => {
                pl-4 text-[var(--textColor)] rounded-xl"
             />
             <button className="px-1 ">
-            <Send className=" w-[20px] text-[#ff4d52] h-4" />
+            <Send className=" w-[20px] text-[#ff4d52] " />
 
             </button>
           </form>
