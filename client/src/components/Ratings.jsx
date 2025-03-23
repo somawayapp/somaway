@@ -5,16 +5,16 @@ const Rating = ({ postId }) => {
   const [rating, setRating] = useState(0);
   const [totalReviews, setTotalReviews] = useState(0);
   const [hover, setHover] = useState(null);
-  const [userRating, setUserRating] = useState(null); // Track user's own rating
+  const [userRating, setUserRating] = useState(null);
 
   useEffect(() => {
-    // Fetch the average rating & total reviews
     const fetchRating = async () => {
       try {
         const res = await fetch(`/api/ratings/${postId}`);
         const data = await res.json();
         setRating(data.averageRating);
         setTotalReviews(data.totalRatings);
+        setUserRating(data.userRating); // Fetch user's existing rating
       } catch (err) {
         console.error("Failed to fetch rating", err);
       }
@@ -34,9 +34,12 @@ const Rating = ({ postId }) => {
       });
 
       if (res.ok) {
-        setUserRating(stars);
-        setRating((prev) => ((prev * totalReviews + stars) / (totalReviews + 1)).toFixed(1));
-        setTotalReviews((prev) => prev + 1);
+        const newData = await res.json();
+        setUserRating(stars); // Set user rating so it doesn't reset on hover
+        setRating(newData.newAverage);
+        setTotalReviews(newData.newTotal);
+      } else {
+        console.error("Failed to submit rating");
       }
     } catch (err) {
       console.error("Failed to submit rating", err);
@@ -60,7 +63,7 @@ const Rating = ({ postId }) => {
       })}
       <span className="pl-2 font-normal text-[14px] md:text-[16px] flex items-center">
         <span className="text-[var(--softTextColor)] text-[14px] md:text-[16px] ml-[-5px]">
-          {rating || "0.0"}
+          {rating.toFixed(1)}
         </span>
         <span className="mx-2 flex items-center">·</span>
         {totalReviews} <span className="ml-1 text-[var(--softTextColor)] text-[14px] md:text-[16px]">reviews</span>
@@ -68,5 +71,6 @@ const Rating = ({ postId }) => {
     </div>
   );
 };
+
 
 export default Rating;
