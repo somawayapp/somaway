@@ -44,7 +44,8 @@
               window.scrollTo(0, 0); // Scrolls to the top when this component mounts
             }, []);
             const { slug } = useParams();
-          
+            const postId = data._id;
+
             const { isPending, error, data } = useQuery({
               queryKey: ["post", slug],
               queryFn: () => fetchPost(slug),
