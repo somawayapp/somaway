@@ -223,7 +223,7 @@ const details = [
         <img src={image} className="object-cover h-full w-full" alt={`Image ${index + 1}`} />
 
         {/* Floating Show More Button on the 8th Image */}
-        {index === 5 && !showMore && (
+        {index === 4 && !showMore && (
  <button
  className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 px-2 py-1 rounded-xl border border-white bg-black bg-opacity-60 text-white text-xs md:text-sm hover:bg-opacity-80 transition"
  onClick={() => openPopup(index === 5)}
