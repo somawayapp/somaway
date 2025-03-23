@@ -251,27 +251,21 @@ const details = [
       className="relative w-full p-3 md:p-9 md:w-4/5 flex items-center justify-center"
       onClick={(e) => e.stopPropagation()}
     >
-      {/* Icons inside the popup image */}
-      <div className="absolute top-3 left-3 right-3 flex justify-between items-center z-10">
-        <button
-          className="bg-gray-400 text-white rounded-full p-2"
-          onClick={() => navigatePopup("prev")}
-        >
-          ◀
-        </button>
-        <button
-          className="bg-gray-400 text-white rounded-full p-2"
-          onClick={() => setPopupImage(null)}
-        >
-          ✖
-        </button>
-        <button
-          className="bg-gray-400 text-white rounded-full p-2"
-          onClick={() => navigatePopup("next")}
-        >
-          ▶
-        </button>
-      </div>
+      {/* Close button inside top-right of the image */}
+      <button
+        className="absolute top-3 right-3 bg-gray-400 text-white rounded-full p-2 z-10"
+        onClick={() => setPopupImage(null)}
+      >
+        ✖
+      </button>
+
+      {/* Left navigation button */}
+      <button
+        className="absolute left-2 bg-gray-400 text-white rounded-full p-2"
+        onClick={() => navigatePopup("prev")}
+      >
+        ◀
+      </button>
 
       {/* Popup Image */}
       <img
@@ -279,6 +273,14 @@ const details = [
         className="w-full h-auto max-h-[85vh] md:max-h-[90vh] object-cover rounded-xl"
         alt="Popup"
       />
+
+      {/* Right navigation button */}
+      <button
+        className="absolute right-2 bg-gray-400 text-white rounded-full p-2"
+        onClick={() => navigatePopup("next")}
+      >
+        ▶
+      </button>
     </div>
   </div>
 )}
