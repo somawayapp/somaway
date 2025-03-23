@@ -139,7 +139,7 @@ const Comments = ({ postId }) => {
               <button
                 onClick={closeComments}
                 className="text-[#ff4d52]  border-[0.2px] border-[#ff4d52]
-               px-1 py-[0.5px] rounded-xl   text-sm mt-2"
+               px-1 py-[0.5px] rounded-xl   text-sm mt-3"
               >
                 Close reviews
               </button>
