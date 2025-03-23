@@ -10,6 +10,8 @@ const Ratings = ({ postId }) => {
   const [totalReviews, setTotalReviews] = useState(0);
   const [hover, setHover] = useState(null);
   const [userRating, setUserRating] = useState(null);
+  const [totalComments, setTotalComments] = useState(0);
+
 
   useEffect(() => {
     const fetchRating = async () => {
@@ -38,8 +40,21 @@ const Ratings = ({ postId }) => {
         console.error("Error fetching rating:", err);
       }
     };
-    fetchRating();
-  }, [postId, isSignedIn, getToken]);
+    
+ 
+
+  const fetchCommentsCount = async () => {
+    try {
+      const res = await axios.get(`${import.meta.env.VITE_API_URL}/comments/${postId}`);
+      setTotalComments(res.data.length);
+    } catch (err) {
+      console.error("Error fetching comments count:", err);
+    }
+  };
+
+  fetchRating();
+  fetchCommentsCount();
+}, [postId])
 
   const handleRating = async (stars) => {
     if (!isSignedIn) {
@@ -76,6 +91,8 @@ const Ratings = ({ postId }) => {
     }
   };
 
+
+  
   return (
     <div className="flex flex-row ml-3 items-center mt-2 text-sm md:text-lg">
       {[...Array(5)].map((_, index) => {
@@ -96,7 +113,7 @@ const Ratings = ({ postId }) => {
           {Number(rating).toFixed(1)}
         </span>
         <span className="mx-2 flex items-center">·</span>
-        {totalReviews} <span className="ml-1 text-[var(--softTextColor)] text-[14px] md:text-[16px]">reviews</span>
+        [{totalReviews} +  {totalComments} ] <span className="ml-1 text-[var(--softTextColor)] text-[14px] md:text-[16px]">reviews</span>
       </span>
     </div>
   );
