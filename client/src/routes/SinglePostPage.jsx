@@ -162,10 +162,14 @@ const details = [
             return details.length > 0 ? (
               <div className=" bg-[var(--bg)]">
           
-          <div
->
-  {isPending ? <SpinnerMini /> : null}
+          <div>
+  {isPending ? (
+    <SpinnerMini />
+  ) : error ? (
+    <p className="text-red-500">{error.message}</p>
+  ) : null}
 </div>
+
 
           
                 <Navbar />
