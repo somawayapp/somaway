@@ -28,7 +28,7 @@ const PostList = () => {
   } = useInfiniteQuery({
     queryKey: ["posts", searchParams.toString()],
     queryFn: ({ pageParam = 1 }) =>
-      fetchPosts(pageParam, searchParams, pageParam === 1 ? 10 : 10), // 10 initially, then 10 per scroll
+      fetchPosts(pageParam, searchParams, pageParam === 1 ? 8 : 12), // 8 first, 12 per scroll
     initialPageParam: 1,
     getNextPageParam: (lastPage, pages) =>
       lastPage.hasMore ? pages.length + 1 : undefined,
@@ -36,10 +36,10 @@ const PostList = () => {
     cacheTime: 1000 * 60 * 30,
   });
 
-  // Preload the next set of posts in advance
+  // Preload the next set before user reaches the bottom
   useEffect(() => {
     if (hasNextPage && !isFetchingNextPage) {
-      setTimeout(fetchNextPage, 500); // Load next set before user reaches bottom
+      setTimeout(fetchNextPage, 1000); // Load next set early
     }
   }, [hasNextPage, isFetchingNextPage, fetchNextPage]);
 
@@ -65,7 +65,7 @@ const PostList = () => {
           <SpinnerMini />
         </div>
       }
-      className="gap-3 md:gap-6 grid grid-cols-2 sm:grid-cols-2 md:grid-cols-7 scrollbar-hide"
+      className="gap-3 md:gap-6 grid grid-cols-1 md:grid-cols-4 scrollbar-hide"
     >
       {allPosts.map((post) => (
         <PostListItem key={post._id} post={post} />
