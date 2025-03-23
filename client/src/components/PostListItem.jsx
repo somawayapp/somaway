@@ -61,16 +61,19 @@ const PostListItem = ({ post }) => {
       )}
 
 
-<Link
+<div className="gap-1 mt-4">
+
+
+<p
 
 className="text-[var(--softTextColor)] mt-6  font-semibold capitalize text-[12px] md:text-[14px] "
 > Nairobi, Kenya
 
-</Link>
+</p>
 
 
 
-      <Link
+      <p
 
   className="text-[var(--softTextColor)] mt-6  capitalize  text-[12px] md:text-[14px] "
 >
@@ -83,9 +86,9 @@ className="text-[var(--softTextColor)] mt-6  font-semibold capitalize text-[12px
     : ""}
   {post.propertytype ? ` ${post.propertytype.slice(0, 20)}` : ""}
   {post.model?.toLowerCase().includes("sale") ? " for Sale" : " for Rent"}
-</Link>
+</p>
 
-<Link
+<p
 
 className="text-[var(--softTextColor)] mt-6  font-semibold capitalize  text-[12px] md:text-[14px]"
 > KSh
@@ -93,9 +96,11 @@ className="text-[var(--softTextColor)] mt-6  font-semibold capitalize  text-[12p
 {post.model?.toLowerCase().includes("sale") ? " /for Sale" : " /month"}
 
 </span>
-</Link>
+</p>
 
     </div>
+    </div>
+
   );
 };
 
