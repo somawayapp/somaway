@@ -226,7 +226,7 @@ const details = [
         {/* Floating Show More Button on the 8th Image */}
         {index === 4 && !showMore && (
    <button
-   className="absolute inset-0 m-auto flex items-center justify-center w-[40px] h-[20px] md:w-[80px] md:h-[40px] px-2 py-1 md:px-4 md:py-2 rounded-xl border-[1px]
+   className="absolute inset-0 m-auto flex items-center justify-center w-[60px] h-[20px] md:w-[100px] md:h-[40px] px-2 py-1 md:px-4 md:py-2 rounded-xl border-[1px]
     border-white bg-black bg-opacity-60 text-white text-[9px] md:text-sm hover:bg-opacity-80 transition whitespace-nowrap"
    onClick={() => openPopup(index === 4)}
  >
