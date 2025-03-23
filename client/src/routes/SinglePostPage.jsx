@@ -30,7 +30,7 @@
           import { IoIosConstruct } from 'react-icons/io';
           import { ArrowUpCircle } from "lucide-react";
           import { useRef } from "react";
-          import Rating from "../components/Ratings";
+          import Ratings from "../components/Ratings";
 
 
           const fetchPost = async (slug) => {
@@ -550,7 +550,7 @@ const details = [
 
 
       <div >
-      <Rating postId={data._id} />
+      <Ratings postId={data._id} />
 
 </div>
 

@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { FaStar } from "react-icons/fa";
 
-const Rating = ({ postId, token }) => {
+const Ratings = ({ postId, token }) => {
   const [rating, setRating] = useState(0);
   const [totalReviews, setTotalReviews] = useState(0);
   const [hover, setHover] = useState(null);
@@ -15,12 +15,12 @@ const Rating = ({ postId, token }) => {
             Authorization: `Bearer ${token}`,
           },
         });
-
+  
         if (res.ok) {
           const data = await res.json();
-          setRating(data.averageRating);
-          setTotalReviews(data.totalRatings);
-          setUserRating(data.userRating); // Fetch user's existing rating
+          setRating(parseFloat(data.averageRating) || 0); // Ensure rating is a number
+          setTotalReviews(data.totalRatings || 0);
+          setUserRating(data.userRating || 0);
         } else {
           console.error("Failed to fetch rating");
         }
@@ -28,9 +28,10 @@ const Rating = ({ postId, token }) => {
         console.error("Failed to fetch rating", err);
       }
     };
-
+  
     fetchRating();
   }, [postId, token]);
+  
 
   const handleRating = async (stars) => {
     try {
@@ -72,9 +73,9 @@ const Rating = ({ postId, token }) => {
         );
       })}
       <span className="pl-2 font-normal text-[14px] md:text-[16px] flex items-center">
-        <span className="text-[var(--softTextColor)] text-[14px] md:text-[16px] ml-[-5px]">
-          {rating.toFixed(1)}
-        </span>
+      <span className="text-[var(--softTextColor)] text-[14px] md:text-[16px] ml-[-5px]">
+  {Number(rating).toFixed(1)}
+</span>
         <span className="mx-2 flex items-center">·</span>
         {totalReviews} <span className="ml-1 text-[var(--softTextColor)] text-[14px] md:text-[16px]">reviews</span>
       </span>
@@ -82,4 +83,4 @@ const Rating = ({ postId, token }) => {
   );
 };
 
-export default Rating;
+export default Ratings;
