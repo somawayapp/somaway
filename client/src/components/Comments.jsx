@@ -101,7 +101,10 @@ const Comments = ({ postId }) => {
               className="w-full pt-1  text-[14px] md:text-[16px]  rounded-xl py-2 px-6   mb-[-2px]
                pl-4 text-[var(--textColor)] rounded-xl"
             />
-           <Send className="ml-2 mr-2 w-8 text-[#ff4d52] h-4" />
+            <button className="px-1 ">
+            <Send className=" w-[20px] text-[#ff4d52] h-4" />
+
+            </button>
           </form>
 
           {commentSuccess && (
