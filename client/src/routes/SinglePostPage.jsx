@@ -129,7 +129,7 @@
               }
             }, [popupDesc]);
      
-            if (isPending) return "loading...";
+            
             if (error) return "Something went wrong!" + error.message;
             if (!data) return "Post not found!";
             
@@ -162,7 +162,18 @@ const details = [
             return details.length > 0 ? (
               <div className=" bg-[var(--bg)]">
           
-          
+          <div
+  style={{
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    height: "100vh",
+    width: "100vw",
+  }}
+>
+  {isPending ? <SpinnerMini /> : null}
+</div>
+
           
                 <Navbar />
                 <Helmet>
