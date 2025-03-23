@@ -32,11 +32,11 @@ const Rating = ({ postId }) => {
         },
         body: JSON.stringify({ stars }),
       });
-
+  
       if (res.ok) {
         const newData = await res.json();
-        setUserRating(stars); // Set user rating so it doesn't reset on hover
-        setRating(newData.newAverage);
+        setUserRating(stars);
+        setRating(parseFloat(newData.newAverage)); // Ensure it's a number
         setTotalReviews(newData.newTotal);
       } else {
         console.error("Failed to submit rating");
@@ -45,6 +45,7 @@ const Rating = ({ postId }) => {
       console.error("Failed to submit rating", err);
     }
   };
+  
 
   return (
     <div className="flex flex-row ml-3 items-center mt-2 text-sm md:text-lg">

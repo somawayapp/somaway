@@ -42,18 +42,31 @@ export const addRating = async (req, res) => {
   if (existingRating) {
     existingRating.stars = stars;
     await existingRating.save();
-    return res.status(200).json("Rating updated successfully!");
+  } else {
+    const newRating = new Rating({
+      user: user._id,
+      post: postId,
+      stars,
+    });
+    await newRating.save();
   }
 
-  const newRating = new Rating({
-    user: user._id,
-    post: postId,
-    stars,
-  });
+  // Fetch updated ratings after adding or updating
+  const ratings = await Rating.find({ post: postId });
 
-  await newRating.save();
-  res.status(201).json("Rating added successfully!");
+  const totalRatings = ratings.length;
+  const avgRating =
+    totalRatings > 0
+      ? ratings.reduce((sum, r) => sum + r.stars, 0) / totalRatings
+      : 0;
+
+  res.status(200).json({
+    message: "Rating updated successfully!",
+    newAverage: avgRating.toFixed(1),
+    newTotal: totalRatings,
+  });
 };
+
 
 export const deleteRating = async (req, res) => {
   const clerkUserId = req.auth.userId;
