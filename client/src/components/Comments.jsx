@@ -79,7 +79,7 @@ const Comments = ({ postId }) => {
       {/* Modern Comment Icon */}
       <Button
           onClick={() => setShowComments((prev) => !prev)}       
-          className="flex flex-row items-center  text-[14px] md:text-[16px]  justify-center h-[42px]  text-white  rounded-xl"
+          className="flex flex-row items-center  text-[14px] md:text-[16px]  mb-5 justify-center h-[42px]  text-white  rounded-xl"
           size="large"
         >
         <span> Property Reviews</span>
@@ -93,21 +93,19 @@ const Comments = ({ postId }) => {
         <>
           <form
             onSubmit={handleSubmit}
-            className="flex items-center bg-[var(--textColore)] text-[var(--textColor)] rounded-xl justify-between gap-1 w-full"
+            className="flex items-center  text-[var(--textColor)] rounded-xl justify-between   shadow-xl  border-[0.5px] w-full border-[var(--softBg4)]"
           >
             <textarea
               name="desc"
               placeholder="Write a review..."
-              className="w-full pt-1 bg-[var(--textColore)] border-none text-sm mb-[-2px]
+              className="w-full pt-1  text-[14px] md:text-[16px]  rounded-xl py-2 px-6   mb-[-2px]
                pl-4 text-[var(--textColor)] rounded-xl"
             />
-          <button className=" flex items-center px-4 ml-5 py-3  text-sm rounded-xl">
            <Send className="ml-2 w-4 bg-[#ff4d52] text-[#ff4d52] h-4" />
-          </button>
           </form>
 
           {commentSuccess && (
-            <p className="text-green-500">Review added successfully!</p>
+            <p className="text-green-500  text-[14px] md:text-[16px]">Review added successfully!</p>
           )}
 
           {isPending ? (
@@ -119,7 +117,7 @@ const Comments = ({ postId }) => {
               {data.slice(0, visibleComments).map((comment) => (
                 <div
                   key={comment._id}
-                  className=" p-2 rounded-2xl shadow-2xl mt-3"
+                  className=" p-2 rounded-2xl  text-[14px] md:text-[16px] shadow-2xl mt-3"
                 >
                   <Comment comment={comment} postId={postId} />
                 </div>

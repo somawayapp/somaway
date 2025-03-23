@@ -43,7 +43,7 @@ const Comment = ({ comment, postId }) => {
             src={comment.user.img || "/placeholder.jpg"} 
           />
         )}
-        <span className=" text-[var(--softTextColor2)] font-medium">{comment.user.username}</span>
+        <span className=" text-[var(--softTextColor2)]  text-[14px] md:text-[16px]   font-light">{comment.user.username}</span>
     
         {user &&
           (comment.user.username === user.username || role === "admin") && (
@@ -57,7 +57,7 @@ const Comment = ({ comment, postId }) => {
           )}
       </div>
       <div className="mt-1">
-        <p>{comment.desc}</p>
+        <p className=" text-[14px] md:text-[16px]">{comment.desc}</p>
       </div>
     </div>
   );
