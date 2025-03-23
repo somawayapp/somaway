@@ -225,7 +225,7 @@ const details = [
         {/* Floating Show More Button on the 8th Image */}
         {index === 5 && !showMore && (
        <button
-       className="absolute inset-0 m-auto flex-col items-center justify-center px-4 py-2 w-10 h-10 rounded-xl border-[1px] border-white bg-black
+       className="absolute inset-0 m-auto flex-col items-center justify-center px-4 py-2 rounded-xl border-[1px] border-white bg-black
         bg-opacity-60 text-white text-xs md:text-sm hover:bg-opacity-80 transition whitespace-nowrap"
        onClick={() => openPopup(index === 6)}
      >
@@ -254,7 +254,7 @@ const details = [
     >
       {/* Close Button (Top Right) */}
       <button
-        className="absolute top-3 right-3 bg-gray-400 text-white w-10 h-10 flex items-center justify-center rounded-full z-10"
+        className="absolute top-3 right-3 bg-gray-400 pt-1 pr-1 text-white w-10 h-10 flex items-center justify-center rounded-full z-10"
         onClick={() => setPopupImage(null)}
       >
         ✖
@@ -262,13 +262,13 @@ const details = [
 
       {/* Previous and Next Buttons (Centered on Image) */}
       <button
-        className="absolute left-3 top-1/2 transform -translate-y-1/2 bg-gray-400 text-white w-10 h-10 flex items-center justify-center rounded-full z-10"
+        className="absolute pl-1 left-3 top-1/2 transform -translate-y-1/2 bg-gray-400 text-white w-10 h-10 flex items-center justify-center rounded-full z-10"
         onClick={() => navigatePopup("prev")}
       >
         ◀
       </button>
       <button
-        className="absolute right-3 top-1/2 transform -translate-y-1/2 bg-gray-400 text-white w-10 h-10 flex items-center justify-center rounded-full z-10"
+        className="absolute right-3 pr-1 top-1/2 transform -translate-y-1/2 bg-gray-400 text-white w-10 h-10 flex items-center justify-center rounded-full z-10"
         onClick={() => navigatePopup("next")}
       >
         ▶
