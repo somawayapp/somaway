@@ -318,7 +318,7 @@ const details = [
     <p className="capitalize font-semibold">
       {data.propertytype}
     </p>
-    <span className=" text-[14px] md:text-[16px] text-[var(--softTextColor)] ">This is a {details.join(", ")} building!</span>
+    <span className=" text-[14px] md:text-[16px] text-[var(--softTextColor)] ">This is a {details.join(", ")} property!</span>
   </span>
 
 </p>

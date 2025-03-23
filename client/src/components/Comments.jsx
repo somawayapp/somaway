@@ -93,16 +93,17 @@ const Comments = ({ postId }) => {
         <>
           <form
             onSubmit={handleSubmit}
-            className="flex items-center  text-[var(--textColor)] rounded-xl justify-between mt-5  shadow-xl  border-[0.5px] w-full border-[var(--softBg4)]"
+            className="flex items-center  bg-[var(--bd)] text-[var(--textColor)] rounded-xl justify-between mt-5  shadow-xl  border-[0.5px]
+             w-full border-[var(--softBg4)]"
           >
             <textarea
               name="desc"
               placeholder="Write a review..."
-              className="w-full pt-1  text-[14px] md:text-[16px]  rounded-xl py-2 px-6   mb-[-2px]
+              className="w-full pt-1  text-[14px] md:text-[16px]  bg-[var(--bd)]  border-[0.5px]  w-full border-[var(--softBg4)] rounded-xl py-2 px-6   mb-[-2px]
                pl-4 text-[var(--textColor)] rounded-xl"
             />
             <button className="px-1 ">
-            <Send className=" h-[40px] text-[#ff4d52] " />
+            <Send className=" h-[40px] pr-1 text-[#ff4d52] " />
 
             </button>
           </form>
