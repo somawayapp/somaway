@@ -29,7 +29,7 @@
           import { MdBalcony, MdAir, MdFitnessCenter, MdSecurity, MdOutlineBackup, MdLocalAirport } from 'react-icons/md';
           import { IoIosConstruct } from 'react-icons/io';
           import { ArrowUpCircle } from "lucide-react";
-
+          import { useRef } from "react";
 
 
           const fetchPost = async (slug) => {
