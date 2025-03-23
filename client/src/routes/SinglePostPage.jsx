@@ -221,7 +221,7 @@ const details = [
         onClick={() => openPopup(index + 1)}
       >
         <img src={image} className="object-cover h-full w-full" alt={`Image ${index + 1}`} />
-        {index === 4 && ( // Show button on the fourth image (0-based index)
+        {index === 3 && ( // Show button on the fourth image (0-based index)
           <button
             className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 text-white text-sm"
             onClick={() => setShowMore(!showMore)}
