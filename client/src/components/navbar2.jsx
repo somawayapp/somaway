@@ -101,10 +101,11 @@ const Navbar = () => {
     <div className="w-9 h-9 rounded-full bg-[var(--sofTextColor)] flex items-center justify-center">
     <svg
   xmlns="http://www.w3.org/2000/svg"
-  className="w-6 h-6 fill-[var(--bg)]"
+  className="w-4 h-4 fill-[var(--bg)]"
   viewBox="0 0 24 24"
 >
-  <path d="M12 10.5c2.5 0 4.5-2 4.5-4.5S14.5 1.5 12 1.5 7.5 3.5 7.5 6s2 4.5 4.5 4.5zM12 12c-4 0-8 2-8 6s4 5 8 5 8-1 8-5-4-6-8-6z"/>
+  <path d="M12 10.5c2.5 0 4.5-2 4.5-4.5S14.5 1.5 12 1.5 7.5 3.5 7.5 6s2 4.5 4.5 4.5z" />
+  <path d="M12 12c-4 0-9 2-9 6v1.5c0 .8.7 1.5 1.5 1.5h15c.8 0 1.5-.7 1.5-1.5V18c0-4-5-6-9-6z" />
 </svg>
 
     </div>
