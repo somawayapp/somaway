@@ -163,13 +163,6 @@ const details = [
               <div className=" bg-[var(--bg)]">
           
           <div
-  style={{
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-    height: "100vh",
-    width: "100vw",
-  }}
 >
   {isPending ? <SpinnerMini /> : null}
 </div>
