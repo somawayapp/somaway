@@ -74,41 +74,40 @@ const Navbar = () => {
         
         {/* MOBILE BUTTON */}
         <div
-  className="cursor-pointer text-[var(--textColor)] text-sm border border-[var(--softBg4)] hover:shadow-xl p-2 rounded-md flex items-center gap-2"
+  className="cursor-pointer text-[var(--textColor)] text-sm border-[2px] border-[var(--softBg4)] hover:shadow-xl p-2 rounded-3xl flex items-center gap-4"
   onClick={() => setOpen((prev) => !prev)}
 >
-  <div className="flex flex-col gap-[3px]">
+  <div className="flex flex-col gap-[2px]">
     <div
-      className={`h-[1px] md:h-[2px] rounded-md w-4 bg-[var(--textColor)] origin-left transition-all ease-in-out ${
+      className={`h-[2px] rounded-md w-3 bg-[var(--softTextColor)] origin-left transition-all ease-in-out ${
         open && "rotate-45"
       }`}
     ></div>
     <div
-      className={`h-[1px] md:h-[2px] rounded-md w-4 bg-[var(--textColor)] origin-left transition-all ease-in-out ${
+      className={`h-[2px] rounded-md w-3 bg-[var(--softTextColor)] origin-left transition-all ease-in-out ${
         open && "opacity-0"
       }`}
     ></div>
     <div
-      className={`h-[1px] md:h-[2px] rounded-md w-4 bg-[var(--textColor)] origin-left transition-all ease-in-out ${
+      className={`h-[2px] rounded-md w-3 bg-[var(--softTextColor)] origin-left transition-all ease-in-out ${
         open && "-rotate-45"
       }`}
     ></div>
   </div>
 
-  <div className="flex items-center gap-2">
 
 
     {/* Person icon */}
-    <div className="w-6 h-6 rounded-full bg-[var(--textColor)] flex items-center justify-center">
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        className="w-4 h-4 fill-[var(--bg)]"
-        viewBox="0 0 24 24"
-      >
-        <path d="M12 12c2.7 0 4.875-2.175 4.875-4.875S14.7 2.25 12 2.25 7.125 4.425 7.125 7.125 9.3 12 12 12zm0 1.5c-3.375 0-10.125 1.687-10.125 5.062V21h20.25v-2.438c0-3.375-6.75-5.062-10.125-5.062z" />
-      </svg>
+    <div className="w-9 h-9 rounded-full bg-[var(--sofTextColor)] flex items-center justify-center">
+    <svg
+  xmlns="http://www.w3.org/2000/svg"
+  className="w-6 h-6 fill-[var(--bg)]"
+  viewBox="0 0 24 24"
+>
+  <path d="M12 10.5c2.5 0 4.5-2 4.5-4.5S14.5 1.5 12 1.5 7.5 3.5 7.5 6s2 4.5 4.5 4.5zM12 12c-4 0-8 2-8 6s4 5 8 5 8-1 8-5-4-6-8-6z"/>
+</svg>
+
     </div>
-  </div>
 </div>
 
           
