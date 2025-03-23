@@ -66,7 +66,7 @@ const Rating = ({ postId }) => {
           {rating.toFixed(1)}
         </span>
         <span className="mx-2 flex items-center">·</span>
-        {totalReviews} <span className="ml-1 text-[var(--softTextColor)] text-[14px] md:text-[16px]">revews</span>
+        {totalReviews} <span className="ml-1 text-[var(--softTextColor)] text-[14px] md:text-[16px]">reviews</span>
       </span>
     </div>
   );
