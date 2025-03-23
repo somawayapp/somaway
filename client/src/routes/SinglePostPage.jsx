@@ -214,23 +214,35 @@ const details = [
 {/* Right Side Images */}
 <div className="w-1/4 h-full flex flex-col overflow-hidden relative">
   <div ref={rightDivRef} className="flex flex-col gap-2 h-full">
-    {sideImages.map((image, index) => (
+    {sideImages.slice(0, showMore ? sideImages.length : 8).map((image, index) => (
       <div
         key={index}
         className="w-full h-1/4 overflow-hidden relative cursor-pointer"
         onClick={() => openPopup(index + 1)}
       >
         <img src={image} className="object-cover h-full w-full" alt={`Image ${index + 1}`} />
-        {index === 3 && ( // Show button on the fourth image (0-based index)
-          <button
-            className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 text-white text-sm"
-            onClick={() => setShowMore(!showMore)}
-          >
-            {showMore ? "Show Less" : "Show More Images"}
-          </button>
-        )}
       </div>
     ))}
+
+    {/* Show More Button on the 8th image */}
+    {sideImages.length > 8 && !showMore && (
+      <button
+        className="w-full p-2 bg-black text-white text-sm rounded cursor-pointer"
+        onClick={() => setShowMore(true)}
+      >
+        Show More Images
+      </button>
+    )}
+
+    {/* Show Less Button when expanded */}
+    {showMore && (
+      <button
+        className="w-full p-2 bg-black text-white text-sm rounded cursor-pointer"
+        onClick={() => setShowMore(false)}
+      >
+        Show Less
+      </button>
+    )}
   </div>
 </div>
 
