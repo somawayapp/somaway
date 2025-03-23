@@ -225,7 +225,8 @@ const details = [
         {/* Floating Show More Button on the 8th Image */}
         {index === 5 && !showMore && (
           <button
-            className="absolute inset-0 m-auto flex items-center justify-center w-10 h-10 rounded-xl border-[1px] border-white bg-black bg-opacity-60 text-white text-xs font-semibold hover:bg-opacity-80 transition"
+            className="absolute inset-0 m-auto flex-col items-center justify-center w-10 h-10 rounded-xl border-[1px] border-white bg-black
+             bg-opacity-60 text-white text-xs md:text-sm hover:bg-opacity-80 transition"
             onClick={() => openPopup(index === 6 )}
           >
             show more
@@ -239,43 +240,49 @@ const details = [
 </div>
 
 
-      {/* Popup Modal */}
-      {popupImage && (
-        <div
-          className="fixed inset-0 bg-black bg-opacity-80 flex items-center justify-center"
-          style={{ zIndex: 100014 }}
+  {/* Popup Modal */}
+{popupImage && (
+  <div
+    className="fixed inset-0 bg-black bg-opacity-80 flex items-center justify-center"
+    style={{ zIndex: 100014 }}
+    onClick={() => setPopupImage(null)}
+  >
+    <div
+      className="relative w-full p-3 md:p-9 md:w-4/5 flex items-center justify-center"
+      onClick={(e) => e.stopPropagation()}
+    >
+      {/* Icons inside the popup image */}
+      <div className="absolute top-3 left-3 right-3 flex justify-between items-center z-10">
+        <button
+          className="bg-gray-400 text-white rounded-full p-2"
+          onClick={() => navigatePopup("prev")}
+        >
+          ◀
+        </button>
+        <button
+          className="bg-gray-400 text-white rounded-full p-2"
           onClick={() => setPopupImage(null)}
         >
-          <div
-            className="relative w-full p-3 md:p-9 md:w-3/4 flex items-center justify-center"
-            onClick={(e) => e.stopPropagation()}
-          >
-            <button
-              className="absolute top-2 right-2 bg-gray-400 text-white rounded-full p-2"
-              onClick={() => setPopupImage(null)}
-            >
-              ✖
-            </button>
-            <button
-              className="absolute left-2 bg-gray-400 text-white rounded-full p-2"
-              onClick={() => navigatePopup("prev")}
-            >
-              ◀
-            </button>
-            <img
-              src={popupImage}
-              className="w-full h-auto max-h-[80vh] object-cover rounded-xl"
-              alt="Popup"
-            />
-            <button
-              className="absolute right-2 bg-gray-400 text-white rounded-full p-2"
-              onClick={() => navigatePopup("next")}
-            >
-              ▶
-            </button>
-          </div>
-        </div>
-      )}
+          ✖
+        </button>
+        <button
+          className="bg-gray-400 text-white rounded-full p-2"
+          onClick={() => navigatePopup("next")}
+        >
+          ▶
+        </button>
+      </div>
+
+      {/* Popup Image */}
+      <img
+        src={popupImage}
+        className="w-full h-auto max-h-[85vh] md:max-h-[90vh] object-cover rounded-xl"
+        alt="Popup"
+      />
+    </div>
+  </div>
+)}
+
     </div>
               
 
