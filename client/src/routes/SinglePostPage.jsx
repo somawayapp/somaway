@@ -214,7 +214,7 @@ const details = [
 {/* Right Side Images */}
 <div className="w-1/4 h-full flex flex-col overflow-hidden relative">
   <div ref={rightDivRef} className="flex flex-col gap-2 h-full">
-    {sideImages.slice(0, showMore ? sideImages.length : 4).map((image, index) => (
+    {sideImages.slice(0, showMore ? sideImages.length : 6).map((image, index) => (
       <div
         key={index}
         className="w-full h-1/4 overflow-hidden relative cursor-pointer"
@@ -223,14 +223,14 @@ const details = [
         <img src={image} className="object-cover h-full w-full" alt={`Image ${index + 1}`} />
 
         {/* Floating Show More Button on the 8th Image */}
-        {index === 4 && !showMore && (
- <button
- className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 px-2 py-1 rounded-xl border border-white bg-black bg-opacity-60 text-white text-xs md:text-sm hover:bg-opacity-80 transition"
- onClick={() => openPopup(index === 5)}
->
- show more
-</button>
-
+        {index === 5 && !showMore && (
+       <button
+       className="absolute inset-0 m-auto flex-col items-center w-[20px] h-[10px] justify-center px-4 py-2 rounded-xl border-[1px] border-white bg-black
+        bg-opacity-60 text-white text-xs md:text-sm hover:bg-opacity-80 transition whitespace-nowrap"
+       onClick={() => openPopup(index === 6)}
+     >
+       show more
+     </button>
      
         )}
       </div>
@@ -254,7 +254,7 @@ const details = [
     >
       {/* Close Button (Top Right) */}
       <button
-        className="absolute top-3 right-3 bg-gray-400 pt-1 pr-1 text-white w-10 h-10 flex items-center justify-center rounded-full z-10"
+        className="absolute top-3 right-3 pt-1 pr-1 bg-gray-400 text-white w-10 h-10 flex items-center justify-center rounded-full z-10"
         onClick={() => setPopupImage(null)}
       >
         ✖
@@ -268,7 +268,7 @@ const details = [
         ◀
       </button>
       <button
-        className="absolute right-3 pr-1 top-1/2 transform -translate-y-1/2 bg-gray-400 text-white w-10 h-10 flex items-center justify-center rounded-full z-10"
+        className="absolute right-3 top-1/2 pr-1 transform -translate-y-1/2 bg-gray-400 text-white w-10 h-10 flex items-center justify-center rounded-full z-10"
         onClick={() => navigatePopup("next")}
       >
         ▶
