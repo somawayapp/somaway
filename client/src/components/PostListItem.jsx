@@ -17,7 +17,7 @@ const PostListItem = ({ post }) => {
   };
 
   return (
-    <div className="relative flex flex col gap-2 md:gap-4 group mb-6 md:mb-[30px] overflow-hidden rounded-xl">
+    <div className="relative  gap-2 md:gap-4 group mb-6 md:mb-[30px] overflow-hidden rounded-xl">
       {/* Image with Link */}
       <Link to={`/${post.slug}`} className="block">
         <div className="relative w-full aspect-[3/3] rounded-xl md:rounded-2xl overflow-hidden">
