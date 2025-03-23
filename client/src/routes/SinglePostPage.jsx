@@ -211,30 +211,29 @@ const details = [
       <div className="flex-1 h-full overflow-hidden relative mr-1 md:mr-2 cursor-pointer" onClick={() => openPopup(0)}>
         {mainImage && <img src={mainImage} className="object-cover h-full w-full" alt="Main Image" />}
       </div>
-
-      {/* Right Side Images */}
-      <div className="w-1/4 h-full flex flex-col  overflow-hidden relative">
-      
-        <div ref={rightDivRef} className="overflow-y-scroll gap-1 md:gap-2 h-full">
-          {sideImages.map((image, index) => (
-            <div
-              key={index}
-              className="w-full h-1/4 overflow-hidden relative cursor-pointer"
-              onClick={() => openPopup(index + 1)}
-            >
-              <img src={image} className="object-cover h-full w-full" alt={`Image ${index + 2}`} />
-              {index === sideImages.length - 2 && (
-                <button
-                  className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 text-white text-sm"
-                  onClick={() => setShowMore(!showMore)}
-                >
-                  {showMore ? "Show Less" : "Show More Images"}
-                </button>
-              )}
-            </div>
-          ))}
-        </div>
+{/* Right Side Images */}
+<div className="w-1/4 h-full flex flex-col overflow-hidden relative">
+  <div ref={rightDivRef} className="gap-1 md:gap-2 h-full">
+    {sideImages.map((image, index) => (
+      <div
+        key={index}
+        className="w-full h-1/4 overflow-hidden relative cursor-pointer"
+        onClick={() => openPopup(index + 1)}
+      >
+        <img src={image} className="object-cover h-full w-full" alt={`Image ${index + 1}`} />
+        {index === 4 && ( // Show button on the fourth image (0-based index)
+          <button
+            className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 text-white text-sm"
+            onClick={() => setShowMore(!showMore)}
+          >
+            {showMore ? "Show Less" : "Show More Images"}
+          </button>
+        )}
       </div>
+    ))}
+  </div>
+</div>
+
 
       {/* Popup Modal */}
       {popupImage && (

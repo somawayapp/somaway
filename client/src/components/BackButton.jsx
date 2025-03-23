@@ -6,7 +6,7 @@ const BackButton = () => {
   return (
     <button
       type="button"
-      className="flex flex-row gap-2 items-center text-[15px] font-semibold py-2 px-4 rounded-full hover:bg-neutral-100 transition
+      className="flex flex-row gap-2 items-center text-[15px] font-semibold py-2 px-4 rounded-full hover:bg-[var(--softBg4)] transition
        cursor-pointer text-[var(--softTextColor)] "
        onClick={() => window.history.back()}>
     <MdKeyboardBackspace size={18}/>
