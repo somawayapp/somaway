@@ -4,6 +4,7 @@ import { useAuth, useUser } from "@clerk/clerk-react";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { toast } from "react-toastify";
 import axios from "axios";
+import Button from "./Button";
 
 const Comment = ({ comment, postId }) => {
   const { user } = useUser();
@@ -26,7 +27,7 @@ const Comment = ({ comment, postId }) => {
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["comments", postId] });
-      toast.success("Comment deleted successfully");
+      toast.success("Review deleted successfully");
     },
     onError: (error) => {
       toast.error(error.response.data);

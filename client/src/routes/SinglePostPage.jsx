@@ -495,14 +495,7 @@ const details = [
 
    <hr className="h-[1px] bg-[var(--softBg4)] border-0" />
    <div className="p-4">
-      <Button
-          disabled={isLoading}
-          className="flex flex-row items-center  text-[14px] md:text-[16px]  justify-center h-[42px]  text-white  rounded-xl"
-          size="large"
-        >
-          {isLoading ? <SpinnerMini /> : <span>Reviews <Comments postId={data._id} /></span>}
-        </Button>
-      </div>
+    <Comments postId={data._id} />
       <hr className="h-[1px] bg-[var(--softBg4)] border-0" />
       <div className="p-4 flex flex-row items-center justify-between font-semibold text-lg">
 

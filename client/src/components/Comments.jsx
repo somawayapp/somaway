@@ -5,6 +5,8 @@ import { useAuth, useUser } from "@clerk/clerk-react";
 import { toast } from "react-toastify";
 import { useState } from "react";
 import { BiCommentDetail } from "react-icons/bi";
+import { Send } from "lucide-react";
+
 
 const fetchComments = async (postId) => {
   const res = await axios.get(
@@ -74,17 +76,20 @@ const Comments = ({ postId }) => {
   return (
     <div className="flex flex-col gap-1 mb-2">
       {/* Modern Comment Icon */}
-      <div
-        className="cursor-pointer flex flex-row gap-4 text-[#FF5A5F]    text-3xl"
-        onClick={() => setShowComments((prev) => !prev)}
-      >
-        <BiCommentDetail />
-      </div>
+      <Button
+          onClick={() => setShowComments((prev) => !prev)}       
+          className="flex flex-row items-center  text-[14px] md:text-[16px]  justify-center h-[42px]  text-white  rounded-xl"
+          size="large"
+        >
+        <span> Property Reviews</span>
+        </Button>
+        
+      
+   
 
       {/* Comments Section */}
       {showComments && (
         <>
-          <h1 className="text-md text-[var(--textColor)]">Comments</h1>
           <form
             onSubmit={handleSubmit}
             className="flex items-center bg-[var(--textColore)] text-[var(--textColor)] rounded-xl justify-between gap-1 w-full"
@@ -95,13 +100,13 @@ const Comments = ({ postId }) => {
               className="w-full pt-1 bg-[var(--textColore)] border-none text-sm mb-[-2px]
                pl-4 text-[var(--textColor)] rounded-xl"
             />
-            <button className="bg-[#ff4d52]    px-4 ml-5 py-3 text-white text-sm rounded-xl">
-              Send
-            </button>
+          <button className="bg-[#ff4d52] flex items-center px-4 ml-5 py-3 text-white text-sm rounded-xl">
+            Send <Send className="ml-2 w-4 h-4" />
+          </button>
           </form>
 
           {commentSuccess && (
-            <p className="text-green-500">Commented successfully!</p>
+            <p className="text-green-500">Review added successfully!</p>
           )}
 
           {isPending ? (
