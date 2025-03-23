@@ -14,7 +14,7 @@ export const addComment = async (req, res) => {
   const postId = req.params.postId;
 
   if (!clerkUserId) {
-    return res.status(401).json("Not authenticated!");
+    return res.status(401).json("Not authenticated, LOGIN to review!");
   }
 
   const user = await User.findOne({ clerkUserId });
@@ -35,17 +35,22 @@ export const deleteComment = async (req, res) => {
   const id = req.params.id;
 
   if (!clerkUserId) {
-    return res.status(401).json("Not authenticated!");
+    return res.status(401).json("Not authenticated, LOGIN!");
   }
 
   const role = req.auth.sessionClaims?.metadata?.role || "user";
 
   if (role === "admin") {
-    await Comment.findByIdAndDelete(req.params.id);
-    return res.status(200).json("Comment has been deleted");
+    await Comment.findByIdAndDelete(id);
+    return res.status(200).json("Review has been deleted");
   }
 
-  const user = User.findOne({ clerkUserId });
+  // **Fix: Await the user query**
+  const user = await User.findOne({ clerkUserId });
+
+  if (!user) {
+    return res.status(404).json("User not found!");
+  }
 
   const deletedComment = await Comment.findOneAndDelete({
     _id: id,
@@ -53,8 +58,9 @@ export const deleteComment = async (req, res) => {
   });
 
   if (!deletedComment) {
-    return res.status(403).json("You can delete only your comment!");
+    return res.status(403).json("You can  only delete your review!");
   }
 
-  res.status(200).json("Comment deleted");
+  res.status(200).json("Review deleted");
 };
+
