@@ -225,8 +225,8 @@ const details = [
         {/* Floating Show More Button on the 8th Image */}
         {index === 4 && !showMore && (
    <button
-   className="absolute inset-0 m-auto flex items-center justify-center w-[80px] h-[40px] px-4 py-2 rounded-xl border-[1px] border-white bg-black
-   bg-opacity-60 text-white text-xs md:text-sm hover:bg-opacity-80 transition whitespace-nowrap"
+   className="absolute inset-0 m-auto flex items-center justify-center w-[80px] h-[40px] px-2 py-1 md:px-4 md:py-2 rounded-xl border-[1px] border-white bg-black
+   bg-opacity-60 text-white text-[9px] md:text-sm hover:bg-opacity-80 transition whitespace-nowrap"
    onClick={() => openPopup(index === 5)}
  >
    show more
@@ -327,7 +327,7 @@ const details = [
         )}
         {data.rooms !== undefined && data.rooms !== null && (
           <span className="detail-item text-[14px] md:text-[16px] ">
-            <AiOutlineAppstore className="icon" /> {data.room} Rooms
+            <AiOutlineAppstore className="icon" /> {data.rooms} Rooms
           </span>
         )}
         {data.propertysize !== undefined && data.propertysize !== null && (
