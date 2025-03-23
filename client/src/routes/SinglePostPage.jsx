@@ -50,6 +50,47 @@
               queryFn: () => fetchPost(slug),
             });
 
+            const [rating, setRating] = useState(0);
+            const [totalReviews, setTotalReviews] = useState(0);
+            const [hover, setHover] = useState(null);
+            const [userRating, setUserRating] = useState(null); // Track user's own rating
+          
+            useEffect(() => {
+              // Fetch the average rating & total reviews
+              const fetchRating = async () => {
+                try {
+                  const res = await fetch(`/api/ratings/${postId}`);
+                  const data = await res.json();
+                  setRating(data.averageRating);
+                  setTotalReviews(data.totalRatings);
+                } catch (err) {
+                  console.error("Failed to fetch rating", err);
+                }
+              };
+          
+              fetchRating();
+            }, [postId]);
+          
+            const handleRating = async (stars) => {
+              try {
+                const res = await fetch(`/api/ratings/${postId}`, {
+                  method: "POST",
+                  headers: {
+                    "Content-Type": "application/json",
+                  },
+                  body: JSON.stringify({ stars }),
+                });
+          
+                if (res.ok) {
+                  setUserRating(stars);
+                  setRating((prev) => ((prev * totalReviews + stars) / (totalReviews + 1)).toFixed(1));
+                  setTotalReviews((prev) => prev + 1);
+                }
+              } catch (err) {
+                console.error("Failed to submit rating", err);
+              }
+            };
+
 
             const amenitiesIcons = {
               "lift": <ArrowUpCircle />,
@@ -214,7 +255,7 @@ const details = [
 {/* Right Side Images */}
 <div className="w-1/4 h-full flex flex-col overflow-hidden relative">
   <div ref={rightDivRef} className="flex flex-col gap-2 h-full">
-    {sideImages.slice(0, showMore ? sideImages.length : 4).map((image, index) => (
+    {sideImages.slice(0, showMore ? sideImages.length : 5).map((image, index) => (
       <div
         key={index}
         className="w-full h-1/4 overflow-hidden relative cursor-pointer"
@@ -227,7 +268,7 @@ const details = [
    <button
    className="absolute inset-0 m-auto flex items-center justify-center w-[80px] h-[40px] px-2 py-1 md:px-4 md:py-2 rounded-xl border-[1px] border-white bg-black
    bg-opacity-60 text-white text-[9px] md:text-sm hover:bg-opacity-80 transition whitespace-nowrap"
-   onClick={() => openPopup(index === 5)}
+   onClick={() => openPopup(index === 4)}
  >
    show more
  </button>
@@ -549,16 +590,27 @@ const details = [
 
 
       <div className="flex flex-row ml-3 items-center mt-2 text-sm md:text-lg">
-  {[...Array(5)].map((_, index) => (
-    <FaStar key={index} className="text-[var(--textColor)] w-[40px] ml-[-15px] " />
-  ))}
-  <span className="pl-2 font-normal  text-[14px] md:text-[16px]  flex items-center">
-    <span className=" text-[var(--softTextColor)]  text-[14px] md:text-[16px]  ml-[-5px]">4.8</span>
-    <span className="mx-2 flex items-center">·</span>
-    {data.visit} <span className="ml-1 text-[var(--softTextColor)]  text-[14px] md:text-[16px]  ">reviews</span>
-  </span>
-</div>
-
+      {[...Array(5)].map((_, index) => {
+        const starValue = index + 1;
+        return (
+          <FaStar
+            key={index}
+            className="w-[40px] ml-[-15px] cursor-pointer transition-all"
+            color={starValue <= (hover || userRating || rating) ? "orange" : "var(--textColor)"}
+            onMouseEnter={() => setHover(starValue)}
+            onMouseLeave={() => setHover(null)}
+            onClick={() => handleRating(starValue)}
+          />
+        );
+      })}
+      <span className="pl-2 font-normal text-[14px] md:text-[16px] flex items-center">
+        <span className="text-[var(--softTextColor)] text-[14px] md:text-[16px] ml-[-5px]">
+          {rating || "0.0"}
+        </span>
+        <span className="mx-2 flex items-center">·</span>
+        {totalReviews} <span className="ml-1 text-[var(--softTextColor)] text-[14px] md:text-[16px]">reviews</span>
+      </span>
+    </div>
 
       </div>
    
