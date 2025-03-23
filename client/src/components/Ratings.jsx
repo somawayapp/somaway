@@ -41,20 +41,23 @@ const Ratings = ({ postId }) => {
       }
     };
     
- 
+
 
   const fetchCommentsCount = async () => {
     try {
       const res = await axios.get(`${import.meta.env.VITE_API_URL}/comments/${postId}`);
-      setTotalComments(res.data.length);
+      setTotalComments(Array.isArray(res.data) ? res.data.length : res.data.count || 0);
     } catch (err) {
       console.error("Error fetching comments count:", err);
     }
   };
 
-  fetchRating();
-  fetchCommentsCount();
-}, [postId])
+  if (postId) {
+    fetchCommentsCount();
+    fetchRating();
+
+  }
+}, [postId]); 
 
   const handleRating = async (stars) => {
     if (!isSignedIn) {
@@ -113,7 +116,7 @@ const Ratings = ({ postId }) => {
           {Number(rating).toFixed(1)}
         </span>
         <span className="mx-2 flex items-center">·</span>
-        [{totalReviews} +  {totalComments} ] <span className="ml-1 text-[var(--softTextColor)] text-[14px] md:text-[16px]">reviews</span>
+        {totalReviews} + {totalComments} <span className="ml-1 text-[var(--softTextColor)] text-[14px] md:text-[16px]">reviews</span>
       </span>
     </div>
   );
