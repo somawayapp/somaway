@@ -214,7 +214,7 @@ const details = [
 {/* Right Side Images */}
 <div className="w-1/4 h-full flex flex-col overflow-hidden relative">
   <div ref={rightDivRef} className="flex flex-col gap-2 h-full">
-    {sideImages.slice(0, showMore ? sideImages.length : 8).map((image, index) => (
+    {sideImages.slice(0, showMore ? sideImages.length : 6).map((image, index) => (
       <div
         key={index}
         className="w-full h-1/4 overflow-hidden relative cursor-pointer"
@@ -223,26 +223,18 @@ const details = [
         <img src={image} className="object-cover h-full w-full" alt={`Image ${index + 1}`} />
 
         {/* Floating Show More Button on the 8th Image */}
-        {index === 7 && !showMore && (
+        {index === 5 && !showMore && (
           <button
             className="absolute inset-0 m-auto flex items-center justify-center w-10 h-10 rounded-full border-2 border-white bg-black bg-opacity-60 text-white text-xs font-semibold hover:bg-opacity-80 transition"
             onClick={() => setShowMore(true)}
           >
-            +
+            show more
           </button>
         )}
       </div>
     ))}
 
-    {/* Show Less Button when expanded */}
-    {showMore && (
-      <button
-        className="w-full p-2 bg-black text-white text-sm rounded cursor-pointer mt-2"
-        onClick={() => setShowMore(false)}
-      >
-        Show Less
-      </button>
-    )}
+
   </div>
 </div>
 
