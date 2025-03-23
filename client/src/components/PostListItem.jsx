@@ -61,12 +61,12 @@ const PostListItem = ({ post }) => {
       )}
 
 
-<div className="gap-1 mt-4">
+<div className="mt-3 gap-1">
 
 
 <p
 
-className="text-[var(--softTextColor)] mt-6  font-semibold capitalize text-[12px] md:text-[14px] "
+className="text-[var(--softTextColor)]  font-semibold capitalize text-[12px] md:text-[14px] "
 > Nairobi, Kenya
 
 </p>
@@ -75,7 +75,7 @@ className="text-[var(--softTextColor)] mt-6  font-semibold capitalize text-[12px
 
       <p
 
-  className="text-[var(--softTextColor)] mt-6  capitalize  text-[12px] md:text-[14px] "
+  className="text-[var(--softTextColor)]  capitalize  text-[12px] md:text-[14px] "
 >
   {post.bedrooms
     ? `${post.bedrooms} Bedroom`
@@ -90,7 +90,7 @@ className="text-[var(--softTextColor)] mt-6  font-semibold capitalize text-[12px
 
 <p
 
-className="text-[var(--softTextColor)] mt-6  font-semibold capitalize  text-[12px] md:text-[14px]"
+className="text-[var(--softTextColor)] font-semibold capitalize  text-[12px] md:text-[14px]"
 > KSh
 {post.price ? ` ${post.price}` : ""} <span className="font-normal">
 {post.model?.toLowerCase().includes("sale") ? " /for Sale" : " /month"}
