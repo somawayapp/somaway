@@ -1,7 +1,7 @@
 
           import { Link, useParams } from "react-router-dom";
           import Image from "../components/Image";
-
+          import Reviews from "../components/Reviews";
           import PostMenuActions from "../components/PostMenuActions";
           import Comments from "../components/Comments";
           import axios from "axios";
@@ -415,11 +415,15 @@ const details = [
       <div className="h-[210px]  text-[14px] md:text-[16px]  text-[var(--softTextColor)]">
        map
       </div>
+      
+      <hr className="h-[1px] bg-[var(--softBg4)] border-0" />
+
+      <Reviews/> 
+      <hr className="h-[1px] bg-[var(--softBg4)] border-0" />
+
     </div>
 
-                <Link   to={`/discover?author=${data.author}`} className=" ml-1" >{data.author}</Link> 
         
-                <Link to={`/discover?cat=${data.category}`}  className="capitalize ml-1 ">{data.category}</Link> 
    
 
           </div>

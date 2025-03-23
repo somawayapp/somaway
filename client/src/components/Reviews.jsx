@@ -16,7 +16,7 @@ const fetchComments = async (postId) => {
   return res.data;
 };
 
-const Comments = ({ postId }) => {
+const Reviews = ({ postId }) => {
   const { user } = useUser();
   const { getToken } = useAuth();
   const queryClient = useQueryClient();
@@ -76,41 +76,9 @@ const Comments = ({ postId }) => {
 
   return (
     <div className="flex flex-col gap-1 mb-2">
-      {/* Modern Comment Icon */}
-      <Button
-          onClick={() => setShowComments((prev) => !prev)}       
-          className="flex flex-row items-center  text-[14px] md:text-[16px] justify-center h-[42px]  text-white  rounded-xl"
-          size="large"
-        >
-        <span> Property Reviews</span>
-        </Button>
-        
-      
-   
 
-      {/* Comments Section */}
-      {showComments && (
         <>
-          <form
-            onSubmit={handleSubmit}
-            className="flex items-center  bg-[var(--bd)] text-[var(--textColor)] rounded-xl justify-between mt-5  shadow-xl  border-[0.5px]
-             w-full border-[var(--softBg4)]"
-          >
-            <textarea
-              name="desc"
-              placeholder="Write a review..."
-              className="w-full pt-1  text-[14px] md:text-[16px]  bg-[var(--bd)]  border-[0.5px]  w-full border-[var(--softBg4)] rounded-xl py-2 px-6   mb-[-2px]
-               pl-4 text-[var(--textColor)] rounded-xl"
-            />
-            <button className="px-1 ">
-            <Send className=" h-[40px] pr-1 text-[#ff4d52] " />
-
-            </button>
-          </form>
-
-          {commentSuccess && (
-            <p className="text-green-500  text-[14px] md:text-[16px]">Review added successfully!</p>
-          )}
+  
 
           {isPending ? (
             "Loading..."
@@ -130,25 +98,23 @@ const Comments = ({ postId }) => {
               {visibleComments < data.length && (
                 <button
                   onClick={loadMoreComments}
-                  className=" text-sm text-[#1DA1F2]   border-[0.2px] border-[#1DA1F2]
-               px-1 py-[0.5px] rounded-xl  "
+                  className=" text-sm text-[#1DA1F2]"
                 >
                   Show more reviews
                 </button>
               )}
               <button
                 onClick={closeComments}
-                className="text-[#ff4d52]  border-[0.2px] border-[#ff4d52]
-               px-1 py-[0.5px] rounded-xl   text-sm mt-2"
+                className="text-[#ff4d52]    text-sm mt-2"
               >
                 Close reviews
               </button>
             </>
           )}
         </>
-      )}
+    
     </div>
   );
 };
 
-export default Comments;
+export default Reviews;

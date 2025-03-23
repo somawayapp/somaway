@@ -48,7 +48,7 @@ const Comment = ({ comment, postId }) => {
         {user &&
           (comment.user.username === user.username || role === "admin") && (
             <span
-              className="text-xs text-right align-right item-right text-red-300 border-[0.2px] border-red-300
+              className="text-xs text-right align-right rounded-xl item-right text-red-300 border-[0.2px] border-red-300
                px-1 py-[0.5px] hover:text-red-500 cursor-pointer"
               onClick={() => mutation.mutate()}
             >
