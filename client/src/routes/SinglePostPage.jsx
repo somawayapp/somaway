@@ -22,6 +22,7 @@
           import { AiOutlineAppstore } from "react-icons/ai";
           import { useRef } from "react";
           import Ratings from "../components/Ratings";
+          import RelatedPosts from "../components/RelatedPosts";
 
 
           const fetchPost = async (slug) => {
@@ -572,7 +573,7 @@ const details = [
       <h3 className="text-xl md:text-3xl ml-2 mb-3 md:mb-6  font-bold text-[var(--SoftTextColor)]">
       Related property     </h3>
     </div>
-   <LatestPosts />
+   <RelatedPosts />
 </div>
 
 
