@@ -37,10 +37,10 @@ const Comment = ({ comment, postId }) => {
     <div className="p-2  pl-4 bg-[var(--bd)] rounded-xl mb-1">
       <div className="flex items-center gap-1">
         {comment.user.img && (
-          <Image
-            src={comment.user.img}
-            className="w-10 h-10 rounded-full object-cover"
-            w="40"
+            <img
+            className="rounded-full text-[14px] md:text-[16px]  w-[20px] md:w-[30px] h-[20px] md:h-[30px] select-none"
+            alt="Avatar"
+            src={comment.user.img || "/placeholder.jpg"} 
           />
         )}
         <span className=" text-[var(--softTextColor2)] font-medium">{comment.user.username}</span>

@@ -97,12 +97,12 @@ const Comments = ({ postId }) => {
           >
             <textarea
               name="desc"
-              placeholder="Write a comment..."
+              placeholder="Write a review..."
               className="w-full pt-1 bg-[var(--textColore)] border-none text-sm mb-[-2px]
                pl-4 text-[var(--textColor)] rounded-xl"
             />
-          <button className="bg-[#ff4d52] flex items-center px-4 ml-5 py-3 text-white text-sm rounded-xl">
-            Send <Send className="ml-2 w-4 h-4" />
+          <button className=" flex items-center px-4 ml-5 py-3  text-sm rounded-xl">
+           <Send className="ml-2 w-4 bg-[#ff4d52] text-[#ff4d52] h-4" />
           </button>
           </form>
 
@@ -113,7 +113,7 @@ const Comments = ({ postId }) => {
           {isPending ? (
             "Loading..."
           ) : error ? (
-            "Error loading comments!"
+            "Error loading reviews!"
           ) : (
             <>
               {data.slice(0, visibleComments).map((comment) => (
@@ -130,14 +130,14 @@ const Comments = ({ postId }) => {
                   onClick={loadMoreComments}
                   className=" text-sm text-[#1DA1F2]"
                 >
-                  Show More
+                  Show more reviews
                 </button>
               )}
               <button
                 onClick={closeComments}
                 className="text-[#ff4d52]    text-sm mt-2"
               >
-                Close Comments
+                Close reviews
               </button>
             </>
           )}
