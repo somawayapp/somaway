@@ -60,10 +60,17 @@ const PostListItem = ({ post }) => {
         </>
       )}
 
-      {/* Author */}
+
+<Link
+
+className="text-[var(--softTextColor)] mt-6  font-semibold capitalize text-[14px] md:text-[16px] "
+> Nairobi, Kenya
+
+</Link>
+
       <Link
 
-  className="text-[var(--softTextColor)] mt-3 ml-3 capitalize text-sm md:text-lg"
+  className="text-[var(--softTextColor)] mt-6  capitalize text-[14px] md:text-[16px] "
 >
   {post.bedrooms
     ? `${post.bedrooms} Bedroom`
@@ -74,6 +81,16 @@ const PostListItem = ({ post }) => {
     : ""}
   {post.propertytype ? ` ${post.propertytype.slice(0, 20)}` : ""}
   {post.model?.toLowerCase().includes("sale") ? " for Sale" : " for Rent"}
+</Link>
+
+<Link
+
+className="text-[var(--softTextColor)] mt-6  font-semibold capitalize text-[14px] md:text-[16px] "
+> KSh
+{post.price ? ` ${post.price.slice(0, 20)}` : ""} <span className="font-normal">
+{post.model?.toLowerCase().includes("sale") ? " /for Sale" : " /month"}
+
+</span>
 </Link>
 
     </div>
