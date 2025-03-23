@@ -19,7 +19,7 @@ const Reviews = ({ postId }) => {
   const { getToken } = useAuth();
   const queryClient = useQueryClient();
 
-  const [visibleComments, setVisibleComments] = useState(6); // Increased initial visible comments
+  const [visibleComments, setVisibleComments] = useState(5); // Initial visible comments set to 5
   const [commentSuccess, setCommentSuccess] = useState(false); // Temporary success message
 
   const { isPending, error, data = [] } = useQuery({
@@ -66,11 +66,12 @@ const Reviews = ({ postId }) => {
     setVisibleComments((prev) => prev + 5); // Load 5 more comments
   };
 
+  const showLessComments = () => {
+    setVisibleComments(5); // Collapse back to the first 5 comments
+  };
+
   return (
     <div className="flex flex-col gap-1 mb-2">
-
-     
-
       {isPending ? (
         "Loading..."
       ) : error ? (
@@ -94,11 +95,19 @@ const Reviews = ({ postId }) => {
               Show more reviews
             </button>
           )}
+
+          {visibleComments > 5 && (
+            <button
+              onClick={showLessComments}
+              className="text-sm text-[#FF0000] mt-2 border-[0.2px] border-[#FF0000] px-1 py-[0.5px] rounded-xl"
+            >
+              Show less
+            </button>
+          )}
         </>
       )}
     </div>
   );
 };
-
 
 export default Reviews;
