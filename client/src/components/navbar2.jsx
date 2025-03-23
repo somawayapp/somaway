@@ -30,45 +30,39 @@ const Navbar = () => {
 
     
      // Modify or remove z-index here
-     <div style={{ zIndex: 100004 }}  className="relative w-full h-[50px] md:h-[70px]  px-3 md:px-9 gap-4 flex items-center text-[var(--TextColor)]
+     <div style={{ zIndex: 100004 }}  className="relative w-full h-[50px] md:h-[70px]  px-3 md:px-[80px] gap-4 flex items-center text-[var(--TextColor)]
       sticky top-0 justify-between bg-[var(--bg)] border-b border-b-[var(--softBg4)] ">
 
 <div className="flex items-center justify-between gap-12">
-  <Link to="/" className="flex items-center gap-1 text-xl font-bold md:text-3xl">
-    <img src="/airlogo.png" className="w-7 h-7 rounded-lg md:w-8 md:h-8" />
-    <span className="bg-clip-text text-[#FF5A5F] pl-1 text-xl md:text-2xl font-extrabold">Somaway</span>
+<Link to="/" className="flex items-center text-xl font-bold md:text-3xl sm:block md:hidden">
+    <img src="/airlogo.png" className="w-8 h-8" />
+  </Link>
+
+  {/* Show on medium screens and larger */}
+  <Link to="/" className="flex items-center gap-1 text-xl font-bold md:text-3xl hidden md:flex">
+    <img src="/airlogo2.svg" className="md:h-9" />
   </Link>
   
-  <div className="hidden md:flex flex-1 justify-center space-x-12">
-    <Link className="hover:text-[#ff4d52] font-bold" to="/" onClick={() => setOpen(false)}>Home</Link>
-    <Link className="hover:text-[#ff4d52] font-bold" to="/" onClick={() => setOpen(false)}>Discover</Link>
-  </div>
+
 </div>
 
-
+<div className="hidden md:flex flex-1 justify-center space-x-12">
+    <Link className="hover:text-[#ff4d52] font-bold" to="/" onClick={() => setOpen(false)}>for rent</Link>
+    <Link className="hover:text-[#ff4d52] font-bold" to="/" onClick={() => setOpen(false)}>for sale</Link>
+  </div>
      
 
      <div className="flex items-center justify-between flex-row gap-2 md:gap-9">
 
-         <SignedOut >
-          <Link
+     <Link
             to="/"
-            className="text-center px-4  md:px-6 hidden md:block py-2 md:py-3 bg-[#FF5A5F]   text-white
-            text-xs md:text-[16px] font-semibold rounded-md hover:bg-[#ff4d52]   "
-          > Summaries
+            className="text-center hidden md:block text-[14px] md:text-[16px] cursor-pointer text-[var(--textColor)] font-semibold hover:text-[#FF5A5F]   text-white
+              "
+          > airbnb your home
             
           </Link>
-          </SignedOut>
 
-          <SignedOut>
-        <Link
-            to="/login"
-            className="text-center px-4 md:px-6 py-2 md:py-3 bg-[var(--textColore3)] text-xs md:text-md text-[var(--textColor)] 
-            font-semibold  text-xs md:text-[16px] rounded-md hover:text-white hover:bg-[#FF5A5F]  "
-          >
-            Login
-          </Link>
-        </SignedOut>
+    
 
         <SignedIn>
           <UserButton />
@@ -112,7 +106,7 @@ const Navbar = () => {
 
         {/* MOBILE LINK LIST */}
         <div
-          className={`w-[80%] md:w-[20%]  overflow-y-auto h-cover bg-[var(--bg)] flex flex-col p-5  items-left justify-left  text-[var(--TextColor)] 
+          className={`w-[80%] md:w-[20%]  overflow-y-auto h-cover bg-[var(--bg)] flex flex-col p-5 items-left justify-left  text-[var(--TextColor)] 
             gap-8 font-sm text-md fixed top-0 right-0  bottom-0 overflow-x-hidden transition-transform ease-in-out z-50 ${
             open ? "translate-x-0" : "translate-x-full"
           }`}   style={{ maxHeight: "100vh" }}
@@ -140,34 +134,35 @@ const Navbar = () => {
 
 
         <div >
-             <Link
-                      to="/"
-                      className="block py-2 text-[var(--TextColor)] font-bold  hover:text-[#FF5A5F]  p-2 rounded-xl"
-             onClick={() => setOpen(false)}          > Home           </Link>     <Link
-             to="/"
-             className="block py-2 text-[var(--TextColor)] font-bold  hover:text-[#FF5A5F]   p-2 rounded-xl"
-          onClick={() => setOpen(false)}          > Book summaries          </Link>
         <Link
             to="/"
-            className="block py-2 text-[var(--TextColor)] font-bold  hover:text-[#FF5A5F]   p-2 rounded-xl"
+            className="block py-2 text-[var(--TextColor)] font-bold  hover:text-[#FF5A5F] p-2 rounded-xl"
+   onClick={() => setOpen(false)}          > Home           </Link>   
+     <Link
+   to="/"
+   className="block py-2 text-[var(--TextColor)] font-bold  hover:text-[#FF5A5F]  p-2 rounded-xl"
+onClick={() => setOpen(false)}          > Book summaries          </Link>
+        <Link
+            to="/"
+            className="block py-2 text-[var(--TextColor)] font-bold  hover:text-[#FF5A5F]  p-2 rounded-xl"
    onClick={() => setOpen(false)}          > Discover          </Link>
           <Link
             to="/premium"
-            className="block py-2 text-[var(--TextColor)] font-bold   hover:text-[#FF5A5F]   p-2 rounded-xl"
+            className="block py-2 text-[var(--TextColor)] font-bold   hover:text-[#FF5A5F]  p-2 rounded-xl"
    onClick={() => setOpen(false)}          > Premium          </Link>
           <Link
             to="/about"
-            className="block py-2 text-[var(--TextColor)] font-bold  hover:text-[#FF5A5F]   p-2 rounded-xl"
+            className="block py-2 text-[var(--TextColor)] font-bold  hover:text-[#FF5A5F]  p-2 rounded-xl"
    onClick={() => setOpen(false)}          > About Us 
           </Link>
           <Link
             to="/settings"
-            className="block py-2 text-[var(--TextColor)] font-bold   hover:text-[#FF5A5F]   p-2 rounded-xl"
+            className="block py-2 text-[var(--TextColor)] font-bold   hover:text-[#FF5A5F]  p-2 rounded-xl"
    onClick={() => setOpen(false)}              > Settings          </Link>
-    
+          
      <Link
             to="/premium"
-            className="block py-2 text-[var(--TextColor)] font-bold  hover:text-[#FF5A5F]   p-2 rounded-xl"
+            className="block py-2 text-[var(--TextColor)] font-bold  hover:text-[#FF5A5F]  p-2 rounded-xl"
    onClick={() => setOpen(false)}              > Pricing           </Link>
         </div>
         
