@@ -1,9 +1,11 @@
 import { useState, useEffect } from "react";
 import { FaStar } from "react-icons/fa";
 import { useAuth } from "@clerk/clerk-react";
+import { useNavigate } from "react-router-dom";
 
 const Ratings = ({ postId }) => {
-  const { getToken } = useAuth(); // Get the token dynamically
+  const { getToken, isSignedIn } = useAuth();
+  const navigate = useNavigate();
   const [rating, setRating] = useState(0);
   const [totalReviews, setTotalReviews] = useState(0);
   const [hover, setHover] = useState(null);
@@ -12,23 +14,23 @@ const Ratings = ({ postId }) => {
   useEffect(() => {
     const fetchRating = async () => {
       try {
-        const token = await getToken(); // Get the token before making the request
-        if (!token) {
-          console.error("No auth token found!");
-          return;
-        }
-
-        const res = await fetch(`${import.meta.env.VITE_API_URL}/ratings/${postId}`, {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
-
+        const res = await fetch(`${import.meta.env.VITE_API_URL}/ratings/${postId}`);
         if (res.ok) {
           const data = await res.json();
           setRating(parseFloat(data.averageRating) || 0);
           setTotalReviews(data.totalRatings || 0);
-          setUserRating(data.userRating || 0);
+          if (isSignedIn) {
+            const token = await getToken();
+            if (token) {
+              const userRes = await fetch(`${import.meta.env.VITE_API_URL}/ratings/user/${postId}`, {
+                headers: { Authorization: `Bearer ${token}` },
+              });
+              if (userRes.ok) {
+                const userData = await userRes.json();
+                setUserRating(userData.userRating || 0);
+              }
+            }
+          }
         } else {
           console.error("Failed to fetch rating", await res.text());
         }
@@ -36,18 +38,22 @@ const Ratings = ({ postId }) => {
         console.error("Error fetching rating:", err);
       }
     };
-
     fetchRating();
-  }, [postId, getToken]);
+  }, [postId, isSignedIn, getToken]);
 
   const handleRating = async (stars) => {
+    if (!isSignedIn) {
+      navigate("/login");
+      return;
+    }
+
     try {
       const token = await getToken();
       if (!token) {
         console.error("No auth token found!");
         return;
       }
-
+      
       const res = await fetch(`${import.meta.env.VITE_API_URL}/ratings/${postId}`, {
         method: "POST",
         headers: {
