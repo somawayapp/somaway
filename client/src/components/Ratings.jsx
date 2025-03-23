@@ -10,7 +10,7 @@ const Rating = ({ postId, token }) => {
   useEffect(() => {
     const fetchRating = async () => {
       try {
-        const res = await fetch(`${import.meta.env.VITE_API_URL}/api/ratings/${postId}`, {
+        const res = await fetch(`${import.meta.env.VITE_API_URL}/ratings/${postId}`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -34,7 +34,7 @@ const Rating = ({ postId, token }) => {
 
   const handleRating = async (stars) => {
     try {
-      const res = await fetch(`${import.meta.env.VITE_API_URL}/api/ratings/${postId}`, {
+      const res = await fetch(`${import.meta.env.VITE_API_URL}/ratings/${postId}`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
