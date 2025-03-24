@@ -2,61 +2,96 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { SignedIn, SignedOut, UserButton } from "@clerk/clerk-react";
 import "../index.css";
-import Search from "./Search";
 import { AiOutlineMenu } from "react-icons/ai";
 import Avatar from "./Avatar";
+import { useNavigate, useSearchParams } from "react-router-dom";
+import { FaSearch, FaTimes } from "react-icons/fa";
+import Search from "./Search";
+
 
 const Navbar = () => {
-  const [open, setOpen] = useState(false);
 
-  const handleOverlayClick = () => setOpen(false);
+  const navigate = useNavigate();
+  const [searchParams, setSearchParams] = useSearchParams();
+  const [isOpen, setIsOpen] = useState(false);
+  const [step, setStep] = useState(1);
 
-  // Disable body scroll when the menu is open
+  const [filters, setFilters] = useState({
+    location: "",
+    propertytype: "",
+    bedrooms: "",
+    bathrooms: "",
+    propertysize: "",
+    rooms: "",
+    pricemin: "",
+    pricemax: "",
+    model: "",
+  });
+
+  const [isScrolledUp, setIsScrolledUp] = useState(false);
+
   useEffect(() => {
-    if (open) {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "auto";
-    }
-    return () => {
-      document.body.style.overflow = "auto"; // Cleanup in case of unmount
+    let lastScrollTop = window.scrollY;
+
+    const handleScroll = () => {
+      let scrollTop = window.scrollY;
+
+      if (scrollTop > lastScrollTop && scrollTop > 50) {
+        setIsScrolledUp(true); // Collapse when scrolling up
+      } else if (scrollTop < 10) {
+        setIsScrolledUp(false); // Expand when back at the top
+      }
+
+      lastScrollTop = scrollTop;
     };
-  }, [open]);
 
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
-  const [scrolled, setScrolled] = useState(false);
-
-  const handleScroll = () => {
-    if (window.scrollY > 0) {
-      setScrolled(true);
+  const handleNext = () => {
+    if (step < 3) {
+      setStep(step + 1);
     } else {
-      setScrolled(false);
+      const filteredParams = Object.entries(filters)
+        .filter(([_, value]) => value !== "")
+        .reduce((acc, [key, value]) => ({ ...acc, [key]: value }), {});
+
+      setSearchParams({
+        ...Object.fromEntries(searchParams),
+        ...filteredParams,
+      });
+      setIsOpen(false);
+    }
+  };
+
+  const handleOutsideClick = (e) => {
+    if (e.target.id === "popup-overlay") {
+      setIsOpen(false);
     }
   };
 
   useEffect(() => {
-    // Add the scroll event listener
-    window.addEventListener('scroll', handleScroll);
+    if (isOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "auto";
+    }
+  }, [isOpen]);
 
-    // Cleanup on component unmount
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-    };
-  }, []);
-
-
-  return (
-
+  return(
 
     
      // Modify or remove z-index here
      <div
      style={{
        zIndex: 100004,
-       height: scrolled ? '90px' : '150px',
      }}
-     className="relative w-full px-3 md:px-[80px] gap-3 md:gap-6 flex items-center text-[var(--TextColor)] sticky top-0 justify-between bg-[var(--bg)] md:border-b md:border-b-[var(--softBg4)]"
+     className={`relative w-full px-3 md:px-[80px] gap-3 md:gap-6 flex items-center text-[var(--TextColor)] sticky top-0 justify-between bg-[var(--bg)] md:border-b md:border-b-[var(--softBg4)] ${
+       isScrolledUp ? "h-[90px]" : "h-[150px]"
+     }`}
    >
+   
 
 
   {/* Show on medium screens and larger */}

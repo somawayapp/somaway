@@ -74,13 +74,11 @@ const Search = () => {
   return(
     <>
   <div
-  className={`fixed top-0  w-full z-50 hidden md:flex flex-col items-center justify-center transition-all duration-3000 ${
-  isScrolledUp ? "pt-0 gap-0" : "pt-6 gap-6"
-      }`}
+  className={`fixed top-0  w-full z-50 hidden md:flex flex-col items-center justify-center transition-all duration-300 ${isScrolledUp ? "pt-0 gap-0" : "pt-6 gap-6" }`}
     >
       {/* Rent & Sale Links */}
       <div
-        className={`flex justify-center gap-[40px] transition-all duration-3000 ${
+        className={`flex justify-center gap-[40px] transition-all duration-300 ${
           isScrolledUp ? "opacity-0 translate-y-[-20px] pointer-events-none" : "opacity-100 translate-y-0"
         }`}
       >
@@ -100,7 +98,7 @@ const Search = () => {
     <button
   onClick={() => setIsOpen(true)}
   type="button"
-  className={`border-[1px] border-[var(--softBg4)] max-w-[1100px] w-full mx-auto rounded-full shadow-sm hover:shadow-md transition duration-3000 cursor-pointer ${
+  className={`border-[1px] border-[var(--softBg4)] max-w-[1100px] w-full mx-auto rounded-full shadow-sm hover:shadow-md transition duration-300 cursor-pointer ${
     isScrolledUp ? "max-w-[500px] " : "max-w-[900px]"
   }`}
 >
