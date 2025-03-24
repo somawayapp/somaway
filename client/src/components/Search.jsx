@@ -54,36 +54,66 @@ const Search = () => {
   return (
     <>
       <button
-        type="button"
-        className="border-[1px] border-[var(--softBg4)] w-full md:w-auto py-3 rounded-full shadow-sm hover:shadow-md transition duration-300 cursor-pointer"
-        onClick={() => setIsOpen(true)}
-      >
-        <div className="flex flex-row justify-between items-center">
-          <small className="  text-[12px] md:text-[14px] font-bold px-6 text-[var(--softTextColor)]">
-            {filters.location || "Anywhere"}
-          </small>
+  type="button"
+  className="border-[1px] border-[var(--softBg4)] w-full md:w-auto py-2 rounded-full shadow-sm hover:shadow-md transition duration-300 cursor-pointer"
+  onClick={() => setIsOpen(true)}
+>
+  <div className="flex flex-row justify-between items-center relative">
+    {/* Location */}
+    <div className="relative group">
+      <small className="text-[12px] md:text-[14px] font-semibold px-6 text-[var(--softTextColor)] group-hover:bg-[var(--softBg4)] py-2 rounded-full transition">
+        {filters.location || "Anywhere"}
+      </small>
+      <span className="hidden md:block absolute left-1/2 transform -translate-x-1/2 mt-1 text-[10px] text-gray-500 whitespace-nowrap">
+        Choose a location
+      </span>
+    </div>
 
-          <small className=" text-[12px] md:text-[14px] font-bold px-6 border-x-[1px] border-x-[var(--softBg4)] flex-1 text-center text-[var(--softTextColor)]]">
-  {filters.pricemin || filters.pricemax ? (
-    <>
-      {filters.pricemin ? `KSh ${filters.pricemin * 150}` : "KSh 0"} -{" "}
-      {filters.pricemax ? `KSh ${filters.pricemax * 150}` : "KSh 0"}
-    </>
-  ) : (
-    "Any price"
-  )}
-</small>
+    {/* Price */}
+    <div className="relative group flex-1 text-center border-x-[1px] border-x-[var(--softBg4)]">
+      <small className="text-[12px] md:text-[14px] font-semibold px-6 text-[var(--softTextColor)] group-hover:bg-[var(--softBg4)] py-2 rounded-full transition">
+        {filters.pricemin || filters.pricemax ? (
+          <>
+            {filters.pricemin ? `KSh ${filters.pricemin}` : "KSh 0"} -{" "}
+            {filters.pricemax ? `KSh ${filters.pricemax}` : "KSh 0"}
+          </>
+        ) : (
+          "Any price"
+        )}
+      </small>
+      <span className="hidden md:block absolute left-1/2 transform -translate-x-1/2 mt-1 text-[10px] text-gray-500 whitespace-nowrap">
+        Set price range
+      </span>
+    </div>
 
-          <div className=" text-[12px] md:text-[14px] text-[var(--softTextColor)] pl-6 pr-2  flex flex-row items-center gap-4">
-            <small className="hidden sm:block font-normal  text-[12px] md:text-[14px] m">
-              {filters.propertytype || "Any type"}
-            </small>
-            <div className="p-4 bg-[#fc3239] rounded-full text-white">
-              <FaSearch className=" text-[12px] md:text-[14px]" /> 
-            </div>
-          </div>
-        </div>
-      </button>
+    {/* Property Type & Size */}
+    <div className="text-[12px] md:text-[14px] text-[var(--softTextColor)] pl-6 pr-2 flex flex-row items-center gap-4">
+      <div className="relative group hidden md:block">
+        <small className="font-semibold text-[12px] md:text-[14px] group-hover:bg-[var(--softBg4)] py-2 rounded-full transition">
+          {filters.propertytype || "Any type"}
+        </small>
+        <span className="hidden md:block absolute left-1/2 transform -translate-x-1/2 mt-1 text-[10px] text-gray-500 whitespace-nowrap">
+          Select property type
+        </span>
+      </div>
+
+      <div className="relative group hidden md:block">
+        <small className="font-semibold text-[12px] md:text-[14px] group-hover:bg-[var(--softBg4)] py-2 rounded-full transition">
+          {filters.size || "Any size"}
+        </small>
+        <span className="hidden md:block absolute left-1/2 transform -translate-x-1/2 mt-1 text-[10px] text-gray-500 whitespace-nowrap">
+          Choose property size
+        </span>
+      </div>
+
+      {/* Search Icon */}
+      <div className="p-4 ml-[80px] bg-[#fc3239] rounded-full text-white transition-transform duration-300 hover:scale-110 hover:bg-[#d82930]">
+        <FaSearch className="text-[12px] md:text-[14px]" />
+      </div>
+    </div>
+  </div>
+</button>
+
 
       {isOpen && (
         <div
@@ -112,7 +142,8 @@ const Search = () => {
 
             {step === 1 && (
               <>
-                <h2 className="text-2xl text-[var(--softTextColor)] font-semibold mb-1">Where do you wanna stay /Property location?</h2>
+                <h2 className="text-2xl text-[var(--softTextColor)] font-semibold mb-1">Where do you wanna stay
+                <span className="block md:hidden">?</span> <span className="hidden md:block">/Property location?</span></h2>
                 <h2 className="text-sm text-[var(--softTextColor)] mb-4 "> Find your perfect location!</h2>
                 <input
                   type="text"
