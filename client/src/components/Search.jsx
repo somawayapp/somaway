@@ -94,9 +94,9 @@ const Search = () => {
         >
            
 
-          <div className="bg-[var(--bg)] p-6 rounded-xl shadow-lg w-96 min-h-[250px] flex flex-col justify-between">
+          <div className="bg-[var(--bg)] p-6 rounded-xl border-[0.5px]  border-[var(--softBg4) shadow-lg w-96 min-h-[250px] flex flex-col justify-between">
           <button
-              className="absolute top-2 right-2 text-[var(--softTextColor)]  hover:font-bold"
+              className="absolute top-4 right-4 text-[var(--softTextColor)]  hover:font-bold"
               onClick={() => setIsOpen(false)}
             >
               <FaTimes />
@@ -108,7 +108,7 @@ const Search = () => {
                 <input
                   type="text"
                   placeholder="City, Region, or Country"
-                  className="w-full p-2 border border-[var(--softBg4)] rounded-xl mb-4"
+                  className="w-full p-2 border border-[var(--softBg4)] bg-[var(--bg)] rounded-xl mb-4"
                   value={filters.location}
                   onChange={(e) =>
                     setFilters({ ...filters, location: e.target.value })
@@ -117,7 +117,7 @@ const Search = () => {
 
                 <h2 className="text-lg text-[var(--softTextColor)] font-bold mb-4">Select Model</h2>
                 <select
-                  className="w-full p-2 border border-[var(--softBg4)] rounded-xl"
+                  className="w-full p-2  bg-[var(--bg) border border-[var(--softBg4)] rounded-xl"
                   value={filters.model}
                   onChange={(e) =>
                     setFilters({ ...filters, model: e.target.value })
@@ -134,7 +134,7 @@ const Search = () => {
               <>
                 <h2 className="text-lg text-[var(--softTextColor)] font-bold mb-4">Select Property Type</h2>
                 <select
-                  className="w-full p-2 border border-[var(--softBg4)] rounded-xl mb-4"
+                  className="w-full p-2 border border-[var(--softBg4)]  bg-[var(--bg)  rounded-xl mb-4"
                   value={filters.propertytype}
                   onChange={(e) =>
                     setFilters({ ...filters, propertytype: e.target.value })
@@ -150,7 +150,7 @@ const Search = () => {
                   <input
                     type="number"
                     placeholder="Bedrooms"
-                    className="w-full p-2 border border-[var(--softBg4)] rounded-xl"
+                    className="w-full p-2 border  bg-[var(--bg) border-[var(--softBg4)]  rounded-xl"
                     min="0"
                     value={filters.bedrooms}
                     onChange={(e) =>
@@ -163,7 +163,7 @@ const Search = () => {
                   <input
                     type="number"
                     placeholder="Bathrooms"
-                    className="w-full p-2 border border-[var(--softBg4)] rounded-xl"
+                    className="w-full p-2 border border-[var(--softBg4)]  bg-[var(--bg) rounded-xl"
                     min="0"
                     value={filters.bathrooms}
                     onChange={(e) =>
@@ -184,7 +184,7 @@ const Search = () => {
                   <input
                     type="number"
                     placeholder="Min Price"
-                    className="w-full p-2 border border-[var(--softBg4)] rounded-xl"
+                    className="w-full p-2 border border-[var(--softBg4)]   bg-[var(--bg) rounded-xl"
                     min="0"
                     value={filters.pricemin}
                     onChange={(e) =>
@@ -197,7 +197,7 @@ const Search = () => {
                   <input
                     type="number"
                     placeholder="Max Price"
-                    className="w-full p-2 border border-[var(--softBg4)] rounded-xl"
+                    className="w-full p-2 border border-[var(--softBg4)]  bg-[var(--bg) rounded-xl"
                     min="0"
                     value={filters.pricemax}
                     onChange={(e) =>
