@@ -58,12 +58,12 @@ const Search = () => {
   onClick={() => setIsOpen(true)}
    
   type="button"
-  className="border-[1px] max-w-[700px] mx-auto border-[var(--softBg4)] md:w-auto  rounded-full shadow-sm hover:shadow-md transition duration-300 cursor-pointer"
+  className="border-[1px] max-w-[900px] mx-auto border-[var(--softBg4)] md:w-auto  rounded-full shadow-sm hover:shadow-md transition duration-300 cursor-pointer"
 >
   <div className="flex flex-row justify-between items-center relative">
     {/* Location */}
     <div className="relative  hover:bg-[var(--softBg4)]  rounded-full group p-2 md:p-3  flex flex-col items-center text-center ">
-     <small className="text-[12px] md:text-[14px] ml-6 md:ml-[20px] font-semibold text-[var(--softTextColor)] transition">
+     <small className="text-[12px] md:text-[13px] ml-6 md:ml-[20px] font-semibold text-[var(--softTextColor)] transition">
      {filters.location || "Anywhere"}
 
       </small>
@@ -80,7 +80,7 @@ const Search = () => {
 
     {/* Property Size */}
        <div className="relative  hover:bg-[var(--softBg4)]  rounded-full group p-2 md:p-3 flex flex-col items-center text-center ">
-     <small className="text-[12px] md:text-[14px] font-semibold text-[var(--softTextColor)] transition">
+     <small className="text-[12px] md:text-[13px] font-semibold text-[var(--softTextColor)] transition">
      {filters.propertysize || "Any size"}
 
       </small>
@@ -96,7 +96,7 @@ const Search = () => {
 
     {/* Price */}
     <div className="relative hidden md:block  hover:bg-[var(--softBg4)]  rounded-full group p-2 md:p-3 flex flex-col items-center text-center   border-x-[var(--softBg4)]">
-     <small className="text-[12px] md:text-[14px] font-semibold text-[var(--softTextColor)] transition">
+     <small className="text-[12px] md:text-[13px] font-semibold text-[var(--softTextColor)] transition">
         {filters.pricemin || filters.pricemax ? (
           <>
             {filters.pricemin ? `KSh ${filters.pricemin}` : "KSh 0"} -{" "}
@@ -119,7 +119,7 @@ const Search = () => {
 
     {/* Property Type */}
     <div className="relative hidden md:block  hover:bg-[var(--softBg4)]  rounded-full group p-2 md:p-3 flex flex-col items-center text-center   border-x-[var(--softBg4)]">
-     <small className="text-[12px] md:text-[14px] font-semibold text-[var(--softTextColor)] transition">
+     <small className="text-[12px] md:text-[13px] font-semibold text-[var(--softTextColor)] transition">
      {filters.propertytype || "Any type"}
 
       </small>
