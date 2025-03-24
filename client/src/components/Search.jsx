@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+  import { useState, useEffect } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { FaSearch, FaTimes } from "react-icons/fa";
 
@@ -55,13 +55,15 @@ const Search = () => {
     <>
 
 <button
+  onClick={() => setIsOpen(true)}
+
   type="button"
   className="border-[1px] border-[var(--softBg4)] w-full md:w-auto  rounded-full shadow-sm hover:shadow-md transition duration-300 cursor-pointer"
 >
   <div className="flex flex-row justify-between items-center relative">
     {/* Location */}
     <div className="relative  hover:bg-[var(--softBg4)]  rounded-full group p-2 md:p-3  flex flex-col items-center text-center ">
-     <small className="text-[12px] md:text-[14px] ml-0 md:ml-4 font-semibold text-[var(--softTextColor)] transition">
+     <small className="text-[12px] md:text-[14px] ml-6 md:ml-[20px] font-semibold text-[var(--softTextColor)] transition">
      {filters.location || "Anywhere"}
 
       </small>
@@ -71,7 +73,7 @@ const Search = () => {
   
     </div>
 
-    <div class="flex items-center justify-center h-[20px] ">
+    <div class="flex items-center justify-center h-[30px] md:h-[50px] ">
     <div class="h-full border-l-[1px] border-[var(--softBg4)]"></div>
 </div>
 
@@ -88,7 +90,7 @@ const Search = () => {
   
     </div>
 
-    <div class="flex  hidden md:block items-center justify-center ">
+    <div class="flex  hidden md:block items-center justify-center h-[30px] md:h-[50px] ">
     <div class="h-full border-l-[1px] border-[var(--softBg4)]"></div>
 </div>
 
@@ -111,7 +113,7 @@ const Search = () => {
     </div>
 
 
-    <div class="flex  hidden md:block items-center justify-center ">
+    <div class="flex  hidden md:block items-center justify-center h-[30px] md:h-[50px] ">
     <div class="h-full border-l-[1px] border-[var(--softBg4)]"></div>
 </div>
 
