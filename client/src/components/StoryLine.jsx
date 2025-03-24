@@ -55,7 +55,7 @@ const StoryLine = () => {
         </p>
         <button
           className="mt-9 bg-black text-white py-4 text-extrabold text-2xl md:text-5xl 
-            px-8 rounded-[40px] cursor-pointer hover:bg-[#ff4d52]   "
+            px-8 rounded-[40px] cursor-pointer hover:bg-[#FF5A5F]   "
         >
           30 titles/month
         </button>

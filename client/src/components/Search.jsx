@@ -59,11 +59,11 @@ const Search = () => {
         onClick={() => setIsOpen(true)}
       >
         <div className="flex flex-row justify-between items-center">
-          <small className="  text-[14px] md:text-[16px] font-bold px-6 text-[var(--softTextColor)]">
+          <small className="  text-[12px] md:text-[14px] font-bold px-6 text-[var(--softTextColor)]">
             {filters.location || "Anywhere"}
           </small>
 
-          <small className=" text-[14px] md:text-[16px] font-bold px-6 border-x-[1px] border-x-[var(--softBg4)] flex-1 text-center text-[var(--softTextColor)]]">
+          <small className=" text-[12px] md:text-[14px] font-bold px-6 border-x-[1px] border-x-[var(--softBg4)] flex-1 text-center text-[var(--softTextColor)]]">
   {filters.pricemin || filters.pricemax ? (
     <>
       {filters.pricemin ? `KSh ${filters.pricemin * 150}` : "KSh 0"} -{" "}
@@ -74,12 +74,12 @@ const Search = () => {
   )}
 </small>
 
-          <div className=" text-[14px] md:text-[16px] text-[var(--softTextColor)] pl-6 pr-2  flex flex-row items-center gap-4">
-            <small className="hidden sm:block font-normal  text-[14px] md:text-[16px] m">
+          <div className=" text-[12px] md:text-[14px] text-[var(--softTextColor)] pl-6 pr-2  flex flex-row items-center gap-4">
+            <small className="hidden sm:block font-normal  text-[12px] md:text-[14px] m">
               {filters.propertytype || "Any type"}
             </small>
-            <div className="p-2 bg-[#FF5A5F] rounded-full text-white">
-              <FaSearch className=" text-[14px] md:text-[16px]" /> 
+            <div className="p-4 bg-[#fc3239] rounded-full text-white">
+              <FaSearch className=" text-[12px] md:text-[14px]" /> 
             </div>
           </div>
         </div>
@@ -90,7 +90,7 @@ const Search = () => {
          id="popup-overlay"
           onClick={handleOutsideClick}
           style={{ zIndex: 100014 }}
-          className="fixed inset-0 flex items-center justify-center bg-[var(--bd)] bg-opacity-50"
+          className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50"
         >
            
 
@@ -222,7 +222,7 @@ const Search = () => {
                 </button>
               )}
               <button
-                className="px-4 py-2 bg-[#FF5A5F] text-white rounded-xl"
+                className="px-4 py-2 bg-[#fc3239] text-white rounded-xl"
                 onClick={handleNext}
               >
                 {step < 3 ? "Next" : "Search"}

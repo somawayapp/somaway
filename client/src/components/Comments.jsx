@@ -103,7 +103,7 @@ const Comments = ({ postId }) => {
                pl-4 text-[var(--textColor)] rounded-xl"
             />
             <button className="px-1 ">
-            <Send className=" h-[40px] pr-1 text-[#ff4d52] " />
+            <Send className=" h-[40px] pr-1 text-[#fc3239] " />
 
             </button>
           </form>
@@ -138,7 +138,7 @@ const Comments = ({ postId }) => {
               )}
               <button
                 onClick={closeComments}
-                className="text-[#ff4d52]  border-[0.2px] border-[#ff4d52]
+                className="text-[#fc3239]  border-[0.2px] border-[#fc3239]
                px-1 py-[0.5px] rounded-xl   text-sm mt-3"
               >
                 Close reviews
