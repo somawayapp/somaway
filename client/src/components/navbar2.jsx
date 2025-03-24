@@ -3,6 +3,8 @@ import { Link } from "react-router-dom";
 import { SignedIn, SignedOut, UserButton } from "@clerk/clerk-react";
 import "../index.css";
 import Search from "./Search";
+import { AiOutlineMenu } from "react-icons/ai";
+import Avatar from "./Avatar";
 
 const Navbar = () => {
   const [open, setOpen] = useState(false);
@@ -97,22 +99,30 @@ const Navbar = () => {
 
 
 
-    <div className="rounded-full w-[30px] h-[30px] bg-[var(--softTextColor)] items-center justify-center">
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    className="w-[60px] h-[60px] mb-[-10px]"
-    viewBox="0 0 24 24"
-    fill="var(--bg)"
-  >
-    <defs>
-      <clipPath id="vesica">
-        <circle cx="12" cy="12" r="7" />
-      </clipPath>
-    </defs>
-    <circle cx="12" cy="5" r="7" fill="var(--bg)" clip-path="url(#vesica)" />
-    <circle cx="12" cy="3" r="3" fill="var(--bg)" />
-  </svg>
-</div>
+  <div className="relative">
+      <div className="flex flex-row items-center gap-3">
+            <button
+              type="button"
+              className="hidden md:block text-sm font-bold py-3 px-4 rounded-full hover:bg-neutral-100 transition cursor-pointer text-[#585858]"
+            >
+              Add listing
+            </button>
+              <button
+                type="button"
+                className=" p-4 md:py-1 md:px-2 border-[1px]   border-neutral-200  flex  flex-row  items-center   gap-3   rounded-full   cursor-pointer   hover:shadow-md   transition duration-300"
+              >
+                <AiOutlineMenu />
+                <div className="hidden md:block">
+                  <Avatar src={user?.image} />
+                </div>
+              </button>
+      </div>
+
+
+
+      
+    </div>
+
 
 
 </div>
