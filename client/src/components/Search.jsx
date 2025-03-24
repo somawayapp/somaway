@@ -96,12 +96,13 @@ const Search = () => {
 
 
     {/* search button for md screens */}
+<div>
 
     <button
   onClick={() => setIsOpen(true)}
   type="button"
   className={`border-[1px] border-[var(--softBg4)] max-w-[1100px] w-full mx-auto rounded-full shadow-sm hover:shadow-md transition duration-300 cursor-pointer ${
-    isScrolledUp ? "max-w-[500px] px-4" : "max-w-[1100px]"
+    isScrolledUp ? "max-w-[500px] " : "max-w-[1100px]"
   }`}
 >
   <div className="flex flex-row  items-center relative gap-2 justify-between">
@@ -129,7 +130,7 @@ const Search = () => {
         isScrolledUp ? "md:px-4" : "md:px-8"
       } flex flex-col items-start text-left flex-1`}
     >
-      <small className="text-[12px] md:text-[13px] font-semibold text-[var(--softTextColor)] transition">
+      <small className="text-[12px] md:text-[13px] font-semibold text-[var(--softTextColor)] transition"   style={{ whiteSpace: 'nowrap' }}>
         {filters.propertysize || "Any size"}
       </small>
       {!isScrolledUp && (
@@ -147,9 +148,8 @@ const Search = () => {
         isScrolledUp ? "md:px-4" : "md:px-8"
       } flex flex-col items-start text-left flex-1`}
     >
-            {!isScrolledUp && (
 
-      <small className="text-[12px] md:text-[13px] font-semibold text-[var(--softTextColor)] transition">
+      <small className="text-[12px] md:text-[13px] font-semibold text-[var(--softTextColor)] transition"   style={{ whiteSpace: 'nowrap' }}>
         {filters.pricemin || filters.pricemax ? (
           <>
             {filters.pricemin ? `KSh ${filters.pricemin}` : "KSh 0"} -{" "}
@@ -158,7 +158,7 @@ const Search = () => {
         ) : (
           "Any price"
         )}
-      </small> )}
+      </small> 
       {!isScrolledUp && (
         <span className="hidden md:block text-[14px] text-[var(--softBg5)]">
           Filter by price
@@ -174,7 +174,7 @@ const Search = () => {
         isScrolledUp ? "md:px-4" : "md:px-8"
       } flex flex-col items-start text-left flex-1`}
     >
-      <small className="text-[12px] md:text-[13px] font-semibold text-[var(--softTextColor)] transition">
+      <small className="text-[12px] md:text-[13px] font-semibold text-[var(--softTextColor)] transition"   style={{ whiteSpace: 'nowrap' }}>
         {filters.propertytype || "Any type"}
       </small>
       {!isScrolledUp && (
@@ -196,7 +196,7 @@ const Search = () => {
     </div>
   </div>
 </button>
-
+</div>
 
 
     </div>
