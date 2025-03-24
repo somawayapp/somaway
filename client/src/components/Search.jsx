@@ -55,7 +55,7 @@ const Search = () => {
     <>
       <button
         type="button"
-        className="border-[1px] border-[var(--softBg4)] w-full md:w-auto py-3 rounded-full shadow-sm hover:shadow-md transition duration-300 cursor-pointer"
+        className="border-[1px] border-[var(--softBg4)]] w-full md:w-auto py-3 rounded-full shadow-sm hover:shadow-md transition duration-300 cursor-pointer"
         onClick={() => setIsOpen(true)}
       >
         <div className="flex flex-row justify-between items-center">
@@ -94,7 +94,7 @@ const Search = () => {
         >
            
 
-          <div className="bg-[var(--bg)] p-5 md:p-9 rounded-md border-[0.5px]  border-[var(--softBg4) shadow-lg w-96 min-h-[250px] flex flex-col justify-between">
+          <div className="bg-[var(--bg)] p-5 md:p-9 rounded-md border-[0.5px]  border-[var(--softBg4)] shadow-lg w-96 min-h-[250px] flex flex-col justify-between">
         
           <div className="flex items-center justify-center relative">
           <p className="text-lg text-[var(--softtextColor)] text-center">Filters</p>
@@ -116,7 +116,7 @@ const Search = () => {
                 <input
                   type="text"
                   placeholder="City, Region, or Country"
-                  className="w-full p-2 text-[var(--softTextColor)] border border-[var(--softBg4)] bg-[var(--bg)] rounded-md mb-4"
+                  className="w-full p-2 text-[var(--softTextColor)] border border-[var(--softBg4)]] bg-[var(--bg)] rounded-md mb-4"
                   value={filters.location}
                   onChange={(e) =>
                     setFilters({ ...filters, location: e.target.value })
@@ -130,7 +130,7 @@ const Search = () => {
                 <h2 className="text-2xl text-[var(--softTextColor)] font-semibold mb-1">Do you want to rent or buy?</h2>
                 <h2 className="text-sm text-[var(--softTextColor)] mb-4"> Choose your perfect option!</h2>          
                       <select
-                  className="w-full p-2  bg-[var(--bg)] border border-[var(--softBg4)] rounded-md"
+                  className="w-full p-2  bg-[var(--bg)] border border-[var(--softBg4)]] rounded-md"
                   value={filters.model}
                   onChange={(e) =>
                     setFilters({ ...filters, model: e.target.value })
@@ -150,7 +150,7 @@ const Search = () => {
                Find your perfect place!</h2>
                 <h2 className="text-sm text-[var(--softTextColor)] mb-4"> What type of property are you looking for!</h2>  
                 <select
-                  className="w-full p-2 border border-[var(--softBg4)]  bg-[var(--bg)]  rounded-md mb-4"
+                  className="w-full p-2 border border-[var(--softBg4)]]  bg-[var(--bg)]  rounded-md mb-4"
                   value={filters.propertytype}
                   onChange={(e) =>
                     setFilters({ ...filters, propertytype: e.target.value })
@@ -246,7 +246,7 @@ const Search = () => {
                   <input
                     type="number"
                     placeholder="Min Price"
-                    className="w-full p-2 border border-[var(--softBg4)]   bg-[var(--bg)] rounded-md"
+                    className="w-full p-2 border border-[var(--softBg4)]]   bg-[var(--bg)] rounded-md"
                     min="0"
                     value={filters.pricemin}
                     onChange={(e) =>
@@ -259,7 +259,7 @@ const Search = () => {
                   <input
                     type="number"
                     placeholder="Max Price"
-                    className="w-full p-2 border border-[var(--softBg4)]  bg-[var(--bg)] rounded-md"
+                    className="w-full p-2 border border-[var(--softBg4)]]  bg-[var(--bg)] rounded-md"
                     min="0"
                     value={filters.pricemax}
                     onChange={(e) =>
@@ -279,7 +279,7 @@ const Search = () => {
 <div className="flex justify-between  mt-4 md:mt-8 gap-4 ">
   {step > 1 && (
     <button
-      className="flex-1 py-3 bg-[var(--bg)] border-[1px] border-[var(--softBg4)] rounded-md"
+      className="flex-1 py-3 bg-[var(--bg)] border-[1px] border-[var(--softBg4)]] rounded-md"
       onClick={() => setStep(step - 1)}
       disabled={step === 1}
     >
