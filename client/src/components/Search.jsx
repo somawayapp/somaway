@@ -96,81 +96,12 @@ const Search = () => {
 
 
 
-    {/* search button for md screens when scrollled up */}
-
-      <button
-  onClick={() => setIsOpen(true)}
-  type="button"
-  className="border-[1px] max-w-[700px] mx-auto  border-[var(--softBg4)] rounded-full shadow-sm hover:shadow-md transition
-   duration-300 cursor-pointer"
->
-  <div className="flex flex-row items-center relative gap-2">
-    {/* Location */}
-    <div className="relative hover:bg-[var(--softBg4)] rounded-full group p-2 px-8 flex flex-col items-start text-left">
-      <small className="text-[13px] ml-4 font-semibold text-[var(--softTextColor)] transition">
-        {filters.location || "Anywhere"}
-      </small>
    
-    </div>
-
-    <div className="flex items-center justify-center h-[40px]">
-      <div className="h-full border-l-[1px] border-[var(--softBg4)]"></div>
-    </div>
-
-    {/* Property Size */}
-    <div className="relative hover:bg-[var(--softBg4)] rounded-full group p-2 px-8 flex flex-col items-start text-left">
-      <small className="text-[13px] font-semibold text-[var(--softTextColor)] transition">
-        {filters.propertysize || "Any size"}
-      </small>
-    
-    </div>
-
-    <div className="flex  items-center justify-center h-[40px]">
-      <div className="h-full border-l-[1px] border-[var(--softBg4)]"></div>
-    </div>
-
-    {/* Price */}
-    <div className="relative hover:bg-[var(--softBg4)] rounded-full group p-2 px-8 flex flex-col items-start text-left">
-      <small className="text-[13px] font-semibold text-[var(--softTextColor)] transition">
-        {filters.pricemin || filters.pricemax ? (
-          <>
-            {filters.pricemin ? `KSh ${filters.pricemin}` : "KSh 0"} -{" "}
-            {filters.pricemax ? `KSh ${filters.pricemax}` : "KSh 0"}
-          </>
-        ) : (
-          "Any price"
-        )}
-      </small>
-  
-    </div>
-
-    <div className="flex  items-center justify-center h-[40px]">
-      <div className="h-full border-l-[1px] border-[var(--softBg4)]"></div>
-    </div>
-
-    {/* Property Type */}
-    <div className="relative  hover:bg-[var(--softBg4)] rounded-full group p-2 px-8 flex flex-col items-start text-left">
-      <small className="text-[13px] font-semibold text-[var(--softTextColor)] transition">
-        {filters.propertytype || "Any type"}
-      </small>
-    
-    </div>
-
-    {/* Search Icon */}
-    <div className="p-2">
-      <div className="p-4 ml-[80px] bg-[#fc3239] rounded-full text-white transition-transform duration-300 hover:scale-110 hover:bg-[#d82930]">
-        <FaSearch className="text-[14px]" />
-      </div>
-    </div>
-  </div>
-</button>
 
 
 
+    {/* search button for md screens */}
 
-    {/* search button for md screens when not scrollled up */}
-
-{!isScrolledUp && (
            <button
            onClick={() => setIsOpen(true)}
            type="button"
@@ -183,9 +114,11 @@ const Search = () => {
                <small className="text-[13px] ml-4 font-semibold text-[var(--softTextColor)] transition">
                  {filters.location || "Anywhere"}
                </small>
+               {!isScrolledUp && (
+
                <span className="text-[14px] ml-4 text-[var(--softBg5)]">
                  Search by location
-               </span>
+               </span> )}
              </div>
          
              <div className="flex items-center justify-center h-[40px]">
@@ -197,9 +130,11 @@ const Search = () => {
                <small className="text-[13px] font-semibold text-[var(--softTextColor)] transition">
                  {filters.propertysize || "Any size"}
                </small>
+
+               {!isScrolledUp && (
                <span className=" text-[14px] text-[var(--softBg5)]">
                  Filter by size
-               </span>
+               </span> )}
              </div>
          
              <div className="flex  items-center justify-center h-[40px]">
@@ -218,9 +153,11 @@ const Search = () => {
                    "Any price"
                  )}
                </small>
+
+               {!isScrolledUp && (
                <span className=" text-[14px] text-[var(--softBg5)]">
                  Filter by price
-               </span>
+               </span>)}
              </div>
          
              <div className="flex  items-center justify-center h-[40px]">
@@ -232,9 +169,11 @@ const Search = () => {
                <small className="text-[13px] font-semibold text-[var(--softTextColor)] transition">
                  {filters.propertytype || "Any type"}
                </small>
+
+               {!isScrolledUp && (
                <span className="text-[14px] text-[var(--softBg5)]">
                  Filter by type
-               </span>
+               </span>)}
              </div>
          
              {/* Search Icon */}
@@ -245,7 +184,7 @@ const Search = () => {
              </div>
            </div>
          </button>
-            )}
+            
 
 
     </div>
