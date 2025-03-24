@@ -71,7 +71,7 @@ const Search = () => {
   
     </div>
 
-    <div class="h-full border-l border-[var(--softBg4)]"></div>
+    <div class="h-full border-l border-black]"></div>
 
 
     {/* Property Size */}
