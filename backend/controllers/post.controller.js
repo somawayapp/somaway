@@ -2,19 +2,11 @@ import ImageKit from "imagekit";
 import Post from "../models/post.model.js";
 import User from "../models/user.model.js";
 
-
 export const getPosts = async (req, res) => {
   try {
     const page = parseInt(req.query.page) || 1;
     const limit = parseInt(req.query.limit) || 2;
     const query = {};
- 
-
-    console.log(req.query);
-    const cat = req.query.cat;
-    const searchQuery = req.query.search;
-    const sortQuery = req.query.sort;
-    const featured = req.query.featured;
 
     const {
       author,
@@ -29,30 +21,26 @@ export const getPosts = async (req, res) => {
       minPrice,
       maxPrice,
       model,
+      featured
     } = req.query;
 
     // Category Filter
-    if (cat) {
-      query.category = cat;
+    if (req.query.cat) {
+      query.category = req.query.cat;
     }
 
     // Search Query (Title & Description)
     if (search) {
       query.$or = [
         { title: { $regex: search, $options: "i" } },
-        { desc: { $regex: search, $options: "i" } },
+        { desc: { $regex: search, $options: "i" } }
       ];
     }
 
     // Author Filter
     if (author) {
-      const authorNames = author
-        .split(/[,;|\s]+/)
-        .map((name) => name.trim())
-        .filter(Boolean);
-
+      const authorNames = author.split(/[,;|\s]+/).map((name) => name.trim()).filter(Boolean);
       const authorRegexes = authorNames.map((name) => new RegExp(name, "i"));
-
       query.author = { $in: authorRegexes };
     }
 
@@ -86,8 +74,7 @@ export const getPosts = async (req, res) => {
 
     // Sorting Logic
     let sortObj = { createdAt: -1 };
-
-    if (sortQuery) {
+    if (sort) {
       switch (sort) {
         case "newest":
           sortObj = { createdAt: -1 };
@@ -100,11 +87,7 @@ export const getPosts = async (req, res) => {
           break;
         case "trending":
           sortObj = { visit: -1 };
-          query.createdAt = {
-            $gte: new Date(new Date().getTime() - 14 * 24 * 60 * 60 * 1000),
-          };
-          break;
-        default:
+          query.createdAt = { $gte: new Date(Date.now() - 14 * 24 * 60 * 60 * 1000) };
           break;
       }
     }
@@ -113,60 +96,10 @@ export const getPosts = async (req, res) => {
     if (featured) {
       query.isFeatured = true;
     }
-    
 
-    if (author) {
-      // Split author names by commas, semicolons, pipes, or multiple spaces
-      const authorNames = author.split(/[,;|\s]+/).map((name) => name.trim()).filter(Boolean);
-    
-      // Build an array of author regexes
-      const authorRegexes = authorNames.map((name) => new RegExp(name, "i"));
-    
-      // Search for posts where the author field matches any of the regex patterns
-      query.author = { $in: authorRegexes };
-    }
-    
-
- 
-
-    console.log(req.query);
-
-
-    if (cat) {
-      query.category = cat;
-    }
-
-    if (searchQuery) {
-      query.$or = [
-        { title: { $regex: searchQuery, $options: "i" } }, // Search in title
-        { desc: { $regex: searchQuery, $options: "i" } }, // Search in description
-      ];
-    }
-
- 
-    
-
-    if (author) {
-      // Split author names by commas, semicolons, pipes, or multiple spaces
-      const authorNames = author.split(/[,;|\s]+/).map((name) => name.trim()).filter(Boolean);
-    
-      // Build an array of author regexes
-      const authorRegexes = authorNames.map((name) => new RegExp(name, "i"));
-    
-      // Search for posts where the author field matches any of the regex patterns
-      query.author = { $in: authorRegexes };
-    }
-    
-
-    
-
-    if (featured) {
-      query.isFeatured = true;
-    }
-
-    // Fetch posts with search query
+    // Fetch posts
     const posts = await Post.find(query)
-      .populate("user", "username") // Populate username for author search
+      .populate("user", "username")
       .sort(sortObj)
       .limit(limit)
       .skip((page - 1) * limit);
@@ -182,11 +115,13 @@ export const getPosts = async (req, res) => {
 };
 
 export const getPost = async (req, res) => {
-  const post = await Post.findOne({ slug: req.params.slug }).populate(
-    "user",
-    "username img"
-  );
-  res.status(200).json(post);
+  try {
+    const post = await Post.findOne({ slug: req.params.slug }).populate("user", "username img");
+    res.status(200).json(post);
+  } catch (error) {
+    console.error("Error fetching post:", error);
+    res.status(500).json("Internal server error!");
+  }
 };
 
 export const createPost = async (req, res) => {

@@ -25,9 +25,13 @@ const Search = () => {
       setStep(step + 1);
     } else {
       // Apply filters when done
+      const filteredParams = Object.entries(filters)
+        .filter(([key, value]) => value !== "")
+        .reduce((acc, [key, value]) => ({ ...acc, [key]: value }), {});
+
       setSearchParams({
         ...Object.fromEntries(searchParams),
-        ...filters,
+        ...filteredParams,
       });
       setIsOpen(false);
     }
@@ -35,7 +39,6 @@ const Search = () => {
 
   return (
     <>
-      {/* SEARCH BUTTON */}
       <button
         type="button"
         className="border-[1px] w-full md:w-auto py-2 rounded-full shadow-sm hover:shadow-md transition duration-300 cursor-pointer"
@@ -48,7 +51,7 @@ const Search = () => {
 
           <small className="hidden sm:block text-sm font-bold px-6 border-x-[1px] flex-1 text-center text-[#585858]">
             {filters.priceMin && filters.priceMax
-              ? `${filters.priceMin} - ${filters.priceMax}`
+              ? `$${filters.priceMin} - $${filters.priceMax}`
               : "Any price"}
           </small>
 
@@ -63,9 +66,8 @@ const Search = () => {
         </div>
       </button>
 
-      {/* MODAL */}
       {isOpen && (
-        <div style={{ zIndex: 100014 }} className="fixed inset-0 flex items-center  justify-center bg-black bg-opacity-50">
+        <div style={{ zIndex: 100014 }} className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
           <div className="bg-white p-6 rounded-lg shadow-lg w-96">
             {step === 1 && (
               <>
@@ -117,31 +119,13 @@ const Search = () => {
                       setFilters({ ...filters, bathrooms: e.target.value })
                     }
                   />
-                  <input
-                    type="text"
-                    placeholder="Property Size"
-                    className="w-full p-2 border rounded"
-                    value={filters.propertysize}
-                    onChange={(e) =>
-                      setFilters({ ...filters, propertysize: e.target.value })
-                    }
-                  />
-                  <input
-                    type="number"
-                    placeholder="Rooms"
-                    className="w-full p-2 border rounded"
-                    value={filters.rooms}
-                    onChange={(e) =>
-                      setFilters({ ...filters, rooms: e.target.value })
-                    }
-                  />
                 </div>
               </>
             )}
 
             {step === 3 && (
               <>
-                <h2 className="text-lg font-bold mb-4">Set Price & Model</h2>
+                <h2 className="text-lg font-bold mb-4">Set Price Range</h2>
                 <div className="flex gap-4">
                   <input
                     type="number"
@@ -162,18 +146,6 @@ const Search = () => {
                     }
                   />
                 </div>
-
-                <select
-                  className="w-full p-2 border rounded mt-4"
-                  value={filters.model}
-                  onChange={(e) =>
-                    setFilters({ ...filters, model: e.target.value })
-                  }
-                >
-                  <option value="">Select</option>
-                  <option value="forrent">For Rent</option>
-                  <option value="forsale">For Sale</option>
-                </select>
               </>
             )}
 
@@ -186,7 +158,6 @@ const Search = () => {
                   Back
                 </button>
               )}
-
               <button
                 className="px-4 py-2 bg-blue-500 text-white rounded"
                 onClick={handleNext}
