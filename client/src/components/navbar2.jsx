@@ -109,7 +109,7 @@
          zIndex: 100004,
        }}
        className="relative w-full px-3 md:px-[80px] gap-3 md:gap-6 flex flex-row items-center text-[var(--TextColor)] sticky
-         top-0 justify-center bg-[var(--bg)] md:border-b  ease-in-out transition-all "
+         top-0 justify-center bg-[var(--bg)] md:border-b  "
      >
   
   
@@ -122,7 +122,7 @@
   
   
   <div
-  className={` w-full z-50 hidden md:flex flex-col items-center justify-center transition-all  ${isScrolledUp ? "pt-0 gap-0 h-[120px]" : "pt-6 gap-6 h-[180px]" }`}
+  className={` w-full z-50 hidden md:flex flex-col items-center justify-center transition-all  ${isScrolledUp ? "pt-0 gap-0 " : "pt-6 gap-6 " }`}
     >
       {/* Rent & Sale Links */}
       <div
