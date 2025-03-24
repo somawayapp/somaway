@@ -112,7 +112,7 @@ const Search = () => {
 
             {step === 1 && (
               <>
-                <h2 className="text-2xl text-[var(--softTextColor)] font-semibold mb-1">Where do you wanna stay?</h2>
+                <h2 className="text-2xl text-[var(--softTextColor)] font-semibold mb-1">Where do you wanna stay /Property location?</h2>
                 <h2 className="text-sm text-[var(--softTextColor)] mb-4 "> Find your perfect location!</h2>
                 <input
                   type="text"
@@ -174,30 +174,31 @@ const Search = () => {
       <p className="text-sm">How many bedrooms do you need?</p>
     </div>
     <div className="flex items-center gap-2">
-      <button
-        className="w-8 h-8 flex items-center justify-center rounded-full bg-[var(--softBg4)] text-[var(--softTextColor)]"
-        onClick={() =>
-          setFilters({
-            ...filters,
-            bedrooms: Math.max(0, filters.bedrooms - 1),
-          })
-        }
-      >
-        -
-      </button>
-      <span className="w-8 text-center">{filters.bedrooms}</span>
-      <button
-        className="w-8 h-8 flex items-center justify-center rounded-full bg-[var(--softBg4)] text-[var(--softTextColor)]"
-        onClick={() =>
-          setFilters({
-            ...filters,
-            bedrooms: filters.bedrooms + 1,
-          })
-        }
-      >
-        +
-      </button>
-    </div>
+  <button
+    className="w-8 h-8 flex items-center justify-center rounded-full bg-[var(--softBg4)] text-[var(--softTextColor)]"
+    onClick={() =>
+      setFilters((prevFilters) => ({
+        ...prevFilters,
+        bedrooms: Math.max(0, (prevFilters.bedrooms || 0) - 1),
+      }))
+    }
+  >
+    -
+  </button>
+  <span className="w-8 text-center">{filters.bedrooms || 0}</span>
+  <button
+    className="w-8 h-8 flex items-center justify-center rounded-full bg-[var(--softBg4)] text-[var(--softTextColor)]"
+    onClick={() =>
+      setFilters((prevFilters) => ({
+        ...prevFilters,
+        bedrooms: (prevFilters.bedrooms || 0) + 1,
+      }))
+    }
+  >
+    +
+  </button>
+</div>
+
   </div>
 
              <hr className="h-[1px] mb-4 mt-4 bg-[var(--softBg4)] border-0" />
@@ -209,30 +210,31 @@ const Search = () => {
       <p className="text-sm">How many bathrooms do you need?</p>
     </div>
     <div className="flex items-center gap-2">
-      <button
-        className="w-8 h-8 flex items-center justify-center rounded-full bg-[var(--softBg4)] text-[var(--softTextColor)]"
-        onClick={() =>
-          setFilters({
-            ...filters,
-            bathrooms: Math.max(0, filters.bathrooms - 1),
-          })
-        }
-      >
-        -
-      </button>
-      <span className="w-8 text-center">{filters.bathrooms}</span>
-      <button
-        className="w-8 h-8 flex items-center justify-center rounded-full bg-[var(--softBg4)] text-[var(--softTextColor)]"
-        onClick={() =>
-          setFilters({
-            ...filters,
-            bathrooms: filters.bathrooms + 1,
-          })
-        }
-      >
-        +
-      </button>
-    </div>
+  <button
+    className="w-8 h-8 flex items-center justify-center rounded-full bg-[var(--softBg4)] text-[var(--softTextColor)]"
+    onClick={() =>
+      setFilters((prevFilters) => ({
+        ...prevFilters,
+        bathrooms: Math.max(0, (prevFilters.bathrooms || 0) - 1),
+      }))
+    }
+  >
+    -
+  </button>
+  <span className="w-8 text-center">{filters.bathrooms || 0}</span>
+  <button
+    className="w-8 h-8 flex items-center justify-center rounded-full bg-[var(--softBg4)] text-[var(--softTextColor)]"
+    onClick={() =>
+      setFilters((prevFilters) => ({
+        ...prevFilters,
+        bathrooms: (prevFilters.bathrooms || 0) + 1,
+      }))
+    }
+  >
+    +
+  </button>
+</div>
+
   </div>
 </div>
 
