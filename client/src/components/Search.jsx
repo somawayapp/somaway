@@ -60,17 +60,30 @@ const Search = () => {
 >
   <div className="flex flex-row justify-between items-center relative">
     {/* Location */}
-    <div className="relative group">
+    <div className="relative group hover:bg-[var(--softBg4)] rounded-full  ">
       <small className="text-[12px] md:text-[14px] font-semibold px-6 text-[var(--softTextColor)] group-hover:bg-[var(--softBg4)] py-2 rounded-full transition">
         {filters.location || "Anywhere"}
       </small>
-      <span className="hidden md:block absolute left-1/2 transform -translate-x-1/2 mt-1 text-[10px] text-gray-500 whitespace-nowrap">
+      <span className="hidden md:block absolute left-1/2 transform -translate-x-1/2 mt-1 text-[12px] text-[var(--softTextColor)] whitespace-nowrap">
         Choose a location
       </span>
+      
     </div>
 
+    {/* Property Type & Size */}
+    <div className="text-[12px] hover:bg-[var(--softBg4)] rounded-full md:text-[14px] text-[var(--softTextColor)] pl-6 pr-2 flex flex-row items-center gap-4">
+      <div className="relative group hidden md:block">
+        <small className="font-semibold text-[12px] md:text-[14px] group-hover:bg-[var(--softBg4)] py-2 rounded-full transition">
+          {filters.propertysize || "Any size"}
+        </small>
+        <span className="hidden md:block absolute left-1/2 transform -translate-x-1/2 mt-1 text-[12px] text-[var(--softTextColor)] whitespace-nowrap">
+          Select property size
+        </span>
+      </div>
+
+
     {/* Price */}
-    <div className="relative group flex-1 text-center border-x-[1px] border-x-[var(--softBg4)]">
+    <div className="relative hover:bg-[var(--softBg4)] rounded-full group flex-1 text-center border-x-[1px] border-x-[var(--softBg4)]">
       <small className="text-[12px] md:text-[14px] font-semibold px-6 text-[var(--softTextColor)] group-hover:bg-[var(--softBg4)] py-2 rounded-full transition">
         {filters.pricemin || filters.pricemax ? (
           <>
@@ -81,33 +94,26 @@ const Search = () => {
           "Any price"
         )}
       </small>
-      <span className="hidden md:block absolute left-1/2 transform -translate-x-1/2 mt-1 text-[10px] text-gray-500 whitespace-nowrap">
+      <span className="hidden md:block absolute left-1/2 transform -translate-x-1/2 mt-1 text-[12px] text-[var(--softTextColor)] whitespace-nowrap">
         Set price range
       </span>
     </div>
 
     {/* Property Type & Size */}
-    <div className="text-[12px] md:text-[14px] text-[var(--softTextColor)] pl-6 pr-2 flex flex-row items-center gap-4">
+    <div className="text-[12px] md:text-[14px] hover:bg-[var(--softBg4)] rounded-full text-[var(--softTextColor)] pl-6 pr-2 flex flex-row items-center gap-4">
       <div className="relative group hidden md:block">
         <small className="font-semibold text-[12px] md:text-[14px] group-hover:bg-[var(--softBg4)] py-2 rounded-full transition">
           {filters.propertytype || "Any type"}
         </small>
-        <span className="hidden md:block absolute left-1/2 transform -translate-x-1/2 mt-1 text-[10px] text-gray-500 whitespace-nowrap">
+        <span className="hidden md:block absolute left-1/2 transform -translate-x-1/2 mt-1 text-[12px] text-[var(--softTextColor)] whitespace-nowrap">
           Select property type
         </span>
       </div>
-
-      <div className="relative group hidden md:block">
-        <small className="font-semibold text-[12px] md:text-[14px] group-hover:bg-[var(--softBg4)] py-2 rounded-full transition">
-          {filters.size || "Any size"}
-        </small>
-        <span className="hidden md:block absolute left-1/2 transform -translate-x-1/2 mt-1 text-[10px] text-gray-500 whitespace-nowrap">
-          Choose property size
-        </span>
-      </div>
+</div>
+     
 
       {/* Search Icon */}
-      <div className="p-4 ml-[80px] bg-[#fc3239] rounded-full text-white transition-transform duration-300 hover:scale-110 hover:bg-[#d82930]">
+      <div className="p-3 md:p-4  ml-0 md:ml-[80px] bg-[#fc3239] rounded-full text-white transition-transform duration-300 hover:scale-110 hover:bg-[#d82930]">
         <FaSearch className="text-[12px] md:text-[14px]" />
       </div>
     </div>
