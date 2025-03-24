@@ -92,57 +92,161 @@ const Search = () => {
         </a>
       </div>
 
-      {/* Filter Button */}
       <button
-        onClick={() => setIsOpen(true)}
-        type="button"
-        className={`w-full max-w-[600px] mx-auto border-[1px] border-[var(--softBg4)] rounded-full shadow-sm hover:shadow-md transition-all duration-300
-          ${isScrolledUp ? "py-2 px-4 text-sm scale-90" : "py-4 px-6 text-base scale-100"}`}
-      >
-        <div className="flex flex-row items-center relative gap-2 justify-between">
-          {/* Location */}
-          <div className="flex-1 text-center">
-            <small className="font-semibold text-[var(--softTextColor)] transition">
-              {filters.location || "Anywhere"}
-            </small>
-          </div>
-
-          <div className="h-[30px] md:h-[40px] border-l-[1px] border-[var(--softBg4)]"></div>
-
-          {/* Property Size */}
-          <div className="flex-1 text-center">
-            <small className="font-semibold text-[var(--softTextColor)] transition">
-              {filters.propertysize || "Any size"}
-            </small>
-          </div>
-
-          <div className="h-[30px] md:h-[40px] border-l-[1px] border-[var(--softBg4)]"></div>
-
-          {/* Price */}
-          <div className="flex-1 text-center">
-            <small className="font-semibold text-[var(--softTextColor)] transition">
-              {filters.pricemin || filters.pricemax ? (
-                <>
-                  {filters.pricemin ? `KSh ${filters.pricemin}` : "KSh 0"} -{" "}
-                  {filters.pricemax ? `KSh ${filters.pricemax}` : "KSh 0"}
-                </>
-              ) : (
-                "Any price"
-              )}
-            </small>
-          </div>
-
-          {/* Search Icon */}
-          {!isScrolledUp && (
-            <div className="p-2">
-              <div className="p-3 md:p-4 bg-[#fc3239] rounded-full text-white transition-transform duration-300 hover:scale-110 hover:bg-[#d82930]">
-                <FaSearch className="text-[12px] md:text-[14px]" />
-              </div>
-            </div>
-          )}
-        </div>
-      </button>
+  onClick={() => setIsOpen(true)}
+  type="button"
+  className="border-[1px] max-full  hidden md:block border-[var(--softBg4)] rounded-full shadow-sm hover:shadow-md transition
+   duration-300 cursor-pointer"
+>
+  <div className="flex flex-row items-center relative gap-2">
+    {/* Location */}
+    <div className="relative hover:bg-[var(--softBg4)] rounded-full group p-2 md:px-8 flex flex-col items-start text-left">
+      <small className="text-[12px] md:text-[13px] ml-4 font-semibold text-[var(--softTextColor)] transition">
+        {filters.location || "Anywhere"}
+      </small>
+      <span className="hidden md:block text-[14px] ml-4 text-[var(--softBg5)]">
+        Search by location
+      </span>
     </div>
+
+    <div className="flex items-center justify-center h-[30px] md:h-[40px]">
+      <div className="h-full border-l-[1px] border-[var(--softBg4)]"></div>
+    </div>
+
+    {/* Property Size */}
+    <div className="relative hover:bg-[var(--softBg4)] rounded-full group p-2 md:px-8 flex flex-col items-start text-left">
+      <small className="text-[12px] md:text-[13px] font-semibold text-[var(--softTextColor)] transition">
+        {filters.propertysize || "Any size"}
+      </small>
+      <span className="hidden md:block text-[14px] text-[var(--softBg5)]">
+        Filter by size
+      </span>
+    </div>
+
+    <div className="flex hidden md:block items-center justify-center h-[30px] md:h-[40px]">
+      <div className="h-full border-l-[1px] border-[var(--softBg4)]"></div>
+    </div>
+
+    {/* Price */}
+    <div className="relative hidden md:block hover:bg-[var(--softBg4)] rounded-full group p-2 md:px-8 flex flex-col items-start text-left">
+      <small className="text-[12px] md:text-[13px] font-semibold text-[var(--softTextColor)] transition">
+        {filters.pricemin || filters.pricemax ? (
+          <>
+            {filters.pricemin ? `KSh ${filters.pricemin}` : "KSh 0"} -{" "}
+            {filters.pricemax ? `KSh ${filters.pricemax}` : "KSh 0"}
+          </>
+        ) : (
+          "Any price"
+        )}
+      </small>
+      <span className="hidden md:block text-[14px] text-[var(--softBg5)]">
+        Filter by price
+      </span>
+    </div>
+
+    <div className="flex hidden md:block items-center justify-center h-[30px] md:h-[40px]">
+      <div className="h-full border-l-[1px] border-[var(--softBg4)]"></div>
+    </div>
+
+    {/* Property Type */}
+    <div className="relative hidden md:block hover:bg-[var(--softBg4)] rounded-full group p-2 md:px-8 flex flex-col items-start text-left">
+      <small className="text-[12px] md:text-[13px] font-semibold text-[var(--softTextColor)] transition">
+        {filters.propertytype || "Any type"}
+      </small>
+      <span className="hidden md:block text-[14px] text-[var(--softBg5)]">
+        Filter by type
+      </span>
+    </div>
+
+    {/* Search Icon */}
+    <div className="p-2">
+      <div className="p-3 md:p-4 ml-0 md:ml-[80px] bg-[#fc3239] rounded-full text-white transition-transform duration-300 hover:scale-110 hover:bg-[#d82930]">
+        <FaSearch className="text-[12px] md:text-[14px]" />
+      </div>
+    </div>
+  </div>
+</button>
+
+    </div>
+
+
+
+
+
+<button
+  onClick={() => setIsOpen(true)}
+  type="button"
+  className="border-[1px] max-full flexmd:hidden  border-[var(--softBg4)] rounded-full shadow-sm hover:shadow-md transition
+   duration-300 cursor-pointer"
+>
+  <div className="flex flex-row items-center relative gap-2">
+    {/* Location */}
+    <div className="relative hover:bg-[var(--softBg4)] rounded-full group p-2 md:px-8 flex flex-col items-start text-left">
+      <small className="text-[12px] md:text-[13px] ml-4 font-semibold text-[var(--softTextColor)] transition">
+        {filters.location || "Anywhere"}
+      </small>
+      <span className="hidden md:block text-[14px] ml-4 text-[var(--softBg5)]">
+        Search by location
+      </span>
+    </div>
+
+    <div className="flex items-center justify-center h-[30px] md:h-[40px]">
+      <div className="h-full border-l-[1px] border-[var(--softBg4)]"></div>
+    </div>
+
+    {/* Property Size */}
+    <div className="relative hover:bg-[var(--softBg4)] rounded-full group p-2 md:px-8 flex flex-col items-start text-left">
+      <small className="text-[12px] md:text-[13px] font-semibold text-[var(--softTextColor)] transition">
+        {filters.propertysize || "Any size"}
+      </small>
+      <span className="hidden md:block text-[14px] text-[var(--softBg5)]">
+        Filter by size
+      </span>
+    </div>
+
+    <div className="flex hidden md:block items-center justify-center h-[30px] md:h-[40px]">
+      <div className="h-full border-l-[1px] border-[var(--softBg4)]"></div>
+    </div>
+
+    {/* Price */}
+    <div className="relative hidden md:block hover:bg-[var(--softBg4)] rounded-full group p-2 md:px-8 flex flex-col items-start text-left">
+      <small className="text-[12px] md:text-[13px] font-semibold text-[var(--softTextColor)] transition">
+        {filters.pricemin || filters.pricemax ? (
+          <>
+            {filters.pricemin ? `KSh ${filters.pricemin}` : "KSh 0"} -{" "}
+            {filters.pricemax ? `KSh ${filters.pricemax}` : "KSh 0"}
+          </>
+        ) : (
+          "Any price"
+        )}
+      </small>
+      <span className="hidden md:block text-[14px] text-[var(--softBg5)]">
+        Filter by price
+      </span>
+    </div>
+
+    <div className="flex hidden md:block items-center justify-center h-[30px] md:h-[40px]">
+      <div className="h-full border-l-[1px] border-[var(--softBg4)]"></div>
+    </div>
+
+    {/* Property Type */}
+    <div className="relative hidden md:block hover:bg-[var(--softBg4)] rounded-full group p-2 md:px-8 flex flex-col items-start text-left">
+      <small className="text-[12px] md:text-[13px] font-semibold text-[var(--softTextColor)] transition">
+        {filters.propertytype || "Any type"}
+      </small>
+      <span className="hidden md:block text-[14px] text-[var(--softBg5)]">
+        Filter by type
+      </span>
+    </div>
+
+    {/* Search Icon */}
+    <div className="p-2">
+      <div className="p-3 md:p-4 ml-0 md:ml-[80px] bg-[#fc3239] rounded-full text-white transition-transform duration-300 hover:scale-110 hover:bg-[#d82930]">
+        <FaSearch className="text-[12px] md:text-[14px]" />
+      </div>
+    </div>
+  </div>
+</button>
 
 
 
