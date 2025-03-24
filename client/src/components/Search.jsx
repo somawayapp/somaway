@@ -65,7 +65,7 @@ const Search = () => {
 
       {/* MODAL */}
       {isOpen && (
-        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
+        <div style={{ zIndex: 100014 }} className="fixed inset-0 flex items-center  justify-center bg-black bg-opacity-50">
           <div className="bg-white p-6 rounded-lg shadow-lg w-96">
             {step === 1 && (
               <>
