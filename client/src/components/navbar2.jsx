@@ -101,7 +101,7 @@ const Navbar = () => {
     <div className="rounded-full bg-[var(--softTextColor)] items-center justify-center">
   <svg
     xmlns="http://www.w3.org/2000/svg"
-    className="w-full h-full"
+    className="w-[30px] h-[30px] mb-[-40px]"
     viewBox="0 0 24 24"
     fill="var(--bg)"
   >
@@ -111,6 +111,7 @@ const Navbar = () => {
       </clipPath>
     </defs>
     <circle cx="12" cy="5" r="7" fill="var(--bg)" clip-path="url(#vesica)" />
+    <circle cx="12" cy="3" r="3" fill="var(--bg)" />
   </svg>
 </div>
 
