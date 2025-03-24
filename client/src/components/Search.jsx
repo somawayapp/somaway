@@ -80,14 +80,14 @@ const Search = () => {
     >
       {/* Rent & Sale Links */}
       <div
-        className={`flex justify-center gap-6 transition-all duration-300 ${
+        className={`flex justify-center gap-[40px] transition-all duration-300 ${
           isScrolledUp ? "opacity-0 translate-y-[-20px] pointer-events-none" : "opacity-100 translate-y-0"
         }`}
       >
-        <a href="?model=forrent" className="text-[14px] font-semibold text-[var(--softTextColor)] hover:underline">
+        <a href="?model=forrent" className="text-[16px] font-semibold text-[var(--softTextColor)] hover:underline">
           For Rent
         </a>
-        <a href="?model=forsale" className="text-[14px] font-semibold text-[var(--softTextColor)] hover:underline">
+        <a href="?model=forsale" className="text-[16px] font-semibold text-[var(--softBg5)] hover:underline">
           For Sale
         </a>
       </div>
