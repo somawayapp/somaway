@@ -15,8 +15,8 @@ const Search = () => {
     bathrooms: "",
     propertysize: "",
     rooms: "",
-    priceMin: "",
-    priceMax: "",
+    pricemin: "",
+    pricemax: "",
     model: "",
   });
 
@@ -40,7 +40,7 @@ const Search = () => {
     <>
       <button
         type="button"
-        className="border-[1px] w-full md:w-auto py-2 rounded-xl-full shadow-sm hover:shadow-md transition duration-300 cursor-pointer"
+        className="border-[1px] w-full md:w-auto py-2 rounded-full shadow-sm hover:shadow-md transition duration-300 cursor-pointer"
         onClick={() => setIsOpen(true)}
       >
         <div className="flex flex-row justify-between items-center">
@@ -48,9 +48,9 @@ const Search = () => {
             {filters.location || "Anywhere"}
           </small>
 
-          <small className="hidden sm:block text-sm font-bold px-6 border-x-[1px] flex-1 text-center text-[#585858]">
-            {filters.priceMin && filters.priceMax
-              ? `$${filters.priceMin} - $${filters.priceMax}`
+          <small className=" text-sm font-bold px-6 border-x-[1px] flex-1 text-center text-[#585858]">
+            {filters.pricemin && filters.pricemax
+              ? `$${filters.pricemin} - $${filters.pricemax}`
               : "Any price"}
           </small>
 
@@ -58,7 +58,7 @@ const Search = () => {
             <small className="hidden sm:block font-normal text-sm">
               {filters.propertytype || "Any type"}
             </small>
-            <div className="p-2 bg-[#FF5A5F] rounded-xl-full text-white">
+            <div className="p-2 bg-[#FF5A5F] rounded-full text-white">
               <FaSearch className="text-[12px]" />
             </div>
           </div>
@@ -70,7 +70,7 @@ const Search = () => {
           style={{ zIndex: 100014 }}
           className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50"
         >
-          <div className="bg-white p-6 rounded-xl-lg shadow-lg w-96 min-h-[250px] flex flex-col justify-between">
+          <div className="bg-white p-6 rounded-xl shadow-lg w-96 min-h-[250px] flex flex-col justify-between">
             {step === 1 && (
               <>
                 <h2 className="text-lg font-bold mb-4">Enter Your Location</h2>
@@ -155,11 +155,11 @@ const Search = () => {
                     placeholder="Min Price"
                     className="w-full p-2 border rounded-xl"
                     min="0"
-                    value={filters.priceMin}
+                    value={filters.pricemin}
                     onChange={(e) =>
                       setFilters({
                         ...filters,
-                        priceMin: Math.max(0, e.target.value),
+                        pricemin: Math.max(0, e.target.value),
                       })
                     }
                   />
@@ -168,11 +168,11 @@ const Search = () => {
                     placeholder="Max Price"
                     className="w-full p-2 border rounded-xl"
                     min="0"
-                    value={filters.priceMax}
+                    value={filters.pricemax}
                     onChange={(e) =>
                       setFilters({
                         ...filters,
-                        priceMax: Math.max(0, e.target.value),
+                        pricemax: Math.max(0, e.target.value),
                       })
                     }
                   />

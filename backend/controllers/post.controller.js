@@ -19,8 +19,8 @@ export const getPosts = async (req, res) => {
       bathrooms,
       propertysize,
       rooms,
-      minPrice,
-      maxPrice,
+      pricemax,
+      pricemin,
       model,
       featured,
     } = req.query;
@@ -65,10 +65,10 @@ export const getPosts = async (req, res) => {
     if (rooms) query.rooms = { $gte: parseInt(rooms) };
 
     // Price Range Filter (Within Range)
-    if (minPrice || maxPrice) {
+    if (pricemin || pricemax) {
       query.price = {};
-      if (minPrice) query.price.$gte = parseInt(minPrice);
-      if (maxPrice) query.price.$lte = parseInt(maxPrice);
+      if (pricemin) query.price.$gte = parseInt(pricemin);
+      if (pricemax) query.price.$lte = parseInt(pricemax);
     }
 
     // Model Filter (For Rent / For Sale)
