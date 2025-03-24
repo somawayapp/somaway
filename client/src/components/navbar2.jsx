@@ -108,9 +108,7 @@
        style={{
          zIndex: 100004,
        }}
-       className={`relative w-full px-3 md:px-[80px] gap-3 md:gap-6 flex items-center text-[var(--TextColor)] sticky top-0 justify-between bg-[var(--bg)] md:border-b md:border-b-[var(--softBg4)] ${
-         isScrolledUp ? "h-[90px]" : "h-[170px]"
-       }`}
+       className="relative w-full px-3 md:px-[80px] gap-3 md:gap-6 flex items-center text-[var(--TextColor)] sticky top-0 justify-between bg-[var(--bg)] md:border-b md:border-b-[var(--softBg4)] "
      >
      
   
@@ -124,11 +122,11 @@
   
     <>
   <div
-  className={`fixed top-0  w-full z-50 hidden md:flex flex-col items-center justify-center transition-all duration-300 ${isScrolledUp ? "pt-0 gap-0" : "pt-6 gap-6" }`}
+  className={`fixed top-0  w-full z-50 hidden md:flex flex-col items-center justify-center transition-all  ${isScrolledUp ? "pt-0 gap-0" : "pt-6 gap-6" }`}
     >
       {/* Rent & Sale Links */}
       <div
-        className={`flex justify-center gap-[40px] transition-all duration-300 ${
+        className={`flex justify-center gap-[40px] transition-all ${
           isScrolledUp ? "opacity-0 translate-y-[-20px] pointer-events-none" : "opacity-100 translate-y-0"
         }`}
       >
@@ -148,7 +146,7 @@
     <button
   onClick={() => setIsOpen(true)}
   type="button"
-  className={`border-[1px] border-[var(--softBg4)] max-w-[1100px] w-full mx-auto rounded-full shadow-sm hover:shadow-md transition duration-300 cursor-pointer ${
+  className={`border-[1px] border-[var(--softBg4)] max-w-[1100px] w-full mx-auto rounded-full shadow-sm hover:shadow-md transition cursor-pointer ${
     isScrolledUp ? "max-w-[500px] " : "max-w-[900px]"
   }`}
 >
@@ -234,7 +232,7 @@
     {/* Search Icon */}
     <div className="p-2">
       <div
-        className={`bg-[#fc3239] rounded-full text-white transition-transform duration-300 hover:scale-110 hover:bg-[#d82930] ${
+        className={`bg-[#fc3239] rounded-full text-white transition-transform  hover:scale-110 hover:bg-[#d82930] ${
           isScrolledUp ? "p-3" : "p-4"
         }`}
       >
