@@ -94,7 +94,8 @@ const Search = () => {
         >
            
 
-          <div className="bg-[var(--bg)] p-5 md:p-9 rounded-md border-[0.5px]  border-[var(--softBg4)] shadow-lg w-96 min-h-[250px] flex flex-col justify-between">
+          <div className="bg-[var(--bg)] p-5 md:p-9 rounded-lg border-[0.5px]  border-[var(--softBg4)] shadow-lg 
+           min-h-[250px] flex flex-col justify-between">
         
           <div className="flex items-center justify-center relative">
           <p className="text-lg text-[var(--softtextColor)] text-center">Filters</p>
@@ -106,7 +107,7 @@ const Search = () => {
           </button>
 
            </div>
-           <hr className="h-[1px] py-4 bg-[var(--softBg4)] border-0" />
+           <hr className="h-[1px] mb-2 mt-2 bg-[var(--softBg4)] border-0" />
 
 
             {step === 1 && (
@@ -123,7 +124,7 @@ const Search = () => {
                   }
                 />
 
-                          <hr className="h-[1px] py-4 bg-[var(--softBg4)] border-0" />
+                          <hr className="h-[1px] mb-2 mt-2 bg-[var(--softBg4)] border-0" />
 
 
 
@@ -162,7 +163,7 @@ const Search = () => {
                   <option value="land">Land</option>
                 </select>
 
-                           <hr className="h-[1px] py-4 bg-[var(--softBg4)] border-0" />
+                           <hr className="h-[1px] mb-2 mt-2 bg-[var(--softBg4)] border-0" />
 
 
 
@@ -199,7 +200,7 @@ const Search = () => {
     </div>
   </div>
 
-             <hr className="h-[1px] py-4 bg-[var(--softBg4)] border-0" />
+             <hr className="h-[1px] mb-2 mt-2 bg-[var(--softBg4)] border-0" />
 
 
   <div className="flex items-center justify-between text-[var(--softTextColor)]">
@@ -270,7 +271,7 @@ const Search = () => {
                     }
                   />
                 </div>
-                           <hr className="h-[1px] py-4 bg-[var(--softBg4)] border-0" />
+                           <hr className="h-[1px] mb-2 mt-2 bg-[var(--softBg4)] border-0" />
 
 
               </>
