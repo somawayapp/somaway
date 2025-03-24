@@ -90,11 +90,11 @@ const Search = () => {
          id="popup-overlay"
           onClick={handleOutsideClick}
           style={{ zIndex: 100014 }}
-          className="fixed inset-0 flex items-center justify-center bg-[var(--textColor)] bg-opacity-50"
+          className="fixed inset-0 flex items-center justify-center bg-[var(--bd)] bg-opacity-50"
         >
            
 
-          <div className="bg-text-[var(--bg)] p-6 rounded-xl shadow-lg w-96 min-h-[250px] flex flex-col justify-between">
+          <div className="bg-[var(--bg)] p-6 rounded-xl shadow-lg w-96 min-h-[250px] flex flex-col justify-between">
           <button
               className="absolute top-2 right-2 text-[var(--softTextColor)]  hover:font-bold"
               onClick={() => setIsOpen(false)}
