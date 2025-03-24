@@ -24,7 +24,25 @@ const Navbar = () => {
   }, [open]);
 
 
+  const [scrolled, setScrolled] = useState(false);
 
+  const handleScroll = () => {
+    if (window.scrollY > 0) {
+      setScrolled(true);
+    } else {
+      setScrolled(false);
+    }
+  };
+
+  useEffect(() => {
+    // Add the scroll event listener
+    window.addEventListener('scroll', handleScroll);
+
+    // Cleanup on component unmount
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
 
 
   return (
@@ -32,9 +50,14 @@ const Navbar = () => {
 
     
      // Modify or remove z-index here
-     <div style={{ zIndex: 100004 }}  className="relative w-full h-[70px] md:h-full px-3 md:px-[80px] gap-3 md:gap-6 flex items-center text-[var(--TextColor)]
-      sticky top-0 justify-between bg-[var(--bg)] md:border-b md:border-b-[var(--softBg4)] ">
-
+     <div
+     style={{
+       zIndex: 100004,
+       height: scrolled ? '120px' : '220px',
+       transition: 'height 0.3s ease-in-out',
+     }}
+     className="relative w-full px-3 md:px-[80px] gap-3 md:gap-6 flex items-center text-[var(--TextColor)] sticky top-0 justify-between bg-[var(--bg)] md:border-b md:border-b-[var(--softBg4)]"
+   >
 
 
   {/* Show on medium screens and larger */}
