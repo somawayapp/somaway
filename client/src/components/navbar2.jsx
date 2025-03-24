@@ -111,7 +111,6 @@ const Navbar = () => {
       </clipPath>
     </defs>
     <circle cx="12" cy="5" r="7" fill="var(--bg)" clip-path="url(#vesica)" />
-    <circle cx="12" cy="3" r="3" fill="var(--bg)" />
   </svg>
 </div>
 
