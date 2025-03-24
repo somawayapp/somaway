@@ -61,10 +61,10 @@ const Search = () => {
   <div className="flex flex-row items-center relative gap-2">
     {/* Location */}
     <div className="relative hover:bg-[var(--softBg4)] rounded-full group p-2 md:px-8 flex flex-col items-start text-left">
-      <small className="text-[12px] md:text-[13px] ml-9 font-semibold text-[var(--softTextColor)] transition">
+      <small className="text-[12px] md:text-[13px] ml-4 font-semibold text-[var(--softTextColor)] transition">
         {filters.location || "Anywhere"}
       </small>
-      <span className="hidden md:block text-[14px] text-[var(--softBg5)]">
+      <span className="hidden md:block text-[14px] ml-4 text-[var(--softBg5)]">
         Search by location
       </span>
     </div>
