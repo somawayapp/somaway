@@ -122,7 +122,7 @@
   
     <>
   <div
-  className={`fixed top-0  w-full z-50 hidden md:flex flex-col items-center justify-center transition-all  ${isScrolledUp ? "pt-0 gap-0" : "pt-6 gap-6" }`}
+  className={`fixed top-0  w-full z-50 hidden md:flex flex-col items-center justify-center transition-all  ${isScrolledUp ? "pt-0 gap-0" : "pt-6 gap-6 width-full bg-black" }`}
     >
       {/* Rent & Sale Links */}
       <div
@@ -146,8 +146,8 @@
     <button
   onClick={() => setIsOpen(true)}
   type="button"
-  className={`border-[1px] border-[var(--softBg4)] max-w-[1100px] w-full mx-auto rounded-full shadow-sm hover:shadow-md transition cursor-pointer ${
-    isScrolledUp ? "max-w-[500px] " : "max-w-[900px]"
+  className={`border-[1px] border-[var(--softBg4)]  w-full mx-auto rounded-full shadow-sm hover:shadow-md transition cursor-pointer ${
+    isScrolledUp ? "max-w-[500px] " : "max-w-[1000px] "
   }`}
 >
   <div className="flex flex-row  items-center relative gap-2 justify-between">
