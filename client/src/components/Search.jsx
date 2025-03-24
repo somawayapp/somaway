@@ -100,11 +100,11 @@ const Search = () => {
     <button
   onClick={() => setIsOpen(true)}
   type="button"
-  className={`border-[1px] border-[var(--softBg4)] rounded-full shadow-sm hover:shadow-md transition duration-300 cursor-pointer ${
+  className={`border-[1px] border-[var(--softBg4)] max-w-[1100px] mx-auto rounded-full shadow-sm hover:shadow-md transition duration-300 cursor-pointer ${
     isScrolledUp ? "w-auto px-4" : "w-full"
   }`}
 >
-  <div className="flex flex-row max-w-[700px] mx-auto items-center relative gap-2 justify-between">
+  <div className="flex flex-row  items-center relative gap-2 justify-between">
     {/* Location */}
     <div
       className={`relative hover:bg-[var(--softBg4)] rounded-full group p-2 ${
