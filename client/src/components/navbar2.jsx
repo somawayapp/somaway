@@ -110,7 +110,7 @@
        }}
        className={`relative w-full px-3 md:px-[80px] gap-3 md:gap-6 flex flex-row items-center text-[var(--TextColor)] sticky
          top-0 justify-center bg-[var(--bg)] md:border-b duration-300 ease-in-out transition-all ${
-         isScrolledUp ? "min-h-[auto]" : "min-h-[auto]"
+         isScrolledUp ? "mb-[100px]" : "mb-[200px]"
        }`}
      >
   
