@@ -10,24 +10,105 @@ export const getPosts = async (req, res) => {
 
     console.log(req.query);
 
-    const cat = req.query.cat;
-    const author = req.query.author;
-    const searchQuery = req.query.search;
-    const sortQuery = req.query.sort;
-    const featured = req.query.featured;
+    const {
+      cat,
+      author,
+      search,
+      sort,
+      featured,
+      location,
+      propertytype,
+      bedrooms,
+      bathrooms,
+      propertysize,
+      rooms,
+      minPrice,
+      maxPrice,
+      model,
+    } = req.query;
 
+    // Category Filter
     if (cat) {
       query.category = cat;
     }
 
-    if (searchQuery) {
+    // Search Query (Title & Description)
+    if (search) {
       query.$or = [
-        { title: { $regex: searchQuery, $options: "i" } }, // Search in title
-        { desc: { $regex: searchQuery, $options: "i" } }, // Search in description
+        { title: { $regex: search, $options: "i" } },
+        { desc: { $regex: search, $options: "i" } },
       ];
     }
 
- 
+    // Author Filter
+    if (author) {
+      const authorNames = author
+        .split(/[,;|\s]+/)
+        .map((name) => name.trim())
+        .filter(Boolean);
+
+      const authorRegexes = authorNames.map((name) => new RegExp(name, "i"));
+
+      query.author = { $in: authorRegexes };
+    }
+
+    // Location Filter
+    if (location) {
+      query["location.city"] = { $regex: location, $options: "i" };
+    }
+
+    // Property Type Filter
+    if (propertytype) {
+      query.propertytype = propertytype;
+    }
+
+    // Numeric Filters
+    if (bedrooms) query.bedrooms = { $gte: parseInt(bedrooms) };
+    if (bathrooms) query.bathrooms = { $gte: parseInt(bathrooms) };
+    if (propertysize) query.propertysize = { $gte: parseInt(propertysize) };
+    if (rooms) query.rooms = { $gte: parseInt(rooms) };
+
+    // Price Range Filter
+    if (minPrice || maxPrice) {
+      query.price = {};
+      if (minPrice) query.price.$gte = parseInt(minPrice);
+      if (maxPrice) query.price.$lte = parseInt(maxPrice);
+    }
+
+    // Model Filter (For Rent / For Sale)
+    if (model) {
+      query.model = model;
+    }
+
+    // Sorting Logic
+    let sortObj = { createdAt: -1 };
+
+    if (sort) {
+      switch (sort) {
+        case "newest":
+          sortObj = { createdAt: -1 };
+          break;
+        case "oldest":
+          sortObj = { createdAt: 1 };
+          break;
+        case "popular":
+          sortObj = { visit: -1 };
+          break;
+        case "trending":
+          sortObj = { visit: -1 };
+          query.createdAt = {
+            $gte: new Date(new Date().getTime() - 14 * 24 * 60 * 60 * 1000),
+          };
+          break;
+        default:
+          break;
+      }
+    }
+
+    // Featured Filter
+    if (featured) {
+      query.isFeatured = true;
+    }
     
 
     if (author) {
@@ -42,7 +123,6 @@ export const getPosts = async (req, res) => {
     }
     
 
-    let sortObj = { createdAt: -1 };
 
     if (sortQuery) {
       switch (sortQuery) {
