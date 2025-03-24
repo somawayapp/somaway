@@ -97,7 +97,7 @@ const Navbar = () => {
 
 
 
-    <div className="rounded-full w-[60px] h-[60px] bg-[var(--softTextColor)] items-center justify-center">
+    <div className="rounded-full w-[20px] h-[20px] bg-[var(--softTextColor)] items-center justify-center">
   <svg
     xmlns="http://www.w3.org/2000/svg"
     className="w-[60px] h-[60px] mb-[-25px]"
