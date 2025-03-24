@@ -98,11 +98,10 @@ const Navbar = () => {
 
 
     {/* Person icon */}
-    <div className="w-[30px] h-[30px] rounded-full bg-[var(--softTextColor)] flex items-center justify-center">
+    <div className="w-[30px] h-[30px] rounded-full bg-[var(--softTextColor)] flex items-center justify-center overflow-hidden">
   <svg
     xmlns="http://www.w3.org/2000/svg"
-    width="300"
-    height="300"
+    className="w-full h-full"
     viewBox="0 0 24 24"
     fill="var(--bg)"
   >
@@ -115,6 +114,7 @@ const Navbar = () => {
     <circle cx="12" cy="3" r="3" fill="var(--bg)" />
   </svg>
 </div>
+
 
 </div>
 
