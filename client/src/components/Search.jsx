@@ -74,8 +74,8 @@ const Search = () => {
   return(
     <>
   <div
-  className={`fixed top-0 left-0 w-full z-50 hidden md:flex flex-col gap-8 items-center justify-center transition-all duration-300 ${
-  isScrolledUp ? "pt-2" : "pt-6"
+  className={`fixed top-0  w-full z-50 hidden md:flex flex-col items-center justify-center transition-all duration-300 ${
+  isScrolledUp ? "pt-0 gap-0" : "pt-6 gap-6"
       }`}
     >
       {/* Rent & Sale Links */}
