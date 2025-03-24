@@ -54,7 +54,6 @@ const Navbar = () => {
      style={{
        zIndex: 100004,
        height: scrolled ? '90px' : '150px',
-       transition: 'height 1.3s ease-in-out',
      }}
      className="relative w-full px-3 md:px-[80px] gap-3 md:gap-6 flex items-center text-[var(--TextColor)] sticky top-0 justify-between bg-[var(--bg)] md:border-b md:border-b-[var(--softBg4)]"
    >
