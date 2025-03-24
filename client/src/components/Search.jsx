@@ -104,7 +104,7 @@ const Search = () => {
     isScrolledUp ? "w-auto px-4" : "w-full"
   }`}
 >
-  <div className="flex flex-row items-center relative gap-2 justify-between">
+  <div className="flex flex-row max-w-[700px] mx-auto items-center relative gap-2 justify-between">
     {/* Location */}
     <div
       className={`relative hover:bg-[var(--softBg4)] rounded-full group p-2 ${
@@ -147,6 +147,8 @@ const Search = () => {
         isScrolledUp ? "md:px-4" : "md:px-8"
       } flex flex-col items-start text-left flex-1`}
     >
+            {!isScrolledUp && (
+
       <small className="text-[12px] md:text-[13px] font-semibold text-[var(--softTextColor)] transition">
         {filters.pricemin || filters.pricemax ? (
           <>
@@ -156,7 +158,7 @@ const Search = () => {
         ) : (
           "Any price"
         )}
-      </small>
+      </small> )}
       {!isScrolledUp && (
         <span className="hidden md:block text-[14px] text-[var(--softBg5)]">
           Filter by price
