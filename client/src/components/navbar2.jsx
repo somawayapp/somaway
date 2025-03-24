@@ -145,7 +145,7 @@
     <button
   onClick={() => setIsOpen(true)}
   type="button"
-  className={`border-[1px] border-[var(--softBg4)]  duration-3000 w-full mx-auto rounded-full shadow-sm hover:shadow-md transition cursor-pointer ${
+  className={`border-[1px] border-[var(--softBg4)]  duration-30000 w-full mx-auto rounded-full shadow-sm hover:shadow-md transition cursor-pointer ${
     isScrolledUp ? "max-w-[500px] " : "max-w-[1000px]"
   }`}
 >
