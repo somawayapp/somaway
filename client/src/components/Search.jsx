@@ -60,7 +60,7 @@ const Search = () => {
 >
   <div className="flex flex-row justify-between items-center relative">
     {/* Location */}
-    <div className="relative  group-hover:bg-[var(--softBg4)]  rounded-full group flex flex-col items-center text-center px-3 md:px-8 border-x-[1px] border-x-[var(--softBg4)]">
+    <div className="relative hover:bg-[var(--softBg4)]  rounded-full group flex flex-col items-center text-center   border-x-[var(--softBg4)]">
      <small className="text-[12px] md:text-[14px] font-semibold text-[var(--softTextColor)] transition">
      {filters.location || "Anywhere"}
 
@@ -73,7 +73,7 @@ const Search = () => {
 
 
     {/* Property Size */}
-       <div className="relative  group-hover:bg-[var(--softBg4)]  rounded-full group flex flex-col items-center text-center px-3 md:px-8 border-x-[1px] border-x-[var(--softBg4)]">
+       <div className="relative hover:bg-[var(--softBg4)]  rounded-full group flex flex-col items-center text-center   border-x-[var(--softBg4)]">
      <small className="text-[12px] md:text-[14px] font-semibold text-[var(--softTextColor)] transition">
      {filters.propertysize || "Any size"}
 
@@ -86,7 +86,7 @@ const Search = () => {
 
 
     {/* Price */}
-    <div className="relative hidden md:block  group-hover:bg-[var(--softBg4)]  rounded-full group flex flex-col items-center text-center px-3 md:px-8 border-x-[1px] border-x-[var(--softBg4)]">
+    <div className="relative hidden md:block hover:bg-[var(--softBg4)]  rounded-full group flex flex-col items-center text-center   border-x-[var(--softBg4)]">
      <small className="text-[12px] md:text-[14px] font-semibold text-[var(--softTextColor)] transition">
         {filters.pricemin || filters.pricemax ? (
           <>
@@ -105,7 +105,7 @@ const Search = () => {
 
 
     {/* Property Type */}
-    <div className="relative hidden md:block  group-hover:bg-[var(--softBg4)]  rounded-full group flex flex-col items-center text-center px-3 md:px-8 border-x-[1px] border-x-[var(--softBg4)]">
+    <div className="relative hidden md:block hover:bg-[var(--softBg4)]  rounded-full group flex flex-col items-center text-center   border-x-[var(--softBg4)]">
      <small className="text-[12px] md:text-[14px] font-semibold text-[var(--softTextColor)] transition">
      {filters.propertytype || "Any type"}
 
