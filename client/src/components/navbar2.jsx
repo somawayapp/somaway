@@ -108,7 +108,7 @@
        style={{
          zIndex: 100004,
        }}
-       className="relative w-full px-3 h-auto md:px-[80px] gap-3 md:gap-6 flex items-center text-[var(--TextColor)] sticky top-0 justify-between bg-[var(--bg)] md:border-b md:border-b-[var(--softBg4)] "
+       className="relative w-full px-3 h-auto md:px-[80px] gap-3 md:gap-6 flex items-center text-[var(--TextColor)] sticky top-0 justify-center bg-[var(--bg)] md:border-b md:border-b-[var(--softBg4)] "
      >
      
   
@@ -120,7 +120,7 @@
     
   
   
-    <div>
+    <>
   <div
   className={`fixed top-0  w-full z-50 hidden md:flex flex-col items-center justify-center transition-all  ${isScrolledUp ? "pt-0 gap-0" : "pt-6 gap-6" }`}
     >
@@ -543,7 +543,7 @@
         </div>
         </div>
       )}
-    </div>
+    </>
        
   
        <div className="flex items-center justify-between flex-row gap-2 md:gap-9">
