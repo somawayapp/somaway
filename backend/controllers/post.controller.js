@@ -2,9 +2,6 @@ import ImageKit from "imagekit";
 import Post from "../models/post.model.js";
 import User from "../models/user.model.js";
 
-import ImageKit from "imagekit";
-import Post from "../models/post.model.js";
-import User from "../models/user.model.js";
 
 export const getPosts = async (req, res) => {
   try {
