@@ -8,34 +8,6 @@ const Search = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [step, setStep] = useState(1);
 
-  const FilterButton = ({ filters, setIsOpen }) => {
-    const [isScrolledUp, setIsScrolledUp] = useState(false);
-  
-    useEffect(() => {
-      let lastScrollTop = window.scrollY;
-  
-      const handleScroll = () => {
-        let scrollTop = window.scrollY;
-  
-        if (scrollTop > lastScrollTop && scrollTop > 50) {
-          setIsScrolledUp(true); // Collapse when scrolling up
-        } else if (scrollTop < 10) {
-          setIsScrolledUp(false); // Expand when back at the top
-        }
-  
-        lastScrollTop = scrollTop;
-      };
-  
-      window.addEventListener("scroll", handleScroll);
-      return () => window.removeEventListener("scroll", handleScroll);
-    }, []);
-
-    return (
-      // You need to add some JSX here for your filter button component
-      <div>Filter Button Component</div> // Just a placeholder to prevent the missing return error
-    );
-  };
-
   const [filters, setFilters] = useState({
     location: "",
     propertytype: "",
@@ -47,6 +19,27 @@ const Search = () => {
     pricemax: "",
     model: "",
   });
+
+  const [isScrolledUp, setIsScrolledUp] = useState(false);
+
+  useEffect(() => {
+    let lastScrollTop = window.scrollY;
+
+    const handleScroll = () => {
+      let scrollTop = window.scrollY;
+
+      if (scrollTop > lastScrollTop && scrollTop > 50) {
+        setIsScrolledUp(true); // Collapse when scrolling up
+      } else if (scrollTop < 10) {
+        setIsScrolledUp(false); // Expand when back at the top
+      }
+
+      lastScrollTop = scrollTop;
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   const handleNext = () => {
     if (step < 3) {
@@ -78,8 +71,7 @@ const Search = () => {
     }
   }, [isOpen]);
 
-  return (
-
+  return(
     <>
   <div
       className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${
