@@ -98,21 +98,25 @@ const Navbar = () => {
 
 
     {/* Person icon */}
-    <div className="w-9 h-9 rounded-full bg-[var(--sofTextColor)] flex items-center justify-center">
+    <div className="w-[40px] h-[40px] rounded-full bg-[var(--sofTextColor)] flex items-center justify-center">
     <svg
   xmlns="http://www.w3.org/2000/svg"
-  width="48"
-  height="48"
+  width="100"
+  height="100"
   viewBox="0 0 24 24"
-  fill="currentColor"
+  fill="var(--sofTextColor)"
 >
-  <circle cx="12" cy="8" r="5" />
-  <path
-    d="M2 16c0-2.5 10-9 20 0c-10 9-20 2.5-20 0z"
-    fill="currentColor"
-    stroke="none"
-  />
+  <defs>
+    <clipPath id="vesica">
+      <circle cx="12" cy="12" r="7" />
+    </clipPath>
+  </defs>
+  <circle cx="12" cy="5" r="7" fill="var(--bg)" clip-path="url(#vesica)" />
+  <circle cx="12" cy="3" r="3" fill="var(--bg)" />
 </svg>
+
+
+
 
 
     </div>
