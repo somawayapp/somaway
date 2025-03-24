@@ -130,7 +130,7 @@ const Search = () => {
     </div>
 
     {/* Search Icon */}
-    <div className="p-2 md:p-3 ">
+    <div className="p-2  ">
     <div className="p-3 md:p-4 ml-0 md:ml-[80px] bg-[#fc3239] rounded-full text-white transition-transform duration-300 hover:scale-110 hover:bg-[#d82930]">
       <FaSearch className="text-[12px] md:text-[14px]" />
     </div>
