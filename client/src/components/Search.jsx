@@ -56,12 +56,12 @@ const Search = () => {
 <button
   onClick={() => setIsOpen(true)}
   type="button"
-  className="border-[1px] max-full border-[var(--softBg4)] rounded-full shadow-sm hover:shadow-md transition
+  className="w-full border-[1px] border-[var(--softBg4)] rounded-full shadow-sm hover:shadow-md transition
    duration-300 cursor-pointer"
 >
-  <div className="flex flex-row items-center relative gap-2">
+  <div className="flex flex-row items-center relative gap-2 w-full justify-between">
     {/* Location */}
-    <div className="relative hover:bg-[var(--softBg4)] rounded-full group p-2 md:px-8 flex flex-col items-start text-left">
+    <div className="relative hover:bg-[var(--softBg4)] rounded-full group p-2 md:px-8 flex flex-col items-start text-left flex-1">
       <small className="text-[12px] md:text-[13px] ml-4 font-semibold text-[var(--softTextColor)] transition">
         {filters.location || "Anywhere"}
       </small>
@@ -70,12 +70,10 @@ const Search = () => {
       </span>
     </div>
 
-    <div className="flex items-center justify-center h-[30px] md:h-[40px]">
-      <div className="h-full border-l-[1px] border-[var(--softBg4)]"></div>
-    </div>
+    <div className="h-[30px] md:h-[40px] border-l-[1px] border-[var(--softBg4)]"></div>
 
     {/* Property Size */}
-    <div className="relative hover:bg-[var(--softBg4)] rounded-full group p-2 md:px-8 flex flex-col items-start text-left">
+    <div className="relative hover:bg-[var(--softBg4)] rounded-full group p-2 md:px-8 flex flex-col items-start text-left flex-1">
       <small className="text-[12px] md:text-[13px] font-semibold text-[var(--softTextColor)] transition">
         {filters.propertysize || "Any size"}
       </small>
@@ -84,12 +82,10 @@ const Search = () => {
       </span>
     </div>
 
-    <div className="flex hidden md:block items-center justify-center h-[30px] md:h-[40px]">
-      <div className="h-full border-l-[1px] border-[var(--softBg4)]"></div>
-    </div>
+    <div className="hidden md:block h-[30px] md:h-[40px] border-l-[1px] border-[var(--softBg4)]"></div>
 
     {/* Price */}
-    <div className="relative hidden md:block hover:bg-[var(--softBg4)] rounded-full group p-2 md:px-8 flex flex-col items-start text-left">
+    <div className="relative hidden md:block hover:bg-[var(--softBg4)] rounded-full group p-2 md:px-8 flex flex-col items-start text-left flex-1">
       <small className="text-[12px] md:text-[13px] font-semibold text-[var(--softTextColor)] transition">
         {filters.pricemin || filters.pricemax ? (
           <>
@@ -105,12 +101,10 @@ const Search = () => {
       </span>
     </div>
 
-    <div className="flex hidden md:block items-center justify-center h-[30px] md:h-[40px]">
-      <div className="h-full border-l-[1px] border-[var(--softBg4)]"></div>
-    </div>
+    <div className="hidden md:block h-[30px] md:h-[40px] border-l-[1px] border-[var(--softBg4)]"></div>
 
     {/* Property Type */}
-    <div className="relative hidden md:block hover:bg-[var(--softBg4)] rounded-full group p-2 md:px-8 flex flex-col items-start text-left">
+    <div className="relative hidden md:block hover:bg-[var(--softBg4)] rounded-full group p-2 md:px-8 flex flex-col items-start text-left flex-1">
       <small className="text-[12px] md:text-[13px] font-semibold text-[var(--softTextColor)] transition">
         {filters.propertytype || "Any type"}
       </small>
@@ -121,12 +115,13 @@ const Search = () => {
 
     {/* Search Icon */}
     <div className="p-2">
-      <div className="p-3 md:p-4 ml-0 md:ml-[80px] bg-[#fc3239] rounded-full text-white transition-transform duration-300 hover:scale-110 hover:bg-[#d82930]">
+      <div className="p-3 md:p-4 bg-[#fc3239] rounded-full text-white transition-transform duration-300 hover:scale-110 hover:bg-[#d82930]">
         <FaSearch className="text-[12px] md:text-[14px]" />
       </div>
     </div>
   </div>
 </button>
+
 
 
 
