@@ -53,50 +53,43 @@ const Search = () => {
 
   return (
     <>
-
 <button
   onClick={() => setIsOpen(true)}
-   
   type="button"
-  className="border-[1px] max-w-[1100px] mx-auto border-[var(--softBg4)] md:w-auto  rounded-full shadow-sm hover:shadow-md transition duration-300 cursor-pointer"
+  className="border-[1px] max-w-[1100px] mx-auto border-[var(--softBg4)] md:w-auto rounded-full shadow-sm hover:shadow-md transition duration-300 cursor-pointer"
 >
   <div className="flex flex-row justify-between items-center relative">
     {/* Location */}
-    <div className="relative  hover:bg-[var(--softBg4)]  rounded-full group p-2  md:px-8  flex flex-col items-center text-center ">
-     <small className="text-[12px] md:text-[13px] ml-6 md:ml-[20px] font-semibold text-[var(--softTextColor)] transition">
-     {filters.location || "Anywhere"}
-
+    <div className="relative hover:bg-[var(--softBg4)] rounded-full group p-2 md:px-8 flex flex-col items-start">
+      <small className="text-[12px] md:text-[13px] ml-6 md:ml-[20px] font-semibold text-[var(--softTextColor)] transition">
+        {filters.location || "Anywhere"}
       </small>
-      <span className="hidden md:block text-[14px] text-[var(--softTextColor)] ">
+      <span className="hidden md:block text-[14px] text-[var(--softTextColor)]">
         Search by location
       </span>
-  
     </div>
 
-    <div class="flex items-center justify-center h-[30px] md:h-[40px] ">
-    <div class="h-full border-l-[1px] border-[var(--softBg4)]"></div>
-</div>
-
+    <div className="flex items-center justify-center h-[30px] md:h-[40px]">
+      <div className="h-full border-l-[1px] border-[var(--softBg4)]"></div>
+    </div>
 
     {/* Property Size */}
-       <div className="relative  hover:bg-[var(--softBg4)]  rounded-full group p-2 md:py-4 md:px-8 flex flex-col  ">
-     <small className="text-[12px] md:text-[13px] font-semibold text-[var(--softTextColor)] transition">
-     {filters.propertysize || "Any size"}
-
+    <div className="relative hover:bg-[var(--softBg4)] rounded-full group p-2 md:px-8 flex flex-col items-start">
+      <small className="text-[12px] md:text-[13px] font-semibold text-[var(--softTextColor)] transition">
+        {filters.propertysize || "Any size"}
       </small>
-      <span className="hidden md:block text-[14px] text-[var(--softerTextColor)] ">
+      <span className="hidden md:block text-[14px] text-[var(--softerTextColor)]">
         filter by size
       </span>
-  
     </div>
 
-    <div class="flex  hidden md:block items-center justify-center h-[30px] md:h-[40px] ">
-    <div class="h-full border-l-[1px] border-[var(--softBg4)]"></div>
-</div>
+    <div className="flex hidden md:block items-center justify-center h-[30px] md:h-[40px]">
+      <div className="h-full border-l-[1px] border-[var(--softBg4)]"></div>
+    </div>
 
     {/* Price */}
-    <div className="relative hidden md:block  hover:bg-[var(--softBg4)]  rounded-full group p-2  md:px-8 flex flex-col   border-x-[var(--softBg4)]">
-     <small className="text-[12px] md:text-[13px] font-semibold text-[var(--softTextColor)] transition">
+    <div className="relative hidden md:block hover:bg-[var(--softBg4)] rounded-full group p-2 md:px-8 flex flex-col items-start">
+      <small className="text-[12px] md:text-[13px] font-semibold text-[var(--softTextColor)] transition">
         {filters.pricemin || filters.pricemax ? (
           <>
             {filters.pricemin ? `KSh ${filters.pricemin}` : "KSh 0"} -{" "}
@@ -106,38 +99,34 @@ const Search = () => {
           "Any price"
         )}
       </small>
-      <span className="hidden md:block text-[14px] text-[var(--softerTextColor)] ">
-        filter by price 
+      <span className="hidden md:block text-[14px] text-[var(--softerTextColor)]">
+        filter by price
       </span>
-  
     </div>
 
-
-    <div class="flex  hidden md:block items-center justify-center h-[30px] md:h-[40px] ">
-    <div class="h-full border-l-[1px] border-[var(--softBg4)]"></div>
-</div>
+    <div className="flex hidden md:block items-center justify-center h-[30px] md:h-[40px]">
+      <div className="h-full border-l-[1px] border-[var(--softBg4)]"></div>
+    </div>
 
     {/* Property Type */}
-    <div className="relative hidden md:block  hover:bg-[var(--softBg4)]  rounded-full group p-2  md:px-8 flex flex-col  border-x-[var(--softBg4)]">
-     <small className="text-[12px] md:text-[13px] font-semibold text-[var(--softTextColor)] transition">
-     {filters.propertytype || "Any type"}
-
+    <div className="relative hidden md:block hover:bg-[var(--softBg4)] rounded-full group p-2 md:px-8 flex flex-col items-start">
+      <small className="text-[12px] md:text-[13px] font-semibold text-[var(--softTextColor)] transition">
+        {filters.propertytype || "Any type"}
       </small>
-      <span className="hidden md:block text-[14px] text-[var(--softerTextColor)] ">
+      <span className="hidden md:block text-[14px] text-[var(--softerTextColor)]">
         filter by type
       </span>
-  
     </div>
 
     {/* Search Icon */}
-    <div className="p-2 md:p-3 ">
-    <div className="p-3 md:p-4 ml-0 md:ml-[80px] bg-[#fc3239] rounded-full text-white transition-transform duration-300 hover:scale-110 hover:bg-[#d82930]">
-      <FaSearch className="text-[12px] md:text-[14px]" />
+    <div className="p-2">
+      <div className="p-3 md:p-4 ml-0 md:ml-[80px] bg-[#fc3239] rounded-full text-white transition-transform duration-300 hover:scale-110 hover:bg-[#d82930]">
+        <FaSearch className="text-[12px] md:text-[14px]" />
+      </div>
     </div>
   </div>
-    </div>
-
 </button>
+
 
 
       {isOpen && (
@@ -167,8 +156,9 @@ const Search = () => {
 
             {step === 1 && (
               <>
-                <h2 className="text-2xl text-[var(--softTextColor)] font-semibold mb-1">Where do you wanna stay
-                <span className="block md:hidden">?</span> <span className="hidden md:block">/Property location?</span></h2>
+                <h2 className="text-2xl text-[var(--softTextColor)] font-semibold mb-1">Where do you wanna stay /Property location?</h2>
+           <h2 className="hidden md:block">/Property location?</h2>
+
                 <h2 className="text-sm text-[var(--softTextColor)] mb-4 "> Find your perfect location!</h2>
                 <input
                   type="text"
