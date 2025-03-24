@@ -2,20 +2,27 @@ import ImageKit from "imagekit";
 import Post from "../models/post.model.js";
 import User from "../models/user.model.js";
 
+import ImageKit from "imagekit";
+import Post from "../models/post.model.js";
+import User from "../models/user.model.js";
+
 export const getPosts = async (req, res) => {
   try {
     const page = parseInt(req.query.page) || 1;
     const limit = parseInt(req.query.limit) || 2;
     const query = {};
+ 
 
     console.log(req.query);
+    const cat = req.query.cat;
+    const searchQuery = req.query.search;
+    const sortQuery = req.query.sort;
+    const featured = req.query.featured;
 
     const {
-      cat,
       author,
       search,
       sort,
-      featured,
       location,
       propertytype,
       bedrooms,
@@ -83,7 +90,7 @@ export const getPosts = async (req, res) => {
     // Sorting Logic
     let sortObj = { createdAt: -1 };
 
-    if (sort) {
+    if (sortQuery) {
       switch (sort) {
         case "newest":
           sortObj = { createdAt: -1 };
@@ -123,28 +130,38 @@ export const getPosts = async (req, res) => {
     }
     
 
+ 
 
-    if (sortQuery) {
-      switch (sortQuery) {
-        case "newest":
-          sortObj = { createdAt: -1 };
-          break;
-        case "oldest":
-          sortObj = { createdAt: 1 };
-          break;
-        case "popular":
-          sortObj = { visit: -1 };
-          break;
-        case "trending":
-          sortObj = { visit: -1 };
-          query.createdAt = {
-            $gte: new Date(new Date().getTime() - 14 * 24 * 60 * 60 * 1000),
-          };
-          break;
-        default:
-          break;
-      }
+    console.log(req.query);
+
+
+    if (cat) {
+      query.category = cat;
     }
+
+    if (searchQuery) {
+      query.$or = [
+        { title: { $regex: searchQuery, $options: "i" } }, // Search in title
+        { desc: { $regex: searchQuery, $options: "i" } }, // Search in description
+      ];
+    }
+
+ 
+    
+
+    if (author) {
+      // Split author names by commas, semicolons, pipes, or multiple spaces
+      const authorNames = author.split(/[,;|\s]+/).map((name) => name.trim()).filter(Boolean);
+    
+      // Build an array of author regexes
+      const authorRegexes = authorNames.map((name) => new RegExp(name, "i"));
+    
+      // Search for posts where the author field matches any of the regex patterns
+      query.author = { $in: authorRegexes };
+    }
+    
+
+    
 
     if (featured) {
       query.isFeatured = true;
