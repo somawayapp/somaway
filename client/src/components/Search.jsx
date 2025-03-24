@@ -60,8 +60,8 @@ const Search = () => {
 >
   <div className="flex flex-row justify-between items-center relative">
     {/* Location */}
-    <div className="relative  hover:bg-[var(--softBg4)]  rounded-full group p-2 md:p-3 p-2 md:p-3 flex flex-col items-center text-center ">
-     <small className="text-[12px] md:text-[14px] pl-0 md:pl-4 font-semibold text-[var(--softTextColor)] transition">
+    <div className="relative  hover:bg-[var(--softBg4)]  rounded-full group p-2 md:p-3  flex flex-col items-center text-center ">
+     <small className="text-[12px] md:text-[14px] ml-0 md:ml-4 font-semibold text-[var(--softTextColor)] transition">
      {filters.location || "Anywhere"}
 
       </small>
@@ -71,7 +71,7 @@ const Search = () => {
   
     </div>
 
-    <div class="flex items-center justify-center ">
+    <div class="flex items-center justify-center h-[20px] ">
     <div class="h-full border-l-[1px] border-[var(--softBg4)]"></div>
 </div>
 
