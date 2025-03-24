@@ -82,9 +82,12 @@ const Navbar = () => {
               >
                 <AiOutlineMenu />
                 <div className="hidden  md:flex items-center justify-center">
-  <SignedIn>
+                <SignedIn>
+  <div style={{ pointerEvents: "none" }}>
     <UserButton />
-  </SignedIn>
+  </div>
+</SignedIn>
+
   <SignedOut>
     <img
       className="rounded-full text-[14px]  w-[30px] h-[30px]  select-none"
