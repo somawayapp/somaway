@@ -71,7 +71,7 @@ const Search = () => {
   
     </div>
 
-    <div className=" border-l-[var(--softBg4)] border-l-[1px] " ></div>
+    <div className=" border-x-[1px] border-x-[var(--softBg4)]"></div>
 
 
     {/* Property Size */}
@@ -108,7 +108,7 @@ const Search = () => {
     </div>
 
 
-<div className=" border-l-[var(--softBg4)] border-l-[1px]  hidden md:block" ></div>
+    <div className=" border-x-[1px] border-x-[var(--softBg4)]">
 
     {/* Property Type */}
     <div className="relative hidden md:block  hover:bg-[var(--softBg4)]  rounded-full group p-2 md:p-3 flex flex-col items-center text-center   border-x-[var(--softBg4)]">
@@ -119,7 +119,7 @@ const Search = () => {
       <span className="hidden md:block text-[14px] text-[var(--softTextColor)] ">
         Select property type
       </span>
-  
+  </div>
     </div>
 
     {/* Search Icon */}
