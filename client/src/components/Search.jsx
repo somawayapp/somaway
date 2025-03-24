@@ -71,7 +71,7 @@ const Search = () => {
   
     </div>
 
-    <div class="h-full border-l border-black]"></div>
+    <div class="h-full border-l border-black"></div>
 
 
     {/* Property Size */}
