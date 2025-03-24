@@ -56,36 +56,38 @@ const Search = () => {
 
 <button
   type="button"
-  className="border-[1px] border-[var(--softBg4)] w-full md:w-auto py-2 rounded-full shadow-sm hover:shadow-md transition duration-300 cursor-pointer"
+  className="border-[1px] border-[var(--softBg4)] w-full md:w-auto p-2 rounded-full shadow-sm hover:shadow-md transition duration-300 cursor-pointer"
 >
   <div className="flex flex-row justify-between items-center relative">
     {/* Location */}
-    <div className="relative group flex flex-col items-center text-center px-6">
-      <small className="text-[12px] md:text-[14px] font-semibold text-[var(--softTextColor)] group-hover:bg-[var(--softBg4)] py-2 rounded-full transition">
-        {filters.location || "Anywhere"}
+    <div className="relative  group-hover:bg-[var(--softBg4)]  rounded-full group flex flex-col items-center text-center px-3 md:px-8 border-x-[1px] border-x-[var(--softBg4)]">
+     <small className="text-[12px] md:text-[14px] font-semibold text-[var(--softTextColor)] transition">
+     {filters.location || "Anywhere"}
+
       </small>
-      <span className="hidden md:block text-[14px] text-[var(--softTextColor)] group-hover:bg-[var(--softBg4)] px-2 py-1 rounded-md">
-        Choose a location
+      <span className="hidden md:block text-[14px] text-[var(--softTextColor)] ">
+        Select property location
       </span>
+  
     </div>
 
-    <span className="text-[var(--softerTextColor)]">|</span>
 
     {/* Property Size */}
-    <div className="relative group flex flex-col items-center text-center px-6">
-      <small className="text-[12px] md:text-[14px] font-semibold text-[var(--softTextColor)] group-hover:bg-[var(--softBg4)] py-2 rounded-full transition">
-        {filters.propertysize || "Any size"}
+       <div className="relative  group-hover:bg-[var(--softBg4)]  rounded-full group flex flex-col items-center text-center px-3 md:px-8 border-x-[1px] border-x-[var(--softBg4)]">
+     <small className="text-[12px] md:text-[14px] font-semibold text-[var(--softTextColor)] transition">
+     {filters.propertysize || "Any size"}
+
       </small>
-      <span className="hidden md:block text-[14px] text-[var(--softTextColor)] group-hover:bg-[var(--softBg4)] px-2 py-1 rounded-md">
+      <span className="hidden md:block text-[14px] text-[var(--softTextColor)] ">
         Select property size
       </span>
+  
     </div>
 
-    <span className="text-[var(--softerTextColor)]">|</span>
 
     {/* Price */}
-    <div className="relative group flex flex-col items-center text-center px-6 border-x-[1px] border-x-[var(--softBg4)]">
-      <small className="text-[12px] md:text-[14px] font-semibold text-[var(--softTextColor)] group-hover:bg-[var(--softBg4)] py-2 rounded-full transition">
+    <div className="relative hidden md:block  group-hover:bg-[var(--softBg4)]  rounded-full group flex flex-col items-center text-center px-3 md:px-8 border-x-[1px] border-x-[var(--softBg4)]">
+     <small className="text-[12px] md:text-[14px] font-semibold text-[var(--softTextColor)] transition">
         {filters.pricemin || filters.pricemax ? (
           <>
             {filters.pricemin ? `KSh ${filters.pricemin}` : "KSh 0"} -{" "}
@@ -95,21 +97,23 @@ const Search = () => {
           "Any price"
         )}
       </small>
-      <span className="hidden md:block text-[14px] text-[var(--softTextColor)] group-hover:bg-[var(--softBg4)] px-2 py-1 rounded-md">
+      <span className="hidden md:block text-[14px] text-[var(--softTextColor)] ">
         Set price range
       </span>
+  
     </div>
 
-    <span className="text-[var(--softerTextColor)]">|</span>
 
     {/* Property Type */}
-    <div className="relative group flex flex-col items-center text-center px-6">
-      <small className="text-[12px] md:text-[14px] font-semibold text-[var(--softTextColor)] group-hover:bg-[var(--softBg4)] py-2 rounded-full transition">
-        {filters.propertytype || "Any type"}
+    <div className="relative hidden md:block  group-hover:bg-[var(--softBg4)]  rounded-full group flex flex-col items-center text-center px-3 md:px-8 border-x-[1px] border-x-[var(--softBg4)]">
+     <small className="text-[12px] md:text-[14px] font-semibold text-[var(--softTextColor)] transition">
+     {filters.propertytype || "Any type"}
+
       </small>
-      <span className="hidden md:block text-[14px] text-[var(--softTextColor)] group-hover:bg-[var(--softBg4)] px-2 py-1 rounded-md">
+      <span className="hidden md:block text-[14px] text-[var(--softTextColor)] ">
         Select property type
       </span>
+  
     </div>
 
     {/* Search Icon */}
