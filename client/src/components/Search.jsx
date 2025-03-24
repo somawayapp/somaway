@@ -53,61 +53,63 @@ const Search = () => {
 
   return (
     <>
-   <button
+
+<button
   type="button"
   className="border-[1px] border-[var(--softBg4)] w-full md:w-auto py-2 rounded-full shadow-sm hover:shadow-md transition duration-300 cursor-pointer"
-  onClick={() => setIsOpen(true)}
 >
   <div className="flex flex-row justify-between items-center relative">
     {/* Location */}
-    <div className="relative group hover:bg-[var(--softBg4)] rounded-full px-4 border-r-[1px] border-[var(--softerTextColor)] flex flex-col items-center text-center">
+    <div className="relative group flex flex-col items-center text-center px-6">
       <small className="text-[12px] md:text-[14px] font-semibold text-[var(--softTextColor)] group-hover:bg-[var(--softBg4)] py-2 rounded-full transition">
         {filters.location || "Anywhere"}
       </small>
-      <span className="hidden md:block text-[14px] text-[var(--softTextColor)] group-hover:bg-[var(--softBg4)] py-1 rounded-full transition">
+      <span className="hidden md:block text-[14px] text-[var(--softTextColor)] group-hover:bg-[var(--softBg4)] px-2 py-1 rounded-md">
         Choose a location
       </span>
     </div>
 
-    {/* Property Type & Size */}
-    <div className="text-[12px] md:text-[14px] hover:bg-[var(--softBg4)] rounded-full text-[var(--softTextColor)] pl-6 pr-2 flex flex-row items-center gap-4">
-      <div className="relative group hidden md:block px-4 border-r-[1px] border-[var(--softerTextColor)] flex flex-col items-center text-center">
-        <small className="font-semibold text-[12px] md:text-[14px] group-hover:bg-[var(--softBg4)] py-2 rounded-full transition">
-          {filters.propertysize || "Any size"}
-        </small>
-        <span className="hidden md:block text-[14px] text-[var(--softTextColor)] group-hover:bg-[var(--softBg4)] py-1 rounded-full transition">
-          Select property size
-        </span>
-      </div>
+    <span className="text-[var(--softerTextColor)]">|</span>
+
+    {/* Property Size */}
+    <div className="relative group flex flex-col items-center text-center px-6">
+      <small className="text-[12px] md:text-[14px] font-semibold text-[var(--softTextColor)] group-hover:bg-[var(--softBg4)] py-2 rounded-full transition">
+        {filters.propertysize || "Any size"}
+      </small>
+      <span className="hidden md:block text-[14px] text-[var(--softTextColor)] group-hover:bg-[var(--softBg4)] px-2 py-1 rounded-md">
+        Select property size
+      </span>
     </div>
 
+    <span className="text-[var(--softerTextColor)]">|</span>
+
     {/* Price */}
-    <div className="relative hover:bg-[var(--softBg4)] rounded-full group flex-1 text-center border-x-[1px] border-x-[var(--softBg4)] px-4 border-r-[1px] border-[var(--softerTextColor)] flex flex-col items-center text-center">
+    <div className="relative group flex flex-col items-center text-center px-6 border-x-[1px] border-x-[var(--softBg4)]">
       <small className="text-[12px] md:text-[14px] font-semibold text-[var(--softTextColor)] group-hover:bg-[var(--softBg4)] py-2 rounded-full transition">
         {filters.pricemin || filters.pricemax ? (
           <>
-            {filters.pricemin ? `KSh ${filters.pricemin}` : "KSh 0"} - {" "}
+            {filters.pricemin ? `KSh ${filters.pricemin}` : "KSh 0"} -{" "}
             {filters.pricemax ? `KSh ${filters.pricemax}` : "KSh 0"}
           </>
         ) : (
           "Any price"
         )}
       </small>
-      <span className="hidden md:block text-[14px] text-[var(--softTextColor)] group-hover:bg-[var(--softBg4)] py-1 rounded-full transition">
+      <span className="hidden md:block text-[14px] text-[var(--softTextColor)] group-hover:bg-[var(--softBg4)] px-2 py-1 rounded-md">
         Set price range
       </span>
     </div>
 
-    {/* Property Type & Size */}
-    <div className="text-[12px] md:text-[14px] hover:bg-[var(--softBg4)] rounded-full text-[var(--softTextColor)] pl-6 pr-2 flex flex-row items-center gap-4">
-      <div className="relative group hidden md:block px-4 border-r-[1px] border-[var(--softerTextColor)] flex flex-col items-center text-center">
-        <small className="font-semibold text-[12px] md:text-[14px] group-hover:bg-[var(--softBg4)] py-2 rounded-full transition">
-          {filters.propertytype || "Any type"}
-        </small>
-        <span className="hidden md:block text-[14px] text-[var(--softTextColor)] group-hover:bg-[var(--softBg4)] py-1 rounded-full transition">
-          Select property type
-        </span>
-      </div>
+    <span className="text-[var(--softerTextColor)]">|</span>
+
+    {/* Property Type */}
+    <div className="relative group flex flex-col items-center text-center px-6">
+      <small className="text-[12px] md:text-[14px] font-semibold text-[var(--softTextColor)] group-hover:bg-[var(--softBg4)] py-2 rounded-full transition">
+        {filters.propertytype || "Any type"}
+      </small>
+      <span className="hidden md:block text-[14px] text-[var(--softTextColor)] group-hover:bg-[var(--softBg4)] px-2 py-1 rounded-md">
+        Select property type
+      </span>
     </div>
 
     {/* Search Icon */}
@@ -116,6 +118,7 @@ const Search = () => {
     </div>
   </div>
 </button>
+
 
       {isOpen && (
         <div
