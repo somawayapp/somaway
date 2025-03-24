@@ -72,32 +72,11 @@ const Navbar = () => {
       
 
         
-        {/* MOBILE BUTTON */}
-        <div
-  className="cursor-pointer text-[var(--textColor)] text-sm border-[2px] border-[var(--softBg4)] hover:shadow-xl p-2 rounded-3xl flex items-center gap-4"
-  onClick={() => setOpen((prev) => !prev)}
->
-  <div className="flex flex-col gap-[2px]">
-    <div
-      className={`h-[2px] rounded-md w-3 bg-[var(--softTextColor)] origin-left transition-all ease-in-out ${
-        open && "rotate-45"
-      }`}
-    ></div>
-    <div
-      className={`h-[2px] rounded-md w-3 bg-[var(--softTextColor)] origin-left transition-all ease-in-out ${
-        open && "opacity-0"
-      }`}
-    ></div>
-    <div
-      className={`h-[2px] rounded-md w-3 bg-[var(--softTextColor)] origin-left transition-all ease-in-out ${
-        open && "-rotate-45"
-      }`}
-    ></div>
-  </div>
+   
 
 
 
-  <div className="relative">
+  <div className="relative"  onClick={() => setOpen((prev) => !prev)}>
       <div className="flex flex-row items-center gap-3">
             <button
               type="button"
@@ -111,9 +90,13 @@ const Navbar = () => {
               >
                 <AiOutlineMenu />
                 <div className="hidden md:block">
-                  <Avatar src={  <SignedIn>
-          <UserButton />
-        </SignedIn>} />
+                <img
+    className="rounded-full text-[14px] md:text-[16px]  w-[30px] md:w-[40px] h-[30px] md:h-[40px] select-none"
+    alt="Avatar"
+    src={ <SignedIn>
+      <UserButton />
+    </SignedIn> || "/placeholder.jpg"} 
+  />               
                 </div>
               </button>
       </div>
@@ -125,7 +108,6 @@ const Navbar = () => {
 
 
 
-</div>
 
           
         </div>
