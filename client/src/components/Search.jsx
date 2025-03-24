@@ -61,7 +61,7 @@ const Search = () => {
   <div className="flex flex-row justify-between items-center relative">
     {/* Location */}
     <div className="relative  hover:bg-[var(--softBg4)]  rounded-full group p-2 md:p-3 p-2 md:p-3 flex flex-col items-center text-center ">
-     <small className="text-[12px] md:text-[14px] font-semibold text-[var(--softTextColor)] transition">
+     <small className="text-[12px] md:text-[14px] pl-0 md:pl-4 font-semibold text-[var(--softTextColor)] transition">
      {filters.location || "Anywhere"}
 
       </small>
@@ -71,8 +71,8 @@ const Search = () => {
   
     </div>
 
-    <div class="flex items-center justify-center h-screen">
-    <div class="h-full border-l-2 border-black"></div>
+    <div class="flex items-center justify-center ">
+    <div class="h-full border-l-[1px] border-[var(--softBg4)]"></div>
 </div>
 
 
@@ -88,8 +88,9 @@ const Search = () => {
   
     </div>
 
-    <div class="h-full border-l border-[var(--softBg4)  hidden md:block" ></div>
-
+    <div class="flex  hidden md:block items-center justify-center ">
+    <div class="h-full border-l-[1px] border-[var(--softBg4)]"></div>
+</div>
 
     {/* Price */}
     <div className="relative hidden md:block  hover:bg-[var(--softBg4)]  rounded-full group p-2 md:p-3 flex flex-col items-center text-center   border-x-[var(--softBg4)]">
@@ -110,7 +111,9 @@ const Search = () => {
     </div>
 
 
- <div class="h-full border-l border-[var(--softBg4)  hidden md:block" ></div>
+    <div class="flex  hidden md:block items-center justify-center ">
+    <div class="h-full border-l-[1px] border-[var(--softBg4)]"></div>
+</div>
 
     {/* Property Type */}
     <div className="relative hidden md:block  hover:bg-[var(--softBg4)]  rounded-full group p-2 md:p-3 flex flex-col items-center text-center   border-x-[var(--softBg4)]">
