@@ -78,19 +78,22 @@ const Navbar = () => {
             </button>
               <button
                 type="button"
-                className=" p-4 md:py-1 md:px-2 border-[1px]   border-neutral-200  flex  flex-row  items-center   gap-3   rounded-full   cursor-pointer   hover:shadow-md   transition duration-300"
+                className=" p-4 md:py-1 md:px-2 border-[1px]   border-[var(--softBg4)]  flex  flex-row  items-center   gap-3   rounded-full   cursor-pointer   hover:shadow-md   transition duration-300"
               >
                 <AiOutlineMenu />
                 <div className="hidden md:block">
-                <img
-    className="rounded-full text-[14px] md:text-[16px]  w-[30px] md:w-[40px] h-[30px] md:h-[40px] select-none"
-    alt="Avatar"
-        src={<SignedIn>
-          <UserButton />
-        </SignedIn> || "/placeholder.jpg"} 
+  <SignedIn>
+    <UserButton />
+  </SignedIn>
+  <SignedOut>
+    <img
+      className="rounded-full text-[14px] md:text-[16px] w-[30px] md:w-[40px] h-[30px] md:h-[40px] select-none"
+      alt="Avatar"
+      src="/placeholder.jpg"
+    />
+  </SignedOut>
+</div>
 
-  />               
-                </div>
               </button>
       </div>
 
