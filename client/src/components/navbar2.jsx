@@ -98,7 +98,7 @@ const Navbar = () => {
 
 
     {/* Person icon */}
-    <div className="w-[40px] h-[40px] rounded-full bg-black text-black flex items-center justify-center">
+    <div className="w-[20px] h-[20px] rounded-full bg-[var(--softTextColor)] flex items-center justify-center">
     <svg
   xmlns="http://www.w3.org/2000/svg"
   width="100"
