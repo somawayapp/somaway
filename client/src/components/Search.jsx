@@ -56,9 +56,9 @@ const Search = () => {
 
 <button
   onClick={() => setIsOpen(true)}
-
+   
   type="button"
-  className="border-[1px] border-[var(--softBg4)] w-full md:w-auto  rounded-full shadow-sm hover:shadow-md transition duration-300 cursor-pointer"
+  className="border-[1px] max-w-[700px] mx-auto border-[var(--softBg4)] md:w-auto  rounded-full shadow-sm hover:shadow-md transition duration-300 cursor-pointer"
 >
   <div className="flex flex-row justify-between items-center relative">
     {/* Location */}
@@ -73,7 +73,7 @@ const Search = () => {
   
     </div>
 
-    <div class="flex items-center justify-center h-[30px] md:h-[50px] ">
+    <div class="flex items-center justify-center h-[30px] md:h-[40px] ">
     <div class="h-full border-l-[1px] border-[var(--softBg4)]"></div>
 </div>
 
@@ -90,7 +90,7 @@ const Search = () => {
   
     </div>
 
-    <div class="flex  hidden md:block items-center justify-center h-[30px] md:h-[50px] ">
+    <div class="flex  hidden md:block items-center justify-center h-[30px] md:h-[40px] ">
     <div class="h-full border-l-[1px] border-[var(--softBg4)]"></div>
 </div>
 
@@ -113,7 +113,7 @@ const Search = () => {
     </div>
 
 
-    <div class="flex  hidden md:block items-center justify-center h-[30px] md:h-[50px] ">
+    <div class="flex  hidden md:block items-center justify-center h-[30px] md:h-[40px] ">
     <div class="h-full border-l-[1px] border-[var(--softBg4)]"></div>
 </div>
 

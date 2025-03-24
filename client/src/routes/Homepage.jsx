@@ -75,8 +75,7 @@ from ${author || 'top authors'}in minutes. Elevate your mind—only on Somaway!`
      
   
 
-      <div className="flex  gap-4 md:gap-8 flex-col justify-between">
-       <Search />
+      <div className="flex  flex-col justify-between">
        <PostList />
       </div>
       </div>

@@ -48,12 +48,8 @@ const Navbar = () => {
 
 </div>
 
-<div className="hidden md:flex flex-1 justify-center space-x-12">
-    <Link className=" text-[13px] md:text-[15px] cursor-pointer text-[var(--softTextColor)]
-             font-semibold hover:bg-[var(--softBg4)] bg[var(--bg)] rounded-3xl py-2 px-4" to="/" onClick={() => setOpen(false)}>For rent</Link>
-    <Link className=" text-[13px] md:text-[15px] cursor-pointer text-[var(--softTextColor)]
-              hover:bg-[var(--softBg4)] bg[var(--bg)] rounded-3xl py-2 px-4" to="/" onClick={() => setOpen(false)}>For sale</Link>
-  </div>
+<Search />
+
      
 
      <div className="flex items-center justify-between flex-row gap-2 md:gap-9">
