@@ -71,7 +71,7 @@ const Search = () => {
   
     </div>
 
-    <div class="h-full border-[1px] border-[var(--softBg4)]"></div>
+    <div class="h-full border-l border-[var(--softBg4)]"></div>
 
 
     {/* Property Size */}
@@ -86,7 +86,7 @@ const Search = () => {
   
     </div>
 
-    <div class="h-full border-[1px] border-[var(--softBg4)  hidden md:block" ></div>
+    <div class="h-full border-l border-[var(--softBg4)  hidden md:block" ></div>
 
 
     {/* Price */}
@@ -108,7 +108,7 @@ const Search = () => {
     </div>
 
 
- <div class="h-full border-[1px] border-[var(--softBg4)  hidden md:block" ></div>
+ <div class="h-full border-l border-[var(--softBg4)  hidden md:block" ></div>
 
     {/* Property Type */}
     <div className="relative hidden md:block  hover:bg-[var(--softBg4)]  rounded-full group p-2 md:p-3 flex flex-col items-center text-center   border-x-[var(--softBg4)]">
