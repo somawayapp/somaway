@@ -94,40 +94,41 @@ const Search = () => {
         >
            
 
-          <div className="bg-[var(--bg)] p-5 md:p8 rounded-md border-[0.5px]  border-[var(--softBg4) shadow-lg w-96 min-h-[250px] flex flex-col justify-between">
+          <div className="bg-[var(--bg)] p-5 md:p-9 rounded-md border-[0.5px]  border-[var(--softBg4) shadow-lg w-96 min-h-[250px] flex flex-col justify-between">
         
           <div className="flex items-center justify-center relative">
-          <p className="text-lg text-[var(--textColor)] text-center">Filters</p>
+          <p className="text-lg text-[var(--softtextColor)] text-center">Filters</p>
           <button
           className="absolute right-0 text-[var(--softTextColor)] hover:text-[var(--softerTextColor)] flex items-center"
            onClick={() => setIsOpen(false)}
           >
           <FaTimes />
           </button>
-          <hr className="h-[1px] bg-[var(--softBg4)] border-0" />
 
            </div>
+           <hr className="h-[1px] py-4 bg-[var(--softBg4)] border-0" />
 
 
             {step === 1 && (
               <>
-                <h2 className="text-xl text-[var(--softTextColor)] font-semibold mb-1">Where do you wanna stay?</h2>
-                <h2 className="text-sm text-[var(--softTextColor)]"> Find your perfect location!</h2>
+                <h2 className="text-2xl text-[var(--softTextColor)] font-semibold mb-1">Where do you wanna stay?</h2>
+                <h2 className="text-sm text-[var(--softTextColor)] mb-4 "> Find your perfect location!</h2>
                 <input
                   type="text"
                   placeholder="City, Region, or Country"
-                  className="w-full p-2 border border-[var(--softBg4)] bg-[var(--bg)] rounded-md mb-4"
+                  className="w-full p-2 text-[var(--softTextColor)] border border-[var(--softBg4)] bg-[var(--bg)] rounded-md mb-4"
                   value={filters.location}
                   onChange={(e) =>
                     setFilters({ ...filters, location: e.target.value })
                   }
                 />
 
-               <hr className="h-[1px] bg-[var(--softBg4)] border-0" />
+                          <hr className="h-[1px] py-4 bg-[var(--softBg4)] border-0" />
 
 
-                <h2 className="text-xl text-[var(--softTextColor)] font-semibold mb-1">Do you want to rent or buy?</h2>
-                <h2 className="text-sm text-[var(--softTextColor)]"> Choose your perfect option!</h2>          
+
+                <h2 className="text-2xl text-[var(--softTextColor)] font-semibold mb-1">Do you want to rent or buy?</h2>
+                <h2 className="text-sm text-[var(--softTextColor)] mb-4"> Choose your perfect option!</h2>          
                       <select
                   className="w-full p-2  bg-[var(--bg)] border border-[var(--softBg4)] rounded-md"
                   value={filters.model}
@@ -145,9 +146,9 @@ const Search = () => {
 
             {step === 2 && (
               <>
-               <h2 className="text-xl text-[var(--softTextColor)] font-semibold mb-1">
+               <h2 className="text-2xl text-[var(--softTextColor)] font-semibold mb-1">
                Find your perfect place!</h2>
-                <h2 className="text-sm text-[var(--softTextColor)]"> What type of property are you looking for!</h2>  
+                <h2 className="text-sm text-[var(--softTextColor)] mb-4"> What type of property are you looking for!</h2>  
                 <select
                   className="w-full p-2 border border-[var(--softBg4)]  bg-[var(--bg)]  rounded-md mb-4"
                   value={filters.propertytype}
@@ -161,7 +162,8 @@ const Search = () => {
                   <option value="land">Land</option>
                 </select>
 
-                <hr className="h-[1px] bg-[var(--softBg4)] border-0" />
+                           <hr className="h-[1px] py-4 bg-[var(--softBg4)] border-0" />
+
 
 
                 <div className="space-y-4">
@@ -197,7 +199,8 @@ const Search = () => {
     </div>
   </div>
 
-  <hr className="h-[1px] bg-[var(--softBg4)] border-0" />
+             <hr className="h-[1px] py-4 bg-[var(--softBg4)] border-0" />
+
 
   <div className="flex items-center justify-between text-[var(--softTextColor)]">
     <div>
@@ -267,12 +270,13 @@ const Search = () => {
                     }
                   />
                 </div>
-                <hr className="h-[1px] bg-[var(--softBg4)] border-0" />
+                           <hr className="h-[1px] py-4 bg-[var(--softBg4)] border-0" />
+
 
               </>
             )}
 
-<div className="flex justify-between  gap-4 ">
+<div className="flex justify-between  mt-4 md:mt-8 gap-4 ">
   {step > 1 && (
     <button
       className="flex-1 py-3 bg-[var(--bg)] border-[1px] border-[var(--softBg4)] rounded-md"
