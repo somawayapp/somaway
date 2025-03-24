@@ -58,7 +58,7 @@ const Search = () => {
   onClick={() => setIsOpen(true)}
    
   type="button"
-  className="border-[1px] max-w-[900px] mx-auto border-[var(--softBg4)] md:w-auto  rounded-full shadow-sm hover:shadow-md transition duration-300 cursor-pointer"
+  className="border-[1px] max-w-[1100px] mx-auto border-[var(--softBg4)] md:w-auto  rounded-full shadow-sm hover:shadow-md transition duration-300 cursor-pointer"
 >
   <div className="flex flex-row justify-between items-center relative">
     {/* Location */}
