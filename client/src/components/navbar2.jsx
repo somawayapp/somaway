@@ -37,7 +37,7 @@ const Navbar = () => {
 
 <div className="flex items-center justify-between gap-12">
 <Link to="/" className="flex items-center text-xl font-bold md:text-3xl sm:block md:hidden">
-    <img src="/airlogo.png" className="w-8 h-8" />
+    <img src="/airlogo.png" className="w-9 h-9" />
   </Link>
 
   {/* Show on medium screens and larger */}
@@ -58,14 +58,6 @@ const Navbar = () => {
 
      <div className="flex items-center justify-between flex-row gap-2 md:gap-9">
 
-     <Link
-            to="/"
-            className="text-center hidden md:block text-[13px] md:text-[15px] cursor-pointer text-[var(--softTextColor)]
-             font-semibold hover:bg-[var(--softBg4)] bg[var(--bg)] rounded-3xl py-2 px-4
-              "
-          > airbnb your home
-            
-          </Link>
 
     
 
@@ -80,7 +72,7 @@ const Navbar = () => {
       <div className="flex flex-row items-center gap-3">
             <button
               type="button"
-              className="hidden md:block text-sm font-bold py-3 px-4 rounded-full hover:bg-neutral-100 transition cursor-pointer text-[#585858]"
+              className="hidden md:block text-sm font-bold py-3 px-4 rounded-full hover:bg-[var(--softBg4)] transition cursor-pointer text-bg-[var(--softTextColor)]"
             >
               Add listing
             </button>
@@ -93,9 +85,10 @@ const Navbar = () => {
                 <img
     className="rounded-full text-[14px] md:text-[16px]  w-[30px] md:w-[40px] h-[30px] md:h-[40px] select-none"
     alt="Avatar"
-    src={ <SignedIn>
-      <UserButton />
-    </SignedIn> || "/placeholder.jpg"} 
+        src={<SignedIn>
+          <UserButton />
+        </SignedIn> || "/placeholder.jpg"} 
+
   />               
                 </div>
               </button>
