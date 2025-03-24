@@ -58,7 +58,7 @@ const Search = () => {
   type="button"
   className="border-[1px] max-w-[1100px] mx-auto border-[var(--softBg4)] md:w-auto rounded-full shadow-sm hover:shadow-md transition duration-300 cursor-pointer"
 >
-  <div className="flex flex-row justify-between items-center relative">
+  <div className="flex flex-row items-center relative gap-2">
     {/* Location */}
     <div className="relative hover:bg-[var(--softBg4)] rounded-full group p-2 md:px-8 flex flex-col items-start">
       <small className="text-[12px] md:text-[13px] ml-6 md:ml-[20px] font-semibold text-[var(--softTextColor)] transition">
