@@ -56,11 +56,11 @@ const Search = () => {
 
 <button
   type="button"
-  className="border-[1px] border-[var(--softBg4)] w-full md:w-auto p-2 rounded-full shadow-sm hover:shadow-md transition duration-300 cursor-pointer"
+  className="border-[1px] border-[var(--softBg4)] w-full md:w-auto  rounded-full shadow-sm hover:shadow-md transition duration-300 cursor-pointer"
 >
   <div className="flex flex-row justify-between items-center relative">
     {/* Location */}
-    <div className="relative hover:bg-[var(--softBg4)]  rounded-full group flex flex-col items-center text-center   border-x-[var(--softBg4)]">
+    <div className="relative  hover:bg-[var(--softBg4)]  rounded-full group p-2 md:p-3 p-2 md:p-3 flex flex-col items-center text-center   border-x-[var(--softBg4)]">
      <small className="text-[12px] md:text-[14px] font-semibold text-[var(--softTextColor)] transition">
      {filters.location || "Anywhere"}
 
@@ -71,9 +71,11 @@ const Search = () => {
   
     </div>
 
+    <div className=" border-l-[var(--softBg4)] border-l-[1px] " ></div>
+
 
     {/* Property Size */}
-       <div className="relative hover:bg-[var(--softBg4)]  rounded-full group flex flex-col items-center text-center   border-x-[var(--softBg4)]">
+       <div className="relative  hover:bg-[var(--softBg4)]  rounded-full group p-2 md:p-3 flex flex-col items-center text-center   border-x-[var(--softBg4)]">
      <small className="text-[12px] md:text-[14px] font-semibold text-[var(--softTextColor)] transition">
      {filters.propertysize || "Any size"}
 
@@ -84,9 +86,11 @@ const Search = () => {
   
     </div>
 
+    <div className=" border-l-[var(--softBg4)] border-l-[1px]  hidden md:block" ></div>
+
 
     {/* Price */}
-    <div className="relative hidden md:block hover:bg-[var(--softBg4)]  rounded-full group flex flex-col items-center text-center   border-x-[var(--softBg4)]">
+    <div className="relative hidden md:block  hover:bg-[var(--softBg4)]  rounded-full group p-2 md:p-3 flex flex-col items-center text-center   border-x-[var(--softBg4)]">
      <small className="text-[12px] md:text-[14px] font-semibold text-[var(--softTextColor)] transition">
         {filters.pricemin || filters.pricemax ? (
           <>
@@ -104,8 +108,10 @@ const Search = () => {
     </div>
 
 
+<div className=" border-l-[var(--softBg4)] border-l-[1px]  hidden md:block" ></div>
+
     {/* Property Type */}
-    <div className="relative hidden md:block hover:bg-[var(--softBg4)]  rounded-full group flex flex-col items-center text-center   border-x-[var(--softBg4)]">
+    <div className="relative hidden md:block  hover:bg-[var(--softBg4)]  rounded-full group p-2 md:p-3 flex flex-col items-center text-center   border-x-[var(--softBg4)]">
      <small className="text-[12px] md:text-[14px] font-semibold text-[var(--softTextColor)] transition">
      {filters.propertytype || "Any type"}
 
@@ -117,10 +123,13 @@ const Search = () => {
     </div>
 
     {/* Search Icon */}
+    <div className="p-2 md:p-3 ">
     <div className="p-3 md:p-4 ml-0 md:ml-[80px] bg-[#fc3239] rounded-full text-white transition-transform duration-300 hover:scale-110 hover:bg-[#d82930]">
       <FaSearch className="text-[12px] md:text-[14px]" />
     </div>
   </div>
+    </div>
+
 </button>
 
 
