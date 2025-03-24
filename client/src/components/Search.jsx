@@ -60,7 +60,7 @@ const Search = () => {
 >
   <div className="flex flex-row justify-between items-center relative">
     {/* Location */}
-    <div className="relative  hover:bg-[var(--softBg4)]  rounded-full group p-2 md:p-3 p-2 md:p-3 flex flex-col items-center text-center   border-x-[var(--softBg4)]">
+    <div className="relative  hover:bg-[var(--softBg4)]  rounded-full group p-2 md:p-3 p-2 md:p-3 flex flex-col items-center text-center ">
      <small className="text-[12px] md:text-[14px] font-semibold text-[var(--softTextColor)] transition">
      {filters.location || "Anywhere"}
 
@@ -71,11 +71,11 @@ const Search = () => {
   
     </div>
 
-    <div className=" border-x-[1px] border-x-[var(--softBg4)]"></div>
+    <div class="h-full border-[1px] border-[var(--softBg4)]"></div>
 
 
     {/* Property Size */}
-       <div className="relative  hover:bg-[var(--softBg4)]  rounded-full group p-2 md:p-3 flex flex-col items-center text-center   border-x-[var(--softBg4)]">
+       <div className="relative  hover:bg-[var(--softBg4)]  rounded-full group p-2 md:p-3 flex flex-col items-center text-center ">
      <small className="text-[12px] md:text-[14px] font-semibold text-[var(--softTextColor)] transition">
      {filters.propertysize || "Any size"}
 
@@ -86,7 +86,7 @@ const Search = () => {
   
     </div>
 
-    <div className=" border-l-[var(--softBg4)] border-l-[1px]  hidden md:block" ></div>
+    <div class="h-full border-[1px] border-[var(--softBg4)  hidden md:block" ></div>
 
 
     {/* Price */}
@@ -108,7 +108,7 @@ const Search = () => {
     </div>
 
 
-    <div className=" border-x-[1px] border-x-[var(--softBg4)]">
+ <div class="h-full border-[1px] border-[var(--softBg4)  hidden md:block" ></div>
 
     {/* Property Type */}
     <div className="relative hidden md:block  hover:bg-[var(--softBg4)]  rounded-full group p-2 md:p-3 flex flex-col items-center text-center   border-x-[var(--softBg4)]">
@@ -119,7 +119,7 @@ const Search = () => {
       <span className="hidden md:block text-[14px] text-[var(--softTextColor)] ">
         Select property type
       </span>
-  </div>
+  
     </div>
 
     {/* Search Icon */}
