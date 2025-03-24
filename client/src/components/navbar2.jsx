@@ -108,7 +108,7 @@
        style={{
           zIndex: 100004,
        }}
-       className={`relative w-full px-3 md:px-[80px] gap-3 md:gap-6 flex items-center text-[var(--TextColor)] sticky top-0 justify-center bg-[var(--bg)] md:border-b md:border-b-[var(--softBg4)] ${isScrolledUp ? "h-[120px]" : "h-[180px]"}`}
+       className={`relative w-full px-3 md:px-[80px] gap-3 md:gap-6 flex items-center text-[var(--TextColor)] sticky top-0 justify-center bg-[var(--bg)] md:border-b  duration-3 md:border-b-[var(--softBg4)] ${isScrolledUp ? "h-[120px]" : "h-[180px]"}`}
     >
   
   
@@ -125,7 +125,7 @@
     >
       {/* Rent & Sale Links */}
       <div
-        className={`flex justify-center gap-[40px] transition-all ${
+        className={`flex justify-center gap-[40px]  duration-3000 transition-all ${
           isScrolledUp ? "opacity-0 translate-y-[-20px] pointer-events-none" : "opacity-100 translate-y-0"
         }`}
       >
@@ -145,7 +145,7 @@
     <button
   onClick={() => setIsOpen(true)}
   type="button"
-  className={`border-[1px] border-[var(--softBg4)]  w-full mx-auto rounded-full shadow-sm hover:shadow-md transition cursor-pointer ${
+  className={`border-[1px] border-[var(--softBg4)]  duration-3000 w-full mx-auto rounded-full shadow-sm hover:shadow-md transition cursor-pointer ${
     isScrolledUp ? "max-w-[500px] " : "max-w-[1000px]"
   }`}
 >
