@@ -62,13 +62,13 @@ const Search = () => {
 >
   <div className="flex flex-row justify-between items-center relative">
     {/* Location */}
-    <div className="relative  hover:bg-[var(--softBg4)]  rounded-full group p-2 md:p-3  flex flex-col items-center text-center ">
+    <div className="relative  hover:bg-[var(--softBg4)]  rounded-full group p-2 md:p-4 px-6  flex flex-col items-center text-center ">
      <small className="text-[12px] md:text-[13px] ml-6 md:ml-[20px] font-semibold text-[var(--softTextColor)] transition">
      {filters.location || "Anywhere"}
 
       </small>
       <span className="hidden md:block text-[14px] text-[var(--softTextColor)] ">
-        Select property location
+        Search by location
       </span>
   
     </div>
@@ -79,13 +79,13 @@ const Search = () => {
 
 
     {/* Property Size */}
-       <div className="relative  hover:bg-[var(--softBg4)]  rounded-full group p-2 md:p-3 flex flex-col items-center text-center ">
+       <div className="relative  hover:bg-[var(--softBg4)]  rounded-full group p-2 md:p-4 px-6 flex flex-col items-center text-center ">
      <small className="text-[12px] md:text-[13px] font-semibold text-[var(--softTextColor)] transition">
      {filters.propertysize || "Any size"}
 
       </small>
       <span className="hidden md:block text-[14px] text-[var(--softTextColor)] ">
-        Select property size
+        filter size
       </span>
   
     </div>
@@ -95,7 +95,7 @@ const Search = () => {
 </div>
 
     {/* Price */}
-    <div className="relative hidden md:block  hover:bg-[var(--softBg4)]  rounded-full group p-2 md:p-3 flex flex-col items-center text-center   border-x-[var(--softBg4)]">
+    <div className="relative hidden md:block  hover:bg-[var(--softBg4)]  rounded-full group p-2 md:p-4 px-6 flex flex-col items-center text-center   border-x-[var(--softBg4)]">
      <small className="text-[12px] md:text-[13px] font-semibold text-[var(--softTextColor)] transition">
         {filters.pricemin || filters.pricemax ? (
           <>
@@ -107,7 +107,7 @@ const Search = () => {
         )}
       </small>
       <span className="hidden md:block text-[14px] text-[var(--softTextColor)] ">
-        Set price range
+        filter price 
       </span>
   
     </div>
@@ -118,13 +118,13 @@ const Search = () => {
 </div>
 
     {/* Property Type */}
-    <div className="relative hidden md:block  hover:bg-[var(--softBg4)]  rounded-full group p-2 md:p-3 flex flex-col items-center text-center   border-x-[var(--softBg4)]">
+    <div className="relative hidden md:block  hover:bg-[var(--softBg4)]  rounded-full group p-2 md:p-4 px-6 flex flex-col items-center text-center   border-x-[var(--softBg4)]">
      <small className="text-[12px] md:text-[13px] font-semibold text-[var(--softTextColor)] transition">
      {filters.propertytype || "Any type"}
 
       </small>
       <span className="hidden md:block text-[14px] text-[var(--softTextColor)] ">
-        Select property type
+        filter type
       </span>
   
     </div>
