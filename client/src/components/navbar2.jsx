@@ -125,6 +125,8 @@
     >
       {/* Rent & Sale Links */}
       <div
+        style={{ transitionDuration: '3s' }}  // Setting the transition duration explicitly here
+
         className={`flex justify-center gap-[40px]  duration-3000 transition-all ${
           isScrolledUp ? "opacity-0 translate-y-[-20px] pointer-events-none" : "opacity-100 translate-y-0"
         }`}
@@ -145,7 +147,8 @@
     <button
   onClick={() => setIsOpen(true)}
   type="button"
-  className={`border-[1px] border-[var(--softBg4)]  duration-30000 w-full mx-auto rounded-full shadow-sm hover:shadow-md transition cursor-pointer ${
+  style={{ transitionDuration: '3s' }}  // Setting the transition duration explicitly here
+  className={`border-[1px] border-[var(--softBg4)]  w-full mx-auto rounded-full shadow-sm hover:shadow-md transition cursor-pointer ${
     isScrolledUp ? "max-w-[500px] " : "max-w-[1000px]"
   }`}
 >
