@@ -72,7 +72,7 @@ const Navbar = () => {
       <div className="flex flex-row items-center gap-3">
             <button
               type="button"
-              className="hidden md:block text-sm font-bold py-3 px-4 rounded-full hover:bg-[var(--softBg4)] transition cursor-pointer text-bg-[var(--softTextColor)]"
+              className="hidden md:block text-sm font-bold py-3 px-4 rounded-full hover:bg-[var(--softBg4)] transition cursor-pointer text-[var(--softTextColor)]"
             >
               Add listing
             </button>
@@ -80,14 +80,14 @@ const Navbar = () => {
                 type="button"
                 className=" p-4 md:py-1 md:px-2 border-[1px]   border-[var(--softBg4)]  flex  flex-row  items-center   gap-3   rounded-full   cursor-pointer   hover:shadow-md   transition duration-300"
               >
-                <AiOutlineMenu />
-                <div className="hidden md:block">
+                <AiOutlineMenu className="pl-0 md:pl-2" />
+                <div className="hidden  md:flex items-center justify-center">
   <SignedIn>
     <UserButton />
   </SignedIn>
   <SignedOut>
     <img
-      className="rounded-full text-[14px] md:text-[16px] w-[30px] md:w-[40px] h-[30px] md:h-[40px] select-none"
+      className="rounded-full text-[14px] md:text-[16px] w-[30px] h-[30px]  select-none"
       alt="Avatar"
       src="/placeholder.jpg"
     />
