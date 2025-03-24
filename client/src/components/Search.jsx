@@ -24,9 +24,8 @@ const Search = () => {
     if (step < 3) {
       setStep(step + 1);
     } else {
-      // Apply filters when done
       const filteredParams = Object.entries(filters)
-        .filter(([key, value]) => value !== "")
+        .filter(([_, value]) => value !== "")
         .reduce((acc, [key, value]) => ({ ...acc, [key]: value }), {});
 
       setSearchParams({
@@ -67,8 +66,11 @@ const Search = () => {
       </button>
 
       {isOpen && (
-        <div style={{ zIndex: 100014 }} className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
-          <div className="bg-white p-6 rounded-lg shadow-lg w-96">
+        <div
+          style={{ zIndex: 100014 }}
+          className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50"
+        >
+          <div className="bg-white p-6 rounded-lg shadow-lg w-96 min-h-[250px] flex flex-col justify-between">
             {step === 1 && (
               <>
                 <h2 className="text-lg font-bold mb-4">Enter Your Location</h2>
@@ -81,6 +83,19 @@ const Search = () => {
                     setFilters({ ...filters, location: e.target.value })
                   }
                 />
+
+                <h2 className="text-lg font-bold mb-4">Select Model</h2>
+                <select
+                  className="w-full p-2 border rounded"
+                  value={filters.model}
+                  onChange={(e) =>
+                    setFilters({ ...filters, model: e.target.value })
+                  }
+                >
+                  <option value="">Any</option>
+                  <option value="forrent">For Rent</option>
+                  <option value="forsale">For Sale</option>
+                </select>
               </>
             )}
 
@@ -105,18 +120,26 @@ const Search = () => {
                     type="number"
                     placeholder="Bedrooms"
                     className="w-full p-2 border rounded"
+                    min="0"
                     value={filters.bedrooms}
                     onChange={(e) =>
-                      setFilters({ ...filters, bedrooms: e.target.value })
+                      setFilters({
+                        ...filters,
+                        bedrooms: Math.max(0, e.target.value),
+                      })
                     }
                   />
                   <input
                     type="number"
                     placeholder="Bathrooms"
                     className="w-full p-2 border rounded"
+                    min="0"
                     value={filters.bathrooms}
                     onChange={(e) =>
-                      setFilters({ ...filters, bathrooms: e.target.value })
+                      setFilters({
+                        ...filters,
+                        bathrooms: Math.max(0, e.target.value),
+                      })
                     }
                   />
                 </div>
@@ -131,18 +154,26 @@ const Search = () => {
                     type="number"
                     placeholder="Min Price"
                     className="w-full p-2 border rounded"
+                    min="0"
                     value={filters.priceMin}
                     onChange={(e) =>
-                      setFilters({ ...filters, priceMin: e.target.value })
+                      setFilters({
+                        ...filters,
+                        priceMin: Math.max(0, e.target.value),
+                      })
                     }
                   />
                   <input
                     type="number"
                     placeholder="Max Price"
                     className="w-full p-2 border rounded"
+                    min="0"
                     value={filters.priceMax}
                     onChange={(e) =>
-                      setFilters({ ...filters, priceMax: e.target.value })
+                      setFilters({
+                        ...filters,
+                        priceMax: Math.max(0, e.target.value),
+                      })
                     }
                   />
                 </div>
@@ -154,6 +185,7 @@ const Search = () => {
                 <button
                   className="px-4 py-2 bg-gray-300 rounded"
                   onClick={() => setStep(step - 1)}
+                  disabled={step === 1}
                 >
                   Back
                 </button>

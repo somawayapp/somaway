@@ -1,13 +1,10 @@
-import ImageKit from "imagekit";
-import Post from "../models/post.model.js";
-import User from "../models/user.model.js";
-
 export const getPosts = async (req, res) => {
   try {
     const page = parseInt(req.query.page) || 1;
-    const limit = parseInt(req.query.limit) || 2;
+    const limit = parseInt(req.query.limit) || 10;
     const query = {};
 
+    // Extract query parameters
     const {
       author,
       search,
@@ -21,7 +18,7 @@ export const getPosts = async (req, res) => {
       minPrice,
       maxPrice,
       model,
-      featured
+      featured,
     } = req.query;
 
     // Category Filter
@@ -33,13 +30,16 @@ export const getPosts = async (req, res) => {
     if (search) {
       query.$or = [
         { title: { $regex: search, $options: "i" } },
-        { desc: { $regex: search, $options: "i" } }
+        { desc: { $regex: search, $options: "i" } },
       ];
     }
 
     // Author Filter
     if (author) {
-      const authorNames = author.split(/[,;|\s]+/).map((name) => name.trim()).filter(Boolean);
+      const authorNames = author
+        .split(/[,;|\s]+/)
+        .map((name) => name.trim())
+        .filter(Boolean);
       const authorRegexes = authorNames.map((name) => new RegExp(name, "i"));
       query.author = { $in: authorRegexes };
     }
@@ -60,7 +60,7 @@ export const getPosts = async (req, res) => {
     if (propertysize) query.propertysize = { $gte: parseInt(propertysize) };
     if (rooms) query.rooms = { $gte: parseInt(rooms) };
 
-    // Price Range Filter
+    // Price Range Filter (Within Range)
     if (minPrice || maxPrice) {
       query.price = {};
       if (minPrice) query.price.$gte = parseInt(minPrice);
@@ -70,6 +70,11 @@ export const getPosts = async (req, res) => {
     // Model Filter (For Rent / For Sale)
     if (model) {
       query.model = model;
+    }
+
+    // Featured Filter
+    if (featured) {
+      query.isFeatured = true;
     }
 
     // Sorting Logic
@@ -87,19 +92,18 @@ export const getPosts = async (req, res) => {
           break;
         case "trending":
           sortObj = { visit: -1 };
-          query.createdAt = { $gte: new Date(Date.now() - 14 * 24 * 60 * 60 * 1000) };
+          query.createdAt = {
+            $gte: new Date(new Date().getTime() - 14 * 24 * 60 * 60 * 1000),
+          };
+          break;
+        default:
           break;
       }
     }
 
-    // Featured Filter
-    if (featured) {
-      query.isFeatured = true;
-    }
-
-    // Fetch posts
+    // Fetch posts with the final query object
     const posts = await Post.find(query)
-      .populate("user", "username")
+      .populate("user", "username") // Populate author details
       .sort(sortObj)
       .limit(limit)
       .skip((page - 1) * limit);
@@ -110,16 +114,6 @@ export const getPosts = async (req, res) => {
     res.status(200).json({ posts, hasMore });
   } catch (error) {
     console.error("Error fetching posts:", error);
-    res.status(500).json("Internal server error!");
-  }
-};
-
-export const getPost = async (req, res) => {
-  try {
-    const post = await Post.findOne({ slug: req.params.slug }).populate("user", "username img");
-    res.status(200).json(post);
-  } catch (error) {
-    console.error("Error fetching post:", error);
     res.status(500).json("Internal server error!");
   }
 };
