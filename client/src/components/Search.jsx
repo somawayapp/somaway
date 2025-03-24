@@ -60,7 +60,7 @@ const Search = () => {
 >
   <div className="flex flex-row items-center relative gap-2">
     {/* Location */}
-    <div className="relative hover:bg-[var(--softBg4)] rounded-full group p-2 md:px-8 flex flex-col items-start">
+    <div className="relative hover:bg-[var(--softBg4)] rounded-full group p-2 md:px-8 flex flex-col items-start text-left">
       <small className="text-[12px] md:text-[13px] ml-6 md:ml-[20px] font-semibold text-[var(--softTextColor)] transition">
         {filters.location || "Anywhere"}
       </small>
@@ -74,12 +74,12 @@ const Search = () => {
     </div>
 
     {/* Property Size */}
-    <div className="relative hover:bg-[var(--softBg4)] rounded-full group p-2 md:px-8 flex flex-col items-start">
+    <div className="relative hover:bg-[var(--softBg4)] rounded-full group p-2 md:px-8 flex flex-col items-start text-left">
       <small className="text-[12px] md:text-[13px] font-semibold text-[var(--softTextColor)] transition">
         {filters.propertysize || "Any size"}
       </small>
       <span className="hidden md:block text-[14px] text-[var(--softerTextColor)]">
-        filter by size
+        Filter by size
       </span>
     </div>
 
@@ -88,7 +88,7 @@ const Search = () => {
     </div>
 
     {/* Price */}
-    <div className="relative hidden md:block hover:bg-[var(--softBg4)] rounded-full group p-2 md:px-8 flex flex-col items-start">
+    <div className="relative hidden md:block hover:bg-[var(--softBg4)] rounded-full group p-2 md:px-8 flex flex-col items-start text-left">
       <small className="text-[12px] md:text-[13px] font-semibold text-[var(--softTextColor)] transition">
         {filters.pricemin || filters.pricemax ? (
           <>
@@ -100,7 +100,7 @@ const Search = () => {
         )}
       </small>
       <span className="hidden md:block text-[14px] text-[var(--softerTextColor)]">
-        filter by price
+        Filter by price
       </span>
     </div>
 
@@ -109,12 +109,12 @@ const Search = () => {
     </div>
 
     {/* Property Type */}
-    <div className="relative hidden md:block hover:bg-[var(--softBg4)] rounded-full group p-2 md:px-8 flex flex-col items-start">
+    <div className="relative hidden md:block hover:bg-[var(--softBg4)] rounded-full group p-2 md:px-8 flex flex-col items-start text-left">
       <small className="text-[12px] md:text-[13px] font-semibold text-[var(--softTextColor)] transition">
         {filters.propertytype || "Any type"}
       </small>
       <span className="hidden md:block text-[14px] text-[var(--softerTextColor)]">
-        filter by type
+        Filter by type
       </span>
     </div>
 
