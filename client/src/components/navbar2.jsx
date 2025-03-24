@@ -106,11 +106,10 @@
        // Modify or remove z-index here
        <div
        style={{
-         zIndex: 100004,
+          zIndex: 100004,
        }}
-       className="relative w-full px-3 h-auto md:px-[80px] gap-3 md:gap-6 flex items-center text-[var(--TextColor)] sticky top-0 justify-center bg-[var(--bg)] md:border-b md:border-b-[var(--softBg4)] "
-     >
-     
+       className={`relative w-full px-3 md:px-[80px] gap-3 md:gap-6 flex items-center text-[var(--TextColor)] sticky top-0 justify-center bg-[var(--bg)] md:border-b md:border-b-[var(--softBg4)] ${isScrolledUp ? "h-[120px]" : "h-[180px]"}`}
+    >
   
   
     {/* Show on medium screens and larger */}
@@ -122,7 +121,7 @@
   
     <>
   <div
-  className={`fixed top-0  w-full z-50 hidden md:flex flex-col items-center justify-center transition-all  ${isScrolledUp ? "pt-0 gap-0" : "pt-6 gap-6 width-full bg-black" }`}
+  className={`fixed top-0  w-full z-50 hidden md:flex flex-col items-center justify-center transition-all  ${isScrolledUp ? "pt-0 gap-0" : "pt-6 gap-6" }`}
     >
       {/* Rent & Sale Links */}
       <div
@@ -147,7 +146,7 @@
   onClick={() => setIsOpen(true)}
   type="button"
   className={`border-[1px] border-[var(--softBg4)]  w-full mx-auto rounded-full shadow-sm hover:shadow-md transition cursor-pointer ${
-    isScrolledUp ? "max-w-[500px] " : "max-w-[1000px] "
+    isScrolledUp ? "max-w-[500px] " : "max-w-[1000px]"
   }`}
 >
   <div className="flex flex-row  items-center relative gap-2 justify-between">
