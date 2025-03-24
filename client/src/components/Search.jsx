@@ -55,7 +55,7 @@ const Search = () => {
     <>
       <button
         type="button"
-        className="border-[1px] border-[var(--softBg4)]] w-full md:w-auto py-3 rounded-full shadow-sm hover:shadow-md transition duration-300 cursor-pointer"
+        className="border-[1px] border-[var(--softBg4)] w-full md:w-auto py-3 rounded-full shadow-sm hover:shadow-md transition duration-300 cursor-pointer"
         onClick={() => setIsOpen(true)}
       >
         <div className="flex flex-row justify-between items-center">
@@ -95,7 +95,7 @@ const Search = () => {
            
 
           <div className="bg-[var(--bg)] p-5 md:p-9 rounded-lg border-[0.5px]  border-[var(--softBg4)] shadow-lg 
-           min-h-[250px] flex flex-col justify-between">
+           min-h-[75vh] flex flex-col justify-between">
         
           <div className="flex items-center justify-center relative">
           <p className="text-lg text-[var(--softtextColor)] text-center">Filters</p>
@@ -107,7 +107,7 @@ const Search = () => {
           </button>
 
            </div>
-           <hr className="h-[1px] mb-2 mt-2 bg-[var(--softBg4)] border-0" />
+           <hr className="h-[1px] mb-4 mt-4 bg-[var(--softBg4)] border-0" />
 
 
             {step === 1 && (
@@ -117,21 +117,21 @@ const Search = () => {
                 <input
                   type="text"
                   placeholder="City, Region, or Country"
-                  className="w-full p-2 text-[var(--softTextColor)] border border-[var(--softBg4)]] bg-[var(--bg)] rounded-md mb-4"
+                  className="w-full p-2 text-[var(--softTextColor)] border border-[var(--softBg4)] bg-[var(--bg)] rounded-md mb-4"
                   value={filters.location}
                   onChange={(e) =>
                     setFilters({ ...filters, location: e.target.value })
                   }
                 />
 
-                          <hr className="h-[1px] mb-2 mt-2 bg-[var(--softBg4)] border-0" />
+                          <hr className="h-[1px] mb-4 mt-4 bg-[var(--softBg4)] border-0" />
 
 
 
                 <h2 className="text-2xl text-[var(--softTextColor)] font-semibold mb-1">Do you want to rent or buy?</h2>
                 <h2 className="text-sm text-[var(--softTextColor)] mb-4"> Choose your perfect option!</h2>          
                       <select
-                  className="w-full p-2  bg-[var(--bg)] border border-[var(--softBg4)]] rounded-md"
+                  className="w-full p-2  bg-[var(--bg)] border border-[var(--softBg4)] rounded-md"
                   value={filters.model}
                   onChange={(e) =>
                     setFilters({ ...filters, model: e.target.value })
@@ -151,7 +151,7 @@ const Search = () => {
                Find your perfect place!</h2>
                 <h2 className="text-sm text-[var(--softTextColor)] mb-4"> What type of property are you looking for!</h2>  
                 <select
-                  className="w-full p-2 border border-[var(--softBg4)]]  bg-[var(--bg)]  rounded-md mb-4"
+                  className="w-full p-2 border border-[var(--softBg4)]  bg-[var(--bg)]  rounded-md mb-4"
                   value={filters.propertytype}
                   onChange={(e) =>
                     setFilters({ ...filters, propertytype: e.target.value })
@@ -163,12 +163,12 @@ const Search = () => {
                   <option value="land">Land</option>
                 </select>
 
-                           <hr className="h-[1px] mb-2 mt-2 bg-[var(--softBg4)] border-0" />
+                           <hr className="h-[1px] mb-4 mt-4 bg-[var(--softBg4)] border-0" />
 
 
 
                 <div className="space-y-4">
-  <div className="flex items-center justify-between text-[var(--softTextColor)]">
+  <div className="flex items-center justify-between gap-2 md:gap-4  text-[var(--softTextColor)]">
     <div>
       <p className="font-semibold">Bedrooms</p>
       <p className="text-sm">How many bedrooms do you need?</p>
@@ -200,10 +200,10 @@ const Search = () => {
     </div>
   </div>
 
-             <hr className="h-[1px] mb-2 mt-2 bg-[var(--softBg4)] border-0" />
+             <hr className="h-[1px] mb-4 mt-4 bg-[var(--softBg4)] border-0" />
 
 
-  <div className="flex items-center justify-between text-[var(--softTextColor)]">
+  <div className="flex items-center gap-2 md:gap-4 justify-between text-[var(--softTextColor)]">
     <div>
       <p className="font-semibold">Bathrooms</p>
       <p className="text-sm">How many bathrooms do you need?</p>
@@ -242,12 +242,12 @@ const Search = () => {
 
             {step === 3 && (
               <>
-                <h2 className="text-lg text-[var(--softTextColor)] font-bold mb-4">Set Price Range</h2>
-                <div className="flex gap-4">
+           <h2 className="text-2xl text-[var(--softTextColor)] font-semibold mb-1">How much do you want do spent?</h2>
+           <h2 className="text-sm text-[var(--softTextColor)] mb-4 "> Choose your perfect price!</h2>                <div className="flex gap-4">
                   <input
                     type="number"
                     placeholder="Min Price"
-                    className="w-full p-2 border border-[var(--softBg4)]]   bg-[var(--bg)] rounded-md"
+                    className="w-full p-2 border border-[var(--softBg4)]  bg-[var(--bg)] rounded-md"
                     min="0"
                     value={filters.pricemin}
                     onChange={(e) =>
@@ -260,7 +260,7 @@ const Search = () => {
                   <input
                     type="number"
                     placeholder="Max Price"
-                    className="w-full p-2 border border-[var(--softBg4)]]  bg-[var(--bg)] rounded-md"
+                    className="w-full p-2 border border-[var(--softBg4)]  bg-[var(--bg)] rounded-md"
                     min="0"
                     value={filters.pricemax}
                     onChange={(e) =>
@@ -271,7 +271,7 @@ const Search = () => {
                     }
                   />
                 </div>
-                           <hr className="h-[1px] mb-2 mt-2 bg-[var(--softBg4)] border-0" />
+                           <hr className="h-[1px] mb-4 mt-4 bg-[var(--softBg4)] border-0" />
 
 
               </>
@@ -280,7 +280,7 @@ const Search = () => {
 <div className="flex justify-between  mt-4 md:mt-8 gap-4 ">
   {step > 1 && (
     <button
-      className="flex-1 py-3 bg-[var(--bg)] border-[1px] border-[var(--softBg4)]] rounded-md"
+      className="flex-1 py-3 bg-[var(--bg)] border-[1px] border-[var(--softBg4)] rounded-md"
       onClick={() => setStep(step - 1)}
       disabled={step === 1}
     >
