@@ -101,12 +101,19 @@ const Navbar = () => {
     <div className="w-9 h-9 rounded-full bg-[var(--sofTextColor)] flex items-center justify-center">
     <svg
   xmlns="http://www.w3.org/2000/svg"
-  className="w-4 h-4 fill-[var(--bg)]"
+  width="48"
+  height="48"
   viewBox="0 0 24 24"
+  fill="currentColor"
 >
-  <path d="M12 10.5c2.5 0 4.5-2 4.5-4.5S14.5 1.5 12 1.5 7.5 3.5 7.5 6s2 4.5 4.5 4.5z" />
-  <path d="M12 12c-4 0-9 2-9 6v1.5c0 .8.7 1.5 1.5 1.5h15c.8 0 1.5-.7 1.5-1.5V18c0-4-5-6-9-6z" />
+  <circle cx="12" cy="8" r="5" />
+  <path
+    d="M2 16c0-2.5 10-9 20 0c-10 9-20 2.5-20 0z"
+    fill="currentColor"
+    stroke="none"
+  />
 </svg>
+
 
     </div>
 </div>
