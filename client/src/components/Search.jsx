@@ -61,10 +61,10 @@ const Search = () => {
   <div className="flex flex-row items-center relative gap-2">
     {/* Location */}
     <div className="relative hover:bg-[var(--softBg4)] rounded-full group p-2 md:px-8 flex flex-col items-start text-left">
-      <small className="text-[12px] md:text-[13px] font-semibold text-[var(--softTextColor)] transition">
-        {filters.location || "Any size"}
+      <small className="text-[12px] md:text-[13px] ml-9 font-semibold text-[var(--softTextColor)] transition">
+        {filters.location || "Anywhere"}
       </small>
-      <span className="hidden md:block text-[14px] text-[var(--softerTextColor)]">
+      <span className="hidden md:block text-[14px] text-[var(--softBg5)]">
         Search by location
       </span>
     </div>
@@ -78,7 +78,7 @@ const Search = () => {
       <small className="text-[12px] md:text-[13px] font-semibold text-[var(--softTextColor)] transition">
         {filters.propertysize || "Any size"}
       </small>
-      <span className="hidden md:block text-[14px] text-[var(--softerTextColor)]">
+      <span className="hidden md:block text-[14px] text-[var(--softBg5)]">
         Filter by size
       </span>
     </div>
@@ -99,7 +99,7 @@ const Search = () => {
           "Any price"
         )}
       </small>
-      <span className="hidden md:block text-[14px] text-[var(--softerTextColor)]">
+      <span className="hidden md:block text-[14px] text-[var(--softBg5)]">
         Filter by price
       </span>
     </div>
@@ -113,7 +113,7 @@ const Search = () => {
       <small className="text-[12px] md:text-[13px] font-semibold text-[var(--softTextColor)] transition">
         {filters.propertytype || "Any type"}
       </small>
-      <span className="hidden md:block text-[14px] text-[var(--softerTextColor)]">
+      <span className="hidden md:block text-[14px] text-[var(--softBg5)]">
         Filter by type
       </span>
     </div>
@@ -136,10 +136,10 @@ const Search = () => {
           style={{ zIndex: 100014 }}
           className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50"
         >
-           
+        <div className="p-3"> 
 
           <div className="bg-[var(--bg)] p-5 md:p-9 rounded-lg border-[0.5px]  border-[var(--softBg4)] shadow-lg 
-           min-h-[75vh] flex flex-col justify-between">
+           min-h-[50vh] flex flex-col justify-between">
         
           <div className="flex items-center justify-center relative">
           <p className="text-lg text-[var(--softtextColor)] text-center">Filters</p>
@@ -346,6 +346,7 @@ const Search = () => {
 </div>
 
           </div>
+        </div>
         </div>
       )}
     </>

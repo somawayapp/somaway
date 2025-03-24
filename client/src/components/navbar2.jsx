@@ -36,9 +36,7 @@ const Navbar = () => {
       sticky top-0 justify-between bg-[var(--bg)] md:border-b md:border-b-[var(--softBg4)] ">
 
 <div className="flex items-center justify-between gap-12">
-<Link to="/" className="flex items-center text-xl font-bold md:text-3xl sm:block md:hidden">
-    <img src="/airlogo.png" className="w-9 h-9" />
-  </Link>
+>
 
   {/* Show on medium screens and larger */}
   <Link to="/" className="flex items-center gap-1 text-xl font-bold md:text-3xl hidden md:flex">
@@ -68,7 +66,7 @@ const Navbar = () => {
       <div className="flex flex-row items-center gap-3">
             <button
               type="button"
-              className="hidden md:block text-sm font-bold py-3 px-4 rounded-full hover:bg-[var(--softBg4)] transition cursor-pointer text-[var(--softTextColor)]"
+              className="hidden md:block text-sm font-semibold py-3 px-4 rounded-full hover:bg-[var(--softBg4)] transition cursor-pointer text-[var(--softBg5)]"
             >
               Add listing
             </button>
@@ -79,14 +77,14 @@ const Navbar = () => {
                 <AiOutlineMenu />
                 <div className="hidden md:flex items-center justify-center">
   <SignedIn>
-    <div className="flex items-center justify-center">
+    <div className="flex items-center  w-[38px] h-[38px] justify-center">
       <UserButton />
     </div>
   </SignedIn>
 
   <SignedOut>
     <img
-      className="rounded-full text-[14px] w-[30px] h-[30px] select-none"
+      className="rounded-full text-[14px] w-[38px] h-[38px] select-none"
       alt="Avatar"
       src="/placeholder.jpg"
     />
