@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { FaSearch } from "react-icons/fa";
 
@@ -36,11 +36,26 @@ const Search = () => {
     }
   };
 
+  const handleOutsideClick = (e) => {
+    if (e.target.id === "popup-overlay") {
+      setIsOpen(false);
+    }
+  };
+
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "auto";
+    }
+  }, [isOpen]);
+
+
   return (
     <>
       <button
         type="button"
-        className="border-[1px] w-full md:w-auto py-2 rounded-full shadow-sm hover:shadow-md transition duration-300 cursor-pointer"
+        className="border-[1px] w-full md:w-auto py-3 rounded-full shadow-sm hover:shadow-md transition duration-300 cursor-pointer"
         onClick={() => setIsOpen(true)}
       >
         <div className="flex flex-row justify-between items-center">
@@ -48,11 +63,16 @@ const Search = () => {
             {filters.location || "Anywhere"}
           </small>
 
-          <small className=" text-sm font-bold px-6 border-x-[1px] flex-1 text-center text-[#585858]">
-            {filters.pricemin && filters.pricemax
-              ? `$${filters.pricemin} - $${filters.pricemax}`
-              : "Any price"}
-          </small>
+          <small className="text-sm font-bold px-6 border-x-[1px] flex-1 text-center text-[#585858]">
+  {filters.pricemin || filters.pricemax ? (
+    <>
+      {filters.pricemin ? `KSh ${filters.pricemin * 150}` : "KSh 0"} -{" "}
+      {filters.pricemax ? `KSh ${filters.pricemax * 150}` : "KSh 0"}
+    </>
+  ) : (
+    "Any price"
+  )}
+</small>
 
           <div className="text-sm pl-6 pr-2 text-gray-600 flex flex-row items-center gap-4">
             <small className="hidden sm:block font-normal text-sm">
@@ -67,9 +87,18 @@ const Search = () => {
 
       {isOpen && (
         <div
+         id="popup-overlay"
+          onClick={handleOutsideClick}
           style={{ zIndex: 100014 }}
           className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50"
         >
+             <button
+              className="absolute top-2 right-2 text-gray-600 hover:text-black"
+              onClick={() => setIsOpen(false)}
+            >
+              <FaTimes />
+            </button>
+
           <div className="bg-white p-6 rounded-xl shadow-lg w-96 min-h-[250px] flex flex-col justify-between">
             {step === 1 && (
               <>
