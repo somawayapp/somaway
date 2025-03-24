@@ -100,40 +100,53 @@ const Search = () => {
     <button
   onClick={() => setIsOpen(true)}
   type="button"
-  className="w-full border-[1px] border-[var(--softBg4)] rounded-full shadow-sm hover:shadow-md transition
-   duration-300 cursor-pointer"
+  className={`border-[1px] border-[var(--softBg4)] rounded-full shadow-sm hover:shadow-md transition duration-300 cursor-pointer ${
+    isScrolledUp ? "w-auto px-4" : "w-full"
+  }`}
 >
-  <div className="flex flex-row items-center relative gap-2 w-full justify-between">
+  <div className="flex flex-row items-center relative gap-2 justify-between">
     {/* Location */}
-    <div className="relative hover:bg-[var(--softBg4)] rounded-full group p-2 md:px-8 flex flex-col items-start text-left flex-1">
+    <div
+      className={`relative hover:bg-[var(--softBg4)] rounded-full group p-2 ${
+        isScrolledUp ? "md:px-4" : "md:px-8"
+      } flex flex-col items-start text-left flex-1`}
+    >
       <small className="text-[12px] md:text-[13px] ml-4 font-semibold text-[var(--softTextColor)] transition">
         {filters.location || "Anywhere"}
       </small>
       {!isScrolledUp && (
-
-      <span className="hidden md:block text-[14px] ml-4 text-[var(--softBg5)]">
-        Search by location
-      </span>)}
+        <span className="hidden md:block text-[14px] ml-4 text-[var(--softBg5)]">
+          Search by location
+        </span>
+      )}
     </div>
 
-    <div className="h-[30px] md:h-[40px] border-l-[1px] border-[var(--softBg4)]"></div>
+    <div className={`h-[30px] ${isScrolledUp ? "md:h-[30px]" : "md:h-[40px]"} border-l-[1px] border-[var(--softBg4)]`}></div>
 
     {/* Property Size */}
-    <div className="relative hover:bg-[var(--softBg4)] rounded-full group p-2 md:px-8 flex flex-col items-start text-left flex-1">
+    <div
+      className={`relative hover:bg-[var(--softBg4)] rounded-full group p-2 ${
+        isScrolledUp ? "md:px-4" : "md:px-8"
+      } flex flex-col items-start text-left flex-1`}
+    >
       <small className="text-[12px] md:text-[13px] font-semibold text-[var(--softTextColor)] transition">
         {filters.propertysize || "Any size"}
       </small>
       {!isScrolledUp && (
-
-      <span className="hidden md:block text-[14px] text-[var(--softBg5)]">
-        Filter by size
-      </span>)}
+        <span className="hidden md:block text-[14px] text-[var(--softBg5)]">
+          Filter by size
+        </span>
+      )}
     </div>
 
-    <div className="hidden md:block h-[30px] md:h-[40px] border-l-[1px] border-[var(--softBg4)]"></div>
+    <div className={`hidden md:block h-[30px] ${isScrolledUp ? "md:h-[30px]" : "md:h-[40px]"} border-l-[1px] border-[var(--softBg4)]`}></div>
 
     {/* Price */}
-    <div className="relative hidden md:block hover:bg-[var(--softBg4)] rounded-full group p-2 md:px-8 flex flex-col items-start text-left flex-1">
+    <div
+      className={`relative hidden md:block hover:bg-[var(--softBg4)] rounded-full group p-2 ${
+        isScrolledUp ? "md:px-4" : "md:px-8"
+      } flex flex-col items-start text-left flex-1`}
+    >
       <small className="text-[12px] md:text-[13px] font-semibold text-[var(--softTextColor)] transition">
         {filters.pricemin || filters.pricemax ? (
           <>
@@ -145,34 +158,43 @@ const Search = () => {
         )}
       </small>
       {!isScrolledUp && (
-
-      <span className="hidden md:block text-[14px] text-[var(--softBg5)]">
-        Filter by price
-      </span>)}
+        <span className="hidden md:block text-[14px] text-[var(--softBg5)]">
+          Filter by price
+        </span>
+      )}
     </div>
 
-    <div className="hidden md:block h-[30px] md:h-[40px] border-l-[1px] border-[var(--softBg4)]"></div>
+    <div className={`hidden md:block h-[30px] ${isScrolledUp ? "md:h-[30px]" : "md:h-[40px]"} border-l-[1px] border-[var(--softBg4)]`}></div>
 
     {/* Property Type */}
-    <div className="relative hidden md:block hover:bg-[var(--softBg4)] rounded-full group p-2 md:px-8 flex flex-col items-start text-left flex-1">
+    <div
+      className={`relative hidden md:block hover:bg-[var(--softBg4)] rounded-full group p-2 ${
+        isScrolledUp ? "md:px-4" : "md:px-8"
+      } flex flex-col items-start text-left flex-1`}
+    >
       <small className="text-[12px] md:text-[13px] font-semibold text-[var(--softTextColor)] transition">
         {filters.propertytype || "Any type"}
       </small>
       {!isScrolledUp && (
-
-      <span className="hidden md:block text-[14px] text-[var(--softBg5)]">
-        Filter by type
-      </span>)}
+        <span className="hidden md:block text-[14px] text-[var(--softBg5)]">
+          Filter by type
+        </span>
+      )}
     </div>
 
     {/* Search Icon */}
     <div className="p-2">
-      <div className="p-3 md:p-4 bg-[#fc3239] rounded-full text-white transition-transform duration-300 hover:scale-110 hover:bg-[#d82930]">
-        <FaSearch className="text-[12px] md:text-[14px]" />
+      <div
+        className={`bg-[#fc3239] rounded-full text-white transition-transform duration-300 hover:scale-110 hover:bg-[#d82930] ${
+          isScrolledUp ? "p-3" : "p-4"
+        }`}
+      >
+        <FaSearch className={`text-[12px]`} />
       </div>
     </div>
   </div>
-</button> 
+</button>
+
 
 
     </div>
@@ -187,7 +209,7 @@ const Search = () => {
     <button
   onClick={() => setIsOpen(true)}
   type="button"
-  className="w-full border-[1px] border-[var(--softBg4)] rounded-full shadow-sm hover:shadow-md transition
+  className="w-full block md:hidden border-[1px] border-[var(--softBg4)] rounded-full shadow-sm hover:shadow-md transition
    duration-300 cursor-pointer"
 >
   <div className="flex flex-row items-center relative gap-2 w-full justify-between">
