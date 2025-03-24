@@ -69,9 +69,7 @@ const Navbar = () => {
 
     
 
-        <SignedIn>
-          <UserButton />
-        </SignedIn>
+      
 
         
         {/* MOBILE BUTTON */}
@@ -113,7 +111,9 @@ const Navbar = () => {
               >
                 <AiOutlineMenu />
                 <div className="hidden md:block">
-                  <Avatar src={user?.image} />
+                  <Avatar src={  <SignedIn>
+          <UserButton />
+        </SignedIn>} />
                 </div>
               </button>
       </div>
