@@ -1,6 +1,6 @@
 import React from "react";
 import { NavLink } from "react-router-dom"; // Use NavLink for active link styling
-import { Home, UserCircle, Search, Settings } from "lucide-react";
+import { Home, Compass, User, Search, Settings } from "lucide-react";
 
 const MobileControls = () => {
   return (
@@ -10,7 +10,7 @@ const MobileControls = () => {
 
       {/* Home Button */}
       <NavLink
-        to="/"
+        to="/home"
         className={({ isActive }) =>
           `flex flex-col items-center ${
             isActive ? "text-[#ff4d52]   " : "text-[var(--softTextColor2)]"
@@ -33,7 +33,7 @@ const MobileControls = () => {
       </NavLink>
       {/* Search Button */}
       <NavLink
-        to="/"
+        to="/discover"
         className={({ isActive }) =>
           `flex flex-col items-center ${
             isActive ? "text-[#ff4d52]   " : "text-[var(--softTextColor2)]"
@@ -52,7 +52,7 @@ const MobileControls = () => {
           } hover:text-[#ff4d52]    transition`
         }
       >
-        <UserCircle className="h-5 w-5" />
+        <User className="h-5 w-5" />
       </NavLink>
     </div>
   );
