@@ -1,6 +1,6 @@
 import React from "react";
 import { NavLink } from "react-router-dom"; // Use NavLink for active link styling
-import { Home, UserCircle, User2, Search, Settings } from "lucide-react";
+import { Home, UserCircle, Search, Settings } from "lucide-react";
 
 const MobileControls = () => {
   return (
@@ -40,7 +40,7 @@ const MobileControls = () => {
           } hover:text-[#ff4d52]    transition`
         }
       >
-        <User2 className="h-5 w-5" />
+        <Search className="h-5 w-5" />
       </NavLink>
 
       {/* Profile Button */}
