@@ -35,7 +35,6 @@ const Navbar = () => {
      <div style={{ zIndex: 100004 }}  className="relative w-full h-[70px] md:h-[90px]  px-3 md:px-[80px] gap-2 flex items-center text-[var(--TextColor)]
       sticky top-0 justify-between bg-[var(--bg)] md:border-b md:border-b-[var(--softBg4)] ">
 
-<div className="flex items-center justify-between gap-12">
 
 
   {/* Show on medium screens and larger */}
@@ -44,7 +43,6 @@ const Navbar = () => {
   </Link>
   
 
-</div>
 
 <Search />
 
