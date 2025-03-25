@@ -5,7 +5,7 @@ import { useRef } from "react";
 
 
 const useScrollDirection = () => {
-  const [isScrolledUp, setIsScrolledUp] = useState(false);
+  const [isScrolledUp, setIsScrolledUp] = useState(false); // Default: visible
   const lastScrollTop = useRef(0);
   const lastDirection = useRef(null); // "up" or "down"
 
@@ -13,23 +13,18 @@ const useScrollDirection = () => {
     const handleScroll = () => {
       const scrollTop = window.scrollY;
 
-      // Only detect within the first 10px of the page
-      if (scrollTop > 10) return;
-
-      // Determine the direction
-      const isScrollingUp = scrollTop < lastScrollTop.current;
-      const isScrollingDown = scrollTop > lastScrollTop.current;
-
-      // Only update if the new scroll direction is opposite of the last registered one
-      if (isScrollingUp && lastDirection.current !== "up") {
-        setIsScrolledUp(false);
-        lastDirection.current = "up";
-      } else if (isScrollingDown && lastDirection.current !== "down") {
-        setIsScrolledUp(true);
+      // If scrolled down within first 10px, hide it (set to true)
+      if (scrollTop > 5 && scrollTop <= 10 && lastDirection.current !== "down") {
+        setIsScrolledUp(true); 
         lastDirection.current = "down";
       }
 
-      // Update lastScrollTop
+      // If scrolled up within first 5px, show it (set to false)
+      if (scrollTop <= 5 && lastDirection.current !== "up") {
+        setIsScrolledUp(false);
+        lastDirection.current = "up";
+      }
+
       lastScrollTop.current = scrollTop;
     };
 
@@ -39,7 +34,6 @@ const useScrollDirection = () => {
 
   return isScrolledUp;
 };
-
 
 
 
