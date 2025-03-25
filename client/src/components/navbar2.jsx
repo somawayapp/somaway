@@ -110,122 +110,136 @@
     </SignedIn>
   
     <SignedOut>
-      <img
-        className="rounded-full text-[14px] w-[38px] h-[38px] select-none"
-        alt="Avatar"
-        src="/placeholder.jpg"
-      />
-    </SignedOut>
-  </div>
+           <img
+            className="rounded-full text-[14px] w-[38px] h-[38px] select-none"
+            alt="Avatar"
+            src="/placeholder.jpg"
+            />
+            </SignedOut>
+           </div>
   
-                </button>
-        </div>
-  
-  
-  
-        
-      </div>
-  
-  
-  
-  
-            
+            </button>
+          </div> 
           </div>
+         </div>
   
           {/* DARK OVERLAY */}
-          {open && (
-            <div
+          {open && ( <div
               className="fixed inset-0 bg-black bg-opacity-5 "
               onClick={handleOverlayClick}
-              style={{ zIndex: 100015 }}
-
-            ></div>
-          )}
+              style={{ zIndex: 100015 }} ></div> )}
   
-  <div
- className={`inline-flex overflow-y-auto bg-[var(--bg)] rounded-xl border border-[var(--softBg4)] flex-col p-5 items-left justify-left text-[var(--softTextColor)] 
-   font-sm text-md rounded-md shadow-md min-w-[21%] fixed top-[10%]  right-3 md:right-[80px] overflow-x-hidden transition-transform ease-in-out ${
-    open ? "translate-x-0 visible" : "translate-x-full invisible"
-  }`}
 
-  style={{ zIndex: 100016 }}
->
-  <div>
+
+
+            <div
+           className={`inline-flex overflow-y-auto bg-[var(--bg)] rounded-xl border border-[var(--softBg4)] flex-col p-5 items-left justify-left text-[var(--softTextColor)] 
+             font-sm text-md rounded-md shadow-md min-w-[19%] fixed top-[10%]  right-3 md:right-[80px] overflow-x-hidden transition-transform ease-in-out ${
+           open ? "translate-x-0 visible" : "translate-x-full invisible" }`}
+
+          style={{ zIndex: 100016 }}>
+           <div>
   
-  </div>
+          </div>
   
      
   
   
-  <div className="flex flex-col">
+         <div className="flex flex-col">
   
+          <SignedOut>
+
             <Link
-              to="/"
-              className="block py-2 text-[var(--TextColor)] font-bold  hover:text-[#fc3239] p-2 rounded-xl"
-     onClick={() => setOpen(false)}          > Home           </Link>   
+              to="/register"
+              className="block py-2 text-[var(--softTextColor)] font-semibold  hover:text-[#fc3239] p-2 rounded-xl"
+            onClick={() => setOpen(false)}          > sign up    
+          </Link>   
+          </SignedOut>
+
+          <SignedOut>
+
        <Link
-     to="/"
-     className="block py-2 text-[var(--TextColor)] font-bold  hover:text-[#fc3239]  p-2 rounded-xl"
-  onClick={() => setOpen(false)}          > Book summaries          </Link>
+         to="/login"
+         className="block py-2 text-[var(--softTextColor)]   hover:text-[#fc3239]  p-2 rounded-xl"
+          onClick={() => setOpen(false)}          > log in     
+               </Link>
+         </SignedOut>
+
+
           <Link
               to="/"
-              className="block py-2 text-[var(--TextColor)] font-bold  hover:text-[#fc3239]  p-2 rounded-xl"
-     onClick={() => setOpen(false)}          > Discover          </Link>
+              className="block py-2 text-[var(--softTextColor)]   hover:text-[#fc3239]  p-2 rounded-xl"
+             onClick={() => setOpen(false)}          > home     
+            </Link>
+            
+
+            <SignedIn>
+            <Link
+              to="/add"
+              className="block py-2 text-[var(--softTextColor)]   hover:text-[#fc3239]  p-2 rounded-xl"
+            onClick={() => setOpen(false)}          > add listing     
+          </Link>
+          </SignedIn>
+
+
+
+           <SignedIn>
+            <Link
+              to="/profile"
+              className="block py-2 text-[var(--softTextColor)]   hover:text-[#fc3239]  p-2 rounded-xl"
+              onClick={() => setOpen(false)}          > profile     
+             </Link>
+             </SignedIn>
+
+
+             <SignedIn>
+              <Link
+              to="/listings"
+              className="block py-2 text-[var(--softTextColor)]   hover:text-[#fc3239]  p-2 rounded-xl"
+               onClick={() => setOpen(false)}          > my listings    
+               </Link>
+             </SignedIn>
+
+             <SignedIn>
+              <Link
+              to="/wishlist"
+              className="block py-2 text-[var(--softTextColor)]   hover:text-[#fc3239]  p-2 rounded-xl"
+              onClick={() => setOpen(false)}          > my wishlist       
+               </Link>
+               </SignedIn>
+
             <Link
               to="/premium"
-              className="block py-2 text-[var(--TextColor)] font-bold   hover:text-[#fc3239]  p-2 rounded-xl"
-     onClick={() => setOpen(false)}          > Premium          </Link>
+              className="block py-2 text-[var(--TextColor)] font-bold  hover:text-[#fc3239]  p-2 rounded-xl"
+              onClick={() => setOpen(false)}              > Pricing       
+              </Link>
+
+
+
             <Link
               to="/about"
-              className="block py-2 text-[var(--TextColor)] font-bold  hover:text-[#fc3239]  p-2 rounded-xl"
-     onClick={() => setOpen(false)}          > About Us 
+              className="block py-2 text-[var(--softTextColor)]  hover:text-[#fc3239]  p-2 rounded-xl"
+              onClick={() => setOpen(false)}          > About Us 
             </Link>
+
+
+
             <Link
-              to="/settings"
+              to="/help"
               className="block py-2 text-[var(--TextColor)] font-bold   hover:text-[#fc3239]  p-2 rounded-xl"
-     onClick={() => setOpen(false)}              > Settings          </Link>
+             onClick={() => setOpen(false)}              > help center      
+              </Link>
             
-       <Link
-              to="/premium"
+             <Link
+              to="/settings"
               className="block py-2 text-[var(--TextColor)] font-bold  hover:text-[#fc3239]  p-2 rounded-xl"
-     onClick={() => setOpen(false)}              > Pricing           </Link>
-          </div>
+              onClick={() => setOpen(false)}              > Settings     
+                  </Link>
+              </div>
           
-  
-  
-  
-  
-  
-  
-  
-  
-         
-  
-            <SignedOut>
-            <Link
-              to="/login"
-              className="w-full items-center  md:ml-2 mr-4 text-center  text-md md:text-xl sm:w-auto px-4 md:px-6  py-3 md:py-3
-               bg-[#fc3239]  text-white font-semibold 
-              rounded-md hover:bg-[#FF5A5F]   "
-            >
-            Login     
-                 </Link>
-            </SignedOut>
-  
           </div>
   
-  
-     
-  
-       
         </div>
-
-    
-     <div>
-      <Search/>
-     </div>
-
-
 
         </div>
     );
