@@ -135,7 +135,7 @@
           {/* DARK OVERLAY */}
           {open && (
             <div
-              className="fixed inset-0 bg-black bg-opacity-50 "
+              className="fixed inset-0 bg-black bg-opacity-5 "
               onClick={handleOverlayClick}
               style={{ zIndex: 100015 }}
 
@@ -144,7 +144,7 @@
   
   <div
  className={`inline-flex overflow-y-auto bg-[var(--bg)] rounded-xl border border-[var(--softBg4)] flex-col p-5 items-left justify-left text-[var(--softTextColor)] 
-  gap-8 font-sm text-md rounded-md shadow-md max-w-max fixed top-9 right-9 overflow-x-hidden transition-transform ease-in-out ${
+  gap-8 font-sm text-md rounded-md shadow-md max-w-max max-w-[20%] fixed top-[20%]  right-3 md:right-[80px] overflow-x-hidden transition-transform ease-in-out ${
     open ? "translate-x-0 visible" : "translate-x-full invisible"
   }`}
 
@@ -154,19 +154,10 @@
   
   </div>
   
-            <button
-              className="absolute top-2  right-8 text-md text-[var(--TextColor)]"
-              onClick={() => setOpen(false)}
-            >
-              ✕
-            </button>
+     
   
   
   <div className="flex flex-row">
-  
-  
-  
-  
   
           <div>
   
