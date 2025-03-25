@@ -20,10 +20,7 @@ const useScrollDirection = () => {
         return;
       }
 
-      if (scrollBottom < 5 || scrollBottom > 10) {
-        // Stop listening when out of the 8px-10px range
-        return;
-      }
+      
       
 
       // Clear previous timeout to debounce
@@ -35,7 +32,7 @@ const useScrollDirection = () => {
       timeoutRef.current = setTimeout(() => {
         if (scrollTop > lastScrollTop.current) {
           setIsScrolledUp(true);
-        } else if (scrollBottom < lastScrollTop.current) {
+        } else if (scrollTop < lastScrollTop.current) {
           setIsScrolledUp(false);
         }
         lastScrollTop.current = scrollTop;
