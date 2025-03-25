@@ -20,9 +20,10 @@ const PostListItem = ({ post }) => {
     <div className="relative  gap-2 md:gap-4 group mb-6 md:mb-[30px] overflow-hidden rounded-xl">
       {/* Image with Link */}
       <Link to={`/${post.slug}`} className="block">
-      <div className="relative w-full overflow-x-auto snap-x snap-mandatory scroll-smooth no-scrollbar">
 
         <div className="relative w-full aspect-[3/3] rounded-xl md:rounded-2xl overflow-hidden">
+        <div className="flex overflow-x-auto snap-x snap-mandatory scroll-smooth no-scrollbar">
+
           <img
             src={images[currentIndex]}
             className="absolute top-0 left-0 w-full h-full object-cover rounded-xl md:rounded-2xl transition-all duration-300"
@@ -50,13 +51,13 @@ const PostListItem = ({ post }) => {
   <>
     <button
       onClick={handlePrev}
-      className="hidden md:block absolute left-3 top-3/4 -translate-y-1/2 bg-black bg-opacity-50 text-white p-2 rounded-full opacity-0 group-hover:opacity-100 transition"
+      className="hidden md:block absolute left-3 top-1/4 -translate-y-1/2 bg-black bg-opacity-50 text-white p-2 rounded-full opacity-0 group-hover:opacity-100 transition"
     >
       <ChevronLeft size={24} />
     </button>
     <button
       onClick={handleNext}
-      className="hidden md:block absolute right-3 top-3/4 -translate-y-1/2 bg-black bg-opacity-50 text-white p-2 rounded-full opacity-0 group-hover:opacity-100 transition"
+      className="hidden md:block absolute right-3 top-1/4 -translate-y-1/2 bg-black bg-opacity-50 text-white p-2 rounded-full opacity-0 group-hover:opacity-100 transition"
     >
       <ChevronRight size={24} />
     </button>

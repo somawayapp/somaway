@@ -73,7 +73,7 @@
               <img src="/airlogo2.png" className="md:h-8" />
              </Link>
     
-              < Search/>
+             <Search className="hidden sm:block" />
 
              <div className="flex items-center justify-between flex-row gap-2 md:gap-9">
               <div className="relative"  onClick={() => setOpen((prev) => !prev)}>
