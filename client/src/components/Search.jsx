@@ -78,7 +78,10 @@ const Search = () => {
     >
      
       <div
-        className="flex justify-center gap-[40px] transition-all duration-300 ">
+        className={` flex justify-center gap-[40px] transition-all duration-300 ${
+          isScrolledUp ? "top-[-20px]" : "mt-0 "
+        }`}
+      >
         <a href="?model=forrent" className="text-[16px] font-semibold text-[var(--softTextColor)] hover:underline">
           For Rent
         </a>
@@ -95,8 +98,8 @@ const Search = () => {
     <button
   onClick={() => setIsOpen(true)}
   type="button"
-  className={`border-[1px] border-[var(--softBg4)] bg-[var(--bg)] w-full mx-auto rounded-full shadow-sm hover:shadow-md transition duration-300 cursor-pointer${
-    isScrolledUp ? "mt-[-200px] mb-4" : "mt-0 mb-8"
+  className={`border-[1px] border-[var(--softBg4)] bg-[var(--bg)] w-full mx-auto rounded-full shadow-sm hover:shadow-md transition duration-300 cursor-pointer ${
+    isScrolledUp ? "top-[-200px] mb-4" : "mt-0 mb-8"
   }`}
 >
   <div className="flex flex-row  items-center relative gap-2 justify-between">
@@ -106,7 +109,7 @@ const Search = () => {
         isScrolledUp ? "md:px-4" : "md:px-8"
       } flex flex-col items-start text-left flex-1`}
     >
-      <small className="text-[12px] md:text-[13px] ml-4 font-semibold text-[var(--softTextColor)] transition">
+      <small className="text-[12px] md:text-[13px] ml-4 font-semibold text-[var(--softTextColor)] transition"   style={{ whiteSpace: 'nowrap' }}>
         {filters.location || "Anywhere"}
       </small>
       {!isScrolledUp && (
