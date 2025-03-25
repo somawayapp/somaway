@@ -30,7 +30,7 @@ const PostListItem = ({ post }) => {
 
           {/* Dots inside the image at the bottom */}
           {images.length > 1 && (
-            <div className="absolute bottom-3 left-1/2 transform -translate-x-1/2 flex gap-1 bg-black px-2 py-1 rounded-full">
+            <div className="absolute bottom-3 left-1/2 transform -translate-x-1/2 flex gap-1 px-2 py-1 rounded-full">
               {images.map((_, index) => (
                 <span
                   key={index}
@@ -50,13 +50,13 @@ const PostListItem = ({ post }) => {
   <>
     <button
       onClick={handlePrev}
-      className="hidden md:block absolute left-3 top-1/2 -translate-y-1/2 bg-black bg-opacity-50 text-white p-2 rounded-full opacity-0 group-hover:opacity-100 transition"
+      className="hidden md:block absolute left-3 top-3/4 -translate-y-1/2 bg-black bg-opacity-50 text-white p-2 rounded-full opacity-0 group-hover:opacity-100 transition"
     >
       <ChevronLeft size={24} />
     </button>
     <button
       onClick={handleNext}
-      className="hidden md:block absolute right-3 top-1/2 -translate-y-1/2 bg-black bg-opacity-50 text-white p-2 rounded-full opacity-0 group-hover:opacity-100 transition"
+      className="hidden md:block absolute right-3 top-3/4 -translate-y-1/2 bg-black bg-opacity-50 text-white p-2 rounded-full opacity-0 group-hover:opacity-100 transition"
     >
       <ChevronRight size={24} />
     </button>
