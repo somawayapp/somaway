@@ -144,7 +144,7 @@
   
   <div
  className={`inline-flex overflow-y-auto bg-[var(--bg)] rounded-xl border border-[var(--softBg4)] flex-col p-5 items-left justify-left text-[var(--softTextColor)] 
-  gap-8 font-sm text-md rounded-md shadow-md min-w-[21%] fixed top-[11%]  right-3 md:right-[80px] overflow-x-hidden transition-transform ease-in-out ${
+   font-sm text-md rounded-md shadow-md min-w-[21%] fixed top-[10%]  right-3 md:right-[80px] overflow-x-hidden transition-transform ease-in-out ${
     open ? "translate-x-0 visible" : "translate-x-full invisible"
   }`}
 
@@ -157,7 +157,7 @@
      
   
   
-  <div className="flex flex-row">
+  <div className="flex flex-col">
   
             <Link
               to="/"
