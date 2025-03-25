@@ -35,7 +35,6 @@ const useScrollDirection = () => {
   return isScrolledUp;
 };
 
-export default useScrollDirection;
 
 
 
