@@ -1,56 +1,41 @@
-import { useState, useEffect } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { FaSearch, FaTimes } from "react-icons/fa";
-import { useRef } from "react";
 
 
 
+
+import { useState, useEffect, useRef } from "react";
 
 const useScrollDirection = () => {
   const [isScrolledUp, setIsScrolledUp] = useState(false);
   const lastScrollTop = useRef(0);
-  const timeoutRef = useRef(null);
 
   useEffect(() => {
     const handleScroll = () => {
       const scrollTop = window.scrollY;
 
-      if (scrollTop < 0 || scrollTop > 5) {
-        // Stop listening when out of the 8px-10px range
-        return;
+      if (lastScrollTop.current < scrollTop && scrollTop >= 0 && scrollTop <= 10) {
+        // Scrolling down between 0 to 10px
+        setIsScrolledUp(false);
+      } 
+      else if (lastScrollTop.current > scrollTop && scrollTop >= 15 && scrollTop <= 25) {
+        // Scrolling up between 15 to 25px
+        setIsScrolledUp(true);
       }
 
-      
-      
-
-      // Clear previous timeout to debounce
-      if (timeoutRef.current) {
-        clearTimeout(timeoutRef.current);
-      }
-
-      // Wait a bit before updating scroll state to confirm change
-      timeoutRef.current = setTimeout(() => {
-        if (scrollTop > lastScrollTop.current) {
-          setIsScrolledUp(true);
-        } else if (scrollTop < lastScrollTop.current) {
-          setIsScrolledUp(false);
-        }
-        lastScrollTop.current = scrollTop;
-      },); // Small delay to ensure another scroll event is registered
+      lastScrollTop.current = scrollTop;
     };
 
     window.addEventListener("scroll", handleScroll);
     return () => {
       window.removeEventListener("scroll", handleScroll);
-      if (timeoutRef.current) {
-        clearTimeout(timeoutRef.current);
-      }
     };
   }, []);
 
   return isScrolledUp;
 };
 
+export default useScrollDirection;
 
 
 
