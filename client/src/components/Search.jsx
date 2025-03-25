@@ -5,18 +5,22 @@ import { useRef } from "react";
 
 
 
+import { useState, useEffect, useRef } from "react";
+
 const useScrollDirection = () => {
-  const [isScrolledUp, setisScrolledUp] = useState(false);
-  const lastScrollTop = useRef(window.scrollY);
+  const [isScrolledUp, setIsScrolledUp] = useState(false);
+  const lastScrollTop = useRef(0);
 
   useEffect(() => {
     const handleScroll = () => {
       const scrollTop = window.scrollY;
 
-      if (scrollTop > lastScrollTop.current && scrollTop > 10) {
-        setisScrolledUp(true);
-      } else if (scrollTop < lastScrollTop.current || scrollTop < 10) {
-        setisScrolledUp(false);
+      if (scrollTop <= 5) {
+        // If we reach the top 5px, ensure the div is visible
+        setIsScrolledUp(false);
+      } else if (scrollTop > 5 && scrollTop <= 10 && lastScrollTop.current < scrollTop) {
+        // If scrolling down within 10px, hide the div
+        setIsScrolledUp(true);
       }
 
       lastScrollTop.current = scrollTop;
@@ -28,6 +32,8 @@ const useScrollDirection = () => {
 
   return isScrolledUp;
 };
+
+
 
 
 
