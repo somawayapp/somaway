@@ -74,7 +74,7 @@ const Search = () => {
   return(
     <div>
   <div
-  className="w-full z-50 hidden md:flex flex-col gap-6 mt-[-50px] mb-4 items-center justify-center transition-all duration-300 "
+  className="w-full z-50 hidden md:flex flex-col gap-6 mt-[-50px] items-center justify-center transition-all duration-300 "
     >
      
       <div
@@ -96,7 +96,7 @@ const Search = () => {
   onClick={() => setIsOpen(true)}
   type="button"
   className={`border-[1px] border-[var(--softBg4)] bg-[var(--bg)] w-full mx-auto rounded-full shadow-sm hover:shadow-md transition duration-300 cursor-pointer${
-    isScrolledUp ? "mt-[-40px] mb-4" : "mt-0 mb-8"
+    isScrolledUp ? "mt-[-200px] mb-4" : "mt-0 mb-8"
   }`}
 >
   <div className="flex flex-row  items-center relative gap-2 justify-between">
