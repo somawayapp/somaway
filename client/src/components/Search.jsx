@@ -74,14 +74,14 @@ const Search = () => {
   return(
     <>
   <div
-  className="top-0 w-full z-50 hidden md:flex mt-[-60px] flex-col items-center justify-center transition-all duration-300"
+  className="top-0 w-full z-50 hidden md:flex mt-[-50px] flex-col items-center justify-center transition-all duration-300"
     >
       {/* Rent & Sale Links */}
       {!isScrolledUp && (
 
       <div
         className={`flex justify-center gap-[40px]  transition-all duration-300 ${
-          isScrolledUp ? "opacity-0 translate-y-[-20px] mb-0  pointer-events-none" : " mb-9 opacity-100 translate-y-0"
+          isScrolledUp ? "opacity-0 translate-y-[-20px] mb-0  pointer-events-none" : " mb-7 opacity-100 translate-y-0"
         }`}
       >
         <a href="?model=forrent" className="text-[16px] font-semibold text-[var(--softTextColor)] hover:underline">
