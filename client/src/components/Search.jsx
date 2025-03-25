@@ -10,6 +10,7 @@ import { useRef } from "react";
 const useScrollDirection = () => {
   const [isScrolledUp, setIsScrolledUp] = useState(false);
   const lastScrollTop = useRef(0);
+  const lastscrollBottom = useRef(0);
   const lastDirection = useRef(null); // "up" or "down"
 
   useEffect(() => {
@@ -18,12 +19,12 @@ const useScrollDirection = () => {
 
       // Only detect within the first 10px of the page
       if (scrollTop > 10) return;
-      if (scrollbottom > 5) return;
+      if (scrollBottom > 5) return;
 
 
       // Determine the direction
       const isScrollingUp = scrollTop < lastScrollTop.current;
-      const isScrollingDown = scrollbottom > lastScrollTop.current;
+      const isScrollingDown = scrollBottom > lastscrollBottom.current;
 
       // Only update if the new scroll direction is opposite of the last registered one
       if (isScrollingUp && lastDirection.current !== "down") {
