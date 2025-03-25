@@ -79,7 +79,7 @@ const Search = () => {
      
       <div
         className={` flex justify-center gap-[40px] transition-all duration-300 ${
-          isScrolledUp ? "top-[-50px]" : "mt-0 "
+          isScrolledUp ? "top-[-60px]" : "mt-0 "
         }`}
       >
         <a href="?model=forrent" className="text-[16px] font-semibold text-[var(--softTextColor)] hover:underline">
@@ -99,7 +99,7 @@ const Search = () => {
   onClick={() => setIsOpen(true)}
   type="button"
   className={`border-[1px] border-[var(--softBg4)] bg-[var(--bg)] w-full mx-auto rounded-full shadow-sm hover:shadow-md transition duration-300 cursor-pointer ${
-    isScrolledUp ? "top-[-20px] mb-3" : "mt-0 mb-6"
+    isScrolledUp ? "top-[-60px] mb-0" : "mt-0 mb-4"
   }`}
 >
   <div className="flex flex-row  items-center relative gap-2 justify-between">
