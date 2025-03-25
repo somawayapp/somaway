@@ -16,7 +16,12 @@
   const Navbar = () => {
   
     const navigate = useNavigate();
+    const [searchParams, setSearchParams] = useSearchParams();
+    const [isOpen, setIsOpen] = useState(false);
+    const [step, setStep] = useState(1);
+  
 
+  
     const handleOutsideClick = (e) => {
       if (e.target.id === "popup-overlay") {
         setIsOpen(false);
@@ -32,7 +37,6 @@
     }, [isOpen]);
   
     return(
-      
   <div 
   style={{
     zIndex: 100004,
