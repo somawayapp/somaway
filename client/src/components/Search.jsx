@@ -22,14 +22,15 @@ const Search = () => {
   });
 
   const [isScrolledUp, setIsScrolledUp] = useState(false);
-
-  const lastScrollTop = useRef(window.scrollY); // ✅ Hook is now at the top level
-
+  const lastScrollTop = useRef(window.scrollY);
+  const scrollThreshold = 30; // Adjust this threshold as needed
+  
   useEffect(() => {
     const handleScroll = () => {
       let scrollTop = window.scrollY;
-  
-      if (scrollTop > lastScrollTop.current && scrollTop > 10) {
+      
+      // Check if scrolling up past a threshold
+      if (scrollTop > lastScrollTop.current + scrollThreshold) {
         setIsScrolledUp(true);
       } else if (scrollTop < 10) {
         setIsScrolledUp(false);
@@ -41,6 +42,7 @@ const Search = () => {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+  
   
 
   const handleNext = () => {
