@@ -74,8 +74,7 @@ const Search = () => {
   return(
     <div>
   <div
-  className={`w-full z-50 hidden md:flex flex-col items-center justify-center transition-all duration-300 ${isScrolledUp ? "mb-0 mt-0" : "mt-6 mb-6" }`}
-    >
+  className="w-full z-50 hidden md:flex flex-col items-center justify-center transition-all duration-300" >
 
 
 
