@@ -110,8 +110,8 @@
      >
       
       
-       <div
-       className="relative w-full  gap-3 md:gap-6 flex flex-row items-center text-[var(--TextColor)]  justify-center bg-[var(--bg)] "
+      <div
+       className="relative w-full  gap-3 md:gap-6 flex flex-row items-center  text-[var(--TextColor)]  justify-between  bg-[var(--bg)] "
      >
   
   
@@ -129,10 +129,7 @@
       {/* Rent & Sale Links */}
       <div
 
-        className={`flex justify-center gap-[40px]  duration-3000 transition-all ${
-          isScrolledUp ? "opacity-0 translate-y-[-20px] pointer-events-none" : "opacity-100 translate-y-0"
-        }`}
-      >
+        className="flex justify-center gap-[40px]  duration-3000 transition-all opacity-100 translate-y-0">
         <a href="?model=forrent" className="text-[16px] font-semibold text-[var(--softTextColor)] hover:underline">
           For Rent
         </a>
