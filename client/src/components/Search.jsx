@@ -97,7 +97,7 @@ const Search = () => {
   return(
     <>
     <div
-    className="top-0 w-full z-50 hidden md:flex mt-[-90px] flex-col items-center justify-center transition-all duration-300"
+    className="top-0 w-full md:px-6 z-50 hidden md:flex mt-[-90px] flex-col items-center justify-center transition-all duration-300"
       >
         {/* Rent & Sale Links */}
         {!isScrolledUp && (
@@ -108,10 +108,10 @@ const Search = () => {
           }`}
         >
           <a href="?model=forrent" className="text-[16px] font-semibold text-[var(--softTextColor)] hover:underline">
-            For Rent
+          Property For Rent
           </a>
           <a href="?model=forsale" className="text-[16px] font-semibold text-[var(--softBg5)] hover:underline">
-            For Sale
+          Property For Sale
           </a>
         </div> )}
   

@@ -73,7 +73,9 @@
               <img src="/airlogo2.png" className="md:h-8" />
              </Link>
     
-  
+            <div className="flex md:hidden">
+              <Search/>
+            </div>
 
              <div className="flex items-center justify-between flex-row gap-2 md:gap-9">
               <div className="relative"  onClick={() => setOpen((prev) => !prev)}>
@@ -201,7 +203,7 @@
 
             <Link
               to="/premium"
-              className="block py-2 text-[var(--softTextColor)] font-bold  hover:text-[#fc3239]  p-2 rounded-xl"
+              className="block py-2 text-[var(--softTextColor)]  hover:text-[#fc3239]  p-2 rounded-xl"
               onClick={() => setOpen(false)}              > Pricing       
               </Link>
 
@@ -217,13 +219,13 @@
 
             <Link
               to="/help"
-              className="block py-2 text-[var(--softTextColor)] font-bold   hover:text-[#fc3239]  p-2 rounded-xl"
+              className="block py-2 text-[var(--softTextColor)]  hover:text-[#fc3239]  p-2 rounded-xl"
              onClick={() => setOpen(false)}              > help center      
               </Link>
             
              <Link
               to="/settings"
-              className="block py-2 text-[var(--softTextColor)] font-bold  hover:text-[#fc3239]  p-2 rounded-xl"
+              className="block py-2 text-[var(--softTextColor)]  hover:text-[#fc3239]  p-2 rounded-xl"
               onClick={() => setOpen(false)}              > Settings     
                   </Link>
               </div>
