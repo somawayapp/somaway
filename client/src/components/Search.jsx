@@ -6,43 +6,38 @@ import { useRef } from "react";
 
 
 
+
 const useScrollDirection = () => {
   const [isScrolledUp, setIsScrolledUp] = useState(false);
   const lastScrollTop = useRef(0);
-  const timeoutRef = useRef(null);
+  const lastDirection = useRef(null); // "up" or "down"
 
   useEffect(() => {
     const handleScroll = () => {
       const scrollTop = window.scrollY;
 
-      if (scrollTop > 10) {
-        // Stop listening when out of the 10px range
-        return;
+      // Only detect within the first 10px of the page
+      if (scrollTop > 10) return;
+
+      // Determine the direction
+      const isScrollingUp = scrollTop < lastScrollTop.current;
+      const isScrollingDown = scrollTop > lastScrollTop.current;
+
+      // Only update if the new scroll direction is opposite of the last registered one
+      if (isScrollingUp && lastDirection.current !== "up") {
+        setIsScrolledUp(true);
+        lastDirection.current = "up";
+      } else if (isScrollingDown && lastDirection.current !== "down") {
+        setIsScrolledUp(false);
+        lastDirection.current = "down";
       }
 
-      // Clear previous timeout to debounce
-      if (timeoutRef.current) {
-        clearTimeout(timeoutRef.current);
-      }
-
-      // Wait a bit before updating scroll state to confirm change
-      timeoutRef.current = setTimeout(() => {
-        if (scrollTop > lastScrollTop.current) {
-          setIsScrolledUp(true);
-        } else if (scrollTop < lastScrollTop.current) {
-          setIsScrolledUp(false);
-        }
-        lastScrollTop.current = scrollTop;
-      }, 50); // Small delay to ensure another scroll event is registered
+      // Update lastScrollTop
+      lastScrollTop.current = scrollTop;
     };
 
     window.addEventListener("scroll", handleScroll);
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-      if (timeoutRef.current) {
-        clearTimeout(timeoutRef.current);
-      }
-    };
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   return isScrolledUp;
