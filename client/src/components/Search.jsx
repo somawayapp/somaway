@@ -6,19 +6,21 @@ import { FaSearch, FaTimes } from "react-icons/fa";
 import { useState, useEffect, useRef } from "react";
 
 const useScrollDirection = () => {
-  const [isScrolledUp, setIsScrolledUp] = useState(false);
+  const [isScrolledUp, setIsScrolledUp] = useState(false); // Default: Visible
   const lastScrollTop = useRef(0);
 
   useEffect(() => {
     const handleScroll = () => {
       const scrollTop = window.scrollY;
 
-      if (scrollTop > 10) return; // Ignore when out of range
+      if (scrollTop > 10) return; // Stop checking beyond 10px
 
-      if (scrollTop > 5 && lastScrollTop.current <= 5) {
-        setIsScrolledUp(true); // Hide when passing 5px downward
-      } else if (scrollTop <= 5 && lastScrollTop.current > 5) {
-        setIsScrolledUp(false); // Show when moving back to 5px or less
+      if (scrollTop > lastScrollTop.current && scrollTop > 5) {
+        // Scrolling down but still within 10px, hide it
+        setIsScrolledUp(true);
+      } else if (scrollTop <= 5) {
+        // Scrolling up and within 5px, show it
+        setIsScrolledUp(false);
       }
 
       lastScrollTop.current = scrollTop;
@@ -30,6 +32,8 @@ const useScrollDirection = () => {
 
   return isScrolledUp;
 };
+
+
 
 
 
