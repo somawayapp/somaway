@@ -77,6 +77,8 @@ const Search = () => {
   className="top-0 w-full z-50 hidden md:flex mt-[-60px] flex-col items-center justify-center transition-all duration-300"
     >
       {/* Rent & Sale Links */}
+      {!isScrolledUp && (
+
       <div
         className={`flex justify-center gap-[40px]  transition-all duration-300 ${
           isScrolledUp ? "opacity-0 translate-y-[-20px] mb-0  pointer-events-none" : " mb-9 opacity-100 translate-y-0"
@@ -88,7 +90,7 @@ const Search = () => {
         <a href="?model=forsale" className="text-[16px] font-semibold text-[var(--softBg5)] hover:underline">
           For Sale
         </a>
-      </div>
+      </div> )}
 
 
 
@@ -98,9 +100,8 @@ const Search = () => {
     <button
   onClick={() => setIsOpen(true)}
   type="button"
-  className={`border-[1px] border-[var(--softBg4)] max-w-[1100px] w-full mx-auto rounded-full shadow-sm hover:shadow-md transition duration-300 cursor-pointer ${
-    isScrolledUp ? "mb-4 mt-[-10px] " : "mb-6 mt-0"
-  }`}
+  className="border-[1px] border-[var(--softBg4)] max-w-[1100px] w-full mx-auto rounded-full shadow-sm hover:shadow-md transition duration-300 cursor-pointer "
+
 >
   <div className="flex flex-row  items-center relative gap-2 justify-between">
     {/* Location */}
