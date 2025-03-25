@@ -6,7 +6,7 @@ import { useRef } from "react";
 
 
 const useScrollDirection = () => {
-  const [isScrolledUp, setIsScrolledUp] = useState(false);
+  const [isScrolledDown, setIsScrolledDown] = useState(false);
   const lastScrollTop = useRef(window.scrollY);
   const lastDirection = useRef(null);
 
@@ -15,9 +15,11 @@ const useScrollDirection = () => {
       const scrollTop = window.scrollY;
       const direction = scrollTop > lastScrollTop.current ? "down" : "up";
 
-      if (scrollTop <= 10 && direction !== lastDirection.current) {
-        setIsScrolledUp(direction === "up");
+      if (scrollTop > 10 && direction !== lastDirection.current) {
+        setIsScrolledDown(direction === "down");
         lastDirection.current = direction;
+      } else if (scrollTop <= 10) {
+        setIsScrolledDown(false);
       }
 
       lastScrollTop.current = scrollTop;
@@ -27,7 +29,7 @@ const useScrollDirection = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  return isScrolledUp;
+  return isScrolledDown;
 };
 
 
