@@ -124,7 +124,7 @@ const Search = () => {
     onClick={() => setIsOpen(true)}
     type="button"
     className={`border-[1px] border-[var(--softBg4)] max-w-[1100px]  shadow-sm w-full mx-auto rounded-full shadow-sm hover:shadow-md transition duration-300 cursor-pointer  ${
-        isScrolledUp ? "mt-[-20px]" : "mt-0"
+        isScrolledUp ? "mt-[10px]" : "mt-0"
       } `}
     >
     <div className="flex flex-row  items-center relative gap-2 justify-between">
