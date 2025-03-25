@@ -15,7 +15,7 @@ const useScrollDirection = () => {
     const handleScroll = () => {
       const scrollTop = window.scrollY;
 
-      if (scrollTop < 9 || scrollTop > 10) {
+      if (scrollTop < 0 || scrollTop > 5) {
         // Stop listening when out of the 8px-10px range
         return;
       }
@@ -34,7 +34,7 @@ const useScrollDirection = () => {
           setIsScrolledUp(false);
         }
         lastScrollTop.current = scrollTop;
-      }, 50); // Small delay to ensure another scroll event is registered
+      },); // Small delay to ensure another scroll event is registered
     };
 
     window.addEventListener("scroll", handleScroll);
