@@ -23,23 +23,24 @@ const Search = () => {
   const [isScrolledUp, setIsScrolledUp] = useState(false);
 
   useEffect(() => {
-    let lastScrollTop = window.scrollY;
-
+    const lastScrollTop = useRef(window.scrollY); // Persist value across renders
+  
     const handleScroll = () => {
       let scrollTop = window.scrollY;
-
-      if (scrollTop > lastScrollTop && scrollTop > 50) {
-        setIsScrolledUp(true); // Collapse when scrolling up
-      } else if (scrollTop < 50) {
-        setIsScrolledUp(false); // Expand when back at the top
+  
+      if (scrollTop > lastScrollTop.current && scrollTop > 10) {
+        setIsScrolledUp(true); // Collapse
+      } else if (scrollTop < 10) {
+        setIsScrolledUp(false); // Expand
       }
-
-      lastScrollTop = scrollTop;
+  
+      lastScrollTop.current = scrollTop; // Update the last scroll position
     };
-
+  
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+  
 
   const handleNext = () => {
     if (step < 3) {
@@ -100,7 +101,7 @@ const Search = () => {
       <button
     onClick={() => setIsOpen(true)}
     type="button"
-    className="border-[1px] border-[var(--softBg4)] max-w-[1100px] w-full mx-auto rounded-full shadow-sm hover:shadow-md transition duration-300 cursor-pointer "
+    className="border-[1px] border-[var(--softBg4)] max-w-[1100px]  shadow-sm w-full mx-auto rounded-full shadow-sm hover:shadow-md transition duration-300 cursor-pointer "
   
   >
     <div className="flex flex-row  items-center relative gap-2 justify-between">
