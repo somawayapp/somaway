@@ -4,9 +4,6 @@ import { FaSearch, FaTimes } from "react-icons/fa";
 import { useRef } from "react";
 
 
-
-
-
 const useScrollDirection = () => {
   const [isScrolledUp, setIsScrolledUp] = useState(false);
   const lastScrollTop = useRef(0);
@@ -16,19 +13,19 @@ const useScrollDirection = () => {
     const handleScroll = () => {
       const scrollTop = window.scrollY;
 
-      // Only trigger within the first 10px range
+      // Only detect within the first 10px of the page
       if (scrollTop > 10) return;
 
-      // Determine direction
+      // Determine the direction
       const isScrollingUp = scrollTop < lastScrollTop.current;
       const isScrollingDown = scrollTop > lastScrollTop.current;
 
-      // Only update if the new scroll direction is different from the last one
+      // Only update if the new scroll direction is opposite of the last registered one
       if (isScrollingUp && lastDirection.current !== "down") {
-        setIsScrolledUp(false);
+        setIsScrolledUp(true);
         lastDirection.current = "down";
       } else if (isScrollingDown && lastDirection.current !== "up") {
-        setIsScrolledUp(true);
+        setIsScrolledUp(false);
         lastDirection.current = "up";
       }
 
