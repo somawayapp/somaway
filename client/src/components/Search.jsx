@@ -7,22 +7,24 @@ import { useRef } from "react";
 const useScrollDirection = () => {
   const [isScrolledUp, setIsScrolledUp] = useState(false); // Default: Visible
   const lastDirection = useRef(null); // "up" or "down"
+  const lastScrollTop = useRef(0);
 
   useEffect(() => {
     const handleScroll = () => {
       const scrollTop = window.scrollY;
 
-      // Hide when scrolling down past 5px but within 10px
+      // If scrolled down within first 10px, hide it (set to true)
       if (scrollTop > 5 && scrollTop <= 10 && lastDirection.current !== "down") {
         setIsScrolledUp(true);
         lastDirection.current = "down";
       }
-
-      // Show again when scrolling back up to <=5px
+      // If scrolled up within first 5px, show it (set to false)
       else if (scrollTop <= 5 && lastDirection.current !== "up") {
         setIsScrolledUp(false);
         lastDirection.current = "up";
       }
+
+      lastScrollTop.current = scrollTop;
     };
 
     window.addEventListener("scroll", handleScroll);
