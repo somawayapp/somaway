@@ -68,7 +68,7 @@
       
       
       <div
-       className="relative w-full  gap-3 md:gap-6 flex flex-row items-center  text-[var(--TextColor)]  justify-between  bg-[var(--bg)] "
+       className="relative w-full  mt-2 gap-3 md:gap-6 flex flex-row items-center  text-[var(--TextColor)]  justify-between  bg-[var(--bg)] "
      >
   
   
