@@ -164,7 +164,11 @@ const Search = () => {
       )}
     </div>
 
+    {!isScrolledUp && (
+
     <div className={`hidden md:block h-[30px] ${isScrolledUp ? "md:h-[30px]" : "md:h-[40px]"} border-l-[1px] border-[var(--softBg4)]`}></div>
+
+    )}
 
     {/* Property Type */}
     {!isScrolledUp && (
