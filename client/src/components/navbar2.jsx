@@ -101,15 +101,17 @@
     }, [isOpen]);
   
     return(
-  <div className="flex flex col">
+  <div 
+  style={{
+    zIndex: 100004,
+  }}
+  className="flex justify-center items-center flex col relative w-full px-3 md:px-[80px] gap-3 md:gap-6 flex sticky
+         top-0  text-[var(--TextColor)] bg-[var(--bg)] md:border-b  "
+     >
       
       
        <div
-       style={{
-         zIndex: 100004,
-       }}
-       className="relative w-full px-3 md:px-[80px] gap-3 md:gap-6 flex flex-row items-center text-[var(--TextColor)] sticky
-         top-0 justify-center bg-[var(--bg)] md:border-b  "
+       className="relative w-full  gap-3 md:gap-6 flex flex-row items-center text-[var(--TextColor)]  justify-center bg-[var(--bg)] "
      >
   
   
@@ -294,13 +296,10 @@
         </div>
 
     
-        <div
-       style={{
-         zIndex: 100004,
-       }}
-       className="relative w-full px-3 md:px-[80px] gap-3 md:gap-6 flex flex-row items-center text-[var(--TextColor)] justify-center bg-[var(--bg)] md:border-b  "
-     >
-      <Search/>
+        <div  className="relative flex flex-row items-center text-[var(--TextColor)] justify-center bg-[var(--bg)] " >
+      <div className="h-auto">
+       <Search/>
+      </div>
 
 </div>
 
