@@ -72,14 +72,14 @@ const Search = () => {
   }, [isOpen]);
 
   return(
-    <div>
+    <>
   <div
-  className="w-full z-50 hidden md:flex flex-col gap-6 mt-[-50px] items-center justify-center transition-all duration-300 "
+  className={`top-0 w-full z-50 hidden md:flex flex-col items-center justify-center transition-all duration-300 ${isScrolledUp ? "pt-0 gap-0" : "pt-6 gap-6" }`}
     >
-     
+      {/* Rent & Sale Links */}
       <div
-        className={` flex justify-center gap-[40px] transition-all duration-300 ${
-          isScrolledUp ? "top-[-60px]" : "mt-0 "
+        className={`flex justify-center gap-[40px] transition-all duration-300 ${
+          isScrolledUp ? "opacity-0 translate-y-[-20px] pointer-events-none" : "opacity-100 translate-y-0"
         }`}
       >
         <a href="?model=forrent" className="text-[16px] font-semibold text-[var(--softTextColor)] hover:underline">
@@ -88,7 +88,7 @@ const Search = () => {
         <a href="?model=forsale" className="text-[16px] font-semibold text-[var(--softBg5)] hover:underline">
           For Sale
         </a>
-      </div> 
+      </div>
 
 
 
@@ -98,8 +98,8 @@ const Search = () => {
     <button
   onClick={() => setIsOpen(true)}
   type="button"
-  className={`border-[1px] border-[var(--softBg4)] bg-[var(--bg)] w-full mx-auto rounded-full shadow-sm hover:shadow-md transition duration-300 cursor-pointer ${
-    isScrolledUp ? "top-[-60px] mb-0" : "mt-0 mb-4"
+  className={`border-[1px] border-[var(--softBg4)] max-w-[1100px] w-full mx-auto rounded-full shadow-sm hover:shadow-md transition duration-300 cursor-pointer ${
+    isScrolledUp ? "max-w-[500px] " : "max-w-[900px]"
   }`}
 >
   <div className="flex flex-row  items-center relative gap-2 justify-between">
@@ -109,11 +109,11 @@ const Search = () => {
         isScrolledUp ? "md:px-4" : "md:px-8"
       } flex flex-col items-start text-left flex-1`}
     >
-      <small className="text-[12px] md:text-[13px] ml-4 font-semibold text-[var(--softTextColor)] transition"   style={{ whiteSpace: 'nowrap' }}>
+      <small className="text-[12px] md:text-[13px] ml-4 font-semibold text-[var(--softTextColor)] transition">
         {filters.location || "Anywhere"}
       </small>
       {!isScrolledUp && (
-        <span className="hidden md:block text-[14px] ml-4 text-[var(--softBg5)]">
+        <span className="hidden md:block text-[14px] ml-4 text-[var(--softBg5)]" style={{ whiteSpace: 'nowrap' }}>
           Search by location
         </span>
       )}
@@ -495,7 +495,7 @@ const Search = () => {
         </div>
         </div>
       )}
-    </div>
+    </>
   );
 };
 
