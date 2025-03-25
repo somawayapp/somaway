@@ -226,7 +226,7 @@
              <Link
               to="/settings"
               className="block py-2 text-[var(--softTextColor)]  hover:text-[#fc3239]  p-2 rounded-xl"
-              onClick={() => setOpen(false)}              > Settings     
+              onClick={() => setOpen(false)}              > Setting    
                   </Link>
               </div>
           
