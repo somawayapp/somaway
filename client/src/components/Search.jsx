@@ -16,11 +16,11 @@ const useScrollDirection = () => {
 
       if (lastScrollTop.current < scrollTop && scrollTop >= 0 && scrollTop <= 30) {
         // Scrolling down between 0 to 10px
-        setIsScrolledUp(false);
+        setIsScrolledUp(true);
       } 
       else if (lastScrollTop.current > scrollTop && scrollTop >= 50 && scrollTop <= 80) {
         // Scrolling up between 15 to 25px
-        setIsScrolledUp(true);
+        setIsScrolledUp(false);
       }
 
       lastScrollTop.current = scrollTop;
@@ -104,7 +104,7 @@ const Search = () => {
   
         <div
           className={`flex justify-center gap-[40px] transition-all duration-300 ${
-            isScrolledUp ? "opacity-0 translate-y-[-20px] mb-0  pointer-events-none" : " mb-6 mt-4 opacity-100 translate-y-0"
+            isScrolledUp ? "opacity-0 translate-y-[-20px] mb-0  pointer-events-none" : " mb-4 mt-9 opacity-100 translate-y-0"
           }`}
         >
           <a href="?model=forrent" className="text-[16px] font-semibold text-[var(--softTextColor)] hover:underline">
@@ -124,7 +124,7 @@ const Search = () => {
     onClick={() => setIsOpen(true)}
     type="button"
     className={`border-[1px] border-[var(--softBg4)] max-w-[1100px]  shadow-sm w-full mx-auto rounded-full shadow-sm hover:shadow-md transition duration-300 cursor-pointer  ${
-        isScrolledUp ? "mt-[10px]" : "mt-0"
+        isScrolledUp ? " mb-0" : " mb-2"
       } `}
     >
     <div className="flex flex-row  items-center relative gap-2 justify-between">
