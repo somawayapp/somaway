@@ -23,19 +23,19 @@ const Search = () => {
 
   const [isScrolledUp, setIsScrolledUp] = useState(false);
 
+  const lastScrollTop = useRef(window.scrollY); // ✅ Hook is now at the top level
+
   useEffect(() => {
-    const lastScrollTop = useRef(window.scrollY); // Persist value across renders
-  
     const handleScroll = () => {
       let scrollTop = window.scrollY;
   
       if (scrollTop > lastScrollTop.current && scrollTop > 10) {
-        setIsScrolledUp(true); // Collapse
+        setIsScrolledUp(true);
       } else if (scrollTop < 10) {
-        setIsScrolledUp(false); // Expand
+        setIsScrolledUp(false);
       }
   
-      lastScrollTop.current = scrollTop; // Update the last scroll position
+      lastScrollTop.current = scrollTop;
     };
   
     window.addEventListener("scroll", handleScroll);
