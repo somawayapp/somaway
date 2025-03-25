@@ -123,23 +123,7 @@
   
   
 
-  <div
-  className=" w-full z-50 hidden md:flex flex-col items-center justify-center ">
-      {/* Rent & Sale Links */}
-      <div
 
-        className="flex justify-center gap-[40px]  duration-3000 transition-all opacity-100 translate-y-0">
-        <a href="?model=forrent" className="text-[16px] font-semibold text-[var(--softTextColor)] hover:underline">
-          For Rent
-        </a>
-        <a href="?model=forsale" className="text-[16px] font-semibold text-[var(--softBg5)] hover:underline">
-          For Sale
-        </a>
-      </div>
-
- </div>
-
-    
 
 
 
