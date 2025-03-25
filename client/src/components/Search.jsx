@@ -30,7 +30,7 @@ const Search = () => {
 
       if (scrollTop > lastScrollTop && scrollTop > 50) {
         setIsScrolledUp(true); // Collapse when scrolling up
-      } else if (scrollTop < 10) {
+      } else if (scrollTop < 50) {
         setIsScrolledUp(false); // Expand when back at the top
       }
 
