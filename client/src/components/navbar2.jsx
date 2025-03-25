@@ -95,7 +95,7 @@
                 type="button"
                 className="hidden md:block text-sm font-semibold py-3 px-4 rounded-full hover:bg-[var(--softBg4)] transition cursor-pointer text-[var(--softBg5)]"
               >
-                Add listing
+                Add listng
               </button>
                 <button
                   type="button"
