@@ -105,7 +105,7 @@
   style={{
     zIndex: 100004,
   }}
-  className="flex justify-center items-center flex col relative w-full px-3 md:px-[80px] gap-3 md:gap-6 flex sticky
+  className="flex justify-center items-center flex-col relative w-full px-3 md:px-[80px] gap-3 md:gap-6 flex sticky
          top-0  text-[var(--TextColor)] bg-[var(--bg)] md:border-b  "
      >
       
@@ -301,7 +301,10 @@
             zIndex: 100004,
           }}
            className="relative flex flex-row items-center text-[var(--TextColor)] justify-center bg-[var(--bg)] " >
-       <Search/>
+            <div>
+            <Search/>
+
+            </div>
 
 </div>
 
