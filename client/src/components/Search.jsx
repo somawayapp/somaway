@@ -4,22 +4,20 @@ import { FaSearch, FaTimes } from "react-icons/fa";
 import { useRef } from "react";
 
 
+
 const useScrollDirection = () => {
   const [isScrolledUp, setIsScrolledUp] = useState(false);
   const lastScrollTop = useRef(window.scrollY);
-  const lastDirection = useRef(null); // Stores the last direction
+  const lastDirection = useRef(null);
 
   useEffect(() => {
     const handleScroll = () => {
       const scrollTop = window.scrollY;
-      const direction = scrollTop > lastScrollTop.current ? "up" : "down";
+      const direction = scrollTop > lastScrollTop.current ? "down" : "up";
 
-      if (scrollTop > 10 && direction !== lastDirection.current) {
-        setIsScrolledUp(true);
-        lastDirection.current = direction; // Store direction change
-      } else if (scrollTop < 10 && direction !== lastDirection.current) {
-        setIsScrolledUp(false);
-        lastDirection.current = direction; // Store direction change
+      if (scrollTop <= 10 && direction !== lastDirection.current) {
+        setIsScrolledUp(direction === "up");
+        lastDirection.current = direction;
       }
 
       lastScrollTop.current = scrollTop;
@@ -31,6 +29,9 @@ const useScrollDirection = () => {
 
   return isScrolledUp;
 };
+
+export default useScrollDirection;
+
 
 const Search = () => {
   const navigate = useNavigate();
