@@ -1,44 +1,42 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { FaSearch, FaTimes } from "react-icons/fa";
+import { useRef } from "react";
 
-// Debounced Scroll Hook
-const useDebouncedScroll = (delay = 1000) => {
+
+const useScrollDirection = () => {
   const [isScrolledUp, setIsScrolledUp] = useState(false);
   const lastScrollTop = useRef(window.scrollY);
-  const timerRef = useRef(null);
+  const lastDirection = useRef(null); // Stores the last direction
 
   useEffect(() => {
     const handleScroll = () => {
-      if (timerRef.current) clearTimeout(timerRef.current);
+      const scrollTop = window.scrollY;
+      const direction = scrollTop > lastScrollTop.current ? "down" : "up";
 
-      timerRef.current = setTimeout(() => {
-        let scrollTop = window.scrollY;
+      if (scrollTop > 10 && direction !== lastDirection.current) {
+        setIsScrolledUp(true);
+        lastDirection.current = direction; // Store direction change
+      } else if (scrollTop < 10 && direction !== lastDirection.current) {
+        setIsScrolledUp(false);
+        lastDirection.current = direction; // Store direction change
+      }
 
-        if (scrollTop > lastScrollTop.current && scrollTop > 10) {
-          setIsScrolledUp(true);
-        } else if (scrollTop < 10) {
-          setIsScrolledUp(false);
-        }
-
-        lastScrollTop.current = scrollTop;
-      }, delay);
+      lastScrollTop.current = scrollTop;
     };
 
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
-  }, [delay]);
+  }, []);
 
   return isScrolledUp;
 };
 
-// Search Component
 const Search = () => {
   const navigate = useNavigate();
   const [searchParams, setSearchParams] = useSearchParams();
   const [isOpen, setIsOpen] = useState(false);
   const [step, setStep] = useState(1);
-  const isScrolledUp = useDebouncedScroll(1000); // Using debounced scroll
 
   const [filters, setFilters] = useState({
     location: "",
@@ -51,6 +49,11 @@ const Search = () => {
     pricemax: "",
     model: "",
   });
+
+
+
+  
+  
 
   const handleNext = () => {
     if (step < 3) {
@@ -75,10 +78,14 @@ const Search = () => {
   };
 
   useEffect(() => {
-    document.body.style.overflow = isOpen ? "hidden" : "auto";
+    if (isOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "auto";
+    }
   }, [isOpen]);
 
-  return (
+  return(
     <>
     <div
     className="top-0 w-full z-50 hidden md:flex mt-[-70px] flex-col items-center justify-center transition-all duration-300"
