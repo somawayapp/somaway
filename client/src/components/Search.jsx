@@ -77,6 +77,8 @@ const Search = () => {
   className="w-full z-50 hidden md:flex flex-col gap-4 items-center justify-center transition-all duration-300 "
     >
       {/* Rent & Sale Links */}
+      {!isScrolledUp && (
+
       <div
         className={`flex justify-center gap-[40px] transition-all duration-300 ${
           isScrolledUp ? "opacity-0 translate-y-[-20px] pointer-events-none" : "opacity-100 translate-y-0"
@@ -88,7 +90,7 @@ const Search = () => {
         <a href="?model=forsale" className="text-[16px] font-semibold text-[var(--softBg5)] hover:underline">
           For Sale
         </a>
-      </div>
+      </div> )}
 
 
 
@@ -99,7 +101,7 @@ const Search = () => {
   onClick={() => setIsOpen(true)}
   type="button"
   className={`border-[1px] border-[var(--softBg4)] w-full mx-auto rounded-full shadow-sm hover:shadow-md transition duration-300 cursor-pointer ${
-    isScrolledUp ? "translate-y-[-200px] " : "translate-y-0"
+    isScrolledUp ? "translate-y-[-75px] " : "translate-y-0"
   }`}
 >
   <div className="flex flex-row  items-center relative gap-2 justify-between">
