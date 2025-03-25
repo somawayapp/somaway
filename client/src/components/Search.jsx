@@ -13,12 +13,12 @@ const useScrollDirection = () => {
     const handleScroll = () => {
       const scrollTop = window.scrollY;
 
-      if (scrollTop <= 5) {
-        // If we reach the top 5px, ensure the div is visible
-        setIsScrolledUp(false);
-      } else if (scrollTop > 5 && scrollTop <= 10 && lastScrollTop.current < scrollTop) {
-        // If scrolling down within 10px, hide the div
-        setIsScrolledUp(true);
+      if (scrollTop > 10) return; // Ignore when out of range
+
+      if (scrollTop > 5 && lastScrollTop.current <= 5) {
+        setIsScrolledUp(true); // Hide when passing 5px downward
+      } else if (scrollTop <= 5 && lastScrollTop.current > 5) {
+        setIsScrolledUp(false); // Show when moving back to 5px or less
       }
 
       lastScrollTop.current = scrollTop;
@@ -30,6 +30,7 @@ const useScrollDirection = () => {
 
   return isScrolledUp;
 };
+
 
 
 
