@@ -296,10 +296,12 @@
         </div>
 
     
-        <div  className="relative flex flex-row items-center text-[var(--TextColor)] justify-center bg-[var(--bg)] " >
-      <div className="h-auto">
+        <div 
+          style={{
+            zIndex: 100004,
+          }}
+           className="relative flex flex-row items-center text-[var(--TextColor)] justify-center bg-[var(--bg)] " >
        <Search/>
-      </div>
 
 </div>
 
