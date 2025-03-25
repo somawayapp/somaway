@@ -80,8 +80,8 @@ const Search = () => {
       {!isScrolledUp && (
 
       <div
-        className={`flex justify-center gap-[40px]  mt-9 transition-all duration-300 ${
-          isScrolledUp ? "opacity-0 translate-y-[-20px] mb-0  pointer-events-none" : " mb-6 opacity-100 translate-y-0"
+        className={`flex justify-center gap-[40px] transition-all duration-300 ${
+          isScrolledUp ? "opacity-0 translate-y-[-20px] mb-0  pointer-events-none" : " mb-8 opacity-100 translate-y-0"
         }`}
       >
         <a href="?model=forrent" className="text-[16px] font-semibold text-[var(--softTextColor)] hover:underline">
