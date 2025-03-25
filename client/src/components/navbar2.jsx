@@ -16,76 +16,7 @@
   const Navbar = () => {
   
     const navigate = useNavigate();
-    const [searchParams, setSearchParams] = useSearchParams();
-    const [isOpen, setIsOpen] = useState(false);
-    const [step, setStep] = useState(1);
-  
-    const [filters, setFilters] = useState({
-      location: "",
-      propertytype: "",
-      bedrooms: "",
-      bathrooms: "",
-      propertysize: "",
-      rooms: "",
-      pricemin: "",
-      pricemax: "",
-      model: "",
-    });
 
-    
-  const [open, setOpen] = useState(false);
-
-  const handleOverlayClick = () => setOpen(false);
-
-  // Disable body scroll when the menu is open
-  useEffect(() => {
-    if (open) {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "auto";
-    }
-    return () => {
-      document.body.style.overflow = "auto"; // Cleanup in case of unmount
-    };
-  }, [open]);
-  
-    const [isScrolledUp, setIsScrolledUp] = useState(false);
-  
-    useEffect(() => {
-      let lastScrollTop = window.scrollY;
-  
-      const handleScroll = () => {
-        let scrollTop = window.scrollY;
-  
-        if (scrollTop > lastScrollTop && scrollTop > 50) {
-          setIsScrolledUp(true); // Collapse when scrolling up
-        } else if (scrollTop < 10) {
-          setIsScrolledUp(false); // Expand when back at the top
-        }
-  
-        lastScrollTop = scrollTop;
-      };
-  
-      window.addEventListener("scroll", handleScroll);
-      return () => window.removeEventListener("scroll", handleScroll);
-    }, []);
-  
-    const handleNext = () => {
-      if (step < 3) {
-        setStep(step + 1);
-      } else {
-        const filteredParams = Object.entries(filters)
-          .filter(([_, value]) => value !== "")
-          .reduce((acc, [key, value]) => ({ ...acc, [key]: value }), {});
-  
-        setSearchParams({
-          ...Object.fromEntries(searchParams),
-          ...filteredParams,
-        });
-        setIsOpen(false);
-      }
-    };
-  
     const handleOutsideClick = (e) => {
       if (e.target.id === "popup-overlay") {
         setIsOpen(false);
@@ -101,6 +32,7 @@
     }, [isOpen]);
   
     return(
+      
   <div 
   style={{
     zIndex: 100004,

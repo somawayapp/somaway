@@ -24,22 +24,30 @@ const Search = () => {
 
   useEffect(() => {
     let lastScrollTop = window.scrollY;
-
+    let timeout = null;
+  
     const handleScroll = () => {
-      let scrollTop = window.scrollY;
-
-      if (scrollTop > lastScrollTop && scrollTop > 50) {
-        setIsScrolledUp(true); // Collapse when scrolling up
-      } else if (scrollTop < 10) {
-        setIsScrolledUp(false); // Expand when back at the top
-      }
-
-      lastScrollTop = scrollTop;
+      clearTimeout(timeout);
+      timeout = setTimeout(() => {
+        let scrollTop = window.scrollY;
+  
+        if (scrollTop > lastScrollTop + 20) {
+          setIsScrolledUp(true); // Hide when scrolling down
+        } else if (scrollTop < lastScrollTop - 20) {
+          setIsScrolledUp(false); // Show when scrolling up
+        }
+  
+        lastScrollTop = scrollTop;
+      }, 100); // Debounce by 100ms
     };
-
+  
     window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      clearTimeout(timeout);
+    };
   }, []);
+  
 
   const handleNext = () => {
     if (step < 3) {
@@ -81,7 +89,7 @@ const Search = () => {
 
       <div
         className={`flex justify-center gap-[40px] transition-all duration-300 ${
-          isScrolledUp ? "opacity-0 translate-y-[-20px] mb-0  pointer-events-none" : " mb-8 opacity-100 translate-y-0"
+          isScrolledUp ? "opacity-0 translate-y-[-20px] mb-0  pointer-events-none" : " mb-8 mt-2 opacity-100 translate-y-0"
         }`}
       >
         <a href="?model=forrent" className="text-[16px] font-semibold text-[var(--softTextColor)] hover:underline">
