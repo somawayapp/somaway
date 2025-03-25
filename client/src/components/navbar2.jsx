@@ -144,7 +144,7 @@
   
   <div
  className={`inline-flex overflow-y-auto bg-[var(--bg)] rounded-xl border border-[var(--softBg4)] flex-col p-5 items-left justify-left text-[var(--softTextColor)] 
-  gap-8 font-sm text-md rounded-md shadow-md max-w-max max-w-[20%] fixed top-[20%]  right-3 md:right-[80px] overflow-x-hidden transition-transform ease-in-out ${
+  gap-8 font-sm text-md rounded-md shadow-md min-w-[25%] fixed top-[13%]  right-3 md:right-[80px] overflow-x-hidden transition-transform ease-in-out ${
     open ? "translate-x-0 visible" : "translate-x-full invisible"
   }`}
 
