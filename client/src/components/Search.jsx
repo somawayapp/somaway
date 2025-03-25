@@ -4,31 +4,45 @@ import { FaSearch, FaTimes } from "react-icons/fa";
 import { useRef } from "react";
 
 
+
+
 const useScrollDirection = () => {
-  const [isScrolledUp, setIsScrolledUp] = useState(false); // Default: Visible
-  const lastDirection = useRef(null); // "up" or "down"
+  const [isScrolledUp, setIsScrolledUp] = useState(false);
   const lastScrollTop = useRef(0);
+  const timeoutRef = useRef(null);
 
   useEffect(() => {
     const handleScroll = () => {
       const scrollTop = window.scrollY;
 
-      // If scrolled down within first 10px, hide it (set to true)
-      if (scrollTop > 5 && scrollTop <= 10 && lastDirection.current !== "down") {
-        setIsScrolledUp(true);
-        lastDirection.current = "down";
-      }
-      // If scrolled up within first 5px, show it (set to false)
-      else if (scrollTop <= 5 && lastDirection.current !== "up") {
-        setIsScrolledUp(false);
-        lastDirection.current = "up";
+      if (scrollTop > 10) {
+        // Stop listening when out of the 10px range
+        return;
       }
 
-      lastScrollTop.current = scrollTop;
+      // Clear previous timeout to debounce
+      if (timeoutRef.current) {
+        clearTimeout(timeoutRef.current);
+      }
+
+      // Wait a bit before updating scroll state to confirm change
+      timeoutRef.current = setTimeout(() => {
+        if (scrollTop > lastScrollTop.current) {
+          setIsScrolledUp(true);
+        } else if (scrollTop < lastScrollTop.current) {
+          setIsScrolledUp(false);
+        }
+        lastScrollTop.current = scrollTop;
+      }, 500); // Small delay to ensure another scroll event is registered
     };
 
     window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      if (timeoutRef.current) {
+        clearTimeout(timeoutRef.current);
+      }
+    };
   }, []);
 
   return isScrolledUp;
