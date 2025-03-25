@@ -5,29 +5,49 @@ import { useRef } from "react";
 
 
 
+
 const useScrollDirection = () => {
-  const [isScrolledUp, setisScrolledUp] = useState(false);
-  const lastScrollTop = useRef(window.scrollY);
+  const [isScrolledUp, setIsScrolledUp] = useState(false);
+  const lastScrollTop = useRef(0);
+  const timeoutRef = useRef(null);
 
   useEffect(() => {
     const handleScroll = () => {
       const scrollTop = window.scrollY;
 
-      if (scrollTop > lastScrollTop.current && scrollTop > 10) {
-        setisScrolledUp(true);
-      } else if (scrollTop < lastScrollTop.current || scrollTop < 10) {
-        setisScrolledUp(false);
+      if (scrollTop > 10) {
+        // Stop listening when out of the 10px range
+        return;
       }
 
-      lastScrollTop.current = scrollTop;
+      // Clear previous timeout to debounce
+      if (timeoutRef.current) {
+        clearTimeout(timeoutRef.current);
+      }
+
+      // Wait a bit before updating scroll state to confirm change
+      timeoutRef.current = setTimeout(() => {
+        if (scrollTop > lastScrollTop.current) {
+          setIsScrolledUp(true);
+        } else if (scrollTop < lastScrollTop.current) {
+          setIsScrolledUp(false);
+        }
+        lastScrollTop.current = scrollTop;
+      }, 50); // Small delay to ensure another scroll event is registered
     };
 
     window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      if (timeoutRef.current) {
+        clearTimeout(timeoutRef.current);
+      }
+    };
   }, []);
 
   return isScrolledUp;
 };
+
 
 
 
