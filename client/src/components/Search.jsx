@@ -18,10 +18,12 @@ const useScrollDirection = () => {
 
       // Only detect within the first 10px of the page
       if (scrollTop > 10) return;
+      if (scrollbottom > 20) return;
+
 
       // Determine the direction
       const isScrollingUp = scrollTop < lastScrollTop.current;
-      const isScrollingDown = scrollTop > lastScrollTop.current;
+      const isScrollingDown = scrollbottom > lastScrollTop.current;
 
       // Only update if the new scroll direction is opposite of the last registered one
       if (isScrollingUp && lastDirection.current !== "down") {
