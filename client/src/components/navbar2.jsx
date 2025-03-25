@@ -21,6 +21,27 @@
     const [step, setStep] = useState(1);
   
 
+    
+  const [open, setOpen] = useState(false);
+
+  const handleOverlayClick = () => setOpen(false);
+
+  // Disable body scroll when the menu is open
+  useEffect(() => {
+    if (open) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "auto";
+    }
+    return () => {
+      document.body.style.overflow = "auto"; // Cleanup in case of unmount
+    };
+  }, [open]);
+  
+ 
+  
+  
+
   
     const handleOutsideClick = (e) => {
       if (e.target.id === "popup-overlay") {
