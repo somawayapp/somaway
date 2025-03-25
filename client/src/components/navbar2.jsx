@@ -296,15 +296,9 @@
         </div>
 
     
-        <div 
-          style={{
-            zIndex: 100004,
-          }}
-           className="relative flex flex-row items-center text-[var(--TextColor)] justify-center bg-[var(--bg)] " >
-            <div>
+        <div className="relative flex h-full flex-row items-center text-[var(--TextColor)] justify-center bg-[var(--bg)] " >
             <Search/>
 
-            </div>
 
 </div>
 
