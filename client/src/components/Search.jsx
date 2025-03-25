@@ -14,13 +14,13 @@ const useScrollDirection = () => {
     const handleScroll = () => {
       const scrollTop = window.scrollY;
 
-      if (lastScrollTop.current < scrollTop && scrollTop > scrollTop <= 50) {
+      if (lastScrollTop.current < scrollTop && scrollTop >= 0 && scrollTop <= 30) {
         // Scrolling down between 0 to 10px
-        setIsScrolledUp(true);
-      } 
-      else if (lastScrollTop.current > scrollTop && scrollTop >= 50) {
-        // Scrolling up between 15 to 25px
         setIsScrolledUp(false);
+      } 
+      else if (lastScrollTop.current > scrollTop && scrollTop >= 50 && scrollTop <= 80) {
+        // Scrolling up between 15 to 25px
+        setIsScrolledUp(true);
       }
 
       lastScrollTop.current = scrollTop;
