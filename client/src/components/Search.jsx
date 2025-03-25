@@ -37,6 +37,8 @@ const Search = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const [isOpen, setIsOpen] = useState(false);
   const [step, setStep] = useState(1);
+  const isScrolledUp = useScrollDirection(10); // Using debounced scroll
+
 
   const [filters, setFilters] = useState({
     location: "",
