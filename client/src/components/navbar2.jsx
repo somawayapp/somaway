@@ -62,13 +62,13 @@
   style={{
     zIndex: 100004,
   }}
-  className="flex justify-center items-center flex-col relative w-full px-3 md:px-[80px] gap-3 py-2  md:gap-6 flex sticky
+  className="flex justify-center items-center flex-col relative w-full px-3 md:px-[80px] gap-3 py-2 md:py-4 md:gap-6 flex sticky
          top-0  text-[var(--TextColor)] bg-[var(--bg)] md:border-b  "
      >
       
       
       <div
-       className="relative w-full  mt-2 gap-3 md:gap-6 flex flex-row items-center  text-[var(--TextColor)]  justify-between  bg-[var(--bg)] "
+       className="relative w-full  gap-3 md:gap-6 flex flex-row items-center  text-[var(--TextColor)]  justify-between  bg-[var(--bg)] "
      >
   
   
