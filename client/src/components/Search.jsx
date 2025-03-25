@@ -13,7 +13,7 @@ const useScrollDirection = () => {
   useEffect(() => {
     const handleScroll = () => {
       const scrollTop = window.scrollY;
-      const direction = scrollTop > lastScrollTop.current ? "up" : "down";
+      const direction = scrollTop > lastScrollTop.current ? "down" : "up";
 
       if (scrollTop <= 10 && direction !== lastDirection.current) {
         setIsScrolledUp(direction === "down");
