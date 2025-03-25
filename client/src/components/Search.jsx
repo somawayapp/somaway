@@ -22,10 +22,10 @@ const useScrollDirection = () => {
 
       // Only update if the new scroll direction is opposite of the last registered one
       if (isScrollingUp && lastDirection.current !== "down") {
-        setIsScrolledUp(true);
+        setIsScrolledUp(false);
         lastDirection.current = "down";
       } else if (isScrollingDown && lastDirection.current !== "up") {
-        setIsScrolledUp(false);
+        setIsScrolledUp(true);
         lastDirection.current = "up";
       }
 
