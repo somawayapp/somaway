@@ -1,13 +1,44 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { FaSearch, FaTimes } from "react-icons/fa";
-import { useRef } from "react";
 
+// Debounced Scroll Hook
+const useDebouncedScroll = (delay = 1000) => {
+  const [isScrolledUp, setIsScrolledUp] = useState(false);
+  const lastScrollTop = useRef(window.scrollY);
+  const timerRef = useRef(null);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (timerRef.current) clearTimeout(timerRef.current);
+
+      timerRef.current = setTimeout(() => {
+        let scrollTop = window.scrollY;
+
+        if (scrollTop > lastScrollTop.current && scrollTop > 10) {
+          setIsScrolledUp(true);
+        } else if (scrollTop < 10) {
+          setIsScrolledUp(false);
+        }
+
+        lastScrollTop.current = scrollTop;
+      }, delay);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [delay]);
+
+  return isScrolledUp;
+};
+
+// Search Component
 const Search = () => {
   const navigate = useNavigate();
   const [searchParams, setSearchParams] = useSearchParams();
   const [isOpen, setIsOpen] = useState(false);
   const [step, setStep] = useState(1);
+  const isScrolledUp = useDebouncedScroll(100); // Using debounced scroll
 
   const [filters, setFilters] = useState({
     location: "",
@@ -20,30 +51,6 @@ const Search = () => {
     pricemax: "",
     model: "",
   });
-
-  const [isScrolledUp, setIsScrolledUp] = useState(false);
-  const lastScrollTop = useRef(window.scrollY);
-  const scrollThreshold = 30; // Adjust this threshold as needed
-  
-  useEffect(() => {
-    const handleScroll = () => {
-      let scrollTop = window.scrollY;
-      
-      // Check if scrolling up past a threshold
-      if (scrollTop > lastScrollTop.current + scrollThreshold) {
-        setIsScrolledUp(true);
-      } else if (scrollTop < 10) {
-        setIsScrolledUp(false);
-      }
-  
-      lastScrollTop.current = scrollTop;
-    };
-  
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-  
-  
 
   const handleNext = () => {
     if (step < 3) {
@@ -68,14 +75,10 @@ const Search = () => {
   };
 
   useEffect(() => {
-    if (isOpen) {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "auto";
-    }
+    document.body.style.overflow = isOpen ? "hidden" : "auto";
   }, [isOpen]);
 
-  return(
+  return (
     <>
     <div
     className="top-0 w-full z-50 hidden md:flex mt-[-70px] flex-col items-center justify-center transition-all duration-300"
