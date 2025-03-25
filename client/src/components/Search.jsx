@@ -237,6 +237,7 @@ const Search = () => {
   
       <button
     onClick={() => setIsOpen(true)}
+    style={{ zIndex: 100010 }}
     type="button"
     className="w-full block md:hidden border-[1px] border-[var(--softBg4)] rounded-full shadow-sm hover:shadow-md transition
      duration-300 cursor-pointer"

@@ -63,7 +63,7 @@
     zIndex: 100004,
   }}
   className="flex justify-center items-center flex-col relative w-full px-3 md:px-[80px] gap-3 py-2  md:gap-6 flex sticky
-         top-0  text-[var(--TextColor)] bg-[var(--bg)] md:border-b  "
+         top-0  text-[var(--TextColor)] bg-[var(--bg)] md:border-b  border-b-[var(--softBg4)] "
      >
       
       
@@ -135,19 +135,20 @@
           {/* DARK OVERLAY */}
           {open && (
             <div
-              className="fixed inset-0 bg-black bg-opacity-50 z-40"
+              className="fixed inset-0 bg-black bg-opacity-50 "
               onClick={handleOverlayClick}
+              style={{ zIndex: 100015 }}
+
             ></div>
           )}
   
-          {/* MOBILE LINK LIST */}
-          <div
-            className={`w-[80%] md:w-[20%]  overflow-y-auto h-cover bg-[var(--bg)] flex flex-col p-5 items-left justify-left  text-[var(--TextColor)] 
-              gap-8 font-sm text-md fixed top-0 right-0  bottom-0 overflow-x-hidden transition-transform ease-in-out z-50 ${
-              open ? "translate-x-0" : "translate-x-full"
-            }`}   style={{ maxHeight: "100vh" }}
-  
-          >
+  <div
+  className={`inline-flex overflow-y-auto h-auto bg-[var(--bg)] border-[var(--softBg4)] flex-col p-5 items-left justify-left text-[var(--TextColor)] 
+    gap-8 font-sm text-md rounded-md shadow-md max-w-max fixed top-0 right-0 bottom-0 overflow-x-hidden transition-transform ease-in-out z-50 ${
+    open ? "translate-x-0" : "translate-x-full"
+  }`}   
+  style={{ maxHeight: "100vh" }}
+>
   <div>
   
   </div>
