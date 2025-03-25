@@ -16,6 +16,8 @@ const useScrollDirection = () => {
   useEffect(() => {
     const handleScroll = () => {
       const scrollTop = window.scrollY;
+      const scrollBottom = window.scrollY;
+
 
       // Only detect within the first 10px of the page
       if (scrollTop > 10) return;
@@ -37,6 +39,8 @@ const useScrollDirection = () => {
 
       // Update lastScrollTop
       lastScrollTop.current = scrollTop;
+      lastscrollBottom.current = scrollBottom;
+
     };
 
     window.addEventListener("scroll", handleScroll);
