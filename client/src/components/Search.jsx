@@ -14,11 +14,11 @@ const useScrollDirection = () => {
     const handleScroll = () => {
       const scrollTop = window.scrollY;
 
-      if (lastScrollTop.current < scrollTop && scrollTop >= 0 && scrollTop <= 20) {
+      if (lastScrollTop.current < scrollTop && scrollTop > scrollTop <= 50) {
         // Scrolling down between 0 to 10px
         setIsScrolledUp(true);
       } 
-      else if (lastScrollTop.current > scrollTop && scrollTop >= 25 && scrollTop <= 45) {
+      else if (lastScrollTop.current > scrollTop && scrollTop >= 50) {
         // Scrolling up between 15 to 25px
         setIsScrolledUp(false);
       }
@@ -97,7 +97,7 @@ const Search = () => {
   return(
     <>
     <div
-    className="top-0 w-full z-50 hidden md:flex mt-[-70px] flex-col items-center justify-center transition-all duration-300"
+    className="top-0 w-full z-50 hidden md:flex mt-[-90px] flex-col items-center justify-center transition-all duration-300"
       >
         {/* Rent & Sale Links */}
         {!isScrolledUp && (
@@ -123,9 +123,10 @@ const Search = () => {
       <button
     onClick={() => setIsOpen(true)}
     type="button"
-    className="border-[1px] border-[var(--softBg4)] max-w-[1100px]  shadow-sm w-full mx-auto rounded-full shadow-sm hover:shadow-md transition duration-300 cursor-pointer "
-  
-  >
+    className={`border-[1px] border-[var(--softBg4)] max-w-[1100px]  shadow-sm w-full mx-auto rounded-full shadow-sm hover:shadow-md transition duration-300 cursor-pointer  ${
+        isScrolledUp ? "mt-[40px]" : "mt-0"
+      } `}
+    >
     <div className="flex flex-row  items-center relative gap-2 justify-between">
       {/* Location */}
       <div
