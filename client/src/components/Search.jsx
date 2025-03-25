@@ -74,11 +74,9 @@ const Search = () => {
   return(
     <div>
   <div
-  className="w-full z-50 hidden md:flex flex-col gap-6 mt-[-40px] items-center justify-center transition-all duration-300 "
+  className="w-full z-50 hidden md:flex flex-col gap-6 mt-[-50px] mb-8 items-center justify-center transition-all duration-300 "
     >
-      {/* Rent & Sale Links */}
-      {!isScrolledUp && (
-
+     
       <div
         className="flex justify-center gap-[40px] transition-all duration-300 ">
         <a href="?model=forrent" className="text-[16px] font-semibold text-[var(--softTextColor)] hover:underline">
@@ -87,7 +85,7 @@ const Search = () => {
         <a href="?model=forsale" className="text-[16px] font-semibold text-[var(--softBg5)] hover:underline">
           For Sale
         </a>
-      </div> )}
+      </div> 
 
 
 
