@@ -143,11 +143,11 @@
           )}
   
   <div
-  className={`inline-flex overflow-y-auto h-auto bg-[var(--bg)] border-[var(--softBg4)] flex-col p-5 items-left justify-left text-[var(--TextColor)] 
-    gap-8 font-sm text-md rounded-md shadow-md max-w-max fixed top-0 right-0 bottom-0 overflow-x-hidden transition-transform ease-in-out z-50 ${
+  className={`inline-flex overflow-y-auto h-auto bg-[var(--bg)] border  border-[var(--softBg4)] flex-col p-5 items-left justify-left text-[var(--TextColor)] 
+    gap-8 font-sm text-md rounded-md shadow-md max-w-max bottom-0 overflow-x-hidden transition-transform ease-in-out  ${
     open ? "translate-x-0" : "translate-x-full"
   }`}   
-  style={{ maxHeight: "100vh" }}
+  style={{ zIndex: 100016 }}
 >
   <div>
   
