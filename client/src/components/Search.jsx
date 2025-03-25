@@ -20,8 +20,8 @@ const useScrollDirection = () => {
 
 
       // Only detect within the first 10px of the page
-      if (scrollTop > 10) return;
-      if (scrollBottom > 5) return;
+      if (scrollTop > 5) return;
+      if (scrollBottom > 10) return;
 
 
       // Determine the direction
