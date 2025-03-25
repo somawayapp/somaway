@@ -122,7 +122,8 @@
     
   
   
-  
+    {!isScrolledUp && (
+
   <div
   className=" w-full z-50 hidden md:flex flex-col items-center justify-center ">
       {/* Rent & Sale Links */}
@@ -142,7 +143,7 @@
 
  </div>
 
-
+      )}
 
 
 
