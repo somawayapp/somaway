@@ -296,11 +296,9 @@
         </div>
 
     
-        <div className="relative flex h-full flex-row items-center text-[var(--TextColor)] justify-center bg-[var(--bg)] " >
-            <Search/>
-
-
-</div>
+     <div className="mt-[20px]">
+      ghi
+     </div>
 
 
 
