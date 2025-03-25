@@ -104,7 +104,7 @@ const Search = () => {
   
         <div
           className={`flex justify-center gap-[60px] transition-all duration-300 ${
-            isScrolledUp ? "opacity-0 translate-y-[-20px] mb-0  pointer-events-none" : " mb-5 mt-[10px] opacity-100 translate-y-0"
+            isScrolledUp ? "opacity-0 translate-y-[-20px] mb-0  pointer-events-none" : " mb-5 mt-[25px] opacity-100 translate-y-0"
           }`}
         >
           <a href="?model=forrent" className="text-[16px] font-semibold text-[var(--softTextColor)] hover:underline">
@@ -124,7 +124,7 @@ const Search = () => {
     onClick={() => setIsOpen(true)}
     type="button"
     className={`border-[1px] border-[var(--softBg4)] max-w-[1100px]  shadow-sm w-full mx-auto rounded-full shadow-sm hover:shadow-md transition duration-300 cursor-pointer  ${
-        isScrolledUp ? " mt-8 mb-0" : " mt-0 mb-4"
+        isScrolledUp ? " mt-7 mb-0" : " mt-0 mb-4"
       } `}
     >
     <div className="flex flex-row  items-center relative gap-2 justify-between">
