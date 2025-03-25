@@ -21,8 +21,8 @@ const PostListItem = ({ post }) => {
       {/* Image with Link */}
       <Link to={`/${post.slug}`} className="block">
 
-        <div className="relative w-full aspect-[3/3] rounded-xl md:rounded-2xl overflow-hidden">
-        <div className="flex overflow-x-auto snap-x snap-mandatory scroll-smooth no-scrollbar">
+        <div className="relative w-full aspect-[3/3] rounded-xl md:rounded-2xl overflow-hidden
+         overflow-x-auto snap-x snap-mandatory scroll-smooth no-scrollbar">
 
           <img
             src={images[currentIndex]}
@@ -42,7 +42,6 @@ const PostListItem = ({ post }) => {
               ))}
             </div>
           )}
-        </div>
         </div>
       </Link>
 
