@@ -296,8 +296,8 @@
         </div>
 
     
-     <div className="mt-[20px]">
-      ghi
+     <div>
+      <Search/>
      </div>
 
 
