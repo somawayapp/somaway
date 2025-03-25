@@ -301,7 +301,7 @@ const Search = () => {
                     <h2 className="text-2xl block md:hidden text-[var(--softTextColor)] font-semibold mb-1">Where do you wanna stay?</h2>
              <h2 className="hidden md:block text-2xl text-[var(--softTextColor)] font-semibold mb-1">Where do you wanna stay /Property location?</h2>
   
-                  <h2 className="text-sm text-[var(--softTextColor)] mb-4 "> Find your perfec location!</h2>
+                  <h2 className="text-sm text-[var(--softTextColor)] mb-4 "> Find your perfect location!</h2>
                   <input
                     type="text"
                     placeholder="City, Region, or Country"

@@ -11,6 +11,7 @@
   import { useNavigate, useSearchParams } from "react-router-dom";
   import { FaSearch, FaTimes } from "react-icons/fa";
   import Search from "./Search";
+  import Search2 from "./Search2";
   
   
   const Navbar = () => {
@@ -73,7 +74,7 @@
               <img src="/airlogo2.png" className="md:h-8" />
              </Link>
     
-             <Search className="hidden" />
+             <Search2 />
 
              <div className="flex items-center justify-between flex-row gap-2 md:gap-9">
               <div className="relative"  onClick={() => setOpen((prev) => !prev)}>
