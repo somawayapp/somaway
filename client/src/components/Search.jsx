@@ -72,9 +72,9 @@ const Search = () => {
   }, [isOpen]);
 
   return(
-    <>
+    <div>
   <div
-  className={`fixed top-0  w-full z-50 hidden md:flex flex-col items-center justify-center transition-all duration-300 ${isScrolledUp ? "pt-0 gap-0" : "pt-6 gap-6" }`}
+  className={`w-full z-50 hidden md:flex flex-col items-center justify-center transition-all duration-300 ${isScrolledUp ? "pt-0 gap-0" : "pt-6 gap-6" }`}
     >
       {/* Rent & Sale Links */}
       <div
@@ -495,7 +495,7 @@ const Search = () => {
         </div>
         </div>
       )}
-    </>
+    </div>
   );
 };
 
