@@ -38,8 +38,8 @@ const PostListItem = ({ post }) => {
         {images.map((_, index) => (
           <span
             key={index}
-            className={`h-1 w-1 rounded-full bg-white transition-all duration-300 ${
-              currentIndex === index ? "w-2 scale-110" : "opacity-50"
+            className={`h-[5px] w-[3px] rounded-full bg-white transition-all duration-300 ${
+              currentIndex === index ? "w-2 h-2 scale-110" : "opacity-50"
             }`}
           ></span>
         ))}
