@@ -18,6 +18,11 @@ const fetchPosts = async (pageParam, searchParams, limit) => {
 const PostList = () => {
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
+  const { isPending,  } = useQuery({
+    queryKey: ["post", slug],
+    queryFn: () => fetchPosts(slug),
+  });
+
 
   const {
     data,
@@ -53,16 +58,17 @@ const PostList = () => {
   }
 
   if (error) return <p>Something went wrong!</p>;
+  if (isPending) return <SpinnerMini />;
 
   const allPosts = data?.pages?.flatMap((page) => page.posts) || [];
 
   if (allPosts.length === 0) {
     return (
-      <div className="flex flex-col rounded-xl border border-[var(--softTextColor)] hover-shadow-md items-center justify-center h-60">
+      <div className="flex flex-col  items-center justify-center h-[100vh]">
         <p className="mb-4 text-[var(--softTextColor)]">No posts found</p>
         <button
           onClick={() => navigate("/")}
-          className="px-4 py-2 text-[var(--softTextColor)] text-white rounded-md hover:text-text-[var(--textColor)]"
+          className="px-4 py-2  rounded-xl border border-[var(--softBg4)] text-[var(--softTextColor)] hover-shadow-md"
         >
           Go Back Home
         </button>
