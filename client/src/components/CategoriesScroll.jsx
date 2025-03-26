@@ -107,7 +107,7 @@ const CategoriesScroll = ({ setOpen }) => {
               to={`/?propertytype=${slug}`}
               className="flex flex-col items-center justify-center gap-2 md:gap-3 text-[var(--softTextColor)] hover:text-[var(--textColor)] text-sm
               md:text-md bg-[var(--bg)] rounded-xl
-               pr-2 md:pr-[44px] pb-3 transition-all"
+               pr-2 md:pr-[38px] pb-3 transition-all"
               onClick={() => setOpen(false)}
             >
            {icons[propertytype] && (
