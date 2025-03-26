@@ -161,7 +161,7 @@
           <Link
               to="/"
               className="block py-2 text-[var(--softTextColor)]   hover:text-[#fc3239]  p-2 rounded-xl"
-             onClick={() => setOpen(false)}          > home     
+             onClick={() => setOpen(false)}          > Home     
             </Link>
             
 
@@ -169,7 +169,7 @@
             <Link
               to="/add"
               className="block py-2 text-[var(--softTextColor)]   hover:text-[#fc3239]  p-2 rounded-xl"
-            onClick={() => setOpen(false)}          > add listing     
+            onClick={() => setOpen(false)}          > Add listing     
           </Link>
           </SignedIn>
 
@@ -179,7 +179,7 @@
             <Link
               to="/profile"
               className="block py-2 text-[var(--softTextColor)]   hover:text-[#fc3239]  p-2 rounded-xl"
-              onClick={() => setOpen(false)}          > profile     
+              onClick={() => setOpen(false)}          > Profile     
              </Link>
              </SignedIn>
 
@@ -188,7 +188,7 @@
               <Link
               to="/listings"
               className="block py-2 text-[var(--softTextColor)]   hover:text-[#fc3239]  p-2 rounded-xl"
-               onClick={() => setOpen(false)}          > my listings    
+               onClick={() => setOpen(false)}          > My listings    
                </Link>
              </SignedIn>
 
@@ -196,7 +196,7 @@
               <Link
               to="/wishlist"
               className="block py-2 text-[var(--softTextColor)]   hover:text-[#fc3239]  p-2 rounded-xl"
-              onClick={() => setOpen(false)}          > my wishlist       
+              onClick={() => setOpen(false)}          > My wishlist       
                </Link>
                </SignedIn>
 
@@ -219,7 +219,7 @@
             <Link
               to="/help"
               className="block py-2 text-[var(--softTextColor)]  hover:text-[#fc3239]  p-2 rounded-xl"
-             onClick={() => setOpen(false)}              > help center      
+             onClick={() => setOpen(false)}              > Help center      
               </Link>
             
              <Link
