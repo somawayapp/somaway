@@ -20,9 +20,7 @@ const PostList = () => {
     data, 
     error, 
     status, 
-    fetchNextPage, 
-    hasNextPage, 
-    isFetchingNextPage 
+  
   } = useInfiniteQuery({
     queryKey: ["posts", searchParams.toString()],
     queryFn: ({ pageParam }) => fetchPosts({ pageParam, searchParams }),
@@ -59,15 +57,6 @@ const PostList = () => {
         <PostListItem key={post._id} post={post} />
       ))}
 
-      {hasNextPage && (
-        <button 
-          onClick={() => fetchNextPage()} 
-          disabled={isFetchingNextPage} 
-          className="col-span-full mt-4 px-4 py-2 bg-blue-500 text-white rounded-md"
-        >
-          {isFetchingNextPage ? "Loading..." : "Load More"}
-        </button>
-      )}
     </div>
   );
 };
