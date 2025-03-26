@@ -38,23 +38,28 @@ const PostList = () => {
   if (allPosts.length === 0) {
     return (
       <div className="flex flex-col items-center justify-center h-[100vh]">
-        <p className="mb-4 text-[var(--softTextColor)]">No posts found</p>
         <button
           onClick={() => navigate("/")}
-          className="px-4 py-2 rounded-xl border border-[var(--softBg4)] text-[var(--softTextColor)] hover-shadow-md"
+          className="px-6 py-3 flex flex-col rounded-xl border border-[var(--softBg4)] text-[var(--softTextColor)] hover:shadow-md"
         >
-          Go Back Home
+        <p className="mb-4 text-[var(--softTextColor)]">No posts found</p>
+        <p className="mb-4 font-semibold text-[var(--softTextColor)]">Go Back Home</p>
+
+          
         </button>
       </div>
     );
   }
 
+
   return (
-    <div>
+    <InfiniteScroll
+      className="gap-3 md:gap-6 grid grid-cols-1 md:grid-cols-4 scrollbar-hide"
+    >
       {allPosts.map((post) => (
-        <PostListItem key={post.id} post={post} />
+        <PostListItem key={post._id} post={post} />
       ))}
-    </div>
+    </InfiniteScroll>
   );
 };
 
