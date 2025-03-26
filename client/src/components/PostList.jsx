@@ -1,13 +1,13 @@
 import PostListItem from "./PostListItem";
-import { useInfiniteQuery } from "@tanstack/react-query";
+import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import { useSearchParams, useNavigate } from "react-router-dom";
 import SpinnerMini from "./Loader";
 
-const fetchPosts = async ({ pageParam = 0, searchParams }) => {
+const fetchPosts = async (searchParams) => {
   const searchParamsObj = Object.fromEntries([...searchParams]);
   const res = await axios.get(`${import.meta.env.VITE_API_URL}/posts`, {
-    params: { ...searchParamsObj, skip: pageParam, limit: pageParam === 0 ? 1 : pageParam < 3 ? 2 : 3 },
+    params: { ...searchParamsObj },
   });
   return res.data;
 };
@@ -16,26 +16,18 @@ const PostList = () => {
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
 
-  const { 
-    data, 
-    error, 
-    status, 
-  
-  } = useInfiniteQuery({
+  const { data, error, status } = useQuery({
     queryKey: ["posts", searchParams.toString()],
-    queryFn: ({ pageParam }) => fetchPosts({ pageParam, searchParams }),
-    initialPageParam: 0,
-    getNextPageParam: (lastPage, allPages) => {
-      if (lastPage.posts.length === 0) return undefined; 
-      return allPages.flat().length; 
-    },
+    queryFn: () => fetchPosts(searchParams),
     staleTime: 1000 * 60 * 5,
     cacheTime: 1000 * 60 * 15,
   });
 
+  if (status === "loading") return <SpinnerMini />;
+
   if (error) return <p>Something went wrong!</p>;
 
-  const allPosts = data?.pages.flatMap((page) => page.posts) || [];
+  const allPosts = data?.posts || [];
 
   if (allPosts.length === 0) {
     return (
@@ -56,7 +48,6 @@ const PostList = () => {
       {allPosts.map((post) => (
         <PostListItem key={post._id} post={post} />
       ))}
-
     </div>
   );
 };
