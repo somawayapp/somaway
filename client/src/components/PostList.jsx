@@ -35,14 +35,14 @@ const PostList = () => {
       index += batchSize;
     };
 
-    loadNextBatch(1); // First batch of 1
-    setTimeout(() => loadNextBatch(2), 500);
-    setTimeout(() => loadNextBatch(3), 1000);
+    loadNextBatch(4); 
+    setTimeout(() => loadNextBatch(4), 50);
+    setTimeout(() => loadNextBatch(4), 100);
     setTimeout(() => {
       while (index < allPosts.length) {
         loadNextBatch(8);
       }
-    }, 1500);
+    }, 150);
   }, [allPosts]);
 
   if (status === "loading") return <p>Loading...</p>;
@@ -78,21 +78,17 @@ const PostList = () => {
   
     return (
     
-<div className="gap-2 grid grid-cols-1 md:grid-cols-4 md:gap-6 scrollbar-hide">
-  {displayedPosts.map((post) => (
-    <PostListItem key={post._id} post={post} />
-  ))}
+    <div className="gap-2 grid grid-cols-1 md:grid-cols-4 md:gap-6 scrollbar-hide">
+      {displayedPosts.map((post) => (
+        <PostListItem key={post._id} post={post} />
+      ))}
 
-  {Array(Math.max(12 - displayedPosts.length, displayedPosts.length))
-    .fill(0)
-    .map((_, index) => (
-      <div key={index} className="relative aspect-[3/3] w-full h-full">
-        <div className="absolute inset-0 bg-[var(--softBg4)] animate-pulse rounded-xl md:rounded-2xl"></div>
-      </div>
-    ))}
-</div>
-
-    
+       {Array(4).fill(0).map((_, index) => (
+          <div key={index} className="relative aspect-[3/3] w-full h-full">
+            <div className="absolute inset-0 bg-[var(--softBg4)] animate-pulse rounded-xl md:rounded-2xl"></div>
+          </div>
+        ))}
+    </div>
   );
 };
 
