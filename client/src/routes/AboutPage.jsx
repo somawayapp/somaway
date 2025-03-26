@@ -17,44 +17,44 @@ const AboutPage = () => {
 
 
       <div
-         className="relative bg-[#7a00da] mt-[20px] md:mt-[50px] w-full shadow-md 
+         className="relative px=3 md:px-[80px] bg-[#7a00da] mt-[20px] md:mt-[50px] w-full shadow-md 
            text-white text-center animate-fadeIn flex flex-col items-center justify-center"
        >
          <div className="h-full p-2  max-w-[900px] mx-auto box-border">
          <h1 className="text-3xl md:text-6xl mt-[20px] md:mt-[70px] font-bold">
-            About  Somaway
+             Hodi
                    </h1>
            <p className="mt-2 text-md md:text-xl">
-             Somaway is a global EdTech startup with kenyan roots. We are mission driven and passionate about self-improvement                  </p>
+             Making your dream home come true everyday               </p>
         
         
          </div>
          <img
-           src="/summary.png"
-           className="h-[100px] md:h-[400px] mx-auto "
+           src="/home.jpg"
+           className="h-[100px] md:h-[400px] pb-9 md:pb-[100px] mx-auto "
          />
        </div>
 
    <div >
   
    
-   <div className="flex  px-3 md:px-9 flex-col items-center justify-center">
+   <div className="flex  px=3 md:px-[80px] flex-col items-center justify-center">
   <div>
     <div className="flex flex-col items-center justify-center mb-[40px] pt-9 pb-9 rounded-2xl gap-5">
       <div className="grid grid-cols-1 mx-auto md:grid-cols-3 gap-6 mt-8 w-full px-4">
         {[
           {
-            text: "2024 –  Somaway founded by Lexanda Mbelenzi",
+            text: "2024 –  Hodi founded by Lexanda Mbelenzi",
             icon: "rocket.svg",
           },
           {
-            text: " Somaway has grown from a 1-person startup into a team of 5+ people in 3 months",
+            text: " Hodi has grown from a 1-person startup into a team of 5+ people in 3 months",
             icon: "smile.svg",
           },
           {
-            text: "Now,  Somaway has offices in London, Nairobi, and San Francisco.",
+            text: "Now,  Hodi has offices in London, Nairobi, and San Francisco.",
             icon: "pin.svg",
-          },
+          },H
         ].map((item, index) => (
           <div
             key={index}
@@ -86,15 +86,24 @@ const AboutPage = () => {
 
   <div className="flex flex-col pl-3 pr-3 pt-12 md:pt-0  md:pl-[100px] lg:pl-[200px] md:flex-row items-center justify-between  z-10 text-black">
     <div className="flex-1  text-center  md:text-left">
-    <h3 className="text-3xl md:text-5xl font-bold mb-4">How did the idea of  Somaway come?</h3>
+    <h3 className="text-3xl md:text-5xl font-bold mb-4">How the story began come?</h3>
       <p className="text-sm md:text-lg max-w-md mb-6">
       
-         For years, I searched for the hidden secrets of success, the ones they never teach us. I always believed there was a shortcut,
-          and I was right. The secrets are hidden in plain sight, written in books by those who have already made it.
-          That’s why I devoted myself to reading—not because I love it, but because knowledge is the key to success.
-          I wanted to learn so many things-as fast as i could  but couldn’t find the most efficient, productive, and enjoyable tool for self-growth.
-           Also, I’ve realized that there’re millions of inquiring minds with the same problem as mine. So what was the best solution? 
-           To create such a tool for each of us. That's how the  Somaway app appeared. A community where we can all grow together .
+         It was on my first day in campus. Unfortunately the school did not have any remaining hostel space so i had to find myself
+          a rental outside the school on the same day. It was probably the hottest day of the year and the dustiest day of the month. 
+         I spent my entire day knocking doors until evening came and i had not found a place yet. Every door that flang open was 
+         either an arrogant caretaker or "no vacants here". I tarmaced for four days but couldn't find the perfect and afordable place. 
+
+        The following day, when asking a stranger for directions, she suggested that maybe i should try searching online. With a sigh of relief i 
+        found a nice shaded place and started doom scrolling and cold calling for hours just to end up disapointed. Most of the houses listed online
+        were years old on the plartforms which made that they were no longer vacant, and some even had fake pictures and prices.
+        
+         Later on in the  day while taking my last lap around, i had this idea ringing in my mind, "what if i created this plartform, a place that
+         would solve all this problems, a place where i could find a house in less than 30 seconds and move in?" But it was just an idea. 
+         I had no choice but to keep tracking and fourtunately i found a fair place in the week that followed. I never thought that i would have
+        to move out and go house hunting again, but trust me, i can't find a house online four years later and i am not hawking for a whole week.
+        Ibelieve that there are other people out there who share the same pain point and i'd better make this idea come true.
+
       </p>
       <img 
   src="/love.svg" 
@@ -102,7 +111,7 @@ const AboutPage = () => {
 />
 
        <p className="font-semibold text-md">Lexanda Mbelenzi</p>
-      <p className="text-sm text-opacity-80"> Somaway CEO and founder</p>
+      <p className="text-sm text-opacity-80"> Hodi founder</p>
     </div>
 
     {/* Adjust vertical alignment with self-start or self-end */}
@@ -121,13 +130,13 @@ const AboutPage = () => {
    
    
 
-<div className="flex flex-col px-3 md:px-9 items-center justify-center">
+<div className="flex flex-col px=3 md:px-[80px] items-center justify-center">
   <div>
     <div className="flex flex-col items-center justify-center mb-[40px] pt-9 pb-9 rounded-2xl gap-5">
       <div className="grid grid-cols-1 mx-auto md:grid-cols-3 gap-6 mt-8 w-full px-4">
         {[
           {
-            text: "Who we are –  Somaway is a non-fiction book summary app",
+            text: "Who we are –  Hodi is a non-fiction book summary app",
             icon: "negotiation.webp",
           },
           {
@@ -162,7 +171,7 @@ const AboutPage = () => {
 <div className="flex items-center justify-center text-[var(--textColor)] mx-auto">
   <div className="text-center">
     <p className="mt-2 text-sm md:text-lg">
-      Contact us makesomaway@gmail.com or call +254 703 394794
+      Contact us makeHodi@gmail.com or call +254 703 394794
     </p>
     <button
     to="/"

@@ -47,11 +47,11 @@ const HomePage = () => {
 <title>
   {cat && author 
     ? `${cat} Book Summary by ${author} | Unlock Key Insights`   : cat  ? `${cat} Book Summaries | Learn from the Best` 
-      : author  ? `Book Summary by ${author} | Must-Read Summaries`  : 'Book Summaries'} | Somaway
+      : author  ? `Book Summary by ${author} | Must-Read Summaries`  : 'Book Summaries'} | Hodi
 </title>
 
 <meta name="description"   content={` Explore top book summaries in the ${cat || 'self-growth'} category. Gain insights 
-from ${author || 'top authors'}in minutes. Elevate your mind—only on Somaway!`} />
+from ${author || 'top authors'}in minutes. Elevate your mind—only on Hodi!`} />
   
   <link rel="canonical" href={`${window.location.href}`} />
   

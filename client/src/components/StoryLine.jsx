@@ -48,7 +48,7 @@ const StoryLine = () => {
           Get new knowledge easily
         </h1>
         <p className="mt-2 text-md md:text-xl">
-          Let’s check how many titles you can finish in a month with  Somaway! Tell us how
+          Let’s check how many titles you can finish in a month with  Hodi! Tell us how
         </p>
         <p className="mt-2 text-md md:text-xl">
           much time you’d like to spend on reading:
@@ -186,7 +186,7 @@ const StoryLine = () => {
       <div className="grid grid-cols-1 mx-auto md:grid-cols-3 gap-6 mt-8 w-full px-4">
         {[
           {
-            text: "Who we are –  Somaway is a non-fiction book summary app",
+            text: "Who we are –  Hodi is a non-fiction book summary app",
             icon: "negotiation.webp",
           },
           {

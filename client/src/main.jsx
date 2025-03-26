@@ -4,6 +4,7 @@ import "./index.css";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Homepage from "./routes/Homepage.jsx";
 import Write from "./routes/Write.jsx";
+import LandingPage from "./routes/LandingPage.jsx";
 import LoginPage from "./routes/LoginPage.jsx";
 import RegisterPage from "./routes/RegisterPage.jsx";
 import SinglePostPage from "./routes/SinglePostPage.jsx";
@@ -41,7 +42,7 @@ const router = createBrowserRouter([
         element: <SinglePostPage />,
       },
       {
-        path: "/write",
+        path: "/add",
         element: <Write />,
       },
       {
@@ -55,7 +56,7 @@ const router = createBrowserRouter([
    
       {
         path: "/about",
-        element: <AboutPage />,
+        element: <LandingPage />,
       },
       {
         path: "/premium",

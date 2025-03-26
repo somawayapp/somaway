@@ -13,7 +13,7 @@ const Footer = () => {
             <ul className="space-y-2">
               <li><a href="/" className="text-[var(--softTextColor)] hover:text-[var(--softTextColor)]">Home</a></li>
               <li><a href="/premium" className="text-[var(--softTextColor)] hover:text-[var(--softTextColor)]">Pricing</a></li>
-              <li><a href="/premium" className="text-[var(--softTextColor)] hover:text-[var(--softTextColor)]">Gift  Somaway</a></li>
+              <li><a href="/premium" className="text-[var(--softTextColor)] hover:text-[var(--softTextColor)]">Gift  Hodi</a></li>
             </ul>
           </nav>
         </div>
@@ -62,10 +62,10 @@ const Footer = () => {
       {/* Bottom Info Section */}
       <div className="mt-8 text-center border-t border-[var(--softBg)]  mb-[100px] md:mb-0  pt-4">
         <p className="text-[var(--softTextColor)]">
-          © {currentYear},  Somaway App Limited, Waiyaki way , 1st floor, Westend towers, Westlands, Nairobi
+          © {currentYear},  Hodi App Limited, Waiyaki way , 1st floor, Westend towers, Westlands, Nairobi
        
           <a href="mailto:support@soma.ia.com" className="text-[var(--softTextColor)] pl-1 hover:text-[var(--softTextColor)]">
-            support@ makesomaway@gmail.com
+            support@ Hodi@gmail.com
           </a>
         </p>
       </div>

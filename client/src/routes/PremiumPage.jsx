@@ -28,7 +28,7 @@ const PremiumPage = () => {
            Experience unlimited acces to our exclusive book summaries 
                  </p>
            <p className="mt-2 text-md md:text-xl">
-             somaway is free for now. Premium is comming soon!
+             Hodi is free for now. Premium is comming soon!
            </p>
            <button
              className="mt-9 bg-black text-white py-4 text-extrabold text-2xl md:text-5xl 

@@ -1,16 +1,21 @@
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { FaSearch, FaTimes } from "react-icons/fa";
-
-
-
-
+import { useLocation } from "react-router-dom";
 import { useState, useEffect, useRef } from "react";
 
 const useScrollDirection = () => {
   const [isScrolledUp, setIsScrolledUp] = useState(false);
   const lastScrollTop = useRef(0);
 
+  const location = useLocation(); // Get the current path
+
   useEffect(() => {
+    // If the path is not "/", set isScrolledUp to true
+    if (location.pathname !== "/") {
+      setIsScrolledUp(true);
+      return;
+    }
+    
     const handleScroll = () => {
       const scrollTop = window.scrollY;
 

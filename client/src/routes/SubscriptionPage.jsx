@@ -63,7 +63,7 @@ const SubscriptionPage = () => {
 <>
   <div className="text-center sm:text-left">
     <h1 className="text-xl lg:text-2xl font-bold text-white">
-      Try  Somaway's premium
+      Try  Hodi's premium
     </h1>
     <p className="text-6xl font-bold text-white">{planPrice}</p>
     <p className="text-lg font-bold text-white mt-2">{planName} Subscription</p>
@@ -78,7 +78,7 @@ const SubscriptionPage = () => {
 
      
           <p className="text-md md:text-lg text-gray-400 italic absolute bottom-5">
-            Powered by <span className="text-xl md:text-2xl font-bold"> Somaway</span>
+            Powered by <span className="text-xl md:text-2xl font-bold"> Hodi</span>
                 </p>
 
       
