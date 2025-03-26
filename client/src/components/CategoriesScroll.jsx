@@ -118,7 +118,7 @@ const CategoriesScroll = ({ setOpen }) => {
       fontSize: window.innerWidth <= 768 ? "15px" : "20px",
       display: "flex",
       alignItems: "center",
-      color: isHovered ? "var(--softTextColor)" : "inherit",
+      color:  "inherit",
       transition: "color 0.3s ease",
     }}
     onMouseEnter={() => setIsHovered(true)}
