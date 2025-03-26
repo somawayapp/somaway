@@ -16,13 +16,13 @@ const PostList = () => {
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
 
-  const { data, error, status } = useQuery({
+  const { data, error, status, isFetching } = useQuery({
     queryKey: ["posts", searchParams.toString()],
     queryFn: () => fetchPosts(searchParams),
     staleTime: 1000 * 60 * 5,
     cacheTime: 1000 * 60 * 15,
+    keepPreviousData: true, // Prevents blank state when refetching
   });
-
 
   if (error) return <p>Something went wrong!</p>;
 
@@ -35,21 +35,19 @@ const PostList = () => {
           onClick={() => navigate("/")}
           className="px-6 py-3 flex flex-col rounded-xl border border-[var(--softBg4)] text-[var(--softTextColor)] hover:shadow-md"
         >
-        <p className="mb-4 text-[var(--softTextColor)]">No posts found</p>
-        <p className="mb-4 font-semibold text-[var(--softTextColor)]">Go Back Home</p>
-
-          
+          <p className="mb-4 text-[var(--softTextColor)]">No posts found</p>
+          <p className="mb-4 font-semibold text-[var(--softTextColor)]">
+            Go Back Home
+          </p>
         </button>
       </div>
     );
   }
 
-
   return (
-    <div
-      className="gap-3 md:gap-6 grid grid-cols-1 md:grid-cols-4 scrollbar-hide"
-    >
-      {allPosts.map((post) => (
+    <div className="gap-3 md:gap-6 grid grid-cols-1 md:grid-cols-4 scrollbar-hide">
+      {allPosts.length > 0 && <PostListItem key={allPosts[0]._id} post={allPosts[0]} />}
+      {allPosts.slice(1).map((post) => (
         <PostListItem key={post._id} post={post} />
       ))}
     </div>

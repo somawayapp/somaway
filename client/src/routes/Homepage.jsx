@@ -13,22 +13,14 @@ import { useEffect } from "react";
 
 
 const HomePage = () => {
-  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     window.scrollTo(0, 0);
     
-    // Simulate loading delay (you can replace this with real data fetching)
-    const timer = setTimeout(() => {
-      setLoading(false);
-    }, 1000); // Adjust time as needed
-
-    return () => clearTimeout(timer);
   }, []);
 
 
   
-  const [open, setOpen] = useState(false);
   const location = useLocation(); 
 
   const params = new URLSearchParams(location.search);
@@ -49,11 +41,7 @@ const HomePage = () => {
 
     return (
       <>
-      {loading ? (
-        <div className="flex justify-center items-center h-screen">
-          <SpinnerMini />
-        </div>
-      ) : (
+
         <div>
 <Helmet>
 <title>
@@ -83,7 +71,7 @@ from ${author || 'top authors'}in minutes. Elevate your mind—only on Somaway!`
        <Footer/>
        </div>
 
-    )}
+  
   </>
 
   );
