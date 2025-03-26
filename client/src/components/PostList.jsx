@@ -47,6 +47,22 @@ const PostList = () => {
 
   if (status === "loading") return <p>Loading...</p>;
   if (error) return <p>Something went wrong!</p>;
+  
+
+  if (displayedPosts.length === 0) {
+    return (
+      <div className="flex flex-col  items-center justify-center h-[100vh]">
+        <p className="mb-4 text-[var(--softTextColor)]">No posts found</p>
+        <button
+          onClick={() => navigate("/")}
+          className="px-4 py-2  rounded-xl border border-[var(--softBg4)] text-[var(--softTextColor)] hover-shadow-md"
+        >
+          Go Back Home
+        </button>
+      </div>
+    );
+  }
+
 
   return (
     <div className="gap-2 grid grid-cols-1 md:grid-cols-4 md:gap-6 scrollbar-hide">

@@ -31,7 +31,7 @@ const AboutPage = () => {
          </div>
          <img
            src="/home.jpg"
-           className="h-[100px] md:h-[400px] pb-9 md:pb-[100px] mx-auto "
+           className="h-[100px] md:h-[400px] pb-9 md:pb-[100px] rounded-xl mx-auto "
          />
        </div>
 
