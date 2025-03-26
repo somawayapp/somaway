@@ -110,7 +110,6 @@ const CategoriesScroll = ({ setOpen }) => {
                px-4 pb-3 transition-all"
               onClick={() => setOpen(false)}
             >
-           import { useState } from "react";
 
 {icons[propertytype] && (
   <span
