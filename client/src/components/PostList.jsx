@@ -1,65 +1,59 @@
 import PostListItem from "./PostListItem";
-import { useInfiniteQuery } from "@tanstack/react-query";
+import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
-import InfiniteScroll from "react-infinite-scroll-component";
 import { useSearchParams } from "react-router-dom";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
-const fetchPosts = async (pageParam, searchParams, limit) => {
+const fetchPosts = async (searchParams) => {
   const searchParamsObj = Object.fromEntries([...searchParams]);
-
   const res = await axios.get(`${import.meta.env.VITE_API_URL}/posts`, {
-    params: { page: pageParam, limit, ...searchParamsObj },
+    params: { ...searchParamsObj },
   });
-  return res.data;
+  return res.data.posts;
 };
 
 const PostList = () => {
   const [searchParams] = useSearchParams();
-
-  const {
-    data,
-    error,
-    fetchNextPage,
-    hasNextPage,
-    isFetchingNextPage,
-    status,
-  } = useInfiniteQuery({
+  const { data: allPosts = [], error, status } = useQuery({
     queryKey: ["posts", searchParams.toString()],
-    queryFn: ({ pageParam = 1 }) =>
-      fetchPosts(   pageParam === 1 ? 1 : pageParam === 2 ? 2 : pageParam === 3 ? 3 : 8 ),
-    initialPageParam: 1,
-    getNextPageParam: (lastPage, pages) =>
-      lastPage.hasMore ? pages.length + 1 : undefined,
+    queryFn: () => fetchPosts(searchParams),
     staleTime: 1000 * 60 * 10,
     cacheTime: 1000 * 60 * 30,
   });
 
-  // Preload the next set before user reaches the bottom
+  const [displayedPosts, setDisplayedPosts] = useState([]);
+
   useEffect(() => {
-    if (hasNextPage && !isFetchingNextPage) {
-      setTimeout(fetchNextPage, 1000); // Load next set early
-    }
-  }, [hasNextPage, isFetchingNextPage, fetchNextPage]);
+    if (allPosts.length === 0) return;
 
+    let newPosts = [];
+    let index = 0;
 
+    const loadNextBatch = (batchSize) => {
+      newPosts = [...newPosts, ...allPosts.slice(index, index + batchSize)];
+      setDisplayedPosts([...newPosts]);
+      index += batchSize;
+    };
 
+    loadNextBatch(1); // First batch of 1
+    setTimeout(() => loadNextBatch(2), 500);
+    setTimeout(() => loadNextBatch(3), 1000);
+    setTimeout(() => {
+      while (index < allPosts.length) {
+        loadNextBatch(8);
+      }
+    }, 1500);
+  }, [allPosts]);
+
+  if (status === "loading") return <p>Loading...</p>;
   if (error) return <p>Something went wrong!</p>;
 
-  const allPosts = data?.pages?.flatMap((page) => page.posts) || [];
-
   return (
-    <InfiniteScroll
-      dataLength={allPosts.length}
-      next={fetchNextPage}
-      hasMore={!!hasNextPage}
-
-      className="gap-3 md:gap-6 grid grid-cols-1 md:grid-cols-4 scrollbar-hide"
-    >
-      {allPosts.map((post) => (
+    <div className="gap-2 grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-7 md:gap-3 scrollbar-hide">
+      {displayedPosts.map((post) => (
         <PostListItem key={post._id} post={post} />
       ))}
-    </InfiniteScroll>
+    </div>
   );
 };
 
