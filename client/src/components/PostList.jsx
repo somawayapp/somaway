@@ -1,13 +1,13 @@
 import PostListItem from "./PostListItem";
-import { useQuery } from "@tanstack/react-query";
+import { useQuery, useQueries } from "@tanstack/react-query";
 import axios from "axios";
 import { useSearchParams, useNavigate } from "react-router-dom";
 import SpinnerMini from "./Loader";
 
-const fetchPosts = async (searchParams) => {
+const fetchPosts = async (searchParams, limit, offset = 0) => {
   const searchParamsObj = Object.fromEntries([...searchParams]);
   const res = await axios.get(`${import.meta.env.VITE_API_URL}/posts`, {
-    params: { ...searchParamsObj },
+    params: { ...searchParamsObj, limit, offset },
   });
   return res.data;
 };
@@ -16,18 +16,50 @@ const PostList = () => {
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
 
-  const { data, error, status } = useQuery({
-    queryKey: ["posts", searchParams.toString()],
-    queryFn: () => fetchPosts(searchParams),
-    staleTime: 1000 * 60 * 5,
-    cacheTime: 1000 * 60 * 15,
+  const queries = useQueries({
+    queries: [
+      {
+        queryKey: ["posts", "step1", searchParams.toString()],
+        queryFn: () => fetchPosts(searchParams, 1, 0), // Fetch first post
+        staleTime: 1000 * 60 * 5,
+      },
+      {
+        queryKey: ["posts", "step2", searchParams.toString()],
+        queryFn: () => fetchPosts(searchParams, 2, 1), // Fetch next two posts
+        enabled: false, // Start only after step 1 is done
+        staleTime: 1000 * 60 * 5,
+      },
+      {
+        queryKey: ["posts", "step3", searchParams.toString()],
+        queryFn: () => fetchPosts(searchParams, 3, 3), // Fetch next three posts
+        enabled: false, // Start only after step 2 is done
+        staleTime: 1000 * 60 * 5,
+      },
+      {
+        queryKey: ["posts", "rest", searchParams.toString()],
+        queryFn: () => fetchPosts(searchParams, 100, 6), // Fetch the rest
+        enabled: false, // Start only after step 3 is done
+        staleTime: 1000 * 60 * 5,
+      },
+    ],
   });
 
-  if (status === "loading") return <SpinnerMini />;
+  const [step1, step2, step3, rest] = queries;
+  
+  // When the first query is done, enable the second
+  if (step1.isSuccess && !step2.isFetching) step2.refetch();
+  if (step2.isSuccess && !step3.isFetching) step3.refetch();
+  if (step3.isSuccess && !rest.isFetching) rest.refetch();
 
-  if (error) return <p>Something went wrong!</p>;
+  const allPosts = [
+    ...(step1.data?.posts || []),
+    ...(step2.data?.posts || []),
+    ...(step3.data?.posts || []),
+    ...(rest.data?.posts || []),
+  ];
 
-  const allPosts = data?.posts || [];
+  if (step1.isLoading) return <SpinnerMini />;
+  if (queries.some((q) => q.isError)) return <p>Something went wrong!</p>;
 
   if (allPosts.length === 0) {
     return (
