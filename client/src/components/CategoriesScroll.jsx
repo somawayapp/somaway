@@ -9,7 +9,7 @@ import { FaSwimmingPool, FaWifi, FaParking, FaLeaf, FaBabyCarriage } from 'react
 import { MdBalcony, MdAir, MdFitnessCenter, MdSecurity, MdOutlineBackup} from 'react-icons/md';
 import { ArrowUpCircle } from "lucide-react";
 
-const categories = [
+const propertytypes = [
   "apartment",
   "studio",
   "bedsitter",
@@ -98,33 +98,39 @@ const CategoriesScroll = ({ setOpen }) => {
         className="flex gap-4 overflow-x-auto mb-5 scrollbar-hide"
         style={{ whiteSpace: "nowrap" }}
       >
-        {categories.map((category) => {
-          const slug = category.toLowerCase().replace(/\s+/g, "").replace(/&/g, "-");
+        {propertytypes.map((propertytype) => {
+          const slug = propertytype.toLowerCase().replace(/\s+/g, "").replace(/&/g, "-");
 
           return (
             <Link
-              key={category}
-              to={`/?cat=${slug}`}
-              className="flex flex-col items-center justify-center text-[var(--softTextColor)] hoover:font-semibold text-sm
-              md:text-lg bg-[var(--bg)] hover:shadow-md rounded-xl
-               px-5 pb-3 md:px-7 transition-all"
+              key={propertytype}
+              to={`/?propertytype=${slug}`}
+              className="flex flex-col items-center justify-center text-[var(--softTextColor)] hoover:text-[var(--softTextColor)] text-sm
+              md:text-md bg-[var(--bg)] rounded-xl
+               px-4 pb-3 transition-all"
               onClick={() => setOpen(false)}
             >
-           {icons[category] && (
+           import { useState } from "react";
+
+{icons[propertytype] && (
   <span
     style={{
       fontSize: window.innerWidth <= 768 ? "15px" : "20px",
       display: "flex",
       alignItems: "center",
-      color: "var(--softBg5)",
+      color: isHovered ? "var(--softTextColor)" : "inherit",
+      transition: "color 0.3s ease",
     }}
+    onMouseEnter={() => setIsHovered(true)}
+    onMouseLeave={() => setIsHovered(false)}
   >
-    {icons[category]}
+    {icons[propertytype]}
   </span>
 )}
 
 
-              <span className="text-xs font-normal  md:text-sm">{category}</span>
+
+              <span className="text-xs font-normal  md:text-sm">{propertytype}</span>
             </Link>
           );
         })}
