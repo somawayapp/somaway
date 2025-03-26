@@ -5,6 +5,8 @@ import InfiniteScroll from "react-infinite-scroll-component";
 import { useSearchParams, useNavigate } from "react-router-dom";
 import SpinnerMini from "./Loader";
 import { useEffect } from "react";
+import { useQuery } from "@tanstack/react-query";
+
 
 const fetchPosts = async (pageParam, searchParams, limit) => {
   const searchParamsObj = Object.fromEntries([...searchParams]);
