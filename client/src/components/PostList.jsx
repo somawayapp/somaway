@@ -51,13 +51,15 @@ const PostList = () => {
 
   if (displayedPosts.length === 0) {
     return (
-      <div className="flex flex-col  items-center justify-center h-[100vh]">
-        <p className="mb-4 text-[var(--softTextColor)]">No posts found</p>
+      <div className="flex flex-col  items-center justify-center h-[70vh]">
         <button
           onClick={() => navigate("/")}
-          className="px-4 py-2  rounded-xl border border-[var(--softBg4)] text-[var(--softTextColor)] hover-shadow-md"
+          className="px-9 py-4  rounded-xl border border-[var(--softBg4)] text-[var(--softTextColor)] hover:shadow-md"
         >
-          Go Back Home
+                  <p className="mb-4 text-[var(--softTextColor)]">No posts found</p>
+                  <p className="mb-4  font-bold hover:text-[var(--textColor)] text-[var(--softTextColor)]"> Go Back Home</p>
+
+         
         </button>
       </div>
     );

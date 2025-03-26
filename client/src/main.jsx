@@ -56,7 +56,7 @@ const router = createBrowserRouter([
    
       {
         path: "/about",
-        element: <AboutPage />,
+        element: <LandingPage />,
       },
       {
         path: "/premium",
