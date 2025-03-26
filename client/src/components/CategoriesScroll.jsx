@@ -105,18 +105,17 @@ const CategoriesScroll = ({ setOpen }) => {
             <Link
               key={propertytype}
               to={`/?propertytype=${slug}`}
-              className="flex flex-col items-center justify-center text-[var(--softTextColor)] hoover: text-sm
+              className="flex flex-col items-center justify-center text-[var(--softTextColor)] hoover:text-[var(--textColor)] text-sm
               md:text-md bg-[var(--bg)] rounded-xl
-               px-4 pb-3 transition-all"
+               px-2 md:px-6 pb-3 transition-all"
               onClick={() => setOpen(false)}
             >
            {icons[propertytype] && (
-  <span
+  <span className="text-[var(--softBg5)] hoover:text-[var(--softTextColor)]"
     style={{
       fontSize: window.innerWidth <= 768 ? "20px" : "25px",
       display: "flex",
       alignItems: "center",
-      color: "var(--softTextColor)",
     }}
   >
     {icons[propertytype]}
