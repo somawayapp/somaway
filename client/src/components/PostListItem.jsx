@@ -27,7 +27,7 @@ const PostListItem = ({ post }) => {
         <img
           key={index}
           src={image}
-          className="w-autonh-full object-cover rounded-xl md:rounded-2xl flex-shrink-0 snap-center"
+          className="w-auto h-full object-cover rounded-xl md:rounded-2xl flex-shrink-0 snap-center"
         />
       ))}
     </div>
