@@ -68,7 +68,7 @@ const PostList = () => {
           className="px-9 py-4 rounded-xl border border-[var(--softBg4)] text-[var(--softTextColor)] shadow:md hover:text-[var(--textColor)"
         >
           <p className="mb-4 ">No posts found</p>
-          <p className="mb-4 font-bold ] ">
+          <p className="mb-4 font-bold ">
             Go Back Home
           </p>
         </button>
