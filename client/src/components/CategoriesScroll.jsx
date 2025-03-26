@@ -76,20 +76,20 @@ const CategoriesScroll = ({ setOpen }) => {
       {showLeftButton && (
         <button
           onClick={() => scroll("left")}
-          className="absolute left-1 top-1/3 transform -translate-y-1/2 hidden md:block bg-[var(--softBg4)] bg-opacity-5 rounded-full py-2 px-4 z-10"
+          className="absolute left-1 top-1/3 transform -translate-y-1/2 hidden md:block bg-[var(--softBg4)] bg-opacity-85 rounded-full py-2 px-4 z-10"
           style={{ border: "none" }}
         >
-          <span className="text-white font-bold">&lt;</span>
+          <span className="text-[var(--bg)] font-bold">&lt;</span>
         </button>
       )}
 
       {showRightButton && (
         <button
           onClick={() => scroll("right")}
-          className="absolute right-1 top-1/3 transform -translate-y-1/2 hidden md:block bg-[var(--softBg4)] bg-opacity-5 rounded-full py-2 px-4 z-10"
+          className="absolute right-1 top-1/3 transform -translate-y-1/2 hidden md:block bg-[var(--softBg4)] bg-opacity-85 rounded-full py-2 px-4 z-10"
           style={{ border: "none" }}
         >
-          <span className="text-[var(--softTextColor)] font-bold">&gt;</span>
+          <span className="text-[var(--bg)] font-bold">&gt;</span>
         </button>
       )}
 
