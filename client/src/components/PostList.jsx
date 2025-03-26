@@ -23,13 +23,6 @@ const PostList = () => {
     cacheTime: 1000 * 60 * 15,
   });
 
-  if (status === "loading") {
-    return (
-      <div className="flex justify-center items-center h-40">
-        <SpinnerMini />
-      </div>
-    );
-  }
 
   if (error) return <p>Something went wrong!</p>;
 
