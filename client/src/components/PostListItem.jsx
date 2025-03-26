@@ -20,29 +20,34 @@ const PostListItem = ({ post }) => {
     <div className="relative  gap-2 md:gap-4 group mb-6 md:mb-[30px] overflow-hidden rounded-xl">
       {/* Image with Link */}
       <Link to={`/${post.slug}`} className="block">
+  <div className="relative w-full aspect-[3/3] rounded-xl md:rounded-2xl overflow-hidden">
+    {/* Scrollable Image Container */}
+    <div className="flex overflow-x-auto snap-x snap-mandatory scroll-smooth scrollbar-hide">
+      {images.map((image, index) => (
+        <img
+          key={index}
+          src={image}
+          className="w-full h-full object-cover rounded-xl md:rounded-2xl flex-shrink-0 snap-center"
+        />
+      ))}
+    </div>
 
-        <div className="relative w-full aspect-[3/3] rounded-xl md:rounded-2xl overflow-x-auto">
+    {/* Dots inside the image at the bottom */}
+    {images.length > 1 && (
+      <div className="absolute bottom-3 left-1/2 transform -translate-x-1/2 flex gap-1 px-2 py-1 rounded-full">
+        {images.map((_, index) => (
+          <span
+            key={index}
+            className={`h-1 w-1 rounded-full bg-white transition-all duration-300 ${
+              currentIndex === index ? "w-2 scale-110" : "opacity-50"
+            }`}
+          ></span>
+        ))}
+      </div>
+    )}
+  </div>
+</Link>
 
-          <img
-            src={images[currentIndex]}
-            className="absolute top-0 left-0 w-full h-full object-cover rounded-xl md:rounded-2xl transition-all duration-300"
-          />
-
-          {/* Dots inside the image at the bottom */}
-          {images.length > 1 && (
-            <div className="absolute bottom-3 left-1/2 transform -translate-x-1/2 flex gap-1  px-2 py-1 rounded-full">
-              {images.map((_, index) => (
-                <span
-                  key={index}
-                  className={`h-1 w-1 rounded-full bg-white transition-all duration-300 ${
-                    currentIndex === index ? "w-2 scale-110" : "opacity-50"
-                  }`}
-                ></span>
-              ))}
-            </div>
-          )}
-        </div>
-      </Link>
 
       {/* Navigation Arrows (outside Link to prevent navigation) */}
       {images.length > 1 && (
