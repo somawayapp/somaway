@@ -24,11 +24,17 @@ const PostListItem = ({ post }) => {
     {/* Scrollable Image Container */}
     <div className="flex overflow-x-auto snap-x snap-mandatory scroll-smooth scrollbar-hide">
       {images.map((image, index) => (
-        <img
-          key={index}
-          src={image}
-          className="w-full h-full object-cover rounded-xl md:rounded-2xl flex-shrink-0 snap-center"
-        />
+        <div key={index} className="relative w-full flex-shrink-0 snap-center">
+          {/* Skeleton Loader */}
+          <div className="absolute inset-0 bg-[var(--softBg4)] animate-pulse rounded-xl md:rounded-2xl"></div>
+          
+          {/* Actual Image */}
+          <img
+            src={image}
+            className="w-full h-full object-cover rounded-xl md:rounded-2xl"
+            onLoad={(e) => e.target.previousSibling.remove()} // Removes loader on image load
+          />
+        </div>
       ))}
     </div>
 
