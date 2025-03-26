@@ -20,14 +20,14 @@ const PostListItem = ({ post }) => {
     <div className="relative  gap-2 md:gap-4 group mb-6 md:mb-[30px] overflow-hidden rounded-xl">
       {/* Image with Link */}
       <Link to={`/${post.slug}`} className="block">
-  <div className="relative w-auto  h-full aspect-[3/3] rounded-xl md:rounded-2xl overflow-hidden">
+  <div className="relative w-full h-full aspect-[3/3] rounded-xl md:rounded-2xl overflow-hidden">
     {/* Scrollable Image Container */}
-    <div className="flex overflow-x-auto snap-x snap-mandatory scroll-smooth scrollbar-hide">
+    <div className="flex overflow-x-auto aspect-[3/3]  snap-x snap-mandatory scroll-smooth scrollbar-hide">
       {images.map((image, index) => (
         <img
           key={index}
           src={image}
-          className="w-auto h-full object-cover rounded-xl md:rounded-2xl flex-shrink-0 snap-center"
+          className="w-full h-full object-cover rounded-xl md:rounded-2xl flex-shrink-0 snap-center"
         />
       ))}
     </div>
