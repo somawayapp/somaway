@@ -21,7 +21,7 @@ const PostListItem = ({ post }) => {
       {/* Image with Link */}
       <Link to={`/${post.slug}`} className="block">
 
-        <div className="relative w-full aspect-[3/3] rounded-xl md:rounded-2xl overflow-hidden">
+        <div className="relative w-full aspect-[3/3] rounded-xl md:rounded-2xl overflow-x-auto">
 
           <img
             src={images[currentIndex]}
