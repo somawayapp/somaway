@@ -1,9 +1,9 @@
 import React, { useRef, useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { FaBath, FaRulerCombined } from "react-icons/fa";
-import { FaBuilding, FaWarehouse, FaHome, FaTree, FaBed } from "react-icons/fa";
+import { FaBuilding,FaCouch, FaDoorOpen, FaWarehouse, FaHome, FaTree, FaBed } from "react-icons/fa";
 import { MdVilla, MdApartment } from "react-icons/md";
-import { GiOfficeChair, GiShop, GiCargoCrate } from "react-icons/gi";
+import { GiOfficeChair, GiShop, GiMansion, GiCargoCrate } from "react-icons/gi";
 import { FaSwimmingPool, FaWifi, FaParking, FaLeaf, FaBabyCarriage } from 'react-icons/fa';
 import { MdBalcony, MdAir, MdFitnessCenter, MdSecurity, MdOutlineBackup} from 'react-icons/md';
 import { ArrowUpCircle } from "lucide-react";
@@ -25,13 +25,13 @@ const categories = [
 ];
 
 const icons = {
-  apartment: <MdApartment />,
-  studio: <FaBed />,
+  apartment: <FaBuilding />,
+  studio: <FaCouch   />,
   bedsitter: <FaBed />,
-  "single-room": <FaBed />,
+  "single-room": <FaDoorOpen  />,
   "town-house": <FaHome />,
   bungalow: <FaHome />,
-  mansionatte: <FaBuilding />, 
+  mansionatte: <GiMansion  />, 
   villa: <MdVilla />,
   container: <GiCargoCrate />,
   office: <GiOfficeChair />,
@@ -104,8 +104,8 @@ const CategoriesScroll = ({ setOpen }) => {
             <Link
               key={category}
               to={`/?cat=${slug}`}
-              className="flex flex-col items-center gap-2 md:gap-4 justify-center text-[var(--textColor)] text-sm
-              md:text-lg bg-[var(--bd3)] shadow-xl hover:bg-[var(--textColore)] rounded-xl
+              className="flex flex-col items-center gap-2 md:gap-4 justify-center text-[var(--softTextColor)] text-sm
+              md:text-lg bg-[var(--bg)] shadow-xl hover:shadow-md rounded-xl
                px-5 py-2 md:px-7 transition-all"
               onClick={() => setOpen(false)}
             >
@@ -114,13 +114,13 @@ const CategoriesScroll = ({ setOpen }) => {
                   fontSize: "30px",
                   display: "flex", 
                   alignItems: "center",
-                  color: "var(--softTextColor)",
-                  fill: "var(--softTextColor)"
+                  color: "var(--softBg5)",
+                  fill: "var(--softBg5)"
                 }}>
                   {icons[category]}
                 </span>
               )}
-              <span className="text-sm font-semibold md:text-md">{category}</span>
+              <span className="text-xs font-normal text-[var(--softTextColor)] hoover:font-semibold md:text-sm">{category}</span>
             </Link>
           );
         })}
