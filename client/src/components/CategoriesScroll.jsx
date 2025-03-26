@@ -76,7 +76,7 @@ const CategoriesScroll = ({ setOpen }) => {
       {showLeftButton && (
         <button
           onClick={() => scroll("left")}
-          className="absolute left-1 top-1/3 transform -translate-y-1/2 hidden md:block bg-[var(--shadow-color)] bg-opacity-5 rounded-full py-2 px-4 z-10"
+          className="absolute left-1 top-1/3 transform -translate-y-1/2 hidden md:block bg-[var(--softBg4)] bg-opacity-5 rounded-full py-2 px-4 z-10"
           style={{ border: "none" }}
         >
           <span className="text-white font-bold">&lt;</span>
@@ -86,7 +86,7 @@ const CategoriesScroll = ({ setOpen }) => {
       {showRightButton && (
         <button
           onClick={() => scroll("right")}
-          className="absolute right-1 top-1/3 transform -translate-y-1/2 hidden md:block bg-[var(--shadow-color)] bg-opacity-50 rounded-full py-2 px-4 z-10"
+          className="absolute right-1 top-1/3 transform -translate-y-1/2 hidden md:block bg-[var(--softBg4)] bg-opacity-50 rounded-full py-2 px-4 z-10"
           style={{ border: "none" }}
         >
           <span className="text-white font-bold">&gt;</span>
@@ -105,13 +105,13 @@ const CategoriesScroll = ({ setOpen }) => {
             <Link
               key={propertytype}
               to={`/?propertytype=${slug}`}
-              className="flex flex-col items-center justify-center text-[var(--softTextColor)] hoover:text-[var(--textColor)] text-sm
+              className="flex flex-col items-center justify-center text-[var(--softTextColor)] hover:text-[var(--textColor)] text-sm
               md:text-md bg-[var(--bg)] rounded-xl
-               px-2 md:px-6 pb-3 transition-all"
+               pr-2 md:pr-6 pb-3 transition-all"
               onClick={() => setOpen(false)}
             >
            {icons[propertytype] && (
-  <span className="text-[var(--softBg5)] hoover:text-[var(--softTextColor)]"
+  <span className="text-[var(--softBg5)] hover:text-[var(--softTextColor)]"
     style={{
       fontSize: window.innerWidth <= 768 ? "20px" : "25px",
       display: "flex",
