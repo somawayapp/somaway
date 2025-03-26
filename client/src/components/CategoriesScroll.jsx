@@ -3,7 +3,8 @@ import { Link } from "react-router-dom";
 import { FaBath, FaRulerCombined } from "react-icons/fa";
 import { FaBuilding,FaCouch, FaDoorOpen, FaWarehouse, FaHome, FaTree, FaBed } from "react-icons/fa";
 import { MdVilla, MdApartment } from "react-icons/md";
-import { GiOfficeChair, GiShop, GiMansion, GiCargoCrate } from "react-icons/gi";
+import { TbBuildingCommunity } from "react-icons/tb";
+import { GiOfficeChair, GiShop, GiCastle, GiCargoCrate } from "react-icons/gi";
 import { FaSwimmingPool, FaWifi, FaParking, FaLeaf, FaBabyCarriage } from 'react-icons/fa';
 import { MdBalcony, MdAir, MdFitnessCenter, MdSecurity, MdOutlineBackup} from 'react-icons/md';
 import { ArrowUpCircle } from "lucide-react";
@@ -29,9 +30,9 @@ const icons = {
   studio: <FaCouch   />,
   bedsitter: <FaBed />,
   "single-room": <FaDoorOpen  />,
-  "town-house": <FaHome />,
-  bungalow: <FaHome />,
-  mansionatte: <GiMansion  />, 
+  "town-house": <TbBuildingCommunity />,
+  bungalow: <FaHome />,   
+  mansionatte: <GiCastle/>, 
   villa: <MdVilla />,
   container: <GiCargoCrate />,
   office: <GiOfficeChair />,
@@ -114,8 +115,8 @@ const CategoriesScroll = ({ setOpen }) => {
                   fontSize: "30px",
                   display: "flex", 
                   alignItems: "center",
-                  color: "var(--softBg5)",
-                  fill: "var(--softBg5)"
+                  color: "black",
+                  fill: "black"
                 }}>
                   {icons[category]}
                 </span>
