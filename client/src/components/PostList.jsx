@@ -2,7 +2,7 @@ import PostListItem from "./PostListItem";
 import { useInfiniteQuery } from "@tanstack/react-query";
 import axios from "axios";
 import InfiniteScroll from "react-infinite-scroll-component";
-import { useSearchParams } from "react-router-dom";
+import { useSearchParams, useNavigate } from "react-router-dom";
 import SpinnerMini from "./Loader";
 import { useEffect } from "react";
 
@@ -17,6 +17,7 @@ const fetchPosts = async (pageParam, searchParams, limit) => {
 
 const PostList = () => {
   const [searchParams] = useSearchParams();
+  const navigate = useNavigate();
 
   const {
     data,
@@ -28,7 +29,7 @@ const PostList = () => {
   } = useInfiniteQuery({
     queryKey: ["posts", searchParams.toString()],
     queryFn: ({ pageParam = 1 }) =>
-      fetchPosts(pageParam, searchParams, pageParam === 1 ? 8 : 12), // 8 first, 12 per scroll
+      fetchPosts(pageParam, searchParams, pageParam === 1 ? 2 : 8), // 8 first, 12 per scroll
     initialPageParam: 1,
     getNextPageParam: (lastPage, pages) =>
       lastPage.hasMore ? pages.length + 1 : undefined,
@@ -54,6 +55,20 @@ const PostList = () => {
   if (error) return <p>Something went wrong!</p>;
 
   const allPosts = data?.pages?.flatMap((page) => page.posts) || [];
+
+  if (allPosts.length === 0) {
+    return (
+      <div className="flex flex-col rounded-xl border border-[var(--softTextColor)] hover-shadow-md items-center justify-center h-60">
+        <p className="mb-4 text-[var(--softTextColor)]">No posts found</p>
+        <button
+          onClick={() => navigate("/")}
+          className="px-4 py-2 text-[var(--softTextColor)] text-white rounded-md hover:text-text-[var(--textColor)]"
+        >
+          Go Back Home
+        </button>
+      </div>
+    );
+  }
 
   return (
     <InfiniteScroll
