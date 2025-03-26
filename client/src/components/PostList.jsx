@@ -49,7 +49,7 @@ const PostList = () => {
   if (error) return <p>Something went wrong!</p>;
 
   return (
-    <div className="gap-2 grid grid-cols-1  md:gap-4 lg:col-6 scrollbar-hide">
+    <div className="gap-2 grid grid-cols-2 md:grid-cols-5 md:gap-3 scrollbar-hide">
       {displayedPosts.map((post) => (
         <PostListItem key={post._id} post={post} />
       ))}
