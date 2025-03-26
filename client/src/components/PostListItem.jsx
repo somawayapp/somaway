@@ -20,21 +20,15 @@ const PostListItem = ({ post }) => {
     <div className="relative  gap-2 md:gap-4 group mb-6 md:mb-[30px] overflow-hidden rounded-xl">
       {/* Image with Link */}
       <Link to={`/${post.slug}`} className="block">
-  <div className="relative w-full aspect-[3/3] rounded-xl md:rounded-2xl overflow-hidden">
+  <div className="relative w-full h-full aspect-[3/3] rounded-xl md:rounded-2xl overflow-hidden">
     {/* Scrollable Image Container */}
     <div className="flex overflow-x-auto snap-x snap-mandatory scroll-smooth scrollbar-hide">
       {images.map((image, index) => (
-        <div key={index} className="relative w-full flex-shrink-0 snap-center">
-          {/* Skeleton Loader */}
-          <div className="absolute inset-0 bg-[var(--softBg4)] animate-pulse rounded-xl md:rounded-2xl"></div>
-          
-          {/* Actual Image */}
-          <img
-            src={image}
-            className="w-full h-full object-cover rounded-xl md:rounded-2xl"
-            onLoad={(e) => e.target.previousSibling.remove()} // Removes loader on image load
-          />
-        </div>
+        <img
+          key={index}
+          src={image}
+          className="w-full h-full object-cover rounded-xl md:rounded-2xl flex-shrink-0 snap-center"
+        />
       ))}
     </div>
 
