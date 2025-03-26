@@ -30,7 +30,7 @@ const PostListItem = ({ post }) => {
 
           {/* Dots inside the image at the bottom */}
           {images.length > 1 && (
-            <div className="absolute bottom-3 left-1/2 transform -translate-x-1/2 flex gap-1 md:gap-2 px-2 py-1 rounded-full">
+            <div className="absolute bottom-3 left-1/2 transform -translate-x-1/2 flex gap-1  px-2 py-1 rounded-full">
               {images.map((_, index) => (
                 <span
                   key={index}
