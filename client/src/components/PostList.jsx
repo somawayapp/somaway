@@ -1,81 +1,65 @@
 import PostListItem from "./PostListItem";
-import { useState, useEffect } from "react";
+import { useInfiniteQuery } from "@tanstack/react-query";
 import axios from "axios";
-import { useSearchParams, useNavigate } from "react-router-dom";
-import SpinnerMini from "./Loader";
+import InfiniteScroll from "react-infinite-scroll-component";
+import { useSearchParams } from "react-router-dom";
+import { useEffect } from "react";
 
-const fetchPostByIndex = async (searchParams, index) => {
+const fetchPosts = async (pageParam, searchParams, limit) => {
   const searchParamsObj = Object.fromEntries([...searchParams]);
+
   const res = await axios.get(`${import.meta.env.VITE_API_URL}/posts`, {
-    params: { ...searchParamsObj, limit: 1, offset: index },
+    params: { page: pageParam, limit, ...searchParamsObj },
   });
-  return res.data.posts?.[0] || null;
+  return res.data;
 };
 
 const PostList = () => {
   const [searchParams] = useSearchParams();
-  const navigate = useNavigate();
-  const [posts, setPosts] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(false);
 
+  const {
+    data,
+    error,
+    fetchNextPage,
+    hasNextPage,
+    isFetchingNextPage,
+    status,
+  } = useInfiniteQuery({
+    queryKey: ["posts", searchParams.toString()],
+    queryFn: ({ pageParam = 1 }) =>
+      fetchPosts(   pageParam === 1 ? 1 : pageParam === 2 ? 2 : pageParam === 3 ? 3 : 8 ),
+    initialPageParam: 1,
+    getNextPageParam: (lastPage, pages) =>
+      lastPage.hasMore ? pages.length + 1 : undefined,
+    staleTime: 1000 * 60 * 10,
+    cacheTime: 1000 * 60 * 30,
+  });
+
+  // Preload the next set before user reaches the bottom
   useEffect(() => {
-    let isMounted = true;
+    if (hasNextPage && !isFetchingNextPage) {
+      setTimeout(fetchNextPage, 1000); // Load next set early
+    }
+  }, [hasNextPage, isFetchingNextPage, fetchNextPage]);
 
-    const loadPosts = async () => {
-      try {
-        setLoading(true);
-        setError(false);
 
-        let index = 0;
-        const newPosts = [];
-
-        while (true) {
-          const post = await fetchPostByIndex(searchParams, index);
-          if (!post) break; // Stop if no more posts
-          
-          if (isMounted) {
-            newPosts.push(post);
-            setPosts([...newPosts]); // Update UI as each post loads
-          }
-
-          index++;
-        }
-      } catch (err) {
-        if (isMounted) setError(true);
-      } finally {
-        if (isMounted) setLoading(false);
-      }
-    };
-
-    loadPosts();
-    return () => (isMounted = false);
-  }, [searchParams]);
 
   if (error) return <p>Something went wrong!</p>;
 
-  if (loading && posts.length === 0) return <SpinnerMini />;
-
-  if (posts.length === 0) {
-    return (
-      <div className="flex flex-col items-center justify-center h-[100vh]">
-        <button
-          onClick={() => navigate("/")}
-          className="px-6 py-3 flex flex-col rounded-xl border border-[var(--softBg4)] text-[var(--softTextColor)] hover:shadow-md"
-        >
-          <p className="mb-4 text-[var(--softTextColor)]">No posts found</p>
-          <p className="mb-4 font-semibold text-[var(--softTextColor)]">Go Back Home</p>
-        </button>
-      </div>
-    );
-  }
+  const allPosts = data?.pages?.flatMap((page) => page.posts) || [];
 
   return (
-    <div className="gap-3 md:gap-6 grid grid-cols-1 md:grid-cols-4 scrollbar-hide">
-      {posts.map((post) => (
+    <InfiniteScroll
+      dataLength={allPosts.length}
+      next={fetchNextPage}
+      hasMore={!!hasNextPage}
+
+      className="gap-3 md:gap-6 grid grid-cols-1 md:grid-cols-4 scrollbar-hide"
+    >
+      {allPosts.map((post) => (
         <PostListItem key={post._id} post={post} />
       ))}
-    </div>
+    </InfiniteScroll>
   );
 };
 
