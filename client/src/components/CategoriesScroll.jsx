@@ -121,8 +121,7 @@ const CategoriesScroll = ({ setOpen }) => {
       color:  "inherit",
       transition: "color 0.3s ease",
     }}
-    onMouseEnter={() => setIsHovered(true)}
-    onMouseLeave={() => setIsHovered(false)}
+
   >
     {icons[propertytype]}
   </span>
