@@ -46,13 +46,13 @@ const PostList = () => {
 
 
   return (
-    <InfiniteScroll
+    <div
       className="gap-3 md:gap-6 grid grid-cols-1 md:grid-cols-4 scrollbar-hide"
     >
       {allPosts.map((post) => (
         <PostListItem key={post._id} post={post} />
       ))}
-    </InfiniteScroll>
+    </div>
   );
 };
 
