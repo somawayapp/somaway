@@ -86,10 +86,10 @@ const CategoriesScroll = ({ setOpen }) => {
       {showRightButton && (
         <button
           onClick={() => scroll("right")}
-          className="absolute right-1 top-1/3 transform -translate-y-1/2 hidden md:block bg-[var(--softBg4)] bg-opacity-50 rounded-full py-2 px-4 z-10"
+          className="absolute right-1 top-1/3 transform -translate-y-1/2 hidden md:block bg-[var(--softBg4)] bg-opacity-5 rounded-full py-2 px-4 z-10"
           style={{ border: "none" }}
         >
-          <span className="text-white font-bold">&gt;</span>
+          <span className="text-[var(--softTextColor)] font-bold">&gt;</span>
         </button>
       )}
 
@@ -107,7 +107,7 @@ const CategoriesScroll = ({ setOpen }) => {
               to={`/?propertytype=${slug}`}
               className="flex flex-col items-center justify-center text-[var(--softTextColor)] hover:text-[var(--textColor)] text-sm
               md:text-md bg-[var(--bg)] rounded-xl
-               pr-2 md:pr-6 md:pl-6 pb-3 transition-all"
+               pr-2 md:pr-[30px] pb-3 transition-all"
               onClick={() => setOpen(false)}
             >
            {icons[propertytype] && (

@@ -123,7 +123,7 @@ const Search = () => {
       <button
     onClick={() => setIsOpen(true)}
     type="button"
-    className={`border-[1px] border-[var(--softBg4)] max-w-[1100px]  shadow-sm w-full mx-auto rounded-full shadow-md transition duration-300 cursor-pointer  ${
+    className={`border-[1px] border-[var(--softBg4)] max-w-[1100px] w-full mx-auto rounded-full shadow-md transition duration-300 cursor-pointer  ${
         isScrolledUp ? " mt-6 mb-0" : " mt-0 mb-4"
       } `}
     >
