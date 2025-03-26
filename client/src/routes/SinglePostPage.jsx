@@ -332,6 +332,7 @@ const details = [
         </div>
       </div>
       <hr className="h-[1px] bg-[var(--softBg4)] border-0" />
+      
       <p className=" flex flex-row" style={{ 
   alignItems: "center", 
 }}>
