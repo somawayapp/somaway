@@ -21,8 +21,8 @@ const PostList = () => {
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
   const { isPending,  } = useQuery({
-    queryKey: ["post", slug],
-    queryFn: () => fetchPosts(slug),
+    queryKey: ["post"],
+    queryFn: () => fetchPosts(),
   });
 
 
