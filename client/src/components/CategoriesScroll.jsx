@@ -105,23 +105,26 @@ const CategoriesScroll = ({ setOpen }) => {
             <Link
               key={category}
               to={`/?cat=${slug}`}
-              className="flex flex-col items-center gap-2 md:gap-4 justify-center text-[var(--softTextColor)] text-sm
-              md:text-lg bg-[var(--bg)] shadow-xl hover:shadow-md rounded-xl
-               px-5 py-2 md:px-7 transition-all"
+              className="flex flex-col items-center justify-center text-[var(--softTextColor)] hoover:font-semibold text-sm
+              md:text-lg bg-[var(--bg)] hover:shadow-md rounded-xl
+               px-5 pb-3 md:px-7 transition-all"
               onClick={() => setOpen(false)}
             >
-              {icons[category] && (
-                <span style={{ 
-                  fontSize: "30px",
-                  display: "flex", 
-                  alignItems: "center",
-                  color: "black",
-                  fill: "black"
-                }}>
-                  {icons[category]}
-                </span>
-              )}
-              <span className="text-xs font-normal text-[var(--softTextColor)] hoover:font-semibold md:text-sm">{category}</span>
+           {icons[category] && (
+  <span
+    style={{
+      fontSize: window.innerWidth <= 768 ? "15px" : "20px",
+      display: "flex",
+      alignItems: "center",
+      color: "var(--softBg5)",
+    }}
+  >
+    {icons[category]}
+  </span>
+)}
+
+
+              <span className="text-xs font-normal  md:text-sm">{category}</span>
             </Link>
           );
         })}
