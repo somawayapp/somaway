@@ -49,21 +49,33 @@ const PostList = () => {
   if (error) return <p>Something went wrong!</p>;
   
 
-  if (displayedPosts.length === 0) {
+
+  const [showMessage, setShowMessage] = useState(false);
+  
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setShowMessage(true);
+    }, 2000); // 2-second delay
+  
+    return () => clearTimeout(timer); // Cleanup timeout on unmount
+  }, []);
+  
+  if (displayedPosts.length === 0 && showMessage) {
     return (
-      <div className="flex flex-col  items-center justify-center h-[70vh]">
+      <div className="flex flex-col items-center justify-center h-[50vh]">
         <button
           onClick={() => navigate("/")}
-          className="px-9 py-4  rounded-xl border border-[var(--softBg4)] text-[var(--softTextColor)] hover:shadow-md"
+          className="px-9 py-4 rounded-xl border border-[var(--softBg4)] text-[var(--softTextColor)] shadow:sm hover:shadow-lg"
         >
-                  <p className="mb-4 text-[var(--softTextColor)]">No posts found</p>
-                  <p className="mb-4  font-bold hover:text-[var(--textColor)] text-[var(--softTextColor)]"> Go Back Home</p>
-
-         
+          <p className="mb-4 text-[var(--softTextColor)]">No posts found</p>
+          <p className="mb-4 font-bold hover:text-[var(--textColor)] text-[var(--softTextColor)]">
+            Go Back Home
+          </p>
         </button>
       </div>
     );
   }
+  
 
 
   return (
