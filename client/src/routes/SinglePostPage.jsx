@@ -23,6 +23,8 @@
           import { useRef } from "react";
           import Ratings from "../components/Ratings";
           import RelatedPosts from "../components/RelatedPosts";
+          import { ChevronLeft } from "lucide-react";
+          import { ChevronRight } from "lucide-react";
 
 
           const fetchPost = async (slug) => {
@@ -248,7 +250,7 @@ const details = [
     >
       {/* Close Button (Top Right) */}
       <button
-        className="absolute top-3 right-3 pt-1 pr-1 bg-gray-400 text-white w-10 h-10 flex items-center justify-center rounded-full z-10"
+        className="absolute top-4 right-4 pt-1 pr-1  bg-black bg-opacity-50 text-white w-10 h-10 flex items-center justify-center rounded-full z-10"
         onClick={() => setPopupImage(null)}
       >
         ✖
@@ -256,17 +258,17 @@ const details = [
 
       {/* Previous and Next Buttons (Centered on Image) */}
       <button
-        className="absolute pl-1 left-3 top-1/2 transform -translate-y-1/2 bg-gray-400 text-white w-10 h-10 flex items-center justify-center rounded-full z-10"
-        onClick={() => navigatePopup("prev")}
-      >
-        ◀
-      </button>
-      <button
-        className="absolute right-3 top-1/2 pr-1 transform -translate-y-1/2 bg-gray-400 text-white w-10 h-10 flex items-center justify-center rounded-full z-10"
-        onClick={() => navigatePopup("next")}
-      >
-        ▶
-      </button>
+      onClick={handlePrev}
+      className="hidden md:block absolute left-3 top-1/2 -translate-y-1/2 bg-black bg-opacity-50 text-white p-2 rounded-full opacity-0 group-hover:opacity-100 transition"
+    >
+      <ChevronLeft size={24} />
+    </button>
+    <button
+      onClick={handleNext}
+      className="hidden md:block absolute right-3 top-1/2 -translate-y-1/2 bg-black bg-opacity-50 text-white p-2 rounded-full opacity-0 group-hover:opacity-100 transition"
+    >
+      <ChevronRight size={24} />
+    </button>
 
       {/* Popup Image */}
       <img

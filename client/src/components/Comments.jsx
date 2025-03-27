@@ -55,19 +55,26 @@ const Comments = ({ postId }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+  
+    // Check if user is logged in
+    if (!user) {
+      window.location.href = "/login"; // Redirect to login page
+      return;
+    }
+  
     const formData = new FormData(e.target);
-
     const data = {
       desc: formData.get("desc"),
     };
-
+  
     mutation.mutate(data);
     e.target.reset(); // Clear the input field
   };
-
+  
   const loadMoreComments = () => {
     setVisibleComments((prev) => prev + 5); // Load 5 more comments
   };
+  
 
   const closeComments = () => {
     setShowComments(false);
@@ -103,6 +110,7 @@ const Comments = ({ postId }) => {
                pl-4 text-[var(--textColor)] rounded-xl"
             />
             <button className="px-1 ">
+              
             <Send className=" h-[40px] pr-1 text-[#fc3239] " />
 
             </button>
