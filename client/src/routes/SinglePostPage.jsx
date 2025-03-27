@@ -23,8 +23,7 @@
           import { useRef } from "react";
           import Ratings from "../components/Ratings";
           import RelatedPosts from "../components/RelatedPosts";
-          import { ChevronLeft } from "lucide-react";
-          import { ChevronRight } from "lucide-react";
+          import { ChevronLeft, ChevronRight } from "lucide-react";
 
 
           const fetchPost = async (slug) => {
@@ -249,6 +248,7 @@ const details = [
       onClick={(e) => e.stopPropagation()}
     >
       {/* Close Button (Top Right) */}
+     
       <button
         className="absolute top-4 right-4 pt-1 pr-1 bg-black bg-opacity-50  text-white w-10 h-10 flex items-center justify-center rounded-full z-10"
         onClick={() => setPopupImage(null)}
