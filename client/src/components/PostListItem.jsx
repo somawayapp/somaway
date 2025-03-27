@@ -38,8 +38,8 @@ const PostListItem = ({ post }) => {
         {images.map((_, index) => (
           <span
             key={index}
-            className={`h-[5px] w-[3px] rounded-full bg-white transition-all duration-300 ${
-              currentIndex === index ? "w-2 h-2 scale-110" : "opacity-50"
+            className={`h-[5px] w-[5px] rounded-full bg-white transition-all duration-300 ${
+              currentIndex === index ? "w-[8px] h-[8px] scale-110" : "opacity-50"
             }`}
           ></span>
         ))}
@@ -74,7 +74,7 @@ const PostListItem = ({ post }) => {
 
 <p
 
-className="text-[var(--softTextColor)]  font-semibold capitalize  text-[13px] md:text-[15px] "
+className="text-[var(--softTextColor)]  font-semibold capitalize  text-[14px] md:text-[15px] "
 > Nairobi, Kenya
 
 </p>
@@ -83,7 +83,7 @@ className="text-[var(--softTextColor)]  font-semibold capitalize  text-[13px] md
 
       <p
 
-  className="text-[var(--softTextColor)]  capitalize   text-[13px] md:text-[15px] "
+  className="text-[var(--softTextColor)]  capitalize   text-[14px] md:text-[15px] "
 >
   {post.bedrooms
     ? `${post.bedrooms} Bedroom`
@@ -98,7 +98,7 @@ className="text-[var(--softTextColor)]  font-semibold capitalize  text-[13px] md
 
 <p
 
-className="text-[var(--softTextColor)]     text-[12px] md:text-[14px] "
+className="text-[var(--softTextColor)]     text-[13px] md:text-[14px] "
 > +254 
 
 {post.phone ? ` ${post.phone}` : ""}
@@ -106,7 +106,7 @@ className="text-[var(--softTextColor)]     text-[12px] md:text-[14px] "
 
 <p
 
-className="text-[var(--softTextColor)] font-semibold    text-[13px] md:text-[15px] "
+className="text-[var(--softTextColor)] font-semibold    text-[14px] md:text-[15px] "
 > KSh
 {post.price ? ` ${post.price}` : ""} <span className="font-normal">
 {post.model?.toLowerCase().includes("forrent") ? " /month " : " /sale"}

@@ -260,7 +260,7 @@ const Search = () => {
     {/* Property Size */}
     <div className="relative hover:bg-[var(--softBg4)] rounded-full group p-2 flex flex-col items-start text-left flex-1">
       <small className="text-[12px] font-semibold text-[var(--softTextColor)] transition">
-        {filters.propertysize || "Any size"}
+        {filters.propertytype || "Any type"}
       </small>
     </div>
 
