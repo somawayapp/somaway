@@ -23,7 +23,8 @@
           import { useRef } from "react";
           import Ratings from "../components/Ratings";
           import RelatedPosts from "../components/RelatedPosts";
-          import { ChevronLeft, ChevronRight } from "lucide-react";
+          import { ChevronLeft } from "lucide-react";
+          import { ChevronRight } from "lucide-react";
 
 
           const fetchPost = async (slug) => {
@@ -261,13 +262,13 @@ const details = [
      onClick={() => navigatePopup("prev")}
       className="hidden md:block absolute left-3 top-1/2 -translate-y-1/2 bg-black bg-opacity-50 text-white p-2 rounded-full opacity-0 group-hover:opacity-100 transition"
     >
-      <ChevronLeft size={24} />
+      <ChevronLeft size={24}  color="white" />
     </button>
       <button
       onClick={() => navigatePopup("next")}
       className="hidden md:block absolute right-3 top-1/2 -translate-y-1/2 bg-black bg-opacity-50 text-white p-2 rounded-full opacity-0 group-hover:opacity-100 transition"
     >
-      <ChevronRight size={24} />
+      <ChevronRight size={24} color="white" />
     </button>
 
       {/* Popup Image */}
