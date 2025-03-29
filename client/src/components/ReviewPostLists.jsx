@@ -107,7 +107,18 @@ const ReviewPostList = () => {
 
 
   return (
-    <div className="gap-2 grid grid-cols-1 md:grid-cols-4 md:gap-6 scrollbar-hide">
+    <div  style={{
+      display: "grid",
+      gap: "1.5rem", // Default gap (6 in Tailwind)
+      gridTemplateColumns:
+        window.innerWidth > 1400
+          ? "repeat(4, 1fr)"
+          : window.innerWidth > 1000
+          ? "repeat(3, 1fr)"
+          : window.innerWidth > 740
+          ? "repeat(2, 1fr)"
+          : "repeat(1, 1fr)",
+    }} className="gap-2 md:gap-6 scrollbar-hide">
       {displayedPosts.map((post) => (
         <ReviewPostItem key={post._id} post={post} />
       ))}
