@@ -46,7 +46,7 @@ const router = createBrowserRouter([
       },
       
       {
-        path: "/reviews:slug",
+        path: "/reviews/:slug",
         element: <ReviewsPostPage />,
       },
       {
