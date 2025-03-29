@@ -4,7 +4,7 @@ import axios from "axios";
 import { useSearchParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import ReviewPostItem from "./ReviewPostItem";
-import Link from "next/link";
+import { Link } from "react-router-dom";
 
 const fetchPosts = async (searchParams) => {
   const searchParamsObj = Object.fromEntries([...searchParams]);
