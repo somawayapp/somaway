@@ -115,7 +115,7 @@ const Search = () => {
           <a href="?model=forrent" className="text-[16px] font-semibold text-[var(--softBg5)] hover:underline">
          For Rent
           </a>
-          <a href="?model=forrent" className="text-[16px] font-semibold text-[var(--softTextColor)] hover:underline">
+          <a href="/reviews" className="text-[16px] font-semibold text-[var(--softTextColor)] hover:underline">
            Reviews
           </a>
           <a href="?model=forsale" className="text-[16px] font-semibold text-[var(--softBg5)] hover:underline">
