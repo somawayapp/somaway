@@ -34,21 +34,21 @@ app.use(express.json());
 app.use(
   cors({
     origin: function (origin, callback) {
+      console.log('Request Origin:', origin); // Debugging
       const allowedOrigins = [
         'https://makesomaway.com',
-        'https://www.makesomaway.com', // Added this
+        'https://www.makesomaway.com',
         'https://somawayclient.vercel.app',
         'https://blogifiyclient.vercel.app',
         'http://localhost:5173',
         'https://www.xtechnewsletter.com',
         'https://xtechnewsletter.com',
-
-    
       ];
 
       if (allowedOrigins.indexOf(origin) !== -1 || !origin) {
         callback(null, true);
       } else {
+        console.error(`CORS Error: Origin ${origin} is not allowed.`);
         callback(new Error('Not allowed by CORS'));
       }
     },
@@ -56,6 +56,7 @@ app.use(
     allowedHeaders: ['Content-Type', 'Authorization'],
   })
 );
+
 
 
 app.get("/test",(req,res)=>{
@@ -85,7 +86,6 @@ app.use('/posts', postRouter); // Correctly map the posts route
 app.use('/subscriptions', subscriptionRouter);
 app.use('/comments', commentRouter);
 app.use('/webhook', webhookRouter);
-app.use('/ratings', router);
 
 
 // Debug route to confirm server is running
