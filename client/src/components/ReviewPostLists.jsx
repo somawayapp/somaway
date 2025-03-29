@@ -68,9 +68,9 @@ const ReviewPostList = () => {
           onClick={() => navigate("/")}
           className="px-9 py-4 rounded-xl border border-[var(--softBg4)] text-[var(--softTextColor)] shadow-md hover:text-[var(--textColor)]"
         >
-          <p className="mb-4 ">No posts found</p>
+          <p className="mb-4 ">No Reviews found for this property search</p>
           <p className="mb-4 font-bold ">
-            Go Back Home
+            Add a new property and review it
           </p>
         </button>
       </div>
@@ -80,7 +80,7 @@ const ReviewPostList = () => {
   
   if (displayedPosts.length === 0) {
     return (
-      <div className="gap-2 grid grid-cols-1 md:grid-cols-4 md:gap-6 scrollbar-hide">
+      <div className="gap-6 grid grid-cols-1 md:grid-cols-4 md:gap-9 scrollbar-hide">
         {Array(8).fill(0).map((_, index) => (
           <div key={index} className="relative aspect-[3/1] w-full">
             <div className="absolute inset-0 bg-[var(--softBg4)] animate-pulse rounded-xl md:rounded-2xl"></div>
