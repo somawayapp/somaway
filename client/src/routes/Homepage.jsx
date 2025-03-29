@@ -10,6 +10,7 @@ import SpinnerMini from "../components/Loader";
 import PostList from "../components/PostList";
 import { Helmet } from "react-helmet";
 import { useEffect } from "react";
+import { MessageCircle } from "lucide-react"; // Importing the icon
 
 
 const HomePage = () => {
@@ -65,14 +66,19 @@ from ${author || 'top authors'}in minutes. Elevate your mind—only on Hodi!`} /
      
   
 
-      <div className="flex  flex-col justify-center">
-       <PostList />
-       <Link  style={{ zIndex: 100004, }}  to="/reviews"  className=" fixed px-8 py-4 bg-[var(--textColor)] text-[14px] md:text-[16px]
-         bottom-[50px] rounded-full text-[var(--bg)] shadow-md font-semibold justify-center items-center  hover:shadow-2xl text-center"
-         >
-           <p className="">Reviews</p>
-         </Link>
-      </div>
+        <div className="flex flex-col justify-between items-center relative min-h-screen">
+      <PostList />
+      <Link
+        style={{ zIndex: 100004 }}
+        to="/reviews"
+        className="fixed px-8 py-4 bg-[var(--textColor)] text-[14px] md:text-[16px]
+        bottom-[50px] left-1/2 -translate-x-1/2 rounded-full text-[var(--bg)]
+        shadow-md font-semibold flex items-center gap-2 hover:shadow-2xl"
+      >
+        <p>Reviews</p>
+        <MessageCircle size={18} />
+      </Link>
+    </div>
       </div>
 
        <Footer/>
