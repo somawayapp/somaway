@@ -54,10 +54,7 @@ const router = createBrowserRouter([
         path: "/:slug",
         element: <SinglePostPage />,
       },
-      {
-        path: "/addlistingreview",
-        element: <Write />,
-      },
+    
       {
         path: "/addlistingreview",
         element: <AddListingReview />,
