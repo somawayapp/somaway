@@ -35,7 +35,7 @@ const fetchPost = async (slug) => {
   return res.data;
 };
 
-const ReviewPostPage = () => {
+const ReviewsPostPage = () => {
   useEffect(() => {
     window.scrollTo(0, 0); // Scrolls to the top when this component mounts
   }, []);
@@ -366,89 +366,6 @@ fontWeight: "normal" // Ensure it's not bold
 
 
 
-
-<hr className="h-[1px] bg-[var(--softBg4)] border-0" />
-
-
-
-{/* Popup Modal */}
-{popupDesc && (
-<div
-className="fixed inset-0 bg-black bg-opacity-80 flex items-center justify-center " style={{ zIndex: 100014 }}
-onClick={() => setPopupDesc(null)}
->
-<div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50" onClick={() => setPopupDesc(null)}>
-<div
-className="relative w-full p-3 md:p-9 md:w-3/4"
-onClick={(e) => e.stopPropagation()} // Prevents closing when clicking inside
->
-<button
-className="absolute top-2 right-2 bg-gray-800 text-white rounded-full"
-onClick={() => setPopupDesc(null)}  
-style={{ zIndex: 100024 }}
->
-<svg
-  xmlns="http://www.w3.org/2000/svg"
-  className="w-4 h-4"
-  viewBox="0 0 24 24"
-  fill="red"
-  stroke="currentColor"
-  strokeWidth="2"
-  strokeLinecap="round"
-  strokeLinejoin="round"
->
-  <line x1="18" y1="6" x2="6" y2="18" />
-  <line x1="6" y1="6" x2="18" y2="18" />
-</svg>
-</button>
-<div className="w-full h-auto max-h-[80vh] overflow-auto bg-[var(--bg)] p-5 rounded-xl">
-  <p className="text-[var(--textColor)]" dangerouslySetInnerHTML={{ __html: popupDesc }} />
-</div>
-</div>
-</div>
-</div>
-)}
-
-{/* Description Preview */}
-<p className="desc-content text-[var(--softTextColor)]">
-{data.desc?.length > 300 ? (
-<>
-<h1 className="text-[var(--softTextColor)] font-semibold  text-[20px] md:text-[22px]  ">About this property </h1>    
-<span dangerouslySetInnerHTML={{ __html: data.desc.substring(0, 470) }} />
-<button  
-className="text-[var(--softTextColor)]  text-[14px] md:text-[16px]  font-semibold  mt-2  border-[2px]  rounded-xl py-2 px-6 border-[var(--softBg4)]"
-onClick={() => setPopupDesc(data.desc)}
->
-Show More
-</button>
-
-</>
-) : (
-<span dangerouslySetInnerHTML={{ __html: data.desc }} />
-)}
-</p>
-
-
-
-<hr className="h-[1px] bg-[var(--softBg4)] border-0" />
-<h1 className="text-[var(--softTextColor)] font-semibold  text-[20px] md:text-[22px]  ">What this property offers </h1>   
-<div className="flex flex-wrap gap-4">
-{data.amenities.map((amenity, index) => (
-<div 
-key={index} 
-className="flex flex-col justify-between items-center gap-1 border-[1px] border-[var(--softBg4)]  py-2  px-3  md:py-4  md:px-6  rounded-md"
->
-<div 
-className="text-[var(--softTextColor)] md:text-3xl text-xl"
->
-{amenitiesIcons[amenity] || null}
-</div>
-<span className=" text-[14px] md:text-[16px]  text-[var(--softTextColor)] capitalize">{amenity.replace('-', ' ')}</span>
-</div>
-))}
-</div>
-
-
 <hr className="h-[1px] bg-[var(--softBg4)] border-0" />
 
 
@@ -598,4 +515,4 @@ Related property     </h3>
 ) : null;
 };
 
-export default ReviewPostPage;
+export default ReviewsPostPage;

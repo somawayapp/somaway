@@ -17,11 +17,11 @@ const ReviewPostItem = ({ post }) => {
   };
 
   return (
-    <div className="relative flex flex-row  bg-[var(--bd)] p-2 md:p-4 rounded-xl  shadow-2xl gap-2 md:gap-4 group mb-6 md:mb-[30px] overflow-hidden">
+    <div className="relative flex flex-row  bg-[var(--bd)] p-2 md:p-4 rounded-xl  shadow-2xl  hover:shadow-3xl gap-2 md:gap-4 group mb-6 md:mb-[30px] overflow-hidden">
       {/* Image with Link */}
 
       <div className="w-1/4">
-      <Link to={`/${post.slug}`} className="block">
+      <Link to={`/reviews${post.slug}`} className="block">
   <div className="relative w-full h-full aspect-[3/3] rounded-xl  overflow-hidden">
     {/* Scrollable Image Container */}
     <div className="flex overflow-x-auto aspect-[3/3]  snap-x snap-mandatory scroll-smooth scrollbar-hide">
@@ -56,15 +56,15 @@ const ReviewPostItem = ({ post }) => {
   <>
     <button
       onClick={handlePrev}
-      className="hidden md:block absolute left-3 top-[37%] -translate-y-1/2 bg-black bg-opacity-50 text-white p-2 rounded-full opacity-0 group-hover:opacity-100 transition"
+      className="hidden md:block absolute left-1 top-[37%] -translate-y-1/2 bg-black bg-opacity-50 text-white p-1 rounded-full opacity-0 group-hover:opacity-100 transition"
     >
-      <ChevronLeft size={24} />
+      <ChevronLeft size={10} />
     </button>
     <button
       onClick={handleNext}
-      className="hidden md:block absolute right-3 top-[37%] -translate-y-1/2 bg-black bg-opacity-50 text-white p-2 rounded-full opacity-0 group-hover:opacity-100 transition"
+      className="hidden md:block absolute right-1 top-[37%] -translate-y-1/2 bg-black bg-opacity-50 text-white p-1 rounded-full opacity-0 group-hover:opacity-100 transition"
     >
-      <ChevronRight size={24} />
+      <ChevronRight size={10} />
     </button>
   </>
 )}
@@ -72,6 +72,7 @@ const ReviewPostItem = ({ post }) => {
       </div>
 
 
+      <Link to={`/reviews${post.slug}`} className="block">
 
 <div className=" w-3/4 gap-1">
 
@@ -102,7 +103,7 @@ className="text-[var(--softTextColor)]  capitalize   text-[14px] md:text-[15px] 
 <p
 
 className="text-[var(--softTextColor)]     text-[13px] md:text-[14px] "
-> 34 Reviews
+>  <span className="font-semibold">34</span> Reviews
 
 {post.reviewslength ? ` ${post.reviewslength}` : ""}
 </p>
@@ -110,6 +111,7 @@ className="text-[var(--softTextColor)]     text-[13px] md:text-[14px] "
 
 
     </div>
+    </Link>
     </div>
 
   );

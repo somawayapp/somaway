@@ -18,6 +18,7 @@ import { Analytics } from "@vercel/analytics/react"; // Import Vercel Analytics
 import PremiumPage from "./routes/PremiumPage.jsx";
 import SettingsPage from "./routes/SettingsPage.jsx";
 import SubscriptionPage from "./routes/SubscriptionPage.jsx";
+import ReviewsHomePage from "./routes/ReviewsHompage.jsx";
 
 const queryClient = new QueryClient();
 
@@ -36,7 +37,11 @@ const router = createBrowserRouter([
         path: "/",
         element: <Homepage />,
       },
-    
+      
+      {
+        path: "/reviews",
+        element: <ReviewsHomePage />,
+      },
       {
         path: "/:slug",
         element: <SinglePostPage />,
