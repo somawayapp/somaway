@@ -73,20 +73,20 @@ const ReviewPostItem = ({ post }) => {
 
 
 
-<div className=" w-3/4 gap-1">
+<div className=" w-3/4 gap-[2px]">
 <Link to={`/reviews/${post.slug}`} className="block">
 
 
 <p
 
-className="text-[var(--softTextColor)]  font-semibold capitalize  text-[14px] md:text-[15px] "
+className="text-[var(--softTextColor)]  font-semibold capitalize  text-[14px]  "
 > Nairobi, Kenya
 
 </p>
 
 <p
 
-className="text-[var(--softTextColor)]  capitalize   text-[14px] md:text-[15px] "
+className="text-[var(--softTextColor)]  capitalize   text-[14px] "
 > Wako House
 
 {post.propertyname ? ` ${post.propertyname.slice(0, 20)}` : ""}
@@ -94,7 +94,7 @@ className="text-[var(--softTextColor)]  capitalize   text-[14px] md:text-[15px] 
 
       <p
 
-  className="text-[var(--softTextColor)]  capitalize   text-[14px] md:text-[15px] "
+  className="text-[var(--softTextColor)]  capitalize   text-[14px] "
 >
 
   {post.propertytype ? ` ${post.propertytype.slice(0, 20)}` : ""}
@@ -102,7 +102,7 @@ className="text-[var(--softTextColor)]  capitalize   text-[14px] md:text-[15px] 
 
 <p
 
-className="text-[var(--softTextColor)]     text-[13px] md:text-[14px] "
+className="text-[var(--softTextColor)]     text-[13px]"
 >  <span className="font-semibold">34</span> Reviews
 
 {post.reviewslength ? ` ${post.reviewslength}` : ""}
