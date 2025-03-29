@@ -10,7 +10,7 @@ import Upload from "../components/Upload";
 import "react-quill-new/dist/quill.snow.css";
 import Navbar from "../components/Navbar";
 
-const Write = () => {
+const AddListing = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
@@ -409,5 +409,5 @@ const Write = () => {
   );
 };
 
-export default Write;
+export default AddListing;
 

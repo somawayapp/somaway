@@ -290,56 +290,25 @@ alt="Popup"
 
 <div className="flex flex-col-reverse md:flex-row bg-[var(--bg)] mt-6 gap-4 md:gap-8">
 
-
-
-
 <div className="flex flex-col gap-1 md:gap-2  mt-4 w-full   md:w-4/6">
-
      
 <div className="col-span-4 flex flex-col gap-8">
 
-
-<p className=" flex flex-row" style={{ 
-alignItems: "center", 
-}}>
-{icons[data.propertytype] && (
-<span style={{ 
-fontSize: "68px", // Large icon for default
-marginRight: "12px", 
-display: "flex", 
-alignItems: "center",
-color: "var(--softTextColor)", // Apply text color variable
-fill: "var(--softTextColor)", // Ensure SVG icons match the text color
-fontWeight: "normal" // Ensure it's not bold
-}}>
-{icons[data.propertytype]}
-</span>
-)}
-
-<span>
-<p className="capitalize font-semibold">
-{data.propertytype}
-</p>
-<span className=" text-[14px] md:text-[16px] text-[var(--softTextColor)] ">This is a {data.propertytype} property!</span>
-</span>
-
-</p>
-
-
-
-
+<hr className="h-[1px] bg-[var(--softBg4)] border-0" />
+<p>enter review button</p>
 <hr className="h-[1px] bg-[var(--softBg4)] border-0" />
 
+<h1 className="text-[var(--softTextColor)] font-semibold ml-1 md:ml-5 text-[20px] md:text-[22px]  ">Property reviews  </h1>   
+<hr className="h-[1px] bg-[var(--softBg4)] border-0" />
+
+<Reviews postId={data._id} /> 
+<hr className="h-[1px] bg-[var(--softBg4)] mb-5 md:mb-9 border-0" />
 
 <div className=" text-[14px] md:text-[16px]  text-[var(--softTextColor)]">
 map
 </div>
-
-<hr className="h-[1px] bg-[var(--softBg4)] border-0" />
-<h1 className="text-[var(--softTextColor)] font-semibold ml-1 md:ml-5 text-[20px] md:text-[22px]  ">Property reviews  </h1>   
-
-<Reviews postId={data._id} /> 
 <hr className="h-[1px] bg-[var(--softBg4)] mb-5 md:mb-9 border-0" />
+
 
 </div>
 

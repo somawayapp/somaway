@@ -3,7 +3,6 @@ import { createRoot } from "react-dom/client";
 import "./index.css";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Homepage from "./routes/Homepage.jsx";
-import Write from "./routes/Write.jsx";
 import LandingPage from "./routes/LandingPage.jsx";
 import LoginPage from "./routes/LoginPage.jsx";
 import RegisterPage from "./routes/RegisterPage.jsx";
@@ -20,6 +19,8 @@ import SettingsPage from "./routes/SettingsPage.jsx";
 import SubscriptionPage from "./routes/SubscriptionPage.jsx";
 import ReviewsHomePage from "./routes/ReviewsHompage.jsx";
 import ReviewsPostPage from "./routes/ReviewsPostPage.jsx";
+import AddListingReview from "./routes/AddListingReview.jsx";
+import AddListing from "./routes/AddListing.jsx";
 
 const queryClient = new QueryClient();
 
@@ -58,8 +59,12 @@ const router = createBrowserRouter([
         element: <Write />,
       },
       {
+        path: "/addlistingreview",
+        element: <AddListingReview />,
+      },
+      {
       path: "/addlisting",
-      element: <Write />,
+      element: <AddListing />,
     },
       {
         path: "/subscribe",
