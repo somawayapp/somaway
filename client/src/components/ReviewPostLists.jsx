@@ -12,7 +12,7 @@ const fetchPosts = async (searchParams) => {
   return res.data.posts;
 };
 
-const PostList = () => {
+const ReviewPostList = () => {
   const [searchParams] = useSearchParams();
   const { data: allPosts = [], error, status } = useQuery({
     queryKey: ["posts", searchParams.toString()],
@@ -100,4 +100,4 @@ const PostList = () => {
   );
 };
 
-export default PostList;
+export default ReviewPostList;

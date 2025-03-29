@@ -10,6 +10,7 @@ import SpinnerMini from "../components/Loader";
 import PostList from "../components/PostList";
 import { Helmet } from "react-helmet";
 import { useEffect } from "react";
+import ReviewPostList from "../components/ReviewPostLists";
 
 
 const HomePage = () => {
@@ -64,7 +65,7 @@ from ${author || 'top authors'}in minutes. Elevate your mind—only on Hodi!`} /
   
 
       <div className="flex  flex-col justify-between">
-       <PostList />
+       <ReviewPostList />
       </div>
       </div>
 
