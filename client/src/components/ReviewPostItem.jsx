@@ -20,7 +20,7 @@ const ReviewPostItem = ({ post }) => {
     <div className="relative flex flex-row  gap-2 md:gap-4 group mb-6 md:mb-[30px] overflow-hidden rounded-xl">
       {/* Image with Link */}
 
-      <div>
+      <div className="w-1/4">
       <Link to={`/${post.slug}`} className="block">
   <div className="relative w-full h-full aspect-[3/3] rounded-xl md:rounded-2xl overflow-hidden">
     {/* Scrollable Image Container */}
@@ -73,7 +73,7 @@ const ReviewPostItem = ({ post }) => {
 
 
 
-<div className="mt-3 gap-1">
+<div className="mt-3 w-3/4 gap-1">
 
 
 <p
