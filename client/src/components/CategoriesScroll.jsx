@@ -47,7 +47,7 @@ const CategoriesScroll = ({ setOpen }) => {
   const [showLeftButton, setShowLeftButton] = useState(false);
   const [showRightButton, setShowRightButton] = useState(false);
   const currentUrl = window.location.pathname;
-  const link = currentUrl.includes('/reviews') 
+  const link = currentUrl.includes('/reviews/') 
     ? `/reviews/?propertytype=` 
     : `/?propertytype=`;
   
