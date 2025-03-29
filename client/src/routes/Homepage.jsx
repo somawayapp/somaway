@@ -57,7 +57,7 @@ from ${author || 'top authors'}in minutes. Elevate your mind—only on Hodi!`} /
   
 </Helmet>
        <Navbar/>
-     
+   
 
        <div className="px-3 pt-4 md:pt-6 md:px-[80px] ">
         <CategoriesScroll/>
@@ -67,8 +67,8 @@ from ${author || 'top authors'}in minutes. Elevate your mind—only on Hodi!`} /
 
       <div className="flex  flex-col justify-between">
        <PostList />
-       <Link  style={{ zIndex: 100004, }}  to="/reviews"  className=" fixed px-6 py-3 bg-[#fc3239] bottom-[50px] rounded-2xl
-                      text-white shadow-md 
+       <Link  style={{ zIndex: 100004, }}  to="/reviews"  className=" fixed px-6 py-3 text-[var(--textColor)]  bottom-[50px] rounded-3xl
+                      text-[var(--bg)] shadow-md font-semibold justify-center items-center
                       hover:shadow-xl text-center"
          >
            <p className="">Reviews</p>
