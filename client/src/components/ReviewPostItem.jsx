@@ -34,7 +34,7 @@ const ReviewPostItem = ({ post }) => {
   };
 
   return (
-    <div className="relative flex flex-row  bg-[var(--bd)] p-2 md:p-4 rounded-xl  shadow-xl  hover:shadow-md gap-2 md:gap-4 group mb-3 md:mb-[15px] overflow-hidden">
+    <div className="relative flex flex-row  bg-[var(--bd)] p-3 md:p-6 rounded-xl  shadow-xl  hover:shadow-md gap-2 md:gap-4 group  overflow-hidden">
       {/* Image with Link */}
 
       <div className="w-1/4">
@@ -92,7 +92,7 @@ const ReviewPostItem = ({ post }) => {
 
 
 
-<div className=" w-3/4 gap-[1px]">
+<div className=" w-3/4 gap-0">
 <Link to={`/reviews/${post.slug}`} className="block">
 
 
@@ -121,8 +121,8 @@ className="text-[var(--softTextColor)]  capitalize   text-[14px] "
 
 <p
 
-className="text-[var(--softTextColor)]     text-[13px]"
->  <span className="font-semibold">34</span> Reviews
+className="text-[var(--softTextColor)]     text-[14px]"
+>  <span className="font-semibold text-[13px]">34</span> Reviews
 
 {post.reviewslength ? ` ${post.reviewslength}` : ""}
 </p>
