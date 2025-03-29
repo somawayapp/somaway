@@ -64,16 +64,16 @@ const PostList = () => {
   if (displayedPosts.length === 0 && showMessage) {
     return (
       <div className="flex flex-col items-center justify-center h-[50vh]">
-              <Link to={`/`}>
-        
-        <button
-          className="px-9 py-4 rounded-xl border border-[var(--softBg4)] text-[var(--softTextColor)] shadow-md hover:text-[var(--textColor)]"
-        >
-          <p className="mb-4 ">No posts found</p>
-          <p className="mb-4 font-bold ">
-            Go Back Home
-          </p>
-        </button>              </Link>
+       <Link to="/addlisting#review">
+  <button
+    className="w-full px-6 py-3 rounded-xl border border-[var(--softBg4)] 
+               text-[var(--softTextColor)] shadow-md 
+               hover:text-[var(--textColor)] text-center"
+  >
+    <p className="mb-2">No posts found</p>
+    <p className="mb-2 font-bold">Go back home</p>
+  </button>
+</Link>
 
       </div>
     );
