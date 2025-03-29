@@ -121,7 +121,7 @@ const ReviewPostList = () => {
 
 
   return (
-    <div className="gap-2 grid grid-cols-1 md:grid-cols-4 md:gap-6 scrollbar-hide">
+    <div style={{ display: "grid", gridTemplateColumns: columns }} className="gap-6 md:gap-9 scrollbar-hide">
       {displayedPosts.map((post) => (
         <ReviewPostItem key={post._id} post={post} />
       ))}
