@@ -36,7 +36,7 @@ const PostListItem = ({ post }) => {
   return (
     <div className="relative gap-2 md:gap-4 group mb-3 md:mb-[15px] overflow-hidden rounded-xl">
       <Link to={`/${post.slug}`} className="block">
-        <div className="relative w-full h-full aspect-[3/3] rounded-xl md:rounded-2xl overflow-hidden">
+        <div className="relative w-full h-full aspect-[3/3] rounded-xl overflow-hidden">
           {/* Scrollable Image Container */}
           <div
             ref={scrollRef}
@@ -46,7 +46,7 @@ const PostListItem = ({ post }) => {
               <img
                 key={index}
                 src={image}
-                className="w-full h-full object-cover rounded-xl md:rounded-2xl flex-shrink-0 snap-center"
+                className="w-full h-full object-cover rounded-xl flex-shrink-0 snap-center"
               />
             ))}
           </div>
