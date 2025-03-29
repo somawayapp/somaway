@@ -12,7 +12,7 @@ const Avatar: React.FC<AvatarProps> = ({ src }) => {
     height={30}
     width={30}
     alt="Avatar"
-    src={src ?? "/placehlder.webp"} // Ensure default works
+    src={src ?? "/placeholder.webp"} // Ensure default works
     unoptimized // Avoids optimization issues in development
   />
   
