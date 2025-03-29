@@ -19,6 +19,7 @@ import PremiumPage from "./routes/PremiumPage.jsx";
 import SettingsPage from "./routes/SettingsPage.jsx";
 import SubscriptionPage from "./routes/SubscriptionPage.jsx";
 import ReviewsHomePage from "./routes/ReviewsHompage.jsx";
+import ReviewsPostPage from "./routes/ReviewsPostPage.jsx";
 
 const queryClient = new QueryClient();
 
@@ -41,6 +42,10 @@ const router = createBrowserRouter([
       {
         path: "/reviews",
         element: <ReviewsHomePage />,
+      },
+      {
+        path: "/reviews/:slug",
+        element: <ReviewsPostPage />,
       },
       {
         path: "/:slug",
