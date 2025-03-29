@@ -13,8 +13,6 @@ import webhookRouter from '../routes/webhook.route.js';
 import subscriptionRouter from '../routes/subscription.route.js';
 import cors from 'cors';
 import 'dotenv/config';
-import ratingRouter from '../routes/rating.route.js';
-import reviewRouter from '../routes/review.route.js';
 
 dotenv.config();
 
@@ -87,8 +85,7 @@ app.use('/posts', postRouter); // Correctly map the posts route
 app.use('/subscriptions', subscriptionRouter);
 app.use('/comments', commentRouter);
 app.use('/webhook', webhookRouter);
-app.use('/ratings', ratingRouter);
-app.use('/reviews', reviewRouter);
+app.use('/ratings', router);
 
 
 // Debug route to confirm server is running
