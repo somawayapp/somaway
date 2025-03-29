@@ -86,6 +86,7 @@ a {
   --softBgSearch: rgb(37, 37, 43);
 
   --softerBg: rgb(27, 27, 27);
+  --softTextColori: #dddfe2;
 
   --softTextColor: #babbbd;
   --softTextColor2: #8899A6;
@@ -115,6 +116,8 @@ a {
   --bgs: rgb(255, 255, 255);
   --bodyBg: rgba(34, 34, 34);
   --softTextColor: #3e3e3f;
+  --softTextColori: #1b1b1b;
+
   --softBg5: #818181;
 
 
