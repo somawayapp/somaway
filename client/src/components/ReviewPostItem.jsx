@@ -73,7 +73,7 @@ const ReviewPostItem = ({ post }) => {
 
 
 
-<div className=" w-3/4 gap-[2px]">
+<div className=" w-3/4 gap-[1px]">
 <Link to={`/reviews/${post.slug}`} className="block">
 
 

@@ -52,9 +52,13 @@ const router = createBrowserRouter([
         element: <SinglePostPage />,
       },
       {
-        path: "/add",
+        path: "/addlisting#review",
         element: <Write />,
       },
+      {
+      path: "/addlisting",
+      element: <Write />,
+    },
       {
         path: "/subscribe",
         element: <SubscriptionPage />,

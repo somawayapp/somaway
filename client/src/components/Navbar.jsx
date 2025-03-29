@@ -172,13 +172,17 @@
 
             <SignedIn>
             <Link
-              to="/add"
+              to="/addlisting"
               className="block py-2 text-[var(--softTextColor)]   hover:text-[#fc3239]  p-2 rounded-xl"
             onClick={() => setOpen(false)}          > Add listing     
           </Link>
           </SignedIn>
 
-
+            <Link
+              to="/addlisting#review"
+              className="block py-2 text-[var(--softTextColor)]   hover:text-[#fc3239]  p-2 rounded-xl"
+            onClick={() => setOpen(false)}          > Add Review     
+          </Link>
 
            <SignedIn>
             <Link
