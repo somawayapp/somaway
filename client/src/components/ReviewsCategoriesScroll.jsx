@@ -104,7 +104,7 @@ const CategoriesScroll = ({ setOpen }) => {
           return (
             <Link
             key={propertytype}
-            to={`/?propertytype=${slug}`}
+            to={`/reviews/?propertytype=${slug}`}
             className="flex flex-col items-center justify-center gap-2 md:gap-3 text-[var(--softTextColor)] hover:text-[var(--textColor)] text-sm
             md:text-md bg-[var(--bg)] rounded-xl
              pr-2 last:md:pr-2 md:pr-[45px] pb-3 transition-all"

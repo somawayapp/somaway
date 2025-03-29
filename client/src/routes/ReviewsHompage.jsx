@@ -3,7 +3,7 @@ import { useState } from "react";
 import { useLocation } from "react-router-dom"; // Import useLocation from react-router-dom
 import Search from "../components/Search";
 import { Link } from "react-router-dom";
-import CategoriesScroll from "../components/CategoriesScroll";
+import CategoriesScroll from "../components/ReviewsCategoriesScroll";
 import Footer from "../components/Footer";
 import SpinnerMini from "../components/Loader";
 import PostList from "../components/PostList";
