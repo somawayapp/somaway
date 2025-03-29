@@ -73,7 +73,7 @@ const ReviewPostItem = ({ post }) => {
 
 
 
-<div className="mt-3 w-3/4 gap-1">
+<div className=" w-3/4 gap-1">
 
 
 <p
@@ -83,40 +83,31 @@ className="text-[var(--softTextColor)]  font-semibold capitalize  text-[14px] md
 
 </p>
 
+<p
 
+className="text-[var(--softTextColor)]  capitalize   text-[14px] md:text-[15px] "
+> Wako House
+
+{post.propertyname ? ` ${post.propertyname.slice(0, 20)}` : ""}
+</p>
 
       <p
 
   className="text-[var(--softTextColor)]  capitalize   text-[14px] md:text-[15px] "
 >
-  {post.bedrooms
-    ? `${post.bedrooms} Bedroom`
-    : post.rooms
-    ? `${post.rooms} Room`
-    : post.propertysize
-    ? `${post.propertysize} Sq Ft`
-    : ""}
+
   {post.propertytype ? ` ${post.propertytype.slice(0, 20)}` : ""}
-  {post.model?.toLowerCase().includes("forrent") ? " for rent " : " for sale"}
 </p>
 
 <p
 
 className="text-[var(--softTextColor)]     text-[13px] md:text-[14px] "
-> +254 
+> 34 Reviews
 
-{post.phone ? ` ${post.phone}` : ""}
+{post.reviewslength ? ` ${post.reviewslength}` : ""}
 </p>
 
-<p
 
-className="text-[var(--softTextColor)] font-semibold    text-[14px] md:text-[15px] "
-> KSh
-{post.price ? ` ${post.price}` : ""} <span className="font-normal">
-{post.model?.toLowerCase().includes("forrent") ? " /month " : " /sale"}
-
-</span>
-</p>
 
     </div>
     </div>
