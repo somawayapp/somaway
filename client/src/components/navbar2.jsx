@@ -76,12 +76,15 @@
              <div className="flex items-center justify-between flex-row gap-2 md:gap-9">
               <div className="relative"  onClick={() => setOpen((prev) => !prev)}>
               <div className="flex flex-row items-center gap-3">
+              <Link
+              to="/addlisting#review">
               <button
                 type="button"
                 className="hidden md:block text-sm font-semibold py-3 px-4 rounded-full hover:bg-[var(--softBg4)] transition cursor-pointer text-[var(--softBg5)]"
               >
-                Add listng
+                Add Listing
                  </button>
+                 </Link>
                 <button
                   type="button"
                   className=" p-4 md:py-1 md:pl-4 md:pr-2 border-[1px]  border-[var(--softBg4)]  flex  flex-row  items-center   gap-3   rounded-full   cursor-pointer   hover:shadow-md   transition duration-300"
@@ -175,7 +178,11 @@
           </Link>
           </SignedIn>
 
-
+          <Link
+              to="/addlisting#review"
+              className="block py-2 text-[var(--softTextColor)]   hover:text-[#fc3239]  p-2 rounded-xl"
+            onClick={() => setOpen(false)}          > Add Review     
+          </Link>
 
            <SignedIn>
             <Link

@@ -71,7 +71,6 @@ const PostListItem = ({ post }) => {
 
 <div className="mt-3 gap-1">
 
-<Link to={`/${post.slug}`} className="block">
 
 <p
 
@@ -115,7 +114,7 @@ className="text-[var(--softTextColor)] font-semibold    text-[14px] md:text-[15p
 </span>
 </p>
 
-</Link>  </div>
+  </div>
     </div>
 
   );

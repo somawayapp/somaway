@@ -5,12 +5,12 @@ import Search from "../components/Search";
 import { Link } from "react-router-dom";
 import CategoriesScroll from "../components/CategoriesScroll";
 import Footer from "../components/Footer";
-import Navbar from "../components/navbar2";
 import SpinnerMini from "../components/Loader";
 import PostList from "../components/PostList";
 import { Helmet } from "react-helmet";
 import { useEffect } from "react";
 import ReviewPostList from "../components/ReviewPostLists";
+import Navbar from "../components/ReviewsNavbar";
 
 
 const ReviewsHomePage = () => {
