@@ -11,7 +11,6 @@ import { Helmet } from "react-helmet";
 import { useEffect } from "react";
 import ReviewPostList from "../components/ReviewPostLists";
 import Navbar from "../components/ReviewsNavbar";
-import { useSearchParams } from "react-router-dom";
 
 
 const ReviewsHomePage = () => {
@@ -22,11 +21,25 @@ const ReviewsHomePage = () => {
   }, []);
 
 
-
-
-    const [searchParams] = useSearchParams();
-
   
+  const location = useLocation(); 
+
+  const params = new URLSearchParams(location.search);
+
+  const sort = params.get("sort");
+  const author = params.get("author");
+  const search = params.get("search");
+  const cat = params.get("cat"); 
+
+  const displayText = [
+    search ? `Search: ${search}` : "",
+    sort ? `Sort: ${sort}` : "",
+    author ? `Author: ${author}` : "",
+    cat ? `Category: ${cat}` : "", 
+  ]
+    .filter(Boolean) 
+    .join(" | ") || "All summaries"; 
+
     return (
       <>
 
