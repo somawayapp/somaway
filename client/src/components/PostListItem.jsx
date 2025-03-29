@@ -7,17 +7,38 @@ const PostListItem = ({ post }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
 
   const handleNext = (e) => {
-    e.stopPropagation(); // Prevent Link click
-    setCurrentIndex((prevIndex) => (prevIndex + 1) % images.length);
+    e.stopPropagation();
+    if (images.length === 0) return;
+
+    setCurrentIndex((prevIndex) => {
+      const newIndex = (prevIndex + 1) % images.length;
+      scrollToImage(newIndex);
+      return newIndex;
+    });
   };
 
   const handlePrev = (e) => {
-    e.stopPropagation(); // Prevent Link click
-    setCurrentIndex((prevIndex) => (prevIndex - 1 + images.length) % images.length);
+    e.stopPropagation();
+    if (images.length === 0) return;
+
+    setCurrentIndex((prevIndex) => {
+      const newIndex = (prevIndex - 1 + images.length) % images.length;
+      scrollToImage(newIndex);
+      return newIndex;
+    });
+  };
+
+  const scrollToImage = (index) => {
+    if (imageContainerRef.current) {
+      const imageElements = imageContainerRef.current.children;
+      if (imageElements[index]) {
+        imageElements[index].scrollIntoView({ behavior: "smooth", inline: "center" });
+      }
+    }
   };
 
   return (
-    <div className="relative  gap-2 md:gap-4 group mb-6 md:mb-[30px] overflow-hidden rounded-xl">
+    <div className="relative  gap-2 md:gap-4 group mb-3 md:mb-[15px] overflow-hidden rounded-xl">
       {/* Image with Link */}
       <Link to={`/${post.slug}`} className="block">
   <div className="relative w-full h-full aspect-[3/3] rounded-xl md:rounded-2xl overflow-hidden">
@@ -71,6 +92,7 @@ const PostListItem = ({ post }) => {
 
 <div className="mt-3 gap-1">
 
+<Link to={`/${post.slug}`} className="block">
 
 <p
 
@@ -114,7 +136,7 @@ className="text-[var(--softTextColor)] font-semibold    text-[14px] md:text-[15p
 </span>
 </p>
 
-  </div>
+</Link>  </div>
     </div>
 
   );

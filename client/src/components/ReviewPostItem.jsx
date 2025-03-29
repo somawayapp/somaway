@@ -7,13 +7,34 @@ const ReviewPostItem = ({ post }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
 
   const handleNext = (e) => {
-    e.stopPropagation(); // Prevent Link click
-    setCurrentIndex((prevIndex) => (prevIndex + 1) % images.length);
+    e.stopPropagation();
+    if (images.length === 0) return;
+
+    setCurrentIndex((prevIndex) => {
+      const newIndex = (prevIndex + 1) % images.length;
+      scrollToImage(newIndex);
+      return newIndex;
+    });
   };
 
   const handlePrev = (e) => {
-    e.stopPropagation(); // Prevent Link click
-    setCurrentIndex((prevIndex) => (prevIndex - 1 + images.length) % images.length);
+    e.stopPropagation();
+    if (images.length === 0) return;
+
+    setCurrentIndex((prevIndex) => {
+      const newIndex = (prevIndex - 1 + images.length) % images.length;
+      scrollToImage(newIndex);
+      return newIndex;
+    });
+  };
+
+  const scrollToImage = (index) => {
+    if (imageContainerRef.current) {
+      const imageElements = imageContainerRef.current.children;
+      if (imageElements[index]) {
+        imageElements[index].scrollIntoView({ behavior: "smooth", inline: "center" });
+      }
+    }
   };
 
   return (
