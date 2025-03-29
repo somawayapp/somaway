@@ -48,8 +48,8 @@ const CategoriesScroll = ({ setOpen }) => {
   const [showRightButton, setShowRightButton] = useState(false);
   const currentUrl = window.location.pathname;
   const link = currentUrl.includes('/reviews') 
-    ? `/reviews/?propertytype=${slug}` 
-    : `/?propertytype=${slug}`;
+    ? `/reviews/?propertytype=` 
+    : `/?propertytype=`;
   
   
   const scroll = (direction) => {
@@ -110,7 +110,7 @@ const CategoriesScroll = ({ setOpen }) => {
           return (
             <Link
             key={propertytype}
-            to={link}
+            to={`${link}${slug}`}
             className="flex flex-col items-center justify-center gap-2 md:gap-3 text-[var(--softTextColor)] hover:text-[var(--textColor)] text-sm
             md:text-md bg-[var(--bg)] rounded-xl
              pr-2 last:md:pr-2 md:pr-[45px] pb-3 transition-all"
