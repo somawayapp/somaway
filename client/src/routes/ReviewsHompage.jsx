@@ -64,19 +64,21 @@ from ${author || 'top authors'}in minutes. Elevate your mind—only on Hodi!`} /
 
      
   
-
-        <Link
-  style={{ zIndex: 100004 }}
-  to="/addlistingreview"
-  className="p-4 md:px-8 md:py-3 bg-[var(--softTextColori)] text-[12px] md:text-[16px]
-  fixed md:sticky bottom-[60px] md:bottom-[30px] right-[9px] md:left-1/2 md:-translate-x-1/2 
-  rounded-full text-[var(--softBg)] shadow-md font-semibold flex items-center gap-2 
-  hover:bg-[var(--textColor)] w-12 h-12 md:w-auto md:h-auto justify-center"
->
-  <Plus className="w-5 h-5" />
-  <p className="hidden md:block">Review</p>
-</Link>
-  
+        <div className="flex flex-col justify-between items-center relative min-h-[75vh]">
+  <ReviewPostList />
+  <Link
+    style={{ zIndex: 100004 }}
+    to="/addlistingreview"
+    className="p-4 md:px-8 md:py-3 bg-[var(--softTextColori)] text-[12px] md:text-[16px]
+    fixed md:sticky bottom-[60px] md:bottom-[30px] md:left-1/2 md:-translate-x-1/2 
+    right-2 md:right-auto rounded-full text-[var(--softBg)]
+    shadow-md font-semibold flex items-center gap-2 hover:bg-[var(--textColor)]"
+  >
+    <Plus className="w-4 h-4 md:w-5 md:h-5" />
+    <p className="hidden md:block">Review</p>
+  </Link>
+</div>
+      
       </div>
 
        <Footer/>
