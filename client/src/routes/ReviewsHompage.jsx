@@ -70,7 +70,7 @@ from ${author || 'top authors'}in minutes. Elevate your mind—only on Hodi!`} /
     style={{ zIndex: 100004 }}
     to="/addlistingreview"
     className="p-4 md:px-8 md:py-3 bg-[var(--softTextColori)] text-[12px] md:text-[16px]
-    fixed md:sticky bottom-[60px] md:bottom-[30px] md:left-1/2 md:-translate-x-1/2 
+    sticky bottom-[60px] md:bottom-[30px] md:left-1/2 md:-translate-x-1/2 
     right-2 md:right-auto rounded-full text-[var(--softBg)]
     shadow-md font-semibold flex items-center gap-2 hover:bg-[var(--textColor)]"
   >
