@@ -39,7 +39,7 @@ const PostListItem = ({ post }) => {
           <span
             key={index}
             className={`h-[5px] w-[5px] rounded-full bg-white transition-all duration-300 ${
-              currentIndex === index ? "w-[8px] h-[8px] scale-110" : "opacity-50"
+              currentIndex === index ? "w-[8px] h-[5px] scale-110" : "opacity-50"
             }`}
           ></span>
         ))}
@@ -71,6 +71,7 @@ const PostListItem = ({ post }) => {
 
 <div className="mt-3 gap-1">
 
+<Link to={`/${post.slug}`} className="block">
 
 <p
 
@@ -114,7 +115,7 @@ className="text-[var(--softTextColor)] font-semibold    text-[14px] md:text-[15p
 </span>
 </p>
 
-    </div>
+</Link>  </div>
     </div>
 
   );

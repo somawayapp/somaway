@@ -21,7 +21,7 @@ const ReviewPostItem = ({ post }) => {
       {/* Image with Link */}
 
       <div className="w-1/4">
-      <Link to={`/reviews${post.slug}`} className="block">
+      <Link to={`/reviews/${post.slug}`} className="block">
   <div className="relative w-full h-full aspect-[3/3] rounded-xl  overflow-hidden">
     {/* Scrollable Image Container */}
     <div className="flex overflow-x-auto aspect-[3/3]  snap-x snap-mandatory scroll-smooth scrollbar-hide">
@@ -40,8 +40,8 @@ const ReviewPostItem = ({ post }) => {
         {images.map((_, index) => (
           <span
             key={index}
-            className={`h-[5px] w-[5px] rounded-full bg-white transition-all duration-300 ${
-              currentIndex === index ? "w-[8px] h-[8px] scale-110" : "opacity-50"
+            className={`h-[3px] w-[3px] rounded-full bg-white transition-all duration-300 ${
+              currentIndex === index ? "w-[5px] h-[3px] scale-110" : "opacity-50"
             }`}
           ></span>
         ))}
@@ -72,9 +72,9 @@ const ReviewPostItem = ({ post }) => {
       </div>
 
 
-      <Link to={`/reviews${post.slug}`} className="block">
 
 <div className=" w-3/4 gap-1">
+<Link to={`/reviews/${post.slug}`} className="block">
 
 
 <p
@@ -110,8 +110,8 @@ className="text-[var(--softTextColor)]     text-[13px] md:text-[14px] "
 
 
 
-    </div>
-    </Link>
+</Link>
+</div>
     </div>
 
   );
