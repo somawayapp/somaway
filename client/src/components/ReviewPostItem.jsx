@@ -34,7 +34,7 @@ const ReviewPostItem = ({ post }) => {
   };
 
   return (
-    <div className="relative flex flex-row  bg-[var(--bd)] p-3 md:p-6 rounded-xl  shadow-xl  hover:shadow-md gap-2 md:gap-4 group  overflow-hidden">
+    <div className="relative flex flex-row  bg-[var(--bd)] mb-3 md:mb-[15px] p-3 md:p-6 rounded-xl  shadow-xl  hover:shadow-md gap-2 md:gap-4 group  overflow-hidden">
       {/* Image with Link */}
 
       <div className="w-1/4">
@@ -92,13 +92,13 @@ const ReviewPostItem = ({ post }) => {
 
 
 
-<div className=" w-3/4 gap-0">
+<div className=" w-3/4 ">
 <Link to={`/reviews/${post.slug}`} className="block">
 
 
 <p
 
-className="text-[var(--softTextColor)]  font-semibold capitalize  text-[14px]  "
+className="text-[var(--softTextColor)]  font-semibold capitalize mt-1 md:mt-[1px]  text-[14px]  "
 > Nairobi, Kenya
 
 </p>
@@ -108,7 +108,7 @@ className="text-[var(--softTextColor)]  font-semibold capitalize  text-[14px]  "
 className="text-[var(--softTextColor)]  capitalize   text-[14px] "
 > Wako House
 
-{post.propertyname ? ` ${post.propertyname.slice(0, 20)}` : ""} <span>  {post.propertytype ? ` ${post.propertytype.slice(0, 20)}` : ""}
+{post.propertyname ? ` ${post.propertyname.slice(0, 20)}` : ""} <span>|</span> <span>  {post.propertytype ? ` ${post.propertytype.slice(0, 20)}` : ""}
 </span>
 </p>
 
