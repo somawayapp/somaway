@@ -108,19 +108,13 @@ className="text-[var(--softTextColor)]  font-semibold capitalize  text-[14px]  "
 className="text-[var(--softTextColor)]  capitalize   text-[14px] "
 > Wako House
 
-{post.propertyname ? ` ${post.propertyname.slice(0, 20)}` : ""}
+{post.propertyname ? ` ${post.propertyname.slice(0, 20)}` : ""} <span>  {post.propertytype ? ` ${post.propertytype.slice(0, 20)}` : ""}
+</span>
 </p>
 
-      <p
-
-  className="text-[var(--softTextColor)]  capitalize   text-[14px] "
->
-
-  {post.propertytype ? ` ${post.propertytype.slice(0, 20)}` : ""}
-</p>
+   
 
 <p
-
 className="text-[var(--softTextColor)]     text-[14px]"
 >  <span className="font-semibold text-[13px]">34</span> Reviews
 
