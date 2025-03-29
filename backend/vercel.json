@@ -16,7 +16,7 @@
       "dest": "api/index.js"
     },
     {
-      "src": "/reviews/(.*)",
+      "src": "/reviews(.*)",
       "dest": "/index.html"
     },
     

@@ -14,6 +14,29 @@ const fetchPosts = async (searchParams) => {
 };
 
 const PostList = () => {
+
+    const [columns, setColumns] = useState("repeat(1, 1fr)");
+  
+    useEffect(() => {
+      const updateColumns = () => {
+        const width = window.innerWidth;
+        setColumns(
+          width > 1400
+            ? "repeat(4, 1fr)"
+            : width > 1000
+            ? "repeat(3, 1fr)"
+            : width > 640
+            ? "repeat(2, 1fr)"
+            : "repeat(1, 1fr)"
+        );
+      };
+  
+      window.addEventListener("resize", updateColumns);
+      updateColumns(); // Initial call
+  
+      return () => window.removeEventListener("resize", updateColumns);
+    }, []);
+    
   const [searchParams] = useSearchParams();
   const { data: allPosts = [], error, status } = useQuery({
     queryKey: ["posts", searchParams.toString()],
@@ -64,7 +87,7 @@ const PostList = () => {
   if (displayedPosts.length === 0 && showMessage) {
     return (
       <div className="flex flex-col items-center justify-center h-[50vh]">
-       <Link to="/addlisting#review"
+       <Link to="/addlisting"
     className="w-full px-6 py-3 rounded-xl border border-[var(--softBg4)] 
                text-[var(--softTextColor)] shadow-md 
                hover:text-[var(--textColor)] text-center"
@@ -80,7 +103,7 @@ const PostList = () => {
   
   if (displayedPosts.length === 0) {
     return (
-      <div className="gap-6 grid grid-cols-1 md:grid-cols-4 md:gap-9 scrollbar-hide">
+      <div style={{ display: "grid", gridTemplateColumns: columns }} className="gap-6 md:gap-9 scrollbar-hide">
         {Array(8).fill(0).map((_, index) => (
           <div key={index} className="relative aspect-[3/3] w-full h-full">
             <div className="absolute inset-0 bg-[var(--softBg4)] animate-pulse rounded-xl md:rounded-2xl"></div>

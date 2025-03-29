@@ -80,7 +80,7 @@
               <div className="relative"  onClick={() => setOpen((prev) => !prev)}>
               <div className="flex flex-row items-center gap-3">
               <Link
-              to="/addlisting#review">
+              to="/addlistingreview">
               <button
                 type="button"
                 className="hidden md:block text-sm font-semibold py-3 px-4 rounded-full hover:bg-[var(--softBg4)] transition cursor-pointer text-[var(--softBg5)]"
@@ -168,7 +168,7 @@
             </Link>
             
             <Link
-              to="/reviews/"
+              to="/reviews"
               className="block py-2 text-[var(--softTextColor)]   hover:text-[#fc3239]  p-2 rounded-xl"
              onClick={() => setOpen(false)}          > Reviews     
             </Link>
@@ -182,7 +182,7 @@
           </SignedIn>
 
             <Link
-              to="/addlisting#review"
+              to="/addlistingreview"
               className="block py-2 text-[var(--softTextColor)]   hover:text-[#fc3239]  p-2 rounded-xl"
             onClick={() => setOpen(false)}          > Add Review     
           </Link>

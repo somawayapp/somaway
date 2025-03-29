@@ -27,7 +27,7 @@ const ReviewPostList = () => {
           ? "repeat(4, 1fr)"
           : width > 1000
           ? "repeat(3, 1fr)"
-          : width > 740
+          : width > 640
           ? "repeat(2, 1fr)"
           : "repeat(1, 1fr)"
       );
@@ -91,7 +91,7 @@ const ReviewPostList = () => {
   if (displayedPosts.length === 0 && showMessage) {
     return (
       <div className="flex flex-col items-center justify-center h-[50vh]">
-    <Link to="/addlisting#review"
+    <Link to="/addlistingreview"
     className="w-full px-6 py-3 rounded-xl border border-[var(--softBg4)] 
                text-[var(--softTextColor)] shadow-md 
                hover:text-[var(--textColor)] text-center"
