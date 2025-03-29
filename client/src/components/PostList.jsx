@@ -87,8 +87,8 @@ const PostList = () => {
   if (displayedPosts.length === 0 && showMessage) {
     return (
       <div className="flex flex-col items-center justify-center h-[50vh]">
-       <Link to="/addlisting"
-    className="w-full px-6 py-3 rounded-xl border border-[var(--softBg4)] 
+       <Link to="/"
+    className=" px-6 py-3 rounded-xl border border-[var(--softBg4)] 
                text-[var(--softTextColor)] shadow-md 
                hover:text-[var(--textColor)] text-center"
   >

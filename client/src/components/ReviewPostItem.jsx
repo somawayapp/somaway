@@ -75,13 +75,13 @@ const ReviewPostItem = ({ post }) => {
   <>
     <button
       onClick={handlePrev}
-      className="hidden md:block absolute left-1 top-[37%] -translate-y-1/2 bg-black bg-opacity-50 text-white p-1 rounded-full opacity-0 group-hover:opacity-100 transition"
+      className="hidden md:block absolute left-1 top-[47%] -translate-y-1/2 bg-black bg-opacity-50 text-white p-1 rounded-full opacity-0 group-hover:opacity-100 transition"
     >
       <ChevronLeft size={10} />
     </button>
     <button
       onClick={handleNext}
-      className="hidden md:block absolute right-1 top-[37%] -translate-y-1/2 bg-black bg-opacity-50 text-white p-1 rounded-full opacity-0 group-hover:opacity-100 transition"
+      className="hidden md:block absolute right-1 top-[47%] -translate-y-1/2 bg-black bg-opacity-50 text-white p-1 rounded-full opacity-0 group-hover:opacity-100 transition"
     >
       <ChevronRight size={10} />
     </button>

@@ -92,7 +92,7 @@ const ReviewPostList = () => {
     return (
       <div className="flex flex-col items-center justify-center h-[50vh]">
     <Link to="/addlistingreview"
-    className="w-full px-6 py-3 rounded-xl border border-[var(--softBg4)] 
+    className=" px-6 py-3 rounded-xl border border-[var(--softBg4)] 
                text-[var(--softTextColor)] shadow-md 
                hover:text-[var(--textColor)] text-center"
   >
