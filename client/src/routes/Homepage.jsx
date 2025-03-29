@@ -67,7 +67,7 @@ from ${author || 'top authors'}in minutes. Elevate your mind—only on Hodi!`} /
 
       <div className="flex  flex-col justify-between">
        <PostList />
-       <Link  style={{ zIndex: 100004, }}  to="/reviews"  className=" fixed px-6 py-3 text-[var(--textColor)]  bottom-[50px] rounded-3xl
+       <Link  style={{ zIndex: 100004, }}  to="/reviews"  className=" fixed px-8 py-4 bg-[var(--textColor)] text-[14px] md:text-[16px]  bottom-[50px] rounded-3xl
                       text-[var(--bg)] shadow-md font-semibold justify-center items-center
                       hover:shadow-xl text-center"
          >
