@@ -64,13 +64,13 @@ from ${author || 'top authors'}in minutes. Elevate your mind—only on Hodi!`} /
 
      
   
-        <div className="flex flex-col justify-between items-center relative min-h-[75vh]">
+<div className="flex flex-col justify-between items-center relative min-h-[75vh]">
   <ReviewPostList />
   <Link
     style={{ zIndex: 100004 }}
     to="/addlistingreview"
     className="p-4 md:px-8 md:py-3 bg-[var(--softTextColori)] text-[12px] md:text-[16px]
-    sticky bottom-[60px] md:bottom-[30px] md:left-1/2 md:-translate-x-1/2 
+    fixed md:sticky bottom-[60px] md:bottom-[30px] md:left-1/2 md:-translate-x-1/2 
     right-2 md:right-auto rounded-full text-[var(--softBg)]
     shadow-md font-semibold flex items-center gap-2 hover:bg-[var(--textColor)]"
   >
