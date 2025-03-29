@@ -39,18 +39,14 @@ const router = createBrowserRouter([
         element: <Homepage />,
       },
       
-      {
-        path: "/reviews/:slug",
-        element: <ReviewsHomePage />,
-      },
-      
+    
       {
         path: "/reviews",
         element: <ReviewsHomePage />,
-      },
+      }
       
       {
-        path: "/review/:slug",
+        path: "/reviews/:slug",
         element: <ReviewsPostPage />,
       },
       {
