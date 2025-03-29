@@ -65,15 +65,13 @@ const ReviewPostList = () => {
   if (displayedPosts.length === 0 && showMessage) {
     return (
       <div className="flex flex-col items-center justify-center h-[50vh]">
-    <Link to="/addlisting#review">
-  <button
+    <Link to="/addlisting#review"
     className="w-full px-6 py-3 rounded-xl border border-[var(--softBg4)] 
                text-[var(--softTextColor)] shadow-md 
                hover:text-[var(--textColor)] text-center"
   >
     <p className="mb-2">No Reviews found for this property search</p>
     <p className="mb-2 font-bold">Add a new property and review it</p>
-  </button>
 </Link>
 
 
