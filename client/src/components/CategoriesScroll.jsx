@@ -1,5 +1,6 @@
 import React, { useRef, useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import { FaBath, FaRulerCombined } from "react-icons/fa";
 import { FaBuilding,FaCouch, FaDoorOpen, FaWarehouse, FaHome, FaTree, FaBed } from "react-icons/fa";
 import { MdVilla, MdApartment } from "react-icons/md";
@@ -45,7 +46,12 @@ const CategoriesScroll = ({ setOpen }) => {
   const containerRef = useRef(null);
   const [showLeftButton, setShowLeftButton] = useState(false);
   const [showRightButton, setShowRightButton] = useState(false);
-
+  const currentUrl = window.location.pathname;
+  const link = currentUrl.includes('/reviews') 
+    ? `/reviews/?propertytype=${slug}` 
+    : `/?propertytype=${slug}`;
+  
+  
   const scroll = (direction) => {
     const scrollAmount = 200;
     if (direction === "left") {
@@ -104,7 +110,7 @@ const CategoriesScroll = ({ setOpen }) => {
           return (
             <Link
             key={propertytype}
-            to={`/?propertytype=${slug}`}
+            to={link}
             className="flex flex-col items-center justify-center gap-2 md:gap-3 text-[var(--softTextColor)] hover:text-[var(--textColor)] text-sm
             md:text-md bg-[var(--bg)] rounded-xl
              pr-2 last:md:pr-2 md:pr-[45px] pb-3 transition-all"

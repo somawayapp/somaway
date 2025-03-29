@@ -98,7 +98,7 @@ const ReviewPostItem = ({ post }) => {
 
 <p
 
-className="text-[var(--softTextColor)]  font-semibold capitalize mt-1 md:mt-[1px]  text-[14px]  "
+className="text-[var(--softTextColor)]  font-semibold capitalize mt-2 md:mt-1  text-[14px]  "
 > Nairobi, Kenya
 
 </p>
