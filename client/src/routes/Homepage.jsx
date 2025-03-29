@@ -66,14 +66,14 @@ from ${author || 'top authors'}in minutes. Elevate your mind—only on Hodi!`} /
      
   
 
-        <div className="flex flex-col justify-between items-center relative min-h-screen">
+        <div className="flex flex-col justify-between items-center relative min-h-[75vh]">
       <PostList />
       <Link
         style={{ zIndex: 100004 }}
         to="/reviews"
         className="fixed px-5 md:px-8 py-2 md:py-4 bg-[var(--softTextColor)] text-[12px] md:text-[16px]
-        bottom-[50px] left-1/2 -translate-x-1/2 rounded-full text-[var(--softBg)]
-        shadow-md font-semibold flex items-center gap-2 hover:shadow-2xl"
+        bottom-[60px]  md:bottom-[30px] left-1/2 -translate-x-1/2 rounded-full text-[var(--softBg)]
+        shadow-md font-semibold flex items-center gap-2 hover:bg-[var(--textColor)] "
       >
         <p>Reviews</p>
         <MessageCircle size={18} />
