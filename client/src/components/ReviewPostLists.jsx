@@ -15,6 +15,30 @@ const fetchPosts = async (searchParams) => {
 };
 
 const ReviewPostList = () => {
+
+
+  const [columns, setColumns] = useState("repeat(1, 1fr)");
+
+  useEffect(() => {
+    const updateColumns = () => {
+      const width = window.innerWidth;
+      setColumns(
+        width > 1400
+          ? "repeat(4, 1fr)"
+          : width > 1000
+          ? "repeat(3, 1fr)"
+          : width > 740
+          ? "repeat(2, 1fr)"
+          : "repeat(1, 1fr)"
+      );
+    };
+
+    window.addEventListener("resize", updateColumns);
+    updateColumns(); // Initial call
+
+    return () => window.removeEventListener("resize", updateColumns);
+  }, []);
+
   const [searchParams] = useSearchParams();
   const { data: allPosts = [], error, status } = useQuery({
     queryKey: ["posts", searchParams.toString()],
@@ -22,6 +46,8 @@ const ReviewPostList = () => {
     staleTime: 1000 * 60 * 10,
     cacheTime: 1000 * 60 * 30,
   });
+
+
 
   const [displayedPosts, setDisplayedPosts] = useState([]);
 
@@ -82,19 +108,7 @@ const ReviewPostList = () => {
   
   if (displayedPosts.length === 0) {
     return (
-      <div  style={{
-        display: "grid",
-        gap: "1.5rem", // Default gap (6 in Tailwind)
-        gridTemplateColumns:
-          window.innerWidth > 1400
-            ? "repeat(4, 1fr)"
-            : window.innerWidth > 1000
-            ? "repeat(3, 1fr)"
-            : window.innerWidth > 740
-            ? "repeat(2, 1fr)"
-            : "repeat(1, 1fr)",
-      }}
-       className="gap-6  md:gap-9 scrollbar-hide">
+      <div style={{ display: "grid", gridTemplateColumns: columns }} className="gap-6 md:gap-9 scrollbar-hide">
         {Array(8).fill(0).map((_, index) => (
           <div key={index} className="relative aspect-[3/1] w-full">
             <div className="absolute inset-0 bg-[var(--softBg4)] animate-pulse rounded-xl md:rounded-2xl"></div>
@@ -107,18 +121,7 @@ const ReviewPostList = () => {
 
 
   return (
-    <div  style={{
-      display: "grid",
-      gap: "1.5rem", // Default gap (6 in Tailwind)
-      gridTemplateColumns:
-        window.innerWidth > 1400
-          ? "repeat(4, 1fr)"
-          : window.innerWidth > 1000
-          ? "repeat(3, 1fr)"
-          : window.innerWidth > 740
-          ? "repeat(2, 1fr)"
-          : "repeat(1, 1fr)",
-    }} className="gap-2 md:gap-6 scrollbar-hide">
+    <div className="gap-2 grid grid-cols-1 md:grid-cols-4 md:gap-6 scrollbar-hide">
       {displayedPosts.map((post) => (
         <ReviewPostItem key={post._id} post={post} />
       ))}
