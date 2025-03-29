@@ -1,67 +1,127 @@
 import ImageKit from "imagekit";
-import Redis from "ioredis";
 import Post from "../models/post.model.js";
 import User from "../models/user.model.js";
 
-const redis = new Redis(); // Initialize Redis
-
 export const getPosts = async (req, res) => {
   try {
-    const pageSize = parseInt(req.query.limit) || 10;
-    const lastCreatedAt = req.query.lastCreatedAt;
-    const cacheKey = `posts:${JSON.stringify(req.query)}`;
+    const page = parseInt(req.query.page) || 1;
+    const limit = parseInt(req.query.limit) || 10;
+    const query = {};
 
-    // Try fetching from Redis Cache
-    const cachedData = await redis.get(cacheKey);
-    if (cachedData) {
-      return res.status(200).json(JSON.parse(cachedData));
+    // Extract query parameters
+    const {
+      author,
+      search,
+      sort,
+      location,
+      propertytype,
+      bedrooms,
+      bathrooms,
+      propertysize,
+      rooms,
+      pricemax,
+      pricemin,
+      model,
+      featured,
+    } = req.query;
+
+    // Category Filter
+    if (req.query.cat) {
+      query.category = req.query.cat;
     }
 
-    const query = {};
-    const { author, search, location, propertytype, bedrooms, bathrooms, propertysize, rooms, pricemax, pricemin, model, featured } = req.query;
-
-    // Filters
+    // Search Query (Title & Description)
     if (search) {
       query.$or = [
         { title: { $regex: search, $options: "i" } },
-        { desc: { $regex: search, $options: "i" } }
+        { desc: { $regex: search, $options: "i" } },
       ];
     }
-    if (author) query.author = { $regex: author, $options: "i" };
-    if (location) query["location.city"] = { $regex: location, $options: "i" };
-    if (propertytype) query.propertytype = propertytype;
+
+    // Author Filter
+    if (author) {
+      const authorNames = author
+        .split(/[,;|\s]+/)
+        .map((name) => name.trim())
+        .filter(Boolean);
+      const authorRegexes = authorNames.map((name) => new RegExp(name, "i"));
+      query.author = { $in: authorRegexes };
+    }
+
+    // Location Filter
+    if (location) {
+      query["location.city"] = { $regex: location, $options: "i" };
+    }
+
+    // Property Type Filter
+    if (propertytype) {
+      query.propertytype = propertytype;
+    }
+
+    // Numeric Filters
     if (bedrooms) query.bedrooms = { $gte: parseInt(bedrooms) };
     if (bathrooms) query.bathrooms = { $gte: parseInt(bathrooms) };
     if (propertysize) query.propertysize = { $gte: parseInt(propertysize) };
     if (rooms) query.rooms = { $gte: parseInt(rooms) };
+
+    // Price Range Filter (Within Range)
     if (pricemin || pricemax) {
       query.price = {};
       if (pricemin) query.price.$gte = parseInt(pricemin);
       if (pricemax) query.price.$lte = parseInt(pricemax);
     }
-    if (model) query.model = model;
-    if (featured) query.isFeatured = true;
-    if (lastCreatedAt) query.createdAt = { $lt: new Date(lastCreatedAt) };
 
-    // Sorting
-    const sort = req.query.sort === "oldest" ? { createdAt: 1 } : { createdAt: -1 };
+    // Model Filter (For Rent / For Sale)
+    if (model) {
+      query.model = model;
+    }
 
-    // Fetch posts
+    // Featured Filter
+    if (featured) {
+      query.isFeatured = true;
+    }
+
+    // Sorting Logic
+    let sortObj = { createdAt: -1 };
+    if (sort) {
+      switch (sort) {
+        case "newest":
+          sortObj = { createdAt: -1 };
+          break;
+        case "oldest":
+          sortObj = { createdAt: 1 };
+          break;
+        case "popular":
+          sortObj = { visit: -1 };
+          break;
+        case "trending":
+          sortObj = { visit: -1 };
+          query.createdAt = {
+            $gte: new Date(new Date().getTime() - 14 * 24 * 60 * 60 * 1000),
+          };
+          break;
+        default:
+          break;
+      }
+    }
+
+    // Fetch posts with the final query object
     const posts = await Post.find(query)
-      .select("title slug price location createdAt isFeatured")
-      .sort(sort)
-      .limit(pageSize)
-      .lean();
+      .populate("user", "username") // Populate author details
+      .sort(sortObj)
+      .limit(limit)
+      .skip((page - 1) * limit);
 
-    // Cache the response for 60 seconds
-    await redis.setex(cacheKey, 60, JSON.stringify(posts));
+    const totalPosts = await Post.countDocuments(query);
+    const hasMore = page * limit < totalPosts;
 
-    res.status(200).json(posts);
+    res.status(200).json({ posts, hasMore });
   } catch (error) {
     console.error("Error fetching posts:", error);
     res.status(500).json("Internal server error!");
   }
 };
+
 
 export const getPost = async (req, res) => {
   const post = await Post.findOne({ slug: req.params.slug }).populate(
