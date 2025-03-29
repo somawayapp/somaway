@@ -72,13 +72,13 @@ const PostListItem = ({ post }) => {
         <>
           <button
             onClick={handlePrev}
-            className="hidden md:block z-50 absolute left-3 top-[37%] -translate-y-1/2 bg-black bg-opacity-50 text-white p-2 rounded-full opacity-100 transition"
+            className="hidden md:block absolute left-3 top-[37%] -translate-y-1/2 bg-black bg-opacity-50 text-white p-2 rounded-full opacity-0 group-hover:opacity-100 transition"
           >
             <ChevronLeft size={24} />
           </button>
           <button
             onClick={handleNext}
-            className="hidden md:block z-50 absolute right-3 top-[37%] -translate-y-1/2 bg-black bg-opacity-50 text-white p-2 rounded-full opacity-100 transition"
+            className="hidden md:block absolute right-3 top-[37%] -translate-y-1/2 bg-black bg-opacity-50 text-white p-2 rounded-full opacity-0 group-hover:opacity-100 transition"
           >
             <ChevronRight size={24} />
           </button>

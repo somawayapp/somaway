@@ -260,13 +260,13 @@ const details = [
       {/* Previous and Next Buttons (Centered on Image) */}
       <button
      onClick={() => navigatePopup("prev")}
-      className="hidden md:block absolute left-3 w-10 h-10  top-1/2 -translate-y-1/2 bg-black bg-opacity-50 text-white p-2 rounded-full opacity-0 group-hover:opacity-100 transition"
+      className="hidden md:block absolute left-3 w-10 h-10  top-1/2 -translate-y-1/2 bg-black bg-opacity-50 text-white p-2 rounded-full opacity-100  transition"
     >
       ❮ 
     </button>
       <button
       onClick={() => navigatePopup("next")}
-      className="hidden md:block absolute right-3 w-10 h-10  top-1/2 -translate-y-1/2 bg-black bg-opacity-50 text-white p-2 rounded-full opacity-0 group-hover:opacity-100 transition"
+      className="hidden md:block absolute right-3 w-10 h-10  top-1/2 -translate-y-1/2 bg-black bg-opacity-50 text-white p-2 rounded-full opacity-100 transition"
     >
       ❯ 
     </button>
