@@ -40,12 +40,12 @@ const router = createBrowserRouter([
       },
       
       {
-        path: "reviews/",
+        path: "/reviews/:slug",
         element: <ReviewsHomePage />,
       },
      
       {
-        path: "/reviews/:slug",
+        path: "/review/:slug",
         element: <ReviewsPostPage />,
       },
       {
