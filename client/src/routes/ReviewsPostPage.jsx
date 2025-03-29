@@ -261,13 +261,13 @@ onClick={() => setPopupImage(null)}
 {/* Previous and Next Buttons (Centered on Image) */}
 <button
 onClick={() => navigatePopup("prev")}
-className="hidden md:block absolute left-3 w-10 h-10  top-1/2 -translate-y-1/2 bg-black bg-opacity-50 text-white p-2 rounded-full opacity-0 group-hover:opacity-100 transition"
+className="hidden md:block absolute left-3 w-10 h-10 z-10  top-1/2 -translate-y-1/2 bg-black bg-opacity-50 text-white p-2 rounded-full opacity-100 transition"
 >
 ❮ 
 </button>
 <button
 onClick={() => navigatePopup("next")}
-className="hidden md:block absolute right-3 w-10 h-10  top-1/2 -translate-y-1/2 bg-black bg-opacity-50 text-white p-2 rounded-full opacity-0 group-hover:opacity-100 transition"
+className="hidden md:block absolute right-3 w-10 h-10 z-10  top-1/2 -translate-y-1/2 bg-black bg-opacity-50 text-white p-2 rounded-full opacity-100 transition"
 >
 ❯ 
 </button>
@@ -297,45 +297,7 @@ alt="Popup"
 
      
 <div className="col-span-4 flex flex-col gap-8">
-<div className="flex flex-col gap-2">
-<div className="text-[16px] font-semibold text-[var(--softTextColor)] flex flex-row items-center gap-2 md:justify-start justify-center">
-<span className="mr-1">Hosted by</span> 
-<img
-className="rounded-full text-[14px] md:text-[16px]  w-[30px] md:w-[40px] h-[30px] md:h-[40px] select-none"
-alt="Avatar"
-src={data.user?.img || "/placeholder.jpg"} 
-/>
-<span>{data.user?.username}</span>
-</div>
 
-<div
-className="flex flex-row items-center  mt-3 md:mt-7 gap-2 md:gap-4 font-light text-[var(--softTextColor)]
-"
->  <div className=" md:justify-start justify-center property-details">
-{data.bedrooms !== undefined && data.bedrooms !== null && (
-<span className="detail-item text-[14px] md:text-[16px] ">
-  <FaBed className="icon" /> {data.bedrooms} Bedrooms
-</span>
-)}
-{data.bathrooms !== undefined && data.bathrooms !== null && (
-<span className="detail-item text-[14px] md:text-[16px] ">
-  <FaBath className="icon" /> {data.bathrooms} Bathrooms
-</span>
-)}
-{data.rooms !== undefined && data.rooms !== null && (
-<span className="detail-item text-[14px] md:text-[16px] ">
-  <AiOutlineAppstore className="icon" /> {data.rooms} Rooms
-</span>
-)}
-{data.propertysize !== undefined && data.propertysize !== null && (
-<span className="detail-item text-[14px] md:text-[16px] ">
-  <FaRulerCombined className="icon" /> {data.propertysize} sq/ft
-</span>
-)}
-</div>
-</div>
-</div>
-<hr className="h-[1px] bg-[var(--softBg4)] border-0" />
 
 <p className=" flex flex-row" style={{ 
 alignItems: "center", 
@@ -358,7 +320,7 @@ fontWeight: "normal" // Ensure it's not bold
 <p className="capitalize font-semibold">
 {data.propertytype}
 </p>
-<span className=" text-[14px] md:text-[16px] text-[var(--softTextColor)] ">This is a {details.join(", ")} property!</span>
+<span className=" text-[14px] md:text-[16px] text-[var(--softTextColor)] ">This is a {data.propertytype} property!</span>
 </span>
 
 </p>
