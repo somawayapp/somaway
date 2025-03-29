@@ -82,7 +82,19 @@ const ReviewPostList = () => {
   
   if (displayedPosts.length === 0) {
     return (
-      <div className="gap-6 grid grid-cols-1 md:grid-cols-4 md:gap-9 scrollbar-hide">
+      <div  style={{
+        display: "grid",
+        gap: "1.5rem", // Default gap (6 in Tailwind)
+        gridTemplateColumns:
+          window.innerWidth > 1400
+            ? "repeat(4, 1fr)"
+            : window.innerWidth > 1000
+            ? "repeat(3, 1fr)"
+            : window.innerWidth > 740
+            ? "repeat(2, 1fr)"
+            : "repeat(1, 1fr)",
+      }}
+       className="gap-6  md:gap-9 scrollbar-hide">
         {Array(8).fill(0).map((_, index) => (
           <div key={index} className="relative aspect-[3/1] w-full">
             <div className="absolute inset-0 bg-[var(--softBg4)] animate-pulse rounded-xl md:rounded-2xl"></div>
