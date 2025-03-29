@@ -17,7 +17,7 @@ const ReviewPostItem = ({ post }) => {
   };
 
   return (
-    <div className="relative flex flex-row  bg-[var(--bd)] rounded-xl  shadow-2xl gap-2 md:gap-4 group mb-6 md:mb-[30px] overflow-hidden">
+    <div className="relative flex flex-row  bg-[var(--bd)] p-2 md:p-4 rounded-xl  shadow-2xl gap-2 md:gap-4 group mb-6 md:mb-[30px] overflow-hidden">
       {/* Image with Link */}
 
       <div className="w-1/4">
