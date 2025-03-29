@@ -10,7 +10,6 @@ import userRouter from '../routes/user.route.js';
 import postRouter from '../routes/post.route.js';
 import commentRouter from '../routes/comment.route.js';
 import webhookRouter from '../routes/webhook.route.js';
-import subscriptionRouter from '../routes/subscription.route.js';
 
 // Load environment variables
 dotenv.config();
@@ -82,7 +81,6 @@ app.get('/protect2', requireAuth(), (req, res) => {
 // API Routes
 app.use('/users', userRouter);
 app.use('/posts', postRouter);
-app.use('/subscriptions', subscriptionRouter);
 app.use('/comments', commentRouter);
 app.use('/webhook', webhookRouter);
 

@@ -44,10 +44,7 @@ const postSchema = new Schema(
       type: [String],
       required: false,
     },
-    img: {
-      type: [String], // Array of image URLs
-      required: false,
-    },
+
     model: {
       type: String,
       required: false,
