@@ -4,6 +4,7 @@ import axios from "axios";
 import { useSearchParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import ReviewPostItem from "./ReviewPostItem";
+import Link from "next/link";
 
 const fetchPosts = async (searchParams) => {
   const searchParamsObj = Object.fromEntries([...searchParams]);
@@ -64,15 +65,17 @@ const ReviewPostList = () => {
   if (displayedPosts.length === 0 && showMessage) {
     return (
       <div className="flex flex-col items-center justify-center h-[50vh]">
+                      <Link to={`/addlisting#review`}>
+
         <button
-          onClick={() => navigate("/addlisting#review")}
           className="px-9 py-4 rounded-xl border border-[var(--softBg4)] text-[var(--softTextColor)] shadow-md hover:text-[var(--textColor)]"
         >
           <p className="mb-4 ">No Reviews found for this property search</p>
           <p className="mb-4 font-bold ">
             Add a new property and review it
           </p>
-        </button>
+        </button>              </Link>
+
       </div>
     );
   }

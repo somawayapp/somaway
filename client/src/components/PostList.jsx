@@ -3,6 +3,7 @@ import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import { useSearchParams } from "react-router-dom";
 import { useEffect, useState } from "react";
+import Link from "next/link";
 
 const fetchPosts = async (searchParams) => {
   const searchParamsObj = Object.fromEntries([...searchParams]);
@@ -63,15 +64,17 @@ const PostList = () => {
   if (displayedPosts.length === 0 && showMessage) {
     return (
       <div className="flex flex-col items-center justify-center h-[50vh]">
+              <Link to={`/`}>
+        
         <button
-          onClick={() => navigate("/")}
           className="px-9 py-4 rounded-xl border border-[var(--softBg4)] text-[var(--softTextColor)] shadow-md hover:text-[var(--textColor)]"
         >
           <p className="mb-4 ">No posts found</p>
           <p className="mb-4 font-bold ">
             Go Back Home
           </p>
-        </button>
+        </button>              </Link>
+
       </div>
     );
   }
