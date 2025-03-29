@@ -19,7 +19,6 @@ model User {
   email          String       @unique
   img            String?
   savedPosts     String[]     @default([]) // Array of post IDs
-  subscription   Subscription[]  // Change to an array to allow multiple subscriptions
   createdAt      DateTime     @default(now())
   updatedAt      DateTime     @updatedAt
   posts          Post[]
