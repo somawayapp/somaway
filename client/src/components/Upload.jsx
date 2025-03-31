@@ -32,12 +32,17 @@ const Upload = ({ type, setProgress, setData }) => {
       return;
     }
   
-    const newImages = files.map((file) => ({ file, url: URL.createObjectURL(file) }));
+    const newImages = files.map((file) => ({
+      file,
+      url: URL.createObjectURL(file),
+    }));
+  
     setImages((prev) => [...prev, ...newImages]);
   
-    // Automatically trigger uploads for each file
-    files.forEach((file) => ref.current?.uploadFile(file));
+    // Send the selected files to the parent to track
+    setData((prev) => [...prev, ...newImages]);
   };
+  
   
   const handlePaste = (e) => {
     handleFileChange({ target: { files: e.clipboardData.files } });
@@ -65,8 +70,13 @@ const Upload = ({ type, setProgress, setData }) => {
   };
 
   const onSuccess = (res) => {
-    setData((prev) => (prev ? [...prev, { url: res.url }] : [{ url: res.url }]));
+    const uploadedImage = {
+      url: res.url,  // Ensure this is the actual uploaded image URL
+      fileId: res.fileId,
+    };
+    setData((prev) => [...prev, uploadedImage]);  // Ensure `img` in AddListingReview gets the correct URLs
   };
+  
   
   const onUploadProgress = (progress) => {
     setProgress(Math.round((progress.loaded / progress.total) * 100));
