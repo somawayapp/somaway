@@ -1,9 +1,9 @@
-import ReviewListItem from "./ReviewListItem";
+
+import ReviewPostItem from "./ReviewPostItem";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import { useSearchParams } from "react-router-dom";
 import { useEffect, useState } from "react";
-import ReviewItem from "./ReviewItem";
 import { Link } from "react-router-dom";
 
 const fetchReviews = async (searchParams) => {
@@ -14,7 +14,7 @@ const fetchReviews = async (searchParams) => {
   return res.data.reviews;
 };
 
-const ReviewList = () => {
+const ReviewPostList = () => {
   const [columns, setColumns] = useState("repeat(1, 1fr)");
 
   useEffect(() => {
@@ -111,10 +111,10 @@ const ReviewList = () => {
   return (
     <div style={{ display: "grid", gridTemplateColumns: columns }} className="gap-6 md:gap-9 scrollbar-hide">
       {displayedReviews.map((review) => (
-        <ReviewItem key={review._id} review={review} />
+        <ReviewPostItem key={review._id} review={review} />
       ))}
     </div>
   );
 };
 
-export default ReviewList;
+export default ReviewPostList;
