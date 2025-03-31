@@ -58,7 +58,7 @@ export const createListingReview = async (req, res) => {
       console.log("Request Headers:", req.headers);
   
       // Generate slug from title
-      let slug = req.body.name.replace(/ /g, "-").toLowerCase();
+      let slug = req.body.propertyname.replace(/ /g, "-").toLowerCase();
       let existingPost = await Post.findOne({ slug });
       let counter = 2;
   
