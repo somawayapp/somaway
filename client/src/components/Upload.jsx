@@ -3,22 +3,17 @@ import { useRef, useState, useEffect } from "react";
 import { toast } from "react-toastify";
 import { FaTimes, FaCamera } from "react-icons/fa";
 
+const MAX_IMAGES = 10;
+
 const authenticator = async () => {
   try {
     const response = await fetch(
       `${import.meta.env.VITE_API_URL}/posts/upload-auth`
     );
-
     if (!response.ok) {
-      const errorText = await response.text();
-      throw new Error(
-        `Request failed with status ${response.status}: ${errorText}`
-      );
+      throw new Error(`Request failed with status ${response.status}`);
     }
-
-    const data = await response.json();
-    const { signature, expire, token } = data;
-    return { signature, expire, token };
+    return await response.json();
   } catch (error) {
     throw new Error(`Authentication request failed: ${error.message}`);
   }
@@ -26,39 +21,37 @@ const authenticator = async () => {
 
 const Upload = ({ children, type, setProgress, setData }) => {
   const ref = useRef(null);
+  const videoRef = useRef(null);
   const [previewImages, setPreviewImages] = useState([]);
+  const [cameraOpen, setCameraOpen] = useState(false);
 
   const handleFileSelect = (files) => {
-    const imagePreviews = Array.from(files).map((file) => {
-      return { file, url: URL.createObjectURL(file) };
-    });
+    let selectedFiles = Array.from(files).slice(0, MAX_IMAGES - previewImages.length);
+    if (selectedFiles.length < files.length) {
+      toast.warn(`Only ${MAX_IMAGES} images allowed!`);
+    }
+    const imagePreviews = selectedFiles.map((file) => ({ file, url: URL.createObjectURL(file) }));
     setPreviewImages((prev) => [...prev, ...imagePreviews]);
   };
 
-  const onError = (err) => {
-    console.log(err);
-    toast.error("Image upload failed!");
-  };
-
+  const onError = () => toast.error("Image upload failed!");
+  
   const onSuccess = (res) => {
-    console.log(res);
     setData((prev) => [...prev, res]);
     setPreviewImages((prev) => prev.filter((img) => img.file.name !== res.name));
   };
 
   const onUploadProgress = (progress) => {
-    console.log(progress);
     setProgress(Math.round((progress.loaded / progress.total) * 100));
   };
 
   const handlePaste = (event) => {
-    const items = (event.clipboardData || event.originalEvent.clipboardData).items;
+    const items = event.clipboardData.items;
+    const files = [];
     for (const item of items) {
-      if (item.kind === "file") {
-        const file = item.getAsFile();
-        handleFileSelect([file]);
-      }
+      if (item.kind === "file") files.push(item.getAsFile());
     }
+    handleFileSelect(files);
   };
 
   useEffect(() => {
@@ -66,17 +59,40 @@ const Upload = ({ children, type, setProgress, setData }) => {
     return () => document.removeEventListener("paste", handlePaste);
   }, []);
 
-  const handleDragOver = (event) => {
-    event.preventDefault();
-  };
-
-  const handleDrop = (event) => {
-    event.preventDefault();
-    handleFileSelect(event.dataTransfer.files);
-  };
-
   const removePreview = (index) => {
     setPreviewImages((prev) => prev.filter((_, i) => i !== index));
+  };
+
+  const openCamera = () => {
+    setCameraOpen(true);
+    navigator.mediaDevices.getUserMedia({ video: true })
+      .then((stream) => {
+        if (videoRef.current) {
+          videoRef.current.srcObject = stream;
+        }
+      })
+      .catch(() => toast.error("Camera access denied!"));
+  };
+
+  const capturePhoto = () => {
+    const video = videoRef.current;
+    if (!video) return;
+    const canvas = document.createElement("canvas");
+    canvas.width = video.videoWidth;
+    canvas.height = video.videoHeight;
+    canvas.getContext("2d").drawImage(video, 0, 0);
+    canvas.toBlob((blob) => {
+      const file = new File([blob], "captured-image.jpg", { type: "image/jpeg" });
+      handleFileSelect([file]);
+    });
+    closeCamera();
+  };
+
+  const closeCamera = () => {
+    setCameraOpen(false);
+    if (videoRef.current && videoRef.current.srcObject) {
+      videoRef.current.srcObject.getTracks().forEach(track => track.stop());
+    }
   };
 
   return (
@@ -87,8 +103,6 @@ const Upload = ({ children, type, setProgress, setData }) => {
     >
       <div
         className="p-4 border-2 border-dashed rounded-lg text-center cursor-pointer"
-        onDragOver={handleDragOver}
-        onDrop={handleDrop}
         onClick={() => ref.current.click()}
       >
         {children || "Drag & Drop or Click to Upload"}
@@ -103,42 +117,28 @@ const Upload = ({ children, type, setProgress, setData }) => {
         accept={`${type}/*`}
         multiple
       />
-      <button
-        className="mt-2 p-2 bg-blue-500 text-white rounded"
-        onClick={() => ref.current.click()}
-      >
+      <button className="mt-2 p-2 bg-blue-500 text-white rounded" onClick={() => ref.current.click()}>
         Select Images
       </button>
-      <button
-        className="mt-2 ml-2 p-2 bg-green-500 text-white rounded flex items-center"
-        onClick={() => {
-          navigator.mediaDevices.getUserMedia({ video: true })
-            .then((stream) => {
-              const track = stream.getVideoTracks()[0];
-              const imageCapture = new ImageCapture(track);
-              imageCapture.takePhoto().then((blob) => {
-                const file = new File([blob], "camera-image.jpg", { type: "image/jpeg" });
-                handleFileSelect([file]);
-                track.stop();
-              });
-            })
-            .catch((err) => toast.error("Camera access denied!"));
-        }}
-      >
+      <button className="mt-2 ml-2 p-2 bg-green-500 text-white rounded flex items-center" onClick={openCamera}>
         <FaCamera className="mr-2" /> Take Photo
       </button>
+      {cameraOpen && (
+        <div className="fixed inset-0 bg-black bg-opacity-75 flex flex-col items-center justify-center">
+          <video ref={videoRef} autoPlay className="w-full max-w-lg rounded" />
+          <button className="mt-4 p-3 bg-white text-black rounded-full" onClick={capturePhoto}>
+            Capture
+          </button>
+          <button className="mt-2 p-2 bg-red-500 text-white rounded" onClick={closeCamera}>
+            Close
+          </button>
+        </div>
+      )}
       <div className="mt-4 grid grid-cols-4 gap-2">
         {previewImages.map((img, index) => (
           <div key={index} className="relative group">
-            <img
-              src={img.url}
-              alt="Preview"
-              className="w-full h-24 object-cover rounded"
-            />
-            <button
-              className="absolute top-1 right-1 bg-red-500 text-white rounded-full p-1 opacity-0 group-hover:opacity-100"
-              onClick={() => removePreview(index)}
-            >
+            <img src={img.url} alt="Preview" className="w-full h-24 object-cover rounded" />
+            <button className="absolute top-1 right-1 bg-red-500 text-white rounded-full p-1 opacity-0 group-hover:opacity-100" onClick={() => removePreview(index)}>
               <FaTimes />
             </button>
           </div>
