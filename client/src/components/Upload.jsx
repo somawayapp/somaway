@@ -4,6 +4,7 @@ import { toast } from "react-toastify";
 const Upload = ({ setData }) => {
   const [images, setImages] = useState([]);
   const fileInputRef = useRef(null);
+  const cameraInputRef = useRef(null);
   const maxImages = 10;
 
   const handleFileChange = (e) => {
@@ -27,26 +28,56 @@ const Upload = ({ setData }) => {
     handleFileChange({ target: { files: items } });
   };
 
+  const handleDrop = (e) => {
+    e.preventDefault();
+    const files = Array.from(e.dataTransfer.files);
+    if (!files.length) return;
+    handleFileChange({ target: { files } });
+  };
+
   const removeImage = (index) => {
     setImages((prev) => prev.filter((_, i) => i !== index));
   };
 
   const triggerUpload = () => fileInputRef.current.click();
+  const triggerCamera = () => cameraInputRef.current.click();
 
   return (
-    <div onPaste={handlePaste} className="space-y-4">
-      <button
-        onClick={triggerUpload}
-        className="w-full p-3 bg-blue-500 text-white font-semibold rounded-lg hover:bg-blue-600 transition-all"
-      >
-        {images.length ? "Add More Images" : "Add Images"}
-      </button>
+    <div
+      onPaste={handlePaste}
+      onDrop={handleDrop}
+      onDragOver={(e) => e.preventDefault()}
+      className="space-y-4 border-dashed border-2 border-gray-400 p-4 rounded-lg"
+    >
+      <div className="flex gap-2">
+        <button
+          onClick={triggerUpload}
+          className="w-full p-3 bg-blue-500 text-white font-semibold rounded-lg hover:bg-blue-600 transition-all"
+        >
+          {images.length ? "Add More Images" : "Add Images"}
+        </button>
+        <button
+          onClick={triggerCamera}
+          className="w-full p-3 bg-green-500 text-white font-semibold rounded-lg hover:bg-green-600 transition-all"
+        >
+          Capture from Camera
+        </button>
+      </div>
       
       <input
         type="file"
         ref={fileInputRef}
         multiple
         accept="image/*"
+        className="hidden"
+        onChange={handleFileChange}
+      />
+
+      <input
+        type="file"
+        ref={cameraInputRef}
+        accept="image/*"
+        capture="environment"
         className="hidden"
         onChange={handleFileChange}
       />
