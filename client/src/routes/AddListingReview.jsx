@@ -21,11 +21,7 @@ const AddListingReview = () => {
   const navigate = useNavigate();
 
   const mutation = useMutation({
-    mutationFn: async (newPost) => {
-      return axios.post(`${import.meta.env.VITE_API_URL}/reviews`, newPost, {
-        headers: { "Content-Type": "multipart/form-data" },
-      });
-    },
+    mutationFn: async (newPost) => axios.post(`${import.meta.env.VITE_API_URL}/reviews`, newPost),
     onSuccess: (res) => {
       toast.success("Listing has been created!");
       navigate(`/reviews/${res.data.slug}`);
@@ -34,42 +30,38 @@ const AddListingReview = () => {
       toast.error(error.response?.data?.message || "An error occurred");
     },
   });
-  
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
     setError("");
-  
+
     let missingFields = [];
     if (!propertyname.trim()) missingFields.push("Property name");
     if (!location.trim()) missingFields.push("Location");
-    if (!img || img.length === 0) missingFields.push("Image");
+    if (img.length === 0) missingFields.push("Image");
     if (!propertytype.trim()) missingFields.push("Property type");
-  
+
     if (missingFields.length > 0) {
-      setError(`All these fields are required: ${missingFields.join(", ")}`);
+      setError(`All this fields are required: ${missingFields.join(", ")}`);
       return;
     }
-  
+
     let slug = propertyname.trim().replace(/\s+/g, "-").toLowerCase().replace(/[^a-z0-9-]/g, "").replace(/-+$/, "");
     slug += `-${Date.now()}-review`;
-  
-    const formData = new FormData();
-    formData.append("propertyname", propertyname);
-    formData.append("slug", slug);
-    formData.append("location", location);
-    formData.append("propertytype", propertytype);
-    
-    img.forEach((image) => {
-      formData.append("images", image.file); // Append actual file for upload
-    });
-  
-    mutation.mutate(formData);
+
+    const data = {
+      propertyname,
+      slug,
+      location,
+      img: img.map((i) => i.url),
+      propertytype,
+    };
+
+    mutation.mutate(data);
   };
-  
 
   return (
-    <div className="min-h-screen py-9  bg-[var(--bg)]">
+    <div className="min-h-screen bg-[var(--bg)]">
       <Navbar />
       <div className="max-w-3xl mx-auto p-6  px-4 md:px-[80px] border border-[var(--softBg4)] shadow-md rounded-lg mt-10">
         <h1 className="text-2xl font-bold text-[var(--softTextColor)] text-center mb-6">Add a place to Review</h1>
@@ -77,8 +69,7 @@ const AddListingReview = () => {
 
         <form onSubmit={handleSubmit} className="space-y-4">
           {/* Upload Component */}
-          <Upload setProgress={setProgress} setData={setImg} />
-
+          <Upload type="image" setProgress={setProgress} setData={setImg}/>
           
           {img.length > 0 && (
             <div className="flex flex-wrap gap-2">
@@ -89,7 +80,7 @@ const AddListingReview = () => {
           )}
 
           {/* Property Type */}
-          <label className="block font-semibold text-[var(--softTextColor)]">Property Type</label>
+          <label className="block font-semibold text-[var(--softTextColor)]]">Property Type</label>
           <select value={propertytype} onChange={(e) => setPropertyType(e.target.value)} className="w-full p-2 border border-[var(--softBg4)] bg-[var(--bg)] text-[var(--softTextColor)] rounded-lg">
             <option value="" disabled>Select the type of Property</option>
             <option value="apartment">Apartment/Flat</option>
@@ -108,11 +99,11 @@ const AddListingReview = () => {
           </select>
 
           {/* Property Name */}
-          <label className="block font-semibold text-[var(--softTextColor)]">Name of this building or place</label>
+          <label className="block font-semibold text-[var(--softTextColor)]]">Name of this building or place</label>
           <input type="text" placeholder="Enter the name of this place" value={propertyname} onChange={(e) => setPropertyName(e.target.value.slice(0, 50))} className="w-full p-2 border  border-[var(--softBg4)] bg-[var(--bg)]   text-[var(--softTextColor)] rounded-lg" />
           
           {/* Location */}
-          <label className="block font-semibold text-[var(--softTextColor)]">Location</label>
+          <label className="block font-semibold text-[var(--softTextColor)]]">Location</label>
           <input type="text" placeholder="Enter the Location" value={location} onChange={(e) => setLocation(e.target.value.slice(0, 50))} className="w-full p-2 border border-[var(--softBg4)] bg-[var(--bg)]   text-[var(--softTextColor)] rounded-lg" />
 
           {/* Progress Indicator */}
