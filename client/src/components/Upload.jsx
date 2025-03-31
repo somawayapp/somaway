@@ -7,21 +7,24 @@ const Upload = ({ setData }) => {
   const cameraInputRef = useRef(null);
   const maxImages = 10;
 
-  const handleFileChange = (e) => {
+  const handleFileChange = async (e) => {
     const files = Array.from(e.target.files);
     if (images.length + files.length > maxImages) {
       toast.error("Maximum images added");
       return;
     }
-
+  
     const newImages = files.map((file) => ({
       url: URL.createObjectURL(file),
-      file,
+      file, // Keep the file for upload
     }));
-
+  
     setImages((prev) => [...prev, ...newImages]);
-
+  
+    // Make sure to update setData in parent (AddListingReview) with actual files
+    setData((prev) => [...prev, ...newImages]);
   };
+  
 
   const handlePaste = (e) => {
     const items = e.clipboardData.files;
