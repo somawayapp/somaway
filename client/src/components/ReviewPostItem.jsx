@@ -106,7 +106,7 @@ className="text-[var(--softTextColor)]  font-semibold capitalize mt-2 md:mt-1  t
 <p
 
 className="text-[var(--softTextColor)]  capitalize   text-[14px] "
-> Wako House
+> 
 
 {review.propertyname ? ` ${review.propertyname.slice(0, 20)}` : ""} <span>|</span> <span>  {review.propertytype ? ` ${review.propertytype.slice(0, 20)}` : ""}
 </span>
