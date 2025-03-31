@@ -114,7 +114,7 @@ const AddListing = () => {
   return (
     <div>
       <Navbar />
-      <div className="max-w-[900px] mx-auto flex flex-col mb-[100px] px-2 justify-center items-center overflow-x-scroll">
+      <div className="max-w-[900px] mx-auto flex flex-col mb-[100px]  px-4 md:px-[80px] justify-center items-center overflow-x-scroll">
         <h1 className="text-xl md:text-3xl mt-[30px] mb-[30px] text-[var(--textColor)] font-semibold">
           Create a New Post
         </h1>

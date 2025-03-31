@@ -17,7 +17,7 @@ const PremiumPage = () => {
 
 
       <div
-         className="relative px-3 md:px-9 bg-[#7a00da] mt-[20px] md:mt-[50px] w-full shadow-md 
+         className="relative px-4 md:px-[80px] bg-[#7a00da] mt-[20px] md:mt-[50px] w-full shadow-md 
            text-white text-center animate-fadeIn flex flex-col items-center justify-center"
        >
          <div className="h-full p-2  box-border">

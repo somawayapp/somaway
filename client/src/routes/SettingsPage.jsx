@@ -18,7 +18,7 @@ const SettingsPage = () => {
 
 
     <div
-         className="relative  w-full  text-white  text-center animate-fadeIn flex flex-col items-center justify-center"
+         className="relative  px-4 md:px-[80px]  w-full  text-white  text-center animate-fadeIn flex flex-col items-center justify-center"
        >
        
 

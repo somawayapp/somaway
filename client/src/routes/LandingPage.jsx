@@ -75,7 +75,7 @@ const LandingPage = () => {
 
             <Navbar/>
 
-    <div className="mb-9  flex flex-col gap-0">
+    <div className="mb-9 px-4 md:px-[80px] flex flex-col gap-0">
 
          
 

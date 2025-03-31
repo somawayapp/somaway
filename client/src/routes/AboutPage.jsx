@@ -17,7 +17,7 @@ const AboutPage = () => {
 
 
       <div
-         className="relative bg-[#7a00da] px-3 md:px-[80px] mt-[20px] md:mt-[50px] w-full shadow-md 
+         className="relative bg-[#7a00da] px-4 md:px-[80px] mt-[20px] md:mt-[50px] w-full shadow-md 
            text-white text-center animate-fadeIn flex flex-col items-center justify-center"
        >
          <div className="h-full p-2  max-w-[900px] mx-auto box-border">
@@ -38,7 +38,7 @@ const AboutPage = () => {
    <div >
   
    
-   <div className="flex   px-3 md:px-[80px] flex-col items-center justify-center">
+   <div className="flex   px-4 md:px-[80px] flex-col items-center justify-center">
   <div>
     <div className="flex flex-col items-center justify-center mb-[40px] pt-9 pb-9 rounded-2xl gap-5">
       <div className="grid grid-cols-1 mx-auto md:grid-cols-3 gap-6 mt-8 w-full px-4">
@@ -130,7 +130,7 @@ const AboutPage = () => {
    
    
 
-<div className="flex flex-col  px-3 md:px-[80px] items-center justify-center">
+<div className="flex flex-col  px-4 md:px-[80px] items-center justify-center">
   <div>
     <div className="flex flex-col items-center justify-center mb-[40px] pt-9 pb-9 rounded-2xl gap-5">
       <div className="grid grid-cols-1 mx-auto md:grid-cols-3 gap-6 mt-8 w-full px-4">

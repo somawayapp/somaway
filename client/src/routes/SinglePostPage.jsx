@@ -159,6 +159,8 @@ const details = [
           
           
                 <Navbar />
+                <div className="px-4 md:px-[80px]">
+
                 <Helmet>
     <title>{`${data.title || 'Best '} by ${data.author || 'Hodi'} Book Summary`}</title>
 
@@ -593,6 +595,8 @@ const details = [
          
    </div>
    <Footer/>     
+   </div>
+  
    </div>
 ) : null;
 };

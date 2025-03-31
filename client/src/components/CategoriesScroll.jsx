@@ -72,7 +72,7 @@ const CategoriesScroll = ({ setOpen }) => {
   }, []);
 
   return (
-    <div className="relative">
+    <div className="relative shadow-sm">
       {showLeftButton && (
         <button
           onClick={() => scroll("left")}

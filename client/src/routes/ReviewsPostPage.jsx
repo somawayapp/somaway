@@ -160,6 +160,8 @@ data.propertytype ? `${data.propertytype} ` : null,
 
 
       <Navbar />
+      <div className="px-4 md:px-[80px]">
+
       <Helmet>
 <title>{`${data.title || 'Best '} by ${data.author || 'Hodi'} Book Summary`}</title>
 
@@ -171,7 +173,7 @@ data.propertytype ? `${data.propertytype} ` : null,
 <meta property="og:url" content={`${window.location.href}`} />
 <link rel="canonical" href={`${window.location.href}`} />
 </Helmet>
-      <div className="flex flex-col p-3 md:p-9 gap-4">
+      <div className="flex flex-col py-3 md:py-9 gap-4">
 
   
       <div className="max-w-[1200px] mx-auto">
@@ -442,7 +444,7 @@ Related property     </h3>
 
 </div>
 <Footer/>     
-</div>
+</div></div>
 ) : null;
 };
 

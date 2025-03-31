@@ -60,7 +60,7 @@ from ${author || 'top authors'}in minutes. Elevate your mind—only on Hodi!`} /
        <Navbar/>
    
 
-       <div className="px-3 pt-4 md:pt-6 md:px-[80px] ">
+       <div className="px-4 pt-4 md:pt-6 md:px-[80px] ">
         <CategoriesScroll/>
 
      
