@@ -71,7 +71,7 @@ from ${author || 'top authors'}in minutes. Elevate your mind—only on Hodi!`} /
       <Link
         style={{ zIndex: 100004 }}
         to="/reviews"
-        className="px-5 md:px-8 py-2 md:py-3 bg-[var(--softTextColori)] text-[12px] md:text-[16px]
+        className="px-5 md:px-8 py-2 md:py-3 bg-[var(--softTextColori)] text-[14px] md:text-[16px]
        sticky  bottom-[60px]  md:bottom-[30px] left-1/2 -translate-x-1/2 rounded-full text-[var(--softBg)]
         shadow-md font-semibold flex items-center gap-2 hover:bg-[var(--textColor)] "
       >
