@@ -69,9 +69,8 @@ const AddListingReview = () => {
 
         <form onSubmit={handleSubmit} className="space-y-4">
           {/* Upload Component */}
-          <Upload type="image" setProgress={setProgress} setData={setImg}>
-            <button className="w-full p-3 bg-blue-500 text-white font-semibold rounded-lg hover:bg-blue-600 transition-all">Add at least one Image</button>
-          </Upload>
+          <Upload setProgress={setProgress} setData={setImg} />
+
           
           {img.length > 0 && (
             <div className="flex flex-wrap gap-2">
