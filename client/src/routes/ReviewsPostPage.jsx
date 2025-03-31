@@ -28,7 +28,7 @@ import { ChevronRight } from "lucide-react";
 import ReviewPostList from "../components/ReviewPostLists";
        
 
-const fetchPost = async (slug) => {
+const fetchReview = async (slug) => {
    
 
   const res = await axios.get(`${import.meta.env.VITE_API_URL}/reviews/${slug}`);
@@ -303,7 +303,7 @@ alt="Popup"
 <h1 className="text-[var(--softTextColor)] font-semibold ml-1 md:ml-5 text-[20px] md:text-[22px]  ">Property reviews  </h1>   
 <hr className="h-[1px] bg-[var(--softBg4)] border-0" />
 
-<Reviews postId={data._id} /> 
+<Reviews reviewId={data._id} /> 
 <hr className="h-[1px] bg-[var(--softBg4)] mb-5 md:mb-9 border-0" />
 
 <div className=" text-[14px] md:text-[16px]  text-[var(--softTextColor)]">
@@ -390,14 +390,14 @@ WhatsApp: <span>{data.whatsapp}</span>
 
 <hr className="h-[1px] bg-[var(--softBg4)] border-0" />
 <div >
-<Comments postId={data._id} />
+<Comments reviewId={data._id} />
 </div>
 <hr className="h-[1px] bg-[var(--softBg4)] border-0" />
 <div className="p-4 flex flex-row items-center justify-between font-semibold text-lg">
 
 
 <div >
-<Ratings postId={data._id} />
+<Ratings reviewId={data._id} />
 
 </div>
 
@@ -436,7 +436,6 @@ Related property     </h3>
 <div className="flex items-center justify-center text-[var(--textColor)] mx-auto">
 
 <div className="flex justify-center ">
-<PostMenuActions post={data} />
 </div>
 
 
