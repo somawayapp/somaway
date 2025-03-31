@@ -32,15 +32,17 @@ const Upload = ({ type, setProgress, setData }) => {
       return;
     }
   
+    // Store locally for preview
     const newImages = files.map((file) => ({
       file,
       url: URL.createObjectURL(file),
     }));
   
     setImages((prev) => [...prev, ...newImages]);
-  
-    // Send the selected files to the parent to track
     setData((prev) => [...prev, ...newImages]);
+  
+    // 🔥 Trigger actual upload
+    ref.current.uploadFiles(files);
   };
   
   
@@ -88,16 +90,18 @@ const Upload = ({ type, setProgress, setData }) => {
       urlEndpoint={import.meta.env.VITE_IK_URL_ENDPOINT}
       authenticator={authenticator}
     >
-      <IKUpload
-        useUniqueFileName
-        onError={onError}
-        onSuccess={onSuccess}
-        onUploadProgress={onUploadProgress}
-        className="hidden"
-        ref={ref}
-        accept={`${type}/*`}
-        multiple
-      />
+   <IKUpload
+  ref={ref}
+  useUniqueFileName
+  onError={onError}
+  onSuccess={onSuccess}
+  onUploadProgress={onUploadProgress}
+  multiple
+  accept="image/*"
+  folder="/uploads"
+  className="hidden"
+/>
+
       
       <div
         onPaste={handlePaste}

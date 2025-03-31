@@ -70,14 +70,7 @@ const AddListingReview = () => {
         <form onSubmit={handleSubmit} className="space-y-4">
           {/* Upload Component */}
           <Upload type="image" setProgress={setProgress} setData={setImg}/>
-          
-          {img.length > 0 && (
-            <div className="flex flex-wrap gap-2">
-              {img.map((img, index) => (
-                <img key={index} src={img.url} alt="Uploaded" className="w-24 h-24 object-cover rounded-md border" />
-              ))}
-            </div>
-          )}
+        
 
           {/* Property Type */}
           <label className="block font-semibold text-[var(--softTextColor)]]">Property Type</label>
