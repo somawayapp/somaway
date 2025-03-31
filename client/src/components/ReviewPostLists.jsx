@@ -1,22 +1,20 @@
-import PostListItem from "./PostListItem";
+import ReviewListItem from "./ReviewListItem";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import { useSearchParams } from "react-router-dom";
 import { useEffect, useState } from "react";
-import ReviewPostItem from "./ReviewPostItem";
+import ReviewItem from "./ReviewItem";
 import { Link } from "react-router-dom";
 
-const fetchPosts = async (searchParams) => {
+const fetchReviews = async (searchParams) => {
   const searchParamsObj = Object.fromEntries([...searchParams]);
-  const res = await axios.get(`${import.meta.env.VITE_API_URL}/posts`, {
+  const res = await axios.get(`${import.meta.env.VITE_API_URL}/reviews`, {
     params: { ...searchParamsObj },
   });
-  return res.data.posts;
+  return res.data.reviews;
 };
 
-const ReviewPostList = () => {
-
-
+const ReviewList = () => {
   const [columns, setColumns] = useState("repeat(1, 1fr)");
 
   useEffect(() => {
@@ -40,26 +38,24 @@ const ReviewPostList = () => {
   }, []);
 
   const [searchParams] = useSearchParams();
-  const { data: allPosts = [], error, status } = useQuery({
-    queryKey: ["posts", searchParams.toString()],
-    queryFn: () => fetchPosts(searchParams),
+  const { data: allReviews = [], error, status } = useQuery({
+    queryKey: ["reviews", searchParams.toString()],
+    queryFn: () => fetchReviews(searchParams),
     staleTime: 1000 * 60 * 10,
     cacheTime: 1000 * 60 * 30,
   });
 
-
-
-  const [displayedPosts, setDisplayedPosts] = useState([]);
+  const [displayedReviews, setDisplayedReviews] = useState([]);
 
   useEffect(() => {
-    if (allPosts.length === 0) return;
+    if (allReviews.length === 0) return;
 
-    let newPosts = [];
+    let newReviews = [];
     let index = 0;
 
     const loadNextBatch = (batchSize) => {
-      newPosts = [...newPosts, ...allPosts.slice(index, index + batchSize)];
-      setDisplayedPosts([...newPosts]);
+      newReviews = [...newReviews, ...allReviews.slice(index, index + batchSize)];
+      setDisplayedReviews([...newReviews]);
       index += batchSize;
     };
 
@@ -67,46 +63,40 @@ const ReviewPostList = () => {
     setTimeout(() => loadNextBatch(4), 50);
     setTimeout(() => loadNextBatch(4), 100);
     setTimeout(() => {
-      while (index < allPosts.length) {
+      while (index < allReviews.length) {
         loadNextBatch(8);
       }
     }, 150);
-  }, [allPosts]);
+  }, [allReviews]);
 
   if (status === "loading") return <p>Loading...</p>;
   if (error) return <p>Something went wrong!</p>;
-  
-
 
   const [showMessage, setShowMessage] = useState(false);
   
   useEffect(() => {
     const timer = setTimeout(() => {
       setShowMessage(true);
-    }, 5000); // 2-second delay
+    }, 5000);
   
-    return () => clearTimeout(timer); // Cleanup timeout on unmount
+    return () => clearTimeout(timer);
   }, []);
   
-  if (displayedPosts.length === 0 && showMessage) {
+  if (displayedReviews.length === 0 && showMessage) {
     return (
       <div className="flex flex-col items-center justify-center h-[50vh]">
-    <Link to="/addlistingreview"
-    className=" px-6 py-3 rounded-xl border border-[var(--softBg4)] 
-               text-[var(--softTextColor)] shadow-md 
-               hover:text-[var(--textColor)] text-center"
-  >
-    <p className="mb-2">No Reviews found for this property search</p>
-    <p className="mb-2 font-bold">Add a new property and review it</p>
-</Link>
-
-
+        <Link to="/addlistingreview"
+          className=" px-6 py-3 rounded-xl border border-[var(--softBg4)] 
+                     text-[var(--softTextColor)] shadow-md 
+                     hover:text-[var(--textColor)] text-center">
+          <p className="mb-2">No Reviews found for this property search</p>
+          <p className="mb-2 font-bold">Add a new property and review it</p>
+        </Link>
       </div>
     );
   }
   
-  
-  if (displayedPosts.length === 0) {
+  if (displayedReviews.length === 0) {
     return (
       <div style={{ display: "grid", gridTemplateColumns: columns }} className="gap-6 md:gap-9 scrollbar-hide">
         {Array(8).fill(0).map((_, index) => (
@@ -117,16 +107,14 @@ const ReviewPostList = () => {
       </div>
     );
   }
-  
-
 
   return (
     <div style={{ display: "grid", gridTemplateColumns: columns }} className="gap-6 md:gap-9 scrollbar-hide">
-      {displayedPosts.map((post) => (
-        <ReviewPostItem key={post._id} post={post} />
+      {displayedReviews.map((review) => (
+        <ReviewItem key={review._id} review={review} />
       ))}
     </div>
   );
 };
 
-export default ReviewPostList;
+export default ReviewList;

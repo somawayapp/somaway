@@ -24,7 +24,7 @@ const AddListingReview = () => {
     mutationFn: async (newPost) => axios.post(`${import.meta.env.VITE_API_URL}/reviews`, newPost),
     onSuccess: (res) => {
       toast.success("Post has been created!");
-      navigate(`/${res.data.slug}`);
+      navigate(`/review/${res.data.slug}`);
     },
     onError: (error) => {
       toast.error(error.response?.data?.message || "An error occurred");
