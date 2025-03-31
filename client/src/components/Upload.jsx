@@ -24,6 +24,7 @@ const Upload = ({ children, type, setProgress, setData }) => {
   const videoRef = useRef(null);
   const [previewImages, setPreviewImages] = useState([]);
   const [cameraOpen, setCameraOpen] = useState(false);
+  const [uploadQueue, setUploadQueue] = useState([]);
 
   const handleFileSelect = (files) => {
     let selectedFiles = Array.from(files).slice(0, MAX_IMAGES - previewImages.length);
@@ -32,13 +33,14 @@ const Upload = ({ children, type, setProgress, setData }) => {
     }
     const imagePreviews = selectedFiles.map((file) => ({ file, url: URL.createObjectURL(file) }));
     setPreviewImages((prev) => [...prev, ...imagePreviews]);
+    setUploadQueue((prev) => [...prev, ...selectedFiles]);
   };
 
   const onError = () => toast.error("Image upload failed!");
   
   const onSuccess = (res) => {
     setData((prev) => [...prev, res]);
-    setPreviewImages((prev) => prev.filter((img) => img.file.name !== res.name));
+    setUploadQueue((prev) => prev.filter((file) => file.name !== res.name));
   };
 
   const onUploadProgress = (progress) => {
@@ -60,7 +62,9 @@ const Upload = ({ children, type, setProgress, setData }) => {
   }, []);
 
   const removePreview = (index) => {
+    const removedImage = previewImages[index];
     setPreviewImages((prev) => prev.filter((_, i) => i !== index));
+    setUploadQueue((prev) => prev.filter((file) => file.name !== removedImage.file.name));
   };
 
   const openCamera = () => {
@@ -107,15 +111,17 @@ const Upload = ({ children, type, setProgress, setData }) => {
       >
         {children || "Drag & Drop or Click to Upload"}
       </div>
-      <IKUpload
-        useUniqueFileName
-        onError={onError}
-        onSuccess={onSuccess}
-        onUploadProgress={onUploadProgress}
+      <input
+        type="file"
+        multiple
         className="hidden"
         ref={ref}
         accept={`${type}/*`}
-        multiple
+        onChange={(e) => {
+          if (e.target.files) {
+            handleFileSelect(e.target.files);
+          }
+        }}
       />
       <button className="mt-2 p-2 bg-blue-500 text-white rounded" onClick={() => ref.current.click()}>
         Select Images
@@ -124,7 +130,7 @@ const Upload = ({ children, type, setProgress, setData }) => {
         <FaCamera className="mr-2" /> Take Photo
       </button>
       {cameraOpen && (
-        <div className="fixed inset-0 bg-black bg-opacity-75 flex flex-col items-center justify-center">
+        <div className="fixed inset-0 bg-black bg-opacity-75 z-10 rounded-xl flex flex-col items-center justify-center">
           <video ref={videoRef} autoPlay className="w-full max-w-lg rounded" />
           <button className="mt-4 p-3 bg-white text-black rounded-full" onClick={capturePhoto}>
             Capture
@@ -144,6 +150,16 @@ const Upload = ({ children, type, setProgress, setData }) => {
           </div>
         ))}
       </div>
+      {uploadQueue.length > 0 && (
+        <IKUpload
+          useUniqueFileName
+          onError={onError}
+          onSuccess={onSuccess}
+          onUploadProgress={onUploadProgress}
+          className="hidden"
+          files={uploadQueue}
+        />
+      )}
     </IKContext>
   );
 };
