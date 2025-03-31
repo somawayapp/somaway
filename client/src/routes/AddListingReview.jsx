@@ -83,7 +83,7 @@ const AddListingReview = () => {
 
           {/* Property Type */}
           <label className="block font-semibold text-[var(--softTextColor)]">Property Type</label>
-          <select value={propertytype} onChange={(e) => setPropertyType(e.target.value)} className="w-full p-2 border border-[var(--softBg4) bg-[var(--bg)   text-[var(--softTextColor) rounded-lg">
+          <select value={propertytype} onChange={(e) => setPropertyType(e.target.value)} className="w-full p-2 border border-[var(--softBg4) bg-black text-[var(--softTextColor) rounded-lg">
             <option value="" disabled>Select the type of Property</option>
             <option value="apartment">Apartment/Flat</option>
             <option value="studio">Studio Apartment</option>
