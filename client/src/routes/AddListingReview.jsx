@@ -38,7 +38,7 @@ const AddListingReview = () => {
     let missingFields = [];
     if (!propertyname.trim()) missingFields.push("Property name");
     if (!location.trim()) missingFields.push("Location");
-    if (img.length === 0) missingFields.push("Image");
+    if (!img || img.length === 0) missingFields.push("Image");
     if (!propertytype.trim()) missingFields.push("Property type");
 
     if (missingFields.length > 0) {

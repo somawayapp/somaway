@@ -20,6 +20,7 @@ const Upload = ({ setData }) => {
     }));
 
     setImages((prev) => [...prev, ...newImages]);
+
   };
 
   const handlePaste = (e) => {
@@ -37,8 +38,9 @@ const Upload = ({ setData }) => {
 
   const removeImage = (index) => {
     setImages((prev) => prev.filter((_, i) => i !== index));
-  };
-
+    setData((prev) => prev.filter((_, i) => i !== index)); // Sync with parent
+      };
+ 
   const triggerUpload = () => fileInputRef.current.click();
   const triggerCamera = () => cameraInputRef.current.click();
 
