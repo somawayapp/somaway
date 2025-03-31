@@ -1,16 +1,16 @@
 import { IKContext, IKUpload } from "imagekitio-react";
-import { useRef, useState, useEffect, useCallback } from "react";
+import { useRef, useState, useEffect, useCallback } from "react"; // Added useCallback
 import { toast } from "react-toastify";
-import { FaTimes, FaCamera, FaUpload } from "react-icons/fa";
+import { FaTimes, FaCamera, FaUpload } from "react-icons/fa"; // Added FaUpload
 
 const MAX_IMAGES = 10;
 
-// --- ImageKit Authenticator (Keep as is, ensure it works) ---
 const authenticator = async () => {
   try {
     const response = await fetch(
-      `${import.meta.env.VITE_API_URL}/posts/upload-auth`
+      `${import.meta.env.VITE_API_URL}/posts/upload-auth` // Verify this endpoint exists and works
     );
+
     if (!response.ok) {
       const errorText = await response.text();
       throw new Error(
@@ -18,29 +18,27 @@ const authenticator = async () => {
       );
     }
     const data = await response.json();
+    // Check if the response contains the expected signature, token, and expire fields
     if (!data.signature || !data.token || !data.expire) {
-        console.error("Authentication response missing fields:", data); // Log missing fields
         throw new Error("Authentication response missing required fields.");
     }
     return data;
   } catch (error) {
-    console.error("Authentication request failed:", error);
-    throw new Error(`Authentication failed: ${error.message}`);
+     console.error("Authentication request failed:", error); // Log the error
+     // Throw a more specific error to be caught by IKUpload onError
+     throw new Error(`Authentication failed: ${error.message}`);
   }
 };
 
-// --- Upload Component ---
-// Added setIsUploading prop
-const Upload = ({ type = "image", setProgress, setData, setIsUploading }) => {
-  const fileInputRef = useRef(null);
-  const videoRef = useRef(null);
-  const [previewImages, setPreviewImages] = useState([]);
-  const [cameraOpen, setCameraOpen] = useState(false);
-  const [uploadQueue, setUploadQueue] = useState([]);
-  // Track successful uploads count to compare with queue length
-  const successfulUploadsRef = useRef(0);
 
-  // Memoize handler
+// --- Upload Component ---
+const Upload = ({ type = "image", setProgress, setData }) => {
+  const fileInputRef = useRef(null); // Renamed ref for clarity
+  const videoRef = useRef(null);
+  const [previewImages, setPreviewImages] = useState([]); // Stores { file, localUrl } for preview
+  const [cameraOpen, setCameraOpen] = useState(false);
+  const [uploadQueue, setUploadQueue] = useState([]); // Files waiting to be uploaded by IKUpload
+
   const handleFileSelect = useCallback((files) => {
     const validFiles = Array.from(files).filter(file => file.type.startsWith(`${type}/`));
 
@@ -48,97 +46,59 @@ const Upload = ({ type = "image", setProgress, setData, setIsUploading }) => {
         toast.warn(`Some files were not of the expected type (${type}) and were ignored.`);
     }
 
-    let availableSlots = MAX_IMAGES - previewImages.length;
-    let selectedFiles = validFiles.slice(0, availableSlots);
+    let selectedFiles = validFiles.slice(
+      0,
+      MAX_IMAGES - previewImages.length
+    );
 
     if (selectedFiles.length < validFiles.length) {
       toast.warn(`You can only upload a maximum of ${MAX_IMAGES} images.`);
     }
 
     if (selectedFiles.length === 0) {
-        if(validFiles.length > 0 && availableSlots <= 0) toast.info("Maximum image limit reached.");
-        return;
+        if(validFiles.length > 0) toast.info("Maximum image limit reached."); // Inform if limit stopped additions
+        return; // No new valid files to add
     }
 
     const newImagePreviews = selectedFiles.map((file) => ({
       file,
-      localUrl: URL.createObjectURL(file),
-      name: file.name // Keep name for removal logic
+      localUrl: URL.createObjectURL(file), // Use localUrl for clarity
+      name: file.name // Store name for removal logic
     }));
 
     setPreviewImages((prev) => [...prev, ...newImagePreviews]);
+    setUploadQueue((prev) => [...prev, ...selectedFiles]); // Add files to the upload queue
 
-    // Add to queue and signal uploading start
-    setUploadQueue((prev) => {
-        const newQueue = [...prev, ...selectedFiles];
-        if (newQueue.length > 0) {
-            setIsUploading(true); // Signal start only if queue has items
-            successfulUploadsRef.current = 0; // Reset success count when adding new files
-        }
-        return newQueue;
-    });
-
-
+    // Reset file input to allow selecting the same file again if removed
     if (fileInputRef.current) {
         fileInputRef.current.value = "";
     }
 
-  }, [previewImages.length, type, setIsUploading]); // Added setIsUploading dependency
+  }, [previewImages.length, type]); // Depend on preview length to enforce MAX_IMAGES correctly
 
 
-  const onError = (err, file) => { // IKUpload passes the file on error too
+  const onError = (err) => {
     console.error("Upload Error:", err);
-    const failedFileName = file?.name || "An image"; // Get filename if available
-    const message = err?.message || `${failedFileName} upload failed! Please try removing and re-adding it.`;
+    // Provide more specific error feedback if possible
+    const message = err?.message || "Image upload failed! Please try again.";
     toast.error(message);
-    setProgress(0); // Reset progress
 
-    // Remove the failed file from the queue and preview
-    const failedFileOriginalName = file?.originalFileName || file?.name; // Check originalFileName first
-    if (failedFileOriginalName) {
-        setPreviewImages((prev) => prev.filter(p => p.name !== failedFileOriginalName));
-        setUploadQueue((prevQueue) => {
-            const newQueue = prevQueue.filter((f) => f.name !== failedFileOriginalName);
-            // If the queue becomes empty due to error, signal upload stopped
-            if (newQueue.length === 0) {
-                 setIsUploading(false);
-            }
-            return newQueue;
-        });
-    } else {
-        // If we can't identify the file, we might be stuck. Resetting might be needed.
-        // For simplicity here, just signal upload might be done, but it's incomplete.
-        setIsUploading(false); // Cautiously signal end, though state might be inconsistent
-    }
+    setProgress(0); // Reset progress on error
   };
 
   const onSuccess = (res) => {
-    // Add successfully uploaded image URL/data
-    setData((prev) => [...prev, { url: res.url, fileId: res.fileId }]);
+ 
+    setData((prev) => [...prev, { url: res.url, fileId: res.fileId }]); // Store URL and maybe fileId
 
-    successfulUploadsRef.current += 1;
+  
+    setUploadQueue((prevQueue) => prevQueue.filter((file) => file.name !== res.name));
 
-    // Check if all files initially added in this batch are now uploaded
-    // Note: res.name might be the unique name generated by ImageKit, use originalFileName if available
-    const originalFileName = res.originalFileName || res.name;
 
-    setUploadQueue((prevQueue) => {
-        const newQueue = prevQueue.filter((file) => file.name !== originalFileName);
-        // Check if the queue is empty *after* this successful upload
-        if (newQueue.length === 0) {
-            setIsUploading(false); // Signal upload finished
-            setProgress(100); // Ensure progress shows 100% at the end
-            toast.success("All images uploaded successfully!"); // Single success message
-        }
-        return newQueue;
-    });
   };
 
-  // Progress reflects the *current single file* being uploaded by IKUpload
-  const onUploadProgress = (progress, file) => { // File context is helpful
-    const percent = Math.round((progress.loaded / progress.total) * 100);
-    setProgress(percent);
-    // console.log(`Progress for ${file.name}: ${percent}%`); // Debugging
+
+  const onUploadProgress = (progress) => {
+    setProgress(Math.round((progress.loaded / progress.total) * 100));
   };
 
 
@@ -154,111 +114,173 @@ const Upload = ({ type = "image", setProgress, setData, setIsUploading }) => {
     if (files.length > 0) {
         handleFileSelect(files);
     }
-  }, [handleFileSelect, type]);
+  }, [handleFileSelect, type]); // Include dependencies
 
 
   useEffect(() => {
     document.addEventListener("paste", handlePaste);
     return () => document.removeEventListener("paste", handlePaste);
-  }, [handlePaste]);
+  }, [handlePaste]); // Dependency array includes the memoized handler
 
 
   const removePreview = (indexToRemove) => {
-      const removedImagePreview = previewImages[indexToRemove];
+     const removedImagePreview = previewImages[indexToRemove];
 
-      setPreviewImages((prev) => prev.filter((_, i) => i !== indexToRemove));
+     setPreviewImages((prev) => prev.filter((_, i) => i !== indexToRemove));
 
-      // Remove from upload queue
-      setUploadQueue((prevQueue) => {
-        const newQueue = prevQueue.filter((file) => file.name !== removedImagePreview.name);
-        // If removing the last item, signal uploading stopped
-        if (newQueue.length === 0 && prevQueue.length > 0) { // Check prevQueue length to avoid false signal on initial empty state
-            setIsUploading(false);
-            setProgress(0); // Reset progress if queue is cleared manually
+     setUploadQueue((prevQueue) => prevQueue.filter((file) => file.name !== removedImagePreview.name));
+
+     URL.revokeObjectURL(removedImagePreview.localUrl);
+  };
+
+  const openCamera = async () => {
+     if (previewImages.length >= MAX_IMAGES) {
+        toast.warn(`Maximum ${MAX_IMAGES} images allowed.`);
+        return;
+     }
+     setCameraOpen(true);
+     try {
+        const stream = await navigator.mediaDevices.getUserMedia({ video: true });
+        if (videoRef.current) {
+          videoRef.current.srcObject = stream;
         }
-        return newQueue;
-      });
+     } catch (err) {
+        console.error("Camera access error:", err);
+        toast.error("Camera access denied or not available!");
+        setCameraOpen(false);
+     }
+  };
 
-      URL.revokeObjectURL(removedImagePreview.localUrl);
-   };
 
-  // --- Camera Functions (Keep as is, ensure handleFileSelect is called correctly) ---
-  const openCamera = async () => { /* ... keep implementation ... */ };
-  const capturePhoto = () => { /* ... ensure handleFileSelect([file]) is called ... */ };
-  const closeCamera = () => { /* ... keep implementation ... */ };
+  const capturePhoto = () => {
+    const video = videoRef.current;
+    if (!video || !video.srcObject) return;
 
-  // --- Cleanup Effect (Keep as is) ---
-  useEffect(() => { /* ... keep implementation ... */ }, [previewImages]);
+    const canvas = document.createElement("canvas");
+    canvas.width = video.videoWidth;
+    canvas.height = video.videoHeight;
+    const ctx = canvas.getContext("2d");
+    if (!ctx) {
+        toast.error("Failed to get canvas context");
+        return;
+    }
+    ctx.drawImage(video, 0, 0);
+
+    canvas.toBlob((blob) => {
+      if (blob) {
+         // Create a uniqueish name for the captured file
+        const fileName = `captured-${Date.now()}.jpg`;
+        const file = new File([blob], fileName, { type: "image/jpeg" });
+        handleFileSelect([file]); // Use the existing handler
+      } else {
+        toast.error("Failed to capture image.");
+      }
+      closeCamera(); // Close camera after capture attempt
+    }, "image/jpeg"); // Specify blob type
+  };
+
+  const closeCamera = () => {
+    if (videoRef.current && videoRef.current.srcObject) {
+      videoRef.current.srcObject.getTracks().forEach(track => track.stop()); // Stop camera stream
+      videoRef.current.srcObject = null; // Release the source object
+    }
+    setCameraOpen(false);
+  };
+
+  useEffect(() => {
+      return () => {
+          previewImages.forEach(img => URL.revokeObjectURL(img.localUrl));
+      };
+  }, [previewImages]);
 
 
   return (
     <IKContext
-      publicKey={import.meta.env.VITE_IK_PUBLIC_KEY}
-      urlEndpoint={import.meta.env.VITE_IK_URL_ENDPOINT}
+      publicKey={import.meta.env.VITE_IK_PUBLIC_KEY} // Ensure these are set
+      urlEndpoint={import.meta.env.VITE_IK_URL_ENDPOINT} // Ensure these are set
       authenticator={authenticator}
     >
-      {/* --- Clickable Area / Buttons / Camera Modal (Keep as is) --- */}
-       <div
-         className="p-4 border-2 border-dashed border-[var(--softBg4)] rounded-lg text-center cursor-pointer hover:bg-[var(--softBg2)] transition-colors"
-         onClick={() => fileInputRef.current?.click()}
-         role="button"
-         tabIndex={0}
-         onKeyPress={(e) => { if (e.key === 'Enter') fileInputRef.current?.click(); }}
-       >
-          <FaUpload className="mx-auto mb-2 text-xl text-[var(--softTextColor)]"/>
-         {previewImages.length === 0
-           ? "Click or Drag & Drop Images Here"
-           : `Add more images (${previewImages.length}/${MAX_IMAGES})`}
-           <span className="block text-xs text-[var(--softTextColor)]">(Or paste images)</span>
-       </div>
+      {/* Clickable Area for Upload */}
+      <div
+        className="p-4 border-2 border-dashed border-[var(--softBg4)] rounded-lg text-center cursor-pointer hover:bg-[var(--softBg2)] transition-colors"
+        onClick={() => fileInputRef.current?.click()} // Trigger hidden input
+        role="button" // Accessibility
+        tabIndex={0} // Accessibility
+        onKeyPress={(e) => { if (e.key === 'Enter') fileInputRef.current?.click(); }} // Accessibility
+      >
+         <FaUpload className="mx-auto mb-2 text-xl text-[var(--softTextColor)]"/>
+        {previewImages.length === 0
+          ? "Click or Drag & Drop Images Here"
+          : `Add more images (${previewImages.length}/${MAX_IMAGES})`}
+          <span className="block text-xs text-[var(--softTextColor)]">(Or paste images)</span>
+      </div>
 
-       <input
-         type="file"
-         multiple
-         className="hidden"
-         ref={fileInputRef}
-         accept={`${type}/*`}
-         onChange={(e) => {
-           if (e.target.files) {
-             handleFileSelect(e.target.files);
-           }
-         }}
-       />
+      <input
+        type="file"
+        multiple
+        className="hidden"
+        ref={fileInputRef}
+        accept={`${type}/*`} // Use type prop dynamically
+        onChange={(e) => {
+          if (e.target.files) {
+            handleFileSelect(e.target.files);
+          }
+        }}
+      />
 
-       <div className="flex gap-2 mt-2">
-         <button
-           type="button"
-           className="p-2 bg-blue-500 text-white rounded hover:bg-blue-600 transition-colors disabled:opacity-50"
-           onClick={() => fileInputRef.current?.click()}
-           disabled={previewImages.length >= MAX_IMAGES}
-         >
-           Select Files
-         </button>
-         <button
-           type="button"
-           className="p-2 bg-green-500 text-white rounded flex items-center hover:bg-green-600 transition-colors disabled:opacity-50"
-           onClick={openCamera}
-           disabled={previewImages.length >= MAX_IMAGES}
-         >
-           <FaCamera className="mr-1" /> Take Photo
-         </button>
-       </div>
+      <div className="flex gap-2 mt-2">
+        <button
+          type="button" // *** IMPORTANT: Prevents form submission ***
+          className="p-2 bg-blue-500 text-white rounded hover:bg-blue-600 transition-colors disabled:opacity-50"
+          onClick={() => fileInputRef.current?.click()}
+          disabled={previewImages.length >= MAX_IMAGES}
+        >
+          Select Files
+        </button>
+        <button
+          type="button" // *** IMPORTANT: Prevents form submission ***
+          className="p-2 bg-green-500 text-white rounded flex items-center hover:bg-green-600 transition-colors disabled:opacity-50"
+          onClick={openCamera}
+          disabled={previewImages.length >= MAX_IMAGES}
+        >
+          <FaCamera className="mr-1" /> Take Photo
+        </button>
+      </div>
 
-       {cameraOpen && (
-         {/* ... Camera Modal JSX ... */}
-       )}
 
-       {previewImages.length > 0 && (
+      {/* Camera Modal */}
+      {cameraOpen && (
+        <div className="fixed inset-0 bg-black bg-opacity-75 z-50 flex flex-col items-center justify-center p-4">
+          <video ref={videoRef} autoPlay playsInline className="w-full max-w-lg rounded border border-gray-500 mb-4" />
+          <div className="flex gap-4">
+            <button
+                type="button" // *** IMPORTANT ***
+                className="p-3 bg-white text-black rounded-full text-lg font-semibold hover:bg-gray-200 transition-colors" onClick={capturePhoto}>
+              Capture
+            </button>
+            <button
+                type="button" // *** IMPORTANT ***
+                className="p-2 bg-red-500 text-white rounded hover:bg-red-600 transition-colors" onClick={closeCamera}>
+              Close Camera
+            </button>
+          </div>
+        </div>
+      )}
+
+
+      {/* Image Previews Grid */}
+      {previewImages.length > 0 && (
           <div className="mt-4 grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 gap-2">
           {previewImages.map((img, index) => (
-            <div key={index} className="relative group aspect-square">
+            <div key={index} className="relative group aspect-square"> {/* Use aspect-square for consistent shape */}
               <img
-                src={img.localUrl}
+                src={img.localUrl} // Use the local object URL for preview
                 alt={`Preview ${index + 1}`}
                 className="w-full h-full object-cover rounded border border-[var(--softBg4)]"
+                // Optionally call revokeObjectURL in onLoad if needed, but cleanup effect is generally better
               />
               <button
-                type="button"
+                type="button" // *** IMPORTANT ***
                 className="absolute top-1 right-1 bg-red-600 text-white rounded-full p-1 opacity-70 group-hover:opacity-100 transition-opacity focus:opacity-100"
                 onClick={() => removePreview(index)}
                 aria-label="Remove image"
@@ -268,23 +290,19 @@ const Upload = ({ type = "image", setProgress, setData, setIsUploading }) => {
             </div>
           ))}
         </div>
-       )}
+      )}
 
-      {/* --- ImageKit Upload Component (Processes the queue) --- */}
-      {/* Render IKUpload only when there are files in the queue */}
+
       {uploadQueue.length > 0 && (
         <IKUpload
-          // Key change might help ensure it remounts/re-evaluates props if queue changes drastically
-          // key={uploadQueue.map(f => f.name).join('-')} // Optional: Use if needed
-          files={uploadQueue} // Pass the current queue
-          useUniqueFileName={true}
+     
+          files={uploadQueue} 
+          useUniqueFileName={true} // Recommended
           onError={onError}
           onSuccess={onSuccess}
           onUploadProgress={onUploadProgress}
-          // Tell ImageKit to return the original filename in the response
-          responseFields={["url", "fileId", "name", "originalFileName"]}
-          className="hidden"
-          // folder={"/property_reviews"} // Optional
+          className="hidden" // Keep hidden, it's for processing, not display
+        
         />
       )}
     </IKContext>
