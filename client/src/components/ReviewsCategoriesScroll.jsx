@@ -72,7 +72,7 @@ const CategoriesScroll = ({ setOpen }) => {
   }, []);
 
   return (
-    <div className="relative shadow-lg">
+    <div className="relative shadow-sm">
             <div className="px-4 md:px-[80px]">
 
       {showLeftButton && (
