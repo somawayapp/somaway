@@ -19,6 +19,7 @@ const AddListingReview = () => {
   const [progress, setProgress] = useState(0);
   const [error, setError] = useState("");
   const navigate = useNavigate();
+  const [isSubmitClicked, setIsSubmitClicked] = useState(false);
 
   const mutation = useMutation({
     mutationFn: async (newPost) => axios.post(`${import.meta.env.VITE_API_URL}/reviews`, newPost),
@@ -34,6 +35,7 @@ const AddListingReview = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     setError("");
+    setIsSubmitClicked(true);
 
     let missingFields = [];
     if (!propertyname.trim()) missingFields.push("Property name");
@@ -46,7 +48,12 @@ const AddListingReview = () => {
       return;
     }
 
-    let slug = propertyname.trim().replace(/\s+/g, "-").toLowerCase().replace(/[^a-z0-9-]/g, "").replace(/-+$/, "");
+    let slug = propertyname
+      .trim()
+      .replace(/\s+/g, "-")
+      .toLowerCase()
+      .replace(/[^a-z0-9-]/g, "")
+      .replace(/-+$/, "");
     slug += `-${Date.now()}-review`;
 
     const data = {
@@ -63,19 +70,30 @@ const AddListingReview = () => {
   return (
     <div className="min-h-screen bg-[var(--bg)]">
       <Navbar />
-      <div className="max-w-3xl mx-auto p-6  px-4 md:px-[80px] border border-[var(--softBg4)] shadow-md rounded-lg mt-10">
-        <h1 className="text-2xl font-bold text-[var(--softTextColor)] text-center mb-6">Add a place to Review</h1>
-        {error && <div className="text-blue-500 text-center mb-4">{error}</div>}
+      <div className="max-w-3xl mx-auto p-6 px-4 md:px-[80px] border border-[var(--softBg4)] shadow-md rounded-lg mt-10">
+        <h1 className="text-2xl font-bold text-[var(--softTextColor)] text-center mb-6">
+          Add a place to Review
+        </h1>
+        {isSubmitClicked && error && (
+          <div className="text-blue-500 text-center mb-4">{error}</div>
+        )}
 
         <form onSubmit={handleSubmit} className="space-y-4">
           {/* Upload Component */}
-          <Upload type="image" setProgress={setProgress} setData={setImg}/>
-        
+          <Upload type="image" setProgress={setProgress} setData={setImg} />
 
           {/* Property Type */}
-          <label className="block font-semibold text-[var(--softTextColor)]]">Property Type</label>
-          <select value={propertytype} onChange={(e) => setPropertyType(e.target.value)} className="w-full p-2 border border-[var(--softBg4)] bg-[var(--bg)] text-[var(--softTextColor)] rounded-lg">
-            <option value="" disabled>Select the type of Property</option>
+          <label className="block font-semibold text-[var(--softTextColor)]">
+            Property Type
+          </label>
+          <select
+            value={propertytype}
+            onChange={(e) => setPropertyType(e.target.value)}
+            className="w-full p-2 border border-[var(--softBg4)] bg-[var(--bg)] text-[var(--softTextColor)] rounded-lg"
+          >
+            <option value="" disabled>
+              Select the type of Property
+            </option>
             <option value="apartment">Apartment/Flat</option>
             <option value="studio">Studio Apartment</option>
             <option value="bedsitter">Bedsitter</option>
@@ -92,18 +110,40 @@ const AddListingReview = () => {
           </select>
 
           {/* Property Name */}
-          <label className="block font-semibold text-[var(--softTextColor)]]">Name of this building or place</label>
-          <input type="text" placeholder="Enter the name of this place" value={propertyname} onChange={(e) => setPropertyName(e.target.value.slice(0, 50))} className="w-full p-2 border  border-[var(--softBg4)] bg-[var(--bg)]   text-[var(--softTextColor)] rounded-lg" />
-          
+          <label className="block font-semibold text-[var(--softTextColor)]">
+            Name of this building or place
+          </label>
+          <input
+            type="text"
+            placeholder="Enter the name of this place"
+            value={propertyname}
+            onChange={(e) => setPropertyName(e.target.value.slice(0, 50))}
+            className="w-full p-2 border border-[var(--softBg4)] bg-[var(--bg)] text-[var(--softTextColor)] rounded-lg"
+          />
+
           {/* Location */}
-          <label className="block font-semibold text-[var(--softTextColor)]]">Location</label>
-          <input type="text" placeholder="Enter the Location" value={location} onChange={(e) => setLocation(e.target.value.slice(0, 50))} className="w-full p-2 border border-[var(--softBg4)] bg-[var(--bg)]   text-[var(--softTextColor)] rounded-lg" />
+          <label className="block font-semibold text-[var(--softTextColor)]">
+            Location
+          </label>
+          <input
+            type="text"
+            placeholder="Enter the Location"
+            value={location}
+            onChange={(e) => setLocation(e.target.value.slice(0, 50))}
+            className="w-full p-2 border border-[var(--softBg4)] bg-[var(--bg)] text-[var(--softTextColor)] rounded-lg"
+          />
 
           {/* Progress Indicator */}
-          <span className="block  text-[var(--softTextColor)]">Upload Progress: {progress}%</span>
+          <span className="block text-[var(--softTextColor)]">
+            Upload Progress: {progress}%
+          </span>
 
           {/* Submit Button */}
-          <button type="submit" disabled={mutation.isPending || (progress > 0 && progress < 100)} className="w-full bg-blue-500 text-white p-3 font-semibold rounded-lg hover:bg-blue-600 transition-all">
+          <button
+            type="submit"
+            disabled={mutation.isPending || (progress > 0 && progress < 100)}
+            className="w-full bg-blue-500 text-white p-3 font-semibold rounded-lg hover:bg-blue-600 transition-all"
+          >
             {mutation.isPending ? "Publishing..." : "Publish Post"}
           </button>
         </form>
@@ -113,3 +153,4 @@ const AddListingReview = () => {
 };
 
 export default AddListingReview;
+
