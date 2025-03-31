@@ -26,16 +26,19 @@ const Upload = ({ type, setProgress, setData }) => {
   const handleFileChange = (e) => {
     const files = Array.from(e.target.files);
     if (!files.length) return;
-
+  
     if (images.length + files.length > maxImages) {
       toast.error(`You can only upload up to ${maxImages} images.`);
       return;
     }
-
+  
     const newImages = files.map((file) => ({ file, url: URL.createObjectURL(file) }));
     setImages((prev) => [...prev, ...newImages]);
+  
+    // Automatically trigger uploads for each file
+    files.forEach((file) => ref.current?.uploadFile(file));
   };
-
+  
   const handlePaste = (e) => {
     handleFileChange({ target: { files: e.clipboardData.files } });
   };
@@ -62,9 +65,9 @@ const Upload = ({ type, setProgress, setData }) => {
   };
 
   const onSuccess = (res) => {
-    setData((prev) => (prev ? [...prev, res] : [res]));
+    setData((prev) => (prev ? [...prev, { url: res.url }] : [{ url: res.url }]));
   };
-
+  
   const onUploadProgress = (progress) => {
     setProgress(Math.round((progress.loaded / progress.total) * 100));
   };
