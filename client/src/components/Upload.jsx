@@ -1,87 +1,82 @@
 import { IKContext, IKUpload } from "imagekitio-react";
-import { useState, useRef } from "react";
+import { useRef, useState, useEffect } from "react";
 import { toast } from "react-toastify";
+import { FaTimes, FaCamera } from "react-icons/fa";
 
 const authenticator = async () => {
   try {
-    const response = await fetch(`${import.meta.env.VITE_API_URL}/posts/upload-auth`);
+    const response = await fetch(
+      `${import.meta.env.VITE_API_URL}/posts/upload-auth`
+    );
+
     if (!response.ok) {
       const errorText = await response.text();
-      throw new Error(`Request failed with status ${response.status}: ${errorText}`);
+      throw new Error(
+        `Request failed with status ${response.status}: ${errorText}`
+      );
     }
+
     const data = await response.json();
-    return { signature: data.signature, expire: data.expire, token: data.token };
+    const { signature, expire, token } = data;
+    return { signature, expire, token };
   } catch (error) {
     throw new Error(`Authentication request failed: ${error.message}`);
   }
 };
 
-const Upload = ({ type, setProgress, setData }) => {
+const Upload = ({ children, type, setProgress, setData }) => {
   const ref = useRef(null);
-  const [images, setImages] = useState([]);
-  const fileInputRef = useRef(null);
-  const cameraInputRef = useRef(null);
-  const maxImages = 10;
+  const [previewImages, setPreviewImages] = useState([]);
 
-  const handleFileChange = (e) => {
-    const files = Array.from(e.target.files);
-    if (!files.length) return;
-  
-    if (images.length + files.length > maxImages) {
-      toast.error(`You can only upload up to ${maxImages} images.`);
-      return;
-    }
-  
-    // Store locally for preview
-    const newImages = files.map((file) => ({
-      file,
-      url: URL.createObjectURL(file),
-    }));
-  
-    setImages((prev) => [...prev, ...newImages]);
-    setData((prev) => [...prev, ...newImages]);
-  
-    // 🔥 Trigger actual upload
-    ref.current.uploadFiles(files);
-  };
-  
-  
-  const handlePaste = (e) => {
-    handleFileChange({ target: { files: e.clipboardData.files } });
-  };
-
-  const handleDrop = (e) => {
-    e.preventDefault();
-    handleFileChange({ target: { files: e.dataTransfer.files } });
-  };
-
-  const removeImage = (index) => {
-    setImages((prev) => {
-      URL.revokeObjectURL(prev[index].url);
-      return prev.filter((_, i) => i !== index);
+  const handleFileSelect = (files) => {
+    const imagePreviews = Array.from(files).map((file) => {
+      return { file, url: URL.createObjectURL(file) };
     });
-    setData((prev) => prev.filter((_, i) => i !== index));
+    setPreviewImages((prev) => [...prev, ...imagePreviews]);
   };
-
-  const triggerUpload = () => fileInputRef.current.click();
-  const triggerCamera = () => cameraInputRef.current.click();
 
   const onError = (err) => {
-    console.error(err);
+    console.log(err);
     toast.error("Image upload failed!");
   };
 
   const onSuccess = (res) => {
-    const uploadedImage = {
-      url: res.url,  // Ensure this is the actual uploaded image URL
-      fileId: res.fileId,
-    };
-    setData((prev) => [...prev, uploadedImage]);  // Ensure `img` in AddListingReview gets the correct URLs
+    console.log(res);
+    setData((prev) => [...prev, res]);
+    setPreviewImages((prev) => prev.filter((img) => img.file.name !== res.name));
   };
-  
-  
+
   const onUploadProgress = (progress) => {
+    console.log(progress);
     setProgress(Math.round((progress.loaded / progress.total) * 100));
+  };
+
+  const handlePaste = (event) => {
+    const items = (event.clipboardData || event.originalEvent.clipboardData).items;
+    for (const item of items) {
+      if (item.kind === "file") {
+        const file = item.getAsFile();
+        handleFileSelect([file]);
+      }
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener("paste", handlePaste);
+    return () => document.removeEventListener("paste", handlePaste);
+  }, []);
+
+  const handleDragOver = (event) => {
+    event.preventDefault();
+  };
+
+  const handleDrop = (event) => {
+    event.preventDefault();
+    handleFileSelect(event.dataTransfer.files);
+  };
+
+  const removePreview = (index) => {
+    setPreviewImages((prev) => prev.filter((_, i) => i !== index));
   };
 
   return (
@@ -90,87 +85,64 @@ const Upload = ({ type, setProgress, setData }) => {
       urlEndpoint={import.meta.env.VITE_IK_URL_ENDPOINT}
       authenticator={authenticator}
     >
-   <IKUpload
-  ref={ref}
-  useUniqueFileName
-  onError={onError}
-  onSuccess={onSuccess}
-  onUploadProgress={onUploadProgress}
-  multiple
-  accept="image/*"
-  folder="/uploads"
-  className="hidden"
-/>
-
-      
       <div
-        onPaste={handlePaste}
+        className="p-4 border-2 border-dashed rounded-lg text-center cursor-pointer"
+        onDragOver={handleDragOver}
         onDrop={handleDrop}
-        onDragOver={(e) => e.preventDefault()}
-        className="space-y-4 border-dashed border-2 border-gray-400 p-4 rounded-lg"
+        onClick={() => ref.current.click()}
       >
-        <div className="flex gap-2">
-          <button
-            onClick={triggerUpload}
-            className="w-full p-3 bg-blue-500 text-white font-semibold rounded-lg hover:bg-blue-600 transition-all"
-          >
-            {images.length ? "Add More Images" : "Add Images"}
-          </button>
-          <button
-            onClick={triggerCamera}
-            className="w-full p-3 bg-green-500 text-white font-semibold rounded-lg hover:bg-green-600 transition-all"
-          >
-            Capture from Camera
-          </button>
-        </div>
-        
-        <input
-          type="file"
-          ref={fileInputRef}
-          multiple
-          accept="image/*"
-          className="hidden"
-          onChange={handleFileChange}
-        />
-        <input
-          type="file"
-          ref={cameraInputRef}
-          accept="image/*"
-          capture="environment"
-          className="hidden"
-          onChange={handleFileChange}
-        />
-        
-        {images.length > 0 && (
-          <div className="flex flex-wrap gap-2">
-            {images.map((img, index) => (
-              <div key={index} className="relative group">
-                <img
-                  src={img.url}
-                  alt="preview"
-                  className="w-24 h-24 object-cover rounded-md border"
-                />
-                <button
-                  className="absolute top-0 right-0 bg-red-500 text-white p-1 rounded-full opacity-0 group-hover:opacity-100"
-                  onClick={() => removeImage(index)}
-                >
-                  X
-                </button>
-              </div>
-            ))}
-          </div>
-        )}
-        
-        {setProgress > 0 && (
-          <div className="w-full bg-gray-200 rounded-lg">
-            <div
-              className="bg-blue-500 text-xs font-semibold text-white text-center p-1 rounded-lg"
-              style={{ width: `${setProgress}%` }}
+        {children || "Drag & Drop or Click to Upload"}
+      </div>
+      <IKUpload
+        useUniqueFileName
+        onError={onError}
+        onSuccess={onSuccess}
+        onUploadProgress={onUploadProgress}
+        className="hidden"
+        ref={ref}
+        accept={`${type}/*`}
+        multiple
+      />
+      <button
+        className="mt-2 p-2 bg-blue-500 text-white rounded"
+        onClick={() => ref.current.click()}
+      >
+        Select Images
+      </button>
+      <button
+        className="mt-2 ml-2 p-2 bg-green-500 text-white rounded flex items-center"
+        onClick={() => {
+          navigator.mediaDevices.getUserMedia({ video: true })
+            .then((stream) => {
+              const track = stream.getVideoTracks()[0];
+              const imageCapture = new ImageCapture(track);
+              imageCapture.takePhoto().then((blob) => {
+                const file = new File([blob], "camera-image.jpg", { type: "image/jpeg" });
+                handleFileSelect([file]);
+                track.stop();
+              });
+            })
+            .catch((err) => toast.error("Camera access denied!"));
+        }}
+      >
+        <FaCamera className="mr-2" /> Take Photo
+      </button>
+      <div className="mt-4 grid grid-cols-4 gap-2">
+        {previewImages.map((img, index) => (
+          <div key={index} className="relative group">
+            <img
+              src={img.url}
+              alt="Preview"
+              className="w-full h-24 object-cover rounded"
+            />
+            <button
+              className="absolute top-1 right-1 bg-red-500 text-white rounded-full p-1 opacity-0 group-hover:opacity-100"
+              onClick={() => removePreview(index)}
             >
-              {setProgress}%
-            </div>
+              <FaTimes />
+            </button>
           </div>
-        )}
+        ))}
       </div>
     </IKContext>
   );
