@@ -60,8 +60,10 @@ from ${author || 'top authors'}in minutes. Elevate your mind—only on Hodi!`} /
        <Navbar/>
    
 
-       <div className="px-4 pt-4 md:pt-6 md:px-[80px] ">
-        <CategoriesScroll/>
+       <div className="pt-4 md:pt-6  ">
+       <CategoriesScroll/>
+
+       <div className="md:px-[80px] px-4">
 
      
   
@@ -82,7 +84,8 @@ from ${author || 'top authors'}in minutes. Elevate your mind—only on Hodi!`} /
       </div>
 
        <Footer/>
-       </div>
+       </div>        </div>
+
 
   
   </>
