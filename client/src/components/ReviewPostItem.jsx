@@ -2,8 +2,8 @@ import { useState, useRef } from "react";
 import { Link } from "react-router-dom";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 
-const ReviewPostItem = ({ post }) => {
-  const images = post.img || [];
+const ReviewPostItem = ({ review }) => {
+  const images = review.img || [];
   const [currentIndex, setCurrentIndex] = useState(0);
   const scrollRef = useRef(null); // Reference for scrolling container
 
@@ -38,7 +38,7 @@ const ReviewPostItem = ({ post }) => {
       {/* Image with Link */}
 
       <div className="w-1/4">
-      <Link to={`/reviews/${post.slug}`} className="block">
+      <Link to={`/reviews/${review.slug}`} className="block">
   <div className="relative w-full h-full aspect-[3/3] rounded-xl  overflow-hidden">
     {/* Scrollable Image Container */}
     <div             ref={scrollRef}
@@ -93,7 +93,7 @@ const ReviewPostItem = ({ post }) => {
 
 
 <div className=" w-3/4 ">
-<Link to={`/reviews/${post.slug}`} className="block">
+<Link to={`/reviews/${review.slug}`} className="block">
 
 
 <p
@@ -108,7 +108,7 @@ className="text-[var(--softTextColor)]  font-semibold capitalize mt-2 md:mt-1  t
 className="text-[var(--softTextColor)]  capitalize   text-[14px] "
 > Wako House
 
-{post.propertyname ? ` ${post.propertyname.slice(0, 20)}` : ""} <span>|</span> <span>  {post.propertytype ? ` ${post.propertytype.slice(0, 20)}` : ""}
+{review.propertyname ? ` ${review.propertyname.slice(0, 20)}` : ""} <span>|</span> <span>  {review.propertytype ? ` ${review.propertytype.slice(0, 20)}` : ""}
 </span>
 </p>
 
@@ -118,7 +118,7 @@ className="text-[var(--softTextColor)]  capitalize   text-[14px] "
 className="text-[var(--softTextColor)]     text-[14px]"
 >  <span className="font-semibold text-[13px]">34</span> Reviews
 
-{post.reviewslength ? ` ${post.reviewslength}` : ""}
+{review.reviewslength ? ` ${review.reviewslength}` : ""}
 </p>
 
 

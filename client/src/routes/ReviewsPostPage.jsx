@@ -31,7 +31,7 @@ import ReviewPostList from "../components/ReviewPostLists";
 const fetchPost = async (slug) => {
    
 
-  const res = await axios.get(`${import.meta.env.VITE_API_URL}/posts/${slug}`);
+  const res = await axios.get(`${import.meta.env.VITE_API_URL}/reviews/${slug}`);
   return res.data;
 };
 
@@ -42,8 +42,8 @@ const ReviewsPostPage = () => {
   const { slug } = useParams();
 
   const { isPending, error, data } = useQuery({
-    queryKey: ["post", slug],
-    queryFn: () => fetchPost(slug),
+    queryKey: ["review", slug],
+    queryFn: () => fetchReview(slug),
   });
 
 
@@ -126,7 +126,7 @@ setPopupImage(images[newIndex]);
 
   if (isPending) return <SpinnerMini />;
   if (error) return "Something went wrong!" + error.message;
-  if (!data) return "Post not found!";
+  if (!data) return "Review not found!";
   
 const icons = {
 apartment: <MdApartment />,
