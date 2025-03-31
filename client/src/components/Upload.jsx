@@ -37,9 +37,9 @@ const Upload = ({ children, type, setProgress, setData }) => {
   };
 
   const onError = () => toast.error("Image upload failed!");
-  
+
   const onSuccess = (res) => {
-    setData((prev) => [...prev, res]);
+    setData((prev) => [...prev, { url: res.url }]);
     setUploadQueue((prev) => prev.filter((file) => file.name !== res.name));
   };
 

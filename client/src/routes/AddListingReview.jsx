@@ -32,10 +32,10 @@ const AddListingReview = () => {
     },
   });
 
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    setError("");
-    setIsSubmitClicked(true);
+    setIsSubmitClicked(true); // Set to true on submit
 
     let missingFields = [];
     if (!propertyname.trim()) missingFields.push("Property name");
