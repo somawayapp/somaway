@@ -1,80 +1,41 @@
-import { IKContext, IKUpload } from "imagekitio-react";
 import { useRef, useState } from "react";
+import { IKContext, IKUpload } from "imagekitio-react";
 import { toast } from "react-toastify";
+import { Camera } from "lucide-react";
 
-// Authentication logic
 const authenticator = async () => {
   try {
     const response = await fetch(`${import.meta.env.VITE_API_URL}/posts/upload-auth`);
-
-    if (!response.ok) {
-      const errorText = await response.text();
-      throw new Error(`Request failed with status ${response.status}: ${errorText}`);
-    }
-
-    const data = await response.json();
-    const { signature, expire, token } = data;
-    return { signature, expire, token };
+    if (!response.ok) throw new Error(`Request failed with status ${response.status}`);
+    return await response.json();
   } catch (error) {
     throw new Error(`Authentication request failed: ${error.message}`);
   }
 };
 
-const Upload = ({ setProgress, setData }) => {
+const Upload = ({ setData, setProgress }) => {
+  const [selectedImages, setSelectedImages] = useState([]);
   const ref = useRef(null);
-  const [images, setImages] = useState([]);
-  const [loading, setLoading] = useState(false);
 
-  // Handle image errors
-  const onError = (err) => {
-    console.log(err);
-    toast.error("Image upload failed!");
+  const handleFiles = (files) => {
+    const imageFiles = Array.from(files).slice(0, 10);
+    setSelectedImages(imageFiles);
   };
 
-  // Handle successful image upload
-  const onSuccess = (res) => {
-    console.log(res);
-    setData((prev) => [...prev, res]); // Append new image to array
-    setImages((prev) => [...prev, res]); // Update preview list
+  const removeImage = (index) => {
+    setSelectedImages((prev) => prev.filter((_, i) => i !== index));
   };
 
-  // Handle image upload progress
-  const onUploadProgress = (progress) => {
-    console.log(progress);
-    setProgress(Math.round((progress.loaded / progress.total) * 100));
-  };
-
-  // Handle file input change (bulk selection)
-  const handleFilesChange = (e) => {
-    const files = e.target.files;
-    if (files.length + images.length > 10) {
-      toast.error("You can only upload a maximum of 10 images.");
-      return;
-    }
-
-    const newImages = Array.from(files).map((file) => ({
-      file,
-      url: URL.createObjectURL(file),
-    }));
-    setImages((prev) => [...prev, ...newImages]);
-  };
-
-  // Handle camera capture
-  const handleCapture = async (e) => {
-    const captureFile = e.target.files[0];
-    if (captureFile) {
-      const captureImage = {
-        file: captureFile,
-        url: URL.createObjectURL(captureFile),
-      };
-      setImages((prev) => [...prev, captureImage]);
+  const uploadImages = async () => {
+    if (!selectedImages.length) return toast.error("No images selected!");
+    for (const image of selectedImages) {
+      await ref.current.uploadFile(image);
     }
   };
 
-  // Delete an image
-  const deleteImage = (index) => {
-    setImages(images.filter((_, i) => i !== index));
-  };
+  const onError = (err) => toast.error("Image upload failed!");
+  const onSuccess = (res) => setData((prev) => [...prev, res]);
+  const onUploadProgress = (progress) => setProgress(Math.round((progress.loaded / progress.total) * 100));
 
   return (
     <IKContext
@@ -82,71 +43,37 @@ const Upload = ({ setProgress, setData }) => {
       urlEndpoint={import.meta.env.VITE_IK_URL_ENDPOINT}
       authenticator={authenticator}
     >
-      <div className="image-picker-container">
+      <div className="p-4 border rounded-lg bg-gray-100">
+        <input
+          type="file"
+          multiple
+          accept="image/*"
+          className="hidden"
+          onChange={(e) => handleFiles(e.target.files)}
+        />
         <div className="flex flex-wrap gap-2">
-          {images.map((image, index) => (
-            <div key={index} className="relative">
-              <img
-                src={image.url}
-                alt="Uploaded"
-                className="w-[100px] h-[100px] object-cover rounded-lg"
-              />
-              <button
-                className="absolute top-0 right-0 bg-red-500 text-white rounded-full w-6 h-6 flex justify-center items-center"
-                onClick={() => deleteImage(index)}
-              >
-                X
-              </button>
+          {selectedImages.map((img, index) => (
+            <div key={index} className="relative w-24 h-24">
+              <img src={URL.createObjectURL(img)} className="w-full h-full object-cover rounded-lg" alt="Preview" />
+              <button onClick={() => removeImage(index)} className="absolute top-1 right-1 bg-red-500 text-white p-1 rounded-full">✕</button>
             </div>
           ))}
         </div>
-
-        {/* File Input for Uploading Images */}
-        <div className="flex gap-2 mt-4">
-          <label
-            htmlFor="image-upload"
-            className="bg-blue-500 text-white py-2 px-4 rounded-lg cursor-pointer"
-          >
-            Select Images
-          </label>
-          <input
-            id="image-upload"
-            type="file"
-            accept="image/*"
-            multiple
-            onChange={handleFilesChange}
-            className="hidden"
-          />
-
-          {/* Camera Capture */}
-          <label
-            htmlFor="camera-upload"
-            className="bg-green-500 text-white py-2 px-4 rounded-lg cursor-pointer"
-          >
-            Capture Image
-          </label>
-          <input
-            id="camera-upload"
-            type="file"
-            accept="image/*"
-            capture="camera"
-            onChange={handleCapture}
-            className="hidden"
-          />
+        <div className="mt-4 flex gap-2">
+          <button onClick={() => document.querySelector('input[type=file]').click()} className="bg-blue-500 text-white px-4 py-2 rounded-lg">Select Images</button>
+          <button onClick={uploadImages} className="bg-green-500 text-white px-4 py-2 rounded-lg">Upload</button>
         </div>
-
-        <IKUpload
-          useUniqueFileName
-          onError={onError}
-          onSuccess={onSuccess}
-          onUploadProgress={onUploadProgress}
-          className="hidden"
-          ref={ref}
-        />
       </div>
+      <IKUpload
+        useUniqueFileName
+        ref={ref}
+        onError={onError}
+        onSuccess={onSuccess}
+        onUploadProgress={onUploadProgress}
+        className="hidden"
+      />
     </IKContext>
   );
 };
 
 export default Upload;
-
