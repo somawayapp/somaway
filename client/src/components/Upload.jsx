@@ -45,7 +45,7 @@ const Upload = ({ setProgress, setData }) => {
     files.forEach((file) => {
       const formData = new FormData();
       formData.append("file", file);
-      fetch(`${import.meta.env.VITE_API_URL}/upload`, {
+      fetch(`${import.meta.env.VITE_API_URL}/posts/upload-auth`, {
         method: "POST",
         body: formData,
       })
