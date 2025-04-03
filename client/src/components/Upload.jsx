@@ -1,5 +1,4 @@
-import { IKContext, IKUpload } from "imagekitio-react";
-import { useRef, useState } from "react";
+import { useState, useRef } from "react";
 import { toast } from "react-toastify";
 
 const authenticator = async () => {
@@ -23,59 +22,58 @@ const authenticator = async () => {
   }
 };
 
-const Upload = ({ children, type, setProgress, setData }) => {
-  const ref = useRef(null);
-  const [files, setFiles] = useState([]);
+const Upload = ({ children, type, setData }) => {
+  const inputRef = useRef(null);
+  const [uploadProgress, setUploadProgress] = useState({});
 
-  const onError = (err) => {
-    console.log(err);
-    toast.error("Image upload failed!");
-  };
+  const handleFileUpload = async (files) => {
+    const { signature, expire, token } = await authenticator();
 
-  const onSuccess = (res) => {
-    console.log(res);
-    setData((prev) => [...prev, res]); // Append uploaded file to state
-  };
+    for (const file of files) {
+      const formData = new FormData();
+      formData.append("file", file);
+      formData.append("publicKey", import.meta.env.VITE_IK_PUBLIC_KEY);
+      formData.append("signature", signature);
+      formData.append("expire", expire);
+      formData.append("token", token);
 
-  const onUploadProgress = (progress) => {
-    setProgress(Math.round((progress.loaded / progress.total) * 100));
-  };
+      try {
+        const response = await fetch("https://upload.imagekit.io/api/v1/files/upload", {
+          method: "POST",
+          body: formData,
+        });
 
-  const handleFileChange = (event) => {
-    const selectedFiles = Array.from(event.target.files);
-    setFiles(selectedFiles);
+        if (!response.ok) {
+          throw new Error(`Failed to upload: ${file.name}`);
+        }
+
+        const data = await response.json();
+        setData((prev) => [...prev, data]); // Store uploaded images
+      } catch (error) {
+        console.error("Upload error:", error);
+        toast.error(`Upload failed for ${file.name}`);
+      }
+    }
   };
 
   return (
-    <IKContext
-      publicKey={import.meta.env.VITE_IK_PUBLIC_KEY}
-      urlEndpoint={import.meta.env.VITE_IK_URL_ENDPOINT}
-      authenticator={authenticator}
-    >
+    <div>
+      {/* Hidden File Input */}
       <input
         type="file"
         multiple
         accept={`${type}/*`}
+        ref={inputRef}
         className="hidden"
-        ref={ref}
-        onChange={handleFileChange}
+        onChange={(e) => handleFileUpload(e.target.files)}
       />
-      {files.map((file, index) => (
-        <IKUpload
-          key={index}
-          file={file}
-          useUniqueFileName
-          onError={onError}
-          onSuccess={onSuccess}
-          onUploadProgress={onUploadProgress}
-        />
-      ))}
-      <div className="cursor-pointer" onClick={() => ref.current.click()}>
+
+      {/* Upload Button */}
+      <div className="cursor-pointer" onClick={() => inputRef.current.click()}>
         {children}
       </div>
-    </IKContext>
+    </div>
   );
 };
 
 export default Upload;
-
