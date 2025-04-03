@@ -1,4 +1,4 @@
-import { IKContext } from "imagekitio-react";
+import { IKContext, IKUpload } from "imagekitio-react";
 import { useRef, useState } from "react";
 import { toast } from "react-toastify";
 
@@ -24,9 +24,9 @@ const authenticator = async () => {
 };
 
 const Upload = ({ children, type, setProgress, setData }) => {
-  const [filesToUpload, setFilesToUpload] = useState([]);
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const imageKit = useRef(null); // Reference to the ImageKit instance
+  const ref = useRef(null);
+  const [files, setFiles] = useState([]); // Store selected files
+  const [uploadingIndex, setUploadingIndex] = useState(0); // Track the current file index
 
   const onError = (err) => {
     console.log(err);
@@ -35,8 +35,13 @@ const Upload = ({ children, type, setProgress, setData }) => {
 
   const onSuccess = (res) => {
     console.log(res);
-    setData((prev) => [...prev, res]); // Append new image(s) to array
-    triggerNextUpload(); // Trigger next upload after success
+    setData((prev) => [...prev, res]); // Append new image to array
+
+    // Proceed with next file after the current one finishes
+    if (uploadingIndex < files.length - 1) {
+      setUploadingIndex((prev) => prev + 1);
+      ref.current.click(); // Trigger upload for the next file
+    }
   };
 
   const onUploadProgress = (progress) => {
@@ -44,29 +49,11 @@ const Upload = ({ children, type, setProgress, setData }) => {
     setProgress(Math.round((progress.loaded / progress.total) * 100));
   };
 
-  const handleMultipleUpload = (files) => {
-    // Store all files to be uploaded
-    setFilesToUpload(Array.from(files));
-    setCurrentIndex(0);
-    triggerNextUpload(); // Start the upload process
-  };
-
-  const triggerNextUpload = () => {
-    if (currentIndex < filesToUpload.length) {
-      const file = filesToUpload[currentIndex];
-      imageKit.current.upload({
-        file: file, // The file to upload
-        fileName: file.name, // Set the filename
-        signature: file.signature, // Use the signature you fetch from your server
-        token: file.token, // Use the token from the server
-        expire: file.expire, // Expiration time from the server
-      }).then((res) => {
-        onSuccess(res); // Handle success
-        setCurrentIndex(currentIndex + 1); // Increment to move to the next file
-      }).catch((err) => {
-        onError(err); // Handle errors
-      });
-    }
+  const handleFileSelection = (event) => {
+    const selectedFiles = Array.from(event.target.files);
+    setFiles(selectedFiles); // Store all selected files
+    setUploadingIndex(0); // Reset to start with the first file
+    ref.current.click(); // Start uploading the first file immediately
   };
 
   return (
@@ -75,21 +62,23 @@ const Upload = ({ children, type, setProgress, setData }) => {
       urlEndpoint={import.meta.env.VITE_IK_URL_ENDPOINT}
       authenticator={authenticator}
     >
-      <div
-        className="cursor-pointer"
-        onClick={() => {
-          const fileInput = document.createElement('input');
-          fileInput.type = 'file';
-          fileInput.accept = `${type}/*`;
-          fileInput.multiple = true;
-          fileInput.click();
-          
-          fileInput.addEventListener("change", (e) => {
-            const selectedFiles = e.target.files;
-            handleMultipleUpload(selectedFiles); // Upload all selected files
-          });
-        }}
-      >
+      <IKUpload
+        useUniqueFileName
+        onError={onError}
+        onSuccess={onSuccess}
+        onUploadProgress={onUploadProgress}
+        className="hidden"
+        ref={ref}
+        accept={`${type}/*`}
+        file={files[uploadingIndex]} // Upload the current file
+      />
+      <input
+        type="file"
+        multiple
+        onChange={handleFileSelection}
+        className="hidden"
+      />
+      <div className="cursor-pointer" onClick={() => ref.current.click()}>
         {children}
       </div>
     </IKContext>
@@ -97,4 +86,3 @@ const Upload = ({ children, type, setProgress, setData }) => {
 };
 
 export default Upload;
-
