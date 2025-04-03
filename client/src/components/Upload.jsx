@@ -111,22 +111,6 @@ const Upload = ({ children, type, setProgress, setData }) => {
           />
         </label>
       </div>
-
-      {/* Trigger image upload for all selected images */}
-      <div className="mt-4">
-        {fileList.length > 0 && (
-          <IKUpload
-            useUniqueFileName
-            onError={onError}
-            onSuccess={onSuccess}
-            onUploadProgress={onUploadProgress}
-            className="hidden"
-            accept={`${type}/*`}
-            multiple
-            files={fileList} // Trigger upload for the list of files
-          />
-        )}
-      </div>
     </IKContext>
   );
 };
