@@ -1,5 +1,5 @@
-import { IKContext, IKUpload } from "imagekitio-react";
-import { useRef } from "react";
+import { IKContext } from "imagekitio-react";
+import { useRef, useState } from "react";
 import { toast } from "react-toastify";
 
 const authenticator = async () => {
@@ -24,7 +24,9 @@ const authenticator = async () => {
 };
 
 const Upload = ({ children, type, setProgress, setData }) => {
-  const ref = useRef(null);
+  const [filesToUpload, setFilesToUpload] = useState([]);
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const imageKit = useRef(null); // Reference to the ImageKit instance
 
   const onError = (err) => {
     console.log(err);
@@ -42,21 +44,28 @@ const Upload = ({ children, type, setProgress, setData }) => {
     setProgress(Math.round((progress.loaded / progress.total) * 100));
   };
 
-  let filesToUpload = [];
-  let currentIndex = 0;
-
   const handleMultipleUpload = (files) => {
     // Store all files to be uploaded
-    filesToUpload = Array.from(files);
-    currentIndex = 0;
+    setFilesToUpload(Array.from(files));
+    setCurrentIndex(0);
     triggerNextUpload(); // Start the upload process
   };
 
   const triggerNextUpload = () => {
     if (currentIndex < filesToUpload.length) {
       const file = filesToUpload[currentIndex];
-      ref.current.upload(file); // Trigger upload for the current file
-      currentIndex++; // Move to the next file
+      imageKit.current.upload({
+        file: file, // The file to upload
+        fileName: file.name, // Set the filename
+        signature: file.signature, // Use the signature you fetch from your server
+        token: file.token, // Use the token from the server
+        expire: file.expire, // Expiration time from the server
+      }).then((res) => {
+        onSuccess(res); // Handle success
+        setCurrentIndex(currentIndex + 1); // Increment to move to the next file
+      }).catch((err) => {
+        onError(err); // Handle errors
+      });
     }
   };
 
@@ -66,21 +75,15 @@ const Upload = ({ children, type, setProgress, setData }) => {
       urlEndpoint={import.meta.env.VITE_IK_URL_ENDPOINT}
       authenticator={authenticator}
     >
-      <IKUpload
-        useUniqueFileName
-        onError={onError}
-        onSuccess={onSuccess}
-        onUploadProgress={onUploadProgress}
-        className="hidden"
-        ref={ref}
-        accept={`${type}/*`}
-        multiple // Allow multiple files
-      />
       <div
         className="cursor-pointer"
         onClick={() => {
-          const fileInput = ref.current;
-          fileInput.click(); // Open file picker
+          const fileInput = document.createElement('input');
+          fileInput.type = 'file';
+          fileInput.accept = `${type}/*`;
+          fileInput.multiple = true;
+          fileInput.click();
+          
           fileInput.addEventListener("change", (e) => {
             const selectedFiles = e.target.files;
             handleMultipleUpload(selectedFiles); // Upload all selected files
@@ -94,3 +97,4 @@ const Upload = ({ children, type, setProgress, setData }) => {
 };
 
 export default Upload;
+
