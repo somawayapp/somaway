@@ -68,6 +68,7 @@ const Upload = ({ children, type, setProgress, setData }) => {
         onSuccess={onSuccess}
         onUploadProgress={onUploadProgress}
         className="hidden"
+        multiple
         ref={ref}
         accept={`${type}/*`}
         file={files[uploadingIndex]} // Upload the current file
@@ -86,3 +87,6 @@ const Upload = ({ children, type, setProgress, setData }) => {
 };
 
 export default Upload;
+
+
+
