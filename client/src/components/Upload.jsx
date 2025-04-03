@@ -195,12 +195,24 @@ const Upload = ({ type = "image", setProgress, setData }) => {
 
 
   return (
-    <IKContext
-      publicKey={import.meta.env.VITE_IK_PUBLIC_KEY} // Ensure these are set
-      urlEndpoint={import.meta.env.VITE_IK_URL_ENDPOINT} // Ensure these are set
+
+ <IKContext
+      publicKey={import.meta.env.VITE_IK_PUBLIC_KEY}
+      urlEndpoint={import.meta.env.VITE_IK_URL_ENDPOINT}
       authenticator={authenticator}
     >
-      {/* Clickable Area for Upload */}
+      <IKUpload
+        useUniqueFileName
+        onError={onError}
+        onSuccess={onSuccess}
+        onUploadProgress={onUploadProgress}
+        className="hidden"
+        ref={ref}
+        accept={`${type}/*`}
+        multiple // Allow multiple uploads
+      />
+      <div className="cursor-pointer" onClick={() => ref.current.click()}>
+  {/* Clickable Area for Upload */}
       <div
         className="p-4 border-2 border-dashed border-[var(--softBg4)] rounded-lg text-center cursor-pointer hover:bg-[var(--softBg2)] transition-colors"
         onClick={() => fileInputRef.current?.click()} // Trigger hidden input
@@ -290,20 +302,7 @@ const Upload = ({ type = "image", setProgress, setData }) => {
             </div>
           ))}
         </div>
-      )}
-
-
-      {uploadQueue.length > 0 && (
-        <IKUpload
-     
-          files={uploadQueue} 
-          useUniqueFileName={true} // Recommended
-          onError={onError}
-          onSuccess={onSuccess}
-          onUploadProgress={onUploadProgress}
-        
-        />
-      )}
+      )}      </div>
     </IKContext>
   );
 };
