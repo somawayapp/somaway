@@ -60,10 +60,10 @@
   
           return(
           <div  style={{ zIndex: 100004, }}
-             className="flex justify-center items-center flex-col relative w-full px-4 md:px-[80px] gap-2 py-2  md:gap-6 flex sticky top-0  text-[var(--TextColor)] bg-[var(--bg)] md:border-b  border-b-[var(--softBg4)] " >
+             className="flex justify-center items-center flex-col relative w-full px-4 md:px-[80px] gap-3 py-2  md:gap-6 flex sticky top-0  text-[var(--TextColor)] bg-[var(--bg)] md:border-b  border-b-[var(--softBg4)] " >
       
       
-            <div className="relative w-full  mt-2 gap-3 md:gap-6 flex flex-row items-center  text-[var(--TextColor)]  justify-between  bg-[var(--bg)] "           >
+            <div className="relative w-full  mt-2 gap-2 md:gap-6 flex flex-row items-center  text-[var(--TextColor)]  justify-between  bg-[var(--bg)] "           >
   
   
              {/* Show on medium screens and larger */}
