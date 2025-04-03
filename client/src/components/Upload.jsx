@@ -32,18 +32,16 @@ const Upload = ({ children, type, setProgress, setData }) => {
   };
 
   const onSuccess = (res) => {
-    console.log("Upload success response:", res);
-
-    // If res is an array, it means multiple files were uploaded
-    // Else wrap it in an array (for a single file upload scenario)
-    const images = Array.isArray(res) ? res : [res];
-
-    console.log("Processed images:", images);
-
-    if (images.length > 0) {
-      setData((prev) => [...prev, ...images]); // Append new images to the existing array
+    console.log(res);
+    // Ensure each image is uploaded and added to the state
+    if (Array.isArray(res)) {
+      // If multiple images are uploaded at once
+      res.forEach((file) => {
+        setData((prev) => [...prev, file]); // Append each file to the state
+      });
     } else {
-      toast.error("Unexpected response format or empty data received!");
+      // If only a single image is uploaded
+      setData((prev) => [...prev, res]);
     }
   };
 
