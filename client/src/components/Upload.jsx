@@ -1,5 +1,5 @@
 import { IKContext, IKUpload } from "imagekitio-react";
-import { useState, useRef } from "react";
+import { useRef } from "react";
 import { toast } from "react-toastify";
 
 const authenticator = async () => {
@@ -24,8 +24,7 @@ const authenticator = async () => {
 };
 
 const Upload = ({ children, type, setProgress, setData }) => {
-  const inputRef = useRef(null);
-  const [selectedFiles, setSelectedFiles] = useState([]);
+  const ref = useRef(null);
 
   const onError = (err) => {
     console.log(err);
@@ -33,19 +32,20 @@ const Upload = ({ children, type, setProgress, setData }) => {
   };
 
   const onSuccess = (res) => {
-    console.log("Upload successful:", res);
-    setData((prev) => [...prev, res]); // Append uploaded file to state
+    console.log(res); // Log response to check data format
+    if (Array.isArray(res)) {
+      res.forEach((file) => {
+        setData((prev) => [...prev, file]); // Append each file to the state
+      });
+    } else {
+      setData((prev) => [...prev, res]); // For single file uploads
+    }
   };
+  
 
   const onUploadProgress = (progress) => {
-    console.log("Upload Progress:", progress);
+    console.log(progress);
     setProgress(Math.round((progress.loaded / progress.total) * 100));
-  };
-
-  // Handles file selection
-  const handleFileSelect = (event) => {
-    const files = Array.from(event.target.files);
-    setSelectedFiles(files); // Store files to render multiple `IKUpload`
   };
 
   return (
@@ -54,40 +54,25 @@ const Upload = ({ children, type, setProgress, setData }) => {
       urlEndpoint={import.meta.env.VITE_IK_URL_ENDPOINT}
       authenticator={authenticator}
     >
-      {/* Hidden file input */}
-      <input
-        type="file"
-        multiple
-        accept={`${type}/*`}
+      <IKUpload
+        useUniqueFileName
+        onError={onError}
+        onSuccess={onSuccess}
+        onUploadProgress={onUploadProgress}
         className="hidden"
-        ref={inputRef}
-        onChange={handleFileSelect}
+        ref={ref}
+        accept={`${type}/*`}
+        multiple // Allow multiple uploads
       />
-
-      {/* Clickable upload button */}
-      <div
-        className="cursor-pointer"
-        onClick={() => inputRef.current && inputRef.current.click()}
-      >
+      <div className="cursor-pointer" onClick={() => ref.current.click()}>
         {children}
       </div>
-
-      {/* Render an IKUpload for each selected file */}
-      {selectedFiles.map((file, index) => (
-        <IKUpload
-          key={index}
-          useUniqueFileName
-          fileName={file.name} // Pass the selected file
-          file={file} // Pass the actual file object
-          onError={onError}
-          onSuccess={onSuccess}
-          onUploadProgress={onUploadProgress}
-          className="hidden"
-        />
-      ))}
     </IKContext>
   );
 };
 
 export default Upload;
+
+
+
 
