@@ -34,14 +34,14 @@ const Upload = ({ children, type, setProgress, setData }) => {
   const onSuccess = (res) => {
     console.log("Upload success response:", res);
 
-    // Check if response is an array, if not, wrap it in an array
+    // If res is an array, it means multiple files were uploaded
+    // Else wrap it in an array (for a single file upload scenario)
     const images = Array.isArray(res) ? res : [res];
 
-    // Log to confirm we're processing an array
     console.log("Processed images:", images);
 
-    if (images && images.length > 0) {
-      setData((prev) => [...prev, ...images]); // Append new images to existing data
+    if (images.length > 0) {
+      setData((prev) => [...prev, ...images]); // Append new images to the existing array
     } else {
       toast.error("Unexpected response format or empty data received!");
     }
