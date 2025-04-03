@@ -1,5 +1,5 @@
 import { IKContext, IKUpload } from "imagekitio-react";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { toast } from "react-toastify";
 
 const authenticator = async () => {
@@ -25,9 +25,10 @@ const authenticator = async () => {
 
 const Upload = ({ children, type, setProgress, setData }) => {
   const ref = useRef(null);
+  const [selectedFiles, setSelectedFiles] = useState([]);
 
   const onError = (err) => {
-    console.log(err);
+    console.error(err);
     toast.error("Image upload failed!");
   };
 
@@ -41,25 +42,44 @@ const Upload = ({ children, type, setProgress, setData }) => {
     setProgress(Math.round((progress.loaded / progress.total) * 100));
   };
 
+  // Handle file selection manually
+  const handleFileChange = (event) => {
+    const files = Array.from(event.target.files);
+    setSelectedFiles(files);
+  };
+
+  // Manually trigger uploads for all selected files
+  const uploadAllFiles = async () => {
+    if (selectedFiles.length === 0) {
+      toast.error("No images selected!");
+      return;
+    }
+
+    for (const file of selectedFiles) {
+      await ref.current.uploadFile(file);
+    }
+  };
+
   return (
     <IKContext
       publicKey={import.meta.env.VITE_IK_PUBLIC_KEY}
       urlEndpoint={import.meta.env.VITE_IK_URL_ENDPOINT}
       authenticator={authenticator}
     >
-      <IKUpload
-        useUniqueFileName
-        onError={onError}
-        onSuccess={onSuccess}
-        onUploadProgress={onUploadProgress}
-        className="hidden"
-        ref={ref}
+      <input
+        type="file"
         accept={`${type}/*`}
-        multiple // Allow multiple uploads
+        multiple
+        className="hidden"
+        onChange={handleFileChange}
+        ref={ref}
       />
       <div className="cursor-pointer" onClick={() => ref.current.click()}>
         {children}
       </div>
+      <button onClick={uploadAllFiles} className="mt-2 p-2 bg-blue-500 text-white rounded">
+        Upload Selected Images
+      </button>
     </IKContext>
   );
 };
