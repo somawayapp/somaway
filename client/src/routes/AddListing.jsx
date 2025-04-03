@@ -121,15 +121,19 @@ const AddListing = () => {
         <form onSubmit={handleSubmit} className="flex flex-col gap-6">
       
 
-          <Upload type="image" setProgress={setProgress} setData={setImg}/>
+        <Upload type="image" setProgress={setProgress} setData={setImg}>
+  <button className="p-2 bg-[var(--textColore)] text-[var(--textColor)] rounded-lg">
+    Upload Additional Images
+  </button>
+</Upload>
 
-          {img.length > 0 && (
-            <div className="flex flex-wrap gap-2">
-              {img.map((img, index) => (
-                <img key={index} src={img.url} alt="Uploaded" className="w-[100px] h-[100px] object-cover" />
-              ))}
-            </div>
-          )}
+{img.length > 0 && (
+  <div className="flex flex-wrap gap-2">
+    {img.map((img, index) => (
+      <img key={index} src={img.url} alt="Uploaded" className="w-[100px] h-[100px] object-cover" />
+    ))}
+  </div>
+)}
 
 
 

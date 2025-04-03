@@ -1,17 +1,13 @@
 import { IKContext, IKUpload } from "imagekitio-react";
-import { useState, useRef } from "react";
+import { useRef, useState } from "react";
 import { toast } from "react-toastify";
 
 const authenticator = async () => {
   try {
-    const response = await fetch(
-      `${import.meta.env.VITE_API_URL}/posts/upload-auth`
-    );
+    const response = await fetch(`${import.meta.env.VITE_API_URL}/posts/upload-auth`);
     if (!response.ok) {
       const errorText = await response.text();
-      throw new Error(
-        `Request failed with status ${response.status}: ${errorText}`
-      );
+      throw new Error(`Request failed with status ${response.status}: ${errorText}`);
     }
 
     const data = await response.json();
@@ -23,9 +19,9 @@ const authenticator = async () => {
 };
 
 const Upload = ({ children, type, setProgress, setData }) => {
-  const [selectedImages, setSelectedImages] = useState([]);
-  const [imagePreviews, setImagePreviews] = useState([]);
   const ref = useRef(null);
+  const [imagePreviews, setImagePreviews] = useState([]);
+  const [fileList, setFileList] = useState([]);
 
   const onError = (err) => {
     console.log(err);
@@ -42,53 +38,26 @@ const Upload = ({ children, type, setProgress, setData }) => {
     setProgress(Math.round((progress.loaded / progress.total) * 100));
   };
 
-  const handleImageSelect = (e) => {
-    const files = e.target.files;
-    if (files.length + selectedImages.length > 10) {
-      toast.error("You can only upload a maximum of 10 images.");
-      return;
-    }
-
-    const newImages = [];
-    const newPreviews = [];
-    for (let i = 0; i < files.length; i++) {
-      newImages.push(files[i]);
-      const previewURL = URL.createObjectURL(files[i]);
-      newPreviews.push(previewURL);
-    }
-
-    setSelectedImages((prev) => [...prev, ...newImages]);
-    setImagePreviews((prev) => [...prev, ...newPreviews]);
+  const handleFileChange = (e) => {
+    const files = Array.from(e.target.files).slice(0, 10); // Limit to 10 images
+    const previews = files.map((file) => URL.createObjectURL(file));
+    setImagePreviews(previews);
+    setFileList(files);
   };
 
-  const handleDeleteImage = (index) => {
-    setSelectedImages((prev) => prev.filter((_, i) => i !== index));
-    setImagePreviews((prev) => prev.filter((_, i) => i !== index));
+  const handleDelete = (index) => {
+    const newFiles = [...fileList];
+    newFiles.splice(index, 1);
+    setFileList(newFiles);
+    setImagePreviews(newFiles.map((file) => URL.createObjectURL(file)));
   };
 
-  const handleCameraCapture = () => {
-    navigator.mediaDevices
-      .getUserMedia({ video: true })
-      .then((stream) => {
-        const video = document.createElement("video");
-        video.srcObject = stream;
-        video.play();
-        video.onloadedmetadata = () => {
-          const canvas = document.createElement("canvas");
-          canvas.width = video.videoWidth;
-          canvas.height = video.videoHeight;
-          canvas.getContext("2d").drawImage(video, 0, 0);
-          const imgURL = canvas.toDataURL("image/png");
-
-          setSelectedImages((prev) => [...prev, imgURL]);
-          setImagePreviews((prev) => [...prev, imgURL]);
-          stream.getTracks().forEach(track => track.stop());
-        };
-      })
-      .catch((err) => {
-        toast.error("Failed to access camera");
-        console.error(err);
-      });
+  const handleCameraCapture = (e) => {
+    const cameraFile = e.target.files[0];
+    if (cameraFile) {
+      setFileList([cameraFile]);
+      setImagePreviews([URL.createObjectURL(cameraFile)]);
+    }
   };
 
   return (
@@ -97,64 +66,50 @@ const Upload = ({ children, type, setProgress, setData }) => {
       urlEndpoint={import.meta.env.VITE_IK_URL_ENDPOINT}
       authenticator={authenticator}
     >
-      <div className="upload-container">
-        {/* Bulk Upload Button */}
-        <div className="upload-buttons">
-          <button
-            onClick={() => ref.current.click()}
-            className="upload-btn"
-          >
-            {children}
-          </button>
-          <button
-            onClick={handleCameraCapture}
-            className="camera-btn"
-          >
-            Use Camera
-          </button>
-        </div>
+      <IKUpload
+        useUniqueFileName
+        onError={onError}
+        onSuccess={onSuccess}
+        onUploadProgress={onUploadProgress}
+        className="hidden"
+        ref={ref}
+        accept={`${type}/*`}
+        multiple
+        onChange={handleFileChange}
+      />
+      <div className="cursor-pointer" onClick={() => ref.current.click()}>
+        {children}
+      </div>
 
-        {/* File input (hidden) */}
-        <IKUpload
-          useUniqueFileName
-          onError={onError}
-          onSuccess={onSuccess}
-          onUploadProgress={onUploadProgress}
-          className="hidden"
-          ref={ref}
-          accept={`${type}/*`}
-          multiple
-          onChange={handleImageSelect}
-        />
+      <div className="flex flex-wrap gap-2 mt-4">
+        {imagePreviews.map((preview, index) => (
+          <div key={index} className="relative">
+            <img
+              src={preview}
+              alt="Preview"
+              className="w-[100px] h-[100px] object-cover rounded-lg"
+            />
+            <button
+              className="absolute top-0 right-0 bg-red-500 text-white p-1 rounded-full"
+              onClick={() => handleDelete(index)}
+            >
+              X
+            </button>
+          </div>
+        ))}
+      </div>
 
-        {/* Image Previews */}
-        <div className="image-previews">
-          {imagePreviews.map((preview, index) => (
-            <div key={index} className="image-preview">
-              <img src={preview} alt={`Preview ${index}`} />
-              <button
-                className="delete-btn"
-                onClick={() => handleDeleteImage(index)}
-              >
-                Delete
-              </button>
-            </div>
-          ))}
-        </div>
-
-        {/* Max 10 Upload Button */}
-        {selectedImages.length > 0 && selectedImages.length <= 10 && (
-          <IKUpload
-            useUniqueFileName
-            onError={onError}
-            onSuccess={onSuccess}
-            onUploadProgress={onUploadProgress}
+      <div className="mt-4">
+        <label className="cursor-pointer p-2 bg-blue-500 text-white rounded-lg">
+          Capture from Camera
+          <input
+            type="file"
+            accept="image/*"
+            capture="camera"
             className="hidden"
-            ref={ref}
-            accept={`${type}/*`}
-            multiple
+            onChange={handleCameraCapture}
           />
-        )}
+        </label>
       </div>
     </IKContext>
   );
