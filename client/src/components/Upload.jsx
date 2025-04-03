@@ -1,5 +1,5 @@
 import { IKContext, IKUpload } from "imagekitio-react";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { toast } from "react-toastify";
 
 const authenticator = async () => {
@@ -25,6 +25,7 @@ const authenticator = async () => {
 
 const Upload = ({ children, type, setProgress, setData }) => {
   const ref = useRef(null);
+  const [files, setFiles] = useState([]);
 
   const onError = (err) => {
     console.log(err);
@@ -32,20 +33,17 @@ const Upload = ({ children, type, setProgress, setData }) => {
   };
 
   const onSuccess = (res) => {
-    console.log(res); // Log response to check data format
-    if (Array.isArray(res)) {
-      res.forEach((file) => {
-        setData((prev) => [...prev, file]); // Append each file to the state
-      });
-    } else {
-      setData((prev) => [...prev, res]); // For single file uploads
-    }
+    console.log(res);
+    setData((prev) => [...prev, res]); // Append uploaded file to state
   };
-  
 
   const onUploadProgress = (progress) => {
-    console.log(progress);
     setProgress(Math.round((progress.loaded / progress.total) * 100));
+  };
+
+  const handleFileChange = (event) => {
+    const selectedFiles = Array.from(event.target.files);
+    setFiles(selectedFiles);
   };
 
   return (
@@ -54,16 +52,24 @@ const Upload = ({ children, type, setProgress, setData }) => {
       urlEndpoint={import.meta.env.VITE_IK_URL_ENDPOINT}
       authenticator={authenticator}
     >
-      <IKUpload
-        useUniqueFileName
-        onError={onError}
-        onSuccess={onSuccess}
-        onUploadProgress={onUploadProgress}
+      <input
+        type="file"
+        multiple
+        accept={`${type}/*`}
         className="hidden"
         ref={ref}
-        accept={`${type}/*`}
-        multiple // Allow multiple uploads
+        onChange={handleFileChange}
       />
+      {files.map((file, index) => (
+        <IKUpload
+          key={index}
+          file={file}
+          useUniqueFileName
+          onError={onError}
+          onSuccess={onSuccess}
+          onUploadProgress={onUploadProgress}
+        />
+      ))}
       <div className="cursor-pointer" onClick={() => ref.current.click()}>
         {children}
       </div>
@@ -72,3 +78,4 @@ const Upload = ({ children, type, setProgress, setData }) => {
 };
 
 export default Upload;
+
