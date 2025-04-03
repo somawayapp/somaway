@@ -86,7 +86,23 @@ const Upload = ({ children, type, setProgress, setData }) => {
       urlEndpoint={import.meta.env.VITE_IK_URL_ENDPOINT}
       authenticator={authenticator}
     >
-      {/* Trigger for selecting files */}
+     
+
+      <IKUpload
+        useUniqueFileName
+        onError={onError}
+        onSuccess={onSuccess}
+        onUploadProgress={onUploadProgress}
+        className="hidden"
+        ref={ref}
+        accept={`${type}/*`}
+        multiple // Allow multiple uploads
+      />
+
+      {/* Trigger for starting the upload */}
+      <div className="cursor-pointer" onClick={() => ref.current?.click()}>
+        {children}
+         {/* Trigger for selecting files */}
       <div
         className="p-4 border-2 border-dashed border-[var(--softBg4)] rounded-lg text-center cursor-pointer hover:bg-[var(--softBg2)] transition-colors"
         onClick={handleClick} // Trigger hidden input
@@ -142,21 +158,6 @@ const Upload = ({ children, type, setProgress, setData }) => {
           ))}
         </div>
       )}
-
-      <IKUpload
-        useUniqueFileName
-        onError={onError}
-        onSuccess={onSuccess}
-        onUploadProgress={onUploadProgress}
-        className="hidden"
-        ref={ref}
-        accept={`${type}/*`}
-        multiple // Allow multiple uploads
-      />
-
-      {/* Trigger for starting the upload */}
-      <div className="cursor-pointer" onClick={() => ref.current?.click()}>
-        {children}
       </div>
     </IKContext>
   );
