@@ -86,8 +86,7 @@ const Upload = ({ children, type, setProgress, setData }) => {
       urlEndpoint={import.meta.env.VITE_IK_URL_ENDPOINT}
       authenticator={authenticator}
     >
-     
-
+      {/* ImageKit upload component */}
       <IKUpload
         useUniqueFileName
         onError={onError}
@@ -102,7 +101,9 @@ const Upload = ({ children, type, setProgress, setData }) => {
       {/* Trigger for starting the upload */}
       <div className="cursor-pointer" onClick={() => ref.current?.click()}>
         {children}
-         {/* Trigger for selecting files */}
+      </div>
+
+      {/* Trigger for selecting files */}
       <div
         className="p-4 border-2 border-dashed border-[var(--softBg4)] rounded-lg text-center cursor-pointer hover:bg-[var(--softBg2)] transition-colors"
         onClick={handleClick} // Trigger hidden input
@@ -125,6 +126,7 @@ const Upload = ({ children, type, setProgress, setData }) => {
         accept={`${type}/*`}
       />
 
+      {/* Select Files Button */}
       <div className="flex gap-2 mt-2">
         <button
           type="button"
@@ -158,7 +160,6 @@ const Upload = ({ children, type, setProgress, setData }) => {
           ))}
         </div>
       )}
-      </div>
     </IKContext>
   );
 };
