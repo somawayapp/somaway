@@ -34,6 +34,7 @@ const Upload = ({ children, type, setProgress, setData }) => {
   const onSuccess = (res) => {
     console.log(res);
     setData((prev) => [...prev, res]); // Append new image(s) to array
+    triggerNextUpload(); // Trigger next upload after success
   };
 
   const onUploadProgress = (progress) => {
@@ -41,11 +42,22 @@ const Upload = ({ children, type, setProgress, setData }) => {
     setProgress(Math.round((progress.loaded / progress.total) * 100));
   };
 
+  let filesToUpload = [];
+  let currentIndex = 0;
+
   const handleMultipleUpload = (files) => {
-    // Loop through each selected file and upload them
-    files.forEach((file) => {
-      ref.current.upload(file); // Trigger upload for each file
-    });
+    // Store all files to be uploaded
+    filesToUpload = Array.from(files);
+    currentIndex = 0;
+    triggerNextUpload(); // Start the upload process
+  };
+
+  const triggerNextUpload = () => {
+    if (currentIndex < filesToUpload.length) {
+      const file = filesToUpload[currentIndex];
+      ref.current.upload(file); // Trigger upload for the current file
+      currentIndex++; // Move to the next file
+    }
   };
 
   return (
@@ -82,5 +94,3 @@ const Upload = ({ children, type, setProgress, setData }) => {
 };
 
 export default Upload;
-
-
