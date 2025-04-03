@@ -32,18 +32,16 @@ const Upload = ({ children, type, setProgress, setData }) => {
   };
 
   const onSuccess = (res) => {
-    console.log(res);
-    // Ensure each image is uploaded and added to the state
+    console.log(res); // Log response to check data format
     if (Array.isArray(res)) {
-      // If multiple images are uploaded at once
       res.forEach((file) => {
         setData((prev) => [...prev, file]); // Append each file to the state
       });
     } else {
-      // If only a single image is uploaded
-      setData((prev) => [...prev, res]);
+      setData((prev) => [...prev, res]); // For single file uploads
     }
   };
+  
 
   const onUploadProgress = (progress) => {
     console.log(progress);
