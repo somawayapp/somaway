@@ -315,11 +315,7 @@ const Upload = ({ type = "image", setProgress, setData }) => {
          </button>
       </div>
 
-      {/* Camera Modal remains the same */}
-      {cameraOpen && (
-          // ... (keep existing modal JSX)
-      )}
-
+    
       {/* Image Previews Grid */}
       {previewImages.length > 0 && (
         <div className="mt-4 grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 gap-2">
