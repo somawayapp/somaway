@@ -4,11 +4,15 @@ import { toast } from "react-toastify";
 
 const authenticator = async () => {
   try {
-    const response = await fetch(`${import.meta.env.VITE_API_URL}/posts/upload-auth`);
+    const response = await fetch(
+      `${import.meta.env.VITE_API_URL}/posts/upload-auth`
+    );
 
     if (!response.ok) {
       const errorText = await response.text();
-      throw new Error(`Request failed with status ${response.status}: ${errorText}`);
+      throw new Error(
+        `Request failed with status ${response.status}: ${errorText}`
+      );
     }
 
     const data = await response.json();
@@ -22,30 +26,26 @@ const authenticator = async () => {
 const Upload = ({ children, type, setProgress, setData }) => {
   const ref = useRef(null);
 
-  // Handle errors
   const onError = (err) => {
     console.log(err);
     toast.error("Image upload failed!");
   };
 
-  // Handle success and add the files to state
   const onSuccess = (res) => {
-    console.log("Upload successful:", res);
-    if (Array.isArray(res)) {
-      // For multiple file uploads
-      res.forEach((file) => {
-        setData((prev) => [...prev, file]); // Append each file to the state
-      });
-    } else {
-      // For single file uploads
-      setData((prev) => [...prev, res]); // Add single file to state
-    }
+    console.log(res);
+    setData((prev) => [...prev, res]); // Append new image(s) to array
   };
 
-  // Track upload progress
   const onUploadProgress = (progress) => {
     console.log(progress);
     setProgress(Math.round((progress.loaded / progress.total) * 100));
+  };
+
+  const handleMultipleUpload = (files) => {
+    // Loop through each selected file and upload them
+    files.forEach((file) => {
+      ref.current.upload(file); // Trigger upload for each file
+    });
   };
 
   return (
@@ -59,12 +59,22 @@ const Upload = ({ children, type, setProgress, setData }) => {
         onError={onError}
         onSuccess={onSuccess}
         onUploadProgress={onUploadProgress}
-        className="hidden"  // Keep the upload button hidden (triggered by click)
+        className="hidden"
         ref={ref}
-        accept={`${type}/*`}  // Ensure the file type is correct
-        multiple // Allow multiple file uploads
+        accept={`${type}/*`}
+        multiple // Allow multiple files
       />
-      <div className="cursor-pointer" onClick={() => ref.current.click()}>
+      <div
+        className="cursor-pointer"
+        onClick={() => {
+          const fileInput = ref.current;
+          fileInput.click(); // Open file picker
+          fileInput.addEventListener("change", (e) => {
+            const selectedFiles = e.target.files;
+            handleMultipleUpload(selectedFiles); // Upload all selected files
+          });
+        }}
+      >
         {children}
       </div>
     </IKContext>
@@ -72,6 +82,5 @@ const Upload = ({ children, type, setProgress, setData }) => {
 };
 
 export default Upload;
-
 
 
