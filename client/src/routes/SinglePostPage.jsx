@@ -277,13 +277,13 @@ const details = [
       {/* Previous and Next Buttons (Centered on Image) */}
       <button
      onClick={() => navigatePopup("prev")}
-      className=" absolute left-3  w-10 h-10 md:z-10  top-1/2 -translate-y-1/2 bg-black bg-opacity-50 text-white p-2 rounded-full opacity-100  transition"
+      className=" absolute left-3  w-10 h-10 z-10  top-1/2 -translate-y-1/2 bg-black bg-opacity-50 text-white p-2 rounded-full opacity-100  transition"
     >
       ❮ 
     </button>
       <button
       onClick={() => navigatePopup("next")}
-      className=" absolute right-3  w-10 h-10 md:z-10  top-1/2 -translate-y-1/2 bg-black bg-opacity-50 text-white p-2 rounded-full opacity-100 transition"
+      className=" absolute right-3  w-10 h-10 z-10  top-1/2 -translate-y-1/2 bg-black bg-opacity-50 text-white p-2 rounded-full opacity-100 transition"
     >
       ❯ 
     </button>
