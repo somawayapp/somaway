@@ -35,7 +35,7 @@
           };
           
           const SinglePostPage = () => {
-            useEffect(() => {
+            useEffect(() => {9
               window.scrollTo(0, 0); // Scrolls to the top when this component mounts
             }, []);
             const { slug } = useParams();
@@ -76,6 +76,14 @@
 
   const mainImage = images.length > 0 ? images[0] : null;
   const sideImages = images.slice(1);
+  const [imageLoading, setImageLoading] = useState([true, true, true, true]);
+
+  const handleImageLoad = (index) => {
+    const updatedLoadingState = [...imageLoading];
+    updatedLoadingState[index] = false;
+    setImageLoading(updatedLoadingState);
+  };
+
 
   const scrollRightDiv = (direction) => {
     if (rightDivRef.current) {
@@ -91,6 +99,7 @@
     setCurrentIndex(imageIndex);
   };
 
+  
   const navigatePopup = (direction) => {
     let newIndex =
       direction === "next"
@@ -204,25 +213,45 @@ const details = [
           
           
 <div className="w-full flex h-[300px] md:h-[500px] overflow-hidden rounded-xl relative transition duration-300">
-  {/* Left Image */}
-  <div className="flex-1 h-full overflow-hidden relative mr-1 md:mr-2 cursor-pointer bg-[var(--softBg5)]" style={{ backgroundImage: mainImage ? 'none' : 'var(--softBg5)' }} >
-    {mainImage && <img src={mainImage} className="object-cover h-full w-full" alt="Main Image" />}
-  </div>
-  
-  <div className="w-1/4 h-full flex flex-col overflow-hidden relative">
-  <div ref={rightDivRef} className="flex flex-col gap-1 md:gap-2 h-full">
-    {sideImages.slice(0, showMore ? sideImages.length : 4).map((image, index) => (
-      <div
-        key={index}
-        className="w-full h-1/4 overflow-hidden relative cursor-pointer bg-[var(--softBg5)]"
-        style={{ backgroundColor: !image ? 'var(--softBg5)' : 'transparent' }} // Background color visible if image is missing
-        onClick={() => openPopup(index + 1)}
-      >
-        {image ? (
-          <img src={image} className="object-cover h-full w-full" alt={`Image ${index + 1}`} />
-        ) : (
-          <div className="h-full w-full bg-[var(--softBg5)]" /> // Placeholder shown if image is not loaded
-        )}
+      {/* Left Image */}
+      <div className="flex-1 h-full overflow-hidden relative mr-1 md:mr-2 cursor-pointer" onClick={() => openPopup(0)}>
+      {mainImage ? (
+            <img
+              src={mainImage}
+              className="object-cover h-full w-full"
+              alt="Main Image"
+              onLoad={() => setImageLoading([false, ...imageLoading.slice(1)])}
+            />
+          ) : (
+            <div
+              className="w-full h-full bg-[var(--softBg5)]"
+              style={{ backgroundColor: imageLoading[0] ? "var(--softBg5)" : "transparent" }}
+            />
+          )}
+        </div>
+
+        {/* Right Side Images */}
+        <div className="w-1/4 h-full flex flex-col overflow-hidden relative">
+          <div ref={rightDivRef} className="flex flex-col gap-1 md:gap-2 h-full">
+            {sideImages.slice(0, showMore ? sideImages.length : 4).map((image, index) => (
+              <div
+                key={index}
+                className="w-full h-1/4 overflow-hidden relative cursor-pointer"
+                onClick={() => openPopup(index + 1)}
+              >
+                {image ? (
+                  <img
+                    src={image}
+                    className="object-cover h-full w-full"
+                    alt={`Image ${index + 1}`}
+                    onLoad={() => handleImageLoad(index)}
+                  />
+                ) : (
+                  <div
+                    className="w-full h-full bg-[var(--softBg5)]"
+                    style={{ backgroundColor: imageLoading[index] ? "var(--softBg5)" : "transparent" }}
+                  />
+                )}
         {/* Floating Show More Button on the 8th Image */}
         {index === 3 && !showMore && (
    <button
