@@ -3,7 +3,7 @@ import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import { useSearchParams } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import Link from "next/link";
 
 const fetchPosts = async (searchParams) => {
   const searchParamsObj = Object.fromEntries([...searchParams]);
@@ -79,19 +79,16 @@ const PostList = () => {
   useEffect(() => {
     const timer = setTimeout(() => {
       setShowMessage(true);
-    }, 5000); // 5-second delay
+    }, 5000); // 2-second delay
   
     return () => clearTimeout(timer); // Cleanup timeout on unmount
   }, []);
   
-
-  
-  
   if (displayedPosts.length === 0 && showMessage) {
     return (
       <div className="flex flex-col items-center justify-center h-[50vh]">
-       <Link to="/"
-    className=" px-6 py-3 rounded-xl border border-[var(--softBg4)] 
+       <Link to="/addlisting"
+    className="w-full px-6 py-3 rounded-xl border border-[var(--softBg4)] 
                text-[var(--softTextColor)] shadow-md 
                hover:text-[var(--textColor)] text-center"
   >
@@ -102,18 +99,27 @@ const PostList = () => {
       </div>
     );
   }
+  
+  
+  if (displayedPosts.length === 0) {
+    return (
+      <div style={{ display: "grid", gridTemplateColumns: columns }} className="gap-6 md:gap-9 scrollbar-hide">
+        {Array(8).fill(0).map((_, index) => (
+          <div key={index} className="relative aspect-[3/3] w-full h-full">
+            <div className="absolute inset-0 bg-[var(--softBg4)] animate-pulse rounded-xl md:rounded-2xl"></div>
+          </div>
+        ))}
+      </div>
+    );
+  }
+  
+
 
   return (
-    <div style={{ display: "grid", gridTemplateColumns: columns }} className="gap-6 md:gap-9 scrollbar-hide">
-      { displayedPosts.length === 0
-        ? Array(8)
-            .fill(0)
-            .map((_, index) => (
-              <div key={index} className="relative aspect-[3/3] w-full h-full">
-                <div className="absolute inset-0 bg-[var(--softBg4)] animate-pulse rounded-xl md:rounded-2xl"></div>
-              </div>
-            ))
-        : displayedPosts.map((post) => <PostListItem key={post._id} post={post} />)}
+    <div className="gap-2 grid grid-cols-1 md:grid-cols-4 md:gap-6 scrollbar-hide">
+      {displayedPosts.map((post) => (
+        <PostListItem key={post._id} post={post} />
+      ))}
     </div>
   );
 };

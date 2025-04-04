@@ -1,11 +1,14 @@
+import ImageKit from "imagekit";
 import Post from "../models/post.model.js";
+import User from "../models/user.model.js";
 
 export const getPosts = async (req, res) => {
   try {
     const page = parseInt(req.query.page) || 1;
-    const limit = parseInt(req.query.limit) || 1000;
-    const skip = (page - 1) * limit;
+    const limit = parseInt(req.query.limit) || 10;
+    const query = {};
 
+    // Extract query parameters
     const {
       author,
       search,
@@ -20,66 +23,95 @@ export const getPosts = async (req, res) => {
       pricemin,
       model,
       featured,
-      cat,
     } = req.query;
 
-    const query = {};
+    // Category Filter
+    if (req.query.cat) {
+      query.category = req.query.cat;
+    }
 
-    if (cat) query.category = cat;
-    if (propertytype) query.propertytype = propertytype;
-    if (model) query.model = model;
-    if (featured) query.isFeatured = true;
+    // Search Query (Title & Description)
+    if (search) {
+      query.$or = [
+        { title: { $regex: search, $options: "i" } },
+        { desc: { $regex: search, $options: "i" } },
+      ];
+    }
 
-    // Price Filter
+    // Author Filter
+    if (author) {
+      const authorNames = author
+        .split(/[,;|\s]+/)
+        .map((name) => name.trim())
+        .filter(Boolean);
+      const authorRegexes = authorNames.map((name) => new RegExp(name, "i"));
+      query.author = { $in: authorRegexes };
+    }
+
+    // Location Filter
+    if (location) {
+      query["location.city"] = { $regex: location, $options: "i" };
+    }
+
+    // Property Type Filter
+    if (propertytype) {
+      query.propertytype = propertytype;
+    }
+
+    // Numeric Filters
+    if (bedrooms) query.bedrooms = { $gte: parseInt(bedrooms) };
+    if (bathrooms) query.bathrooms = { $gte: parseInt(bathrooms) };
+    if (propertysize) query.propertysize = { $gte: parseInt(propertysize) };
+    if (rooms) query.rooms = { $gte: parseInt(rooms) };
+
+    // Price Range Filter (Within Range)
     if (pricemin || pricemax) {
       query.price = {};
       if (pricemin) query.price.$gte = parseInt(pricemin);
       if (pricemax) query.price.$lte = parseInt(pricemax);
     }
 
-    // Numeric Filters (Avoid Parsing Multiple Times)
-    if (bedrooms) query.bedrooms = { $gte: Number(bedrooms) };
-    if (bathrooms) query.bathrooms = { $gte: Number(bathrooms) };
-    if (propertysize) query.propertysize = { $gte: Number(propertysize) };
-    if (rooms) query.rooms = { $gte: Number(rooms) };
-
-    // Search Optimization
-    if (search) {
-      query.$text = { $search: search }; // Requires MongoDB text index on `title` & `desc`
+    // Model Filter (For Rent / For Sale)
+    if (model) {
+      query.model = model;
     }
 
-    // Author Filter (More Efficient)
-    if (author) {
-      const authorRegex = new RegExp(`^${author.trim()}$`, "i");
-      query.author = authorRegex;
+    // Featured Filter
+    if (featured) {
+      query.isFeatured = true;
     }
 
-    // Location Filter (Avoid Complex Regex)
-    if (location) query["location.city"] = location;
-
-    // Sorting
+    // Sorting Logic
     let sortObj = { createdAt: -1 };
     if (sort) {
-      sortObj =
-        sort === "oldest"
-          ? { createdAt: 1 }
-          : sort === "popular"
-          ? { visit: -1 }
-          : sort === "trending"
-          ? { visit: -1, createdAt: { $gte: new Date(Date.now() - 14 * 86400000) } }
-          : { createdAt: -1 };
+      switch (sort) {
+        case "newest":
+          sortObj = { createdAt: -1 };
+          break;
+        case "oldest":
+          sortObj = { createdAt: 1 };
+          break;
+        case "popular":
+          sortObj = { visit: -1 };
+          break;
+        case "trending":
+          sortObj = { visit: -1 };
+          query.createdAt = {
+            $gte: new Date(new Date().getTime() - 14 * 24 * 60 * 60 * 1000),
+          };
+          break;
+        default:
+          break;
+      }
     }
 
-    // Fetching Data with Projection & Lean
+    // Fetch posts with the final query object
     const posts = await Post.find(query)
-      .select("title desc img price category createdAt user")
-      .populate("user", "username")
+      .populate("user", "username") // Populate author details
       .sort(sortObj)
-      .skip(skip)
       .limit(limit)
-      .lean(); // Converts to plain JSON for faster response
+      .skip((page - 1) * limit);
 
-    // Optimized Count Query
     const totalPosts = await Post.countDocuments(query);
     const hasMore = page * limit < totalPosts;
 
@@ -89,20 +121,14 @@ export const getPosts = async (req, res) => {
     res.status(500).json("Internal server error!");
   }
 };
-export const getPost = async (req, res) => {
-  try {
-    const post = await Post.findOne({ slug: req.params.slug })
-      .select("title desc img price category createdAt user")
-      .populate("user", "username img")
-      .lean();
-      
-    if (!post) return res.status(404).json({ message: "Post not found" });
 
-    res.status(200).json(post);
-  } catch (error) {
-    console.error("Error fetching post:", error);
-    res.status(500).json("Internal server error!");
-  }
+
+export const getPost = async (req, res) => {
+  const post = await Post.findOne({ slug: req.params.slug }).populate(
+    "user",
+    "username img"
+  );
+  res.status(200).json(post);
 };
 
 
