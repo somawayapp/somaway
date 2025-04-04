@@ -204,21 +204,23 @@ const details = [
           
           
 <div className="w-full flex h-[300px] md:h-[500px] overflow-hidden rounded-xl relative transition duration-300">
-      {/* Left Image */}
-      <div className="flex-1 h-full overflow-hidden relative mr-1 md:mr-2 cursor-pointer" onClick={() => openPopup(0)}>
-        {mainImage && <img src={mainImage} className="object-cover h-full w-full" alt="Main Image" />}
-      </div>
-{/* Right Side Images */}
-<div className="w-1/4 h-full flex flex-col overflow-hidden relative">
-  <div ref={rightDivRef} className="flex flex-col gap-1 md:gap-2 h-full">
-    {sideImages.slice(0, showMore ? sideImages.length : 4).map((image, index) => (
-      <div
-        key={index}
-        className="w-full h-1/4 overflow-hidden relative cursor-pointer"
-        onClick={() => openPopup(index + 1)}
-      >
-        <img src={image} className="object-cover h-full w-full" alt={`Image ${index + 1}`} />
-
+  {/* Left Image */}
+  <div className="flex-1 h-full overflow-hidden relative mr-1 md:mr-2 cursor-pointer bg-[var(--softBg5)]" style={{ backgroundImage: mainImage ? 'none' : 'var(--softBg5)' }} >
+    {mainImage && <img src={mainImage} className="object-cover h-full w-full" alt="Main Image" />}
+  </div>
+  
+  {/* Right Side Images */}
+  <div className="w-1/4 h-full flex flex-col overflow-hidden relative">
+    <div ref={rightDivRef} className="flex flex-col gap-1 md:gap-2 h-full">
+      {sideImages.slice(0, showMore ? sideImages.length : 4).map((image, index) => (
+        <div
+          key={index}
+          className="w-full h-1/4 overflow-hidden relative cursor-pointer bg-[var(--softBg5)]"
+          style={{ backgroundImage: image ? 'none' : 'var(--softBg5)' }}
+          onClick={() => openPopup(index + 1)}
+        >
+          <img src={image} className="object-cover h-full w-full" alt={`Image ${index + 1}`} />
+        
         {/* Floating Show More Button on the 8th Image */}
         {index === 3 && !showMore && (
    <button
