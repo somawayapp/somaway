@@ -79,24 +79,25 @@ const PostList = () => {
   useEffect(() => {
     const timer = setTimeout(() => {
       setShowMessage(true);
-    }, 5000); // 2-second delay
+    }, 2000); // 2-second delay
   
     return () => clearTimeout(timer); // Cleanup timeout on unmount
   }, []);
   
   if (displayedPosts.length === 0 && showMessage) {
     return (
-<div className="flex flex-col items-center justify-center h-[50vh]">
-  <Link to="/addlisting"  // Ensure 'to' prop is used correctly here
-    className="w-full px-6 py-3 rounded-xl border border-[var(--softBg4)] 
-               text-[var(--softTextColor)] shadow-md 
-               hover:text-[var(--textColor)] text-center"
-  >
-    <p className="mb-2">No posts found</p>
-    <p className="mb-2 font-bold">Go back home</p>
-  </Link>
-</div>
-
+      <div className="flex flex-col items-center justify-center h-[50vh]">
+      <button
+        onClick={() => window.location.href = '/addlisting'}
+        className="w-full px-6 py-3 rounded-xl border border-[var(--softBg4)] 
+                   text-[var(--softTextColor)] shadow-md 
+                   hover:text-[var(--textColor)] hover:shadow-xl text-center"
+      >
+        <p className="mb-2">No posts found</p>
+        <p className="mb-2 font-bold">Go back home</p>
+      </button>
+    </div>
+    
     );
   }
   
