@@ -35,7 +35,7 @@
           };
           
           const SinglePostPage = () => {
-            useEffect(() => {9
+            useEffect(() => {
               window.scrollTo(0, 0); // Scrolls to the top when this component mounts
             }, []);
             const { slug } = useParams();
@@ -76,14 +76,6 @@
 
   const mainImage = images.length > 0 ? images[0] : null;
   const sideImages = images.slice(1);
-  const [imageLoading, setImageLoading] = useState([true, true, true, true]);
-
-  const handleImageLoad = (index) => {
-    const updatedLoadingState = [...imageLoading];
-    updatedLoadingState[index] = false;
-    setImageLoading(updatedLoadingState);
-  };
-
 
   const scrollRightDiv = (direction) => {
     if (rightDivRef.current) {
@@ -99,7 +91,6 @@
     setCurrentIndex(imageIndex);
   };
 
-  
   const navigatePopup = (direction) => {
     let newIndex =
       direction === "next"
@@ -215,61 +206,52 @@ const details = [
 <div className="w-full flex h-[300px] md:h-[500px] overflow-hidden rounded-xl relative transition duration-300">
       {/* Left Image */}
       <div className="flex-1 h-full overflow-hidden relative mr-1 md:mr-2 cursor-pointer" onClick={() => openPopup(0)}>
-      {mainImage ? (
+        {mainImage && <img src={mainImage} className="object-cover h-full w-full" alt="Main Image" />}
+      </div>
+{/* Right Side Images */}
+<div className="w-1/4 h-full flex flex-col overflow-hidden relative">
+  <div ref={rightDivRef} className="flex flex-col gap-1 md:gap-2 h-full">
+    {/* Map through 4 items even if there are fewer than 4 images */}
+    {Array.from({ length: 4 }).map((_, index) => {
+      const image = sideImages[index];
+      return (
+        <div
+          key={index}
+          className="w-full h-1/4 overflow-hidden relative cursor-pointer"
+          style={{
+            backgroundColor: image ? 'transparent' : 'var(--softBg5)', // Apply background color if no image
+          }}
+          onClick={() => openPopup(index + 1)}
+        >
+          {/* Conditionally render the image or fallback background */}
+          {image ? (
             <img
-              src={mainImage}
+              src={image}
               className="object-cover h-full w-full"
-              alt="Main Image"
-              onLoad={() => setImageLoading([false, ...imageLoading.slice(1)])}
+              alt={`Image ${index + 1}`}
             />
           ) : (
-            <div
-              className="w-full h-full bg-[var(--softBg5)]"
-              style={{ backgroundColor: imageLoading[0] ? "var(--softBg5)" : "transparent" }}
-            />
+            <div className="w-full h-full flex items-center justify-center">
+              {/* Optional: You can display some placeholder text or icon */}
+            </div>
           )}
         </div>
+      );
+    })}
 
-        {/* Right Side Images */}
-        <div className="w-1/4 h-full flex flex-col overflow-hidden relative">
-          <div ref={rightDivRef} className="flex flex-col gap-1 md:gap-2 h-full">
-            {sideImages.slice(0, showMore ? sideImages.length : 4).map((image, index) => (
-              <div
-                key={index}
-                className="w-full h-1/4 overflow-hidden relative cursor-pointer"
-                onClick={() => openPopup(index + 1)}
-              >
-                {image ? (
-                  <img
-                    src={image}
-                    className="object-cover h-full w-full"
-                    alt={`Image ${index + 1}`}
-                    onLoad={() => handleImageLoad(index)}
-                  />
-                ) : (
-                  <div
-                    className="w-full h-full bg-[var(--softBg5)]"
-                    style={{ backgroundColor: imageLoading[index] ? "var(--softBg5)" : "transparent" }}
-                  />
-                )}
-        {/* Floating Show More Button on the 8th Image */}
-        {index === 3 && !showMore && (
-   <button
-   className="absolute inset-0 m-auto flex items-center justify-center w-[60px] h-[20px] md:w-[100px] md:h-[40px] px-2 py-1 md:px-4 md:py-2 rounded-xl border-[1px]
-    border-white bg-black bg-opacity-60 text-white text-[9px] md:text-sm hover:bg-opacity-80 transition whitespace-nowrap"
-   onClick={() => openPopup(index === 3)}
- >
-   show more
- </button>
- 
-     
-        )}
-      </div>
-    ))}
-
-
+    {/* Floating Show More Button on the 4th Image */}
+    {!showMore && sideImages.length > 4 && (
+      <button
+        className="absolute inset-0 m-auto flex items-center justify-center w-[60px] h-[20px] md:w-[100px] md:h-[40px] px-2 py-1 md:px-4 md:py-2 rounded-xl border-[1px]
+          border-white bg-black bg-opacity-60 text-white text-[9px] md:text-sm hover:bg-opacity-80 transition whitespace-nowrap"
+        onClick={() => openPopup(4)} // Here, openPopup can be triggered for the 4th image (or custom logic)
+      >
+        Show More
+      </button>
+    )}
   </div>
 </div>
+
 
 
   {/* Popup Modal */}
