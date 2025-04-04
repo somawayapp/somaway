@@ -79,7 +79,7 @@ const PostList = () => {
   useEffect(() => {
     const timer = setTimeout(() => {
       setShowMessage(true);
-    }, 5000); // 2-second delay
+    }, 5000); // 5-second delay
   
     return () => clearTimeout(timer); // Cleanup timeout on unmount
   }, []);
