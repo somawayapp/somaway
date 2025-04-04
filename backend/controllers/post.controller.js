@@ -6,7 +6,7 @@ export const getPosts = async (req, res) => {
   
   try {
     const page = parseInt(req.query.page) || 1;
-    const limit = parseInt(req.query.limit) || 10;
+    const limit = parseInt(req.query.limit) || 1000;
     const query = {};
 
     // Extract query parameters
