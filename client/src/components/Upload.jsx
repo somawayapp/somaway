@@ -1,5 +1,5 @@
 import { IKContext, IKUpload } from "imagekitio-react";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { toast } from "react-toastify";
 
 const authenticator = async () => {
@@ -24,7 +24,9 @@ const authenticator = async () => {
 };
 
 const Upload = ({ children, type, setProgress, setData }) => {
-  const [files, setFiles] = useState([]);
+  const ref = useRef(null);
+  const [files, setFiles] = useState([]); // Store selected files
+  const [uploadingIndex, setUploadingIndex] = useState(0); // Track the current file index
 
   const onError = (err) => {
     console.log(err);
@@ -33,7 +35,13 @@ const Upload = ({ children, type, setProgress, setData }) => {
 
   const onSuccess = (res) => {
     console.log(res);
-    setData((prev) => [...prev, res]);
+    setData((prev) => [...prev, res]); // Append new image to array
+
+    // Proceed with next file after the current one finishes
+    if (uploadingIndex < files.length - 1) {
+      setUploadingIndex((prev) => prev + 1);
+      ref.current.click(); // Trigger upload for the next file
+    }
   };
 
   const onUploadProgress = (progress) => {
@@ -41,35 +49,11 @@ const Upload = ({ children, type, setProgress, setData }) => {
     setProgress(Math.round((progress.loaded / progress.total) * 100));
   };
 
-  const handleFileSelection = async (event) => {
+  const handleFileSelection = (event) => {
     const selectedFiles = Array.from(event.target.files);
-    setFiles(selectedFiles);
-
-    // Upload each file one by one
-    for (const file of selectedFiles) {
-      await new Promise((resolve) => {
-        const uploader = document.createElement("input");
-        uploader.type = "file";
-        uploader.accept = `${type}/*`;
-        uploader.style.display = "none";
-
-        const ikUpload = (
-          <IKUpload
-            useUniqueFileName
-            onError={onError}
-            onSuccess={(res) => {
-              onSuccess(res);
-              resolve();
-            }}
-            onUploadProgress={onUploadProgress}
-            file={file} // Upload file one by one
-          />
-        );
-
-        document.body.appendChild(uploader);
-        uploader.click();
-      });
-    }
+    setFiles(selectedFiles); // Store all selected files
+    setUploadingIndex(0); // Reset to start with the first file
+    ref.current.click(); // Start uploading the first file immediately
   };
 
   return (
@@ -78,13 +62,24 @@ const Upload = ({ children, type, setProgress, setData }) => {
       urlEndpoint={import.meta.env.VITE_IK_URL_ENDPOINT}
       authenticator={authenticator}
     >
+      <IKUpload
+        useUniqueFileName
+        onError={onError}
+        onSuccess={onSuccess}
+        onUploadProgress={onUploadProgress}
+        className="hidden"
+        multiple
+        ref={ref}
+        accept={`${type}/*`}
+        file={files[uploadingIndex]} // Upload the current file
+      />
       <input
         type="file"
         multiple
         onChange={handleFileSelection}
         className="hidden"
       />
-      <div className="cursor-pointer" onClick={() => document.querySelector('input[type="file"]').click()}>
+      <div className="cursor-pointer" onClick={() => ref.current.click()}>
         {children}
       </div>
     </IKContext>
@@ -92,3 +87,6 @@ const Upload = ({ children, type, setProgress, setData }) => {
 };
 
 export default Upload;
+
+
+
