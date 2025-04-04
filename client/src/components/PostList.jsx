@@ -84,10 +84,24 @@ const PostList = () => {
     return () => clearTimeout(timer); // Cleanup timeout on unmount
   }, []);
   
+  if (displayedPosts.length === 0 && showMessage) {
+    return (
+      <div className="flex flex-col items-center justify-center h-[50vh]">
+       <Link to="/addlisting"
+    className="w-full px-6 py-3 rounded-xl border border-[var(--softBg4)] 
+               text-[var(--softTextColor)] shadow-md 
+               hover:text-[var(--textColor)] text-center"
+  >
+    <p className="mb-2">No posts found</p>
+    <p className="mb-2 font-bold">Go back home</p>
+  </Link>
 
+      </div>
+    );
+  }
   
   
-  if (displayedPosts.length === 0) {
+  if (displayedPosts.length === 1000) {
     return (
       <div style={{ display: "grid", gridTemplateColumns: columns }} className="gap-6 md:gap-9 scrollbar-hide">
         {Array(8).fill(0).map((_, index) => (
@@ -103,7 +117,9 @@ const PostList = () => {
 
   return (
     <div className="gap-2 grid grid-cols-1 md:grid-cols-4 md:gap-6 scrollbar-hide">
-    
+      {displayedPosts.map((post) => (
+        <PostListItem key={post._id} post={post} />
+      ))}
     </div>
   );
 };
