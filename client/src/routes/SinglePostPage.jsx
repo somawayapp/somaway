@@ -254,20 +254,21 @@ const details = [
 
 
 
-{/* Popup Modal */}
+  {/* Popup Modal */}
 {popupImage && (
   <div
     className="fixed inset-0 bg-black bg-opacity-80 flex items-center justify-center"
     style={{ zIndex: 100014 }}
-    onClick={() => setPopupImage(null)}  
+    onClick={() => setPopupImage(null)}
   >
     <div
       className="relative w-full p-3 md:p-9 md:w-4/5 flex items-center justify-center"
       onClick={(e) => e.stopPropagation()}
     >
       {/* Close Button (Top Right) */}
+     
       <button
-        className="absolute top-4 right-4 pt-1 pr-1 bg-black bg-opacity-50 text-white w-10 h-10 flex items-center justify-center rounded-full z-10"
+        className="absolute top-4 right-4 p-3 md:p-2  bg-black bg-opacity-50  text-white w-6 h-6 md:w-10 md:h-10 flex items-center justify-center rounded-full z-10"
         onClick={() => setPopupImage(null)}
       >
         ✖
@@ -275,30 +276,27 @@ const details = [
 
       {/* Previous and Next Buttons (Centered on Image) */}
       <button
-        onClick={() => navigatePopup("prev")}
-        className="absolute left-3 w-10 h-10 z-10 top-1/2 -translate-y-1/2 bg-black bg-opacity-50 text-white p-2 rounded-full opacity-100 transition"
-      >
-        ❮
-      </button>
+     onClick={() => navigatePopup("prev")}
+      className=" absolute left-3  w-6 h-6 md:w-10 md:h-10 z-10  top-1/2 -translate-y-1/2 bg-black bg-opacity-50 text-white p-3 md:p-2 rounded-full opacity-100  transition"
+    >
+      ❮ 
+    </button>
       <button
-        onClick={() => navigatePopup("next")}
-        className="absolute right-3 w-10 h-10 z-10 top-1/2 -translate-y-1/2 bg-black bg-opacity-50 text-white p-2 rounded-full opacity-100 transition"
-      >
-        ❯
-      </button>
+      onClick={() => navigatePopup("next")}
+      className=" absolute right-3  w-6 h-6 md:w-10 md:h-10 z-10  top-1/2 -translate-y-1/2 bg-black bg-opacity-50 text-white p-3  md:p-2 rounded-full opacity-100 transition"
+    >
+      ❯ 
+    </button>
 
-      {/* Scrollable and Swipeable Container */}
-      <div className="overflow-x-auto snap-x snap-mandatory scroll-smooth scrollbar-hide">
-        <img
-          src={popupImage}
-          className="w-full h-auto max-h-[85vh] md:max-h-[90vh] object-cover rounded-xl snap-center"
-          alt="Popup"
-        />
-      </div>
+      {/* Popup Image */}
+      <img
+        src={popupImage}
+        className="w-full h-auto max-h-[85vh] md:max-h-[90vh] object-cover rounded-xl"
+        alt="Popup"
+      />
     </div>
   </div>
 )}
-
 
     </div>
               
