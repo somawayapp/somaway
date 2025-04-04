@@ -209,18 +209,20 @@ const details = [
     {mainImage && <img src={mainImage} className="object-cover h-full w-full" alt="Main Image" />}
   </div>
   
-  {/* Right Side Images */}
   <div className="w-1/4 h-full flex flex-col overflow-hidden relative">
-    <div ref={rightDivRef} className="flex flex-col gap-1 md:gap-2 h-full">
-      {sideImages.slice(0, showMore ? sideImages.length : 4).map((image, index) => (
-        <div
-          key={index}
-          className="w-full h-1/4 overflow-hidden relative cursor-pointer bg-[var(--softBg5)]"
-          style={{ backgroundImage: image ? 'none' : 'var(--softBg5)' }}
-          onClick={() => openPopup(index + 1)}
-        >
+  <div ref={rightDivRef} className="flex flex-col gap-1 md:gap-2 h-full">
+    {sideImages.slice(0, showMore ? sideImages.length : 4).map((image, index) => (
+      <div
+        key={index}
+        className="w-full h-1/4 overflow-hidden relative cursor-pointer bg-[var(--softBg5)]"
+        style={{ backgroundColor: !image ? 'var(--softBg5)' : 'transparent' }} // Background color visible if image is missing
+        onClick={() => openPopup(index + 1)}
+      >
+        {image ? (
           <img src={image} className="object-cover h-full w-full" alt={`Image ${index + 1}`} />
-        
+        ) : (
+          <div className="h-full w-full bg-[var(--softBg5)]" /> // Placeholder shown if image is not loaded
+        )}
         {/* Floating Show More Button on the 8th Image */}
         {index === 3 && !showMore && (
    <button
