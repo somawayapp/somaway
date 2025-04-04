@@ -1,118 +1,102 @@
-import ImageKit from "imagekit";
 import Post from "../models/post.model.js";
-import User from "../models/user.model.js";
-import Redis from "ioredis";
 
-const redis = new Redis(); // Initialize Redis connection
-
-// GET ALL POSTS
 export const getPosts = async (req, res) => {
   try {
     const page = parseInt(req.query.page) || 1;
     const limit = parseInt(req.query.limit) || 1000;
-    const cacheKey = `posts:${JSON.stringify(req.query)}`;
+    const skip = (page - 1) * limit;
 
-    // Check cache first
-    const cachedData = await redis.get(cacheKey);
-    if (cachedData) {
-      return res.status(200).json(JSON.parse(cachedData));
-    }
+    const {
+      author,
+      search,
+      sort,
+      location,
+      propertytype,
+      bedrooms,
+      bathrooms,
+      propertysize,
+      rooms,
+      pricemax,
+      pricemin,
+      model,
+      featured,
+      cat,
+    } = req.query;
 
     const query = {};
-    const { author, search, sort, location, propertytype, bedrooms, bathrooms, propertysize, rooms, pricemax, pricemin, model, featured } = req.query;
 
-    // Category Filter
-    if (req.query.cat) query.category = req.query.cat;
-
-    // Full-Text Search Optimization
-    if (search) query.$text = { $search: search };
-
-    // Author Filter
-    if (author) query.author = { $in: author.split(/[,;|\s]+/).map(name => new RegExp(name.trim(), "i")) };
-
-    // Location Filter
-    if (location) query["location.city"] = { $regex: location, $options: "i" };
-
-    // Property Type Filter
+    if (cat) query.category = cat;
     if (propertytype) query.propertytype = propertytype;
+    if (model) query.model = model;
+    if (featured) query.isFeatured = true;
 
-    // Numeric Filters
-    if (bedrooms) query.bedrooms = { $gte: parseInt(bedrooms) };
-    if (bathrooms) query.bathrooms = { $gte: parseInt(bathrooms) };
-    if (propertysize) query.propertysize = { $gte: parseInt(propertysize) };
-    if (rooms) query.rooms = { $gte: parseInt(rooms) };
-
-    // Price Range Filter
+    // Price Filter
     if (pricemin || pricemax) {
       query.price = {};
       if (pricemin) query.price.$gte = parseInt(pricemin);
       if (pricemax) query.price.$lte = parseInt(pricemax);
     }
 
-    // Model Filter (For Rent / For Sale)
-    if (model) query.model = model;
+    // Numeric Filters (Avoid Parsing Multiple Times)
+    if (bedrooms) query.bedrooms = { $gte: Number(bedrooms) };
+    if (bathrooms) query.bathrooms = { $gte: Number(bathrooms) };
+    if (propertysize) query.propertysize = { $gte: Number(propertysize) };
+    if (rooms) query.rooms = { $gte: Number(rooms) };
 
-    // Featured Filter
-    if (featured) query.isFeatured = true;
+    // Search Optimization
+    if (search) {
+      query.$text = { $search: search }; // Requires MongoDB text index on `title` & `desc`
+    }
 
-    // Sorting Logic
-    const sortOptions = {
-      newest: { createdAt: -1 },
-      oldest: { createdAt: 1 },
-      popular: { visit: -1 },
-      trending: { visit: -1, createdAt: { $gte: new Date(Date.now() - 14 * 24 * 60 * 60 * 1000) } },
-    };
+    // Author Filter (More Efficient)
+    if (author) {
+      const authorRegex = new RegExp(`^${author.trim()}$`, "i");
+      query.author = authorRegex;
+    }
 
-    const sortObj = sortOptions[sort] || { createdAt: -1 };
+    // Location Filter (Avoid Complex Regex)
+    if (location) query["location.city"] = location;
 
-    // Fetch posts with optimized query
+    // Sorting
+    let sortObj = { createdAt: -1 };
+    if (sort) {
+      sortObj =
+        sort === "oldest"
+          ? { createdAt: 1 }
+          : sort === "popular"
+          ? { visit: -1 }
+          : sort === "trending"
+          ? { visit: -1, createdAt: { $gte: new Date(Date.now() - 14 * 86400000) } }
+          : { createdAt: -1 };
+    }
+
+    // Fetching Data with Projection & Lean
     const posts = await Post.find(query)
+      .select("title desc img price category createdAt user")
       .populate("user", "username")
       .sort(sortObj)
+      .skip(skip)
       .limit(limit)
-      .skip((page - 1) * limit)
-      .select("title slug price bedrooms bathrooms location createdAt")
-      .lean();
+      .lean(); // Converts to plain JSON for faster response
 
+    // Optimized Count Query
     const totalPosts = await Post.countDocuments(query);
     const hasMore = page * limit < totalPosts;
 
-    const response = { posts, hasMore };
-
-    // Store in Redis Cache for 1 hour
-    await redis.setex(cacheKey, 3600, JSON.stringify(response));
-
-    res.status(200).json(response);
+    res.status(200).json({ posts, hasMore });
   } catch (error) {
     console.error("Error fetching posts:", error);
     res.status(500).json("Internal server error!");
   }
 };
-
-// GET SINGLE POST
 export const getPost = async (req, res) => {
   try {
-    const { slug } = req.params;
-    const cacheKey = `post:${slug}`;
-
-    // Check cache first
-    const cachedPost = await redis.get(cacheKey);
-    if (cachedPost) {
-      return res.status(200).json(JSON.parse(cachedPost));
-    }
-
-    // Fetch post
-    const post = await Post.findOne({ slug })
+    const post = await Post.findOne({ slug: req.params.slug })
+      .select("title desc img price category createdAt user")
       .populate("user", "username img")
-      .select("title slug price bedrooms bathrooms location desc createdAt")
       .lean();
-
-    if (!post) {
-      return res.status(404).json({ message: "Post not found" });
-    }
-
-    // Cache post for 1 hour
-    await redis.setex(cacheKey, 3600, JSON.stringify(post));
+      
+    if (!post) return res.status(404).json({ message: "Post not found" });
 
     res.status(200).json(post);
   } catch (error) {
