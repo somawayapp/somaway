@@ -105,7 +105,7 @@ const PostList = () => {
 
   return (
     <div style={{ display: "grid", gridTemplateColumns: columns }} className="gap-6 md:gap-9 scrollbar-hide">
-      {isLoading || displayedPosts.length === 0
+      { displayedPosts.length === 0
         ? Array(8)
             .fill(0)
             .map((_, index) => (
