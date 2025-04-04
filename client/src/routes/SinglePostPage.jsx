@@ -219,7 +219,7 @@ const details = [
           key={index}
           className="w-full h-1/4 overflow-hidden relative cursor-pointer"
           style={{
-            backgroundColor: image ? 'transparent' : 'var(--softBg5)', // Apply background color if no image
+            backgroundColor: image ? 'transparent' : 'var(--softBg4)', // Apply background color if no image
           }}
           onClick={() => openPopup(index + 1)}
         >
@@ -268,7 +268,7 @@ const details = [
       {/* Close Button (Top Right) */}
      
       <button
-        className="absolute top-4 right-4 p-3 md:p-2  bg-black bg-opacity-50  text-white w-6 h-6 md:w-10 md:h-10 flex items-center justify-center rounded-full z-10"
+        className="absolute top-4 right-4 p-2  bg-black bg-opacity-50  text-white w-6 h-6 md:w-10 md:h-10 flex items-center justify-center rounded-full z-10"
         onClick={() => setPopupImage(null)}
       >
         ✖
@@ -277,13 +277,13 @@ const details = [
       {/* Previous and Next Buttons (Centered on Image) */}
       <button
      onClick={() => navigatePopup("prev")}
-      className=" absolute left-3  w-6 h-6 md:w-10 md:h-10 z-10  top-1/2 -translate-y-1/2 bg-black bg-opacity-50 text-white p-3 md:p-2 rounded-full opacity-100  transition"
+      className=" absolute left-3  w-10 h-10 z-10  top-1/2 -translate-y-1/2 bg-black bg-opacity-50 text-white p-2 rounded-full opacity-100  transition"
     >
       ❮ 
     </button>
       <button
       onClick={() => navigatePopup("next")}
-      className=" absolute right-3  w-6 h-6 md:w-10 md:h-10 z-10  top-1/2 -translate-y-1/2 bg-black bg-opacity-50 text-white p-3  md:p-2 rounded-full opacity-100 transition"
+      className=" absolute right-3  w-10 h-10 md:z-10  top-1/2 -translate-y-1/2 bg-black bg-opacity-50 text-white p-2 rounded-full opacity-100 transition"
     >
       ❯ 
     </button>
