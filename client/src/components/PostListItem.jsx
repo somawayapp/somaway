@@ -102,7 +102,7 @@ const PostListItem = ({ post }) => {
         <p className="text-[var(--softTextColor)] font-semibold capitalize text-[14px] md:text-[15px]"> 
             Nairobi, Kenya
           </p>
-        <LikeButton postId={post._id} />
+        <Star postId={post._id} />
 
         </div>
        
