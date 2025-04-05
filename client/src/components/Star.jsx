@@ -29,9 +29,9 @@ const Star = ({ postId }) => {
   }, [postId]);
 
   return (
-    <div className="flex flex-row items-center">
+    <div className="flex flex-row gap-1 ml-2 items-center">
           <FaStar
-            className="w-[20px]  mt-[-1px]"
+            className="w-[10px]  mt-[-4px]"
             color= "var(--softTextColor)"
           />
     
