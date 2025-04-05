@@ -210,9 +210,7 @@ const details = [
         {mainImage && <img src={mainImage} className="object-cover h-full w-full" alt="Main Image" />}
       </div>
 
-      <div className=" absolute top-3 right-3">
-       <LikeButton postId={post._id} />
-        </div>
+    
       </div>
   
 {/* Right Side Images */}
