@@ -68,21 +68,29 @@ const LikeButton = ({ postId }) => {
   
 
   return (
+
+
 <button
-  onClick={toggleLike}
-  className={`transition-transform duration-300 ${
-    animating ? "animate-bounce-heart" : ""
-  }`}
-  aria-label="Like"
+onClick={toggleLike}
+className={`  relative hover:opacity-80 transition cursor-pointer z-[5] transition-transform duration-300 ${
+  animating ? "animate-bounce-heart" : ""
+}`}
+aria-label="Like"
 >
-  {liked ? (
-    <FaHeart className="text-red-500 w-6 h-6" />
-  ) : (
-    <FaRegHeart
-    className="text-transparent  w-6 h-6 hover:text-gray-300 fill-gray-500"
-  />
-  
-  )}
+
+<AiOutlineHeart
+  size={28}
+  className="
+    text-gray-50
+    absolute
+    -top-[2px]
+    -right-[2px]
+  "
+/>
+<AiFillHeart
+  size={24}
+  className={cn(liked ? "fill-blue-500" : "fill-neutral-500/70")}
+/>
 </button>
 
   );
