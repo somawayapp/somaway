@@ -9,9 +9,9 @@ import {
 
 const router = express.Router();
 
-router.post("/like/:postId", likePost);
-router.delete("/like/:postId", unlikePost);
-router.get("/like/:postId", isPostLiked);
+router.post("/likes/:postId", likePost);
+router.delete("/likes/:postId", unlikePost);
+router.get("/likes/:postId", isPostLiked);
 router.get("/likes", getLikedPosts);
 
 export default router;
