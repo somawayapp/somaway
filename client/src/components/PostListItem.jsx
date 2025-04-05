@@ -1,6 +1,7 @@
 import { useState, useRef } from "react";
 import { Link } from "react-router-dom";
 import { ChevronLeft, ChevronRight } from "lucide-react";
+import LikeButton from "./LikeButton";
 
 const PostListItem = ({ post }) => {
   const images = post.img || [];
@@ -49,6 +50,12 @@ const PostListItem = ({ post }) => {
                 className="w-full h-full object-cover rounded-xl flex-shrink-0 snap-center"
               />
             ))}
+          </div>
+
+          <div className=" absolute top-2 left-2">
+
+          <LikeButton postId={post._id} />
+
           </div>
 
           {/* Dots Indicator */}
