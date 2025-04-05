@@ -31,12 +31,12 @@ const Star = ({ postId }) => {
   return (
     <div className="flex flex-row items-center">
           <FaStar
-            className="w-[30px]"
+            className="w-[20px]  mt-[-1px]"
             color= "var(--softTextColor)"
           />
     
-      <span className="pl-2 font-semibold text-[13px] md:text-[16px] flex items-center">
-        <span className="text-[var(--softTextColor)] text-[13px] md:text-[16px] ">
+      <span className="font-semibold text-[13px] md:text-[15px] flex items-center">
+        <span className="text-[var(--softTextColor)] text-[13px] md:text-[15px] ">
           {Number(rating).toFixed(1)}
         </span>
       </span>
