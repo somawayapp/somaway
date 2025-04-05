@@ -73,7 +73,7 @@ const LikeButton = ({ postId }) => {
 
 <button
 onClick={toggleLike}
-className={`  relative hover:opacity-80 transition cursor-pointer z-[5] transition-transform duration-300 ${
+className={`  relative hover:opacity-80 transition cursor-pointer transition-transform duration-300 ${
   animating ? "animate-bounce-heart" : ""
 }`}
 aria-label="Like"

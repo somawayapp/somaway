@@ -2,6 +2,7 @@ import { useState, useRef } from "react";
 import { Link } from "react-router-dom";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import LikeButton from "./LikeButton";
+import Star from "./Star";
 
 const PostListItem = ({ post }) => {
   const images = post.img || [];
@@ -96,9 +97,15 @@ const PostListItem = ({ post }) => {
 
       <div className="mt-3 gap-1">
         <Link to={`/${post.slug}`} className="block">
-          <p className="text-[var(--softTextColor)] font-semibold capitalize text-[14px] md:text-[15px]"> 
+        <div className=" flex justify-between">
+ 
+        <p className="text-[var(--softTextColor)] font-semibold capitalize text-[14px] md:text-[15px]"> 
             Nairobi, Kenya
           </p>
+        <LikeButton postId={post._id} />
+
+        </div>
+       
           <p className="text-[var(--softTextColor)] capitalize text-[14px] md:text-[15px]">
             {post.bedrooms
               ? `${post.bedrooms} Bedroom`
