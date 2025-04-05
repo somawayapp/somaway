@@ -79,8 +79,9 @@ const LikeButton = ({ postId }) => {
     <FaHeart className="text-red-500 w-6 h-6" />
   ) : (
     <FaRegHeart
-      className="text-gray-200 border-2 border-gray-100 w-6 h-6 hover:text-gray-300"
-    />
+    className="text-transparent border-2 border-gray-200 w-6 h-6 hover:text-gray-300 fill-gray-200"
+  />
+  
   )}
 </button>
 
