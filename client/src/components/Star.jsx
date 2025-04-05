@@ -29,19 +29,15 @@ const Star = ({ postId }) => {
   }, [postId]);
 
   return (
-    <div className="flex flex-row ml-3 items-center mt-2 text-sm md:text-lg">
-      {[...Array(5)].map((_, index) => {
-        const starValue = index + 1;
-        return (
+    <div className="flex flex-row items-center">
           <FaStar
             key={index}
-            className="w-[40px] ml-[-15px]"
-            color={starValue <= rating ? "var(--softTextColor)" : "var(--textColor)"}
+            className="w-[30px]"
+            color= "var(--softTextColor)"
           />
-        );
-      })}
-      <span className="pl-2 font-normal text-[14px] md:text-[16px] flex items-center">
-        <span className="text-[var(--softTextColor)] text-[14px] md:text-[16px] ml-[-5px]">
+    
+      <span className="pl-2 font-semibold text-[13px] md:text-[16px] flex items-center">
+        <span className="text-[var(--softTextColor)] text-[13px] md:text-[16px] ">
           {Number(rating).toFixed(1)}
         </span>
       </span>
