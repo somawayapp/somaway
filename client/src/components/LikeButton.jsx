@@ -31,49 +31,57 @@ const LikeButton = ({ postId }) => {
     fetchLikedStatus();
   }, [postId, isSignedIn]);
 
-  // Toggle like
   const toggleLike = async () => {
     if (!isSignedIn) {
       navigate("/login");
       return;
     }
-
+  
+    // Optimistically update UI
+    const newLikedState = !liked;
+    setLiked(newLikedState);
+    setAnimating(true);
+  
     try {
       const token = await getToken();
-      setAnimating(true); // Start animation
-
-      const method = liked ? "DELETE" : "POST";
+      const method = newLikedState ? "POST" : "DELETE";
+  
       const res = await fetch(`${import.meta.env.VITE_API_URL}/likes/${postId}`, {
         method,
         headers: { Authorization: `Bearer ${token}` },
       });
-
-      if (res.ok) {
-        setLiked(!liked);
-      } else {
+  
+      if (!res.ok) {
+        // Revert back if request failed
+        setLiked(!newLikedState);
         console.error("Failed to toggle like:", await res.text());
       }
     } catch (err) {
+      // Revert back if request errored out
+      setLiked(!newLikedState);
       console.error("Error toggling like:", err);
     } finally {
-      setTimeout(() => setAnimating(false), 300); // End animation
+      setTimeout(() => setAnimating(false), 300);
     }
   };
-
+  
   return (
-    <button
-    onClick={toggleLike}
-    className={`transition-transform duration-300 ${
-      animating ? "animate-bounce-heart" : ""
+<button
+  onClick={toggleLike}
+  className={`transition-transform duration-300 ${
+    animating ? "animate-bounce-heart" : ""
+  }`}
+  aria-label="Like"
+>
+  <FaHeart
+    className={`w-6 h-6 ${
+      liked
+        ? "text-[#fc3239]" // liked color
+        : "text-[var(--softTextColor)] hover:text-[var(--softBg5)]" // pre-liked color
     }`}
-    aria-label="Like"
-  >
-      {liked ? (
-        <FaHeart className="text-red-500 w-6 h-6" />
-      ) : (
-        <FaRegHeart className="text-[var(--softBg4)] hover:text-red-400 w-6 h-6" />
-      )}
-    </button>
+  />
+</button>
+
   );
 };
 
