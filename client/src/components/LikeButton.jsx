@@ -31,6 +31,7 @@ const LikeButton = ({ postId }) => {
     fetchLikedStatus();
   }, [postId, isSignedIn]);
 
+  // Toggle like
   const toggleLike = async () => {
     if (!isSignedIn) {
       navigate("/login");
@@ -65,6 +66,7 @@ const LikeButton = ({ postId }) => {
     }
   };
   
+
   return (
 <button
   onClick={toggleLike}
@@ -73,15 +75,14 @@ const LikeButton = ({ postId }) => {
   }`}
   aria-label="Like"
 >
-  <FaHeart
-    className={`w-6 h-6 ${
-      liked
-        ? "text-[#fc3239]" // Liked state
-        : "text-[var(--softBg5)] drop-shadow-[0_0_0.5px_rgba(169,169,169,1)]" 
-    }`}
-  />
+  {liked ? (
+    <FaHeart className="text-red-500 w-6 h-6" />
+  ) : (
+    <FaRegHeart
+      className="text-gray-200 border-2 border-gray-100 w-6 h-6 hover:text-gray-300"
+    />
+  )}
 </button>
-
 
   );
 };
