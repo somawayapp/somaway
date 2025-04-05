@@ -25,7 +25,7 @@ const LikeButton = ({ postId }) => {
           setLiked(data.liked);
         }
       } catch (err) {
-        console.error("Failed to fetch lik status", err);
+        console.error("Failed to fetch like status", err);
       }
     };
 
@@ -79,7 +79,9 @@ className={`  relative hover:opacity-80 transition cursor-pointer z-[5] transiti
 aria-label="Like"
 >
 
-<AiOutlineHeart
+
+{liked ? (
+  <AiOutlineHeart
   size={28}
   className="
     text-gray-50
@@ -87,11 +89,13 @@ aria-label="Like"
     -top-[2px]
     -right-[2px]
   "
-/>
-<AiFillHeart
+/>      ) : (
+  <AiFillHeart
   size={24}
-  className={cn(liked ? "fill-blue-500" : "fill-neutral-500/70")}
-/>
+  className={(liked ? "fill-blue-500" : "fill-neutral-500/70")}
+/>      )}
+
+
 </button>
 
   );
