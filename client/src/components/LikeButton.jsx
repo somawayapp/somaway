@@ -16,7 +16,7 @@ const LikeButton = ({ postId }) => {
     const fetchLikedStatus = async () => {
       try {
         const token = await getToken();
-        const res = await fetch(`${import.meta.env.VITE_API_URL}/like/${postId}`, {
+        const res = await fetch(`${import.meta.env.VITE_API_URL}/likes/${postId}`, {
           headers: { Authorization: `Bearer ${token}` },
         });
         if (res.ok) {
@@ -43,7 +43,7 @@ const LikeButton = ({ postId }) => {
       setAnimating(true); // Start animation
 
       const method = liked ? "DELETE" : "POST";
-      const res = await fetch(`${import.meta.env.VITE_API_URL}/like/${postId}`, {
+      const res = await fetch(`${import.meta.env.VITE_API_URL}/likes/${postId}`, {
         method,
         headers: { Authorization: `Bearer ${token}` },
       });
@@ -62,12 +62,12 @@ const LikeButton = ({ postId }) => {
 
   return (
     <button
-      onClick={toggleLike}
-      className={`transition-transform duration-300 ${
-        animating ? "scale-125" : "scale-100"
-      }`}
-      aria-label="Like"
-    >
+    onClick={toggleLike}
+    className={`transition-transform duration-300 ${
+      animating ? "animate-bounce-heart" : ""
+    }`}
+    aria-label="Like"
+  >
       {liked ? (
         <FaHeart className="text-red-500 w-6 h-6" />
       ) : (
