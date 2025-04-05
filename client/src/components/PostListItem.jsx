@@ -52,11 +52,6 @@ const PostListItem = ({ post }) => {
             ))}
           </div>
 
-          <div className=" absolute top-2 left-2">
-
-          <LikeButton postId={post._id} />
-
-          </div>
 
           {/* Dots Indicator */}
           {images.length > 1 && (
@@ -73,6 +68,13 @@ const PostListItem = ({ post }) => {
           )}
         </div>
       </Link>
+
+      
+      <div className=" absolute top-3 right-3">
+
+        <LikeButton postId={post._id} />
+
+        </div>
 
       {/* Navigation Arrows */}
       {images.length > 1 && (
