@@ -80,8 +80,8 @@ aria-label="Like"
 >
 
 
-{liked ? (
-  <AiOutlineHeart
+
+<AiOutlineHeart
   size={28}
   className="
     text-gray-50
@@ -89,13 +89,11 @@ aria-label="Like"
     -top-[2px]
     -right-[2px]
   "
-/>      ) : (
-  <AiFillHeart
+/>
+<AiFillHeart
   size={24}
   className={(liked ? "fill-blue-500" : "fill-neutral-500/70")}
-/>      )}
-
-
+/>
 </button>
 
   );
