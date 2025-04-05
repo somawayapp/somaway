@@ -14,6 +14,7 @@ import subscriptionRouter from '../routes/subscription.route.js';
 import cors from 'cors';
 import 'dotenv/config';
 import ratingRouter from '../routes/rating.route.js';
+import likeRouter from '../routes/like.route.js';
 
 dotenv.config();
 
@@ -88,6 +89,7 @@ app.use('/subscriptions', subscriptionRouter);
 app.use('/comments', commentRouter);
 app.use('/webhook', webhookRouter);
 app.use('/ratings', ratingRouter);
+app.use('/likes', likeRouter);
 
 
 // Debug route to confirm server is running
