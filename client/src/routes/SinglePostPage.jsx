@@ -25,7 +25,7 @@
           import RelatedPosts from "../components/RelatedPosts";
           import { ChevronLeft } from "lucide-react";
           import { ChevronRight } from "lucide-react";
-
+          import LikeButton from "../components/LikeButton";
 
           const fetchPost = async (slug) => {
              
@@ -205,9 +205,16 @@ const details = [
           
 <div className="w-full flex h-[300px] md:h-[500px] overflow-hidden rounded-xl relative transition duration-300">
       {/* Left Image */}
+      <div>
       <div className="flex-1 h-full overflow-hidden relative mr-1 md:mr-2 cursor-pointer" onClick={() => openPopup(0)}>
         {mainImage && <img src={mainImage} className="object-cover h-full w-full" alt="Main Image" />}
       </div>
+
+      <div className=" absolute top-3 right-3">
+       <LikeButton postId={post._id} />
+        </div>
+      </div>
+  
 {/* Right Side Images */}
 <div className="w-1/4 h-full flex flex-col overflow-hidden relative">
   <div ref={rightDivRef} className="flex flex-col gap-1 md:gap-2 h-full">
