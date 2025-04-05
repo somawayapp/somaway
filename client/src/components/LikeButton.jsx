@@ -77,7 +77,7 @@ const LikeButton = ({ postId }) => {
     className={`w-6 h-6 ${
       liked
         ? "text-[#fc3239]" // Liked state
-        : "text-[var(--softBg5)] drop-shadow-[0_0_0.5px_var(--bg)]" // Unliked state with soft outline
+        : "text-[var(--softBg5)] drop-shadow-[0_0_0.5px_rgba(169,169,169,1)]" 
     }`}
   />
 </button>
