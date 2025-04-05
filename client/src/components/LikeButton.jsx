@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { FaHeart, FaRegHeart } from "react-icons/fa";
 import { useAuth } from "@clerk/clerk-react";
 import { useNavigate } from "react-router-dom";
+import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
 
 const LikeButton = ({ postId }) => {
   const { getToken, isSignedIn } = useAuth();
@@ -24,7 +25,7 @@ const LikeButton = ({ postId }) => {
           setLiked(data.liked);
         }
       } catch (err) {
-        console.error("Failed to fetch like status", err);
+        console.error("Failed to fetch lik status", err);
       }
     };
 
