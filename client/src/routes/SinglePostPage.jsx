@@ -49,37 +49,56 @@
               queryFn: () => fetchPost(slug),
             });
 
-            const [showPopup, setShowPopup] = useState(false);
-            const [isLoggedIn, setIsLoggedIn] = useState(false);
-            const [showFullContact, setShowFullContact] = useState(false);
-          
-            useEffect(() => {
-              const userLoggedIn = localStorage.getItem('userLoggedIn') === 'true';
-              const lastShared = parseInt(localStorage.getItem('lastShared'), 10);
-              const now = Date.now();
-              const sharedWithin24Hours = lastShared && (now - lastShared) <= 24 * 60 * 60 * 1000;
-          
-              setIsLoggedIn(userLoggedIn);
-          
-              if (userLoggedIn || sharedWithin24Hours) {
+
+              const [showPopup, setShowPopup] = useState(false);
+              const [isLoggedIn, setIsLoggedIn] = useState(false);
+              const [showFullContact, setShowFullContact] = useState(false);
+              const popupRef = useRef(null); // Reference for the popup
+            
+              useEffect(() => {
+                const userLoggedIn = localStorage.getItem('userLoggedIn') === 'true';
+                const lastShared = parseInt(localStorage.getItem('lastShared'), 10);
+                const now = Date.now();
+                const sharedWithin24Hours = lastShared && (now - lastShared) <= 24 * 60 * 60 * 1000;
+            
+                setIsLoggedIn(userLoggedIn);
+            
+                if (userLoggedIn || sharedWithin24Hours) {
+                  setShowFullContact(true);
+                }
+            
+                // Close popup when clicking outside of it (and not on the buttons)
+                const handleClickOutside = (event) => {
+                  if (popupRef.current && !popupRef.current.contains(event.target)) {
+                    setShowPopup(false);
+                  }
+                };
+            
+                // Set up event listener
+                document.addEventListener('click', handleClickOutside);
+            
+                // Clean up event listener on component unmount
+                return () => {
+                  document.removeEventListener('click', handleClickOutside);
+                };
+              }, []);
+            
+              const handleShareToWhatsApp = () => {
+                window.open(`https://wa.me/?text=${encodeURIComponent(`Contact Info: ${data.phone}`)}`, '_blank');
+                localStorage.setItem('lastShared', Date.now().toString());
                 setShowFullContact(true);
-              }
-            }, []);
-          
-            const handleShareToWhatsApp = () => {
-              window.open(`https://wa.me/?text=${encodeURIComponent(`Contact Info: ${data.phone}`)}`, '_blank');
-              localStorage.setItem('lastShared', Date.now().toString());
-              setShowFullContact(true);
-              setShowPopup(false);
-            };
-          
-            const handleLogin = () => {
-              window.location.href = '/login';
-            };
-          
-            const renderPhoneNumber = (phone) => {
-              return showFullContact ? phone : `${phone.slice(0, 4)}...`;
-            };
+                setShowPopup(false);
+              };
+            
+              const handleLogin = () => {
+                window.location.href = '/login';
+              };
+            
+              const renderPhoneNumber = (phone) => {
+                return showFullContact ? phone : `${phone.slice(0, 4)}...`;
+              };
+           
+            
 
             const amenitiesIcons = {
               "lift": <ArrowUpCircle />,
@@ -624,13 +643,14 @@ const details = [
         </p>
       </div>
 
+
       {showPopup && (
-        <div className="absolute top-0 left-0 w-full h-full bg-black bg-opacity-40 flex justify-center items-center z-50">
-          <div className="bg-white dark:bg-[var(--softBg2)] rounded-xl p-6 shadow-xl w-full max-w-sm text-center space-y-4">
-            <h3 className="text-lg font-semibold text-gray-800 dark:text-white">
+              <div ref={popupRef} className="popup absolute top-0 left-0 w-full h-full bg-black bg-opacity-40 flex justify-center items-center z-50">
+          <div className="bg-[var(--softBg)] rounded-xl p-6 shadow-xl w-full max-w-sm text-center space-y-4">
+            <h3 className="text-lg font-semibold text-[var(--softTextColor)]">
               Unlock Full Contact Info
             </h3>
-            <p className="text-sm text-gray-600 dark:text-gray-300">
+            <p className="text-sm text-[var(--softTextColor)]">
               Share to at least one WhatsApp group or log in to view full contact information.
             </p>
             <div className="flex flex-col sm:flex-row gap-3 justify-center">
@@ -649,6 +669,7 @@ const details = [
             </div>
           </div>
         </div>
+
       )}
     </div>
     </div> 
