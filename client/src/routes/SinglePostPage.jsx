@@ -66,7 +66,7 @@ const SinglePostPage = () => {
     const userLoggedIn = user !== null;
     const lastShared = parseInt(localStorage.getItem('lastShared'), 10);
     const now = Date.now();
-    const sharedWithin24Hours = lastShared && (now - lastShared) <= 0 * 0 * 0 * 0;
+    const sharedWithin24Hours = lastShared && (now - lastShared) <= 24 * 60 * 60 * 1000;
   
     setIsLoggedIn(userLoggedIn);
   
@@ -91,7 +91,7 @@ const SinglePostPage = () => {
   const handleShareToWhatsApp = () => {
     const message = `🏠 Welcome to HodiHodi! 🌟\nLooking to rent, buy, or sell property? Whether it’s an apartment, house, office space, or land — HodiHodi is your trusted hub! 🏡\n\n✔️ List or browse properties for FREE\n✔️ Connect with tenants or landlords\n✔️ Explore reviews, filter by location, price & more!\n\nStart your journey today:\nhttps://makesomaway.com 🚪✨`;
   
-    const url = `https://wa.me/?text=${encodeURIComponent(message + " " + "https://makesomaway.com")}`;
+    const url = `https://wa.me/?text=${encodeURIComponent(message + " ")}`;
   
     window.open(url, '_blank');
     localStorage.setItem('lastShared', Date.now().toString());
@@ -504,7 +504,7 @@ data.propertytype ? `${data.propertytype} ` : null,
 <h1 className="text-[var(--softTextColor)] font-semibold  text-[20px] md:text-[22px]  ">About this property </h1>    
   <span dangerouslySetInnerHTML={{ __html: data.desc.substring(0, 470) }} />
       <button  
-  className="text-[var(--softTextColor)]  text-[14px] md:text-[16px]  font-semibold  mt-2  border-[2px]  rounded-xl py-2 px-6 border-[var(--softBg4)]"
+  className="text-[var(--softTextColor)]  gap-1 text-[14px] md:text-[16px]  font-semibold  mt-2  border-[2px]    hover:shadow-xl  hover:text-[var(--textColor)]   rounded-xl py-2 px-6 border-[var(--softBg4)]"
   onClick={() => setPopupDesc(data.desc)}
 >
   Show More
@@ -516,7 +516,13 @@ data.propertytype ? `${data.propertytype} ` : null,
   )}
 </p>
 
+<hr className="h-[1px] bg-[var(--softBg4)] border-0" />
 
+<button  
+  className="text-[var(--softTextColor)]  gap-1 text-[14px] md:text-[16px]  font-semibold  mt-2  border-[2px]    hover:shadow-xl  hover:text-[var(--textColor)]   rounded-xl py-2 px-6 border-[var(--softBg4)]"
+>
+{data.visit} <span className=" font-normal  hover:text-[var(--textColor)] "> Page visits</span>
+</button>
 
 <hr className="h-[1px] bg-[var(--softBg4)] border-0" />
 <h1 className="text-[var(--softTextColor)] font-semibold  text-[20px] md:text-[22px]  ">What this property offers </h1>   
