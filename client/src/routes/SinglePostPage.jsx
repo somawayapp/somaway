@@ -66,7 +66,7 @@ const SinglePostPage = () => {
     const userLoggedIn = user !== null;
     const lastShared = parseInt(localStorage.getItem('lastShared'), 10);
     const now = Date.now();
-    const sharedWithin24Hours = lastShared && (now - lastShared) <= 24 * 60 * 60 * 1000;
+    const sharedWithin24Hours = lastShared && (now - lastShared) <= 0 * 0 * 0 * 0;
   
     setIsLoggedIn(userLoggedIn);
   
