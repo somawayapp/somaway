@@ -89,20 +89,16 @@ const SinglePostPage = () => {
   }, [user, isLoaded]);
   
   const handleShareToWhatsApp = () => {
-    window.open(
-      `https://wa.me/?text=${encodeURIComponent(
-        '🏡 Welcome to HodiHodi! 🌟 \n' +
-        'Looking for a place to rent, buy, or sell? 🏠 Whether you\'re a tenant, landlord, or agent, HodiHodi makes it easy for you to list, search, and connect! 📲 \n\n' +
-        'With FREE listings, property reviews, and powerful filters (by location, price, type, and more), finding your perfect property has never been easier. 🌍\n\n' +
-        'Join us today at [HodiHodi.com](https://hodihodi.com) and start your property journey now! 🔑\n\n' +
-        '#Rent #Buy #Sell #Property #HodiHodi #RealEstate #FreeListings #SearchNow'
-      )}`,
-      '_blank'
-    );
+    const message = `🏡 Check out Somaway! 🌟\nDiscover and create art and book summaries in a unique way. 🌍\n\nJoin us at [Somaway.com](https://makesomaway.com) today! 🔑\n#Art #Books #Create #Explore #Somaway #Innovation`;
+  
+    const url = `https://wa.me/?text=${encodeURIComponent(message + " " + "https://makesomaway.com")}`;
+  
+    window.open(url, '_blank');
     localStorage.setItem('lastShared', Date.now().toString());
     setShowFullContact(true);
     setShowPopup(false);
   };
+  
   
   
   const handleLogin = () => {
