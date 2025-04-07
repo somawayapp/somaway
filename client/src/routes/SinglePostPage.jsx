@@ -559,7 +559,7 @@ const details = [
     </div>
 
    </div>
-    <ContactInfo/>
+    <ContactInfo postId={data._id}/>
    <hr className="h-[1px] bg-[var(--softBg4)] border-0" />
    <div >
     <Comments postId={data._id} />

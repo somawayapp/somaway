@@ -1,18 +1,20 @@
 import { useState, useEffect } from "react";
 import { useAuth } from "@clerk/clerk-react";
 import { useNavigate } from "react-router-dom";
-const fetchPost = async (slug) => {
-             
-          
-    const res = await axios.get(`${import.meta.env.VITE_API_URL}/posts/${slug}`);
-    return res.data;
-  };
+import { useQuery } from "@tanstack/react-query";
+import axios from "axios";
 
-const ContactInfo = ({ data }) => {
-    const {  data } = useQuery({
-        queryKey: ["post", slug],
-        queryFn: () => fetchPost(slug),
-      });
+const fetchPost = async (postId) => {
+  const res = await axios.get(`${import.meta.env.VITE_API_URL}/posts/${postId}`);
+  return res.data;
+};
+
+const ContactInfo = ({ postId }) => {
+  const { data } = useQuery({
+    queryKey: ["post", postId],
+    queryFn: () => fetchPost(postId),
+    enabled: !!postId,
+  });
 
   const { isSignedIn } = useAuth();
   const navigate = useNavigate();
@@ -42,7 +44,7 @@ const ContactInfo = ({ data }) => {
 
   const handleContactClick = () => {
     if (canViewContact) {
-      window.location.href = `tel:${data.phone}`;
+      window.location.href = `tel:${data?.phone}`;
     } else {
       setShowPopup(true);
     }
@@ -51,11 +53,7 @@ const ContactInfo = ({ data }) => {
   const handleWhatsAppShare = () => {
     const message = encodeURIComponent("Hey! Check out this amazing site I found.");
     const whatsappUrl = `https://api.whatsapp.com/send?text=${message}`;
-
-    // Open WhatsApp in new tab
     window.open(whatsappUrl, "_blank");
-
-    // Simulate that sharing has happened - in a real app, you'd verify this with a backend
     localStorage.setItem(WHATSAPP_SHARE_KEY, Date.now().toString());
     setCanViewContact(true);
     setShowPopup(false);
@@ -64,6 +62,8 @@ const ContactInfo = ({ data }) => {
   const handleLogin = () => {
     navigate("/login");
   };
+
+  if (!data) return null; // or a loader
 
   return (
     <>
@@ -89,7 +89,6 @@ const ContactInfo = ({ data }) => {
         </p>
       </div>
 
-      {/* Popup */}
       {showPopup && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
           <div className="bg-white rounded-xl p-6 shadow-lg w-[90%] max-w-md text-center">
@@ -123,6 +122,8 @@ const ContactInfo = ({ data }) => {
     </>
   );
 };
+
+
 
 // Inline Icons
 const PhoneIcon = () => (
