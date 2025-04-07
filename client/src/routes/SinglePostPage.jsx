@@ -5,6 +5,8 @@
           import Comments from "../components/Comments";
           import axios from "axios";
           import { useQuery } from "@tanstack/react-query";
+          import { useUser } from '@clerk/clerk-react';  // Importing the hook
+
           import Navbar from "../components/navbar2";
           import Footer from "../components/Footer";
           import { useEffect } from "react";
@@ -50,52 +52,56 @@
             });
 
 
+
             const [showPopup, setShowPopup] = useState(false);
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [showFullContact, setShowFullContact] = useState(false);
-  const popupRef = useRef(null); // Ref for the popup
-
-  useEffect(() => {
-    const userLoggedIn = localStorage.getItem('userLoggedIn') === 'true';
-    const lastShared = parseInt(localStorage.getItem('lastShared'), 10);
-    const now = Date.now();
-    const sharedWithin24Hours = lastShared && (now - lastShared) <= 24 * 60 * 60 * 1000;
-
-    setIsLoggedIn(userLoggedIn);
-
-    if (userLoggedIn || sharedWithin24Hours) {
-      setShowFullContact(true);
-    }
-
-    // Close the popup if clicked outside
-    const handleClickOutside = (event) => {
-      if (popupRef.current && !popupRef.current.contains(event.target)) {
-        setShowPopup(false);
-      }
-    };
-
-    document.addEventListener('mousedown', handleClickOutside);
-
-    return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
-    };
-  }, []);
-
-  const handleShareToWhatsApp = () => {
-    window.open(`https://wa.me/?text=${encodeURIComponent(`Contact Info: ${data.phone}`)}`, '_blank');
-    localStorage.setItem('lastShared', Date.now().toString());
-    setShowFullContact(true);
-    setShowPopup(false);
-  };
-
-  const handleLogin = () => {
-    window.location.href = '/login';
-  };
-
-  const renderPhoneNumber = (phone) => {
-    return showFullContact ? phone : `${phone.slice(0, 4)}...`;
-  };
+            const [isLoggedIn, setIsLoggedIn] = useState(false);
+            const [showFullContact, setShowFullContact] = useState(false);
+            const popupRef = useRef(null); // Ref for the popup
             
+            useEffect(() => {
+              const { user } = useUser(); // Using the useUser hook to get the logged-in user
+            
+              // Check if user is logged in
+              setIsLoggedIn(!!user);  // Set isLoggedIn to true if a user exists
+            
+              // Check if user is logged in or shared within 24 hours
+              const lastShared = parseInt(localStorage.getItem('lastShared'), 10);
+              const now = Date.now();
+              const sharedWithin24Hours = lastShared && (now - lastShared) <= 24 * 60 * 60 * 1000;
+            
+              if (user || sharedWithin24Hours) {
+                setShowFullContact(true);
+              }
+            
+              // Close the popup if clicked outside
+              const handleClickOutside = (event) => {
+                if (popupRef.current && !popupRef.current.contains(event.target)) {
+                  setShowPopup(false);
+                }
+              };
+            
+              document.addEventListener('mousedown', handleClickOutside);
+            
+              return () => {
+                document.removeEventListener('mousedown', handleClickOutside);
+              };
+            }, []); // Only run once on mount
+            
+            const handleShareToWhatsApp = () => {
+              window.open(`https://wa.me/?text=${encodeURIComponent(`Contact Info: ${data.phone}`)}`, '_blank');
+              localStorage.setItem('lastShared', Date.now().toString());
+              setShowFullContact(true);
+              setShowPopup(false);
+            };
+            
+            const handleLogin = () => {
+              window.location.href = '/login';
+            };
+            
+            const renderPhoneNumber = (phone) => {
+              return showFullContact ? phone : `${phone.slice(0, 4)}...`;
+            };
+                 
               
             
             
