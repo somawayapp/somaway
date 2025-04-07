@@ -27,6 +27,12 @@
           import { ChevronRight } from "lucide-react";
           import LikeButton from "../components/LikeButton";
           import ContactInfo from "../components/ContactInfo";
+          import { useState, useEffect } from "react";
+          import { useAuth } from "@clerk/clerk-react";
+          import { useNavigate } from "react-router-dom";
+          import { useQuery } from "@tanstack/react-query";
+          import axios from "axios";
+          
           const fetchPost = async (slug) => {
              
           
