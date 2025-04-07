@@ -24,7 +24,10 @@ const SettingsPage = () => {
 
        
        
-
+     
+     <SignedIn>
+    <UserButton />
+    </SignedIn>
   
 
 
