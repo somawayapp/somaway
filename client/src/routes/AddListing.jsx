@@ -26,6 +26,7 @@ const AddListing = () => {
   const [model, setModel] = useState("");
   const [propertysize, setPropertySize] = useState("");
   const [propertytype, setPropertyType] = useState("");
+  const [propertyname, setPropertyName] = useState("");
   const [bedrooms, setBedrooms] = useState("");
   const [rooms, setRooms] = useState("");
   const [bathrooms, setBathrooms] = useState("");
@@ -98,6 +99,7 @@ const AddListing = () => {
       model,
       propertytype,
       specification,
+      propertyname,
       propertysize,
       bathrooms,
       rooms,
@@ -243,6 +245,7 @@ const AddListing = () => {
         </select>
 
         <input type="text" placeholder="Enter Post Title" value={title} onChange={(e) => setTitle(e.target.value.slice(0, 500))} className="p-2 bg-[var(--textColore)] text-[var(--textColor)]  rounded" />
+        <input type="text" placeholder="Enter the name of this building /property" value={propertyname} onChange={(e) => setPropertyName(e.target.value.slice(0, 500))} className="p-2 bg-[var(--textColore)] text-[var(--textColor)]  rounded" />
 
 
         <ReactQuill 

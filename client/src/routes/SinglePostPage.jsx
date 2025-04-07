@@ -26,7 +26,7 @@
           import { ChevronLeft } from "lucide-react";
           import { ChevronRight } from "lucide-react";
           import LikeButton from "../components/LikeButton";
-
+          import ContactInfo from "../components/ContactInfo";
           const fetchPost = async (slug) => {
              
           
@@ -559,7 +559,7 @@ const details = [
     </div>
 
    </div>
-
+    <ContactInfo/>
    <hr className="h-[1px] bg-[var(--softBg4)] border-0" />
    <div >
     <Comments postId={data._id} />

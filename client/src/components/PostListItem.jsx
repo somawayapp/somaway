@@ -97,7 +97,7 @@ const PostListItem = ({ post }) => {
 
       <div className="mt-3 gap-1">
         <Link to={`/${post.slug}`} className="block">
-        <div className=" flex ml-2 justify-between">
+        <div className=" flex mr-1 justify-between">
  
         <p className="text-[var(--softTextColor)] font-semibold capitalize text-[14px] md:text-[15px]"> 
             Nairobi, Kenya
