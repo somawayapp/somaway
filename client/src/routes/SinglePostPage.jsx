@@ -555,11 +555,12 @@ const details = [
           <path d="M16.5 15.3c-.5.3-1 .5-1.6.6-2.6.6-5.5-1.7-6.7-3.8-.3-.5-.5-1-.6-1.6 0-.5.2-.9.6-1.2.3-.2.7-.2 1.1 0l.9.4c.3.1.6.4.7.7l.2.4c.1.3 0 .6-.2.9-.1.2-.3.4-.3.4s.4.7 1 1.3c.6.6 1.3 1 1.3 1 .1 0 .2-.1.4-.3.3-.2.6-.3.9-.2l.4.2c.3.1.6.3.7.7l.4.9c.1.3.1.8-.1 1.1z" />
         </svg>
         WhatsApp: <span>{data.whatsapp}</span>
+        <ContactInfo postId={data._id}/>
+
       </p>
     </div>
 
    </div>
-    <ContactInfo postId={data._id}/>
    <hr className="h-[1px] bg-[var(--softBg4)] border-0" />
    <div >
     <Comments postId={data._id} />
