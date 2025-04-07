@@ -43,48 +43,43 @@
             }, []);
             const { slug } = useParams();
 
-            const [showPopup, setShowPopup] = useState(false);
-            const [isLoggedIn, setIsLoggedIn] = useState(false);
-            const [hasShared, setHasShared] = useState(false);
-            const [showFullContact, setShowFullContact] = useState(false);
           
-            useEffect(() => {
-              // Check if the user is logged in (you can replace this with your actual login check)
-              const userLoggedIn = localStorage.getItem('userLoggedIn') === 'true';
-              const sharedToday = localStorage.getItem('sharedToday') === 'true';
-              
-              setIsLoggedIn(userLoggedIn);
-              setHasShared(sharedToday);
-          
-              if (userLoggedIn || sharedToday) {
-                setShowFullContact(true); // Automatically show full contact info
-              }
-            }, []);
-          
-            const handleShareToWhatsApp = () => {
-              // Open WhatsApp share (you can adjust this link if needed)
-              window.open(`https://wa.me/?text=${encodeURIComponent(`Contact Info: ${data.phone}`)}`, '_blank');
-              
-              // After sharing, store this information in localStorage
-              localStorage.setItem('sharedToday', 'true');
-              setHasShared(true);
-              setShowFullContact(true);
-            };
-          
-            const handleLogin = () => {
-              // Redirect to login (adjust to your actual login logic)
-              window.location.href = '/login';
-            };
-          
-            const renderPhoneNumber = (phone) => {
-              return `${phone.slice(0, 4)}...`; // Show first 4 digits of the number
-            };
-         
             const { isPending, error, data } = useQuery({
               queryKey: ["post", slug],
               queryFn: () => fetchPost(slug),
             });
 
+            const [showPopup, setShowPopup] = useState(false);
+            const [isLoggedIn, setIsLoggedIn] = useState(false);
+            const [showFullContact, setShowFullContact] = useState(false);
+          
+            useEffect(() => {
+              const userLoggedIn = localStorage.getItem('userLoggedIn') === 'true';
+              const lastShared = parseInt(localStorage.getItem('lastShared'), 10);
+              const now = Date.now();
+              const sharedWithin24Hours = lastShared && (now - lastShared) <= 24 * 60 * 60 * 1000;
+          
+              setIsLoggedIn(userLoggedIn);
+          
+              if (userLoggedIn || sharedWithin24Hours) {
+                setShowFullContact(true);
+              }
+            }, []);
+          
+            const handleShareToWhatsApp = () => {
+              window.open(`https://wa.me/?text=${encodeURIComponent(`Contact Info: ${data.phone}`)}`, '_blank');
+              localStorage.setItem('lastShared', Date.now().toString());
+              setShowFullContact(true);
+              setShowPopup(false);
+            };
+          
+            const handleLogin = () => {
+              window.location.href = '/login';
+            };
+          
+            const renderPhoneNumber = (phone) => {
+              return showFullContact ? phone : `${phone.slice(0, 4)}...`;
+            };
 
             const amenitiesIcons = {
               "lift": <ArrowUpCircle />,
@@ -606,64 +601,56 @@ const details = [
 
 
    <div>
+   <div className="relative">
       <div>
         <p
           className="p-4 text-[14px] md:text-[16px] text-[var(--softTextColor)] flex items-center gap-2 cursor-pointer hover:bg-[var(--softBg)] rounded-lg transition"
-          onClick={() => showFullContact ? window.location.href = `tel:${data.phone}` : setShowPopup(true)}
+          onClick={() =>
+            showFullContact ? window.location.href = `tel:${data.phone}` : setShowPopup(true)
+          }
         >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          >
-            <path d="M22 16.92v3a2 2 0 0 1-2 2 19.79 19.79 0 0 1-8.63-2A19.79 19.79 0 0 1 2 6a2 2 0 0 1 2-2h3a2 2 0 0 1 2 1.72 12.34 12.34 0 0 0 .68 2.72 2 2 0 0 1-.45 2.11l-1.42 1.42a16 16 0 0 0 6 6l1.42-1.42a2 2 0 0 1 2.11-.45 12.34 12.34 0 0 0 2.72.68A2 2 0 0 1 22 16.92z" />
-          </svg>
-          Contact: <span>{renderPhoneNumber(data.phone)}</span>
+          📞 Contact: <span>{renderPhoneNumber(data.phone)}</span>
         </p>
       </div>
       <hr className="h-[1px] bg-[var(--softBg4)] border-0" />
       <div>
         <p
           className="p-4 flex items-center text-[var(--softTextColor)] gap-2 text-[14px] md:text-[16px] cursor-pointer hover:bg-[var(--softBg)] rounded-lg transition-all"
-          onClick={() => showFullContact ? window.location.href = `https://wa.me/${data.whatsapp}` : setShowPopup(true)}
+          onClick={() =>
+            showFullContact ? window.location.href = `https://wa.me/${data.whatsapp}` : setShowPopup(true)
+          }
         >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          >
-            <path d="M21.5 12.2c0-5.2-4.3-9.5-9.5-9.5S2.5 7 2.5 12.2a9.5 9.5 0 0 0 1.3 4.9L2 22l5.2-1.7a9.5 9.5 0 0 0 4.8 1.3c5.2 0 9.5-4.3 9.5-9.5z" />
-            <path d="M16.5 15.3c-.5.3-1 .5-1.6.6-2.6.6-5.5-1.7-6.7-3.8-.3-.5-.5-1-.6-1.6 0-.5.2-.9.6-1.2.3-.2.7-.2 1.1 0l.9.4c.3.1.6.4.7.7l.2.4c.1.3 0 .6-.2.9-.1.2-.3.4-.3.4s.4.7 1 1.3c.6.6 1.3 1 1.3 1 .1 0 .2-.1.4-.3.3-.2.6-.3.9-.2l.4.2c.3.1.6.3.7.7l.4.9c.1.3.1.8-.1 1.1z" />
-          </svg>
-          WhatsApp: <span>{renderPhoneNumber(data.whatsapp)}</span>
+          💬 WhatsApp: <span>{renderPhoneNumber(data.whatsapp)}</span>
         </p>
       </div>
 
       {showPopup && (
-        <div className="popup">
-          <div className="popup-content">
-            <h3>Share to at least one WhatsApp group or login to view full contact info.</h3>
-            <button onClick={handleShareToWhatsApp}>
-              Share to WhatsApp
-            </button>
-            <button onClick={handleLogin}>
-              Login to View Full Contact
-            </button>
+        <div className="absolute top-0 left-0 w-full h-full bg-black bg-opacity-40 flex justify-center items-center z-50">
+          <div className="bg-white dark:bg-[var(--softBg2)] rounded-xl p-6 shadow-xl w-full max-w-sm text-center space-y-4">
+            <h3 className="text-lg font-semibold text-gray-800 dark:text-white">
+              Unlock Full Contact Info
+            </h3>
+            <p className="text-sm text-gray-600 dark:text-gray-300">
+              Share to at least one WhatsApp group or log in to view full contact information.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-3 justify-center">
+              <button
+                className="bg-green-500 hover:bg-green-600 text-white py-2 px-4 rounded-lg w-full transition"
+                onClick={handleShareToWhatsApp}
+              >
+                Share to WhatsApp
+              </button>
+              <button
+                className="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded-lg w-full transition"
+                onClick={handleLogin}
+              >
+                Login to View
+              </button>
+            </div>
           </div>
         </div>
       )}
+    </div>
     </div> 
   
   
