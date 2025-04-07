@@ -89,7 +89,7 @@ const SinglePostPage = () => {
   }, [user, isLoaded]);
   
   const handleShareToWhatsApp = () => {
-    const message = `🏡 Check out Somaway! 🌟\nDiscover and create art and book summaries in a unique way. 🌍\n\nJoin us at [Somaway.com](https://makesomaway.com) today! 🔑\n#Art #Books #Create #Explore #Somaway #Innovation`;
+    const message = `🏠 Welcome to HodiHodi! 🌟\nLooking to rent, buy, or sell property? Whether it’s an apartment, house, office space, or land — HodiHodi is your trusted hub! 🏡\n\n✔️ List or browse properties for FREE\n✔️ Connect with tenants or landlords\n✔️ Explore reviews, filter by location, price & more!\n\nStart your journey today at [HodiHodi.com](https://hodihodi.com) 🚪✨\n#RealEstate #Rent #Buy #Sell #HodiHodi #FreeListings #FindYourSpace`;
   
     const url = `https://wa.me/?text=${encodeURIComponent(message + " " + "https://makesomaway.com")}`;
   
