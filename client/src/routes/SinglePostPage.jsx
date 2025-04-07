@@ -503,6 +503,11 @@ data.propertytype ? `${data.propertytype} ` : null,
     <>
 <h1 className="text-[var(--softTextColor)] font-semibold  text-[20px] md:text-[22px]  ">About this property </h1>    
   <span dangerouslySetInnerHTML={{ __html: data.desc.substring(0, 470) }} />
+  <p  
+  className="text-[var(--softTextColor)]  gap-1 text-[16px] md:text-[18px]  font-semibold mt-2  hover:shadow-xl  hover:text-[var(--textColor)]"
+>
+{data.visit} <span className=" font-normal text-[14px] md:text-[16px]  hover:text-[var(--textColor)] "> Page visits</span>
+</p>
       <button  
   className="text-[var(--softTextColor)]  gap-1 text-[14px] md:text-[16px]  font-semibold  mt-2  border-[2px]    hover:shadow-xl  hover:text-[var(--textColor)]   rounded-xl py-2 px-6 border-[var(--softBg4)]"
   onClick={() => setPopupDesc(data.desc)}
@@ -516,13 +521,8 @@ data.propertytype ? `${data.propertytype} ` : null,
   )}
 </p>
 
-<hr className="h-[1px] bg-[var(--softBg4)] border-0" />
 
-<button  
-  className="text-[var(--softTextColor)]  gap-1 text-[14px] md:text-[16px]  font-semibold  mt-2  border-[2px]    hover:shadow-xl  hover:text-[var(--textColor)]   rounded-xl py-2 px-6 border-[var(--softBg4)]"
->
-{data.visit} <span className=" font-normal  hover:text-[var(--textColor)] "> Page visits</span>
-</button>
+
 
 <hr className="h-[1px] bg-[var(--softBg4)] border-0" />
 <h1 className="text-[var(--softTextColor)] font-semibold  text-[20px] md:text-[22px]  ">What this property offers </h1>   
