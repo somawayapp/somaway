@@ -109,8 +109,9 @@ const Ratings = ({ postId }) => {
         <span className="text-[var(--softTextColor)] text-[14px] md:text-[16px] ml-[-5px]">
           {Number(rating).toFixed(1)}
         </span>
-        <span className="mx-2 flex items-center">·</span>
-        {totalReviews + totalComments} <span className="ml-1 text-[var(--softTextColor)] text-[14px] md:text-[16px]">reviews</span>
+        <span className="mx-2 flex text-[var(--softTextColor)] items-center">·</span>
+        <span className="text-[var(--softTextColor)]">{totalReviews + totalComments}</span>
+         <span className="ml-1 text-[var(--softTextColor)] text-[14px] md:text-[16px]">reviews</span>
       </span>
     </div>
   );
