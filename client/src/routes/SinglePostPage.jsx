@@ -5,8 +5,6 @@
           import Comments from "../components/Comments";
           import axios from "axios";
           import { useQuery } from "@tanstack/react-query";
-          import { useUser } from '@clerk/clerk-react';  // Importing the hook
-
           import Navbar from "../components/navbar2";
           import Footer from "../components/Footer";
           import { useEffect } from "react";
@@ -30,6 +28,8 @@
           import LikeButton from "../components/LikeButton";
           import ContactInfo from "../components/ContactInfo";
           import { useAuth } from "@clerk/clerk-react";
+          import { useUser } from '@clerk/clerk-react';
+
           import { useNavigate } from "react-router-dom";
 
           const fetchPost = async (slug) => {
@@ -58,18 +58,19 @@
             const [showFullContact, setShowFullContact] = useState(false);
             const popupRef = useRef(null); // Ref for the popup
             
+            const { user, isLoaded } = useUser(); // Get the user's info from Clerk
+            
             useEffect(() => {
-              const { user } = useUser(); // Using the useUser hook to get the logged-in user
+              if (!isLoaded) return; // Wait until the user data is loaded
             
-              // Check if user is logged in
-              setIsLoggedIn(!!user);  // Set isLoggedIn to true if a user exists
-            
-              // Check if user is logged in or shared within 24 hours
+              const userLoggedIn = user !== null;
               const lastShared = parseInt(localStorage.getItem('lastShared'), 10);
               const now = Date.now();
               const sharedWithin24Hours = lastShared && (now - lastShared) <= 24 * 60 * 60 * 1000;
             
-              if (user || sharedWithin24Hours) {
+              setIsLoggedIn(userLoggedIn);
+            
+              if (userLoggedIn || sharedWithin24Hours) {
                 setShowFullContact(true);
               }
             
@@ -85,7 +86,7 @@
               return () => {
                 document.removeEventListener('mousedown', handleClickOutside);
               };
-            }, []); // Only run once on mount
+            }, [user, isLoaded]);
             
             const handleShareToWhatsApp = () => {
               window.open(`https://wa.me/?text=${encodeURIComponent(`Contact Info: ${data.phone}`)}`, '_blank');
@@ -101,9 +102,7 @@
             const renderPhoneNumber = (phone) => {
               return showFullContact ? phone : `${phone.slice(0, 4)}...`;
             };
-                 
-              
-            
+                  
             
 
             const amenitiesIcons = {
