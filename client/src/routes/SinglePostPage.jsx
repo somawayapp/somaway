@@ -39,6 +39,49 @@
               window.scrollTo(0, 0); // Scrolls to the top when this component mounts
             }, []);
             const { slug } = useParams();
+
+            const { isSignedIn } = useAuth();
+            const navigate = useNavigate();
+            const [showPopup, setShowPopup] = useState(false);
+            const [canViewContact, setCanViewContact] = useState(false);
+          
+            const WHATSAPP_SHARE_KEY = `sharedToWhatsApp`;
+          
+            useEffect(() => {
+              const sharedTime = localStorage.getItem(WHATSAPP_SHARE_KEY);
+              if (sharedTime) {
+                const hoursPassed = (Date.now() - parseInt(sharedTime)) / 1000 / 60 / 60;
+                if (hoursPassed < 24) {
+                  setCanViewContact(true);
+                } else {
+                  localStorage.removeItem(WHATSAPP_SHARE_KEY);
+                }
+              }
+          
+              if (isSignedIn) setCanViewContact(true);
+            }, [isSignedIn]);
+          
+            const maskNumber = (number) => {
+              if (!number) return "";
+              return number.slice(0, 4) + "****";
+            };
+          
+            const handleContactClick = () => {
+              if (canViewContact) {
+                window.location.href = `tel:${data?.phone}`;
+              } else {
+                setShowPopup(true);
+              }
+            };
+          
+            const handleWhatsAppShare = () => {
+              const message = encodeURIComponent("Hey! Check out this amazing site I found.");
+              const whatsappUrl = `https://api.whatsapp.com/send?text=${message}`;
+              window.open(whatsappUrl, "_blank");
+              localStorage.setItem(WHATSAPP_SHARE_KEY, Date.now().toString());
+              setCanViewContact(true);
+              setShowPopup(false);
+            };
           
             const { isPending, error, data } = useQuery({
               queryKey: ["post", slug],
@@ -563,8 +606,72 @@ const details = [
    </div>
    <hr className="h-[1px] bg-[var(--softBg4)] border-0" />
    <div >
-    <Comments postId={data._id} />
+
+
+
+<div>
+  
+      <div>
+        <p
+          className="p-4 text-[14px] md:text-[16px] text-[var(--softTextColor)] flex items-center gap-2 cursor-pointer hover:bg-[var(--softBg)] rounded-lg transition"
+          onClick={handleContactClick}
+        >
+          <FaBed />
+          Contact: <span>{canViewContact ? data.phone : maskNumber(data.phone)} {canViewContact ? "" : "View contact info"}</span>
+        </p>
       </div>
+
+      <hr className="h-[1px] bg-[var(--softBg4)] border-0" />
+
+      <div>
+        <p
+          className="p-4 flex items-center text-[var(--softTextColor)] gap-2 text-[14px] md:text-[16px] cursor-pointer hover:bg-[var(--softBg)] rounded-lg transition-all"
+          onClick={handleContactClick}
+        >
+          <FaBed />
+          WhatsApp: <span>{canViewContact ? data.whatsapp : maskNumber(data.whatsapp)} {canViewContact ? "" : "View contact info"}</span>
+        </p>
+      </div>
+
+      {showPopup && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
+          <div className="bg-white rounded-xl p-6 shadow-lg w-[90%] max-w-md text-center">
+            <h2 className="text-xl font-semibold mb-4">View Contact Info</h2>
+            <p className="text-gray-600 mb-6">
+              Share to <b>at least one WhatsApp group</b> or login to view full contact information.
+            </p>
+            <div className="flex flex-col gap-4">
+              <button
+                className="bg-green-500 text-white py-2 rounded-lg hover:bg-green-600 transition"
+                onClick={handleWhatsAppShare}
+              >
+                Share to WhatsApp Group
+              </button>
+              <button
+                className="bg-blue-500 text-white py-2 rounded-lg hover:bg-blue-600 transition"
+                onClick={handleLogin}
+              >
+                Login to View Contact
+              </button>
+              <button
+                className="text-gray-500 mt-2 text-sm"
+                onClick={() => setShowPopup(false)}
+              >
+                Cancel
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+    
+  
+  </div>   
+  
+  
+  
+  
+  
+     </div>
       <hr className="h-[1px] bg-[var(--softBg4)] border-0" />
       <div className="p-4 flex flex-row items-center justify-between font-semibold text-lg">
 
