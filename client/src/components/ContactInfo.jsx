@@ -1,8 +1,19 @@
 import { useState, useEffect } from "react";
 import { useAuth } from "@clerk/clerk-react";
 import { useNavigate } from "react-router-dom";
+const fetchPost = async (slug) => {
+             
+          
+    const res = await axios.get(`${import.meta.env.VITE_API_URL}/posts/${slug}`);
+    return res.data;
+  };
 
 const ContactInfo = ({ data }) => {
+    const {  data } = useQuery({
+        queryKey: ["post", slug],
+        queryFn: () => fetchPost(slug),
+      });
+
   const { isSignedIn } = useAuth();
   const navigate = useNavigate();
   const [showPopup, setShowPopup] = useState(false);
