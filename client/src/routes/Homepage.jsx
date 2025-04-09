@@ -11,7 +11,7 @@ import PostList from "../components/PostList";
 import { Helmet } from "react-helmet";
 import { useEffect } from "react";
 import { MessageCircle } from "lucide-react"; // Importing the icon
-
+import PropertySwitcher from "../components/PropertySwitcher";
 
 const HomePage = () => {
 
@@ -64,6 +64,7 @@ from ${author || 'top authors'}in minutes. Elevate your mind—only on Hodi!`} /
        <CategoriesScroll/>
 
        <div className="md:px-[80px] px-4">
+       <PropertySwitcher/>
 
      
   
