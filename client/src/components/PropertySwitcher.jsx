@@ -4,23 +4,20 @@ import { useLocation, useNavigate } from "react-router-dom";
 export default function PropertySwitcher() {
   const location = useLocation();
   const navigate = useNavigate();
-  const [showExtraOptions, setShowExtraOptions] = useState(false);
   const [toggleState, setToggleState] = useState(false); // false = forrent, true = forsale
-
-  useEffect(() => {
-    const isHomePage = location.pathname === "/" && location.search === "";
-    setShowExtraOptions(!isHomePage);
-  }, [location]);
 
   const handleToggle = () => {
     const newState = !toggleState;
     setToggleState(newState);
-    navigate("/"); // Navigate to home
+    navigate("/"); // Always go to home when toggling
   };
 
   const handleGoHome = () => {
     navigate("/");
   };
+
+  
+
 
   return (
     <div className="w-full border p-3 border-[var(--softBg4)] rounded-xl mb-5 shadow-md flex flex-col items-center space-y-4">
