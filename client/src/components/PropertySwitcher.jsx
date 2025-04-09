@@ -19,7 +19,7 @@ export default function PropertySwitcher() {
   };
 
   return (
-    <div className="w-full border p-3 border-[var(--softBg4)] shadow-md flex flex-col items-center space-y-4">
+    <div className="w-full border p-3 border-[var(--softBg4)] rounded-xl mb-4 shadow-md flex flex-col items-center space-y-4">
       {/* Top switcher */}
       <div className="flex justify-between w-full max-w-sm">
         <a
@@ -49,7 +49,7 @@ export default function PropertySwitcher() {
             className= "w-16 h-8 flex items-center rounded-full p-1 cursor-pointer transition-colors duration-30 bg-[var(--softTextColor)]" >
             <div
               className={`w-6 h-6 flex items-center justify-center text-[var(--softTextColor)] rounded-full shadow-md transform duration-300 ease-in-out
-                ${toggleState ? "translate-x-8 bg-[var(--softTextColor)]" : "translate-x-0 bg-[var(--softTextColor)]"}`}
+                ${toggleState ? "translate-x-8 bg-[var(--bg)]" : "translate-x-0 bg-[var(--bg)]"}`}
             >
               {toggleState ? "✕" : "✓"}
             </div>
