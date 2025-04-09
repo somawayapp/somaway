@@ -22,7 +22,6 @@ export default function PropertySwitcher() {
   return (
     <div className="w-full border p-3 border-[var(--softBg4)] rounded-xl mb-5 shadow-md flex flex-col items-center space-y-4">
       {/* Extra options shown if not on root path */}
-      {showExtraOptions && (
         <div className="flex justify-between gap-2 md:gap-4 items-center w-full max-w-sm">
           
           {/* Clickable text */}
@@ -48,7 +47,6 @@ export default function PropertySwitcher() {
             </div>
           </div>
         </div>
-      )}
     </div>
   );
 }
