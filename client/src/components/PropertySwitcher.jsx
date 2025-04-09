@@ -47,6 +47,23 @@ export default function PropertySwitcher() {
             </div>
           </div>
         </div>
+
+
+
+        <div className="flex justify-between w-full block md:block max-w-sm">
+        <a
+          href="?model=forrent"
+          className="text-md font-bold text-[var(--softTextColor)] hover:underline"
+        >
+          For Rent
+        </a>
+        <a
+          href="?model=forsale"
+          className="text-md font-bold text-[var(--softTextColor)] hover:underline"
+        >
+          For Sale
+        </a>
+      </div>
     </div>
   );
 }
