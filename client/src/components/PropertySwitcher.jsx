@@ -93,20 +93,21 @@ export default function PropertySwitcher() {
         <div className="flex justify-between block md:hidden  gap-2 md:gap-4 items-center w-full max-w-sm">
           
           {/* Clickable text */}
-          <div onClick={handleModelToggle} className="cursor-pointer ">
-            <p className="text-[16px] text-[var(--softTextColor)] font-bold">
-              Proprty model
-            </p>
-            <div className="flex">
-            <span className="text-md text-[var(--softTextColor)] hover:underline">
-              For rent/
-            </span>
+          <div onClick={handleModelToggle} className="cursor-pointer">
+       <p className="text-[16px] text-[var(--softTextColor)] font-bold">
+           Property model
+         </p>
+         <div className="flex items-center">
+            <span className="text-sm text-[var(--softTextColor)] hover:underline">
+             For rent
+             </span>
+           <span className="text-sm mx-1 text-[var(--softTextColor)]">/</span>
             <span className="text-sm md:hidden block text-[var(--softTextColor)]">
               For sale
             </span>
-            </div>
-       
-          </div>
+          </div>     
+         </div>
+
 
           {/* Fancy Toggle Switch */}
           <div
