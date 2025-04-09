@@ -116,7 +116,7 @@ const CategoriesScroll = ({ setOpen }) => {
           {showRightButton && (
             <button
               onClick={() => scroll("right")}
-              className="absolute right-[260px] top-[37%] transform -translate-y-1/2 hidden md:block bg-[var(--softBg4)] bg-opacity-85 rounded-full py-2 px-4 z-10"
+              className="absolute right-[250px] top-[37%] transform -translate-y-1/2 hidden md:block bg-[var(--softBg4)] bg-opacity-85 rounded-full py-2 px-4 z-10"
               style={{ border: "none" }}
             >
               <span className="text-[var(--bg)] font-bold">&gt;</span>
@@ -135,7 +135,7 @@ const CategoriesScroll = ({ setOpen }) => {
           )}
   
           {/* PropertySwitcher always visible at the end */}
-          <div className="flex-shrink-0 hidden md:block pl-9">
+          <div className="flex-shrink-0 hidden md:block pl-[40px]">
             <PropertySwitcher />
           </div>
         </div>
