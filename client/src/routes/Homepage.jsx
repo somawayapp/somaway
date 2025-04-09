@@ -62,12 +62,13 @@ from ${author || 'top authors'}in minutes. Elevate your mind—only on Hodi!`} /
 
        <div className="pt-4 md:pt-6  ">
        <CategoriesScroll/>
-
-       <div className="md:px-[80px] px-4">
-        <div  className="md:hidden block">
+       <div className="md:px-[80px]  md:hidden block mt-4 px-4">
         <PropertySwitcher/>
 
         </div>
+
+       <div className="md:px-[80px] px-4">
+       
 
      
   

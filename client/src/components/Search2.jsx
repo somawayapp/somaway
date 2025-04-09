@@ -112,7 +112,7 @@ const Search2 = () => {
   onClick={() => setIsOpen(true)}
   style={{ zIndex: 100010 }}
   type="button"
-  className="w-full block md:hidden border-[1px] mt-[-1px] border-[var(--softBg4)] rounded-full shadow-sm  transition
+  className="w-full block md:hidden border-[1px] mt-[-1px] border-[var(--softBg4)] rounded-full shadow-lg  transition
    duration-300 cursor-pointer"
 >
   <div className="flex flex-row items-center relative gap-2 w-full justify-between">
