@@ -73,8 +73,9 @@ const CategoriesScroll = ({ setOpen }) => {
 
   return (
     <div className="relative shadow-sm md:shadow-md">
-      <div className="px-4 md:px-[80px]">
+      <div className="px-4 md:px-[80px] gap-1 md:gap-5 flex">
 
+      <div>
       {showLeftButton && (
         <button
           onClick={() => scroll("left")}
@@ -131,10 +132,14 @@ const CategoriesScroll = ({ setOpen }) => {
           );
         })}
 
-               <PropertySwitcher/>
         
       </div>
-    </div>      </div>
+    </div>   
+    <PropertySwitcher/>
+
+    </div>
+
+       </div>
 
   );
 };
