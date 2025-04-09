@@ -12,12 +12,13 @@ export default function PropertySwitcher() {
     setToggleState(newState);
     navigate("/"); // Always go to home when toggling
   };
+
   const handleModelToggle = () => {
     const newState = !toggleModelState;
     setToggleModelState(newState);
     navigate(location.pathname + `?model=${newState ? 'forsale' : 'forrent'}`);
   };
-
+  
   const handleGoHome = () => {
     navigate("/");
   };
@@ -53,7 +54,7 @@ export default function PropertySwitcher() {
               className={`w-6 h-6 flex items-center justify-center text-[var(--softTextColor)] rounded-full shadow-md transform duration-300 ease-in-out
                 ${toggleState ? "translate-x-8 bg-[var(--bg)]" : "translate-x-0 bg-[var(--bg)]"}`}
             >
-              {toggleState ? "✕" : "✓"}
+              {toggleState ? "✓" : "✓"}
             </div>
           </div>
         </div>    )}
@@ -82,38 +83,45 @@ export default function PropertySwitcher() {
               className={`w-6 h-6 flex items-center justify-center text-[var(--softTextColor)] rounded-full shadow-md transform duration-300 ease-in-out
                 ${toggleState ? "translate-x-8 bg-[var(--bg)]" : "translate-x-0 bg-[var(--bg)]"}`}
             >
-              {toggleState ? "✕" : "✓"}
+              {toggleState ? "✓" : "✓"}
             </div>
           </div>
         </div>
 
-        {isRootPathWithoutSearchParams && (
+  
+{isRootPathWithoutSearchParams && (
+  <div className="flex justify-between block md:hidden gap-2 md:gap-4 items-center w-full max-w-sm">
+    
+    {/* Clickable text */}
+    <div onClick={handleModelToggle} className="cursor-pointer">
+      <p className="text-[16px] text-[var(--softTextColor)] font-bold">
+        Proprty model
+      </p>
+      <div className="flex">
+        <p className={`text-md text-[var(--softTextColor)] hover:underline ${!toggleModelState ? 'font-bold' : ''}`}>
+          For rent/
+        </p>
+        <p className={`text-sm md:hidden block text-[var(--softTextColor)] ${toggleModelState ? 'font-bold' : ''}`}>
+          For sale
+        </p>
+      </div>
+    </div>
 
-        <div className="flex justify-between block md:hidden  gap-2 md:gap-4 items-center w-full max-w-sm">
-          
-          {/* Clickable text */}
-          <div onClick={handleModelToggle} className="cursor-pointer">
-            <p className="text-md text-[var(--softTextColor)] font-bold hover:underline">
-              For rent
-            </p>
-            <p className="text-sm md:hidden block text-[var(--softTextColor)] font-normal">
-              For sale
-            </p>
-          </div>
+    {/* Fancy Toggle Switch */}
+    <div
+      onClick={handleModelToggle}
+      className="w-16 h-8 flex items-center rounded-full p-1 cursor-pointer transition-colors duration-300 bg-[var(--softTextColor)]"
+    >
+      <div
+        className={`w-6 h-6 flex items-center justify-center text-[var(--softTextColor)] rounded-full shadow-md transform duration-300 ease-in-out
+          ${toggleModelState ? "translate-x-8 bg-[var(--bg)]" : "translate-x-0 bg-[var(--bg)]"}`}
+      >
+        {toggleState ? "✕" : "✓"}
+      </div>
+    </div>
+  </div>
+)}
 
-          {/* Fancy Toggle Switch */}
-          <div
-            onClick={handleModelToggle}
-            className="w-16 h-8 flex items-center rounded-full p-1 cursor-pointer transition-colors duration-300 bg-[var(--softTextColor)]"
-          >
-            <div
-              className={`w-6 h-6 flex items-center justify-center text-[var(--softTextColor)] rounded-full shadow-md transform duration-300 ease-in-out
-                ${toggleModelState ? "translate-x-8 bg-[var(--bg)]" : "translate-x-0 bg-[var(--bg)]"}`}
-            >
-              {toggleState ? "✕" : "✓"}
-            </div>
-          </div>
-        </div> )}
 
     </div>
   );
