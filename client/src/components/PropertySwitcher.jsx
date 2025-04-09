@@ -29,7 +29,7 @@ export default function PropertySwitcher() {
             <p className="text-md text-[var(--softTextColor)] font-bold cursor-pointer hover:underline">
             Remove all filters
           </p>
-          <p className="text-sm text-[var(--softTextColor)] font-normal ">
+          <p className="text-sm  md:hidden block text-[var(--softTextColor)] font-normal ">
             go back home
           </p>
             </div>
