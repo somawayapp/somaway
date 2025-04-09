@@ -21,31 +21,11 @@ export default function PropertySwitcher() {
   return (
     <div className="w-full border p-3 border-[var(--softBg4)] rounded-xl mb-5 shadow-md flex flex-col items-center space-y-4">
       {/* Top switcher */}
-      <div className="flex justify-between w-full max-w-sm">
-        <button className="rounded-xl shadow-md border px-3 py-2 border-[var(--softBg4)] ">
-        <a
-          href="?model=forrent"
-          className="text-[16px] font-normal text-[var(--softTextColor)] hover:underline"
-        >
-          For Rent
-        </a>
-        </button>
-       
-        <button className="rounded-xl shadow-md border px-3 py-2 border-[var(--softBg4)] ">
-        <a
-          href="?model=forsale"
-          className="text-[16px] font-normal text-[var(--softTextColor)] hover:underline"
-        >
-          For Sale
-        </a>
-         </button>
-     
-      </div>
-
+    
       {/* Extra options shown if not on root path */}
       {showExtraOptions && (
         <div className="flex justify-between items-center w-full max-w-sm mt-2">
-          <span className="text-sm text-[var(--softTextColor)] font-bold cursor-pointer hover:underline">
+          <span className="text-md text-[var(--softTextColor)] font-bold cursor-pointer hover:underline">
             Remove all filters
           </span>
 
@@ -62,6 +42,26 @@ export default function PropertySwitcher() {
           </div>
         </div>
       )}
+
+
+<div className="flex justify-between w-full max-w-sm">
+        <button className="rounded-xl shadow-md border px-3 py-2 border-[var(--softBg4)] ">
+        <a
+          href="?model=forrent"
+          className="text-[16px] font-semibold text-[var(--softTextColor)] hover:underline"
+        >
+          For Rent
+        </a>
+        <a
+          href="?model=forsale"
+          className="text-[16px] font-semibold text-[var(--softTextColor)] hover:underline"
+        >
+          For Sale
+        </a>
+         </button>
+     
+      </div>
+
     </div>
   );
 }
