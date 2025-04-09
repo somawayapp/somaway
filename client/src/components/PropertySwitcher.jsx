@@ -5,6 +5,7 @@ export default function PropertySwitcher() {
   const location = useLocation();
   const navigate = useNavigate();
   const [toggleState, setToggleState] = useState(false); // false = forrent, true = forsale
+  const [toggleModelState, setToggleModelState] = useState(false); // false = forrent, true = forsale
 
   const handleToggle = () => {
     const newState = !toggleState;
@@ -12,8 +13,8 @@ export default function PropertySwitcher() {
     navigate("/"); // Always go to home when toggling
   };
   const handleModelToggle = () => {
-    const newState = !toggleState;
-    setToggleState(newState);
+    const newState = !toggleModelState;
+    setToggleModelState(newState);
     navigate(location.pathname + `?model=${newState ? 'forsale' : 'forrent'}`);
   };
 
@@ -74,7 +75,7 @@ export default function PropertySwitcher() {
           >
             <div
               className={`w-6 h-6 flex items-center justify-center text-[var(--softTextColor)] rounded-full shadow-md transform duration-300 ease-in-out
-                ${toggleState ? "translate-x-8 bg-[var(--bg)]" : "translate-x-0 bg-[var(--bg)]"}`}
+                ${toggleModelState ? "translate-x-8 bg-[var(--bg)]" : "translate-x-0 bg-[var(--bg)]"}`}
             >
               {toggleState ? "✕" : "✓"}
             </div>
