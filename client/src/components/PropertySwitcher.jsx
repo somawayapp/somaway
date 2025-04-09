@@ -22,7 +22,7 @@ export default function PropertySwitcher() {
     navigate("/");
   };
 
-  const isNotRootPath = location.pathname === "/";
+  const isNotRootPath = location.pathname === "";
 
   const isRootPathWithoutSearchParams = location.pathname === "/" && !location.search;
 
@@ -61,7 +61,7 @@ export default function PropertySwitcher() {
 
 
 
-        <div className="flex justify-between hidden md:block gap-2 md:gap-4 items-center w-full max-w-sm">
+        <div className="flex justify-between hidden md:flex gap-2 md:gap-4 items-center w-full max-w-sm">
           
           {/* Clickable text */}
           <div onClick={handleGoHome} className="cursor-pointer">
