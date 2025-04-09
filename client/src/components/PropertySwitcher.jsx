@@ -25,9 +25,15 @@ export default function PropertySwitcher() {
       {/* Extra options shown if not on root path */}
       {showExtraOptions && (
         <div className="flex justify-between items-center w-full max-w-sm mt-2">
-          <span className="text-md text-[var(--softTextColor)] font-bold cursor-pointer hover:underline">
+            <div>
+            <p className="text-md text-[var(--softTextColor)] font-bold cursor-pointer hover:underline">
             Remove all filters
-          </span>
+          </p>
+          <p className="text-sm text-[var(--softTextColor)] font-normal ">
+            go back home
+          </p>
+            </div>
+         
 
           {/* Fancy Toggle Switch */}
           <div
@@ -44,23 +50,6 @@ export default function PropertySwitcher() {
       )}
 
 
-<div className="flex justify-between w-full max-w-sm">
-        <button className="rounded-xl shadow-md border px-3 py-2 border-[var(--softBg4)] ">
-        <a
-          href="?model=forrent"
-          className="text-[16px] font-semibold text-[var(--softTextColor)] hover:underline"
-        >
-          For Rent
-        </a>
-        <a
-          href="?model=forsale"
-          className="text-[16px] font-semibold text-[var(--softTextColor)] hover:underline"
-        >
-          For Sale
-        </a>
-         </button>
-     
-      </div>
 
     </div>
   );
