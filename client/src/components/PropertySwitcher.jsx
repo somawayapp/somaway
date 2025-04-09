@@ -22,14 +22,15 @@ export default function PropertySwitcher() {
     navigate("/");
   };
 
-  const isRootPath = location.pathname === "/";
+  const isNotRootPath = location.pathname === "/";
 
-  
+  const isRootPathWithoutSearchParams = location.pathname === "/" && !location.search;
+
 
 
   return (
     <div className="w-full border p-3 border-[var(--softBg4)] rounded-xl mb-5 shadow-md flex flex-col items-center space-y-4">
-        {isRootPath && (
+        {isNotRootPath && (
 
         <div className="flex justify-between gap-2 block md:hidden md:gap-4 items-center w-full max-w-sm">
           
@@ -86,6 +87,7 @@ export default function PropertySwitcher() {
           </div>
         </div>
 
+        {isRootPathWithoutSearchParams && (
 
         <div className="flex justify-between block md:hidden  gap-2 md:gap-4 items-center w-full max-w-sm">
           
@@ -111,7 +113,7 @@ export default function PropertySwitcher() {
               {toggleState ? "✕" : "✓"}
             </div>
           </div>
-        </div>
+        </div> )}
 
     </div>
   );
