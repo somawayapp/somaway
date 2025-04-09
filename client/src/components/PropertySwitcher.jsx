@@ -50,7 +50,7 @@ export default function PropertySwitcher() {
 
 
 
-        <div className="flex justify-between w-full block md:block max-w-sm">
+        <div className="flex  border p-3 border-[var(--softBg4)] rounded-xl justify-between w-full block md:hidden max-w-sm">
         <a
           href="?model=forrent"
           className="text-md font-bold text-[var(--softTextColor)] hover:underline"
