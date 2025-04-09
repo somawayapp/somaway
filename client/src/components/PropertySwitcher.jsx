@@ -19,7 +19,7 @@ export default function PropertySwitcher() {
   };
 
   return (
-    <div className="w-full flex flex-col items-center space-y-4">
+    <div className="w-full border border-[var(--softBg4)] shadow-md flex flex-col items-center space-y-4">
       {/* Top switcher */}
       <div className="flex justify-between w-full max-w-sm">
         <a
@@ -39,18 +39,26 @@ export default function PropertySwitcher() {
       {/* Extra options shown if not on root path */}
       {showExtraOptions && (
         <div className="flex justify-between items-center w-full max-w-sm mt-2">
-          <span className="text-sm text-gray-500 cursor-pointer hover:underline">
+          <span className="text-sm text-[var(--softTextColor)] font-bold cursor-pointer hover:underline">
             Remove all filters
           </span>
-          <button
+
+          {/* Fancy Toggle Switch */}
+          <div
             onClick={handleToggle}
-            className="px-4 py-2 bg-gray-200 text-sm rounded-full hover:bg-gray-300 transition"
+            className={`w-16 h-8 flex items-center rounded-full p-1 cursor-pointer transition-colors duration-300 ${
+              toggleState ? "bg-blue-500" : "bg-gray-300"
+            }`}
           >
-            Toggle to {toggleState ? "For Rent" : "For Sale"}
-          </button>
+            <div
+              className={`w-6 h-6 flex items-center justify-center text-[var(--softTextColor)] rounded-full shadow-md transform duration-300 ease-in-out
+                ${toggleState ? "translate-x-8 bg-blue-700" : "translate-x-0 bg-[var(--softTextColor)]"}`}
+            >
+              {toggleState ? "✕" : "✓"}
+            </div>
+          </div>
         </div>
       )}
     </div>
   );
 }
-
