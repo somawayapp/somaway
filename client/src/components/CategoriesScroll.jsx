@@ -75,7 +75,7 @@ const CategoriesScroll = ({ setOpen }) => {
     <div className="relative  md:shadow-md">
       <div className="px-4 md:px-[80px]">
         
-        <div className="relative flex items-start mb-2 mb-5">
+        <div className="relative flex items-start mb-0 md:mb-5">
           
           {/* Scrollable Categories */}
           <div
