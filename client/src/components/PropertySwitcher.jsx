@@ -8,8 +8,8 @@ export default function PropertySwitcher() {
   const [toggleState, setToggleState] = useState(false); // false = forrent, true = forsale
 
   useEffect(() => {
-    // Show extra options if current path is not "/"
-    setShowExtraOptions(location.pathname !== "/");
+    const isHomePage = location.pathname === "/" && location.search === "";
+    setShowExtraOptions(!isHomePage);
   }, [location]);
 
   const handleToggle = () => {
@@ -36,7 +36,7 @@ export default function PropertySwitcher() {
         </a>
       </div>
 
-      {/* Conditional section */}
+      {/* Extra options shown if not on root path */}
       {showExtraOptions && (
         <div className="flex justify-between items-center w-full max-w-sm mt-2">
           <span className="text-sm text-gray-500 cursor-pointer hover:underline">
@@ -53,3 +53,4 @@ export default function PropertySwitcher() {
     </div>
   );
 }
+
