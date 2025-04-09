@@ -22,7 +22,7 @@ export default function PropertySwitcher() {
     navigate("/");
   };
 
-  const isNotRootPath = location.pathname !== "/" && location.pathname !== "" && location.search === "";
+  const isNotRootPath = location.pathname === "/" && location.search !== "";
 
 
   const isRootPathWithoutSearchParams = location.pathname === "/" && !location.search;
