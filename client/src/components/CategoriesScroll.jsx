@@ -73,75 +73,75 @@ const CategoriesScroll = ({ setOpen }) => {
 
   return (
     <div className="relative shadow-sm md:shadow-md">
-      <div className="px-4 md:px-[80px] gap-1 md:gap-5 flex">
-
-      <div>
-      {showLeftButton && (
-        <button
-          onClick={() => scroll("left")}
-          className="absolute left-1 top-1/3 transform -translate-y-1/2 hidden md:block bg-[var(--softBg4)] bg-opacity-85 rounded-full py-2 px-4 z-10"
-          style={{ border: "none" }}
-        >
-          <span className="text-[var(--bg)] font-bold">&lt;</span>
-        </button>
-      )}
-
-      {showRightButton && (
-        <button
-          onClick={() => scroll("right")}
-          className="absolute right-1 top-1/3 transform -translate-y-1/2 hidden md:block bg-[var(--softBg4)] bg-opacity-85 rounded-full py-2 px-4 z-10"
-          style={{ border: "none" }}
-        >
-          <span className="text-[var(--bg)] font-bold">&gt;</span>
-        </button>
-      )}
-
-      <div
-        ref={containerRef}
-        className="flex gap-4 overflow-x-auto mb-5 scrollbar-hide"
-        style={{ whiteSpace: "nowrap" }}
-      >
-        {propertytypes.map((propertytype) => {
-          const slug = propertytype.toLowerCase().replace(/\s+/g, "").replace(/&/g, "-");
-
-          return (
-            <Link
-            key={propertytype}
-            to={`/?propertytype=${slug}`}
-            className="flex flex-col items-center justify-center gap-2 md:gap-3 text-[var(--softTextColor)] hover:text-[var(--textColor)] text-sm
-            md:text-md bg-[var(--bg)] rounded-xl
-             pr-2 last:md:pr-2 md:pr-[45px] pb-3 transition-all"
-            onClick={() => setOpen(false)}
+      <div className="px-4 md:px-[80px]">
+  
+        {/* Scroll Buttons */}
+        {showLeftButton && (
+          <button
+            onClick={() => scroll("left")}
+            className="absolute left-1 top-1/3 transform -translate-y-1/2 hidden md:block bg-[var(--softBg4)] bg-opacity-85 rounded-full py-2 px-4 z-10"
+            style={{ border: "none" }}
           >
+            <span className="text-[var(--bg)] font-bold">&lt;</span>
+          </button>
+        )}
+        {showRightButton && (
+          <button
+            onClick={() => scroll("right")}
+            className="absolute right-16 top-1/3 transform -translate-y-1/2 hidden md:block bg-[var(--softBg4)] bg-opacity-85 rounded-full py-2 px-4 z-10"
+            style={{ border: "none" }}
+          >
+            <span className="text-[var(--bg)] font-bold">&gt;</span>
+          </button>
+        )}
+  
+        {/* FLEX CONTAINER */}
+        <div className="flex items-start mb-5">
           
-           {icons[propertytype] && (
-  <span className="text-[var(--softBg5)] hover:text-[var(--softTextColor)]"
-    style={{
-      fontSize: window.innerWidth <= 768 ? "20px" : "25px",
-      display: "flex",
-      alignItems: "center",
-    }}
-  >
-    {icons[propertytype]}
-  </span>
-)}
-
-
-              <span className="text-xs font-normal  md:text-sm">{propertytype}</span>
-            </Link> 
-          );
-        })}
-
-        
+          {/* Scrollable Categories */}
+          <div
+            ref={containerRef}
+            className="flex gap-4 overflow-x-auto scrollbar-hide pr-2"
+            style={{ whiteSpace: "nowrap", flex: 1 }}
+          >
+            {propertytypes.map((propertytype) => {
+              const slug = propertytype.toLowerCase().replace(/\s+/g, "").replace(/&/g, "-");
+              return (
+                <Link
+                  key={propertytype}
+                  to={`/?propertytype=${slug}`}
+                  className="flex flex-col items-center justify-center gap-2 md:gap-3 text-[var(--softTextColor)] hover:text-[var(--textColor)] text-sm
+                  md:text-md bg-[var(--bg)] rounded-xl pr-2 md:pr-[45px] pb-3 transition-all"
+                  onClick={() => setOpen(false)}
+                >
+                  {icons[propertytype] && (
+                    <span
+                      className="text-[var(--softBg5)] hover:text-[var(--softTextColor)]"
+                      style={{
+                        fontSize: window.innerWidth <= 768 ? "20px" : "25px",
+                        display: "flex",
+                        alignItems: "center",
+                      }}
+                    >
+                      {icons[propertytype]}
+                    </span>
+                  )}
+                  <span className="text-xs font-normal md:text-sm">{propertytype}</span>
+                </Link>
+              );
+            })}
+          </div>
+  
+          {/* Sticky PropertySwitcher on the right */}
+          <div className="flex-shrink-0 pl-4">
+            <PropertySwitcher />
+          </div>
+  
+        </div>
       </div>
-    </div>   
-    <PropertySwitcher/>
-
     </div>
-
-       </div>
-
   );
+  
 };
 
 export default CategoriesScroll;
