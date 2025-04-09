@@ -87,7 +87,7 @@
                  </Link>
                 <button
                   type="button"
-                  className=" p-4 md:py-1 md:pl-4 md:pr-2 border-[1px]  border-[var(--softBg4)]  flex  flex-row  items-center   gap-3   rounded-full   cursor-pointer   hover:shadow-md   transition duration-300"
+                  className=" p-4 md:py-1 md:pl-4 md:pr-2 border-[1px]  border-[var(--softBg4)]  flex  flex-row  items-center   gap-3   hover:shadow-lg shadow-md  cursor-pointer   hover:shadow-md   transition duration-300"
                 >
                   <AiOutlineMenu />
                   <div className="hidden md:flex items-center justify-center">
