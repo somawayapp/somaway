@@ -24,7 +24,7 @@ export default function PropertySwitcher() {
     
       {/* Extra options shown if not on root path */}
       {showExtraOptions && (
-        <div className="flex justify-between  gap-2 md:gap-4 items-center w-full max-w-sm mt-2">
+        <div className="flex justify-between  gap-2 md:gap-4 items-center w-full max-w-sm ">
             <div>
             <p className="text-md text-[var(--softTextColor)] font-bold cursor-pointer hover:underline">
             Remove all filters
