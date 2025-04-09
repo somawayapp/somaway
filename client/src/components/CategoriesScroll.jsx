@@ -74,29 +74,9 @@ const CategoriesScroll = ({ setOpen }) => {
   return (
     <div className="relative shadow-sm md:shadow-md">
       <div className="px-4 md:px-[80px]">
-  
-        {/* Scroll Buttons */}
-        {showLeftButton && (
-          <button
-            onClick={() => scroll("left")}
-            className="absolute left-1 top-1/3 transform -translate-y-1/2 hidden md:block bg-[var(--softBg4)] bg-opacity-85 rounded-full py-2 px-4 z-10"
-            style={{ border: "none" }}
-          >
-            <span className="text-[var(--bg)] font-bold">&lt;</span>
-          </button>
-        )}
-        {showRightButton && (
-          <button
-            onClick={() => scroll("right")}
-            className="absolute right-16 top-1/3 transform -translate-y-1/2 hidden md:block bg-[var(--softBg4)] bg-opacity-85 rounded-full py-2 px-4 z-10"
-            style={{ border: "none" }}
-          >
-            <span className="text-[var(--bg)] font-bold">&gt;</span>
-          </button>
-        )}
-  
-        {/* FLEX CONTAINER */}
-        <div className="flex items-start mb-5">
+        
+        {/* Outer flex container with relative position */}
+        <div className="relative flex items-start mb-5">
           
           {/* Scrollable Categories */}
           <div
@@ -132,11 +112,32 @@ const CategoriesScroll = ({ setOpen }) => {
             })}
           </div>
   
-          {/* Sticky PropertySwitcher on the right */}
-          <div className="flex-shrink-0 pl-4">
+          {/* Right Scroll Button JUST BEFORE the PropertySwitcher */}
+          {showRightButton && (
+            <button
+              onClick={() => scroll("right")}
+              className="absolute right-[110px] top-1/2 transform -translate-y-1/2 hidden md:block bg-[var(--softBg4)] bg-opacity-85 rounded-full py-2 px-4 z-10"
+              style={{ border: "none" }}
+            >
+              <span className="text-[var(--bg)] font-bold">&gt;</span>
+            </button>
+          )}
+  
+          {/* Left Scroll Button at far left */}
+          {showLeftButton && (
+            <button
+              onClick={() => scroll("left")}
+              className="absolute left-1 top-1/2 transform -translate-y-1/2 hidden md:block bg-[var(--softBg4)] bg-opacity-85 rounded-full py-2 px-4 z-10"
+              style={{ border: "none" }}
+            >
+              <span className="text-[var(--bg)] font-bold">&lt;</span>
+            </button>
+          )}
+  
+          {/* PropertySwitcher always visible at the end */}
+          <div className="flex-shrink-0 hidden md:block pl-4">
             <PropertySwitcher />
           </div>
-  
         </div>
       </div>
     </div>
