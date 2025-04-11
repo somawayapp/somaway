@@ -20,9 +20,11 @@ export default function PropertySwitcher() {
   };
 
   const handleClick = (model) => {
-    searchParams.set('model', model);
-    setSearchParams(searchParams); // Triggers rerender with updated model param
+    const newParams = new URLSearchParams(searchParams.toString()); // Create a new instance
+    newParams.set('model', model);
+    setSearchParams(newParams); // Triggers rerender with updated model param
   };
+  
 
   useEffect(() => {
     if (currentModel) {
