@@ -5,7 +5,6 @@ export default function PropertySwitcher() {
   const location = useLocation();
   const navigate = useNavigate();
   const [toggleState, setToggleState] = useState(false); // false = forrent, true = forsale
-  const [toggleModelState, setToggleModelState] = useState(false); // false = forrent, true = forsale
   const searchParams = new URLSearchParams(location.search);
   const currentModel = searchParams.get('model'); // "forrent" or "forsa
 
@@ -14,6 +13,17 @@ export default function PropertySwitcher() {
     currentParams.set('model', model);
     navigate(`${location.pathname}?${currentParams.toString()}`);
   };
+
+  useEffect(() => {
+    if (currentModel === "forsale") {
+      setToggleState(true);
+      // Optionally trigger some effect, e.g. fetch properties for sale
+    } else if (currentModel === "forrent") {
+      setToggleState(false);
+      // Fetch rental properties, etc.
+    }
+  }, [currentModel]);
+  
   
 
   const handleToggle = () => {
@@ -21,11 +31,7 @@ export default function PropertySwitcher() {
     setToggleState(newState);
     navigate("/"); // Always go to home when toggling
   };
-  const handleModelToggle = () => {
-    const newState = !toggleModelState;
-    setToggleModelState(newState);
-    navigate(location.pathname + `?model=${newState ? 'forsale' : 'forrent'}`);
-  };
+ 
 
   const handleGoHome = () => {
     navigate("/");
@@ -50,22 +56,23 @@ export default function PropertySwitcher() {
               Remove all filters
             </p>
             <div className="cursor-pointer flex flex-col justify-between md:hidden">
-         <p
-        onClick={() => handleClick('forrent')}
-        className={`text-sm text-[var(--softTextColor)] hover:underline ${
-          currentModel === 'forrent' ? 'font-bold' : ''
-        }`}
-      >
-        For rent
-          </p>
-         <p
-        onClick={() => handleClick('forsale')}
-        className={`text-sm md:hidden block text-[var(--softTextColor)] ${
-          currentModel === 'forsale' ? 'font-bold' : ''
-        }`}
-         >
-        For sale
-      </p>
+   <p
+  onClick={() => handleClick('forrent')}
+  className={`text-sm text-[var(--softTextColor)] hover:underline ${
+    currentModel === 'forrent' ? 'font-bold underline' : ''
+  }`}
+>
+  For rent
+</p>
+
+<p
+  onClick={() => handleClick('forrent')}
+  className={`text-sm text-[var(--softTextColor)] hover:underline ${
+    currentModel === 'forrent' ? 'font-bold underline' : ''
+  }`}
+>
+  For rent
+</p>
     </div>
           </div>
 
