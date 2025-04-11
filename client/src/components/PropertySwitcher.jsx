@@ -113,17 +113,17 @@ export default function PropertySwitcher() {
 
         {isRootPathWithoutSearchParams && (
 
-        <div onClick={handleModelToggle} className="flex justify-between block md:hidden  gap-0 md:gap-4 items-center w-full max-w-sm">
+        <div  className="flex justify-between block md:hidden  gap-0 md:gap-4 items-center w-full max-w-sm">
           
           {/* Clickable text */}
           <div>
           <p className="text-md text-[var(--softTextColor)] font-bold hover:underline">
               Buy or rent property
             </p>
-            <div className="cursor-pointer flex gap-[30px] justify-between md:hidden">
+            <div className="cursor-pointer flex flex-col justify-between md:hidden">
          <p
         onClick={() => handleClick('forrent')}
-        className={`text-md text-[var(--softTextColor)] hover:underline ${
+        className={`text-sm text-[var(--softTextColor)] hover:underline ${
           currentModel === 'forrent' ? 'font-bold' : ''
         }`}
       >
@@ -131,7 +131,7 @@ export default function PropertySwitcher() {
           </p>
          <p
         onClick={() => handleClick('forsale')}
-        className={`text-md md:hidden block text-[var(--softTextColor)] ${
+        className={`text-sm md:hidden block text-[var(--softTextColor)] ${
           currentModel === 'forsale' ? 'font-bold' : ''
         }`}
          >
