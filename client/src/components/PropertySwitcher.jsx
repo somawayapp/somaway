@@ -1,13 +1,15 @@
 import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
+import { useSearchParams } from 'react-router-dom';
+
 
 export default function PropertySwitcher() {
   const location = useLocation();
   const navigate = useNavigate();
   const [toggleState, setToggleState] = useState(false); // false = forrent, true = forsale
-  const searchParams = new URLSearchParams(location.search);
-  const currentModel = searchParams.get('model'); // "forrent" or "forsa
   const [toggleModelState, setToggleModelState] = useState(false); // false = forrent, true = forsale
+  const [searchParams, setSearchParams] = useSearchParams();
+  const currentModel = searchParams.get('model');
 
 
 
@@ -18,21 +20,18 @@ export default function PropertySwitcher() {
   };
 
   const handleClick = (model) => {
-    const currentParams = new URLSearchParams(location.search);
-    currentParams.set('model', model);
-    navigate(`${location.pathname}?${currentParams.toString()}`);
+    searchParams.set('model', model);
+    setSearchParams(searchParams); // Triggers rerender with updated model param
   };
 
   useEffect(() => {
-    if (currentModel === "forsale") {
-      setToggleState(true);
-      // Optionally trigger some effect, e.g. fetch properties for sale
-    } else if (currentModel === "forrent") {
-      setToggleState(false);
-      // Fetch rental properties, etc.
+    if (currentModel) {
+      // Your fetch/search logic here
+      console.log('Fetching data for model:', currentModel);
+      // fetchData(currentModel);
     }
   }, [currentModel]);
-  
+
   
 
   const handleToggle = () => {
