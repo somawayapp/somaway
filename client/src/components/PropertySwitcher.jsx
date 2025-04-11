@@ -42,7 +42,7 @@ export default function PropertySwitcher() {
             <p className="text-md text-[var(--softTextColor)] font-bold hover:underline">
               Remove all filters
             </p>
-            <div className="cursor-pointer flex flex justify-between block md:hidden">
+            <div className="cursor-pointer  flex justify-between  md:hidden">
       <p
         className={`text-md text-[var(--softTextColor)] hover:underline ${
           currentModel === 'forrent' ? 'text-lg font-bold' : ''
@@ -109,7 +109,7 @@ export default function PropertySwitcher() {
         <div onClick={handleModelToggle} className="flex justify-between block md:hidden  gap-0 md:gap-4 items-center w-full max-w-sm">
           
           {/* Clickable text */}
-          <div className="cursor-pointer flex flex justify-between block md:hidden">
+          <div className="cursor-pointer flex  justify-between  md:hidden">
       <p
         className={`text-md text-[var(--softTextColor)] hover:underline ${
           currentModel === 'forrent' ? 'text-lg font-bold' : ''
