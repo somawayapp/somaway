@@ -13,11 +13,6 @@ export default function PropertySwitcher() {
   const currentModelRent = searchParams.get('forrent');
 
 
-  const handleModelToggle = () => {
-    const newState = !toggleModelState;
-    setToggleModelState(newState);
-    navigate(location.pathname + `?model=${newState ? 'forsale' : 'forrent'}`);
-  };
 
   const handleClickSale = (model) => {
     const newParams = new URLSearchParams(searchParams.toString());
@@ -131,8 +126,8 @@ export default function PropertySwitcher() {
               Buy or rent property
             </p>
             <div className="cursor-pointer flex flex-col justify-between md:hidden">
-   <p
-  onClick={() => handleClickBuy('forsale')}
+            <p
+  onClick={() => handleClickSale('forsale')}
   className={`text-sm text-[var(--softTextColor)] hover:underline ${
     currentModelSale === 'forsale' ? 'font-bold underline' : ''
   }`}
