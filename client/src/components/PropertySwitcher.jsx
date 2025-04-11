@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
+import { useRouter } from 'next/router';
 
 export default function PropertySwitcher() {
   const location = useLocation();
@@ -8,6 +9,16 @@ export default function PropertySwitcher() {
   const [toggleModelState, setToggleModelState] = useState(false); // false = forrent, true = forsale
   const searchParams = new URLSearchParams(location.search);
   const currentModel = searchParams.get('model'); // "forrent" or "forsa
+  const router = useRouter();
+
+  const handleClick = (model) => {
+    const currentParams = new URLSearchParams(router.query);
+    currentParams.set('model', model);
+    router.push({
+      pathname: router.pathname,
+      query: Object.fromEntries(currentParams.entries()),
+    });
+  };
 
   const handleToggle = () => {
     const newState = !toggleState;
@@ -111,30 +122,31 @@ export default function PropertySwitcher() {
           {/* Clickable text */}
           <div>
           <p className="text-md text-[var(--softTextColor)] font-bold hover:underline">
-              Property model
+              Buy or rent property
             </p>
-          <div className="cursor-pointer flex gap-[30px] justify-between  md:hidden">
-      <p
+            <div className="cursor-pointer flex gap-[30px] justify-between md:hidden">
+         <p
+        onClick={() => handleClick('forrent')}
         className={`text-md text-[var(--softTextColor)] hover:underline ${
           currentModel === 'forrent' ? 'font-bold' : ''
         }`}
       >
         For rent
-      </p>
-      <p
-        className={`text-md md:hidden  block text-[var(--softTextColor)] ${
+          </p>
+         <p
+        onClick={() => handleClick('forsale')}
+        className={`text-md md:hidden block text-[var(--softTextColor)] ${
           currentModel === 'forsale' ? 'font-bold' : ''
         }`}
-      >
+         >
         For sale
       </p>
-      </div>
+    </div>
       </div>   
 
 
           {/* Fancy Toggle Switch */}
           <div
-            onClick={handleModelToggle}
             className="w-16 h-8 flex items-center rounded-full p-1 cursor-pointer transition-colors duration-300 bg-[var(--softTextColor)]"
           >
             <div
