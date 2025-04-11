@@ -59,7 +59,7 @@ const CategoriesScroll = ({ setOpen }) => {
     if (!containerRef.current) return;
     const { scrollLeft, scrollWidth, clientWidth } = containerRef.current;
     setShowLeftButton(scrollLeft > 0);
-    setShowRightButton(scrollLeft + clientWidth -50 < scrollWidth);
+    setShowRightButton(scrollLeft + clientWidth -380 < scrollWidth);
   };
 
   useEffect(() => {
