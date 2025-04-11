@@ -45,31 +45,33 @@ export default function PropertySwitcher() {
         <div className="flex justify-between gap-2 block md:hidden md:gap-4 items-center w-full max-w-sm">
           
           {/* Clickable text */}
-          <div onClick={handleGoHome} className="cursor-pointer">
-            <p className="text-md text-[var(--softTextColor)] font-bold hover:underline">
+          <div  className="cursor-pointer">
+            <p onClick={handleGoHome} className="text-md cursor-pointer text-[var(--softTextColor)] font-bold hover:underline">
               Remove all filters
             </p>
-            <div className="cursor-pointer  flex justify-between  md:hidden">
-      <p
-        className={`text-md text-[var(--softTextColor)] hover:underline ${
-          currentModel === 'forrent' ? 'text-lg font-bold' : ''
+            <div className="cursor-pointer flex flex-col justify-between md:hidden">
+         <p
+        onClick={() => handleClick('forrent')}
+        className={`text-sm text-[var(--softTextColor)] hover:underline ${
+          currentModel === 'forrent' ? 'font-bold' : ''
         }`}
       >
         For rent
-      </p>
-      <p
-        className={`text-md md:hidden  block text-[var(--softTextColor)] ${
-          currentModel === 'forsale' ? 'text-lg font-bold' : ''
+          </p>
+         <p
+        onClick={() => handleClick('forsale')}
+        className={`text-sm md:hidden block text-[var(--softTextColor)] ${
+          currentModel === 'forsale' ? 'font-bold' : ''
         }`}
-      >
+         >
         For sale
       </p>
-    </div>  
+    </div>
           </div>
 
           {/* Fancy Toggle Switch */}
           <div
-            onClick={handleToggle}
+            onClick={handleGoHome}
             className="w-16 h-8 flex items-center rounded-full p-1 cursor-pointer transition-colors duration-300 bg-[var(--softTextColor)]"
           >
             <div
