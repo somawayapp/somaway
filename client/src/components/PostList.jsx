@@ -48,17 +48,20 @@ const PostList = () => {
   const [displayedPosts, setDisplayedPosts] = useState([]);
 
   useEffect(() => {
-    if (allPosts.length === 0) return;
-
+    if (allPosts.length === 0) {
+      setDisplayedPosts([]); // 🧼 clear out the old data
+      return;
+    }
+  
     let newPosts = [];
     let index = 0;
-
+  
     const loadNextBatch = (batchSize) => {
       newPosts = [...newPosts, ...allPosts.slice(index, index + batchSize)];
       setDisplayedPosts([...newPosts]);
       index += batchSize;
     };
-
+  
     loadNextBatch(4); 
     setTimeout(() => loadNextBatch(4), 50);
     setTimeout(() => loadNextBatch(4), 100);
@@ -68,7 +71,7 @@ const PostList = () => {
       }
     }, 150);
   }, [allPosts]);
-
+  
   if (status === "loading") return <p>Loading...</p>;
   if (error) return <p>Something went wrong!</p>;
   
