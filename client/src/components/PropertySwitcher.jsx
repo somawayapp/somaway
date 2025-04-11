@@ -8,13 +8,10 @@ export default function PropertySwitcher() {
   const [toggleState, setToggleState] = useState(false); // false = forrent, true = forsale
   const [toggleModelState, setToggleModelState] = useState(false); // false = forrent, true = forsale
   const [searchParams, setSearchParams] = useSearchParams();
-  const currentModel = searchParams.get('model');
+  const currentModelSale = searchParams.get('forsale');
 
-  // Sync toggleModelState with the URL search parameter
-  useEffect(() => {
-    const model = searchParams.get('model');
-    setToggleModelState(model === 'forsale');
-  }, [searchParams]);
+  const currentModelRent = searchParams.get('forrent');
+
 
   const handleModelToggle = () => {
     const newState = !toggleModelState;
@@ -22,7 +19,7 @@ export default function PropertySwitcher() {
     navigate(location.pathname + `?model=${newState ? 'forsale' : 'forrent'}`);
   };
 
-  const handleClickBuy = (model) => {
+  const handleClickSale = (model) => {
     const newParams = new URLSearchParams(searchParams.toString());
     newParams.set('model', model);
     setSearchParams(newParams); // Triggers rerender with updated model param
@@ -61,9 +58,9 @@ export default function PropertySwitcher() {
             </p>
             <div className="cursor-pointer flex flex-col justify-between md:hidden">
    <p
-  onClick={() => handleClickBuy('forsale')}
+  onClick={() => handleClickSale('forsale')}
   className={`text-sm text-[var(--softTextColor)] hover:underline ${
-    currentModel === 'forsale' ? 'font-bold underline' : ''
+    currentModelSale === 'forsale' ? 'font-bold underline' : ''
   }`}
 >
   For Sale
@@ -72,7 +69,7 @@ export default function PropertySwitcher() {
 <p
   onClick={() => handleClickRent('forrent')}
   className={`text-sm text-[var(--softTextColor)] hover:underline ${
-    currentModel === 'forrent' ? 'font-bold underline' : ''
+    currentModelRent === 'forrent' ? 'font-bold underline' : ''
   }`}
 >
   For Rent
