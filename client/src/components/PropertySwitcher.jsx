@@ -6,6 +6,8 @@ export default function PropertySwitcher() {
   const navigate = useNavigate();
   const [toggleState, setToggleState] = useState(false); // false = forrent, true = forsale
   const [toggleModelState, setToggleModelState] = useState(false); // false = forrent, true = forsale
+  const searchParams = new URLSearchParams(location.search);
+  const currentModel = searchParams.get('model'); // "forrent" or "forsa
 
   const handleToggle = () => {
     const newState = !toggleState;
@@ -88,6 +90,7 @@ export default function PropertySwitcher() {
           </div>
         </div>
 
+
         {isRootPathWithoutSearchParams && (
 
         <div className="flex justify-between block md:hidden  gap-2 md:gap-4 items-center w-full max-w-sm">
@@ -118,10 +121,32 @@ export default function PropertySwitcher() {
               className={`w-6 h-6 flex items-center justify-center text-[var(--softTextColor)] rounded-full shadow-md transform duration-300 ease-in-out
                 ${toggleModelState ? "translate-x-8 bg-[var(--bg)]" : "translate-x-0 bg-[var(--bg)]"}`}
             >
-              {toggleState ? "✕" : "✓"}
+              {toggleState ? "✓" : "✓"}
             </div>
           </div>
         </div> )}
+
+
+<div className="flex justify-between block md:hidden  gap-2 md:gap-4 items-center w-full max-w-sm">
+  
+<div className="flex gap-9 items-center">
+      <span
+        className={`text-sm text-[var(--softTextColor)] hover:underline ${
+          currentModel === 'forrent' ? 'text-lg font-bold' : ''
+        }`}
+      >
+        For rent
+      </span>
+      <span
+        className={`text-sm md:hidden block text-[var(--softTextColor)] ${
+          currentModel === 'forsale' ? 'text-lg font-bold' : ''
+        }`}
+      >
+        For sale
+      </span>
+    </div>
+
+</div> 
 
     </div>
   );
