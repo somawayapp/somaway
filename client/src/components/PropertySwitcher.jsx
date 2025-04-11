@@ -131,16 +131,7 @@ export default function PropertySwitcher() {
             </div>
           </div>
 
-          {/* Fancy Toggle Switch */}
-          <div className="w-16 h-8 flex items-center rounded-full p-1 cursor-pointer transition-colors duration-300 bg-[var(--softTextColor)]">
-            <div
-              className={`w-6 h-6 flex items-center justify-center text-[var(--softTextColor)] rounded-full shadow-md transform duration-300 ease-in-out ${
-                toggleModelState ? "translate-x-8 bg-[var(--bg)]" : "translate-x-0 bg-[var(--bg)]"
-              }`}
-            >
-              ✓
-            </div>
-          </div>
+        
         </div>
       )}
     </div>
