@@ -32,7 +32,7 @@ export default function PropertySwitcher() {
 
 
   return (
-    <div className="w-full border p-3 border-[var(--softBg4)] rounded-xl mb-5 shadow-md flex flex-col items-center space-y-4">
+    <div className="w-full border p-3 border-[var(--softBg4)] rounded-xl mb-5 shadow-md flex flex-col items-center ">
         {isNotRootPath && (
 
         <div className="flex justify-between gap-2 block md:hidden md:gap-4 items-center w-full max-w-sm">
@@ -42,9 +42,22 @@ export default function PropertySwitcher() {
             <p className="text-md text-[var(--softTextColor)] font-bold hover:underline">
               Remove all filters
             </p>
-            <p className="text-sm md:hidden block text-[var(--softTextColor)] font-normal">
-              go back home
-            </p>
+            <div className="cursor-pointer flex flex justify-between block md:hidden">
+      <p
+        className={`text-md text-[var(--softTextColor)] hover:underline ${
+          currentModel === 'forrent' ? 'text-lg font-bold' : ''
+        }`}
+      >
+        For rent
+      </p>
+      <p
+        className={`text-md md:hidden  block text-[var(--softTextColor)] ${
+          currentModel === 'forsale' ? 'text-lg font-bold' : ''
+        }`}
+      >
+        For sale
+      </p>
+    </div>  
           </div>
 
           {/* Fancy Toggle Switch */}
@@ -96,7 +109,7 @@ export default function PropertySwitcher() {
         <div onClick={handleModelToggle} className="flex justify-between block md:hidden  gap-0 md:gap-4 items-center w-full max-w-sm">
           
           {/* Clickable text */}
-          <div className="cursor-pointer flex flex justify-between block md:hidden items-center">
+          <div className="cursor-pointer flex flex justify-between block md:hidden">
       <p
         className={`text-md text-[var(--softTextColor)] hover:underline ${
           currentModel === 'forrent' ? 'text-lg font-bold' : ''
