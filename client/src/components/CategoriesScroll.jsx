@@ -59,7 +59,7 @@ const CategoriesScroll = ({ setOpen }) => {
     if (!containerRef.current) return;
     const { scrollLeft, scrollWidth, clientWidth } = containerRef.current;
     setShowLeftButton(scrollLeft > 0);
-    setShowRightButton(scrollLeft + clientWidth - 270 < scrollWidth);
+    setShowRightButton(scrollLeft + clientWidth - 290 < scrollWidth);
   };
 
   useEffect(() => {
@@ -115,10 +115,10 @@ const CategoriesScroll = ({ setOpen }) => {
           {showRightButton && (
             <button
               onClick={() => scroll("right")}
-              className="absolute right-[260px] top-[37%] transform -translate-y-1/2 hidden md:block bg-[var(--softBg4)] bg-opacity-85 rounded-full py-2 px-4 z-10"
+              className="absolute right-[250px] top-[37%] transform -translate-y-1/2 hidden md:block border border-[var(--softBg4)] bg-[var(--bg)] bg-opacity-85 rounded-full py-[4px] px-[8px] z-10"
               style={{ border: "none" }}
             >
-              <span className="text-[var(--bg)] font-bold">&gt;</span>
+              <span className="text-[var(--softTextColor)] font-bold">&gt;</span>
             </button>
           )}
   
@@ -126,15 +126,15 @@ const CategoriesScroll = ({ setOpen }) => {
           {showLeftButton && (
             <button
               onClick={() => scroll("left")}
-              className="absolute left-1 top-[37%]  transform -translate-y-1/2 hidden md:block bg-[var(--softBg4)] bg-opacity-85 rounded-full py-2 px-4 z-10"
+              className="absolute left-1 top-[37%]  transform -translate-y-1/2 hidden md:block bordr  border-[var(--softBg4)] bg-[var(--bg)] bg-opacity-85 rounded-full py-[4px] px-[8px] z-10"
               style={{ border: "none" }}
             >
-              <span className="text-[var(--bg)] font-bold">&lt;</span>
+              <span className="text-[var(--softTextColor)] font-bold">&lt;</span>
             </button>
           )}
   
           {/* PropertySwitcher always visible at the end */}
-          <div className="flex-shrink-0 hidden md:block pl-[40px]">
+          <div className="flex-shrink-0 hidden md:block pl-[30px]">
             <PropertySwitcher />
           </div>
         </div>
