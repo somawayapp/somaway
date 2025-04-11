@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useSearchParams } from 'react-router-dom';
 
-
 export default function PropertySwitcher() {
   const location = useLocation();
   const navigate = useNavigate();
@@ -11,7 +10,11 @@ export default function PropertySwitcher() {
   const [searchParams, setSearchParams] = useSearchParams();
   const currentModel = searchParams.get('model');
 
-
+  // Sync toggleModelState with the URL search parameter
+  useEffect(() => {
+    const model = searchParams.get('model');
+    setToggleModelState(model === 'forsale');
+  }, [searchParams]);
 
   const handleModelToggle = () => {
     const newState = !toggleModelState;
@@ -22,40 +25,21 @@ export default function PropertySwitcher() {
   const handleClick = (model) => {
     const newParams = new URLSearchParams(searchParams.toString());
     newParams.set('model', model);
-    setSearchParams(newParams);
-  
-    // Optional: Sync UI toggle with model
-    setToggleModelState(model === 'forsale');
+    setSearchParams(newParams); // Triggers rerender with updated model param
   };
-  
-  
-
-  useEffect(() => {
-    if (currentModel) {
-      // Your fetch/search logic here
-      console.log('Fetching data for model:', currentModel);
-      // fetchData(currentModel);
-    }
-  }, [currentModel]);
-
-  
 
   const handleToggle = () => {
     const newState = !toggleState;
     setToggleState(newState);
     navigate("/"); // Always go to home when toggling
   };
- 
 
   const handleGoHome = () => {
     navigate("/");
   };
 
   const isNotRootPath = location.pathname === "/" && location.search !== "";
-
-
   const isRootPathWithoutSearchParams = location.pathname === "/" && !location.search;
-
 
 
   return (
