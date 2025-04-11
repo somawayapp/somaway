@@ -93,23 +93,25 @@ export default function PropertySwitcher() {
 
         {isRootPathWithoutSearchParams && (
 
-        <div className="flex justify-between block md:hidden  gap-2 md:gap-4 items-center w-full max-w-sm">
+        <div onClick={handleModelToggle} className="flex justify-between block md:hidden  gap-0 md:gap-4 items-center w-full max-w-sm">
           
           {/* Clickable text */}
-          <div onClick={handleModelToggle} className="cursor-pointer">
-       <p className="text-[16px] text-[var(--softTextColor)] font-bold">
-           Property model
-         </p>
-         <div className="flex items-center">
-            <span className="text-sm text-[var(--softTextColor)] hover:underline">
-             For rent
-             </span>
-           <span className="text-sm mx-1 text-[var(--softTextColor)]">/</span>
-            <span className="text-sm md:hidden block text-[var(--softTextColor)]">
-              For sale
-            </span>
-          </div>     
-         </div>
+          <div className="cursor-pointer flex flex justify-between block md:hidden items-center">
+      <p
+        className={`text-md text-[var(--softTextColor)] hover:underline ${
+          currentModel === 'forrent' ? 'text-lg font-bold' : ''
+        }`}
+      >
+        For rent
+      </p>
+      <p
+        className={`text-md md:hidden  block text-[var(--softTextColor)] ${
+          currentModel === 'forsale' ? 'text-lg font-bold' : ''
+        }`}
+      >
+        For sale
+      </p>
+    </div>   
 
 
           {/* Fancy Toggle Switch */}
@@ -127,26 +129,7 @@ export default function PropertySwitcher() {
         </div> )}
 
 
-<div className="flex justify-between block md:hidden  gap-2 md:gap-4 items-center w-full max-w-sm">
-  
-<div className="flex gap-9 items-center">
-      <span
-        className={`text-sm text-[var(--softTextColor)] hover:underline ${
-          currentModel === 'forrent' ? 'text-lg font-bold' : ''
-        }`}
-      >
-        For rent
-      </span>
-      <span
-        className={`text-sm md:hidden block text-[var(--softTextColor)] ${
-          currentModel === 'forsale' ? 'text-lg font-bold' : ''
-        }`}
-      >
-        For sale
-      </span>
-    </div>
 
-</div> 
 
     </div>
   );
