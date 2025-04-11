@@ -20,10 +20,14 @@ export default function PropertySwitcher() {
   };
 
   const handleClick = (model) => {
-    const newParams = new URLSearchParams(searchParams.toString()); // Create a new instance
+    const newParams = new URLSearchParams(searchParams.toString());
     newParams.set('model', model);
-    setSearchParams(newParams); // Triggers rerender with updated model param
+    setSearchParams(newParams);
+  
+    // Optional: Sync UI toggle with model
+    setToggleModelState(model === 'forsale');
   };
+  
   
 
   useEffect(() => {
