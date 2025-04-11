@@ -134,22 +134,23 @@ export default function PropertySwitcher() {
               Buy or rent property
             </p>
             <div className="cursor-pointer flex flex-col justify-between md:hidden">
-         <p
-        onClick={() => handleClick('forrent')}
-        className={`text-sm text-[var(--softTextColor)] hover:underline ${
-          currentModel === 'forrent' ? 'font-bold' : ''
-        }`}
-      >
-        For rent
-          </p>
-         <p
-        onClick={() => handleClick('forsale')}
-        className={`text-sm md:hidden block text-[var(--softTextColor)] ${
-          currentModel === 'forsale' ? 'font-bold' : ''
-        }`}
-         >
-        For sale
-      </p>
+   <p
+  onClick={() => handleClickBuy('forsale')}
+  className={`text-sm text-[var(--softTextColor)] hover:underline ${
+    currentModel === 'forsale' ? 'font-bold underline' : ''
+  }`}
+>
+  For Sale
+</p>
+
+<p
+  onClick={() => handleClickRent('forrent')}
+  className={`text-sm text-[var(--softTextColor)] hover:underline ${
+    currentModel === 'forrent' ? 'font-bold underline' : ''
+  }`}
+>
+  For Rent
+</p>
     </div>
       </div>   
 
