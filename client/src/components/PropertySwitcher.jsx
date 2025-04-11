@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import { useRouter } from 'next/router';
 
 export default function PropertySwitcher() {
   const location = useLocation();
@@ -9,16 +8,13 @@ export default function PropertySwitcher() {
   const [toggleModelState, setToggleModelState] = useState(false); // false = forrent, true = forsale
   const searchParams = new URLSearchParams(location.search);
   const currentModel = searchParams.get('model'); // "forrent" or "forsa
-  const router = useRouter();
 
   const handleClick = (model) => {
-    const currentParams = new URLSearchParams(router.query);
+    const currentParams = new URLSearchParams(location.search);
     currentParams.set('model', model);
-    router.push({
-      pathname: router.pathname,
-      query: Object.fromEntries(currentParams.entries()),
-    });
+    navigate(`${location.pathname}?${currentParams.toString()}`);
   };
+  
 
   const handleToggle = () => {
     const newState = !toggleState;
