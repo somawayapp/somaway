@@ -7,6 +7,15 @@ export default function PropertySwitcher() {
   const [toggleState, setToggleState] = useState(false); // false = forrent, true = forsale
   const searchParams = new URLSearchParams(location.search);
   const currentModel = searchParams.get('model'); // "forrent" or "forsa
+  const [toggleModelState, setToggleModelState] = useState(false); // false = forrent, true = forsale
+
+
+
+  const handleModelToggle = () => {
+    const newState = !toggleModelState;
+    setToggleModelState(newState);
+    navigate(location.pathname + `?model=${newState ? 'forsale' : 'forrent'}`);
+  };
 
   const handleClick = (model) => {
     const currentParams = new URLSearchParams(location.search);
@@ -66,12 +75,12 @@ export default function PropertySwitcher() {
 </p>
 
 <p
-  onClick={() => handleClick('forrent')}
+  onClick={() => handleClick('forsale')}
   className={`text-sm text-[var(--softTextColor)] hover:underline ${
-    currentModel === 'forrent' ? 'font-bold underline' : ''
+    currentModel === 'forsale' ? 'font-bold underline' : ''
   }`}
 >
-  For rent
+  For sale
 </p>
     </div>
           </div>
@@ -169,3 +178,5 @@ export default function PropertySwitcher() {
     </div>
   );
 }
+
+
