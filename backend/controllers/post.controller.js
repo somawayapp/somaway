@@ -130,7 +130,7 @@ export const getPosts = async (req, res) => {
     res.status(500).json("Internal server error!");
   }
 };
-
+         
 
 export const getPost = async (req, res) => {
   const post = await Post.findOne({ slug: req.params.slug }).populate(
@@ -235,35 +235,35 @@ export const deletePost = async (req, res) => {
 export const featurePost = async (req, res) => {
   const clerkUserId = req.auth.userId;
   const postId = req.body.postId;
+  const duration = parseInt(req.body.duration); // in days
 
-  if (!clerkUserId) {
-    return res.status(401).json("Not authenticated!");
-  }
+  if (!clerkUserId) return res.status(401).json("Not authenticated!");
 
   const role = req.auth.sessionClaims?.metadata?.role || "user";
 
-  if (role !== "admin") {
-    return res.status(403).json("You cannot feature posts!");
-  }
+  if (role !== "admin") return res.status(403).json("You cannot feature posts!");
 
   const post = await Post.findById(postId);
-
-  if (!post) {
-    return res.status(404).json("Post not found!");
-  }
+  if (!post) return res.status(404).json("Post not found!");
 
   const isFeatured = post.isFeatured;
 
-  const updatedPost = await Post.findByIdAndUpdate(
-    postId,
-    {
-      isFeatured: !isFeatured,
-    },
-    { new: true }
-  );
+  let updateFields = {
+    isFeatured: !isFeatured,
+    featuredUntil: null,
+  };
+
+  // If enabling feature, set expiration
+  if (!isFeatured && duration) {
+    const featuredUntilDate = new Date(Date.now() + duration * 24 * 60 * 60 * 1000);
+    updateFields.featuredUntil = featuredUntilDate;
+  }
+
+  const updatedPost = await Post.findByIdAndUpdate(postId, updateFields, { new: true });
 
   res.status(200).json(updatedPost);
 };
+
 
 const imagekit = new ImageKit({
   urlEndpoint: process.env.IK_URL_ENDPOINT,
