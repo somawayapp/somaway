@@ -7,11 +7,12 @@ import Link from "next/link";
 
 const fetchPosts = async (searchParams) => {
   const searchParamsObj = Object.fromEntries([...searchParams]);
-  const res = await axios.get(`${import.meta.env.VITE_API_URL}/posts`, {
+  const res = await axios.get(`${import.meta.env.VITE_API_URL}/posts?featured=true&sort=newest`, {
     params: { ...searchParamsObj },
   });
   return res.data.posts;
 };
+
 
 const PostList = () => {
 
