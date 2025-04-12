@@ -139,7 +139,7 @@ const PostList = () => {
   }
 
   return (
-    <div className=" scrollbar-hide">
+    <div className="gap-2 grid grid-cols-1 md:grid-cols-4 md:gap-6 scrollbar-hide">
       {/* Display featured posts first on medium screens */}
       {featuredPosts.length > 0 && (
         <div className="md:col-span-4">
