@@ -8,7 +8,7 @@ import Link from "next/link";
 // Fetch regular posts
 const fetchPosts = async (searchParams) => {
   const searchParamsObj = Object.fromEntries([...searchParams]);
-  const res = await axios.get(`${import.meta.env.VITE_API_URL}/posts?random`, {
+  const res = await axios.get(`${import.meta.env.VITE_API_URL}/posts?sort=random`, {
     params: { ...searchParamsObj },
   });
   return res.data.posts;
@@ -16,7 +16,7 @@ const fetchPosts = async (searchParams) => {
 
 // Fetch featured posts
 const fetchFeaturedPosts = async () => {
-  const res = await axios.get(`${import.meta.env.VITE_API_URL}/posts?featured=true&limit=4&sort=random`);
+  const res = await axios.get(`${import.meta.env.VITE_API_URL}/posts?featured=true&limit=2&sort=random`);
   return res.data.posts;
 };
 
