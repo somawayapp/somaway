@@ -222,6 +222,7 @@ export const deletePost = async (req, res) => {
 
   res.status(200).json("Post has been deleted");
 };
+
 export const featurePost = async (req, res) => {
   const clerkUserId = req.auth.userId;
   const postId = req.body.postId;
@@ -241,16 +242,16 @@ export const featurePost = async (req, res) => {
     // Unfeature it
     updatedPost = await Post.findByIdAndUpdate(postId, {
       isFeatured: false,
-      featuredUntil: null,
+      isfeaturedUntil: null,
     }, { new: true });
   } else {
     // Feature it with duration
-    const featuredUntil = new Date();
-    featuredUntil.setDate(featuredUntil.getDate() + parseInt(duration));
+    const isfeaturedUntil = new Date();
+    isfeaturedUntil.setDate(isfeaturedUntil.getDate() + parseInt(duration));
 
     updatedPost = await Post.findByIdAndUpdate(postId, {
       isFeatured: true,
-      featuredUntil,
+      isfeaturedUntil,
     }, { new: true });
   }
 

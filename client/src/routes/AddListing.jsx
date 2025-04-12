@@ -35,7 +35,7 @@ const AddListing = () => {
   const [progress, setProgress] = useState(0);
   const [error, setError] = useState("");
   const [isFeatured, setIsFeatured] = useState(false);
-  const [isFeaturedUntil, setisFeaturedUntil] = useState("1"); 
+  const [duration, setDuration] = useState("7"); // Default value, e.g. 1 week
 
 
 
@@ -106,7 +106,7 @@ const AddListing = () => {
       rooms,
       bedrooms,
       isFeatured,
-      isFeaturedUntil,
+      duration,
     };
 
     mutation.mutate(data);
@@ -401,23 +401,26 @@ const AddListing = () => {
 
   {isFeatured && (
     <select
-      value={isFeaturedUntil}
-      onChange={(e) => setisFeaturedUntil(e.target.value)}
+      value={duration}
+      onChange={(e) => setDuration(e.target.value)}
       className="border p-1 rounded"
     >
-      <option value="1">1 day</option>
-      <option value="2">2 days</option>
-      <option value="3">3 days</option>
-      <option value="4">4 days</option>
-      <option value="5">5 days</option>
-      <option value="6">6 days</option>
-      <option value="7">1 week</option>
-      <option value="14">2 weeks</option>
-      <option value="21">3 weeks</option>
-      <option value="30">1 month</option>
-      <option value="30">2 months</option>
-      <option value="90">3 months</option>
-    </select>
+   
+     
+           <option value="1">1 day</option>
+           <option value="2">2 days</option>
+           <option value="3">3 days</option>
+           <option value="4">4 days</option>
+           <option value="5">5 days</option>
+           <option value="6">6 days</option>
+           <option value="7">1 week</option>
+           <option value="14">2 weeks</option>
+           <option value="21">3 weeks</option>
+           <option value="30">1 month</option>
+           <option value="30">2 months</option>
+           <option value="90">3 months</option>
+         </select>
+      
   )}
 </label>
 
