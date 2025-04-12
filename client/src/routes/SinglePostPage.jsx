@@ -512,7 +512,7 @@ data.propertytype ? `${data.propertytype} ` : null,
   className="text-[var(--softTextColor)]  gap-1 text-[14px] md:text-[16px]  font-semibold  mt-2  border-[2px]    hover:shadow-xl  hover:text-[var(--textColor)]   rounded-xl py-2 px-6 border-[var(--softBg4)]"
   onClick={() => setPopupDesc(data.desc)}
 >
-  Show More
+  Show Mor
 </button>
 
     </>
