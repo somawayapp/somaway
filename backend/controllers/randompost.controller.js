@@ -80,16 +80,22 @@ export const getPosts = async (req, res) => {
       { $sample: { size: limit } },
     ]);
 
-    // Check the posts structure and log it for debugging
-    console.log(posts); // Ensure that 'posts' is an array and populated data works
+    // Check that 'posts' is an array and log it for debugging
+    console.log(posts); // Inspect the posts array
 
-    // If the aggregation query returns a valid result, proceed with populating the 'user' field
-    posts = await Post.populate(posts, { path: "user", select: "username" });
+    if (Array.isArray(posts) && posts.length > 0) {
+      // Populate the 'user' field correctly
+      posts = await Post.populate(posts, { path: "user", select: "username" });
 
-    const totalPosts = await Post.countDocuments(query);
-    const hasMore = page * limit < totalPosts;
+      const totalPosts = await Post.countDocuments(query);
+      const hasMore = page * limit < totalPosts;
 
-    res.status(200).json({ posts, hasMore });
+      return res.status(200).json({ posts, hasMore });
+    }
+
+    // If no posts are found
+    return res.status(404).json({ message: "No posts found" });
+
   } catch (error) {
     console.error("Error fetching posts:", error);
     res.status(500).json("Internal server error!");
@@ -99,8 +105,8 @@ export const getPosts = async (req, res) => {
 export const getPost = async (req, res) => {
   try {
     const post = await Post.findOne({ slug: req.params.slug })
-      .populate("user", "username img")
-      .exec(); // Ensure exec() is used if needed to populate properly
+      .populate("user", "username img") // Populate the user field directly
+      .exec(); // Ensure exec() is used for proper population
 
     if (!post) {
       return res.status(404).json({ message: "Post not found" });
