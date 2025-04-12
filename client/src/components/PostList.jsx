@@ -49,7 +49,7 @@ const PostList = () => {
 
   const [searchParams] = useSearchParams();
   const { data: allPosts = [], error, status } = useQuery({
-    queryKey: ["posts", "random", searchParams.toString()],
+    queryKey: ["posts", searchParams.toString()],
     queryFn: () => fetchAllPosts(searchParams),
     staleTime: 1000 * 60 * 10,
     cacheTime: 1000 * 60 * 30,
@@ -153,7 +153,7 @@ const PostList = () => {
     
 
     <div className="gap-2 grid grid-cols-1 md:grid-cols-4 md:gap-6 scrollbar-hide">
-    {displayedPosts.map((post) => (
+    {allPosts.map((post) => (
           <PostListItem key={post._id} post={post} />
         ))}
     </div>
