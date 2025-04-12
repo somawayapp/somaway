@@ -5,26 +5,20 @@ import { useSearchParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import Link from "next/link";
 
-const fetchFeaturedPosts = async (searchParams) => {
+const fetchPosts = async (searchParams) => {
   const searchParamsObj = Object.fromEntries([...searchParams]);
-  const res = await axios.get(
-    `${import.meta.env.VITE_API_URL}/posts?featured=true&sort=random`,
-    {
-      params: { ...searchParamsObj },
-    }
-  );
-  return res.data.posts || [];
+  const res = await axios.get(`${import.meta.env.VITE_API_URL}/posts?sort=random`, {
+    params: { ...searchParamsObj },
+  });
+  return res.data.posts;
 };
 
-const fetchAllPosts = async (searchParams) => {
+const fetchFeaturedPosts = async (searchParams) => {
   const searchParamsObj = Object.fromEntries([...searchParams]);
-  const res = await axios.get(
-    `${import.meta.env.VITE_API_URL}/posts?sort=random`,
-    {
-      params: { ...searchParamsObj },
-    }
-  );
-  return res.data.posts || [];
+  const res = await axios.get(`${import.meta.env.VITE_API_URL}/posts?featured=true&sort=random`, {
+    params: { ...searchParamsObj },
+  });
+  return res.data.posts;
 };
 
 const PostList = () => {
@@ -51,25 +45,16 @@ const PostList = () => {
   }, []);
 
   const [searchParams] = useSearchParams();
-
-  const {
-    data: featuredPosts = [],
-    error: featuredError,
-    status: featuredStatus,
-  } = useQuery({
-    queryKey: ["featuredPosts", searchParams.toString()],
-    queryFn: () => fetchFeaturedPosts(searchParams),
+  const { data: allPosts = [], error, status } = useQuery({
+    queryKey: ["posts", searchParams.toString()],
+    queryFn: () => fetchPosts(searchParams),
     staleTime: 1000 * 60 * 10,
     cacheTime: 1000 * 60 * 30,
   });
 
-  const {
-    data: allPosts = [],
-    error: allError,
-    status: allStatus,
-  } = useQuery({
-    queryKey: ["allPosts", searchParams.toString()],
-    queryFn: () => fetchAllPosts(searchParams),
+  const { data: featuredPosts = [], error: featuredError, status: featuredStatus } = useQuery({
+    queryKey: ["featuredPosts", searchParams.toString()],
+    queryFn: () => fetchFeaturedPosts(searchParams),
     staleTime: 1000 * 60 * 10,
     cacheTime: 1000 * 60 * 30,
   });
@@ -77,64 +62,50 @@ const PostList = () => {
   const [displayedPosts, setDisplayedPosts] = useState([]);
 
   useEffect(() => {
-    if (featuredPosts.length === 0 && allPosts.length === 0) {
-      setDisplayedPosts([]); // Clear out the displayed posts if no posts are available
+    if (allPosts.length === 0 && featuredPosts.length === 0) {
+      setDisplayedPosts([]); // 🧼 clear out the old data
       return;
     }
-  
-    const featuredLimit = 4;
-    const topFeatured = featuredPosts.slice(0, featuredLimit);
-    const nonFeatured = allPosts.filter(
-      (post) => !featuredPosts.some((fp) => fp._id === post._id)
-    );
-  
-    const combinedPosts = [...topFeatured, ...nonFeatured];
-  
-    // If no new posts are available, do not update state
-    if (JSON.stringify(combinedPosts) === JSON.stringify(displayedPosts)) return;
-  
+
     let newPosts = [];
     let index = 0;
-  
+
     const loadNextBatch = (batchSize) => {
-      newPosts = [...newPosts, ...combinedPosts.slice(index, index + batchSize)];
+      newPosts = [...newPosts, ...allPosts.slice(index, index + batchSize)];
       setDisplayedPosts([...newPosts]);
       index += batchSize;
     };
-  
-    loadNextBatch(4);
-    setTimeout(() => loadNextBatch(4), 50);
-    setTimeout(() => loadNextBatch(4), 100);
-    setTimeout(() => {
-      while (index < combinedPosts.length) {
-        loadNextBatch(8);
-      }
-    }, 150);
-  }, [featuredPosts, allPosts, displayedPosts]);
-  
-  if (featuredStatus === "loading" || allStatus === "loading") {
-    return <p>Loading...</p>;
-  }
 
-  if (featuredError || allError) {
-    return <p>Something went wrong!</p>;
-  }
+    // Show up to 4 featured posts first, if available
+    let featuredToShow = featuredPosts.slice(0, 4);
+    let remainingPosts = allPosts;
+
+    if (featuredToShow.length > 0) {
+      remainingPosts = allPosts.filter(post => !featuredToShow.some(fPost => fPost._id === post._id));
+    }
+
+    setDisplayedPosts([...featuredToShow, ...remainingPosts]);
+
+  }, [allPosts, featuredPosts]);
+
+  if (status === "loading" || featuredStatus === "loading") return <p>Loading...</p>;
+  if (error || featuredError) return <p>Something went wrong!</p>;
 
   const [showMessage, setShowMessage] = useState(false);
 
   useEffect(() => {
     const timer = setTimeout(() => {
       setShowMessage(true);
-    }, 3000);
+    }, 3000); // 3-second delay
 
-    return () => clearTimeout(timer);
+    return () => clearTimeout(timer); // Cleanup timeout on unmount
   }, []);
 
   if (displayedPosts.length === 0 && showMessage) {
     return (
       <div className="flex flex-col items-center justify-center h-[50vh]">
         <button
-          onClick={() => (window.location.href = "/addlisting")}
+          onClick={() => window.location.href = '/addlisting'}
           className="w-full px-6 py-3 rounded-xl border border-[var(--softBg4)] 
                      text-[var(--softTextColor)] shadow-md 
                      hover:text-[var(--textColor)] hover:shadow-xl text-center"
@@ -148,17 +119,12 @@ const PostList = () => {
 
   if (displayedPosts.length === 0) {
     return (
-      <div
-        className="gap-2 grid grid-cols-1 md:grid-cols-4 md:gap-6 overflow-y-auto scrollbar-hide"
-        style={{ height: "calc(100vw * 8)" }}
-      >
-        {Array(8)
-          .fill(0)
-          .map((_, index) => (
-            <div key={index} className="relative aspect-[3/3] w-full">
-              <div className="absolute inset-0 bg-[var(--softBg4)] animate-pulse rounded-xl md:rounded-2xl"></div>
-            </div>
-          ))}
+      <div className="gap-2 grid grid-cols-1 md:grid-cols-4 md:gap-6 overflow-y-auto scrollbar-hide" style={{ height: 'calc(100vw * 8)' }}>
+        {Array(8).fill(0).map((_, index) => (
+          <div key={index} className="relative aspect-[3/3] w-full">
+            <div className="absolute inset-0 bg-[var(--softBg4)] animate-pulse rounded-xl md:rounded-2xl"></div>
+          </div>
+        ))}
       </div>
     );
   }
