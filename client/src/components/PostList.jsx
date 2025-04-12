@@ -1,16 +1,15 @@
-import { useState, useEffect } from "react";
-import { useSearchParams } from "react-router-dom"; // Make sure this is imported
+// PostList.jsx
+import PostListItem from "./PostListItem";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
-import PostListItem from "./PostListItem";
+import { useSearchParams } from "react-router-dom";
+import { useEffect, useState } from "react";
 
-// Fetch regular posts
 const fetchPosts = async (searchParams) => {
   const searchParamsObj = Object.fromEntries([...searchParams]);
   const res = await axios.get(`${import.meta.env.VITE_API_URL}/posts?sort=random`, {
     params: { ...searchParamsObj },
   });
-
   return Array.isArray(res.data?.posts) ? res.data.posts : [];
 };
 
@@ -21,10 +20,28 @@ const fetchFeaturedPosts = async () => {
 
 const PostList = () => {
   const [columns, setColumns] = useState("repeat(1, 1fr)");
+  const [searchParams] = useSearchParams();
   const [displayedPosts, setDisplayedPosts] = useState([]);
   const [showMessage, setShowMessage] = useState(false);
 
-  const [searchParams] = useSearchParams();  // Get search params from the URL
+  useEffect(() => {
+    const updateColumns = () => {
+      const width = window.innerWidth;
+      setColumns(
+        width > 1400
+          ? "repeat(4, 1fr)"
+          : width > 1000
+          ? "repeat(3, 1fr)"
+          : width > 640
+          ? "repeat(2, 1fr)"
+          : "repeat(1, 1fr)"
+      );
+    };
+
+    window.addEventListener("resize", updateColumns);
+    updateColumns();
+    return () => window.removeEventListener("resize", updateColumns);
+  }, []);
 
   const {
     data: allPosts = [],
@@ -48,9 +65,7 @@ const PostList = () => {
   });
 
   useEffect(() => {
-    const timer = setTimeout(() => {
-      setShowMessage(true);
-    }, 3000);
+    const timer = setTimeout(() => setShowMessage(true), 3000);
     return () => clearTimeout(timer);
   }, []);
 
@@ -62,37 +77,33 @@ const PostList = () => {
       const combined = [...featuredPosts, ...filteredPosts];
       let index = 0;
       let batched = [];
-      const loadNextBatch = (batchSize, delay) => {
-        setTimeout(() => {
-          batched = [...batched, ...combined.slice(index, index + batchSize)];
-          setDisplayedPosts([...batched]);
-          index += batchSize;
-        }, delay);
+      const loadNextBatch = (batchSize) => {
+        batched = [...batched, ...combined.slice(index, index + batchSize)];
+        setDisplayedPosts([...batched]);
+        index += batchSize;
       };
-
-      loadNextBatch(4, 0);
-      loadNextBatch(4, 50);
-      loadNextBatch(4, 100);
-      loadNextBatch(combined.length, 150);
+      loadNextBatch(4);
+      setTimeout(() => loadNextBatch(4), 50);
+      setTimeout(() => loadNextBatch(4), 100);
+      setTimeout(() => {
+        while (index < combined.length) loadNextBatch(8);
+      }, 150);
     }
   }, [allPosts, featuredPosts, postsStatus, featuredStatus]);
 
-  if (postsStatus === "loading" || featuredStatus === "loading") {
+  if (postsStatus === "loading" || featuredStatus === "loading")
     return <p>Loading...</p>;
-  }
 
-  if (postsError) {
-    return <p>Something went wrong!</p>;
-  }
+  if (postsError) return <p>Something went wrong!</p>;
+
+  if (!Array.isArray(displayedPosts)) return <p>Data format error</p>;
 
   if (displayedPosts.length === 0 && showMessage) {
     return (
       <div className="flex flex-col items-center justify-center h-[50vh]">
         <button
           onClick={() => (window.location.href = "/addlisting")}
-          className="w-full px-6 py-3 rounded-xl border border-[var(--softBg4)] 
-                     text-[var(--softTextColor)] shadow-md 
-                     hover:text-[var(--textColor)] hover:shadow-xl text-center"
+          className="w-full px-6 py-3 rounded-xl border border-[var(--softBg4)] text-[var(--softTextColor)] shadow-md hover:text-[var(--textColor)] hover:shadow-xl text-center"
         >
           <p className="mb-2">No listings found</p>
           <p className="mb-2 font-bold">Go back home</p>
