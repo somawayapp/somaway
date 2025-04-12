@@ -222,39 +222,41 @@ export const deletePost = async (req, res) => {
 
   res.status(200).json("Post has been deleted");
 };
-
 export const featurePost = async (req, res) => {
   const clerkUserId = req.auth.userId;
   const postId = req.body.postId;
+  const duration = req.body.duration; // duration in days
 
-  if (!clerkUserId) {
-    return res.status(401).json("Not authenticated!");
-  }
+  if (!clerkUserId) return res.status(401).json("Not authenticated!");
 
   const role = req.auth.sessionClaims?.metadata?.role || "user";
-
-  if (role !== "admin") {
-    return res.status(403).json("You cannot feature posts!");
-  }
+  if (role !== "admin") return res.status(403).json("You cannot feature posts!");
 
   const post = await Post.findById(postId);
+  if (!post) return res.status(404).json("Post not found!");
 
-  if (!post) {
-    return res.status(404).json("Post not found!");
+  let updatedPost;
+
+  if (post.isFeatured) {
+    // Unfeature it
+    updatedPost = await Post.findByIdAndUpdate(postId, {
+      isFeatured: false,
+      featuredUntil: null,
+    }, { new: true });
+  } else {
+    // Feature it with duration
+    const featuredUntil = new Date();
+    featuredUntil.setDate(featuredUntil.getDate() + parseInt(duration));
+
+    updatedPost = await Post.findByIdAndUpdate(postId, {
+      isFeatured: true,
+      featuredUntil,
+    }, { new: true });
   }
-
-  const isFeatured = post.isFeatured;
-
-  const updatedPost = await Post.findByIdAndUpdate(
-    postId,
-    {
-      isFeatured: !isFeatured,
-    },
-    { new: true }
-  );
 
   res.status(200).json(updatedPost);
 };
+
 
 const imagekit = new ImageKit({
   urlEndpoint: process.env.IK_URL_ENDPOINT,

@@ -387,10 +387,30 @@ const AddListing = () => {
 
 
         {/* Featured Checkbox */}
-        <label className="flex items-center gap-2">
-          <input type="checkbox" checked={isFeatured} onChange={() => setIsFeatured(!isFeatured)} />
-          Mark as Featured
-        </label>
+        <label className="flex flex-col gap-2">
+  <div className="flex items-center gap-2">
+    <input
+      type="checkbox"
+      checked={isFeatured}
+      onChange={() => setIsFeatured(!isFeatured)}
+    />
+    Mark as Featured
+  </div>
+
+  {isFeatured && (
+    <select
+      value={duration}
+      onChange={(e) => setDuration(e.target.value)}
+      className="border p-1 rounded"
+    >
+      <option value="1">1 day</option>
+      <option value="7">1 week</option>
+      <option value="30">1 month</option>
+      <option value="90">3 months</option>
+    </select>
+  )}
+</label>
+
         {error && <div className="text-red-600">{error}</div>}
 
         <button 

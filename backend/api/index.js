@@ -15,6 +15,7 @@ import cors from 'cors';
 import 'dotenv/config';
 import ratingRouter from '../routes/rating.route.js';
 import likeRouter from '../routes/like.route.js';
+import "./cron/featureCleaner.js"; 
 
 dotenv.config();
 
