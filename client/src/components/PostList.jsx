@@ -8,16 +8,16 @@ import Link from "next/link";
 // Fetch regular posts
 const fetchPosts = async (searchParams) => {
   const searchParamsObj = Object.fromEntries([...searchParams]);
-  try {
-    const res = await axios.get(`${import.meta.env.VITE_API_URL}/posts?sort=random`, {
-      params: { ...searchParamsObj },
-    });
-    console.log("API Response:", res.data);
-    return res.data.posts;
-  } catch (error) {
-    console.error("Error fetching posts:", error);
-    return [];
-  }
+  const res = await axios.get(`${import.meta.env.VITE_API_URL}/posts?random`, {
+    params: { ...searchParamsObj },
+  });
+  return res.data.posts;
+};
+
+// Fetch featured posts
+const fetchFeaturedPosts = async () => {
+  const res = await axios.get(`${import.meta.env.VITE_API_URL}/posts?featured=true&limit=4&sort=random`);
+  return res.data.posts;
 };
 
 const PostList = () => {
@@ -38,67 +38,81 @@ const PostList = () => {
     };
 
     window.addEventListener("resize", updateColumns);
-    updateColumns();
-
+    updateColumns(); // Initial call
     return () => window.removeEventListener("resize", updateColumns);
   }, []);
 
   const [searchParams] = useSearchParams();
-  const { data: allPosts = [], error, status } = useQuery({
+
+  const {
+    data: allPosts = [],
+    error: postsError,
+    status: postsStatus,
+  } = useQuery({
     queryKey: ["posts", searchParams.toString()],
     queryFn: () => fetchPosts(searchParams),
     staleTime: 1000 * 60 * 10,
     cacheTime: 1000 * 60 * 30,
   });
 
+  const {
+    data: featuredPosts = [],
+    status: featuredStatus,
+  } = useQuery({
+    queryKey: ["featuredPosts"],
+    queryFn: fetchFeaturedPosts,
+    staleTime: 1000 * 60 * 10,
+    cacheTime: 1000 * 60 * 30,
+  });
+
   const [displayedPosts, setDisplayedPosts] = useState([]);
-
-  useEffect(() => {
-    if (!allPosts || allPosts.length === 0) {
-      setDisplayedPosts([]);
-      return;
-    }
-
-    let newPosts = [];
-    let index = 0;
-
-    const loadNextBatch = (batchSize) => {
-      newPosts = [...newPosts, ...allPosts.slice(index, index + batchSize)];
-      setDisplayedPosts([...newPosts]);
-      index += batchSize;
-    };
-
-    loadNextBatch(4);
-    setTimeout(() => loadNextBatch(4), 50);
-    setTimeout(() => loadNextBatch(4), 100);
-    setTimeout(() => {
-      while (index < allPosts.length) {
-        loadNextBatch(8);
-      }
-    }, 150);
-  }, [allPosts]);
-
-  if (status === "loading") return <p>Loading...</p>;
-  if (error) return <p>Something went wrong!</p>;
-
   const [showMessage, setShowMessage] = useState(false);
 
   useEffect(() => {
     const timer = setTimeout(() => {
       setShowMessage(true);
     }, 3000);
-
     return () => clearTimeout(timer);
   }, []);
+
+  useEffect(() => {
+    if (postsStatus === "success" && featuredStatus === "success") {
+      // Remove duplicates based on _id, in case featured posts are also in allPosts
+      const filteredPosts = allPosts.filter(
+        (post) => !featuredPosts.find((f) => f._id === post._id)
+      );
+      const combined = [...featuredPosts, ...filteredPosts];
+      let index = 0;
+      let batched = [];
+      const loadNextBatch = (batchSize) => {
+        batched = [...batched, ...combined.slice(index, index + batchSize)];
+        setDisplayedPosts([...batched]);
+        index += batchSize;
+      };
+      loadNextBatch(4);
+      setTimeout(() => loadNextBatch(4), 50);
+      setTimeout(() => loadNextBatch(4), 100);
+      setTimeout(() => {
+        while (index < combined.length) {
+          loadNextBatch(8);
+        }
+      }, 150);
+    }
+  }, [allPosts, featuredPosts, postsStatus, featuredStatus]);
+
+  if (postsStatus === "loading" || featuredStatus === "loading")
+    return <p>Loading...</p>;
+
+  if (postsError) return <p>Something went wrong!</p>;
 
   if (displayedPosts.length === 0 && showMessage) {
     return (
       <div className="flex flex-col items-center justify-center h-[50vh]">
         <button
           onClick={() => (window.location.href = "/addlisting")}
-          className="w-full px-6 py-3 rounded-xl border border-[var(--softBg4)]
-                   text-[var(--softTextColor)] shadow-md
-                   hover:text-[var(--textColor)] hover:shadow-xl text-center"
+          className="w-full px-6 py-3 rounded-xl border border-[var(--softBg4)] 
+                     text-[var(--softTextColor)] shadow-md 
+                     hover:text-[var(--textColor)] hover:shadow-xl text-center"
         >
           <p className="mb-2">No listings found</p>
           <p className="mb-2 font-bold">Go back home</p>
@@ -107,7 +121,7 @@ const PostList = () => {
     );
   }
 
-  if (displayedPosts.length === 0 && status === "loading") {
+  if (displayedPosts.length === 0) {
     return (
       <div className="gap-2 grid grid-cols-1 md:grid-cols-4 md:gap-6 overflow-y-auto scrollbar-hide" style={{ height: 'calc(100vw * 8)' }}>
         {Array(8).fill(0).map((_, index) => (
@@ -120,15 +134,13 @@ const PostList = () => {
   }
 
   return (
-    <div>
-      <div className="gap-2 grid grid-cols-1 md:grid-cols-4 md:gap-6 scrollbar-hide">
-        {console.log("displayedPosts before map:", displayedPosts)}
-        {displayedPosts.map((post) => (
-          <PostListItem key={post._id} post={post} />
-        ))}
-      </div>
+    <div className="gap-2 grid grid-cols-1 md:grid-cols-4 md:gap-6 scrollbar-hide">
+      {displayedPosts.map((post) => (
+        <PostListItem key={post._id} post={post} />
+      ))}
     </div>
   );
 };
 
 export default PostList;
+
