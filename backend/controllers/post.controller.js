@@ -1,150 +1,173 @@
 import ImageKit from "imagekit";
 import Post from "../models/post.model.js";
 import User from "../models/user.model.js";
-import Redis from "ioredis";
+import redis from "redis";
+import rateLimit from "express-rate-limit";
 
-const redis = new Redis(); // Initialize Redis connection
+// Redis client setup
+const client = redis.createClient();
 
-// GET ALL POSTS
+// Set up rate limiter
+const limiter = rateLimit({
+  windowMs: 15 * 60 * 1000, // 15 minutes
+  max: 1000, // Limit each IP to 1000 requests per windowMs
+  message: "Too many requests, please try again later."
+});
+
+const imagekit = new ImageKit({
+  urlEndpoint: process.env.IK_URL_ENDPOINT,
+  publicKey: process.env.IK_PUBLIC_KEY,
+  privateKey: process.env.IK_PRIVATE_KEY,
+});
+
 export const getPosts = async (req, res) => {
   try {
     const page = parseInt(req.query.page) || 1;
     const limit = parseInt(req.query.limit) || 1000;
-    const cacheKey = `posts:${JSON.stringify(req.query)}`;
+    const query = {};
 
-    // Check cache first
-    const cachedData = await redis.get(cacheKey);
-    if (cachedData) {
-      return res.status(200).json(JSON.parse(cachedData));
+    const {
+      author,
+      search,
+      sort,
+      location,
+      propertytype,
+      bedrooms,
+      bathrooms,
+      propertysize,
+      rooms,
+      pricemax,
+      pricemin,
+      model,
+      featured,
+    } = req.query;
+
+    if (req.query.cat) {
+      query.category = req.query.cat;
     }
 
-    const query = {};
-    const { author, search, sort, location, propertytype, bedrooms, bathrooms, propertysize, rooms, pricemax, pricemin, model, featured } = req.query;
+    if (search) {
+      query.$or = [
+        { title: { $regex: search, $options: "i" } },
+        { desc: { $regex: search, $options: "i" } },
+      ];
+    }
 
-    // Category Filter
-    if (req.query.cat) query.category = req.query.cat;
+    if (author) {
+      const authorNames = author
+        .split(/[,;|\s]+/)
+        .map((name) => name.trim())
+        .filter(Boolean);
+      const authorRegexes = authorNames.map((name) => new RegExp(name, "i"));
+      query.author = { $in: authorRegexes };
+    }
 
-    // Full-Text Search Optimization
-    if (search) query.$text = { $search: search };
+    if (location) {
+      query["location.city"] = { $regex: location, $options: "i" };
+    }
 
-    // Author Filter
-    if (author) query.author = { $in: author.split(/[,;|\s]+/).map(name => new RegExp(name.trim(), "i")) };
+    if (propertytype) {
+      query.propertytype = propertytype;
+    }
 
-    // Location Filter
-    if (location) query["location.city"] = { $regex: location, $options: "i" };
-
-    // Property Type Filter
-    if (propertytype) query.propertytype = propertytype;
-
-    // Numeric Filters
     if (bedrooms) query.bedrooms = { $gte: parseInt(bedrooms) };
     if (bathrooms) query.bathrooms = { $gte: parseInt(bathrooms) };
     if (propertysize) query.propertysize = { $gte: parseInt(propertysize) };
     if (rooms) query.rooms = { $gte: parseInt(rooms) };
 
-    // Price Range Filter
     if (pricemin || pricemax) {
       query.price = {};
       if (pricemin) query.price.$gte = parseInt(pricemin);
       if (pricemax) query.price.$lte = parseInt(pricemax);
     }
 
-    // Model Filter (For Rent / For Sale)
-    if (model) query.model = model;
+    if (model) {
+      query.model = model;
+    }
 
-    // Featured Filter
-    if (featured) query.isFeatured = true;
+    if (featured) {
+      query.isFeatured = true;
+    }
 
-    // Sorting Logic
-  // Sorting Logic
-const sortOptions = {
-  newest: { createdAt: -1 },
-  oldest: { createdAt: 1 },
-  popular: { visit: -1 },
-  trending: { visit: -1, createdAt: { $gte: new Date(Date.now() - 14 * 24 * 60 * 60 * 1000) } },
-};
+    let sortObj = { createdAt: -1 };
+    let useAggregation = false;
 
-// Fetch posts with optimized query
-let posts;
+    if (sort) {
+      switch (sort) {
+        case "newest":
+          sortObj = { createdAt: -1 };
+          break;
+        case "oldest":
+          sortObj = { createdAt: 1 };
+          break;
+        case "popular":
+          sortObj = { visit: -1 };
+          break;
+        case "trending":
+          sortObj = { visit: -1 };
+          query.createdAt = {
+            $gte: new Date(new Date().getTime() - 14 * 24 * 60 * 60 * 1000),
+          };
+          break;
+        case "random":
+          useAggregation = true;
+          break;
+        default:
+          break;
+      }
+    }
 
-if (sort === "random") {
-  posts = await Post.aggregate([
-    { $match: query },
-    { $sample: { size: limit } }, // Randomly sample 'limit' documents
-    {
-      $lookup: {
-        from: "users",
-        localField: "user",
-        foreignField: "_id",
-        as: "user",
-      },
-    },
-    { $unwind: "$user" },
-    {
-      $project: {
-        title: 1,
-        slug: 1,
-        price: 1,
-        bedrooms: 1,
-        bathrooms: 1,
-        location: 1,
-        createdAt: 1,
-        "user.username": 1,
-      },
-    },
-  ]);
-} else {
-  const sortObj = sortOptions[sort] || { createdAt: -1 };
+    // Cache check before hitting the database
+    const cacheKey = JSON.stringify(query) + sortObj + page + limit;
+    client.get(cacheKey, async (err, cachedData) => {
+      if (cachedData) {
+        return res.status(200).json(JSON.parse(cachedData));
+      }
 
-  posts = await Post.find(query)
-    .populate("user", "username")
-    .sort(sortObj)
-    .limit(limit)
-    .skip((page - 1) * limit)
-    .select("title slug price bedrooms bathrooms location createdAt")
-    .lean();
-}
+      let posts, totalPosts;
 
+      if (useAggregation) {
+        posts = await Post.aggregate([
+          { $match: query },
+          { $sample: { size: limit } },
+          { $project: { title: 1, slug: 1, price: 1, location: 1, createdAt: 1 } },
+        ]);
 
-    const totalPosts = await Post.countDocuments(query);
-    const hasMore = page * limit < totalPosts;
+        posts = await Post.populate(posts, { path: "user", select: "username" });
 
-    const response = { posts, hasMore };
+        totalPosts = await Post.countDocuments(query);
+      } else {
+        posts = await Post.find(query)
+          .populate("user", "username")
+          .select("title slug price location createdAt")
+          .sort(sortObj)
+          .limit(limit)
+          .skip((page - 1) * limit);
 
-    // Store in Redis Cache for 1 hour
-    await redis.setex(cacheKey, 3600, JSON.stringify(response));
+        totalPosts = await Post.countDocuments(query);
+      }
 
-    res.status(200).json(response);
+      const hasMore = page * limit < totalPosts;
+
+      // Cache the result for future requests
+      client.setex(cacheKey, 3600, JSON.stringify({ posts, hasMore }));
+
+      res.status(200).json({ posts, hasMore });
+    });
   } catch (error) {
     console.error("Error fetching posts:", error);
     res.status(500).json("Internal server error!");
   }
 };
 
-// GET SINGLE POST
 export const getPost = async (req, res) => {
   try {
-    const { slug } = req.params;
-    const cacheKey = `post:${slug}`;
-
-    // Check cache first
-    const cachedPost = await redis.get(cacheKey);
-    if (cachedPost) {
-      return res.status(200).json(JSON.parse(cachedPost));
-    }
-
-    // Fetch post
-    const post = await Post.findOne({ slug })
-      .populate("user", "username img")
-      .select("title slug price bedrooms bathrooms location desc createdAt")
-      .lean();
+    const post = await Post.findOne({ slug: req.params.slug })
+      .populate("user", "username img");
 
     if (!post) {
-      return res.status(404).json({ message: "Post not found" });
+      return res.status(404).json("Post not found!");
     }
-
-    // Cache post for 1 hour
-    await redis.setex(cacheKey, 3600, JSON.stringify(post));
 
     res.status(200).json(post);
   } catch (error) {
@@ -153,54 +176,32 @@ export const getPost = async (req, res) => {
   }
 };
 
-         
-
-
-
 export const createPost = async (req, res) => {
   try {
-    // Log request headers for debugging
-    console.log("Request Headers:", req.headers);
-
     const clerkUserId = req.auth.userId;
 
-    // Check if the user is authenticated
-    if (!clerkUserId) {
-      console.log("Not authenticated, returning 401.");
-      return res.status(401).json("Not authenticated!");
-    }
+    if (!clerkUserId) return res.status(401).json("Not authenticated!");
 
-    // Find the user in the database
     const user = await User.findOne({ clerkUserId });
-    if (!user) {
-      console.log("User not found, returning 404.");
-      return res.status(404).json("User not found!");
-    }
+    if (!user) return res.status(404).json("User not found!");
 
-    // Generate slug from title
     let slug = req.body.title.replace(/ /g, "-").toLowerCase();
     let existingPost = await Post.findOne({ slug });
     let counter = 2;
 
-    // Handle slug collision by appending a counter
     while (existingPost) {
       slug = `${slug}-${counter}`;
       existingPost = await Post.findOne({ slug });
       counter++;
     }
 
-    // Extract location data from Vercel headers
     const location = {
       country: req.headers["x-vercel-ip-country"] || "Unknown",
       city: req.headers["x-vercel-ip-city"] || "Unknown",
       region: req.headers["x-vercel-ip-region"] || "Unknown",
       timezone: req.headers["x-vercel-ip-timezone"] || "Unknown",
-
     };
 
-    console.log("Extracted location data:", location);
-
-    // Create a new post object with the validated data
     const newPost = new Post({
       user: user._id,
       slug,
@@ -208,10 +209,8 @@ export const createPost = async (req, res) => {
       ...req.body,
     });
 
-    // Save the post to the database
     const post = await newPost.save();
 
-    // Send the response with the created post
     res.status(200).json(post);
   } catch (error) {
     console.error("Error creating post:", error);
@@ -219,75 +218,76 @@ export const createPost = async (req, res) => {
   }
 };
 
-
 export const deletePost = async (req, res) => {
-  const clerkUserId = req.auth.userId;
+  try {
+    const clerkUserId = req.auth.userId;
 
-  if (!clerkUserId) {
-    return res.status(401).json("Not authenticated!");
+    if (!clerkUserId) return res.status(401).json("Not authenticated!");
+
+    const role = req.auth.sessionClaims?.metadata?.role || "user";
+
+    if (role === "admin") {
+      await Post.findByIdAndDelete(req.params.id);
+      return res.status(200).json("Post has been deleted");
+    }
+
+    const user = await User.findOne({ clerkUserId });
+    const deletedPost = await Post.findOneAndDelete({
+      _id: req.params.id,
+      user: user._id,
+    });
+
+    if (!deletedPost) return res.status(403).json("You can delete only your posts!");
+
+    res.status(200).json("Post has been deleted");
+  } catch (error) {
+    console.error("Error deleting post:", error);
+    res.status(500).json("Internal server error!");
   }
-
-  const role = req.auth.sessionClaims?.metadata?.role || "user";
-
-  if (role === "admin") {
-    await Post.findByIdAndDelete(req.params.id);
-    return res.status(200).json("Post has been deleted");
-  }
-
-  const user = await User.findOne({ clerkUserId });
-
-  const deletedPost = await Post.findOneAndDelete({
-    _id: req.params.id,
-    user: user._id,
-  });
-
-  if (!deletedPost) {
-    return res.status(403).json("You can delete only your posts!");
-  }
-
-  res.status(200).json("Post has been deleted");
 };
 
 export const featurePost = async (req, res) => {
-  const clerkUserId = req.auth.userId;
-  const postId = req.body.postId;
-  const duration = parseInt(req.body.duration); // in days
+  try {
+    const clerkUserId = req.auth.userId;
+    const postId = req.body.postId;
+    const duration = parseInt(req.body.duration);
 
-  if (!clerkUserId) return res.status(401).json("Not authenticated!");
+    if (!clerkUserId) return res.status(401).json("Not authenticated!");
 
-  const role = req.auth.sessionClaims?.metadata?.role || "user";
+    const role = req.auth.sessionClaims?.metadata?.role || "user";
 
-  if (role !== "admin") return res.status(403).json("You cannot feature posts!");
+    if (role !== "admin") return res.status(403).json("You cannot feature posts!");
 
-  const post = await Post.findById(postId);
-  if (!post) return res.status(404).json("Post not found!");
+    const post = await Post.findById(postId);
+    if (!post) return res.status(404).json("Post not found!");
 
-  const isFeatured = post.isFeatured;
+    const isFeatured = post.isFeatured;
 
-  let updateFields = {
-    isFeatured: !isFeatured,
-    featuredUntil: null,
-  };
+    let updateFields = {
+      isFeatured: !isFeatured,
+      featuredUntil: null,
+    };
 
-  // If enabling feature, set expiration
-  if (!isFeatured && duration) {
-    const featuredUntilDate = new Date(Date.now() + duration * 24 * 60 * 60 * 1000);
-    updateFields.featuredUntil = featuredUntilDate;
+    if (!isFeatured && duration) {
+      const featuredUntilDate = new Date(Date.now() + duration * 24 * 60 * 60 * 1000);
+      updateFields.featuredUntil = featuredUntilDate;
+    }
+
+    const updatedPost = await Post.findByIdAndUpdate(postId, updateFields, { new: true });
+
+    res.status(200).json(updatedPost);
+  } catch (error) {
+    console.error("Error featuring post:", error);
+    res.status(500).json("Internal server error!");
   }
-
-  const updatedPost = await Post.findByIdAndUpdate(postId, updateFields, { new: true });
-
-  res.status(200).json(updatedPost);
 };
 
-
-const imagekit = new ImageKit({
-  urlEndpoint: process.env.IK_URL_ENDPOINT,
-  publicKey: process.env.IK_PUBLIC_KEY,
-  privateKey: process.env.IK_PRIVATE_KEY,
-});
-
 export const uploadAuth = async (req, res) => {
-  const result = imagekit.getAuthenticationParameters();
-  res.send(result);
+  try {
+    const result = imagekit.getAuthenticationParameters();
+    res.send(result);
+  } catch (error) {
+    console.error("Error generating upload authentication:", error);
+    res.status(500).json("Internal server error!");
+  }
 };
