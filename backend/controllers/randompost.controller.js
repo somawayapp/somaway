@@ -39,8 +39,12 @@ export const getPosts = async (req, res) => {
         .split(/[,;|\s]+/)
         .map((name) => name.trim())
         .filter(Boolean);
-      const authorRegexes = authorNames.map((name) => new RegExp(name, "i"));
-      query.author = { $in: authorRegexes };
+
+      // Ensure authorNames is an array before using map
+      if (Array.isArray(authorNames)) {
+        const authorRegexes = authorNames.map((name) => new RegExp(name, "i"));
+        query.author = { $in: authorRegexes };
+      }
     }
 
     if (location) {
@@ -76,7 +80,10 @@ export const getPosts = async (req, res) => {
       { $sample: { size: limit } },
     ]);
 
-    // Populate 'user' field manually
+    // Check the posts structure and log it for debugging
+    console.log(posts); // Ensure that 'posts' is an array and populated data works
+
+    // If the aggregation query returns a valid result, proceed with populating the 'user' field
     posts = await Post.populate(posts, { path: "user", select: "username" });
 
     const totalPosts = await Post.countDocuments(query);
@@ -89,16 +96,22 @@ export const getPosts = async (req, res) => {
   }
 };
 
-         
-
 export const getPost = async (req, res) => {
-  const post = await Post.findOne({ slug: req.params.slug }).populate(
-    "user",
-    "username img"
-  );
-  res.status(200).json(post);
-};
+  try {
+    const post = await Post.findOne({ slug: req.params.slug })
+      .populate("user", "username img")
+      .exec(); // Ensure exec() is used if needed to populate properly
 
+    if (!post) {
+      return res.status(404).json({ message: "Post not found" });
+    }
+
+    res.status(200).json(post);
+  } catch (error) {
+    console.error("Error fetching post:", error);
+    res.status(500).json("Internal server error!");
+  }
+};
 
 
 
