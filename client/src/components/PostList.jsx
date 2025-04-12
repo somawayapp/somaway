@@ -119,7 +119,7 @@ const PostList = () => {
                      text-[var(--softTextColor)] shadow-md 
                      hover:text-[var(--textColor)] hover:shadow-xl text-center"
         >
-          <p className="mb-2">No listing found</p>
+          <p className="mb-2">No listings found</p>
           <p className="mb-2 font-bold">Go back home</p>
         </button>
       </div>
