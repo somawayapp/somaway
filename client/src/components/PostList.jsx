@@ -77,24 +77,22 @@ const PostList = () => {
     if (featuredPosts.length > 0) {
       // If featured posts are available, handle them separately
       setDisplayedPosts([...featuredPosts.slice(0, 2)]); // Show only 2 on small screens
-      setTimeout(() => loadNextBatch(4), 50);
-      setTimeout(() => loadNextBatch(4), 100);
-      setTimeout(() => {
-        while (index < allPosts.length) {
-          loadNextBatch(8);
-        }
-      }, 150);
+      loadNextBatch(4);
+      loadNextBatch(4);
+      while (index < allPosts.length) {
+        loadNextBatch(8);
+      }
     } else {
       // If no featured posts, load all posts normally
-      loadNextBatch(4); 
-      setTimeout(() => loadNextBatch(4), 50);
-      setTimeout(() => loadNextBatch(4), 100);
-      setTimeout(() => {
-        while (index < allPosts.length) {
-          loadNextBatch(8);
-        }
-      }, 150);
+      loadNextBatch(4);
+      loadNextBatch(4);
+      loadNextBatch(4);
+      while (index < allPosts.length) {
+        loadNextBatch(8);
+      }
     }
+    
+  
   }, [allPosts, featuredPosts]);
 
   if (status === "loading") return <p>Loading...</p>;
