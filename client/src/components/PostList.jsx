@@ -1,4 +1,3 @@
-// PostList.jsx
 import PostListItem from "./PostListItem";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
@@ -10,12 +9,13 @@ const fetchPosts = async (searchParams) => {
   const res = await axios.get(`${import.meta.env.VITE_API_URL}/posts?sort=random`, {
     params: { ...searchParamsObj },
   });
-  return Array.isArray(res.data?.posts) ? res.data.posts : [];
+
+  return Array.isArray(res.data.posts) ? res.data.posts : [];
 };
 
 const fetchFeaturedPosts = async () => {
   const res = await axios.get(`${import.meta.env.VITE_API_URL}/posts?featured=true&limit=4&sort=random`);
-  return Array.isArray(res.data?.posts) ? res.data.posts : [];
+  return Array.isArray(res.data.posts) ? res.data.posts : [];
 };
 
 const PostList = () => {
@@ -65,7 +65,9 @@ const PostList = () => {
   });
 
   useEffect(() => {
-    const timer = setTimeout(() => setShowMessage(true), 3000);
+    const timer = setTimeout(() => {
+      setShowMessage(true);
+    }, 3000);
     return () => clearTimeout(timer);
   }, []);
 
@@ -86,24 +88,31 @@ const PostList = () => {
       setTimeout(() => loadNextBatch(4), 50);
       setTimeout(() => loadNextBatch(4), 100);
       setTimeout(() => {
-        while (index < combined.length) loadNextBatch(8);
+        while (index < combined.length) {
+          loadNextBatch(8);
+        }
       }, 150);
     }
   }, [allPosts, featuredPosts, postsStatus, featuredStatus]);
 
-  if (postsStatus === "loading" || featuredStatus === "loading")
+  if (postsStatus === "loading" || featuredStatus === "loading") {
     return <p>Loading...</p>;
+  }
 
   if (postsError) return <p>Something went wrong!</p>;
 
-  if (!Array.isArray(displayedPosts)) return <p>Data format error</p>;
+  if (!Array.isArray(displayedPosts)) {
+    return <p>Unexpected error: displayedPosts is not an array</p>;
+  }
 
   if (displayedPosts.length === 0 && showMessage) {
     return (
       <div className="flex flex-col items-center justify-center h-[50vh]">
         <button
           onClick={() => (window.location.href = "/addlisting")}
-          className="w-full px-6 py-3 rounded-xl border border-[var(--softBg4)] text-[var(--softTextColor)] shadow-md hover:text-[var(--textColor)] hover:shadow-xl text-center"
+          className="w-full px-6 py-3 rounded-xl border border-[var(--softBg4)] 
+                     text-[var(--softTextColor)] shadow-md 
+                     hover:text-[var(--textColor)] hover:shadow-xl text-center"
         >
           <p className="mb-2">No listings found</p>
           <p className="mb-2 font-bold">Go back home</p>
