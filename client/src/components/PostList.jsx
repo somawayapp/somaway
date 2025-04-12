@@ -5,23 +5,62 @@ import { useSearchParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import Link from "next/link";
 
-// Fetch regular posts
 const fetchPosts = async (searchParams) => {
   const searchParamsObj = Object.fromEntries([...searchParams]);
-  const res = await axios.get(`${import.meta.env.VITE_API_URL}/posts?sort=random`, {
+  const res = await axios.get(`${import.meta.env.VITE_API_URL}/posts`, {
     params: { ...searchParamsObj },
   });
-  return res.data.posts;
+
+  console.log("Fetched posts response:", res.data);
+  const posts = res.data?.posts;
+
+  if (!Array.isArray(posts)) {
+    throw new Error("Expected posts to be an array");
+  }
+
+  return posts;
 };
 
-// Fetch featured posts
 const fetchFeaturedPosts = async () => {
   const res = await axios.get(`${import.meta.env.VITE_API_URL}/posts?featured=true&limit=4&sort=random`);
-  return res.data.posts;
+
+  console.log("Fetched featured posts response:", res.data);
+  const posts = res.data?.posts;
+
+  if (!Array.isArray(posts)) {
+    throw new Error("Expected featured posts to be an array");
+  }
+
+  return posts;
 };
 
 const PostList = () => {
   const [columns, setColumns] = useState("repeat(1, 1fr)");
+  const [displayedPosts, setDisplayedPosts] = useState([]);
+  const [showMessage, setShowMessage] = useState(false);
+
+  const [searchParams] = useSearchParams();
+
+  const {
+    data: allPosts = [],
+    error: postsError,
+    status: postsStatus,
+  } = useQuery({
+    queryKey: ["posts", searchParams.toString()],
+    queryFn: () => fetchPosts(searchParams),
+    staleTime: 1000 * 60 * 10,
+    cacheTime: 1000 * 60 * 30,
+  });
+
+  const {
+    data: featuredPosts = [],
+    status: featuredStatus,
+  } = useQuery({
+    queryKey: ["featuredPosts"],
+    queryFn: fetchFeaturedPosts,
+    staleTime: 1000 * 60 * 10,
+    cacheTime: 1000 * 60 * 30,
+  });
 
   useEffect(() => {
     const updateColumns = () => {
@@ -36,67 +75,52 @@ const PostList = () => {
           : "repeat(1, 1fr)"
       );
     };
-
     window.addEventListener("resize", updateColumns);
-    updateColumns(); // Initial call
-
+    updateColumns();
     return () => window.removeEventListener("resize", updateColumns);
   }, []);
-
-  const [searchParams] = useSearchParams();
-  const { data: allPosts = [], error, status } = useQuery({
-    queryKey: ["posts", searchParams.toString()],
-    queryFn: () => fetchPosts(searchParams),
-    staleTime: 1000 * 60 * 10,
-    cacheTime: 1000 * 60 * 30,
-  });
-
-  const { data: featuredPosts = [], status: featuredStatus } = useQuery({
-    queryKey: ["featuredPosts"],
-    queryFn: fetchFeaturedPosts,
-    staleTime: 1000 * 60 * 10,
-    cacheTime: 1000 * 60 * 30,
-  });
-
-  const [displayedPosts, setDisplayedPosts] = useState([]);
-
-  useEffect(() => {
-    if (allPosts.length === 0) {
-      setDisplayedPosts([]); // 🧼 clear out the old data
-      return;
-    }
-
-    let newPosts = [];
-    let index = 0;
-
-    const loadNextBatch = (batchSize) => {
-      newPosts = [...newPosts, ...allPosts.slice(index, index + batchSize)];
-      setDisplayedPosts([...newPosts]);
-      index += batchSize;
-    };
-
-    loadNextBatch(4);
-    setTimeout(() => loadNextBatch(4), 50);
-    setTimeout(() => loadNextBatch(4), 100);
-    setTimeout(() => {
-      while (index < allPosts.length) {
-        loadNextBatch(8);
-      }
-    }, 150);
-  }, [allPosts]);
-
-  if (status === "loading") return <p>Loading...</p>;
-  if (error) return <p>Something went wrong!</p>;
-
-  const [showMessage, setShowMessage] = useState(false);
 
   useEffect(() => {
     const timer = setTimeout(() => {
       setShowMessage(true);
-    }, 3000); // 2-second delay
-
-    return () => clearTimeout(timer); // Cleanup timeout on unmount
+    }, 3000);
+    return () => clearTimeout(timer);
   }, []);
+
+  useEffect(() => {
+    if (postsStatus === "success" && featuredStatus === "success") {
+      const filteredPosts = allPosts.filter(
+        (post) => !featuredPosts.some((f) => f._id === post._id)
+      );
+      const combined = [...featuredPosts, ...filteredPosts];
+
+      let index = 0;
+      const batched = [];
+
+      const batchLoad = () => {
+        if (index >= combined.length) return;
+        const batchSize = index === 0 ? 4 : index < 8 ? 4 : 8;
+        batched.push(...combined.slice(index, index + batchSize));
+        setDisplayedPosts([...batched]);
+        index += batchSize;
+        setTimeout(batchLoad, 50);
+      };
+
+      batchLoad();
+    }
+  }, [allPosts, featuredPosts, postsStatus, featuredStatus]);
+
+  if (postsStatus === "loading" || featuredStatus === "loading") {
+    return <p>Loading...</p>;
+  }
+
+  if (postsError) {
+    return <p>Something went wrong!</p>;
+  }
+
+  if (!Array.isArray(displayedPosts)) {
+    return <p>Error: displayedPosts is not an array</p>;
+  }
 
   if (displayedPosts.length === 0 && showMessage) {
     return (
@@ -104,8 +128,8 @@ const PostList = () => {
         <button
           onClick={() => (window.location.href = "/addlisting")}
           className="w-full px-6 py-3 rounded-xl border border-[var(--softBg4)] 
-                   text-[var(--softTextColor)] shadow-md 
-                   hover:text-[var(--textColor)] hover:shadow-xl text-center"
+                     text-[var(--softTextColor)] shadow-md 
+                     hover:text-[var(--textColor)] hover:shadow-xl text-center"
         >
           <p className="mb-2">No listings found</p>
           <p className="mb-2 font-bold">Go back home</p>
@@ -116,39 +140,26 @@ const PostList = () => {
 
   if (displayedPosts.length === 0) {
     return (
-      <div className="gap-2 grid grid-cols-1 md:grid-cols-4 md:gap-6 overflow-y-auto scrollbar-hide" style={{ height: 'calc(100vw * 8)' }}>
-        {Array(8).fill(0).map((_, index) => (
-          <div key={index} className="relative aspect-[3/3] w-full">
-            <div className="absolute inset-0 bg-[var(--softBg4)] animate-pulse rounded-xl md:rounded-2xl"></div>
-          </div>
-        ))}
+      <div
+        className="gap-2 grid grid-cols-1 md:grid-cols-4 md:gap-6 overflow-y-auto scrollbar-hide"
+        style={{ height: "calc(100vw * 8)" }}
+      >
+        {Array(8)
+          .fill(0)
+          .map((_, index) => (
+            <div key={index} className="relative aspect-[3/3] w-full">
+              <div className="absolute inset-0 bg-[var(--softBg4)] animate-pulse rounded-xl md:rounded-2xl"></div>
+            </div>
+          ))}
       </div>
     );
   }
 
   return (
-    <div>
-      <div className="gap-2 grid grid-cols-1 md:grid-cols-4 md:gap-6 scrollbar-hide">
-        {displayedPosts.map((post) => (
-          <PostListItem key={post._id} post={post} />
-        ))}
-      </div>
-
-      {/* Featured Posts Section */}
-      {featuredStatus === "loading" ? (
-        <p>Loading featured posts...</p>
-      ) : featuredPosts.length > 0 ? (
-        <div className="mt-8">
-          <h2 className="text-2xl font-semibold">Featured Posts</h2>
-          <div className="gap-2 grid grid-cols-1 md:grid-cols-4 md:gap-6 mt-4">
-            {featuredPosts.map((post) => (
-              <PostListItem key={post._id} post={post} />
-            ))}
-          </div>
-        </div>
-      ) : (
-        <p>No featured posts available.</p>
-      )}
+    <div className="gap-2 grid grid-cols-1 md:grid-cols-4 md:gap-6 scrollbar-hide">
+      {displayedPosts.map((post) => (
+        <PostListItem key={post._id} post={post} />
+      ))}
     </div>
   );
 };
