@@ -7,7 +7,6 @@ import userRouter from '../routes/user.route.js';
 import postRouter from '../routes/post.route.js';
 import commentRouter from '../routes/comment.route.js';
 import webhookRouter from '../routes/webhook.route.js';
-import subscriptionRouter from '../routes/subscription.route.js';
 import cors from 'cors';
 import 'dotenv/config';
 import ratingRouter from '../routes/rating.route.js';
@@ -85,7 +84,6 @@ app.use(unfeatureCleanerMiddleware);
 // API Routes
 app.use('/users', userRouter);
 app.use('/posts', postRouter); 
-app.use('/subscriptions', subscriptionRouter);
 app.use('/comments', commentRouter);
 app.use('/webhook', webhookRouter);
 app.use('/ratings', ratingRouter);
