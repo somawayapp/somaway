@@ -79,14 +79,15 @@ const postSchema = new Schema(
       type: Number,
       required: false,
     },
-    isFeatured: {
-      type: Boolean,
-      default: false,
-    },
-    isfeaturedUntil: {
-      type: Date,
-      default: null, 
-    },
+ 
+    isFeatured: 
+    { type: Boolean,
+       default: false },
+
+    featuredUntil: 
+    { type: Date,
+       default: null },
+  
     visit: {
       type: Number,
       default: 0,
