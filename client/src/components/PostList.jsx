@@ -29,7 +29,7 @@ const fetchFeaturedPosts = async (searchParams) => {
     sort: "random",
   };
 
-  const res = await axios.get(`${import.meta.env.VITE_API_URL}/posts`, {
+  const res = await axios.get(`${import.meta.env.VITE_API_URL}/posts?sort=random`, {
     params,
   });
 
