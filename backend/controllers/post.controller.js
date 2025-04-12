@@ -2,18 +2,19 @@ import ImageKit from "imagekit";
 import Post from "../models/post.model.js";
 import User from "../models/user.model.js";
 
+// Initialize ImageKit once globally
 const imagekit = new ImageKit({
   urlEndpoint: process.env.IK_URL_ENDPOINT,
   publicKey: process.env.IK_PUBLIC_KEY,
   privateKey: process.env.IK_PRIVATE_KEY,
 });
 
-// Get posts with optimized query
 export const getPosts = async (req, res) => {
   try {
-    const page = parseInt(req.query.page) || 1;
-    const limit = Math.min(parseInt(req.query.limit) || 1000, 1000); // Limit to 1000
+    const page = Math.max(1, parseInt(req.query.page) || 1);
+    const limit = Math.min(1000, parseInt(req.query.limit) || 100);  // Set a sensible upper limit
     const query = {};
+
     const {
       author,
       search,
@@ -28,12 +29,10 @@ export const getPosts = async (req, res) => {
       pricemin,
       model,
       featured,
+      cat
     } = req.query;
 
-    // Query handling
-    if (req.query.cat) {
-      query.category = req.query.cat;
-    }
+    if (cat) query.category = cat;
 
     if (search) {
       query.$or = [
@@ -43,8 +42,12 @@ export const getPosts = async (req, res) => {
     }
 
     if (author) {
-      const authorNames = author.split(/[,;|\s]+/).map((name) => name.trim()).filter(Boolean);
-      query.author = { $in: authorNames.map(name => new RegExp(name, "i")) };
+      const authorNames = author
+        .split(/[,;|\s]+/)
+        .map(name => name.trim())
+        .filter(Boolean)
+        .map(name => new RegExp(name, "i"));
+      query.author = { $in: authorNames };
     }
 
     if (location) {
@@ -56,46 +59,44 @@ export const getPosts = async (req, res) => {
     if (bathrooms) query.bathrooms = { $gte: parseInt(bathrooms) };
     if (propertysize) query.propertysize = { $gte: parseInt(propertysize) };
     if (rooms) query.rooms = { $gte: parseInt(rooms) };
-
     if (pricemin || pricemax) {
       query.price = {};
       if (pricemin) query.price.$gte = parseInt(pricemin);
       if (pricemax) query.price.$lte = parseInt(pricemax);
     }
-
     if (model) query.model = model;
     if (featured) query.isFeatured = true;
 
-    let sortObj = { createdAt: -1 };
+    // Handle sorting efficiently
+    const sortObj = getSortObj(sort);
 
-    if (sort) {
-      switch (sort) {
-        case "newest": sortObj = { createdAt: -1 }; break;
-        case "oldest": sortObj = { createdAt: 1 }; break;
-        case "popular": sortObj = { visit: -1 }; break;
-        case "trending": 
-          sortObj = { visit: -1 };
-          query.createdAt = { $gte: new Date(new Date().getTime() - 14 * 24 * 60 * 60 * 1000) };
-          break;
-        case "random":
-          return res.status(200).json(await Post.aggregate([{ $match: query }, { $sample: { size: limit } }]));
-        default: break;
-      }
+    let posts, totalPosts;
+
+    if (sort === "random") {
+      posts = await Post.aggregate([
+        { $match: query },
+        { $sample: { size: limit } },
+      ]).populate("user", "username");
+
+      totalPosts = await Post.countDocuments(query);
+    } else {
+      posts = await Post.find(query)
+        .populate("user", "username")
+        .sort(sortObj)
+        .limit(limit)
+        .skip((page - 1) * limit);
+
+      totalPosts = await Post.countDocuments(query);
     }
 
-    const [posts, totalPosts] = await Promise.all([
-      Post.find(query).populate("user", "username").sort(sortObj).limit(limit).skip((page - 1) * limit),
-      Post.countDocuments(query)
-    ]);
-
-    res.status(200).json({ posts, hasMore: page * limit < totalPosts });
+    const hasMore = page * limit < totalPosts;
+    res.status(200).json({ posts, hasMore });
   } catch (error) {
     console.error("Error fetching posts:", error);
     res.status(500).json("Internal server error!");
   }
 };
 
-// Get a specific post
 export const getPost = async (req, res) => {
   try {
     const post = await Post.findOne({ slug: req.params.slug }).populate("user", "username img");
@@ -107,7 +108,6 @@ export const getPost = async (req, res) => {
   }
 };
 
-// Create a new post
 export const createPost = async (req, res) => {
   try {
     const clerkUserId = req.auth.userId;
@@ -116,24 +116,9 @@ export const createPost = async (req, res) => {
     const user = await User.findOne({ clerkUserId });
     if (!user) return res.status(404).json("User not found!");
 
-    let slug = req.body.title.replace(/ /g, "-").toLowerCase();
-    let existingPost = await Post.findOne({ slug });
-    let counter = 2;
+    const slug = await generateUniqueSlug(req.body.title);
 
-    // Handle slug collision with a counter
-    while (existingPost) {
-      slug = `${slug}-${counter}`;
-      existingPost = await Post.findOne({ slug });
-      counter++;
-    }
-
-    // Location data extraction
-    const location = {
-      country: req.headers["x-vercel-ip-country"] || "Unknown",
-      city: req.headers["x-vercel-ip-city"] || "Unknown",
-      region: req.headers["x-vercel-ip-region"] || "Unknown",
-      timezone: req.headers["x-vercel-ip-timezone"] || "Unknown",
-    };
+    const location = getLocationData(req.headers);
 
     const newPost = new Post({
       user: user._id,
@@ -150,50 +135,102 @@ export const createPost = async (req, res) => {
   }
 };
 
-// Delete a post
 export const deletePost = async (req, res) => {
-  const clerkUserId = req.auth.userId;
-  if (!clerkUserId) return res.status(401).json("Not authenticated!");
+  try {
+    const clerkUserId = req.auth.userId;
+    if (!clerkUserId) return res.status(401).json("Not authenticated!");
 
-  const role = req.auth.sessionClaims?.metadata?.role || "user";
-  if (role === "admin") {
-    await Post.findByIdAndDelete(req.params.id);
-    return res.status(200).json("Post has been deleted");
+    const role = req.auth.sessionClaims?.metadata?.role || "user";
+    const postId = req.params.id;
+
+    if (role === "admin") {
+      await Post.findByIdAndDelete(postId);
+      return res.status(200).json("Post has been deleted");
+    }
+
+    const user = await User.findOne({ clerkUserId });
+    const deletedPost = await Post.findOneAndDelete({
+      _id: postId,
+      user: user._id,
+    });
+
+    if (!deletedPost) return res.status(403).json("You can delete only your posts!");
+
+    res.status(200).json("Post has been deleted");
+  } catch (error) {
+    console.error("Error deleting post:", error);
+    res.status(500).json("Internal server error!");
   }
-
-  const user = await User.findOne({ clerkUserId });
-  const deletedPost = await Post.findOneAndDelete({ _id: req.params.id, user: user._id });
-
-  if (!deletedPost) return res.status(403).json("You can delete only your posts!");
-  res.status(200).json("Post has been deleted");
 };
 
-// Feature a post
 export const featurePost = async (req, res) => {
-  const clerkUserId = req.auth.userId;
-  const postId = req.body.postId;
-  const duration = parseInt(req.body.duration);
+  try {
+    const clerkUserId = req.auth.userId;
+    const postId = req.body.postId;
+    const duration = parseInt(req.body.duration);
 
-  if (!clerkUserId) return res.status(401).json("Not authenticated!");
-  const role = req.auth.sessionClaims?.metadata?.role || "user";
-  if (role !== "admin") return res.status(403).json("You cannot feature posts!");
+    if (!clerkUserId) return res.status(401).json("Not authenticated!");
+    const role = req.auth.sessionClaims?.metadata?.role || "user";
+    if (role !== "admin") return res.status(403).json("You cannot feature posts!");
 
-  const post = await Post.findById(postId);
-  if (!post) return res.status(404).json("Post not found!");
+    const post = await Post.findById(postId);
+    if (!post) return res.status(404).json("Post not found!");
 
-  const isFeatured = post.isFeatured;
-  let updateFields = { isFeatured: !isFeatured, featuredUntil: null };
+    const isFeatured = post.isFeatured;
+    const updateFields = { isFeatured: !isFeatured };
 
-  if (!isFeatured && duration) {
-    updateFields.featuredUntil = new Date(Date.now() + duration * 24 * 60 * 60 * 1000);
+    if (!isFeatured && duration) {
+      updateFields.featuredUntil = new Date(Date.now() + duration * 24 * 60 * 60 * 1000);
+    }
+
+    const updatedPost = await Post.findByIdAndUpdate(postId, updateFields, { new: true });
+    res.status(200).json(updatedPost);
+  } catch (error) {
+    console.error("Error featuring post:", error);
+    res.status(500).json("Internal server error!");
   }
-
-  const updatedPost = await Post.findByIdAndUpdate(postId, updateFields, { new: true });
-  res.status(200).json(updatedPost);
 };
 
-// ImageKit Authentication (for uploads)
 export const uploadAuth = async (req, res) => {
   const result = imagekit.getAuthenticationParameters();
   res.send(result);
+};
+
+// Helper Functions
+
+const getSortObj = (sort) => {
+  switch (sort) {
+    case "newest":
+      return { createdAt: -1 };
+    case "oldest":
+      return { createdAt: 1 };
+    case "popular":
+    case "trending":
+      return { visit: -1 };
+    default:
+      return { createdAt: -1 };
+  }
+};
+
+const generateUniqueSlug = async (title) => {
+  let slug = title.replace(/ /g, "-").toLowerCase();
+  let existingPost = await Post.findOne({ slug });
+  let counter = 2;
+
+  while (existingPost) {
+    slug = `${slug}-${counter}`;
+    existingPost = await Post.findOne({ slug });
+    counter++;
+  }
+
+  return slug;
+};
+
+const getLocationData = (headers) => {
+  return {
+    country: headers["x-vercel-ip-country"] || "Unknown",
+    city: headers["x-vercel-ip-city"] || "Unknown",
+    region: headers["x-vercel-ip-region"] || "Unknown",
+    timezone: headers["x-vercel-ip-timezone"] || "Unknown",
+  };
 };
