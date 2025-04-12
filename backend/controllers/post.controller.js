@@ -108,7 +108,7 @@ export const getPost = async (req, res) => {
       .lean();
 
     if (!post) {
-      return res.status(404).json({ message: "Post  found" });
+      return res.status(404).json({ message: "Post not found" });
     }
 
     // Cache post for 1 hour
