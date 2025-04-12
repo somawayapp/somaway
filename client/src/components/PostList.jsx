@@ -3,25 +3,20 @@ import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import { useSearchParams } from "react-router-dom";
 import { useEffect, useState } from "react";
-import Link from "next/link";
 
-// Fetch both featured and non-featured posts
-const fetchPosts = async (searchParams) => {
+const fetchPosts = async (searchParams, isFeatured = false) => {
   const searchParamsObj = Object.fromEntries([...searchParams]);
-
-  const [featuredRes, randomRes] = await Promise.all([
-    axios.get(`${import.meta.env.VITE_API_URL}/posts`, {
-      params: { ...searchParamsObj, featured: true, sort: "random" },
-    }),
-    axios.get(`${import.meta.env.VITE_API_URL}/posts`, {
-      params: { ...searchParamsObj, sort: "random" },
-    }),
-  ]);
-
-  return {
-    featured: featuredRes.data.posts || [],
-    random: randomRes.data.posts || [],
-  };
+  const res = await axios.get(
+    `${import.meta.env.VITE_API_URL}/posts`,
+    {
+      params: {
+        ...searchParamsObj,
+        ...(isFeatured ? { featured: true } : {}),
+        sort: "random",
+      },
+    }
+  );
+  return res.data.posts;
 };
 
 const PostList = () => {
@@ -43,38 +38,68 @@ const PostList = () => {
 
     window.addEventListener("resize", updateColumns);
     updateColumns();
+
     return () => window.removeEventListener("resize", updateColumns);
   }, []);
 
   const [searchParams] = useSearchParams();
-  const { data = {}, error, status } = useQuery({
-    queryKey: ["posts", searchParams.toString()],
-    queryFn: () => fetchPosts(searchParams),
+
+  const {
+    data: featuredPosts = [],
+    status: featuredStatus,
+    error: featuredError,
+  } = useQuery({
+    queryKey: ["featuredPosts", searchParams.toString()],
+    queryFn: () => fetchPosts(searchParams, true),
+    staleTime: 1000 * 60 * 10,
+    cacheTime: 1000 * 60 * 30,
+  });
+
+  const {
+    data: allPosts = [],
+    status: allStatus,
+    error: allError,
+  } = useQuery({
+    queryKey: ["allPosts", searchParams.toString()],
+    queryFn: () => fetchPosts(searchParams, false),
     staleTime: 1000 * 60 * 10,
     cacheTime: 1000 * 60 * 30,
   });
 
   const [displayedPosts, setDisplayedPosts] = useState([]);
+  const [showMessage, setShowMessage] = useState(false);
 
   useEffect(() => {
-    if (!data || (!data.featured?.length && !data.random?.length)) {
+    const timer = setTimeout(() => {
+      setShowMessage(true);
+    }, 3000);
+    return () => clearTimeout(timer);
+  }, []);
+
+  useEffect(() => {
+    let combinedPosts = [];
+
+    const limitedFeatured = featuredPosts.slice(0, 4);
+    const remainingPosts = allPosts.filter(
+      (post) => !limitedFeatured.find((fp) => fp._id === post._id)
+    );
+
+    if (limitedFeatured.length > 0) {
+      combinedPosts = [...limitedFeatured, ...remainingPosts];
+    } else {
+      combinedPosts = allPosts;
+    }
+
+    if (combinedPosts.length === 0) {
       setDisplayedPosts([]);
       return;
     }
-
-    const featuredLimit = 4;
-    const featuredPosts = (data.featured || []).slice(0, featuredLimit);
-    const remainingRandomPosts = (data.random || []).filter(
-      (p) => !featuredPosts.some((f) => f._id === p._id)
-    );
-
-    const allPosts = [...featuredPosts, ...remainingRandomPosts];
 
     let newPosts = [];
     let index = 0;
 
     const loadNextBatch = (batchSize) => {
-      newPosts = [...newPosts, ...allPosts.slice(index, index + batchSize)];
+      newPosts = [...newPosts, ...combinedPosts.slice(index, index + batchSize)];
       setDisplayedPosts([...newPosts]);
       index += batchSize;
     };
@@ -83,22 +108,14 @@ const PostList = () => {
     setTimeout(() => loadNextBatch(4), 50);
     setTimeout(() => loadNextBatch(4), 100);
     setTimeout(() => {
-      while (index < allPosts.length) {
+      while (index < combinedPosts.length) {
         loadNextBatch(8);
       }
     }, 150);
-  }, [data]);
+  }, [featuredPosts, allPosts]);
 
-  const [showMessage, setShowMessage] = useState(false);
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setShowMessage(true);
-    }, 3000);
-    return () => clearTimeout(timer);
-  }, []);
-
-  if (status === "loading") return <p>Loading...</p>;
-  if (error) return <p>Something went wrong!</p>;
+  if (featuredStatus === "loading" || allStatus === "loading") return <p>Loading...</p>;
+  if (featuredError || allError) return <p>Something went wrong!</p>;
 
   if (displayedPosts.length === 0 && showMessage) {
     return (
