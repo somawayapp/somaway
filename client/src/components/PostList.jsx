@@ -140,14 +140,7 @@ const PostList = () => {
 
   return (
     <>
-      {/* Display featured posts first on medium screens */}
-      {featuredPosts.length > 0 && (
-      < div className="gap-2 grid grid-cols-1 md:grid-cols-4 md:gap-6 scrollbar-hide">
-       {featuredPosts.slice(0, 2).map((post) => (
-          <PostListItem key={post._id} post={post} />
-        ))}
-      </div>
-      )}
+    
 
       
     
