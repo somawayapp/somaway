@@ -5,22 +5,21 @@ import { useSearchParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 
 const fetchFeaturedPosts = async (searchParams) => {
-  const searchParamsObj = Object.fromEntries([...searchParams]);
-  const res = await axios.get(
-    `${import.meta.env.VITE_API_URL}/posts?featured=true&limit=4&sort=random`,
-    { params: { ...searchParamsObj } }
-  );
-  return res.data.posts;
+  const res = await axios.get(`${import.meta.env.VITE_API_URL}/posts`, {
+    params: { ...Object.fromEntries([...searchParams]), featured: true, limit: 4, sort: "random" }
+  });
+  return res.data.posts || []; // <- Ensure array
 };
 
 const fetchRandomPosts = async (searchParams) => {
-  const searchParamsObj = Object.fromEntries([...searchParams]);
-  const res = await axios.get(
-    `${import.meta.env.VITE_API_URL}/posts?sort=random`,
-    { params: { ...searchParamsObj } }
-  );
-  return res.data.posts;
+  const res = await axios.get(`${import.meta.env.VITE_API_URL}/posts`, {
+    params: { ...Object.fromEntries([...searchParams]), sort: "random" }
+  });
+  return res.data.posts || []; // <- Ensure array
 };
+
+
+
 
 const PostList = () => {
   const [searchParams] = useSearchParams();
