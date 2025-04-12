@@ -2,7 +2,7 @@ import ImageKit from "imagekit";
 import Post from "../models/post.model.js";
 import User from "../models/user.model.js";
 
-// Optimize database queries with `.lean()`, and remove redundant operations
+// Use lean queries to improve performance
 export const getPosts = async (req, res) => {
   try {
     const page = parseInt(req.query.page) || 1;
@@ -25,9 +25,7 @@ export const getPosts = async (req, res) => {
       featured,
     } = req.query;
 
-    if (req.query.cat) {
-      query.category = req.query.cat;
-    }
+    if (req.query.cat) query.category = req.query.cat;
 
     if (search) {
       query.$or = [
@@ -45,22 +43,17 @@ export const getPosts = async (req, res) => {
       query.author = { $in: authorRegexes };
     }
 
-    if (location) {
-      query["location.city"] = { $regex: location, $options: "i" };
-    }
-
+    if (location) query["location.city"] = { $regex: location, $options: "i" };
     if (propertytype) query.propertytype = propertytype;
     if (bedrooms) query.bedrooms = { $gte: parseInt(bedrooms) };
     if (bathrooms) query.bathrooms = { $gte: parseInt(bathrooms) };
     if (propertysize) query.propertysize = { $gte: parseInt(propertysize) };
     if (rooms) query.rooms = { $gte: parseInt(rooms) };
-
     if (pricemin || pricemax) {
       query.price = {};
       if (pricemin) query.price.$gte = parseInt(pricemin);
       if (pricemax) query.price.$lte = parseInt(pricemax);
     }
-
     if (model) query.model = model;
     if (featured) query.isFeatured = true;
 
@@ -95,25 +88,23 @@ export const getPosts = async (req, res) => {
     let posts, totalPosts;
 
     if (useAggregation) {
-      // Aggregation pipeline for random sorting
       posts = await Post.aggregate([
         { $match: query },
         { $sample: { size: limit } },
-      ]);
+      ]).exec();
 
       posts = await Post.populate(posts, { path: "user", select: "username" });
 
-      totalPosts = await Post.countDocuments(query);
+      totalPosts = await Post.countDocuments(query).exec();
     } else {
-      // Use `.lean()` to avoid Mongoose document overhead
       posts = await Post.find(query)
         .populate("user", "username")
         .sort(sortObj)
         .limit(limit)
         .skip((page - 1) * limit)
-        .lean();
+        .lean();  // Use lean() to get plain objects
 
-      totalPosts = await Post.countDocuments(query);
+      totalPosts = await Post.countDocuments(query).exec();
     }
 
     const hasMore = page * limit < totalPosts;
@@ -127,10 +118,10 @@ export const getPosts = async (req, res) => {
 
 export const getPost = async (req, res) => {
   try {
-    const post = await Post.findOne({ slug: req.params.slug }).populate(
-      "user",
-      "username img"
-    ).lean();
+    const post = await Post.findOne({ slug: req.params.slug })
+      .populate("user", "username img")
+      .lean();  // Use lean to avoid Mongoose overhead
+
     if (!post) return res.status(404).json("Post not found!");
     res.status(200).json(post);
   } catch (error) {
@@ -143,14 +134,10 @@ export const createPost = async (req, res) => {
   try {
     const clerkUserId = req.auth.userId;
 
-    if (!clerkUserId) {
-      return res.status(401).json("Not authenticated!");
-    }
+    if (!clerkUserId) return res.status(401).json("Not authenticated!");
 
     const user = await User.findOne({ clerkUserId }).lean();
-    if (!user) {
-      return res.status(404).json("User not found!");
-    }
+    if (!user) return res.status(404).json("User not found!");
 
     let slug = req.body.title.replace(/ /g, "-").toLowerCase();
     let existingPost = await Post.findOne({ slug }).lean();
@@ -192,7 +179,7 @@ export const deletePost = async (req, res) => {
 
     const role = req.auth.sessionClaims?.metadata?.role || "user";
     if (role === "admin") {
-      await Post.findByIdAndDelete(req.params.id);
+      await Post.findByIdAndDelete(req.params.id).exec();
       return res.status(200).json("Post has been deleted");
     }
 
@@ -202,9 +189,7 @@ export const deletePost = async (req, res) => {
       user: user._id,
     }).lean();
 
-    if (!deletedPost) {
-      return res.status(403).json("You can delete only your posts!");
-    }
+    if (!deletedPost) return res.status(403).json("You can delete only your posts!");
 
     res.status(200).json("Post has been deleted");
   } catch (error) {
@@ -234,7 +219,7 @@ export const featurePost = async (req, res) => {
       updateFields.featuredUntil = new Date(Date.now() + duration * 24 * 60 * 60 * 1000);
     }
 
-    const updatedPost = await Post.findByIdAndUpdate(postId, updateFields, { new: true });
+    const updatedPost = await Post.findByIdAndUpdate(postId, updateFields, { new: true }).exec();
 
     res.status(200).json(updatedPost);
   } catch (error) {
