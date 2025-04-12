@@ -1,7 +1,4 @@
-
 import { clerkMiddleware, requireAuth } from '@clerk/express';
-
-
 import express from 'express';
 import mongoose from 'mongoose';
 import dotenv from 'dotenv';
@@ -15,7 +12,7 @@ import cors from 'cors';
 import 'dotenv/config';
 import ratingRouter from '../routes/rating.route.js';
 import likeRouter from '../routes/like.route.js';
-import "./featureCleaner.js"; 
+import Post from "../models/post.model.js"; // Import Post model
 
 dotenv.config();
 
@@ -40,14 +37,12 @@ app.use(
     origin: function (origin, callback) {
       const allowedOrigins = [
         'https://makesomaway.com',
-        'https://www.makesomaway.com', // Added this
+        'https://www.makesomaway.com', 
         'https://somawayclient.vercel.app',
         'https://blogifiyclient.vercel.app',
         'http://localhost:5173',
         'https://www.xtechnewsletter.com',
         'https://xtechnewsletter.com',
-
-    
       ];
 
       if (allowedOrigins.indexOf(origin) !== -1 || !origin) {
@@ -61,37 +56,32 @@ app.use(
   })
 );
 
+// Middleware for unfeaturing expired posts
+const unfeatureCleanerMiddleware = async (req, res, next) => {
+  try {
+    const now = new Date();
+    const result = await Post.updateMany(
+      { isFeatured: true, featuredUntil: { $lte: now } },
+      { isFeatured: false, featuredUntil: null }
+    );
+    console.log(`[Middleware] Unfeatured ${result.modifiedCount} posts at ${now.toISOString()}`);
+  } catch (err) {
+    console.error('[Middleware] Error cleaning featured posts:', err);
+  }
+  next(); // Proceed to the next middleware or route handler
+};
 
-app.get("/test",(req,res)=>{
-  res.status(200).send("it works!")
- })
-
- app.get("/auth-state", (req, res) => {
-  const authState = req.auth;
-  res.json(authState);
- });
-
- app.get("/protect", (req, res) => {
-   const {userId} = req.auth;
-   if(!userId){
-     return res.status(401).json("not authenticated")
-   }
-  res.status(200).json("content")
- });
-
- app.get("/protect2", requireAuth(), (req, res) => {
-   res.status(200).json("content")
- });
+// Apply the unfeature cleaner middleware globally
+app.use(unfeatureCleanerMiddleware);
 
 // API Routes
 app.use('/users', userRouter);
-app.use('/posts', postRouter); // Correctly map the posts route
+app.use('/posts', postRouter); 
 app.use('/subscriptions', subscriptionRouter);
 app.use('/comments', commentRouter);
 app.use('/webhook', webhookRouter);
 app.use('/ratings', ratingRouter);
 app.use('/likes', likeRouter);
-
 
 // Debug route to confirm server is running
 app.get('/debug', (req, res) => {
@@ -103,7 +93,6 @@ app.use((err, req, res, next) => {
   console.error(err.stack);
   res.status(err.status || 500).json({ message: err.message || 'Internal server error' });
 });
-
 
 const mongoURI = process.env.DATABASE_URL;
 
@@ -121,8 +110,6 @@ mongoose
     console.error('Database connection error:', err);
     process.exit(1);
   });
-
-
 
 // Start the server
 const port = process.env.PORT || 3000;
