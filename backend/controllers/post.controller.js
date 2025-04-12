@@ -55,42 +55,56 @@ export const getPosts = async (req, res) => {
     // Featured Filter
     if (featured) query.isFeatured = true;
 
-    let sortObj = { createdAt: -1 }; // Default sorting by creation date
     // Sorting Logic
-    if (sort) {
-      switch (sort) {
-        case "newest":
-          sortObj = { createdAt: -1 };
-          break;
-        case "oldest":
-          sortObj = { createdAt: 1 };
-          break;
-        case "popular":
-          sortObj = { visit: -1 };
-          break;
-        case "trending":
-          sortObj = { visit: -1 };
-          query.createdAt = {
-            $gte: new Date(new Date().getTime() - 14 * 24 * 60 * 60 * 1000),
-          };
-          break;
-        case "random":
-          // If you're going to implement random sorting, consider using an aggregation pipeline.
-          // For now, it’s left untouched.
-          break;
-        default:
-          break;
-      }
-    }
+  // Sorting Logic
+const sortOptions = {
+  newest: { createdAt: -1 },
+  oldest: { createdAt: 1 },
+  popular: { visit: -1 },
+  trending: { visit: -1, createdAt: { $gte: new Date(Date.now() - 14 * 24 * 60 * 60 * 1000) } },
+};
 
-    // Fetch posts with optimized query
-    const posts = await Post.find(query)
-      .populate("user", "username")
-      .sort(sortObj)
-      .limit(limit)
-      .skip((page - 1) * limit)
-      .select("title slug price bedrooms bathrooms location createdAt")
-      .lean();
+// Fetch posts with optimized query
+let posts;
+
+if (sort === "random") {
+  posts = await Post.aggregate([
+    { $match: query },
+    { $sample: { size: limit } }, // Randomly sample 'limit' documents
+    {
+      $lookup: {
+        from: "users",
+        localField: "user",
+        foreignField: "_id",
+        as: "user",
+      },
+    },
+    { $unwind: "$user" },
+    {
+      $project: {
+        title: 1,
+        slug: 1,
+        price: 1,
+        bedrooms: 1,
+        bathrooms: 1,
+        location: 1,
+        createdAt: 1,
+        "user.username": 1,
+      },
+    },
+  ]);
+} else {
+  const sortObj = sortOptions[sort] || { createdAt: -1 };
+
+  posts = await Post.find(query)
+    .populate("user", "username")
+    .sort(sortObj)
+    .limit(limit)
+    .skip((page - 1) * limit)
+    .select("title slug price bedrooms bathrooms location createdAt")
+    .lean();
+}
+
 
     const totalPosts = await Post.countDocuments(query);
     const hasMore = page * limit < totalPosts;
@@ -107,41 +121,39 @@ export const getPosts = async (req, res) => {
   }
 };
 
-    
-    // GET SINGLE POST
-    export const getPost = async (req, res) => {
-      try {
-        const { slug } = req.params;
-        const cacheKey = `post:${slug}`;
-    
-        // Check cache first
-        const cachedPost = await redis.get(cacheKey);
-        if (cachedPost) {
-          return res.status(200).json(JSON.parse(cachedPost));
-        }
-    
-        // Fetch post
-        const post = await Post.findOne({ slug })
-          .populate("user", "username img")
-          .select("title slug price bedrooms bathrooms location desc createdAt")
-          .lean();
-    
-        if (!post) {
-          return res.status(404).json({ message: "Post not found" });
-        }
-    
-        // Cache post for 1 hour
-        await redis.setex(cacheKey, 3600, JSON.stringify(post));
-    
-        res.status(200).json(post);
-      } catch (error) {
-        console.error("Error fetching post:", error);
-        res.status(500).json("Internal server error!");
-      }
-    };
-    
-      
+// GET SINGLE POST
+export const getPost = async (req, res) => {
+  try {
+    const { slug } = req.params;
+    const cacheKey = `post:${slug}`;
 
+    // Check cache first
+    const cachedPost = await redis.get(cacheKey);
+    if (cachedPost) {
+      return res.status(200).json(JSON.parse(cachedPost));
+    }
+
+    // Fetch post
+    const post = await Post.findOne({ slug })
+      .populate("user", "username img")
+      .select("title slug price bedrooms bathrooms location desc createdAt")
+      .lean();
+
+    if (!post) {
+      return res.status(404).json({ message: "Post not found" });
+    }
+
+    // Cache post for 1 hour
+    await redis.setex(cacheKey, 3600, JSON.stringify(post));
+
+    res.status(200).json(post);
+  } catch (error) {
+    console.error("Error fetching post:", error);
+    res.status(500).json("Internal server error!");
+  }
+};
+
+         
 
 
 
