@@ -20,41 +20,18 @@ const fetchFeaturedPosts = async () => {
 };
 
 const PostList = () => {
-  const [searchParams] = useSearchParams();
   const [columns, setColumns] = useState("repeat(1, 1fr)");
   const [displayedPosts, setDisplayedPosts] = useState([]);
   const [showMessage, setShowMessage] = useState(false);
 
-  useEffect(() => {
-    const updateColumns = () => {
-      const width = window.innerWidth;
-      setColumns(
-        width > 1400 ? "repeat(4, 1fr)" :
-        width > 1000 ? "repeat(3, 1fr)" :
-        width > 640 ? "repeat(2, 1fr)" :
-        "repeat(1, 1fr)"
-      );
-    };
-    window.addEventListener("resize", updateColumns);
-    updateColumns();
-    return () => window.removeEventListener("resize", updateColumns);
-  }, []);
-
-  const {
-    data: allPosts = [],
-    error: postsError,
-    status: postsStatus,
-  } = useQuery({
+  const { data: allPosts = [], error: postsError, status: postsStatus } = useQuery({
     queryKey: ["posts", searchParams.toString()],
     queryFn: () => fetchPosts(searchParams),
     staleTime: 1000 * 60 * 10,
     cacheTime: 1000 * 60 * 30,
   });
 
-  const {
-    data: featuredPosts = [],
-    status: featuredStatus,
-  } = useQuery({
+  const { data: featuredPosts = [], status: featuredStatus } = useQuery({
     queryKey: ["featured"],
     queryFn: fetchFeaturedPosts,
     staleTime: 1000 * 60 * 10,
@@ -76,7 +53,6 @@ const PostList = () => {
       const combined = [...featuredPosts, ...filteredPosts];
       let index = 0;
       let batched = [];
-
       const loadNextBatch = (batchSize, delay) => {
         setTimeout(() => {
           batched = [...batched, ...combined.slice(index, index + batchSize)];
@@ -136,5 +112,6 @@ const PostList = () => {
     </div>
   );
 };
+
 
 export default PostList;
