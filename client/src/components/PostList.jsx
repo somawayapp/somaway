@@ -8,12 +8,18 @@ import Link from "next/link";
 // Fetch regular posts
 const fetchPosts = async (searchParams) => {
   const searchParamsObj = Object.fromEntries([...searchParams]);
-  const res = await axios.get(`${import.meta.env.VITE_API_URL}/posts?sort=random`, {
-    params: { ...searchParamsObj },
-  });
-  return res.data.posts;
+  try {
+    const res = await axios.get(`${import.meta.env.VITE_API_URL}/posts?sort=random`, {
+      params: { ...searchParamsObj },
+    });
+    // IMPORTANT: Log the API response to inspect its structure
+    console.log("API Response:", res.data);
+    return res.data.posts; // Assuming the array of posts is under the 'posts' property
+  } catch (error) {
+    console.error("Error fetching posts:", error);
+    return []; // Return an empty array on error to prevent .map() issues initially
+  }
 };
-
 
 const PostList = () => {
   const [columns, setColumns] = useState("repeat(1, 1fr)");
@@ -46,12 +52,12 @@ const PostList = () => {
     cacheTime: 1000 * 60 * 30,
   });
 
-
   const [displayedPosts, setDisplayedPosts] = useState([]);
 
   useEffect(() => {
-    if (allPosts.length === 0) {
-      setDisplayedPosts([]); // 🧼 clear out the old data
+    // This effect runs whenever allPosts changes
+    if (!allPosts || allPosts.length === 0) {
+      setDisplayedPosts([]); // Clear out old data if allPosts is empty or undefined
       return;
     }
 
@@ -82,18 +88,19 @@ const PostList = () => {
   useEffect(() => {
     const timer = setTimeout(() => {
       setShowMessage(true);
-    }, 3000); // 2-second delay
+    }, 3000); // 3-second delay
 
     return () => clearTimeout(timer); // Cleanup timeout on unmount
   }, []);
 
+  // Rendered when no posts are found after the initial delay
   if (displayedPosts.length === 0 && showMessage) {
     return (
       <div className="flex flex-col items-center justify-center h-[50vh]">
         <button
           onClick={() => (window.location.href = "/addlisting")}
-          className="w-full px-6 py-3 rounded-xl border border-[var(--softBg4)] 
-                   text-[var(--softTextColor)] shadow-md 
+          className="w-full px-6 py-3 rounded-xl border border-[var(--softBg4)]
+                   text-[var(--softTextColor)] shadow-md
                    hover:text-[var(--textColor)] hover:shadow-xl text-center"
         >
           <p className="mb-2">No listings found</p>
@@ -103,7 +110,8 @@ const PostList = () => {
     );
   }
 
-  if (displayedPosts.length === 0) {
+  // Initial loading state with skeleton UI
+  if (displayedPosts.length === 0 && status === "loading") {
     return (
       <div className="gap-2 grid grid-cols-1 md:grid-cols-4 md:gap-6 overflow-y-auto scrollbar-hide" style={{ height: 'calc(100vw * 8)' }}>
         {Array(8).fill(0).map((_, index) => (
@@ -115,9 +123,11 @@ const PostList = () => {
     );
   }
 
+  // Render the list of posts
   return (
     <div>
       <div className="gap-2 grid grid-cols-1 md:grid-cols-4 md:gap-6 scrollbar-hide">
+        {/* POTENTIAL ERROR POINT: Ensure displayedPosts is always an array here */}
         {displayedPosts.map((post) => (
           <PostListItem key={post._id} post={post} />
         ))}
