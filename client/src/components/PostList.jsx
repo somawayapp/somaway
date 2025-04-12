@@ -76,7 +76,7 @@ const PostList = () => {
 
     if (featuredPosts.length > 0) {
       // If featured posts are available, handle them separately
-      setDisplayedPosts([...featuredPosts.slice(0, 20)]); // Show only 2 on small screens
+      setDisplayedPosts([...featuredPosts]); // Show only 2 on small screens
       setTimeout(() => loadNextBatch(4), 50);
       setTimeout(() => loadNextBatch(4), 100);
       setTimeout(() => {
@@ -143,7 +143,7 @@ const PostList = () => {
       {/* Display featured posts first on medium screens */}
       {featuredPosts.length > 0 && (
       < div className="gap-2 grid grid-cols-1 md:grid-cols-4 md:gap-6 scrollbar-hide">
-       {featuredPosts.slice(0, 2).map((post) => (
+       {featuredPosts.slice(0, 4).map((post) => (
           <PostListItem key={post._id} post={post} />
         ))}
       </div>
@@ -153,7 +153,7 @@ const PostList = () => {
     
 
     <div className="gap-2 grid grid-cols-1 md:grid-cols-4 md:gap-6 scrollbar-hide">
-    {allPosts.map((post) => (
+    {displayedPosts.map((post) => (
           <PostListItem key={post._id} post={post} />
         ))}
     </div>
