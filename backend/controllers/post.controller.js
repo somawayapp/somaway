@@ -122,15 +122,7 @@ export const getPost = async (req, res) => {
 };
 
 
-export const getPost = async (req, res) => {
-  try {
-    const post = await Post.findOne({ slug: req.params.slug }).populate("user", "username img");
-    res.status(200).json(post);
-  } catch (error) {
-    console.error("Error fetching post:", error);
-    res.status(500).json("Internal server error!");
-  }
-};
+
 
 export const createPost = async (req, res) => {
   try {
