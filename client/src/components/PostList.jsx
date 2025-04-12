@@ -23,7 +23,6 @@ const fetchAllPosts = async (searchParams) => {
   });
   return res.data.posts;
 };
-
 const PostList = () => {
   const [columns, setColumns] = useState("repeat(1, 1fr)");
 
@@ -42,12 +41,13 @@ const PostList = () => {
     };
 
     window.addEventListener("resize", updateColumns);
-    updateColumns(); // Initial call
+    updateColumns();
 
     return () => window.removeEventListener("resize", updateColumns);
   }, []);
 
   const [searchParams] = useSearchParams();
+
   const { data: allPosts = [], error, status } = useQuery({
     queryKey: ["posts", searchParams.toString()],
     queryFn: () => fetchAllPosts(searchParams),
@@ -62,31 +62,22 @@ const PostList = () => {
     cacheTime: 1000 * 60 * 30,
   });
 
+  // Displayed Posts Logic (All Posts Only)
   const [displayedPosts, setDisplayedPosts] = useState([]);
 
   useEffect(() => {
-    let newPosts = [];
     let index = 0;
+    let currentPosts = [];
 
     const loadNextBatch = (batchSize) => {
-      newPosts = [...newPosts, ...allPosts.slice(index, index + batchSize)];
-      setDisplayedPosts([...newPosts]);
+      const nextBatch = allPosts.slice(index, index + batchSize);
+      currentPosts = [...currentPosts, ...nextBatch];
+      setDisplayedPosts([...currentPosts]);
       index += batchSize;
     };
 
-    if (featuredPosts.length > 0) {
-      // If featured posts are available, handle them separately
-      setDisplayedPosts([...featuredPosts]); // Show only 2 on small screens
-      setTimeout(() => loadNextBatch(4), 50);
-      setTimeout(() => loadNextBatch(4), 100);
-      setTimeout(() => {
-        while (index < allPosts.length) {
-          loadNextBatch(8);
-        }
-      }, 150);
-    } else {
-      // If no featured posts, load all posts normally
-      loadNextBatch(4); 
+    if (allPosts.length > 0) {
+      loadNextBatch(4);
       setTimeout(() => loadNextBatch(4), 50);
       setTimeout(() => loadNextBatch(4), 100);
       setTimeout(() => {
@@ -95,12 +86,10 @@ const PostList = () => {
         }
       }, 150);
     }
-  }, [allPosts, featuredPosts]);
-  
-  const filteredDisplayedPosts = displayedPosts.filter(
-    (post) => !featuredPosts.find((fp) => fp._id === post._id)
-  );
-  
+  }, [allPosts]);
+
+
+
   if (status === "loading") return <p>Loading...</p>;
   if (error) return <p>Something went wrong!</p>;
 
