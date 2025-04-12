@@ -13,6 +13,7 @@ import 'dotenv/config';
 import ratingRouter from '../routes/rating.route.js';
 import likeRouter from '../routes/like.route.js';
 import Post from "../models/post.model.js"; // Import Post model
+import moment from 'moment-timezone'; // Import moment-timezone
 
 dotenv.config();
 
@@ -57,19 +58,26 @@ app.use(
 );
 
 // Middleware for unfeaturing expired posts
+
+// Middleware for unfeaturing expired posts
 const unfeatureCleanerMiddleware = async (req, res, next) => {
   try {
-    const now = new Date();
+    // Get the current time in Nairobi (EAT)
+    const now = moment().tz('Africa/Nairobi');  // Current time in Nairobi's time zone
+
+    // Update the posts that are featured and expired based on Nairobi time
     const result = await Post.updateMany(
-      { isFeatured: true, featuredUntil: { $lte: now } },
+      { isFeatured: true, featuredUntil: { $lte: now.toDate() } }, // Convert moment to native Date
       { isFeatured: false, featuredUntil: null }
     );
+
     console.log(`[Middleware] Unfeatured ${result.modifiedCount} posts at ${now.toISOString()}`);
   } catch (err) {
     console.error('[Middleware] Error cleaning featured posts:', err);
   }
   next(); // Proceed to the next middleware or route handler
 };
+
 
 // Apply the unfeature cleaner middleware globally
 app.use(unfeatureCleanerMiddleware);
