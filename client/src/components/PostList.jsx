@@ -5,7 +5,6 @@ import { useSearchParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import Link from "next/link";
 
-// Fetch regular posts
 const fetchPosts = async (searchParams) => {
   const searchParamsObj = Object.fromEntries([...searchParams]);
   const res = await axios.get(`${import.meta.env.VITE_API_URL}/posts?sort=random`, {
@@ -13,9 +12,8 @@ const fetchPosts = async (searchParams) => {
   });
 
   console.log("Fetched posts response:", res.data);
+  const posts = res.data?.posts;
 
-  // Ensure posts is always an array
-  const posts = res.data.posts;
   if (!Array.isArray(posts)) {
     throw new Error("Expected posts to be an array");
   }
@@ -23,13 +21,12 @@ const fetchPosts = async (searchParams) => {
   return posts;
 };
 
-// Fetch featured posts
 const fetchFeaturedPosts = async () => {
   const res = await axios.get(`${import.meta.env.VITE_API_URL}/posts?featured=true&limit=4&sort=random`);
 
   console.log("Fetched featured posts response:", res.data);
+  const posts = res.data?.posts;
 
-  const posts = res.data.posts;
   if (!Array.isArray(posts)) {
     throw new Error("Expected featured posts to be an array");
   }
@@ -39,25 +36,8 @@ const fetchFeaturedPosts = async () => {
 
 const PostList = () => {
   const [columns, setColumns] = useState("repeat(1, 1fr)");
-
-  useEffect(() => {
-    const updateColumns = () => {
-      const width = window.innerWidth;
-      setColumns(
-        width > 1400
-          ? "repeat(4, 1fr)"
-          : width > 1000
-          ? "repeat(3, 1fr)"
-          : width > 640
-          ? "repeat(2, 1fr)"
-          : "repeat(1, 1fr)"
-      );
-    };
-
-    window.addEventListener("resize", updateColumns);
-    updateColumns();
-    return () => window.removeEventListener("resize", updateColumns);
-  }, []);
+  const [displayedPosts, setDisplayedPosts] = useState([]);
+  const [showMessage, setShowMessage] = useState(false);
 
   const [searchParams] = useSearchParams();
 
@@ -82,8 +62,23 @@ const PostList = () => {
     cacheTime: 1000 * 60 * 30,
   });
 
-  const [displayedPosts, setDisplayedPosts] = useState([]);
-  const [showMessage, setShowMessage] = useState(false);
+  useEffect(() => {
+    const updateColumns = () => {
+      const width = window.innerWidth;
+      setColumns(
+        width > 1400
+          ? "repeat(4, 1fr)"
+          : width > 1000
+          ? "repeat(3, 1fr)"
+          : width > 640
+          ? "repeat(2, 1fr)"
+          : "repeat(1, 1fr)"
+      );
+    };
+    window.addEventListener("resize", updateColumns);
+    updateColumns();
+    return () => window.removeEventListener("resize", updateColumns);
+  }, []);
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -95,31 +90,37 @@ const PostList = () => {
   useEffect(() => {
     if (postsStatus === "success" && featuredStatus === "success") {
       const filteredPosts = allPosts.filter(
-        (post) => !featuredPosts.find((f) => f._id === post._id)
+        (post) => !featuredPosts.some((f) => f._id === post._id)
       );
       const combined = [...featuredPosts, ...filteredPosts];
+
       let index = 0;
-      let batched = [];
-      const loadNextBatch = (batchSize) => {
-        batched = [...batched, ...combined.slice(index, index + batchSize)];
+      const batched = [];
+
+      const batchLoad = () => {
+        if (index >= combined.length) return;
+        const batchSize = index === 0 ? 4 : index < 8 ? 4 : 8;
+        batched.push(...combined.slice(index, index + batchSize));
         setDisplayedPosts([...batched]);
         index += batchSize;
+        setTimeout(batchLoad, 50);
       };
-      loadNextBatch(4);
-      setTimeout(() => loadNextBatch(4), 50);
-      setTimeout(() => loadNextBatch(4), 100);
-      setTimeout(() => {
-        while (index < combined.length) {
-          loadNextBatch(8);
-        }
-      }, 150);
+
+      batchLoad();
     }
   }, [allPosts, featuredPosts, postsStatus, featuredStatus]);
 
-  if (postsStatus === "loading" || featuredStatus === "loading")
+  if (postsStatus === "loading" || featuredStatus === "loading") {
     return <p>Loading...</p>;
+  }
 
-  if (postsError) return <p>Something went wrong!</p>;
+  if (postsError) {
+    return <p>Something went wrong!</p>;
+  }
+
+  if (!Array.isArray(displayedPosts)) {
+    return <p>Error: displayedPosts is not an array</p>;
+  }
 
   if (displayedPosts.length === 0 && showMessage) {
     return (
