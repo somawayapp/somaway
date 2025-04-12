@@ -29,6 +29,8 @@
     "mongoose": "^8.8.3",
     "react-query": "^3.39.3",
     "svix": "^1.37.0",
-    "wrappy": "^1.0.2"
+    "wrappy": "^1.0.2",
+    "node-cron": "^3.0.2"
+
   }
 }
