@@ -6,8 +6,8 @@ cron.schedule("0 * * * *", async () => {
   const now = new Date();
   try {
     await Post.updateMany(
-      { isFeatured: true, featuredUntil: { $lt: now } },
-      { isFeatured: false, featuredUntil: null }
+      { isFeatured: true, isfeaturedUntil: { $lt: now } },
+      { isFeatured: false, isfeaturedUntil: null }
     );
     console.log(`[CRON] Unfeatured expired posts at ${now.toISOString()}`);
   } catch (err) {
