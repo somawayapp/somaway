@@ -7,10 +7,13 @@ const connectDB = async () => {
     if (!uri) {
       throw new Error("DATABASE_URL is missing in environment variables.");
     }
-
+  
     await mongoose.connect(uri, {
       useNewUrlParser: true,
       useUnifiedTopology: true,
+      ssl: true,
+      tlsAllowInvalidCertificates: false, 
+   
     });
     console.log("MongoDB connected successfully!");
   } catch (error) {
