@@ -35,8 +35,15 @@ const fetchFeaturedPosts = async (searchParams) => {
 
   const featured = res.data?.posts;
   console.log("Fetched featured posts:", featured);
-  return Array.isArray(featured) ? featured : [];
+
+  // Randomize the featured posts
+  if (Array.isArray(featured)) {
+    return featured.sort(() => Math.random() - 0.5);
+  }
+
+  return [];
 };
+
 
 const PostList = () => {
   const [columns, setColumns] = useState("repeat(1, 1fr)");
@@ -78,7 +85,7 @@ const PostList = () => {
     data: featuredPosts = [],
     status: featuredStatus,
   } = useQuery({
-    queryKey: ["featured", "sort=random", searchParams.toString()],
+    queryKey: ["featured", searchParams.toString()],
     queryFn: () => fetchFeaturedPosts(searchParams),
     staleTime: 1000 * 60 * 10,
     cacheTime: 1000 * 60 * 30,
