@@ -12,12 +12,11 @@ const fetchPosts = async (searchParams) => {
     const res = await axios.get(`${import.meta.env.VITE_API_URL}/posts?sort=random`, {
       params: { ...searchParamsObj },
     });
-    // IMPORTANT: Log the API response to inspect its structure
     console.log("API Response:", res.data);
-    return res.data.posts; // Assuming the array of posts is under the 'posts' property
+    return res.data.posts;
   } catch (error) {
     console.error("Error fetching posts:", error);
-    return []; // Return an empty array on error to prevent .map() issues initially
+    return [];
   }
 };
 
@@ -39,7 +38,7 @@ const PostList = () => {
     };
 
     window.addEventListener("resize", updateColumns);
-    updateColumns(); // Initial call
+    updateColumns();
 
     return () => window.removeEventListener("resize", updateColumns);
   }, []);
@@ -55,9 +54,8 @@ const PostList = () => {
   const [displayedPosts, setDisplayedPosts] = useState([]);
 
   useEffect(() => {
-    // This effect runs whenever allPosts changes
     if (!allPosts || allPosts.length === 0) {
-      setDisplayedPosts([]); // Clear out old data if allPosts is empty or undefined
+      setDisplayedPosts([]);
       return;
     }
 
@@ -88,12 +86,11 @@ const PostList = () => {
   useEffect(() => {
     const timer = setTimeout(() => {
       setShowMessage(true);
-    }, 3000); // 3-second delay
+    }, 3000);
 
-    return () => clearTimeout(timer); // Cleanup timeout on unmount
+    return () => clearTimeout(timer);
   }, []);
 
-  // Rendered when no posts are found after the initial delay
   if (displayedPosts.length === 0 && showMessage) {
     return (
       <div className="flex flex-col items-center justify-center h-[50vh]">
@@ -110,7 +107,6 @@ const PostList = () => {
     );
   }
 
-  // Initial loading state with skeleton UI
   if (displayedPosts.length === 0 && status === "loading") {
     return (
       <div className="gap-2 grid grid-cols-1 md:grid-cols-4 md:gap-6 overflow-y-auto scrollbar-hide" style={{ height: 'calc(100vw * 8)' }}>
@@ -123,11 +119,10 @@ const PostList = () => {
     );
   }
 
-  // Render the list of posts
   return (
     <div>
       <div className="gap-2 grid grid-cols-1 md:grid-cols-4 md:gap-6 scrollbar-hide">
-        {/* POTENTIAL ERROR POINT: Ensure displayedPosts is always an array here */}
+        {console.log("displayedPosts before map:", displayedPosts)}
         {displayedPosts.map((post) => (
           <PostListItem key={post._id} post={post} />
         ))}
