@@ -65,21 +65,18 @@ const PostList = () => {
   const [displayedPosts, setDisplayedPosts] = useState([]);
 
   useEffect(() => {
+    let newPosts = [];
     let index = 0;
-    let currentPosts = [];
-  
+
     const loadNextBatch = (batchSize) => {
-      const nextBatch = allPosts.slice(index, index + batchSize);
-      currentPosts = [...currentPosts, ...nextBatch];
-      setDisplayedPosts(prev => [...prev, ...nextBatch]);
+      newPosts = [...newPosts, ...allPosts.slice(index, index + batchSize)];
+      setDisplayedPosts([...newPosts]);
       index += batchSize;
     };
-  
+
     if (featuredPosts.length > 0) {
-      // Start with featured posts
-      setDisplayedPosts([...featuredPosts.slice(0, 2)]);
-      currentPosts = [...featuredPosts.slice(0, 2)];
-  
+      // If featured posts are available, handle them separately
+      setDisplayedPosts([...featuredPosts.slice(0, 4)]); // Show only 2 on small screens
       setTimeout(() => loadNextBatch(4), 50);
       setTimeout(() => loadNextBatch(4), 100);
       setTimeout(() => {
@@ -88,11 +85,8 @@ const PostList = () => {
         }
       }, 150);
     } else {
-      // No featured posts, just load all normally
-      setDisplayedPosts([]);
-      currentPosts = [];
-  
-      setTimeout(() => loadNextBatch(4), 0);
+      // If no featured posts, load all posts normally
+      loadNextBatch(4); 
       setTimeout(() => loadNextBatch(4), 50);
       setTimeout(() => loadNextBatch(4), 100);
       setTimeout(() => {
@@ -102,7 +96,7 @@ const PostList = () => {
       }, 150);
     }
   }, [allPosts, featuredPosts]);
-  
+
   if (status === "loading") return <p>Loading...</p>;
   if (error) return <p>Something went wrong!</p>;
 
