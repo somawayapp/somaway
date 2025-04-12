@@ -69,7 +69,9 @@ export const getPosts = async (req, res) => {
 
     if (featured) {
       query.isFeatured = true;
+      query.featuredUntil = { $gte: new Date() }; // Only include posts where 'featuredUntil' is greater than or equal to the current date
     }
+    
 
     let sortObj = { createdAt: -1 };
     let useAggregation = false;
