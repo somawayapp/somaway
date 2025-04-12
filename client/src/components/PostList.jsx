@@ -175,11 +175,22 @@ const PostList = () => {
 
 
   return (
-    <div className="gap-2 grid grid-cols-1 md:grid-cols-4 md:gap-6 scrollbar-hide">
-      {displayedPosts.map((post) => (
-        <PostListItem key={post._id} post={post} />
+    <div>
+    {showMessage && <p>Welcome! Check out the latest posts!</p>}
+    <h2>Featured Posts</h2>
+    <div style={{ display: "grid", gridTemplateColumns: columns, gap: "1rem" }}>
+      {featuredPosts.map((post) => (
+        <PostListItem key={post.id} post={post} />
       ))}
     </div>
+
+    <h2>All Posts</h2>
+    <div style={{ display: "grid", gridTemplateColumns: columns, gap: "1rem" }}>
+      {displayedPosts.map((post) => (
+        <PostListItem key={post.id} post={post} />
+      ))}
+    </div>
+  </div>
   );
 };
 
