@@ -77,43 +77,48 @@ const PostList = () => {
   }, []);
 
   useEffect(() => {
-    let combinedPosts = [];
-
-    const limitedFeatured = featuredPosts.slice(0, 4);
-    const remainingPosts = allPosts.filter(
-      (post) => !limitedFeatured.find((fp) => fp._id === post._id)
-    );
-
-    if (limitedFeatured.length > 0) {
-      combinedPosts = [...limitedFeatured, ...remainingPosts];
-    } else {
-      combinedPosts = allPosts;
-    }
-
+    let indexRef = { current: 0 };
+    let newPosts = [];
+  
+    const combinedPosts = (() => {
+      const limitedFeatured = featuredPosts.slice(0, 4);
+      const remainingPosts = allPosts.filter(
+        (post) => !limitedFeatured.find((fp) => fp._id === post._id)
+      );
+      return limitedFeatured.length > 0
+        ? [...limitedFeatured, ...remainingPosts]
+        : allPosts;
+    })();
+  
     if (combinedPosts.length === 0) {
       setDisplayedPosts([]);
       return;
     }
-
-    let newPosts = [];
-    let index = 0;
-
+  
     const loadNextBatch = (batchSize) => {
-      newPosts = [...newPosts, ...combinedPosts.slice(index, index + batchSize)];
+      const nextSlice = combinedPosts.slice(
+        indexRef.current,
+        indexRef.current + batchSize
+      );
+      newPosts = [...newPosts, ...nextSlice];
+      indexRef.current += batchSize;
       setDisplayedPosts([...newPosts]);
-      index += batchSize;
     };
-
-    loadNextBatch(4);
-    setTimeout(() => loadNextBatch(4), 50);
-    setTimeout(() => loadNextBatch(4), 100);
-    setTimeout(() => {
-      while (index < combinedPosts.length) {
-        loadNextBatch(8);
-      }
-    }, 150);
+  
+    const timeouts = [
+      setTimeout(() => loadNextBatch(4), 0),
+      setTimeout(() => loadNextBatch(4), 50),
+      setTimeout(() => loadNextBatch(4), 100),
+      setTimeout(() => {
+        while (indexRef.current < combinedPosts.length) {
+          loadNextBatch(8);
+        }
+      }, 150),
+    ];
+  
+    return () => timeouts.forEach((t) => clearTimeout(t));
   }, [featuredPosts, allPosts]);
-
+  
   if (featuredStatus === "loading" || allStatus === "loading") return <p>Loading...</p>;
   if (featuredError || allError) return <p>Something went wrong!</p>;
 
