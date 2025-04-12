@@ -22,7 +22,7 @@ const fetchPosts = async (searchParams) => {
 };
 
 const fetchFeaturedPosts = async () => {
-  const res = await axios.get(`${import.meta.env.VITE_API_URL}/posts?featured=true&limit=4&sort=random`);
+  const res = await axios.get(`${import.meta.env.VITE_API_URL}/posts?featured=true&limit=4`);
 
   console.log("Fetched featured posts response:", res.data);
   const posts = res.data?.posts;
