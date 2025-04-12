@@ -141,21 +141,22 @@ const PostList = () => {
   return (
     <div className=" scrollbar-hide">
       {/* Display featured posts first on medium screens */}
-     
       {featuredPosts.length > 0 && (
+        <div className="md:col-span-4">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
             {featuredPosts.slice(0, 2).map((post) => (
               <PostListItem key={post._id} post={post} />
             ))}
-
           </div>
+        </div>
       )}
-    <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
+
+      {/* Display other posts */}
+      <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
         {displayedPosts.map((post) => (
           <PostListItem key={post._id} post={post} />
         ))}
       </div>
-
     </div>
   );
 };
