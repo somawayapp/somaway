@@ -9,7 +9,7 @@ const fetchPosts = async (searchParams) => {
     ? Object.fromEntries([...searchParams])
     : {};
 
-  const res = await axios.get(`${import.meta.env.VITE_API_URL}/posts?sort=random`, {
+  const res = await axios.get(`${import.meta.env.VITE_API_URL}/posts`, {
     params,
   });
 
