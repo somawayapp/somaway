@@ -4,11 +4,14 @@ import axios from "axios";
 import { useSearchParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 
-const fetchPosts = async (searchParams) => {
-  const params = searchParams instanceof URLSearchParams
+// Utility to convert URLSearchParams to plain object
+const parseSearchParams = (searchParams) =>
+  searchParams instanceof URLSearchParams
     ? Object.fromEntries([...searchParams])
     : {};
 
+const fetchPosts = async (searchParams) => {
+  const params = parseSearchParams(searchParams);
   const res = await axios.get(`${import.meta.env.VITE_API_URL}/posts?sort=random`, {
     params,
   });
@@ -18,8 +21,18 @@ const fetchPosts = async (searchParams) => {
   return Array.isArray(posts) ? posts : [];
 };
 
-const fetchFeaturedPosts = async () => {
-  const res = await axios.get(`${import.meta.env.VITE_API_URL}/posts?featured=true&limit=4&sort=random`);
+const fetchFeaturedPosts = async (searchParams) => {
+  const params = {
+    ...parseSearchParams(searchParams),
+    featured: true,
+    limit: 4,
+    sort: "random",
+  };
+
+  const res = await axios.get(`${import.meta.env.VITE_API_URL}/posts`, {
+    params,
+  });
+
   const featured = res.data?.posts;
   console.log("Fetched featured posts:", featured);
   return Array.isArray(featured) ? featured : [];
@@ -65,8 +78,8 @@ const PostList = () => {
     data: featuredPosts = [],
     status: featuredStatus,
   } = useQuery({
-    queryKey: ["featured"],
-    queryFn: fetchFeaturedPosts,
+    queryKey: ["featured", searchParams.toString()],
+    queryFn: () => fetchFeaturedPosts(searchParams),
     staleTime: 1000 * 60 * 10,
     cacheTime: 1000 * 60 * 30,
   });
