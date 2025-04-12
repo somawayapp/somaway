@@ -5,10 +5,14 @@ import { useSearchParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 
 const fetchPosts = async (searchParams) => {
-  const searchParamsObj = Object.fromEntries([...searchParams]);
+  const params = searchParams instanceof URLSearchParams
+    ? Object.fromEntries([...searchParams])
+    : {};
+
   const res = await axios.get(`${import.meta.env.VITE_API_URL}/posts?sort=random`, {
-    params: { ...searchParamsObj },
+    params,
   });
+
   const posts = res.data?.posts;
   console.log("Fetched posts:", posts);
   return Array.isArray(posts) ? posts : [];
@@ -82,13 +86,16 @@ const PostList = () => {
         (post) => !featuredPosts.find((f) => f._id === post._id)
       );
       const combined = [...featuredPosts, ...filteredPosts];
+
       let index = 0;
       let batched = [];
+
       const loadNextBatch = (batchSize) => {
         batched = [...batched, ...combined.slice(index, index + batchSize)];
         setDisplayedPosts([...batched]);
         index += batchSize;
       };
+
       loadNextBatch(4);
       setTimeout(() => loadNextBatch(4), 50);
       setTimeout(() => loadNextBatch(4), 100);
@@ -140,7 +147,7 @@ const PostList = () => {
 
   return (
     <div className="gap-2 grid grid-cols-1 md:grid-cols-4 md:gap-6 scrollbar-hide">
-      {Array.isArray(displayedPosts) && displayedPosts.map((post) => (
+      {displayedPosts.map((post) => (
         <PostListItem key={post._id} post={post} />
       ))}
     </div>
