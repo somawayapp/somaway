@@ -83,6 +83,10 @@ const postSchema = new Schema(
       type: Boolean,
       default: false,
     },
+    featuredUntil: {
+      type: Date,
+      default: null, 
+    },
     visit: {
       type: Number,
       default: 0,

@@ -35,6 +35,7 @@ const AddListing = () => {
   const [progress, setProgress] = useState(0);
   const [error, setError] = useState("");
   const [isFeatured, setIsFeatured] = useState(false);
+  const [isFeaturedUntil, setisFeaturedUntil] = useState("7"); 
 
 
 
@@ -105,6 +106,7 @@ const AddListing = () => {
       rooms,
       bedrooms,
       isFeatured,
+      isFeaturedUntil,
     };
 
     mutation.mutate(data);
@@ -399,8 +401,8 @@ const AddListing = () => {
 
   {isFeatured && (
     <select
-      value={duration}
-      onChange={(e) => setDuration(e.target.value)}
+      value={isFeaturedUntil}
+      onChange={(e) => setisFeaturedUntil(e.target.value)}
       className="border p-1 rounded"
     >
       <option value="1">1 day</option>
