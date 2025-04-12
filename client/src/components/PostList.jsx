@@ -89,14 +89,11 @@ const PostList = () => {
 
   useEffect(() => {
     if (postsStatus === "success" && featuredStatus === "success") {
-      const filteredPosts = allPosts.filter(
-        (post) => !featuredPosts.some((f) => f._id === post._id)
-      );
-      const combined = [...featuredPosts, ...filteredPosts];
-
+      const combined = [...featuredPosts, ...allPosts]; // Combine featured and all posts
+  
       let index = 0;
       const batched = [];
-
+  
       const batchLoad = () => {
         if (index >= combined.length) return;
         const batchSize = index === 0 ? 4 : index < 8 ? 4 : 8;
@@ -105,11 +102,12 @@ const PostList = () => {
         index += batchSize;
         setTimeout(batchLoad, 50);
       };
-
+  
       batchLoad();
     }
   }, [allPosts, featuredPosts, postsStatus, featuredStatus]);
 
+  
   if (postsStatus === "loading" || featuredStatus === "loading") {
     return <p>Loading...</p>;
   }
