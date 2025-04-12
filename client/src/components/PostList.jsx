@@ -4,27 +4,24 @@ import axios from "axios";
 import { useSearchParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 
-// Fetch regular posts
 const fetchPosts = async (searchParams) => {
   const searchParamsObj = Object.fromEntries([...searchParams]);
   const res = await axios.get(`${import.meta.env.VITE_API_URL}/posts?sort=random`, {
     params: { ...searchParamsObj },
   });
-
-  const posts = res?.data?.posts;
+  const posts = res.data?.posts;
   return Array.isArray(posts) ? posts : [];
 };
 
-// Fetch featured posts
 const fetchFeaturedPosts = async () => {
   const res = await axios.get(`${import.meta.env.VITE_API_URL}/posts?featured=true&limit=4&sort=random`);
-  const posts = res?.data?.posts;
+  const posts = res.data?.posts;
   return Array.isArray(posts) ? posts : [];
 };
 
 const PostList = () => {
-  const [columns, setColumns] = useState("repeat(1, 1fr)");
   const [searchParams] = useSearchParams();
+  const [columns, setColumns] = useState("repeat(1, 1fr)");
   const [displayedPosts, setDisplayedPosts] = useState([]);
   const [showMessage, setShowMessage] = useState(false);
 
@@ -32,25 +29,15 @@ const PostList = () => {
     const updateColumns = () => {
       const width = window.innerWidth;
       setColumns(
-        width > 1400
-          ? "repeat(4, 1fr)"
-          : width > 1000
-          ? "repeat(3, 1fr)"
-          : width > 640
-          ? "repeat(2, 1fr)"
-          : "repeat(1, 1fr)"
+        width > 1400 ? "repeat(4, 1fr)" :
+        width > 1000 ? "repeat(3, 1fr)" :
+        width > 640 ? "repeat(2, 1fr)" :
+        "repeat(1, 1fr)"
       );
     };
     window.addEventListener("resize", updateColumns);
     updateColumns();
     return () => window.removeEventListener("resize", updateColumns);
-  }, []);
-
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setShowMessage(true);
-    }, 3000);
-    return () => clearTimeout(timer);
   }, []);
 
   const {
@@ -75,29 +62,33 @@ const PostList = () => {
   });
 
   useEffect(() => {
-    if (postsStatus === "success" && featuredStatus === "success") {
-      const combined = [
-        ...featuredPosts,
-        ...allPosts.filter(post => !featuredPosts.find(f => f._id === post._id)),
-      ];
+    const timer = setTimeout(() => {
+      setShowMessage(true);
+    }, 3000);
+    return () => clearTimeout(timer);
+  }, []);
 
+  useEffect(() => {
+    if (postsStatus === "success" && featuredStatus === "success") {
+      const filteredPosts = allPosts.filter(
+        (post) => !featuredPosts.find((f) => f._id === post._id)
+      );
+      const combined = [...featuredPosts, ...filteredPosts];
       let index = 0;
       let batched = [];
 
-      const loadNextBatch = (batchSize) => {
-        batched = [...batched, ...combined.slice(index, index + batchSize)];
-        setDisplayedPosts([...batched]);
-        index += batchSize;
+      const loadNextBatch = (batchSize, delay) => {
+        setTimeout(() => {
+          batched = [...batched, ...combined.slice(index, index + batchSize)];
+          setDisplayedPosts([...batched]);
+          index += batchSize;
+        }, delay);
       };
 
-      loadNextBatch(4);
-      setTimeout(() => loadNextBatch(4), 50);
-      setTimeout(() => loadNextBatch(4), 100);
-      setTimeout(() => {
-        while (index < combined.length) {
-          loadNextBatch(8);
-        }
-      }, 150);
+      loadNextBatch(4, 0);
+      loadNextBatch(4, 50);
+      loadNextBatch(4, 100);
+      loadNextBatch(combined.length, 150);
     }
   }, [allPosts, featuredPosts, postsStatus, featuredStatus]);
 
@@ -138,13 +129,10 @@ const PostList = () => {
   }
 
   return (
-    <div className="gap-2 grid" style={{ gridTemplateColumns: columns }}>
-      {Array.isArray(displayedPosts) &&
-        displayedPosts.map((post, index) =>
-          post && typeof post === "object" ? (
-            <PostListItem key={post._id || index} post={post} />
-          ) : null
-        )}
+    <div className="gap-2 grid grid-cols-1 md:grid-cols-4 md:gap-6 scrollbar-hide">
+      {displayedPosts.map((post) => (
+        <PostListItem key={post._id} post={post} />
+      ))}
     </div>
   );
 };
