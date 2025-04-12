@@ -8,7 +8,7 @@ import Link from "next/link";
 // Fetch regular posts
 const fetchPosts = async (searchParams) => {
   const searchParamsObj = Object.fromEntries([...searchParams]);
-  const res = await axios.get(`${import.meta.env.VITE_API_URL}/posts?random`, {
+  const res = await axios.get(`${import.meta.env.VITE_API_URL}/posts?sort=random`, {
     params: { ...searchParamsObj },
   });
 
@@ -61,7 +61,7 @@ const PostList = () => {
     data: featuredPosts = [],
     status: featuredStatus,
   } = useQuery({
-    queryKey: ["featuredPosts"],
+    queryKey: ["featured"],
     queryFn: fetchFeaturedPosts,
     staleTime: 1000 * 60 * 10,
     cacheTime: 1000 * 60 * 30,
