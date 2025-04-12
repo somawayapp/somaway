@@ -9,13 +9,16 @@ const fetchPosts = async (searchParams) => {
   const res = await axios.get(`${import.meta.env.VITE_API_URL}/posts?sort=random`, {
     params: { ...searchParamsObj },
   });
-
-  return Array.isArray(res.data.posts) ? res.data.posts : [];
+  const posts = res.data?.posts;
+  console.log("Fetched posts:", posts);
+  return Array.isArray(posts) ? posts : [];
 };
 
 const fetchFeaturedPosts = async () => {
   const res = await axios.get(`${import.meta.env.VITE_API_URL}/posts?featured=true&limit=4&sort=random`);
-  return Array.isArray(res.data.posts) ? res.data.posts : [];
+  const featured = res.data?.posts;
+  console.log("Fetched featured posts:", featured);
+  return Array.isArray(featured) ? featured : [];
 };
 
 const PostList = () => {
@@ -72,6 +75,8 @@ const PostList = () => {
   }, []);
 
   useEffect(() => {
+    if (!Array.isArray(allPosts) || !Array.isArray(featuredPosts)) return;
+
     if (postsStatus === "success" && featuredStatus === "success") {
       const filteredPosts = allPosts.filter(
         (post) => !featuredPosts.find((f) => f._id === post._id)
@@ -135,7 +140,7 @@ const PostList = () => {
 
   return (
     <div className="gap-2 grid grid-cols-1 md:grid-cols-4 md:gap-6 scrollbar-hide">
-      {displayedPosts.map((post) => (
+      {Array.isArray(displayedPosts) && displayedPosts.map((post) => (
         <PostListItem key={post._id} post={post} />
       ))}
     </div>
