@@ -77,28 +77,31 @@ const PostList = () => {
   const [displayedPosts, setDisplayedPosts] = useState([]);
 
   useEffect(() => {
+    if (featuredPosts.length === 0 && allPosts.length === 0) {
+      setDisplayedPosts([]); // Clear out the displayed posts if no posts are available
+      return;
+    }
+  
     const featuredLimit = 4;
     const topFeatured = featuredPosts.slice(0, featuredLimit);
     const nonFeatured = allPosts.filter(
       (post) => !featuredPosts.some((fp) => fp._id === post._id)
     );
-
+  
     const combinedPosts = [...topFeatured, ...nonFeatured];
-
-    if (combinedPosts.length === 0) {
-      setDisplayedPosts([]);
-      return;
-    }
-
+  
+    // If no new posts are available, do not update state
+    if (JSON.stringify(combinedPosts) === JSON.stringify(displayedPosts)) return;
+  
     let newPosts = [];
     let index = 0;
-
+  
     const loadNextBatch = (batchSize) => {
       newPosts = [...newPosts, ...combinedPosts.slice(index, index + batchSize)];
       setDisplayedPosts([...newPosts]);
       index += batchSize;
     };
-
+  
     loadNextBatch(4);
     setTimeout(() => loadNextBatch(4), 50);
     setTimeout(() => loadNextBatch(4), 100);
@@ -107,8 +110,8 @@ const PostList = () => {
         loadNextBatch(8);
       }
     }, 150);
-  }, [featuredPosts, allPosts]);
-
+  }, [featuredPosts, allPosts, displayedPosts]);
+  
   if (featuredStatus === "loading" || allStatus === "loading") {
     return <p>Loading...</p>;
   }
