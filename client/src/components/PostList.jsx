@@ -12,19 +12,23 @@ const fetchPosts = async (searchParams) => {
     params: { ...searchParamsObj },
   });
 
-  return Array.isArray(res.data.posts) ? res.data.posts : [];
+  // Ensure it's always an array
+  return Array.isArray(res.data?.posts) ? res.data.posts : [];
 };
 
+// Fetch featured posts
 const fetchFeaturedPosts = async () => {
   const res = await axios.get(`${import.meta.env.VITE_API_URL}/posts?featured=true&limit=4&sort=random`);
 
-  return Array.isArray(res.data.posts) ? res.data.posts : [];
+  // Ensure it's always an array
+  return Array.isArray(res.data?.posts) ? res.data.posts : [];
 };
-
 
 const PostList = () => {
   const [columns, setColumns] = useState("repeat(1, 1fr)");
+  const [searchParams] = useSearchParams();
 
+  // Responsive column layout
   useEffect(() => {
     const updateColumns = () => {
       const width = window.innerWidth;
@@ -38,14 +42,12 @@ const PostList = () => {
           : "repeat(1, 1fr)"
       );
     };
-
     window.addEventListener("resize", updateColumns);
-    updateColumns(); // Initial call
+    updateColumns(); // Initial run
     return () => window.removeEventListener("resize", updateColumns);
   }, []);
 
-  const [searchParams] = useSearchParams();
-
+  // Queries
   const {
     data: allPosts = [],
     error: postsError,
@@ -77,20 +79,23 @@ const PostList = () => {
     return () => clearTimeout(timer);
   }, []);
 
+  // Combine and display posts
   useEffect(() => {
     if (postsStatus === "success" && featuredStatus === "success") {
-      // Remove duplicates based on _id, in case featured posts are also in allPosts
       const filteredPosts = allPosts.filter(
-        (post) => !featuredPosts.find((f) => f._id === post._id)
+        (post) => !featuredPosts.some((f) => f._id === post._id)
       );
       const combined = [...featuredPosts, ...filteredPosts];
+
       let index = 0;
       let batched = [];
+
       const loadNextBatch = (batchSize) => {
         batched = [...batched, ...combined.slice(index, index + batchSize)];
         setDisplayedPosts([...batched]);
         index += batchSize;
       };
+
       loadNextBatch(4);
       setTimeout(() => loadNextBatch(4), 50);
       setTimeout(() => loadNextBatch(4), 100);
@@ -102,10 +107,18 @@ const PostList = () => {
     }
   }, [allPosts, featuredPosts, postsStatus, featuredStatus]);
 
-  if (postsStatus === "loading" || featuredStatus === "loading")
+  if (postsStatus === "loading" || featuredStatus === "loading") {
     return <p>Loading...</p>;
+  }
 
-  if (postsError) return <p>Something went wrong!</p>;
+  if (postsError) {
+    return <p>Something went wrong!</p>;
+  }
+
+  if (!Array.isArray(displayedPosts)) {
+    console.error("Expected displayedPosts to be an array:", displayedPosts);
+    return <p>Invalid data received!</p>;
+  }
 
   if (displayedPosts.length === 0 && showMessage) {
     return (
@@ -136,7 +149,7 @@ const PostList = () => {
   }
 
   return (
-    <div className="gap-2 grid grid-cols-1 md:grid-cols-4 md:gap-6 scrollbar-hide">
+    <div className="gap-2 grid" style={{ gridTemplateColumns: columns }}>
       {displayedPosts.map((post) => (
         <PostListItem key={post._id} post={post} />
       ))}
