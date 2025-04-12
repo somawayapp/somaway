@@ -5,6 +5,7 @@ import dotenv from 'dotenv';
 import { createClerkClient } from '@clerk/backend';
 import userRouter from '../routes/user.route.js';
 import postRouter from '../routes/post.route.js';
+import randompostRouter from '../routes/randompost.route.js';
 import commentRouter from '../routes/comment.route.js';
 import webhookRouter from '../routes/webhook.route.js';
 import cors from 'cors';
@@ -13,6 +14,7 @@ import ratingRouter from '../routes/rating.route.js';
 import likeRouter from '../routes/like.route.js';
 import Post from "../models/post.model.js"; // Import Post model
 import moment from 'moment-timezone'; // Import moment-timezone
+
 
 dotenv.config();
 
@@ -84,6 +86,7 @@ app.use(unfeatureCleanerMiddleware);
 // API Routes
 app.use('/users', userRouter);
 app.use('/posts', postRouter); 
+app.use('/randomposts', randompostRouter); 
 app.use('/comments', commentRouter);
 app.use('/webhook', webhookRouter);
 app.use('/ratings', ratingRouter);
