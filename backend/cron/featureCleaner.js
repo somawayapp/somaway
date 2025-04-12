@@ -1,5 +1,5 @@
 import cron from "node-cron";
-import Post from "../models/Post.js"; // adjust path if your models are elsewhere
+import Post from "../models/post.model.js";
 
 // Runs every hour
 cron.schedule("0 * * * *", async () => {
