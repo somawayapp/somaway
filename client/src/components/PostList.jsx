@@ -11,13 +11,30 @@ const fetchPosts = async (searchParams) => {
   const res = await axios.get(`${import.meta.env.VITE_API_URL}/posts?sort=random`, {
     params: { ...searchParamsObj },
   });
-  return res.data.posts;
+
+  console.log("Fetched posts response:", res.data);
+
+  // Ensure posts is always an array
+  const posts = res.data.posts;
+  if (!Array.isArray(posts)) {
+    throw new Error("Expected posts to be an array");
+  }
+
+  return posts;
 };
 
 // Fetch featured posts
 const fetchFeaturedPosts = async () => {
   const res = await axios.get(`${import.meta.env.VITE_API_URL}/posts?featured=true&limit=4&sort=random`);
-  return res.data.posts;
+
+  console.log("Fetched featured posts response:", res.data);
+
+  const posts = res.data.posts;
+  if (!Array.isArray(posts)) {
+    throw new Error("Expected featured posts to be an array");
+  }
+
+  return posts;
 };
 
 const PostList = () => {
@@ -38,7 +55,7 @@ const PostList = () => {
     };
 
     window.addEventListener("resize", updateColumns);
-    updateColumns(); // Initial call
+    updateColumns();
     return () => window.removeEventListener("resize", updateColumns);
   }, []);
 
@@ -77,7 +94,6 @@ const PostList = () => {
 
   useEffect(() => {
     if (postsStatus === "success" && featuredStatus === "success") {
-      // Remove duplicates based on _id, in case featured posts are also in allPosts
       const filteredPosts = allPosts.filter(
         (post) => !featuredPosts.find((f) => f._id === post._id)
       );
@@ -123,12 +139,17 @@ const PostList = () => {
 
   if (displayedPosts.length === 0) {
     return (
-      <div className="gap-2 grid grid-cols-1 md:grid-cols-4 md:gap-6 overflow-y-auto scrollbar-hide" style={{ height: 'calc(100vw * 8)' }}>
-        {Array(8).fill(0).map((_, index) => (
-          <div key={index} className="relative aspect-[3/3] w-full">
-            <div className="absolute inset-0 bg-[var(--softBg4)] animate-pulse rounded-xl md:rounded-2xl"></div>
-          </div>
-        ))}
+      <div
+        className="gap-2 grid grid-cols-1 md:grid-cols-4 md:gap-6 overflow-y-auto scrollbar-hide"
+        style={{ height: "calc(100vw * 8)" }}
+      >
+        {Array(8)
+          .fill(0)
+          .map((_, index) => (
+            <div key={index} className="relative aspect-[3/3] w-full">
+              <div className="absolute inset-0 bg-[var(--softBg4)] animate-pulse rounded-xl md:rounded-2xl"></div>
+            </div>
+          ))}
       </div>
     );
   }
