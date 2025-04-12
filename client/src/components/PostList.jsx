@@ -1,10 +1,10 @@
 import PostListItem from "./PostListItem";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
-import { useSearchParams } from "react-router-dom";
+import { useSearchParams, Link } from "react-router-dom";
 import { useEffect, useState } from "react";
-import Link from "next/link";
 
+// Fetch functions
 const fetchPosts = async (searchParams) => {
   const searchParamsObj = Object.fromEntries([...searchParams]);
   const res = await axios.get(`${import.meta.env.VITE_API_URL}/posts?sort=random`, {
@@ -23,7 +23,9 @@ const fetchFeaturedPosts = async (searchParams) => {
 
 const PostList = () => {
   const [columns, setColumns] = useState("repeat(1, 1fr)");
+  const [searchParams] = useSearchParams();
 
+  // Update columns on window resize
   useEffect(() => {
     const updateColumns = () => {
       const width = window.innerWidth;
@@ -39,12 +41,11 @@ const PostList = () => {
     };
 
     window.addEventListener("resize", updateColumns);
-    updateColumns(); // Initial call
-
+    updateColumns();
     return () => window.removeEventListener("resize", updateColumns);
   }, []);
 
-  const [searchParams] = useSearchParams();
+  // Queries
   const { data: allPosts = [], error, status } = useQuery({
     queryKey: ["posts", searchParams.toString()],
     queryFn: () => fetchPosts(searchParams),
@@ -59,67 +60,32 @@ const PostList = () => {
     cacheTime: 1000 * 60 * 30,
   });
 
+  // Combine featured + allPosts
   const [displayedPosts, setDisplayedPosts] = useState([]);
 
   useEffect(() => {
     if (allPosts.length === 0 && featuredPosts.length === 0) {
-      setDisplayedPosts([]); // 🧼 clear out the old data
+      setDisplayedPosts([]);
       return;
     }
 
-    let newPosts = [];
-    let index = 0;
-
-    const loadNextBatch = (batchSize) => {
-      newPosts = [...newPosts, ...allPosts.slice(index, index + batchSize)];
-      setDisplayedPosts([...newPosts]);
-      index += batchSize;
-    };
-
-    // Show up to 4 featured posts first, if available
-    let featuredToShow = featuredPosts.slice(0, 4);
-    let remainingPosts = allPosts;
-
-    if (featuredToShow.length > 0) {
-      remainingPosts = allPosts.filter(post => !featuredToShow.some(fPost => fPost._id === post._id));
-    }
-
+    const featuredToShow = featuredPosts.slice(0, 4);
+    const featuredIds = new Set(featuredToShow.map((post) => post._id));
+    const remainingPosts = allPosts.filter((post) => !featuredIds.has(post._id));
     setDisplayedPosts([...featuredToShow, ...remainingPosts]);
-
   }, [allPosts, featuredPosts]);
 
-  if (status === "loading" || featuredStatus === "loading") return <p>Loading...</p>;
-  if (error || featuredError) return <p>Something went wrong!</p>;
-
+  // Delayed empty message
   const [showMessage, setShowMessage] = useState(false);
-
   useEffect(() => {
-    const timer = setTimeout(() => {
-      setShowMessage(true);
-    }, 3000); // 3-second delay
-
-    return () => clearTimeout(timer); // Cleanup timeout on unmount
+    const timer = setTimeout(() => setShowMessage(true), 3000);
+    return () => clearTimeout(timer);
   }, []);
 
-  if (displayedPosts.length === 0 && showMessage) {
+  // Loading
+  if (status === "loading" || featuredStatus === "loading") {
     return (
-      <div className="flex flex-col items-center justify-center h-[50vh]">
-        <button
-          onClick={() => window.location.href = '/addlisting'}
-          className="w-full px-6 py-3 rounded-xl border border-[var(--softBg4)] 
-                     text-[var(--softTextColor)] shadow-md 
-                     hover:text-[var(--textColor)] hover:shadow-xl text-center"
-        >
-          <p className="mb-2">No listings found</p>
-          <p className="mb-2 font-bold">Go back home</p>
-        </button>
-      </div>
-    );
-  }
-
-  if (displayedPosts.length === 0) {
-    return (
-      <div className="gap-2 grid grid-cols-1 md:grid-cols-4 md:gap-6 overflow-y-auto scrollbar-hide" style={{ height: 'calc(100vw * 8)' }}>
+      <div className="gap-2 grid grid-cols-1 md:grid-cols-4 md:gap-6 overflow-y-auto scrollbar-hide min-h-[60vh]">
         {Array(8).fill(0).map((_, index) => (
           <div key={index} className="relative aspect-[3/3] w-full">
             <div className="absolute inset-0 bg-[var(--softBg4)] animate-pulse rounded-xl md:rounded-2xl"></div>
@@ -129,8 +95,32 @@ const PostList = () => {
     );
   }
 
+  // Error
+  if (error || featuredError) return <p>Something went wrong!</p>;
+
+  // No posts after delay
+  if (displayedPosts.length === 0 && showMessage) {
+    return (
+      <div className="flex flex-col items-center justify-center h-[50vh] text-center">
+        <Link
+          to="/addlisting"
+          className="w-full px-6 py-3 rounded-xl border border-[var(--softBg4)] 
+                     text-[var(--softTextColor)] shadow-md 
+                     hover:text-[var(--textColor)] hover:shadow-xl"
+        >
+          <p className="mb-2">No listings found</p>
+          <p className="mb-2 font-bold">Add a new one</p>
+        </Link>
+      </div>
+    );
+  }
+
+  // Final list
   return (
-    <div className="gap-2 grid grid-cols-1 md:grid-cols-4 md:gap-6 scrollbar-hide">
+    <div
+      className="gap-2 grid md:gap-6 scrollbar-hide"
+      style={{ gridTemplateColumns: columns }}
+    >
       {displayedPosts.map((post) => (
         <PostListItem key={post._id} post={post} />
       ))}
