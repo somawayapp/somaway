@@ -1,7 +1,7 @@
-import ImageKit from "imagekit";
-import Post from "../models/post.model.js";
-import User from "../models/user.model.js";
-import Redis from "ioredis";
+const ImageKit = require('imagekit');
+const Post = require('../models/post.model.js');
+const User = require('../models/user.model.js');
+const Redis = require('ioredis');
 
 const redis = new Redis(); // Initialize Redis connection
 
