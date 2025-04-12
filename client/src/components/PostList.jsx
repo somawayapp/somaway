@@ -18,7 +18,7 @@ const fetchPosts = async (searchParams) => {
 
 const fetchAllPosts = async (searchParams) => {
   const searchParamsObj = Object.fromEntries([...searchParams]);
-  const res = await axios.get(`${import.meta.env.VITE_API_URL}/posts`, {
+  const res = await axios.get(`${import.meta.env.VITE_API_URL}/posts&sort=random`, {
     params: { ...searchParamsObj },
   });
   return res.data.posts;
@@ -56,7 +56,7 @@ const PostList = () => {
   });
 
   const { data: featuredPosts = [] } = useQuery({
-    queryKey: ["featuredPosts", searchParams.toString()],
+    queryKey: ["featured", searchParams.toString()],
     queryFn: () => fetchPosts(searchParams),
     staleTime: 1000 * 60 * 10,
     cacheTime: 1000 * 60 * 30,
@@ -143,21 +143,19 @@ const PostList = () => {
       {/* Display featured posts first on medium screens */}
       {featuredPosts.length > 0 && (
         <div className="md:col-span-4">
-          <h3 className="text-lg font-bold mb-4">Featured Posts</h3>
           <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
             {featuredPosts.slice(0, 2).map((post) => (
               <PostListItem key={post._id} post={post} />
             ))}
+
+        {displayedPosts.map((post) => (
+          <PostListItem key={post._id} post={post} />
+        ))}
           </div>
         </div>
       )}
 
-      {/* Display other posts */}
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
-        {displayedPosts.map((post) => (
-          <PostListItem key={post._id} post={post} />
-        ))}
-      </div>
+
     </div>
   );
 };
