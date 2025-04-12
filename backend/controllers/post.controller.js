@@ -21,21 +21,7 @@ export const getPosts = async (req, res) => {
       return res.status(200).json(cachedData);
     }
 
-    const {
-      author,
-      search,
-      sort,
-      location,
-      propertytype,
-      bedrooms,
-      bathrooms,
-      propertysize,
-      rooms,
-      pricemax,
-      pricemin,
-      model,
-      featured,
-    } = req.query;
+    const { author, search, sort, location, propertytype, bedrooms, bathrooms, propertysize, rooms, pricemax, pricemin, model, featured } = req.query;
 
     if (req.query.cat) {
       query.category = req.query.cat;
@@ -49,10 +35,7 @@ export const getPosts = async (req, res) => {
     }
 
     if (author) {
-      const authorNames = author
-        .split(/[,;|\s]+/)
-        .map((name) => name.trim())
-        .filter(Boolean);
+      const authorNames = author.split(/[,;|\s]+/).map((name) => name.trim()).filter(Boolean);
       const authorRegexes = authorNames.map((name) => new RegExp(name, "i"));
       query.author = { $in: authorRegexes };
     }
@@ -61,75 +44,38 @@ export const getPosts = async (req, res) => {
       query["location.city"] = { $regex: location, $options: "i" };
     }
 
-    if (propertytype) {
-      query.propertytype = propertytype;
-    }
-
+    if (propertytype) query.propertytype = propertytype;
     if (bedrooms) query.bedrooms = { $gte: parseInt(bedrooms) };
     if (bathrooms) query.bathrooms = { $gte: parseInt(bathrooms) };
     if (propertysize) query.propertysize = { $gte: parseInt(propertysize) };
     if (rooms) query.rooms = { $gte: parseInt(rooms) };
-
     if (pricemin || pricemax) {
       query.price = {};
       if (pricemin) query.price.$gte = parseInt(pricemin);
       if (pricemax) query.price.$lte = parseInt(pricemax);
     }
-
-    if (model) {
-      query.model = model;
-    }
-
-    if (featured) {
-      query.isFeatured = true;
-    }
+    if (model) query.model = model;
+    if (featured) query.isFeatured = true;
 
     let sortObj = { createdAt: -1 };
-    let useAggregation = false;
-
     if (sort) {
       switch (sort) {
-        case "newest":
-          sortObj = { createdAt: -1 };
-          break;
-        case "oldest":
-          sortObj = { createdAt: 1 };
-          break;
-        case "popular":
-          sortObj = { visit: -1 };
-          break;
+        case "newest": sortObj = { createdAt: -1 }; break;
+        case "oldest": sortObj = { createdAt: 1 }; break;
+        case "popular": sortObj = { visit: -1 }; break;
         case "trending":
           sortObj = { visit: -1 };
-          query.createdAt = {
-            $gte: new Date(new Date().getTime() - 14 * 24 * 60 * 60 * 1000),
-          };
+          query.createdAt = { $gte: new Date(new Date().getTime() - 14 * 24 * 60 * 60 * 1000) };
           break;
-        case "random":
-          useAggregation = true;
-          break;
-        default:
-          break;
+        case "random": sortObj = {}; break;
+        default: break;
       }
     }
 
-    let posts, totalPosts;
-
-    if (useAggregation) {
-      // Aggregation pipeline for random sorting
-      posts = await Post.aggregate([
-        { $match: query },
-        { $sample: { size: limit } },
-      ]);
-      posts = await Post.populate(posts, { path: "user", select: "username" });
-      totalPosts = await Post.countDocuments(query);
-    } else {
-      posts = await Post.find(query)
-        .populate("user", "username")
-        .sort(sortObj)
-        .limit(limit)
-        .skip((page - 1) * limit);
-      totalPosts = await Post.countDocuments(query);
-    }
+    const [posts, totalPosts] = await Promise.all([
+      Post.find(query).populate("user", "username").sort(sortObj).limit(limit).skip((page - 1) * limit),
+      Post.countDocuments(query)
+    ]);
 
     const hasMore = page * limit < totalPosts;
 
