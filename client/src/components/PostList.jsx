@@ -8,7 +8,7 @@ import Link from "next/link";
 // Fetch regular posts
 const fetchPosts = async (searchParams) => {
   const searchParamsObj = Object.fromEntries([...searchParams]);
-  const res = await axios.get(`${import.meta.env.VITE_API_URL}/posts?random`, {
+  const res = await axios.get(`${import.meta.env.VITE_API_URL}/posts?sort=random`, {
     params: { ...searchParamsObj },
   });
   return res.data.posts;
