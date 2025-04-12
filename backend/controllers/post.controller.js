@@ -68,9 +68,17 @@ export const getPosts = async (req, res) => {
     }
 
     if (featured) {
-      query.isFeatured = true;
-      // Check if the featuredUntil date is greater than the current date
-      query.featuredUntil = { $gt: new Date() };
+      const currentTime = new Date();
+      // Filter only featured posts that are not expired
+      query.$and = [
+        { isFeatured: true },
+        {
+          $or: [
+            { featuredUntil: { $exists: false } },  // No expiration set
+            { featuredUntil: { $gte: currentTime } }  // Featured until future
+          ]
+        }
+      ];
     }
 
     let sortObj = { createdAt: -1 };
