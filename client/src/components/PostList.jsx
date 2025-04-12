@@ -1,22 +1,22 @@
-import PostListItem from "./PostListItem";
+import { useState, useEffect } from "react";
+import { useSearchParams } from "react-router-dom"; // Make sure this is imported
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
-import { useSearchParams } from "react-router-dom";
-import { useEffect, useState } from "react";
+import PostListItem from "./PostListItem";
 
+// Fetch regular posts
 const fetchPosts = async (searchParams) => {
   const searchParamsObj = Object.fromEntries([...searchParams]);
   const res = await axios.get(`${import.meta.env.VITE_API_URL}/posts?sort=random`, {
     params: { ...searchParamsObj },
   });
-  const posts = res.data?.posts;
-  return Array.isArray(posts) ? posts : [];
+
+  return Array.isArray(res.data?.posts) ? res.data.posts : [];
 };
 
 const fetchFeaturedPosts = async () => {
   const res = await axios.get(`${import.meta.env.VITE_API_URL}/posts?featured=true&limit=4&sort=random`);
-  const posts = res.data?.posts;
-  return Array.isArray(posts) ? posts : [];
+  return Array.isArray(res.data?.posts) ? res.data.posts : [];
 };
 
 const PostList = () => {
@@ -24,14 +24,23 @@ const PostList = () => {
   const [displayedPosts, setDisplayedPosts] = useState([]);
   const [showMessage, setShowMessage] = useState(false);
 
-  const { data: allPosts = [], error: postsError, status: postsStatus } = useQuery({
+  const [searchParams] = useSearchParams();  // Get search params from the URL
+
+  const {
+    data: allPosts = [],
+    error: postsError,
+    status: postsStatus,
+  } = useQuery({
     queryKey: ["posts", searchParams.toString()],
     queryFn: () => fetchPosts(searchParams),
     staleTime: 1000 * 60 * 10,
     cacheTime: 1000 * 60 * 30,
   });
 
-  const { data: featuredPosts = [], status: featuredStatus } = useQuery({
+  const {
+    data: featuredPosts = [],
+    status: featuredStatus,
+  } = useQuery({
     queryKey: ["featured"],
     queryFn: fetchFeaturedPosts,
     staleTime: 1000 * 60 * 10,
@@ -112,6 +121,5 @@ const PostList = () => {
     </div>
   );
 };
-
 
 export default PostList;
