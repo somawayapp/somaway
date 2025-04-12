@@ -78,7 +78,7 @@ const PostList = () => {
     data: featuredPosts = [],
     status: featuredStatus,
   } = useQuery({
-    queryKey: ["featured", searchParams.toString()],
+    queryKey: ["featured", "sort=random", searchParams.toString()],
     queryFn: () => fetchFeaturedPosts(searchParams),
     staleTime: 1000 * 60 * 10,
     cacheTime: 1000 * 60 * 30,
