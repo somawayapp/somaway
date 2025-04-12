@@ -1,31 +1,36 @@
 import PostListItem from "./PostListItem";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
-import { useSearchParams, Link } from "react-router-dom";
+import { useSearchParams } from "react-router-dom";
 import { useEffect, useState } from "react";
+import Link from "next/link";
 
-// Fetch functions
 const fetchPosts = async (searchParams) => {
   const searchParamsObj = Object.fromEntries([...searchParams]);
-  const res = await axios.get(`${import.meta.env.VITE_API_URL}/posts?sort=random`, {
-    params: { ...searchParamsObj },
-  });
-  return res.data.posts;
-};
 
-const fetchFeaturedPosts = async (searchParams) => {
-  const searchParamsObj = Object.fromEntries([...searchParams]);
-  const res = await axios.get(`${import.meta.env.VITE_API_URL}/posts?featured=true&sort=random`, {
-    params: { ...searchParamsObj },
-  });
-  return res.data.posts;
+  const [featuredRes, randomRes] = await Promise.all([
+    axios.get(`${import.meta.env.VITE_API_URL}/posts`, {
+      params: { ...searchParamsObj, featured: true, sort: "random" },
+    }),
+    axios.get(`${import.meta.env.VITE_API_URL}/posts`, {
+      params: { ...searchParamsObj, featured: false, sort: "random" },
+    }),
+  ]);
+
+  const featured = featuredRes.data.posts || [];
+  const random = randomRes.data.posts || [];
+
+  const limitedFeatured = featured.slice(0, 4);
+  const remainingRandom = random.filter(
+    (post) => !limitedFeatured.find((f) => f._id === post._id)
+  );
+
+  return [...limitedFeatured, ...remainingRandom];
 };
 
 const PostList = () => {
   const [columns, setColumns] = useState("repeat(1, 1fr)");
-  const [searchParams] = useSearchParams();
 
-  // Update columns on window resize
   useEffect(() => {
     const updateColumns = () => {
       const width = window.innerWidth;
@@ -42,85 +47,91 @@ const PostList = () => {
 
     window.addEventListener("resize", updateColumns);
     updateColumns();
+
     return () => window.removeEventListener("resize", updateColumns);
   }, []);
 
-  // Queries
-  const { data: allPosts = [], error, status } = useQuery({
+  const [searchParams] = useSearchParams();
+  const {
+    data: allPosts = [],
+    error,
+    status,
+  } = useQuery({
     queryKey: ["posts", searchParams.toString()],
     queryFn: () => fetchPosts(searchParams),
     staleTime: 1000 * 60 * 10,
     cacheTime: 1000 * 60 * 30,
   });
 
-  const { data: featuredPosts = [], error: featuredError, status: featuredStatus } = useQuery({
-    queryKey: ["featuredPosts", searchParams.toString()],
-    queryFn: () => fetchFeaturedPosts(searchParams),
-    staleTime: 1000 * 60 * 10,
-    cacheTime: 1000 * 60 * 30,
-  });
-
-  // Combine featured + allPosts
   const [displayedPosts, setDisplayedPosts] = useState([]);
+  const [showMessage, setShowMessage] = useState(false);
 
   useEffect(() => {
-    if (allPosts.length === 0 && featuredPosts.length === 0) {
+    if (allPosts.length === 0) {
       setDisplayedPosts([]);
       return;
     }
 
-    const featuredToShow = featuredPosts.slice(0, 4);
-    const featuredIds = new Set(featuredToShow.map((post) => post._id));
-    const remainingPosts = allPosts.filter((post) => !featuredIds.has(post._id));
-    setDisplayedPosts([...featuredToShow, ...remainingPosts]);
-  }, [allPosts, featuredPosts]);
+    let newPosts = [];
+    let index = 0;
 
-  // Delayed empty message
-  const [showMessage, setShowMessage] = useState(false);
+    const loadNextBatch = (batchSize) => {
+      newPosts = [...newPosts, ...allPosts.slice(index, index + batchSize)];
+      setDisplayedPosts([...newPosts]);
+      index += batchSize;
+    };
+
+    loadNextBatch(4);
+    setTimeout(() => loadNextBatch(4), 50);
+    setTimeout(() => loadNextBatch(4), 100);
+    setTimeout(() => {
+      while (index < allPosts.length) {
+        loadNextBatch(8);
+      }
+    }, 150);
+  }, [allPosts]);
+
   useEffect(() => {
-    const timer = setTimeout(() => setShowMessage(true), 3000);
+    const timer = setTimeout(() => {
+      setShowMessage(true);
+    }, 3000);
     return () => clearTimeout(timer);
   }, []);
 
-  // Loading
-  if (status === "loading" || featuredStatus === "loading") {
+  if (status === "loading") {
     return (
-      <div className="gap-2 grid grid-cols-1 md:grid-cols-4 md:gap-6 overflow-y-auto scrollbar-hide min-h-[60vh]">
-        {Array(8).fill(0).map((_, index) => (
-          <div key={index} className="relative aspect-[3/3] w-full">
-            <div className="absolute inset-0 bg-[var(--softBg4)] animate-pulse rounded-xl md:rounded-2xl"></div>
-          </div>
-        ))}
+      <div className="gap-2 grid grid-cols-1 md:grid-cols-4 md:gap-6 overflow-y-auto scrollbar-hide" style={{ height: "calc(100vw * 8)" }}>
+        {Array(8)
+          .fill(0)
+          .map((_, index) => (
+            <div key={index} className="relative aspect-[3/3] w-full">
+              <div className="absolute inset-0 bg-[var(--softBg4)] animate-pulse rounded-xl md:rounded-2xl"></div>
+            </div>
+          ))}
       </div>
     );
   }
 
-  // Error
-  if (error || featuredError) return <p>Something went wrong!</p>;
+  if (error) return <p>Something went wrong!</p>;
 
-  // No posts after delay
   if (displayedPosts.length === 0 && showMessage) {
     return (
-      <div className="flex flex-col items-center justify-center h-[50vh] text-center">
-        <Link
-          to="/addlisting"
+      <div className="flex flex-col items-center justify-center h-[50vh]">
+        <button
+          onClick={() => (window.location.href = "/addlisting")}
           className="w-full px-6 py-3 rounded-xl border border-[var(--softBg4)] 
-                     text-[var(--softTextColor)] shadow-md 
-                     hover:text-[var(--textColor)] hover:shadow-xl"
+            text-[var(--softTextColor)] shadow-md 
+            hover:text-[var(--textColor)] hover:shadow-xl text-center"
         >
           <p className="mb-2">No listings found</p>
-          <p className="mb-2 font-bold">Add a new one</p>
-        </Link>
+          <p className="mb-2 font-bold">Go back home</p>
+        </button>
       </div>
     );
   }
 
-  // Final list
   return (
-    <div
-      className="gap-2 grid md:gap-6 scrollbar-hide"
-      style={{ gridTemplateColumns: columns }}
-    >
+    <div className="gap-2 grid grid-cols-1 md:grid-cols-4 md:gap-6 scrollbar-hide">
       {displayedPosts.map((post) => (
         <PostListItem key={post._id} post={post} />
       ))}
@@ -129,3 +140,4 @@ const PostList = () => {
 };
 
 export default PostList;
+
