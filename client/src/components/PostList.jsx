@@ -3,20 +3,28 @@ import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import { useSearchParams } from "react-router-dom";
 import { useEffect, useState } from "react";
+import Link from "next/link";
 
-const fetchPosts = async (searchParams, isFeatured = false) => {
+const fetchFeaturedPosts = async (searchParams) => {
   const searchParamsObj = Object.fromEntries([...searchParams]);
   const res = await axios.get(
-    `${import.meta.env.VITE_API_URL}/posts`,
+    `${import.meta.env.VITE_API_URL}/posts?featured=true&sort=random`,
     {
-      params: {
-        ...searchParamsObj,
-        ...(isFeatured ? { featured: true } : {}),
-        sort: "random",
-      },
+      params: { ...searchParamsObj },
     }
   );
-  return res.data.posts;
+  return res.data.posts || [];
+};
+
+const fetchAllPosts = async (searchParams) => {
+  const searchParamsObj = Object.fromEntries([...searchParams]);
+  const res = await axios.get(
+    `${import.meta.env.VITE_API_URL}/posts?sort=random`,
+    {
+      params: { ...searchParamsObj },
+    }
+  );
+  return res.data.posts || [];
 };
 
 const PostList = () => {
@@ -37,7 +45,7 @@ const PostList = () => {
     };
 
     window.addEventListener("resize", updateColumns);
-    updateColumns();
+    updateColumns(); // Initial call
 
     return () => window.removeEventListener("resize", updateColumns);
   }, []);
@@ -46,81 +54,78 @@ const PostList = () => {
 
   const {
     data: featuredPosts = [],
-    status: featuredStatus,
     error: featuredError,
+    status: featuredStatus,
   } = useQuery({
     queryKey: ["featuredPosts", searchParams.toString()],
-    queryFn: () => fetchPosts(searchParams, true),
+    queryFn: () => fetchFeaturedPosts(searchParams),
     staleTime: 1000 * 60 * 10,
     cacheTime: 1000 * 60 * 30,
   });
 
   const {
     data: allPosts = [],
-    status: allStatus,
     error: allError,
+    status: allStatus,
   } = useQuery({
     queryKey: ["allPosts", searchParams.toString()],
-    queryFn: () => fetchPosts(searchParams, false),
+    queryFn: () => fetchAllPosts(searchParams),
     staleTime: 1000 * 60 * 10,
     cacheTime: 1000 * 60 * 30,
   });
 
   const [displayedPosts, setDisplayedPosts] = useState([]);
+
+  useEffect(() => {
+    const featuredLimit = 4;
+    const topFeatured = featuredPosts.slice(0, featuredLimit);
+    const nonFeatured = allPosts.filter(
+      (post) => !featuredPosts.some((fp) => fp._id === post._id)
+    );
+
+    const combinedPosts = [...topFeatured, ...nonFeatured];
+
+    if (combinedPosts.length === 0) {
+      setDisplayedPosts([]);
+      return;
+    }
+
+    let newPosts = [];
+    let index = 0;
+
+    const loadNextBatch = (batchSize) => {
+      newPosts = [...newPosts, ...combinedPosts.slice(index, index + batchSize)];
+      setDisplayedPosts([...newPosts]);
+      index += batchSize;
+    };
+
+    loadNextBatch(4);
+    setTimeout(() => loadNextBatch(4), 50);
+    setTimeout(() => loadNextBatch(4), 100);
+    setTimeout(() => {
+      while (index < combinedPosts.length) {
+        loadNextBatch(8);
+      }
+    }, 150);
+  }, [featuredPosts, allPosts]);
+
+  if (featuredStatus === "loading" || allStatus === "loading") {
+    return <p>Loading...</p>;
+  }
+
+  if (featuredError || allError) {
+    return <p>Something went wrong!</p>;
+  }
+
   const [showMessage, setShowMessage] = useState(false);
 
   useEffect(() => {
     const timer = setTimeout(() => {
       setShowMessage(true);
     }, 3000);
+
     return () => clearTimeout(timer);
   }, []);
-
-  useEffect(() => {
-    let indexRef = { current: 0 };
-    let newPosts = [];
-  
-    const combinedPosts = (() => {
-      const limitedFeatured = featuredPosts.slice(0, 4);
-      const remainingPosts = allPosts.filter(
-        (post) => !limitedFeatured.find((fp) => fp._id === post._id)
-      );
-      return limitedFeatured.length > 0
-        ? [...limitedFeatured, ...remainingPosts]
-        : allPosts;
-    })();
-  
-    if (combinedPosts.length === 0) {
-      setDisplayedPosts([]);
-      return;
-    }
-  
-    const loadNextBatch = (batchSize) => {
-      const nextSlice = combinedPosts.slice(
-        indexRef.current,
-        indexRef.current + batchSize
-      );
-      newPosts = [...newPosts, ...nextSlice];
-      indexRef.current += batchSize;
-      setDisplayedPosts([...newPosts]);
-    };
-  
-    const timeouts = [
-      setTimeout(() => loadNextBatch(4), 0),
-      setTimeout(() => loadNextBatch(4), 50),
-      setTimeout(() => loadNextBatch(4), 100),
-      setTimeout(() => {
-        while (indexRef.current < combinedPosts.length) {
-          loadNextBatch(8);
-        }
-      }, 150),
-    ];
-  
-    return () => timeouts.forEach((t) => clearTimeout(t));
-  }, [featuredPosts, allPosts]);
-  
-  if (featuredStatus === "loading" || allStatus === "loading") return <p>Loading...</p>;
-  if (featuredError || allError) return <p>Something went wrong!</p>;
 
   if (displayedPosts.length === 0 && showMessage) {
     return (
@@ -165,4 +170,3 @@ const PostList = () => {
 };
 
 export default PostList;
-
