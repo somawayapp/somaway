@@ -8,7 +8,7 @@ import Link from "next/link";
 const fetchPosts = async (searchParams) => {
   const searchParamsObj = Object.fromEntries([...searchParams]);
   const res = await axios.get(
-    `${import.meta.env.VITE_API_URL}/posts?featured=true&sort=random`, 
+    `${import.meta.env.VITE_API_URL}/posts?featured=true&limit=4&sort=random`, 
     {
       params: { ...searchParamsObj },
     }
@@ -49,7 +49,7 @@ const PostList = () => {
 
   const [searchParams] = useSearchParams();
   const { data: allPosts = [], error, status } = useQuery({
-    queryKey: ["posts", searchParams.toString()],
+    queryKey: ["posts", "random", searchParams.toString()],
     queryFn: () => fetchAllPosts(searchParams),
     staleTime: 1000 * 60 * 10,
     cacheTime: 1000 * 60 * 30,
