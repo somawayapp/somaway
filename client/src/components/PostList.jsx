@@ -11,14 +11,16 @@ const fetchPosts = async (searchParams) => {
   const res = await axios.get(`${import.meta.env.VITE_API_URL}/posts?random`, {
     params: { ...searchParamsObj },
   });
-  return res.data.posts;
+
+  return Array.isArray(res.data.posts) ? res.data.posts : [];
 };
 
-// Fetch featured posts
 const fetchFeaturedPosts = async () => {
   const res = await axios.get(`${import.meta.env.VITE_API_URL}/posts?featured=true&limit=4&sort=random`);
-  return res.data.posts;
+
+  return Array.isArray(res.data.posts) ? res.data.posts : [];
 };
+
 
 const PostList = () => {
   const [columns, setColumns] = useState("repeat(1, 1fr)");
@@ -143,4 +145,3 @@ const PostList = () => {
 };
 
 export default PostList;
-
