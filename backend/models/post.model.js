@@ -83,7 +83,7 @@ const postSchema = new Schema(
       type: Boolean,
       default: false,
     },
-    featuredUntil: {
+    isfeaturedUntil: {
       type: Date,
       default: null, 
     },
