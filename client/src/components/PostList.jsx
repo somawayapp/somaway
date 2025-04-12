@@ -7,12 +7,20 @@ import Link from "next/link";
 
 const fetchPosts = async (searchParams) => {
   const searchParamsObj = Object.fromEntries([...searchParams]);
-  const res = await axios.get(`${import.meta.env.VITE_API_URL}/posts?sort=random`, {
-    params: { ...searchParamsObj },
+  const res = await axios.get(`${import.meta.env.VITE_API_URL}/posts`, {
+    params: {
+      sort: "random",
+      ...searchParamsObj,
+    },
   });
 
   console.log("Fetched posts response:", res.data);
-  const posts = res.data?.posts;
+
+  const posts = Array.isArray(res.data)
+    ? res.data
+    : Array.isArray(res.data.posts)
+    ? res.data.posts
+    : [];
 
   if (!Array.isArray(posts)) {
     throw new Error("Expected posts to be an array");
@@ -22,10 +30,21 @@ const fetchPosts = async (searchParams) => {
 };
 
 const fetchFeaturedPosts = async () => {
-  const res = await axios.get(`${import.meta.env.VITE_API_URL}/posts?featured=true&limit=4&sort=random`);
+  const res = await axios.get(`${import.meta.env.VITE_API_URL}/posts`, {
+    params: {
+      featured: true,
+      limit: 4,
+      sort: "random",
+    },
+  });
 
   console.log("Fetched featured posts response:", res.data);
-  const posts = res.data?.posts;
+
+  const posts = Array.isArray(res.data)
+    ? res.data
+    : Array.isArray(res.data.posts)
+    ? res.data.posts
+    : [];
 
   if (!Array.isArray(posts)) {
     throw new Error("Expected featured posts to be an array");
@@ -38,7 +57,6 @@ const PostList = () => {
   const [columns, setColumns] = useState("repeat(1, 1fr)");
   const [displayedPosts, setDisplayedPosts] = useState([]);
   const [showMessage, setShowMessage] = useState(false);
-
   const [searchParams] = useSearchParams();
 
   const {
