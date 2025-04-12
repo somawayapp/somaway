@@ -20,6 +20,8 @@
         "react-query": "^3.39.3",
         "react-quill": "^2.0.0",
         "react-router-dom": "^7.0.2",
+        "imagekit": "^1.6.0",
+
         "redis": "^4.7.0"
     }
 }
