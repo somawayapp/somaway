@@ -1,12 +1,15 @@
-import React from 'react';
+import React from "react";
+import Footer from "../components/Footer";
+import Navbar from "../components/Navbar";
 
 const PrivacyPolicyPage = () => {
   return (
-    <div className="bg-gray-100 py-12">
-      <div className="max-w-3xl mx-auto bg-white rounded-lg shadow-md p-8">
-        <h1 className="text-3xl font-bold text-gray-800 mb-6">Privacy Policy</h1>
-        <p className="text-gray-700 mb-4">
-          We respect your privacy and are committed to protecting your personal information. This privacy policy
+             <div>      
+            <Navbar/>
+
+            <div className="text-[var(--softTextColor)] bg-[var(--bg)] space-y-6   max-w-[1200px] mx-auto mt-8 md:mt-[40px]  mb-8 md:mb-[40px] px-4 md:px-[80px]">
+            <h1 className="text-2xl md:text-4xl font-bold">Privacy Policy</h1>
+              <p>          We respect your privacy and are committed to protecting your personal information. This privacy policy
           (“Policy”) applies to your use of{' '}
           <a
             href="https://hodii.com"
@@ -21,17 +24,14 @@ const PrivacyPolicyPage = () => {
           the Platform or the services offered through our Sites. The Policy and our treatment of your personal data
           complies with the Data Protection Act of Kenya 2019 (as otherwise amended or varied from time to time).
         </p>
-        <p className="text-gray-700 mb-4">
-          Please review this Policy carefully to understand our practices.
+              <p>          Please review this Policy carefully to understand our practices.
         </p>
-        <p className="text-gray-700 mb-4">
-          This Site is not intended for children (i.e. under 18 years) and we do not knowingly collect data relating to
+              <p>          This Site is not intended for children (i.e. under 18 years) and we do not knowingly collect data relating to
           children.
         </p>
 
-        <h2 className="text-2xl font-semibold text-gray-800 mt-6 mb-2">TERMS</h2>
-        <p className="text-gray-700 mb-4">
-          For ease of reference, the terms below as used in the Policy have the following meaning:
+        <h2 className="text-xl font-semibold">TERMS</h2>
+              <p>          For ease of reference, the terms below as used in the Policy have the following meaning:
         </p>
         <ul className="list-disc list-inside text-gray-700 mb-4">
           <li>
@@ -57,16 +57,14 @@ const PrivacyPolicyPage = () => {
           </li>
         </ul>
 
-        <h2 className="text-2xl font-semibold text-gray-800 mt-6 mb-2">DATA CONTROLLER:</h2>
-        <p className="text-gray-700 mb-4">
-          Hodi.com Limited is the data controller and responsible for your personal data (referred to as “we”, “us” or
+        <h2 className="text-xl font-semibold">DATA CONTROLLER:</h2>
+              <p>          Hodi.com Limited is the data controller and responsible for your personal data (referred to as “we”, “us” or
           “our” in this Policy). If you have any questions about this Policy please send an email to{' '}
           <a href="mailto:privacy@hodii.com" className="text-blue-600 hover:text-blue-800">
             privacy@hodii.com
           </a>
         </p>
-        <p className="text-gray-700 mb-4">
-          Ringier One Africa Media Ltd is made up of different legal entities, details of which can be found{' '}
+              <p>          Ringier One Africa Media Ltd is made up of different legal entities, details of which can be found{' '}
           <a
             href="#"
             className="text-blue-600 underline hover:text-blue-800"
@@ -83,8 +81,7 @@ const PrivacyPolicyPage = () => {
           you have any questions about this Policy, including any requests to exercise your legal rights, please contact
           the data privacy manager using the details set out above.
         </p>
-        <p className="text-gray-700 mb-4">
-          Ringier One Africa Media Ltd is made up of different legal entities, details of which can be found{' '}
+              <p>          Ringier One Africa Media Ltd is made up of different legal entities, details of which can be found{' '}
           <a
             href="#"
             className="text-blue-600 underline hover:text-blue-800"
@@ -102,9 +99,8 @@ const PrivacyPolicyPage = () => {
           the data privacy manager using the details set out above.
         </p>
 
-        <h2 className="text-2xl font-semibold text-gray-800 mt-6 mb-2">DATA COLLECTED</h2>
-        <p className="text-gray-700 mb-4">
-          Depending on the Services you are obtaining or accessing, we may collect, store, use and transfer the
+        <h2 className="text-xl font-semibold">DATA COLLECTED</h2>
+              <p>          Depending on the Services you are obtaining or accessing, we may collect, store, use and transfer the
           following different types of information:
         </p>
         <ul className="list-disc list-inside text-gray-700 mb-4">
@@ -147,30 +143,26 @@ const PrivacyPolicyPage = () => {
             receiving marketing from us and our third parties and your communication preferences.
           </li>
         </ul>
-        <p className="text-gray-700 mb-4">
-          Please note that this is not an exhaustive list.
+              <p>          Please note that this is not an exhaustive list.
         </p>
-        <p className="text-gray-700 mb-4">
-          We may collect and use statistical or demographic information for any purpose. This data is anonymous and it
+              <p>          We may collect and use statistical or demographic information for any purpose. This data is anonymous and it
           is not personal information as this data will not directly or indirectly reveal your identity. However, if we
           combine or connect statistical/demographic information with your personal data, we treat the resulting
           information as personal data and it will be used in accordance with this privacy policy.
         </p>
-        <p className="text-gray-700 mb-4">
-          We do collect sensitive personal data about you. This includes details about your race or ethnicity, religious
+              <p>          We do collect sensitive personal data about you. This includes details about your race or ethnicity, religious
           or philosophical beliefs, sex life, information about your health, and genetic and biometric data. We also
           collect information about criminal convictions and offences.
         </p>
 
-        <h2 className="text-2xl font-semibold text-gray-800 mt-6 mb-2">WHAT IF I DON’T WANT TO PROVIDE ANY PERSONAL DATA</h2>
-        <p className="text-gray-700 mb-4">
-          Where we need to collect personal data by law, or under the terms of a contract we have with you, and you fail
+        <h2 className="text-xl font-semibold">WHAT IF I DON’T WANT TO PROVIDE ANY PERSONAL DATA</h2>
+              <p>          Where we need to collect personal data by law, or under the terms of a contract we have with you, and you fail
           to provide that data when requested, we may not be able to perform the contract we have or are trying to enter
           into with you (for example, to provide you with goods or services). In this case, we may have to cancel a
           product or service you have with us but we will notify you if this is the case at the time.
         </p>
 
-        <h2 className="text-2xl font-semibold text-gray-800 mt-6 mb-2">HOW DATA IS COLLECTED</h2>
+        <h2 className="text-xl font-semibold">HOW DATA IS COLLECTED</h2>
         <p className="text-gray-700 mb-4">We collect personal information:</p>
         <ul className="list-disc list-inside text-gray-700 mb-4">
           <li>That you provide to us directly for example through the Site, on the phone or through any other communication channel or method.</li>
@@ -178,21 +170,19 @@ const PrivacyPolicyPage = () => {
           <li>Using cookies, logs, web beacons, tags, pixels and other internet technologies (used to record information about how you browse the Site), for example the technical data.</li>
         </ul>
 
-        <h2 className="text-2xl font-semibold text-gray-800 mt-6 mb-2">ACCURACY OF THE DATA</h2>
-        <p className="text-gray-700 mb-4">
-          It is important that the personal data we hold is accurate and current to enable us to deliver the Services.
+        <h2 className="text-xl font-semibold">ACCURACY OF THE DATA</h2>
+              <p>          It is important that the personal data we hold is accurate and current to enable us to deliver the Services.
           As such, please keep us informed if your personal data or any other information changes in the course of your
           use of the Site.
         </p>
-        <p className="text-gray-700 mb-4">
-          You guarantee and declare that you are the owner of the information you submit on the Site or share with us,
+              <p>          You guarantee and declare that you are the owner of the information you submit on the Site or share with us,
           or that you have the necessary rights to do so. You also guarantee and declare that it is exact, true and
           verified, and the use of the information is not contrary to this Policy or applicable laws and will not damage
           a third party’s reputation. You accept full and complete liability for any information that is contrary to
           this Policy or any applicable laws.
         </p>
 
-        <h2 className="text-2xl font-semibold text-gray-800 mt-6 mb-2">USE OF THE COLLECTED DATA</h2>
+        <h2 className="text-xl font-semibold">USE OF THE COLLECTED DATA</h2>
         <p className="text-gray-700 mb-4">How we use your personal data depends on the Services you are accessing. We will use your personal data:</p>
         <ul className="list-disc list-inside text-gray-700 mb-4">
           <li>
@@ -208,19 +198,16 @@ const PrivacyPolicyPage = () => {
           <li>Where necessary for our legitimate interests (or those of a third party) and your interests and fundamental rights do not override those interests.</li>
           <li>Where the personal data is required for statistical or research purposes.</li>
         </ul>
-        <p className="text-gray-700 mb-4">
-          Note: we may process your personal data for more than one lawful ground depending on the specific purpose for
+              <p>          Note: we may process your personal data for more than one lawful ground depending on the specific purpose for
           which we are using your data.
         </p>
-        <p className="text-gray-700 mb-4">
-          Generally, we do not rely on consent as a legal basis for processing your personal data although we will get
+              <p>          Generally, we do not rely on consent as a legal basis for processing your personal data although we will get
           your consent before sending third party direct marketing communications to you via email or text message. You
           have the right to withdraw consent to marketing at any time by contacting us.
         </p>
 
-        <h2 className="text-2xl font-semibold text-gray-800 mt-6 mb-2">SHARING YOUR PERSONAL DATA</h2>
-        <p className="text-gray-700 mb-4">
-          Except as specified in this Policy, we will not disclose your personal data to third parties without your
+        <h2 className="text-xl font-semibold">SHARING YOUR PERSONAL DATA</h2>
+              <p>          Except as specified in this Policy, we will not disclose your personal data to third parties without your
           consent. Depending on the Services, we may share your personal data with:
         </p>
         <ul className="list-disc list-inside text-gray-700 mb-4">
@@ -228,8 +215,7 @@ const PrivacyPolicyPage = () => {
           <li>External third parties such as service providers (for example, Amazon Web Services, Flutterwave, MailChimp), Kenya Revenue Authority and Facebook Analytics.</li>
           <li>Third parties to whom we may choose to sell, transfer or merge parts of our business or our assets to. Alternatively, we may seek to acquire other businesses or merge with them. If a change happens to our business, then the new owners may use your personal data in the same way as set out in this Policy.</li>
         </ul>
-        <p className="text-gray-700 mb-4">
-          Depending on the Services you are accessing, we may share certain personal information with third parties to
+              <p>          Depending on the Services you are accessing, we may share certain personal information with third parties to
           help us use your personal information. For example, for users of Hodi.com, buyers and sellers have access to
           each other's contacts. We require all third parties to respect the security of your personal data and to treat
           it in accordance with the law. We do not allow our third-party service providers to use your personal data for
@@ -237,48 +223,41 @@ const PrivacyPolicyPage = () => {
           with our instructions.
         </p>
 
-        <h2 className="text-2xl font-semibold text-gray-800 mt-6 mb-2">RETENTION OF DATA</h2>
-        <p className="text-gray-700 mb-4">
-          We will only retain your personal data for as long as reasonably necessary to fulfil the purposes for which it
+        <h2 className="text-xl font-semibold">RETENTION OF DATA</h2>
+              <p>          We will only retain your personal data for as long as reasonably necessary to fulfil the purposes for which it
           was collected, including for the purposes of satisfying any legal, regulatory, tax, accounting or reporting
           requirements. Your personal data may be retained for a longer period where there has been a complaint or there
           is a prospect of litigation with respect to your use of the Site.
         </p>
 
-        <h2 className="text-2xl font-semibold text-gray-800 mt-6 mb-2">MARKETING</h2>
-        <p className="text-gray-700 mb-4">
-          We strive to provide you with choices regarding certain personal data uses, particularly around marketing and
+        <h2 className="text-xl font-semibold">MARKETING</h2>
+              <p>          We strive to provide you with choices regarding certain personal data uses, particularly around marketing and
           advertising. You will receive marketing communications from us if you have requested information from us or
           purchased goods or services from us and you have not opted out of receiving the said marketing
           communications.
         </p>
-        <p className="text-gray-700 mb-4">
-          You can ask us or third parties to stop sending you marketing messages at any time by following the opt-out
+              <p>          You can ask us or third parties to stop sending you marketing messages at any time by following the opt-out
           links on any marketing message sent to you or by contacting us at any time.
         </p>
-        <p className="text-gray-700 mb-4">
-          Where you opt out of receiving these marketing messages, this will not apply to personal data provided to us as
+              <p>          Where you opt out of receiving these marketing messages, this will not apply to personal data provided to us as
           a result of a product/service purchase, product/service experience or other transactions.
         </p>
 
-        <h2 className="text-2xl font-semibold text-gray-800 mt-6 mb-2">WEB ANALYTICS</h2>
-        <p className="text-gray-700 mb-4">
-          Our website uses Google Analytics, a web analytics service provided by Google, Inc. (Google Ireland Limited,
+        <h2 className="text-xl font-semibold">WEB ANALYTICS</h2>
+              <p>          Our website uses Google Analytics, a web analytics service provided by Google, Inc. (Google Ireland Limited,
           Gordon House, Barrow Street, Dublin 4, Ireland). Such use includes the 'Universal Analytics' mode of
           operation. This makes it possible, if a user is logged into a Google service, to assign data, sessions and
           interactions across multiple devices to a pseudonymous user ID and thus to analyse the user's activities
           across such devices.
         </p>
-        <p className="text-gray-700 mb-4">
-          Google Analytics uses cookies. The non-personal information generated by such cookies about your use of our
+              <p>          Google Analytics uses cookies. The non-personal information generated by such cookies about your use of our
           website is usually transferred to a Google server in the USA and stored there. However, the corresponding IP
           addresses are anonymised beforehand using IP anonymisation. The anonymised IP address transmitted by your
           browser under Google Analytics will not be merged with other Google data. Google will use this information on
           our behalf for the purposes of evaluating your use of our website, compiling reports on website activity and
           providing other services relating to website activity and internet use.
         </p>
-        <p className="text-gray-700 mb-4">
-          If you wish to prevent the collection of data regarding your activity on our website by Google Analytics, you
+              <p>          If you wish to prevent the collection of data regarding your activity on our website by Google Analytics, you
           can use Google Analytics opt-out browser add-on available at{' '}
           <a
             href="https://tools.google.com/dlpage/gaoptout/"
@@ -291,7 +270,7 @@ const PrivacyPolicyPage = () => {
           . You can also prevent the storage of cookies by adjusting your browser software accordingly.
         </p>
 
-        <h2 className="text-2xl font-semibold text-gray-800 mt-6 mb-2">OUR LEGAL RIGHTS</h2>
+        <h2 className="text-xl font-semibold">OUR LEGAL RIGHTS</h2>
         <p className="text-gray-700 mb-4">In accordance with the applicable laws of Kenya, you may have the right to:</p>
         <ul className="list-disc list-inside text-gray-700 mb-4">
           <li>Be informed of the use to which your personal data is being put.</li>
@@ -304,10 +283,9 @@ const PrivacyPolicyPage = () => {
           <li>Withdraw consent at any time where we are relying on consent to process your personal data.</li>
         </ul>
 
-        <h2 className="text-2xl font-semibold text-gray-800 mt-6 mb-2">DATA SUBJECT ACCESS REQUEST</h2>
+        <h2 className="text-xl font-semibold">DATA SUBJECT ACCESS REQUEST</h2>
         <h3 className="text-xl font-semibold text-gray-800 mt-4 mb-2">Right of access to your personal data</h3>
-        <p className="text-gray-700 mb-4">
-          As a data subject, you are allowed to confirm the accuracy of your data and exercise your right of correction.
+              <p>          As a data subject, you are allowed to confirm the accuracy of your data and exercise your right of correction.
           You can request to see any personal data that we hold about you. To exercise your right to rectification, go to
           your Hodi.com profile and edit your information. To request your data from Hodi.com kindly reach out to{' '}
           <a href="mailto:support@hodii.com" className="text-blue-600 hover:text-blue-800">
@@ -321,8 +299,7 @@ const PrivacyPolicyPage = () => {
         </p>
 
         <h3 className="text-xl font-semibold text-gray-800 mt-4 mb-2">Data Deletion Request (Right to be forgotten)</h3>
-        <p className="text-gray-700 mb-4">
-          As a data subject, you can request for deletion of your personal data from our system or withdraw consent on
+              <p>          As a data subject, you can request for deletion of your personal data from our system or withdraw consent on
           processing of your personal information. If you wish to delete your data from Hodi.com website, kindly reach
           out to{' '}
           <a href="mailto:support@hodii.com" className="text-blue-600 hover:text-blue-800">
@@ -335,21 +312,21 @@ const PrivacyPolicyPage = () => {
         </p>
 
         <h3 className="text-xl font-semibold text-gray-800 mt-4 mb-2">Data Retention</h3>
-        <p className="text-gray-700 mb-4">
-          In any event, to the extent required or allowed by applicable law, the Data Processor, as defined as Hodi.com
+              <p>          In any event, to the extent required or allowed by applicable law, the Data Processor, as defined as Hodi.com
           Limited, may retain one copy of the Personal Data for evidence purposes and/or for the establishment,
           exercise or defense of legal claims and/or to comply with applicable laws and regulations.
         </p>
 
-        <h2 className="text-2xl font-semibold text-gray-800 mt-6 mb-2">CHANGES TO THE PRIVACY POLICY</h2>
-        <p className="text-gray-700 mb-4">
-          We regularly review and update this Policy in order to reflect changes to our practices, for operational,
+        <h2 className="text-xl font-semibold">CHANGES TO THE PRIVACY POLICY</h2>
+              <p>          We regularly review and update this Policy in order to reflect changes to our practices, for operational,
           legal or regulatory reasons, and for any other purpose. Any revisions to this Policy will be uploaded to the
           Site and such upload will be deemed to be sufficient communication to you. Where you are a registered user, we
           may elect, at our own discretion, to notify you of any revision through a notice on your account.
         </p>
         <p className="text-gray-700">Last updated: [06-05-2024]</p>
       </div>
+      <Footer/>
+
     </div>
   );
 };
