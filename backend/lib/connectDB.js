@@ -10,7 +10,6 @@ const connectDB = async () => {
 
     await mongoose.connect(uri, {
       ssl: true,
-      tlsAllowInvalidCertificates: false, // Keep this only if you have a cert validation requirement
     });
 
     console.log("MongoDB connected successfully!");
