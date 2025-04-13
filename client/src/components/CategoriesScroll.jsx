@@ -132,7 +132,7 @@ const CategoriesScroll = ({ setOpen }) => {
           )}
   
           {/* PropertySwitcher always visible at the end */}
-          <div className="flex-shrink-0 hidden md:block pl-[55px]">
+          <div className="flex-shrink-0 hidden md:block pl-[60px]">
             <PropertySwitcher />
           </div>
         </div>
