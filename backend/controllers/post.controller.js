@@ -3,7 +3,7 @@ import Post from "../models/post.model.js";
 import User from "../models/user.model.js";
 import cache from "memory-cache"; // In-memory cache
 
-const CACHE_DURATION = 36000000; // 1 hour in milliseconds
+const CACHE_DURATION = 3600000; // 1 hour in milliseconds
 
 
 export const getPosts = async (req, res) => {
