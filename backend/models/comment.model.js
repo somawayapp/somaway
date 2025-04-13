@@ -16,6 +16,8 @@ const commentSchema = new Schema(
     desc: {
       type: String,
       required: true,
+      minlength: 1,
+
     },
   },
   { timestamps: true }

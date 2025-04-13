@@ -10,6 +10,7 @@ const connectDB = async () => {
 
     await mongoose.connect(uri, {
       ssl: true,
+      tlsAllowInvalidCertificates: false, 
     });
 
     console.log("MongoDB connected successfully!");
