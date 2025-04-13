@@ -39,7 +39,7 @@ const SubscriptionTerms = () => {
           <li>For recurring subscriptions, your Subscription will automatically renew at the end of each billing cycle (e.g., monthly, annually)
              unless you cancel it before the renewal date.</li>
           <li>You authorize us to charge the applicable Subscription fees for each renewal period to your designated payment method.</li>
-          <li>If you choose a one-time payment, you hereby authorize us to deduct the agreed-upon amount only once.</li>      
+          <li>If you choose a one-time payment model, you hereby authorize us to deduct the agreed-upon amount only once.</li>      
         <li>If your payment method fails, we may suspend or terminate your Subscription until payment is successfully processed.</li>
           <li>You are responsible for keeping your billing information current and accurate. You can update your payment details through your 
             account settings on the Site.</li>

@@ -13,7 +13,8 @@ const Footer = () => {
             <ul className="space-y-2">
               <li><a href="/" className="text-[var(--softTextColor)] hover:text-[var(--softTextColor)]">Home</a></li>
               <li><a href="/premium" className="text-[var(--softTextColor)] hover:text-[var(--softTextColor)]">Pricing</a></li>
-              <li><a href="/premium" className="text-[var(--softTextColor)] hover:text-[var(--softTextColor)]">Gift  Hodi</a></li>
+              <li><a href="/" className="text-[var(--softTextColor)] hover:text-[var(--softTextColor)]">Properties</a></li>
+
             </ul>
           </nav>
         </div>
@@ -24,10 +25,8 @@ const Footer = () => {
           <nav>
             <ul className="space-y-2">
               <li><a href="/about" className="text-[var(--softTextColor)] hover:text-[var(--softTextColor)]">About</a></li>
-              <li><a href="/about" className="text-[var(--softTextColor)] hover:text-[var(--softTextColor)]">Careers</a></li>
-              <li><a href="/about" className="text-[var(--softTextColor)] hover:text-[var(--softTextColor)]">Family</a></li>
-              <li><a href="/about" className="text-[var(--softTextColor)] hover:text-[var(--softTextColor)]">Press Info</a></li>
-              <li><a href="/about" className="text-[var(--softTextColor)] hover:text-[var(--softTextColor)]">Affiliates</a></li>
+              <li><a href="/career" className="text-[var(--softTextColor)] hover:text-[var(--softTextColor)]">Careers</a></li>
+              <li><a href="/affiliates" className="text-[var(--softTextColor)] hover:text-[var(--softTextColor)]">Affiliates</a></li>
             </ul>
           </nav>
         </div>
@@ -37,9 +36,10 @@ const Footer = () => {
           <h4 className="text-lg font-semibold mb-4">Resources</h4>
           <nav>
             <ul className="space-y-2">
-              <li><a href="/" className="text-[var(--softTextColor)] hover:text-[var(--softTextColor)]">Book Summaries</a></li>
-              <li><a href="/" className="text-[var(--softTextColor)] hover:text-[var(--softTextColor)]">Blog</a></li>
-              <li><a href="/about" className="text-[var(--softTextColor)] hover:text-[var(--softTextColor)]">FAQ</a></li>
+              <li><a href="/" className="text-[var(--softTextColor)] hover:text-[var(--softTextColor)]">Listings</a></li>
+              <li><a href="/reviews" className="text-[var(--softTextColor)] hover:text-[var(--softTextColor)]">Reviews</a></li>
+              <li><a href="/blog" className="text-[var(--softTextColor)] hover:text-[var(--softTextColor)]">Blog</a></li>
+              <li><a href="/faq" className="text-[var(--softTextColor)] hover:text-[var(--softTextColor)]">FAQ</a></li>
             </ul>
           </nav>
         </div>
@@ -60,10 +60,10 @@ const Footer = () => {
       {/* Bottom Info Section */}
       <div className="mt-8 text-center border-t border-[var(--softBg)]  mb-[100px] md:mb-0  pt-4">
         <p className="text-[var(--softTextColor)]">
-          © {currentYear},  Hodi App Limited, Waiyaki way , 1st floor, Westend towers, Westlands, Nairobi
+          © {currentYear},  Hodii App Limited, Waiyaki way , 1st floor, Westend towers, Westlands, Nairobi
        
           <a href="mailto:support@soma.ia.com" className="text-[var(--softTextColor)] pl-1 hover:text-[var(--softTextColor)]">
-            support@ Hodi@gmail.com
+            support@ Hodii@gmail.com
           </a>
         </p>
       </div>
