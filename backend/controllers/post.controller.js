@@ -6,18 +6,14 @@ import cache from "memory-cache"; // In-memory cache
 const CACHE_DURATION = 36000000; // 1 hour in milliseconds
 
 
-
-
 export const getPosts = async (req, res) => {
   try {
     const page = parseInt(req.query.page) || 1;
-    const limit = Math.min(parseInt(req.query.limit) || 1000, 1000); // cap max limit
+    const limit = parseInt(req.query.limit) || 1000;
+    const query = {};
 
-    // Normalize cache key (ignore default values)
-    const queryKey = { ...req.query };
-    if (queryKey.page == 1) delete queryKey.page;
-    if (queryKey.limit == 1000) delete queryKey.limit;
-    const cacheKey = `posts:${JSON.stringify(queryKey)}:${page}:${limit}`;
+    // Create a normalized cache key
+    const cacheKey = `posts:${JSON.stringify(req.query)}:${page}:${limit}`;
     const cachedData = cache.get(cacheKey);
 
     if (cachedData) {
@@ -42,7 +38,8 @@ export const getPosts = async (req, res) => {
       featured,
     } = req.query;
 
-    const query = {};
+    // Build dynamic query
+    if (req.query.cat) query.category = req.query.cat;
 
     if (search) {
       query.$or = [
@@ -52,9 +49,11 @@ export const getPosts = async (req, res) => {
     }
 
     if (author) {
-      const authorRegexes = author
+      const authorNames = author
         .split(/[,;|\s]+/)
-        .map((name) => new RegExp(name.trim(), "i"));
+        .map((name) => name.trim())
+        .filter(Boolean);
+      const authorRegexes = authorNames.map((name) => new RegExp(name, "i"));
       query.author = { $in: authorRegexes };
     }
 
@@ -64,19 +63,23 @@ export const getPosts = async (req, res) => {
     if (bathrooms) query.bathrooms = { $gte: parseInt(bathrooms) };
     if (propertysize) query.propertysize = { $gte: parseInt(propertysize) };
     if (rooms) query.rooms = { $gte: parseInt(rooms) };
+
     if (pricemin || pricemax) {
       query.price = {};
       if (pricemin) query.price.$gte = parseInt(pricemin);
       if (pricemax) query.price.$lte = parseInt(pricemax);
     }
+
     if (model) query.model = model;
     if (featured) query.isFeatured = true;
 
-    // Sort logic
     let sortObj = { createdAt: -1 };
     let useAggregation = false;
 
     switch (sort) {
+      case "newest":
+        sortObj = { createdAt: -1 };
+        break;
       case "oldest":
         sortObj = { createdAt: 1 };
         break;
@@ -101,45 +104,24 @@ export const getPosts = async (req, res) => {
       posts = await Post.aggregate([
         { $match: query },
         { $sample: { size: limit } },
-        {
-          $lookup: {
-            from: "users",
-            localField: "user",
-            foreignField: "_id",
-            as: "user",
-          },
-        },
-        {
-          $unwind: "$user",
-        },
-        {
-          $project: {
-            title: 1,
-            price: 1,
-            img: 1,
-            slug: 1,
-            location: 1,
-            isFeatured: 1,
-            createdAt: 1,
-            "user.username": 1,
-          },
-        },
       ]);
+      posts = await Post.populate(posts, { path: "user", select: "username" });
+      hasMore = false; // random = no pagination
     } else {
       posts = await Post.find(query)
         .populate("user", "username")
         .sort(sortObj)
+        .limit(limit + 1)
         .skip((page - 1) * limit)
-        .limit(limit + 1) // grab one extra to check if more exist
-        .select("title price img slug location isFeatured createdAt user")
         .lean();
 
       hasMore = posts.length > limit;
-      if (hasMore) posts.pop();
+      if (hasMore) posts.pop(); // Remove the extra one
     }
 
     const result = { posts, hasMore };
     cache.put(cacheKey, result, CACHE_DURATION);
+
     res.status(200).json(result);
   } catch (error) {
     console.error("Error fetching posts:", error);
@@ -147,31 +129,34 @@ export const getPosts = async (req, res) => {
   }
 };
 
+
 export const getPost = async (req, res) => {
   try {
     const slug = req.params.slug;
     const cacheKey = `post:${slug}`;
 
+    // Check if the post is cached
     const cachedPost = cache.get(cacheKey);
     if (cachedPost) {
       console.log("Returning cached post");
       return res.status(200).json(cachedPost);
     }
 
-    const post = await Post.findOne({ slug })
-      .populate("user", "username img")
-      .lean();
+    const post = await Post.findOne({ slug }).populate("user", "username img");
 
-    if (!post) return res.status(404).json("Post not found!");
+    if (!post) {
+      return res.status(404).json("Post not found!");
+    }
 
+    // Cache the result
     cache.put(cacheKey, post, CACHE_DURATION);
+
     res.status(200).json(post);
   } catch (error) {
     console.error("Error fetching post:", error);
     res.status(500).json("Internal server error!");
   }
 };
-
 
 // Keep the rest of your methods as they are...
 

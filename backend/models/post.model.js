@@ -2,7 +2,6 @@ import { Schema } from "mongoose";
 import mongoose from "mongoose";
 import slugify from "slugify";
 
-// Schema definition
 const postSchema = new Schema(
   {
     user: {
@@ -12,6 +11,7 @@ const postSchema = new Schema(
     },
     img: {
       type: [String],
+      required: false,
     },
     title: {
       type: String,
@@ -63,24 +63,14 @@ const postSchema = new Schema(
   { timestamps: true }
 );
 
-// Text & search indexes
+// Indexes
 postSchema.index({ title: "text", desc: "text" });
 postSchema.index({ "location.city": 1 });
 postSchema.index({ createdAt: -1 });
 postSchema.index({ price: 1 });
 postSchema.index({ isFeatured: 1 });
 
-// 🔥 Compound indexes
-postSchema.index({ "location.city": 1, price: 1 });
-postSchema.index({ "location.city": 1, createdAt: -1 });
-
-// 🌿 Sparse index for featured logic
-postSchema.index({ isFeatured: 1, featuredUntil: 1 }, { sparse: true });
-
-// ⏳ Optional TTL index to auto-delete expired featured posts
-// postSchema.index({ featuredUntil: 1 }, { expireAfterSeconds: 0 }); // WARNING: deletes doc
-
-// Slug generation
+// Auto-generate slug if missing
 postSchema.pre("save", function (next) {
   if (!this.slug) {
     this.slug = slugify(this.title, { lower: true, strict: true });
