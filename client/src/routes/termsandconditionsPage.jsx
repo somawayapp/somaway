@@ -22,7 +22,7 @@ const TermsAndConditions = () => {
             <h2 className="text-xl font-semibold">Definitions</h2>
             <p>
               For the purposes of these terms the terms: <br />
-             <span className="fontsemibold underline hover-thumb">Hodii, we, our</span>  and <span className="fontsemibold underline hover-thumb">us</span> refer to Hodii Limited; and <br />
+             <span className="font-semibold  hover-thumb">Hodii, we, our</span>  and <span className="font-semibold  hover-thumb">us</span> refer to Hodii Limited; and <br />
               Site refers to   <a href="https://www.hodii.com" target="_blank" rel="noopener noreferrer" className="text-blue-500 underline hover:text-blue-700">  www.hodii.com </a>, and mobile versions of these websites and software applications
               derived from these websites for mobile devices. <br />
               Advertisers and listers refer to private sellers, agents, property developers, landlords and
@@ -79,7 +79,7 @@ const TermsAndConditions = () => {
             <p>
               You acknowledge and agree that the information published on the Site is intended to provide general
               information in summary form on property and other issues. It does constitute advice which should be
-              relied upon. <br />
+              relied upon. (including but not limited to user reviews, comments and ratings linked to any property or listing) <br />
               Hodii does not endorse or recommend any of the advertisers, agents, property developers, private sellers,
               ancillary partners, potential buyers property or services advertised on the Site. We strongly recommend
               that you obtain your own independent legal, accounting, financial, customer reputation, reference,
@@ -188,7 +188,7 @@ const TermsAndConditions = () => {
               of its Courts.
             </p>
       
-            <p><strong>Last updated:</strong> 6th May 2024</p>
+            <p><strong>Last updated:</strong> 12th april 2025</p>
           </div>
           <Footer/>
 
