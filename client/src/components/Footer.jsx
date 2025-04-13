@@ -25,8 +25,8 @@ const Footer = () => {
           <nav>
             <ul className="space-y-2">
               <li><a href="/about" className="text-[var(--softTextColor)] hover:text-[var(--softTextColor)]">About</a></li>
-              <li><a href="/career" className="text-[var(--softTextColor)] hover:text-[var(--softTextColor)]">Careers</a></li>
-              <li><a href="/affiliates" className="text-[var(--softTextColor)] hover:text-[var(--softTextColor)]">Affiliates</a></li>
+              <li><a href="/coming-soon" className="text-[var(--softTextColor)] hover:text-[var(--softTextColor)]">Careers</a></li>
+              <li><a href="/coming-soon" className="text-[var(--softTextColor)] hover:text-[var(--softTextColor)]">Affiliates</a></li>
             </ul>
           </nav>
         </div>
@@ -38,8 +38,8 @@ const Footer = () => {
             <ul className="space-y-2">
               <li><a href="/" className="text-[var(--softTextColor)] hover:text-[var(--softTextColor)]">Listings</a></li>
               <li><a href="/reviews" className="text-[var(--softTextColor)] hover:text-[var(--softTextColor)]">Reviews</a></li>
-              <li><a href="/blog" className="text-[var(--softTextColor)] hover:text-[var(--softTextColor)]">Blog</a></li>
-              <li><a href="/faq" className="text-[var(--softTextColor)] hover:text-[var(--softTextColor)]">FAQ</a></li>
+              <li><a href="/coming-soon" className="text-[var(--softTextColor)] hover:text-[var(--softTextColor)]">Blog</a></li>
+              <li><a href="/coming-soon" className="text-[var(--softTextColor)] hover:text-[var(--softTextColor)]">FAQ</a></li>
             </ul>
           </nav>
         </div>

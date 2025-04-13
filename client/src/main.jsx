@@ -9,6 +9,7 @@ import RegisterPage from "./routes/RegisterPage.jsx";
 import SinglePostPage from "./routes/SinglePostPage.jsx";
 import AboutPage from "./routes/AboutPage.jsx";
 import MainLayout from "./layouts/MainLayout.jsx";
+import ComingSoon from "./routes/comingsoonPage.jsx";
 import { ClerkProvider } from "@clerk/clerk-react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ToastContainer } from "react-toastify";
@@ -55,7 +56,10 @@ const router = createBrowserRouter([
         path: "/privacy",
         element: <PrivacyPolicy />,
       },
-    
+      {
+        path: "/coming-soon",
+        element: <ComingSoon />,
+      },
       {
         path: "/reviews",
         element: <ReviewsHomePage />,
