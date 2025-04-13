@@ -16,6 +16,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { Analytics } from "@vercel/analytics/react"; // Import Vercel Analytics
 import PremiumPage from "./routes/PremiumPage.jsx";
 import SettingsPage from "./routes/SettingsPage.jsx";
+import TermsAndConditions from "./routes/termsandconditionsPage.jsx";
 import SubscriptionPage from "./routes/SubscriptionPage.jsx";
 import ReviewsHomePage from "./routes/ReviewsHompage.jsx";
 import ReviewsPostPage from "./routes/ReviewsPostPage.jsx";
@@ -39,7 +40,10 @@ const router = createBrowserRouter([
         path: "/",
         element: <Homepage />,
       },
-      
+      {
+        path: "/terms",
+        element: <TermsAndConditions />,
+      },
     
       {
         path: "/reviews",
