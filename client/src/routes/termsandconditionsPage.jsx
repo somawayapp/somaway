@@ -11,17 +11,19 @@ const TermsAndConditions = () => {
             <h1 className="text-2xl md:text-4xl font-bold">Terms and Conditions of Use (the “Terms”)</h1>
            <p>
               Please read these Terms carefully before accessing or using the services made available,
-              accessed, published or otherwise offered through www.hodii.com (the "Site"). By accessing or using
+              accessed, published or otherwise offered through   <a href="https://www.hodii.com" target="_blank" rel="noopener noreferrer" className="text-blue-500 underline hover:text-blue-700">  www.hodii.com </a>  
+               (the "Site"). By accessing or using
               the Site, you agree to be bound by these Terms. Please note that you will be required to review and agree
-              to our   <a href="https://www.hodii.com/privacy" target="_blank" rel="noopener noreferrer" className="text-blue-500 underline hover:text-blue-700">    Privacy Policy    </a>  before you can access and use the Site. Advertisers who use the Site must accept
+              to our  <a href="https://www.hodii.com/privacy" target="_blank" rel="noopener noreferrer" className="text-blue-500 underline hover:text-blue-700">    Privacy Policy    </a>
+               before you can access and use the Site. Advertisers who use the Site must accept
               and adhere to the Advertiser’s Terms and Conditions.
             </p>
       
             <h2 className="text-xl font-semibold">Definitions</h2>
             <p>
               For the purposes of these terms the terms: <br />
-             <span className="font-semibold"> Hodii, we, our</span>  and <span className="font-semibold"> us</span> refer to Hodii Limited; and <br />
-              Site refers to www.hodii.com, and mobile versions of these websites and software applications
+             <span className="fontsemibold underline hover-thumb">Hodii, we, our</span>  and <span className="fontsemibold underline hover-thumb">us</span> refer to Hodii Limited; and <br />
+              Site refers to   <a href="https://www.hodii.com" target="_blank" rel="noopener noreferrer" className="text-blue-500 underline hover:text-blue-700">  www.hodii.com </a>, and mobile versions of these websites and software applications
               derived from these websites for mobile devices. <br />
               Advertisers and listers refer to private sellers, agents, property developers, landlords and
               ancillary partners.
@@ -33,7 +35,8 @@ const TermsAndConditions = () => {
               are only available to registered users. If you decide to create an account on the Site and become
               a registered user, you will be required to submit certain personal information as part of the
               registration process. Our Privacy governs how we deal with your personal information. Please review
-              the   <a href="https://www.hodii.com/privacy" target="_blank" rel="noopener noreferrer" className="text-blue-500 underline hover:text-blue-700">    Privacy Policy    </a>  carefully to understand our practices.
+              the  <a href="https://www.hodii.com/privacy" target="_blank" rel="noopener noreferrer" className="text-blue-500 underline hover:text-blue-700">    Privacy Policy    </a>
+               carefully to understand our practices.
             </p>
       
             <h2 className="text-xl font-semibold">Copyright and trademarks</h2>
@@ -48,7 +51,7 @@ const TermsAndConditions = () => {
               You agree not to infringe on any of the intellectual property rights in the Content or any other material
               owned by third parties, and undertake not to reproduce the materials without the express permission in
               writing of the owners of the intellectual property rights. To obtain permission for the use of the Content
-              on the Site, please email<a href="mailto:privacy@hodii.com" className="text-blue-500 underline relative group"> privacy@hodii.com</a>
+              on the Site, please email  <a href="mailto:privacy@hodii.com" className="text-blue-500 underline hover:text-blue-700"> privacy@hodii.com</a>
 
             </p>
       
@@ -128,7 +131,8 @@ const TermsAndConditions = () => {
               transmit, create derivative works of, and publicly display any materials and other information (including
               ideas for new or improved products and services) that you submit to any public areas of the Site (such
               as bulletin boards, forums and newsgroups) or by email or any other form of communication to us. Please
-              read our   <a href="https://www.hodii.com/privacy" target="_blank" rel="noopener noreferrer" className="text-blue-500 underline hover:text-blue-700">    Privacy Policy    </a>  for more information on how we deal with the information you share with us.
+              read our  <a href="https://www.hodii.com/privacy" target="_blank" rel="noopener noreferrer" className="text-blue-500 underline hover:text-blue-700">    Privacy Policy    </a>
+               for more information on how we deal with the information you share with us.
             </p>
       
             <h2 className="text-xl font-semibold">The security of your information</h2>
@@ -138,7 +142,8 @@ const TermsAndConditions = () => {
               observed by or disclosed to a third party while in transit over the internet or while stored on Hodii
               systems or on the Site. Hodii disclaims all liability to you to the greatest extent possible under the
               relevant laws should this occur. <br />
-              Please refer to our   <a href="https://www.hodii.com/privacy" target="_blank" rel="noopener noreferrer" className="text-blue-500 underline hover:text-blue-700">    Privacy Policy    </a>  for more information on this.
+              Please refer to our  <a href="https://www.hodii.com/privacy" target="_blank" rel="noopener noreferrer" className="text-blue-500 underline hover:text-blue-700">    Privacy Policy    </a>
+               for more information on this.
             </p>
       
             <h2 className="text-xl font-semibold">Securing your login details</h2>
