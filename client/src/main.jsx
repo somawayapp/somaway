@@ -22,6 +22,9 @@ import ReviewsHomePage from "./routes/ReviewsHompage.jsx";
 import ReviewsPostPage from "./routes/ReviewsPostPage.jsx";
 import AddListingReview from "./routes/AddListingReview.jsx";
 import AddListing from "./routes/AddListing.jsx";
+import AdvertiserTerms from "./routes/advertisertermsPage.jsx";
+import SubscriptionTerms from "./routes/subscriptiontermsPage.jsx";
+import PrivacyPolicy from "./routes/privacyPage.jsx";
 
 const queryClient = new QueryClient();
 
@@ -43,6 +46,18 @@ const router = createBrowserRouter([
       {
         path: "/terms",
         element: <TermsAndConditions />,
+      },
+      {
+        path: "/subscription-terms",
+        element: <SubscriptionTerms />,
+      },
+      {
+        path: "/advertiser-terms",
+        element: <AdvertiserTerms />,
+      },
+      {
+        path: "/privacy",
+        element: <PrivacyPolicy />,
       },
     
       {
