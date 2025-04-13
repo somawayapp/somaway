@@ -5,22 +5,23 @@ import cache from "memory-cache"; // In-memory cache
 
 const CACHE_DURATION = 3600000; // 1 hour in milliseconds
 
+
 export const getPosts = async (req, res) => {
   try {
     const page = parseInt(req.query.page) || 1;
     const limit = parseInt(req.query.limit) || 1000;
     const query = {};
 
-    // Generate a unique cache key for the request
+    // Create a normalized cache key
     const cacheKey = `posts:${JSON.stringify(req.query)}:${page}:${limit}`;
-
-    // Check if the data is already cached
     const cachedData = cache.get(cacheKey);
+
     if (cachedData) {
       console.log("Returning cached data for getPosts");
       return res.status(200).json(cachedData);
     }
 
+    // Extract filters
     const {
       author,
       search,
@@ -37,9 +38,8 @@ export const getPosts = async (req, res) => {
       featured,
     } = req.query;
 
-    if (req.query.cat) {
-      query.category = req.query.cat;
-    }
+    // Build dynamic query
+    if (req.query.cat) query.category = req.query.cat;
 
     if (search) {
       query.$or = [
@@ -57,14 +57,8 @@ export const getPosts = async (req, res) => {
       query.author = { $in: authorRegexes };
     }
 
-    if (location) {
-      query["location.city"] = { $regex: location, $options: "i" };
-    }
-
-    if (propertytype) {
-      query.propertytype = propertytype;
-    }
-
+    if (location) query["location.city"] = { $regex: location, $options: "i" };
+    if (propertytype) query.propertytype = propertytype;
     if (bedrooms) query.bedrooms = { $gte: parseInt(bedrooms) };
     if (bathrooms) query.bathrooms = { $gte: parseInt(bathrooms) };
     if (propertysize) query.propertysize = { $gte: parseInt(propertysize) };
@@ -76,66 +70,57 @@ export const getPosts = async (req, res) => {
       if (pricemax) query.price.$lte = parseInt(pricemax);
     }
 
-    if (model) {
-      query.model = model;
-    }
-
-    if (featured) {
-      query.isFeatured = true;
-    }
+    if (model) query.model = model;
+    if (featured) query.isFeatured = true;
 
     let sortObj = { createdAt: -1 };
     let useAggregation = false;
 
-    if (sort) {
-      switch (sort) {
-        case "newest":
-          sortObj = { createdAt: -1 };
-          break;
-        case "oldest":
-          sortObj = { createdAt: 1 };
-          break;
-        case "popular":
-          sortObj = { visit: -1 };
-          break;
-        case "trending":
-          sortObj = { visit: -1 };
-          query.createdAt = {
-            $gte: new Date(new Date().getTime() - 14 * 24 * 60 * 60 * 1000),
-          };
-          break;
-        case "random":
-          useAggregation = true;
-          break;
-        default:
-          break;
-      }
+    switch (sort) {
+      case "newest":
+        sortObj = { createdAt: -1 };
+        break;
+      case "oldest":
+        sortObj = { createdAt: 1 };
+        break;
+      case "popular":
+        sortObj = { visit: -1 };
+        break;
+      case "trending":
+        sortObj = { visit: -1 };
+        query.createdAt = {
+          $gte: new Date(Date.now() - 14 * 24 * 60 * 60 * 1000),
+        };
+        break;
+      case "random":
+        useAggregation = true;
+        break;
     }
 
-    let posts, totalPosts;
+    let posts;
+    let hasMore = false;
 
     if (useAggregation) {
-      // Aggregation pipeline for random sorting
       posts = await Post.aggregate([
         { $match: query },
         { $sample: { size: limit } },
       ]);
       posts = await Post.populate(posts, { path: "user", select: "username" });
-      totalPosts = await Post.countDocuments(query);
+      hasMore = false; // random = no pagination
     } else {
       posts = await Post.find(query)
         .populate("user", "username")
         .sort(sortObj)
-        .limit(limit)
-        .skip((page - 1) * limit);
-      totalPosts = await Post.countDocuments(query);
+        .limit(limit + 1)
+        .skip((page - 1) * limit)
+        .lean();
+
+      hasMore = posts.length > limit;
+      if (hasMore) posts.pop(); // Remove the extra one
     }
 
-    const hasMore = page * limit < totalPosts;
-
-    // Cache the result
     const result = { posts, hasMore };
-    cache.put(cacheKey, result, CACHE_DURATION); // Store in cache for 1 hour
+    cache.put(cacheKey, result, CACHE_DURATION);
 
     res.status(200).json(result);
   } catch (error) {
@@ -143,6 +128,7 @@ export const getPosts = async (req, res) => {
     res.status(500).json("Internal server error!");
   }
 };
+
 
 export const getPost = async (req, res) => {
   try {

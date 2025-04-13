@@ -1,5 +1,6 @@
 import { Schema } from "mongoose";
 import mongoose from "mongoose";
+import slugify from "slugify";
 
 const postSchema = new Schema(
   {
@@ -9,10 +10,9 @@ const postSchema = new Schema(
       required: true,
     },
     img: {
-      type: [String], 
-      required: true, 
+      type: [String],
+      required: false,
     },
-    
     title: {
       type: String,
       required: true,
@@ -30,77 +30,52 @@ const postSchema = new Schema(
       type: String,
       required: true,
     },
-
-    whatsapp: {
-      type: String,
-      required: false,
+    whatsapp: String,
+    phone: String,
+    price: Number,
+    amenities: [String],
+    model: String,
+    propertytype: String,
+    specification: String,
+    propertysize: String,
+    bathrooms: Number,
+    bedrooms: Number,
+    rooms: Number,
+    isFeatured: {
+      type: Boolean,
+      default: false,
     },
-    phone: {
-      type: String,
-      required: false,
+    featuredUntil: {
+      type: Date,
+      default: null,
     },
-    price: {
-      type: Number,
-      required: false,
-    },
-    amenities: {
-      type: [String],
-      required: false,
-    },
-    img: {
-      type: [String], // Array of image URLs
-      required: false,
-    },
-    model: {
-      type: String,
-      required: false,
-    },
-    propertytype: {
-      type: String,
-      required: false,
-    },
-    specification: {
-      type: String,
-      required: false,
-    },
-    propertysize: {
-      type: String,
-      required: false,
-    },
-    bathrooms: {
-      type: Number,
-      required: false,
-    },
-    bedrooms: {
-      type: Number,
-      required: false,
-    },
-    rooms: {
-      type: Number,
-      required: false,
-    },
- 
-    isFeatured: 
-    { type: Boolean,
-       default: false },
-
-    featuredUntil: 
-    { type: Date,
-       default: null },
-  
     visit: {
       type: Number,
       default: 0,
     },
     location: {
-      country: { type: String },
-      city: { type: String },
-      region: { type: String },
-      timezone: { type: String },
-
+      country: String,
+      city: String,
+      region: String,
+      timezone: String,
     },
   },
   { timestamps: true }
 );
+
+// Indexes
+postSchema.index({ title: "text", desc: "text" });
+postSchema.index({ "location.city": 1 });
+postSchema.index({ createdAt: -1 });
+postSchema.index({ price: 1 });
+postSchema.index({ isFeatured: 1 });
+
+// Auto-generate slug if missing
+postSchema.pre("save", function (next) {
+  if (!this.slug) {
+    this.slug = slugify(this.title, { lower: true, strict: true });
+  }
+  next();
+});
 
 export default mongoose.model("Post", postSchema);
