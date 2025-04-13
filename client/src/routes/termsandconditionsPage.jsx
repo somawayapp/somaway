@@ -7,7 +7,7 @@ const TermsAndConditions = () => {
              <div>      
             <Navbar/>
 
-          <div className="text-[var(--softTextColor)] bg-[var(--bg)]  max-w-[1300px] mx-auto space-y-6 px-4 md:px-[80px]">
+          <div className="text-[var(--softTextColor)] bg-[var(--bg)]  max-w-[1300px] mx-auto mt-8 md:mt-[40px]  mb-8 md:mb-[40px] px-4 md:px-[80px]">
             <h1 className="text-4xl font-semibold">Terms and Conditions of Use (the “Terms”)</h1>
             <p>
               Please read these Terms carefully before accessing or using the services made available,
