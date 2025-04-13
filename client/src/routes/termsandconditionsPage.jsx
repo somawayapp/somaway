@@ -7,9 +7,9 @@ const TermsAndConditions = () => {
              <div>      
             <Navbar/>
 
-          <div className="text-[var(--softTextColor)] bg-[var(--bg)]  max-w-[1300px] mx-auto mt-8 md:mt-[40px]  mb-8 md:mb-[40px] px-4 md:px-[80px]">
-            <h1 className="text-4xl font-semibold">Terms and Conditions of Use (the “Terms”)</h1>
-            <p>
+            <div className="text-[var(--softTextColor)] bg-[var(--bg)] space-y-6 md:space-y-9  max-w-[1300px] mx-auto mt-8 md:mt-[40px]  mb-8 md:mb-[40px] px-4 md:px-[80px]">
+            <h1 className="text-4xl font-bold">Terms and Conditions of Use (the “Terms”)</h1>
+           <p>
               Please read these Terms carefully before accessing or using the services made available,
               accessed, published or otherwise offered through www.hodii.com (the "Site"). By accessing or using
               the Site, you agree to be bound by these Terms. Please note that you will be required to review and agree
