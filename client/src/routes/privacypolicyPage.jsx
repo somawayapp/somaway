@@ -45,7 +45,7 @@ const PrivacyPolicyPage = () => {
             anonymized data, which is information that can no longer identify you.
           </li>
           <li>
-            <span className="font-semibold">Site</span> means, together or individually as applicable, hodi.com sites.
+            <span className="font-semibold">Site</span> means, together or individually as applicable, hodii.com sites.
           </li>
           <li>
             <span className="font-semibold">Services</span> means such services made available, accessed, published or
@@ -54,7 +54,7 @@ const PrivacyPolicyPage = () => {
         </ul>
 
         <h2 className="text-xl font-semibold">DATA CONTROLLER:</h2>
-              <p>          Hodi.com Limited is the data controller and responsible for your personal data (referred to as “we”, “us” or
+              <p>          Hodii.com Limited is the data controller and responsible for your personal data (referred to as “we”, “us” or
           “our” in this Policy). If you have any questions about this Policy please send an email to{' '}
           <a href="mailto:privacy@hodii.com" className="text-blue-600 hover:text-blue-800">
             privacy@hodii.com
@@ -78,7 +78,7 @@ const PrivacyPolicyPage = () => {
           </li>
           <li>
             <span className="font-semibold">Financial information</span> such as bank account, payment card details,
-            and/or monthly income. Details about monthly income is collected for users of Hodi.com only.
+            and/or monthly income. Details about monthly income is collected for users of Hodii.com only.
           </li>
           <li>
             <span className="font-semibold">Verification information</span> such as your government issued national
@@ -152,8 +152,8 @@ const PrivacyPolicyPage = () => {
           <li>
             <span className="font-semibold">To provide you with the Services, in particular:</span>
             <ul className="list-disc list-inside ml-6">
-              <li>Connect you to a buyer or seller, as the case may be (hodi.com).</li>
-              <li>Run targeted marketing campaigns (Hodi.com).</li>
+              <li>Connect you to a buyer or seller, as the case may be (hodii.com).</li>
+              <li>Run targeted marketing campaigns (Hodii.com).</li>
             </ul>
           </li>
           <li>To contact you about the Services, events and promotions (where you have agreed to us doing so).</li>
@@ -179,7 +179,7 @@ const PrivacyPolicyPage = () => {
           <li>Third parties to whom we may choose to sell, transfer or merge parts of our business or our assets to. Alternatively, we may seek to acquire other businesses or merge with them. If a change happens to our business, then the new owners may use your personal data in the same way as set out in this Policy.</li>
         </ul>
               <p>          Depending on the Services you are accessing, we may share certain personal information with third parties to
-          help us use your personal information. For example, for users of Hodi.com, buyers and sellers have access to
+          help us use your personal information. For example, for users of Hodii.com, buyers and sellers have access to
           each other's contacts. We require all third parties to respect the security of your personal data and to treat
           it in accordance with the law. We do not allow our third-party service providers to use your personal data for
           their own purposes and only permit them to process your personal data for specified purposes and in accordance
@@ -250,7 +250,7 @@ const PrivacyPolicyPage = () => {
            <h3 className="text-xl font-semibold">Right of access to your personal data</h3>
               <p>          As a data subject, you are allowed to confirm the accuracy of your data and exercise your right of correction.
           You can request to see any personal data that we hold about you. To exercise your right to rectification, go to
-          your Hodi.com profile and edit your information. To request your data from Hodi.com kindly reach out to{' '}
+          your Hodii.com profile and edit your information. To request your data from Hodii.com kindly reach out to{' '}
           <a href="mailto:support@hodii.com" className="text-blue-600 hover:text-blue-800">
             support@hodii.com
           </a>{' '}
@@ -263,7 +263,7 @@ const PrivacyPolicyPage = () => {
 
            <h3 className="text-xl font-semibold">Data Deletion Request (Right to be forgotten)</h3>
               <p>          As a data subject, you can request for deletion of your personal data from our system or withdraw consent on
-          processing of your personal information. If you wish to delete your data from Hodi.com website, kindly reach
+          processing of your personal information. If you wish to delete your data from Hodii.com website, kindly reach
           out to{' '}
           <a href="mailto:support@hodii.com" className="text-blue-600 hover:text-blue-800">
             support@hodii.com
@@ -275,7 +275,7 @@ const PrivacyPolicyPage = () => {
         </p>
 
            <h3 className="text-xl font-semibold">Data Retention</h3>
-              <p>          In any event, to the extent required or allowed by applicable law, the Data Processor, as defined as Hodi.com
+              <p>          In any event, to the extent required or allowed by applicable law, the Data Processor, as defined as Hodii.com
           Limited, may retain one copy of the Personal Data for evidence purposes and/or for the establishment,
           exercise or defense of legal claims and/or to comply with applicable laws and regulations.
         </p>

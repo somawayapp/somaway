@@ -15,8 +15,7 @@ const TermsAndConditions = () => {
                (the "Site"). By accessing or using
               the Site, you agree to be bound by these Terms. Please note that you will be required to review and agree
               to our  <a href="https://www.hodii.com/privacy" target="_blank" rel="noopener noreferrer" className="text-blue-500 underline hover:text-blue-700">    Privacy Policy    </a>
-               before you can access and use the Site. Advertisers who use the Site must accept
-              and adhere to the Advertiser’s Terms and Conditions.
+               before you can access and use the Site.
             </p>
       
             <h2 className="text-xl font-semibold">Definitions</h2>

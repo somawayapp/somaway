@@ -52,7 +52,6 @@ const Footer = () => {
               <li><a href="/privacy" className="text-[var(--softTextColor)] hover:text-[var(--softTextColor)]">Privacy Policy</a></li>
               <li><a href="/terms" className="text-[var(--softTextColor)] hover:text-[var(--softTextColor)]">Terms and Conditions</a></li>
               <li><a href="/subscription-terms" className="text-[var(--softTextColor)] hover:text-[var(--softTextColor)]">Subscription Terms</a></li>
-              <li><a href="/advertiser-terms" className="text-[var(--softTextColor)] hover:text-[var(--softTextColor)]">Advertiser Terms</a></li>
             </ul>
           </nav>
         </div>
