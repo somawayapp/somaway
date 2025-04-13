@@ -7,7 +7,7 @@ const PrivacyPolicyPage = () => {
              <div>      
             <Navbar/>
 
-            <div className="text-[var(--softTextColor)] bg-[var(--bg)] space-y-6   max-w-[1200px] mx-auto mt-8 md:mt-[40px]  mb-8 md:mb-[40px] px-4 md:px-[80px]">
+            <div className="text-[var(--softTextColor)] bg-[var(--bg)] space-y-6   max-w-[1000px] mx-auto mt-8 md:mt-[40px]  mb-8 md:mb-[40px] px-4 md:px-[80px]">
             <h1 className="text-2xl md:text-4xl font-bold">Privacy Policy</h1>
               <p>          We respect your privacy and are committed to protecting your personal information. This privacy policy
           (“Policy”) applies to your use of{' '}
@@ -33,7 +33,7 @@ const PrivacyPolicyPage = () => {
         <h2 className="text-xl font-semibold">TERMS</h2>
               <p>          For ease of reference, the terms below as used in the Policy have the following meaning:
         </p>
-        <ul className="list-disc list-inside text-gray-700 mb-4">
+        <ul className="list-disc list-inside  mb-4">
           <li>
             <span className="font-semibold">Account</span> means the account you create when registering as a user on
             the Site to enable you to access some of the Services.
@@ -103,7 +103,7 @@ const PrivacyPolicyPage = () => {
               <p>          Depending on the Services you are obtaining or accessing, we may collect, store, use and transfer the
           following different types of information:
         </p>
-        <ul className="list-disc list-inside text-gray-700 mb-4">
+        <ul className="list-disc list-inside  mb-4">
           <li>
             <span className="font-semibold">Identity information</span> such as your first name, maiden name, last name,
             username or similar identifier, marital status, title, nationality, date of birth or gender.
@@ -163,8 +163,8 @@ const PrivacyPolicyPage = () => {
         </p>
 
         <h2 className="text-xl font-semibold">HOW DATA IS COLLECTED</h2>
-        <p className="text-gray-700 mb-4">We collect personal information:</p>
-        <ul className="list-disc list-inside text-gray-700 mb-4">
+        <p className=" mb-4">We collect personal information:</p>
+        <ul className="list-disc list-inside  mb-4">
           <li>That you provide to us directly for example through the Site, on the phone or through any other communication channel or method.</li>
           <li>We obtain from other sources.</li>
           <li>Using cookies, logs, web beacons, tags, pixels and other internet technologies (used to record information about how you browse the Site), for example the technical data.</li>
@@ -183,8 +183,8 @@ const PrivacyPolicyPage = () => {
         </p>
 
         <h2 className="text-xl font-semibold">USE OF THE COLLECTED DATA</h2>
-        <p className="text-gray-700 mb-4">How we use your personal data depends on the Services you are accessing. We will use your personal data:</p>
-        <ul className="list-disc list-inside text-gray-700 mb-4">
+        <p className=" mb-4">How we use your personal data depends on the Services you are accessing. We will use your personal data:</p>
+        <ul className="list-disc list-inside  mb-4">
           <li>
             <span className="font-semibold">To provide you with the Services, in particular:</span>
             <ul className="list-disc list-inside ml-6">
@@ -210,7 +210,7 @@ const PrivacyPolicyPage = () => {
               <p>          Except as specified in this Policy, we will not disclose your personal data to third parties without your
           consent. Depending on the Services, we may share your personal data with:
         </p>
-        <ul className="list-disc list-inside text-gray-700 mb-4">
+        <ul className="list-disc list-inside  mb-4">
           <li>Internal third parties such as companies within the Group and who are based in Kenya and South Africa;</li>
           <li>External third parties such as service providers (for example, Amazon Web Services, Flutterwave, MailChimp), Kenya Revenue Authority and Facebook Analytics.</li>
           <li>Third parties to whom we may choose to sell, transfer or merge parts of our business or our assets to. Alternatively, we may seek to acquire other businesses or merge with them. If a change happens to our business, then the new owners may use your personal data in the same way as set out in this Policy.</li>
@@ -271,8 +271,8 @@ const PrivacyPolicyPage = () => {
         </p>
 
         <h2 className="text-xl font-semibold">OUR LEGAL RIGHTS</h2>
-        <p className="text-gray-700 mb-4">In accordance with the applicable laws of Kenya, you may have the right to:</p>
-        <ul className="list-disc list-inside text-gray-700 mb-4">
+        <p className=" mb-4">In accordance with the applicable laws of Kenya, you may have the right to:</p>
+        <ul className="list-disc list-inside  mb-4">
           <li>Be informed of the use to which your personal data is being put.</li>
           <li>Access your personal data.</li>
           <li>Object to the processing of your personal data.</li>
@@ -284,7 +284,7 @@ const PrivacyPolicyPage = () => {
         </ul>
 
         <h2 className="text-xl font-semibold">DATA SUBJECT ACCESS REQUEST</h2>
-        <h3 className="text-xl font-semibold text-gray-800 mt-4 mb-2">Right of access to your personal data</h3>
+           <h3 className="text-xl font-semibold">Right of access to your personal data</h3>
               <p>          As a data subject, you are allowed to confirm the accuracy of your data and exercise your right of correction.
           You can request to see any personal data that we hold about you. To exercise your right to rectification, go to
           your Hodi.com profile and edit your information. To request your data from Hodi.com kindly reach out to{' '}
@@ -298,7 +298,7 @@ const PrivacyPolicyPage = () => {
           and we will respond to your request within 30 days.
         </p>
 
-        <h3 className="text-xl font-semibold text-gray-800 mt-4 mb-2">Data Deletion Request (Right to be forgotten)</h3>
+           <h3 className="text-xl font-semibold">Data Deletion Request (Right to be forgotten)</h3>
               <p>          As a data subject, you can request for deletion of your personal data from our system or withdraw consent on
           processing of your personal information. If you wish to delete your data from Hodi.com website, kindly reach
           out to{' '}
@@ -311,7 +311,7 @@ const PrivacyPolicyPage = () => {
           </a>
         </p>
 
-        <h3 className="text-xl font-semibold text-gray-800 mt-4 mb-2">Data Retention</h3>
+           <h3 className="text-xl font-semibold">Data Retention</h3>
               <p>          In any event, to the extent required or allowed by applicable law, the Data Processor, as defined as Hodi.com
           Limited, may retain one copy of the Personal Data for evidence purposes and/or for the establishment,
           exercise or defense of legal claims and/or to comply with applicable laws and regulations.
@@ -323,7 +323,7 @@ const PrivacyPolicyPage = () => {
           Site and such upload will be deemed to be sufficient communication to you. Where you are a registered user, we
           may elect, at our own discretion, to notify you of any revision through a notice on your account.
         </p>
-        <p className="text-gray-700">Last updated: [06-05-2024]</p>
+        <p className="">Last updated: [06-05-2024]</p>
       </div>
       <Footer/>
 
