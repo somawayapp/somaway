@@ -24,7 +24,7 @@ import AddListingReview from "./routes/AddListingReview.jsx";
 import AddListing from "./routes/AddListing.jsx";
 import AdvertiserTerms from "./routes/advertisertermsPage.jsx";
 import SubscriptionTerms from "./routes/subscriptiontermsPage.jsx";
-import PrivacyPolicy from "./routes/privacyPage.jsx";
+import PrivacyPolicy from "./routes/privacypolicyPage.jsx";
 
 const queryClient = new QueryClient();
 
