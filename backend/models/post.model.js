@@ -1,30 +1,91 @@
-import Post from "../models/Post.js";
+import { Schema } from "mongoose";
+import mongoose from "mongoose";
+import slugify from "slugify";
 
-// 📥 Get posts with lean and pagination
-export const getPosts = async (req, res) => {
-  try {
-    const { city, priceMin, priceMax, lastSeen, limit = 10 } = req.query;
+// Schema definition
+const postSchema = new Schema(
+  {
+    user: {
+      type: Schema.Types.ObjectId,
+      ref: "User",
+      required: true,
+    },
+    img: {
+      type: [String],
+    },
+    title: {
+      type: String,
+      required: true,
+    },
+    propertyname: {
+      type: String,
+      required: true,
+    },
+    slug: {
+      type: String,
+      required: true,
+      unique: true,
+    },
+    desc: {
+      type: String,
+      required: true,
+    },
+    whatsapp: String,
+    phone: String,
+    price: Number,
+    amenities: [String],
+    model: String,
+    propertytype: String,
+    specification: String,
+    propertysize: String,
+    bathrooms: Number,
+    bedrooms: Number,
+    rooms: Number,
+    isFeatured: {
+      type: Boolean,
+      default: false,
+    },
+    featuredUntil: {
+      type: Date,
+      default: null,
+    },
+    visit: {
+      type: Number,
+      default: 0,
+    },
+    location: {
+      country: String,
+      city: String,
+      region: String,
+      timezone: String,
+    },
+  },
+  { timestamps: true }
+);
 
-    const filters = {};
-    if (city) filters["location.city"] = city;
-    if (priceMin || priceMax) {
-      filters.price = {};
-      if (priceMin) filters.price.$gte = Number(priceMin);
-      if (priceMax) filters.price.$lte = Number(priceMax);
-    }
-    if (lastSeen) {
-      filters.createdAt = { $lt: new Date(lastSeen) };
-    }
+// Text & search indexes
+postSchema.index({ title: "text", desc: "text" });
+postSchema.index({ "location.city": 1 });
+postSchema.index({ createdAt: -1 });
+postSchema.index({ price: 1 });
+postSchema.index({ isFeatured: 1 });
 
-    const posts = await Post.find(filters)
-      .sort({ createdAt: -1 })
-      .limit(Number(limit))
-      .select("title price location isFeatured createdAt slug img")
-      .lean();
+// 🔥 Compound indexes
+postSchema.index({ "location.city": 1, price: 1 });
+postSchema.index({ "location.city": 1, createdAt: -1 });
 
-    res.json(posts);
-  } catch (error) {
-    console.error("Fetch error:", error);
-    res.status(500).json({ error: "Internal server error" });
+// 🌿 Sparse index for featured logic
+postSchema.index({ isFeatured: 1, featuredUntil: 1 }, { sparse: true });
+
+// ⏳ Optional TTL index to auto-delete expired featured posts
+// postSchema.index({ featuredUntil: 1 }, { expireAfterSeconds: 0 }); // WARNING: deletes doc
+
+// Slug generation
+postSchema.pre("save", function (next) {
+  if (!this.slug) {
+    this.slug = slugify(this.title, { lower: true, strict: true });
   }
-};
+  next();
+});
+
+export default mongoose.model("Post", postSchema);
