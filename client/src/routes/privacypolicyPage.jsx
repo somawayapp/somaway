@@ -7,7 +7,7 @@ const PrivacyPolicyPage = () => {
              <div>      
             <Navbar/>
 
-            <div className="text-[var(--softTextColor)] bg-[var(--bg)] space-y-6   max-w-[1000px] mx-auto mt-8 md:mt-[40px]  mb-8 md:mb-[40px] px-4 md:px-[80px]">
+            <div className="text-[var(--softTextColor)] bg-[var(--bg)] space-y-6   max-w-[1100px] mx-auto mt-8 md:mt-[40px]  mb-8 md:mb-[40px] px-4 md:px-[80px]">
             <h1 className="text-2xl md:text-4xl font-bold">Privacy Policy</h1>
               <p>          We respect your privacy and are committed to protecting your personal information. This privacy policy
           (“Policy”) applies to your use of{' '}
@@ -38,18 +38,14 @@ const PrivacyPolicyPage = () => {
             <span className="font-semibold">Account</span> means the account you create when registering as a user on
             the Site to enable you to access some of the Services.
           </li>
-          <li>
-            <span className="font-semibold">Group</span> means any other business of Ringier One Africa Media Ltd
-            operating in Kenya or within the Ringier companies worldwide.
-          </li>
+        
           <li>
             <span className="font-semibold">Personal data</span> means information relating to you and which can identify
             you as an individual (whether on its own or taken with other information). It does not include aggregated or
             anonymized data, which is information that can no longer identify you.
           </li>
           <li>
-            <span className="font-semibold">Site</span> means, together or individually as applicable, BuyRentKenya,
-            BrighterMonday and Pigiame sites.
+            <span className="font-semibold">Site</span> means, together or individually as applicable, hodi.com sites.
           </li>
           <li>
             <span className="font-semibold">Services</span> means such services made available, accessed, published or
@@ -64,40 +60,8 @@ const PrivacyPolicyPage = () => {
             privacy@hodii.com
           </a>
         </p>
-              <p>          Ringier One Africa Media Ltd is made up of different legal entities, details of which can be found{' '}
-          <a
-            href="#"
-            className="text-blue-600 underline hover:text-blue-800"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            here
-          </a>
-          . This Policy is issued on behalf of Ringier One Africa Media Group (“Group”) so when we mention "Hodi.com",
-          "we", "us" or "our" in this Policy, we are referring to the relevant company in the Group responsible for
-          processing your data. We will let you know which entity will be the controller for your data when you purchase
-          a product or service with us. Hodi.com Limited is the controller and responsible for this Site. We have
-          appointed a data privacy manager who is responsible for overseeing questions in relation to this Policy. If
-          you have any questions about this Policy, including any requests to exercise your legal rights, please contact
-          the data privacy manager using the details set out above.
-        </p>
-              <p>          Ringier One Africa Media Ltd is made up of different legal entities, details of which can be found{' '}
-          <a
-            href="#"
-            className="text-blue-600 underline hover:text-blue-800"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            here
-          </a>
-          . This Policy is issued on behalf of Ringier One Africa Media Group (“Group”) so when we mention "Hodi.com",
-          "we", "us" or "our" in this Policy, we are referring to the relevant company in the Group responsible for
-          processing your data. We will let you know which entity will be the controller for your data when you purchase
-          a product or service with us. Hodi.com Limited is the controller and responsible for this Site. We have
-          appointed a data privacy manager who is responsible for overseeing questions in relation to this Policy. If
-          you have any questions about this Policy, including any requests to exercise your legal rights, please contact
-          the data privacy manager using the details set out above.
-        </p>
+            
+   
 
         <h2 className="text-xl font-semibold">DATA COLLECTED</h2>
               <p>          Depending on the Services you are obtaining or accessing, we may collect, store, use and transfer the
@@ -188,7 +152,7 @@ const PrivacyPolicyPage = () => {
           <li>
             <span className="font-semibold">To provide you with the Services, in particular:</span>
             <ul className="list-disc list-inside ml-6">
-              <li>Connect you to a buyer or seller, as the case may be (Pigiame).</li>
+              <li>Connect you to a buyer or seller, as the case may be (hodi.com).</li>
               <li>Run targeted marketing campaigns (Hodi.com).</li>
             </ul>
           </li>
@@ -211,8 +175,7 @@ const PrivacyPolicyPage = () => {
           consent. Depending on the Services, we may share your personal data with:
         </p>
         <ul className="list-disc list-inside  mb-4">
-          <li>Internal third parties such as companies within the Group and who are based in Kenya and South Africa;</li>
-          <li>External third parties such as service providers (for example, Amazon Web Services, Flutterwave, MailChimp), Kenya Revenue Authority and Facebook Analytics.</li>
+          <li>External third parties such as service providers (for example, Amazon Web Services, Vercel hosting, Clerk authentication provider,  Flutterwave, MailChimp), Kenya Revenue Authority and Facebook Analytics.</li>
           <li>Third parties to whom we may choose to sell, transfer or merge parts of our business or our assets to. Alternatively, we may seek to acquire other businesses or merge with them. If a change happens to our business, then the new owners may use your personal data in the same way as set out in this Policy.</li>
         </ul>
               <p>          Depending on the Services you are accessing, we may share certain personal information with third parties to
@@ -323,7 +286,7 @@ const PrivacyPolicyPage = () => {
           Site and such upload will be deemed to be sufficient communication to you. Where you are a registered user, we
           may elect, at our own discretion, to notify you of any revision through a notice on your account.
         </p>
-        <p className="">Last updated: [06-05-2024]</p>
+        <p className="">Last updated: [12th-april-2025]</p>
       </div>
       <Footer/>
 
