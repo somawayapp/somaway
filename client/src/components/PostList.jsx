@@ -25,6 +25,7 @@ const fetchFeaturedPosts = async (searchParams) => {
   const params = {
     ...parseSearchParams(searchParams),
     featured: true,
+    listed: true,
     limit: 4,
     sort: "random",
   };

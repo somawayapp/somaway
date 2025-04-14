@@ -74,7 +74,7 @@ export const getPosts = async (req, res) => {
 
     if (model) query.model = model;
     if (featured) query.isFeatured = true;
-    if (listed) query.isListed = false;
+    if (listed) query.isListed = true;
 
 
     let sortObj = { createdAt: -1 };
