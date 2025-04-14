@@ -76,7 +76,7 @@ const TermsAndConditions = () => {
               trademarks provision above and keep intact all copyright and other proprietary notices.
             </p>
 
-            <h2 className="text-xl font-semibold">Propert Reviews</h2>
+            <h2 className="text-xl font-semibold">Property Reviews</h2>
             <p>         
              The reviews system on Hodii.com exists to help create a safe and transparent rental environment for everyone. Verified 
              tenants and visitors are encouraged to share their honest experiences with listed properties to assist future renters in making 
