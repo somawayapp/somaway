@@ -137,10 +137,8 @@ const Search = () => {
       {/* Location */}
       <div
         className={`relative hover:bg-[var(--softBg4)] rounded-full group p-2 ${
-          isScrolledUp
-          ? "min:md:px-[2px] max:md:px-[4px]"
-          : "md:px-8"
-                } flex flex-col items-start text-left flex-1`}
+          isScrolledUp ? "md:px-4" : "md:px-8"
+        } flex flex-col items-start text-left flex-1`}
       >
         <small className="text-[12px] md:text-[13px] ml-4 font-semibold text-[var(--softTextColor)] transition">
           {filters.location || "Anywhere"}
@@ -157,10 +155,8 @@ const Search = () => {
       {/* Property Size */}
       <div
         className={`relative hover:bg-[var(--softBg4)] rounded-full group p-2 ${
-          isScrolledUp
-          ? "min:md:px-[2px] max:md:px-[4px]"
-          : "md:px-8"
-                } flex flex-col items-start text-left flex-1`}
+          isScrolledUp ? "md:px-4" : "md:px-8"
+        } flex flex-col items-start text-left flex-1`}
       >
         <small className="text-[12px] md:text-[13px] font-semibold text-[var(--softTextColor)] transition"   style={{ whiteSpace: 'nowrap' }}>
           {filters.propertysize || "Any size"}
@@ -177,9 +173,8 @@ const Search = () => {
       {/* Price */}
       <div
         className={`relative hidden md:block hover:bg-[var(--softBg4)] rounded-full group p-2 ${
-          isScrolledUp
-          ? "min:md:px-[2px] max:md:px-[4px]"
-          : "md:px-8"        } flex flex-col items-start text-left flex-1`}
+          isScrolledUp ? "md:px-4" : "md:px-8"
+        } flex flex-col items-start text-left flex-1`}
       >
   
         <small className="text-[12px] md:text-[13px] font-semibold text-[var(--softTextColor)] transition"   style={{ whiteSpace: 'nowrap' }}>
