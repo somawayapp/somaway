@@ -19,6 +19,6 @@ router.get("/:slug", increaseVisit, getPost);
 router.post("/", (req, res, next) => {
 console.log("Auth State:", req.auth); next();}, requireAuth(), createPost);
 router.delete("/:id", deletePost);
-router.patch("/:id", requireAuth(), togglePostListing);
+router.patch("/:id", togglePostListing);
 router.patch("/feature", featurePost);
 export default router 
