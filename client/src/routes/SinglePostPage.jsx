@@ -89,7 +89,7 @@ const SinglePostPage = () => {
   }, [user, isLoaded]);
   
   const handleShareToWhatsApp = () => {
-    const message = `🏠 Welcome to Hodii! 🌟\nLooking to rent, buy, or sell property? Whether it’s an apartment, house, office space, or land — Hodii is your trusted hub! 🏡\n\n✔️ List or browse properties for FREE\n✔️ Connect with tenants or landlords\n✔️ Explore reviews, filter by location, price & more!\n\nStart your journey today:\nhttps://makesomaway.com 🚪✨`;
+    const message = `🏠 Welcome to HodiHodi! 🌟\nLooking to rent, buy, or sell property? Whether it’s an apartment, house, office space, or land — Hodi is your trusted hub! 🏡\n\n✔️ List or browse properties for FREE\n✔️ Connect with tenants or landlords\n✔️ Explore reviews, filter by location, price & more!\n\nStart your journey today:\nhttps://makesomaway.com 🚪✨`;
   
     const url = `https://wa.me/?text=${encodeURIComponent(message + " ")}`;
   
@@ -271,8 +271,8 @@ data.propertytype ? `${data.propertytype} ` : null,
           
 <div className="w-full flex h-[300px] md:h-[500px] overflow-hidden rounded-xl relative transition duration-300">
       {/* Left Image */}
-      <div className=" w-full  relative mr-1 md:mr-2 cursor-pointer">
-        {mainImage && <img src={mainImage}  onClick={() => openPopup(0)} className="object-fill w-full" alt="Main Image" />}
+      <div className="flex h-full overflow-hidden relative mr-1 md:mr-2 cursor-pointer">
+        {mainImage && <img src={mainImage}  onClick={() => openPopup(0)} className="object-cover h-full w-full" alt="Main Image" />}
        
       <div className=" absolute top-3 right-3">
        <LikeButton postId={data._id} />
