@@ -11,8 +11,12 @@ const parseSearchParams = (searchParams) =>
     : {};
 
 const fetchPosts = async (searchParams) => {
-  const params = parseSearchParams(searchParams);
-  const res = await axios.get(`${import.meta.env.VITE_API_URL}/posts?sort=random`, {
+  const params = {
+    ...parseSearchParams(searchParams),
+    listed: true,
+    sort: "random",
+  };
+    const res = await axios.get(`${import.meta.env.VITE_API_URL}/posts?sort=random`, {
     params,
   });
 
