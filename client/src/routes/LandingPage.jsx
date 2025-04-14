@@ -35,21 +35,21 @@ const LandingPage = () => {
 
       <div>
         <Helmet>
-        <title>The #1 Free App to Unlock the Best Ideas from Top Books! - Hodi Best Book Summaries</title>
+        <title>The #1 Free App to Unlock the Best Ideas from Top Books! - Hodii Best Book Summaries</title>
 
-        <meta name="description" content="Hodi is the #1 award-winning book summary app and website, trusted by 40M+ users worldwide and 100K+ daily readers. Get smarter in just 15 minutes with our free, concise summaries of best-selling books. Join us today—learn and grow, one book summary at a time! " />
+        <meta name="description" content="Hodii is the #1 award-winning book summary app and website, trusted by 40M+ users worldwide and 100K+ daily readers. Get smarter in just 15 minutes with our free, concise summaries of best-selling books. Join us today—learn and grow, one book summary at a time! " />
 
         <meta name="keywords" content="book summaries, knowledge empowerment, bestselling books, transformative ideas, thought leadership, business books, self-help summaries, industry insights, personal growth, productivity hacks, motivation, innovation strategies, creative thinking, mind mastery, leadership skills, financial wisdom, success mindset, breakthrough thinking, wisdom for life, practical knowledge, learning shortcuts, brain boost, rapid reading, book digest, quick reads, success stories, entrepreneurial mindset, modern wisdom, elite knowledge, mastery techniques, global perspectives, future readiness, book analysis, idea extraction, in-depth reviews, concise knowledge, summary breakdowns, book wisdom, mental expansion, critical thinking, intellectual growth, top books, influential reads, advanced thinking, ultimate book digest, life hacks, professional growth, career mastery, mindset shift, paradigm transformation, unconventional wisdom, practical insights, top nonfiction books, skill enhancement, brain optimization, cognitive skills, mind enhancement, top book reviews, wisdom harvesting, fast knowledge, core ideas, rapid insights, strategic intelligence, innovation fuel, personal development, growth mindset, self-mastery, breakthrough books, smart reading, fast tracking wisdom, peak performance, visionary thinking, knowledge domination, unbeatable learning" />
 
  
-  <meta property="og:title" content="Hodi - Elevate Your Mind" />
+  <meta property="og:title" content="Hodii - Elevate Your Mind" />
   <meta property="og:description" content="Achieve greatness with Hodi. Explore groundbreaking book summaries that transform your life." />
   <meta property="og:image" content="/images/Hodi-og.jpg" />
   <meta property="og:url" content={`${window.location.href}`} />
   <meta property="og:type" content="website" />
   
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Hodi - Elevate Your Mind" />
+  <meta name="twitter:title" content="Hodii - Elevate Your Mind" />
   <meta name="twitter:description" content="Revolutionize your thinking with powerful book insights on Hodi." />
   <meta name="twitter:image" content="/images/Hodi-twitter.jpg" />
   
@@ -169,10 +169,10 @@ const LandingPage = () => {
   <div className="md:w-3/5 items-start justify-start md:text-left">
     <p className="text-xs mt-5 md:mt-9 text-[var(--bg2)]  md:text-md">ABOUT US</p>
     <p className="text-md mt-1 md:mt-2 text-[var(--bg)] md:text-2xl font-semibold">
-      Still wondering what is Hodi app?
+      Still wondering what is Hodii app?
     </p>
     <p className="text-sm text-[var(--bg)] mt-1 md:mt-2 md:text-lg">
-      Hodi is a global EdTech startup with Kenyan roots. Hodi app offers
+      Hodii is a global EdTech startup with Kenyan roots. Hodii app offers
       15-minute bite-sized non-fiction book summaries catered to your everyday
       needs. We are mission-driven and passionate about self-improvement.
     </p>

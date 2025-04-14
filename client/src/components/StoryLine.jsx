@@ -186,7 +186,7 @@ const StoryLine = () => {
       <div className="grid grid-cols-1 mx-auto md:grid-cols-3 gap-6 mt-8 w-full px-4">
         {[
           {
-            text: "Who we are –  Hodi is a non-fiction book summary app",
+            text: "Who we are –  Hodii is a non-fiction book summary app",
             icon: "negotiation.webp",
           },
           {

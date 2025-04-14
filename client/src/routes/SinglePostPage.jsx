@@ -89,7 +89,7 @@ const SinglePostPage = () => {
   }, [user, isLoaded]);
   
   const handleShareToWhatsApp = () => {
-    const message = `🏠 Welcome to HodiHodi! 🌟\nLooking to rent, buy, or sell property? Whether it’s an apartment, house, office space, or land — HodiHodi is your trusted hub! 🏡\n\n✔️ List or browse properties for FREE\n✔️ Connect with tenants or landlords\n✔️ Explore reviews, filter by location, price & more!\n\nStart your journey today:\nhttps://makesomaway.com 🚪✨`;
+    const message = `🏠 Welcome to Hodii! 🌟\nLooking to rent, buy, or sell property? Whether it’s an apartment, house, office space, or land — Hodii is your trusted hub! 🏡\n\n✔️ List or browse properties for FREE\n✔️ Connect with tenants or landlords\n✔️ Explore reviews, filter by location, price & more!\n\nStart your journey today:\nhttps://makesomaway.com 🚪✨`;
   
     const url = `https://wa.me/?text=${encodeURIComponent(message + " ")}`;
   

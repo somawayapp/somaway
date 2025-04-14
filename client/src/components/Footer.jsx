@@ -63,7 +63,7 @@ const Footer = () => {
           © {currentYear},  Hodii App Limited, Waiyaki way , 1st floor, Westend towers, Westlands, Nairobi
        
           <a href="mailto:support@soma.ia.com" className="text-[var(--softTextColor)] pl-1 hover:text-[var(--softTextColor)]">
-            support@ Hodii@gmail.com
+            support: Hodii@gmail.com
           </a>
         </p>
       </div>

@@ -53,7 +53,9 @@ const TermsAndConditions = () => {
               on the Site, please email  <a href="mailto:privacy@hodii.com" className="text-blue-500 underline hover:text-blue-700"> privacy@hodii.com</a>
 
             </p>
-      
+
+           
+
             <h2 className="text-xl font-semibold">Use of the Site</h2>
             <p>
               The information contained on this Site is for your personal use only. <br />
@@ -73,6 +75,51 @@ const TermsAndConditions = () => {
               You may download material from this Site for your personal use provided you adhere to the copyright and
               trademarks provision above and keep intact all copyright and other proprietary notices.
             </p>
+
+            <h2 className="text-xl font-semibold">Property Reviews</h2>
+            <p>         
+             The reviews system on Hodii.com exists to help create a safe and transparent rental environment for everyone. Verified 
+             tenants and visitors are encouraged to share their honest experiences with listed properties to assist future renters in making 
+             informed decisions.
+
+            </p>
+
+            <h2 className="text-xl font-semibold">Who Can Leave a Review</h2>
+             <p>Only users who have either:</p>
+              <li>Resided at a property, or</li>
+              <li>Visited the property in person (e.g., for a viewing or short stay)</li>
+             <p> are allowed to leave a review. All reviews must be based on real experiences. Reviews must remain respectful and professional.
+             </p> 
+
+
+
+
+
+
+            <h2 className="text-xl font-semibold">Review Visibility and Property Unlisting</h2>
+            <p>Landlords may choose to unlist a property at any time. This action will remove the property from discovery, search results, and featured pages.
+               <br />
+               However, existing reviews will remain visible under the property’s historical review page.
+               <br />
+               This ensures renters can access public experiences tied to a property, even if it is no longer actively listed.
+
+            </p>
+
+            <h2 className="text-xl font-semibold">Review Removal</h2>
+            <p>
+             Hodii does not remove reviews based on disagreement or unfavorable content.
+            <br />
+            We may remove reviews if:
+            <br />
+            They contain hate speech, personal attacks, or offensive language.
+            <br />
+            They are proven to be false or written by non-renters/visitors.
+            <br />
+            They include confidential personal data or violate laws.
+
+
+            </p>
+
       
             <h2 className="text-xl font-semibold">Information does not constitute professional advice</h2>
             <p>

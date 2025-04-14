@@ -112,11 +112,11 @@ const Search = () => {
             isScrolledUp ? "opacity-0 translate-y-[-20px] mb-0  pointer-events-none" : " mb-6 mt-[35px] opacity-100 translate-y-0"
           }`}
         >
-          <a href="?model=forrent" className="text-md font-semibold  text-[var(--softTextColor)] hover:underline">
+          <a href="?model=forrent" className="text-sm font-semibold  text-[var(--softTextColor)] hover:underline">
          For Rent
           </a>
    
-          <a href="?model=forsale" className="text-md font-normal text-[var(--softTextColor)] hover:underline">
+          <a href="?model=forsale" className="text-sm font-normal text-[var(--softTextColor)] hover:underline">
           For Sale
           </a>
         </div> )}

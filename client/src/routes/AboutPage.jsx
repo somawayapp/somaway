@@ -86,7 +86,7 @@ const AboutPage = () => {
 
   <div className="flex flex-col pl-3 pr-3 pt-12 md:pt-0  md:pl-[100px] lg:pl-[200px] md:flex-row items-center justify-between  z-10 text-black">
     <div className="flex-1  text-center  md:text-left">
-    <h3 className="text-3xl md:text-5xl font-bold mb-4">How did the idea of Hodi come?</h3>
+    <h3 className="text-3xl md:text-5xl font-bold mb-4">How did the idea of Hodii come?</h3>
       <p className="text-sm md:text-lg max-w-md mb-6">
       
       It was on my first day in campus. Unfortunately the school did not have any remaining hostel space so i had to find myself
