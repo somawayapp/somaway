@@ -29,33 +29,6 @@ const PostMenuActions = ({ post }) => {
   const isAdmin = user?.publicMetadata?.role === "admin" || false;
   const isSaved = savedPosts?.data?.some((p) => p === post._id) || false;
 
-
-  const toggleListMutation = useMutation({
-    mutationFn: async () => {
-      const token = await getToken();
-      return axios.patch(
-        `${import.meta.env.VITE_API_URL}/posts/${post._id}`,
-        {
-          isListed: !post.isListed, // Toggle value
-        },
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
-    },
-    onSuccess: () => {
-      toast.success("Post visibility updated!");
-      queryClient.invalidateQueries({ queryKey: ["post", post.slug] });
-    },
-    onError: (error) => {
-      toast.error(error.response.data);
-    },
-  });
-  
-  
-
   const deleteMutation = useMutation({
     mutationFn: async () => {
       const token = await getToken();
@@ -146,12 +119,7 @@ const PostMenuActions = ({ post }) => {
     featureMutation.mutate();
     setDropdownOpen(false);
   };
-  const handleToggleList = () => {
-    toggleListMutation.mutate();
-    setDropdownOpen(false);
-  };
-  
-  
+
   const handleSave = () => {
     if (!user) {
       return navigate("/login");
@@ -223,19 +191,6 @@ const PostMenuActions = ({ post }) => {
               )}
             </div>
           )}
-            {user && (post.user.username === user.username || isAdmin) && (
-  <div
-    className="flex items-center gap-2 py-2 text-[var(--textColor)] text-sm cursor-pointer"
-    onClick={handleToggleList}
-  >
-    <span>{post.isListed ? "Unlist" : "List"}</span>
-    {toggleListMutation.isPending && (
-      <span className="text-xs">(in progress)</span>
-    )}
-  </div>
-)}
-
-
           {user && (
             <div
               className="flex items-center gap-2 py-2 text-[var(--textColor)] text-sm cursor-pointer"
