@@ -271,7 +271,7 @@ data.propertytype ? `${data.propertytype} ` : null,
           
 <div className="w-full flex h-[300px] md:h-[500px] overflow-hidden rounded-xl relative transition duration-300">
       {/* Left Image */}
-      <div className="w-7/8 flex h-full overflow-hidden relative mr-1 md:mr-2 cursor-pointer">
+      <div className="w-3/4  left-0 flex h-full overflow-hidden relative mr-1 md:mr-2 cursor-pointer">
         {mainImage && <img src={mainImage}  onClick={() => openPopup(0)} className="object-cover h-full w-full" alt="Main Image" />}
        
       <div className=" absolute top-3 right-3">
@@ -281,7 +281,7 @@ data.propertytype ? `${data.propertytype} ` : null,
       </div>
   
 {/* Right Side Images */}
-<div className="w-1/8 h-full flex flex-col overflow-hidden relative">
+<div className="w-1/8 h-full right-0 flex flex-col overflow-hidden relative">
   <div ref={rightDivRef} className="flex flex-col gap-1 md:gap-2 h-full">
     {/* Map through 4 items even if there are fewer than 4 images */}
     {Array.from({ length: 4 }).map((_, index) => {
