@@ -90,8 +90,17 @@ const PostMenuActions = ({ post }) => {
       queryClient.invalidateQueries(); // Refresh post state
     },
     onError: (error) => {
-      toast.error(error.response?.data || "Something went wrong.");
-    },
+      console.error("Toggle listing mutation failed:", error);
+    
+      const message =
+        error?.response?.data?.message || // Try known API error message structure
+        error?.response?.data ||          // Fall back to full data if no `message`
+        error?.message ||                 // Axios error message
+        "Unknown error occurred.";
+    
+      toast.error(`Failed to update listing: ${message}`);
+    }
+    
   });
   
 
