@@ -271,8 +271,8 @@ data.propertytype ? `${data.propertytype} ` : null,
           
 <div className="w-full flex h-[300px] md:h-[500px] overflow-hidden rounded-xl relative transition duration-300">
       {/* Left Image */}
-      <div className="flex-1 w-full  relative mr-1 md:mr-2 cursor-pointer">
-        {mainImage && <img src={mainImage}  onClick={() => openPopup(0)} className="object-cover w-full" alt="Main Image" />}
+      <div className=" w-full  relative mr-1 md:mr-2 cursor-pointer">
+        {mainImage && <img src={mainImage}  onClick={() => openPopup(0)} className="object-fill w-full" alt="Main Image" />}
        
       <div className=" absolute top-3 right-3">
        <LikeButton postId={data._id} />
