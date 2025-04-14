@@ -49,6 +49,29 @@ const PostMenuActions = ({ post }) => {
 
   const queryClient = useQueryClient();
 
+  const toggleListingMutation = useMutation({
+    mutationFn: async () => {
+      const token = await getToken();
+      return axios.patch(
+        `${import.meta.env.VITE_API_URL}/posts/${post._id}`,
+        {}, // no payload needed, your backend toggles automatically
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["post", post.slug] }); // or wherever you're storing post data
+      toast.success("Listing status updated!");
+    },
+    onError: (error) => {
+      toast.error(error.response.data || "Failed to toggle listing status.");
+    },
+  });
+  
+
   const saveMutation = useMutation({
     mutationFn: async () => {
       const token = await getToken();
@@ -120,6 +143,8 @@ const PostMenuActions = ({ post }) => {
     setDropdownOpen(false);
   };
 
+  
+
   const handleSave = () => {
     if (!user) {
       return navigate("/login");
@@ -180,6 +205,21 @@ const PostMenuActions = ({ post }) => {
               )}
             </div>
           )}
+          {user && (post.user.username === user.username || isAdmin) && (
+  <div
+    className="flex items-center gap-2 py-2 text-[var(--textColor)] text-sm cursor-pointer"
+    onClick={() => {
+      toggleListingMutation.mutate();
+      setDropdownOpen(false);
+    }}
+  >
+    <span>{post.isListed ? "Unlist" : "List"}</span>
+    {toggleListingMutation.isPending && (
+      <span className="text-xs">(updating)</span>
+    )}
+  </div>
+)}
+
           {user && (post.user.username === user.username || isAdmin) && (
             <div
               className="flex items-center gap-2 py-2 text-[var(--textColor)] text-sm cursor-pointer"
