@@ -257,6 +257,8 @@ export const deletePost = async (req, res) => {
 
 
 export const togglePostListing = async (req, res) => {
+  const { id } = req.params;
+  const { isListed } = req.body;
   const clerkUserId = req.auth.userId;
 
   if (!clerkUserId) {
@@ -264,31 +266,29 @@ export const togglePostListing = async (req, res) => {
   }
 
   const role = req.auth.sessionClaims?.metadata?.role || "user";
-  const postId = req.params.id;
 
-  // Find the post first
-  const post = await Post.findById(postId);
-  if (!post) {
-    return res.status(404).json("Post not found!");
-  }
-
-  // Admins can toggle any post
   if (role === "admin") {
-    post.isListed = !post.isListed;
-    await post.save();
-    return res.status(200).json({ message: "Post listing status toggled", isListed: post.isListed });
+    const post = await Post.findByIdAndUpdate(
+      id,
+      { isListed },
+      { new: true }
+    );
+    return res.status(200).json(post);
   }
 
-  // Normal users can only toggle their own posts
   const user = await User.findOne({ clerkUserId });
-  if (!user || post.user.toString() !== user._id.toString()) {
-    return res.status(403).json("You can only toggle your own posts!");
+
+  const post = await Post.findOneAndUpdate(
+    { _id: id, user: user._id },
+    { isListed },
+    { new: true }
+  );
+
+  if (!post) {
+    return res.status(403).json("You can update only your posts!");
   }
 
-  post.isListed = !post.isListed;
-  await post.save();
-
-  res.status(200).json({ message: "Post listing status toggled", isListed: post.isListed });
+  res.status(200).json(post);
 };
 
 

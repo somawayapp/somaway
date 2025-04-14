@@ -49,25 +49,6 @@ const PostMenuActions = ({ post }) => {
 
   const queryClient = useQueryClient();
 
-  const toggleListingMutation = useMutation({
-    mutationFn: async () => {
-      const token = await getToken();
-        return axios.patch(`${import.meta.env.VITE_API_URL}/posts/${post._id}`, {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
-      },
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["post", post.slug] }); // or wherever you're storing post data
-      toast.success("Listing status updated!");
-    },
-    onError: (error) => {
-      toast.error(error.response.data || "Failed to toggle listing status.");
-    },
-  });
-  
-
   const saveMutation = useMutation({
     mutationFn: async () => {
       const token = await getToken();
@@ -90,6 +71,32 @@ const PostMenuActions = ({ post }) => {
       toast.error(error.response.data);
     },
   });
+
+
+
+  const toggleListing = useMutation({
+    mutationFn: async (isListed) => {
+      const token = await getToken();
+      return axios.patch(
+        `${import.meta.env.VITE_API_URL}/posts/${post._id}`,
+        { isListed }, // body
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+    },
+    onSuccess: () => {
+      toast.success("Listing status updated!");
+      queryClient.invalidateQueries("posts"); // optional if using react-query
+    },
+    onError: (error) => {
+      toast.error(error.response.data);
+    },
+  });
+
+  
 
   const featureMutation = useMutation({
     mutationFn: async () => {
@@ -138,8 +145,6 @@ const PostMenuActions = ({ post }) => {
     featureMutation.mutate();
     setDropdownOpen(false);
   };
-
-  
 
   const handleSave = () => {
     if (!user) {
@@ -201,20 +206,19 @@ const PostMenuActions = ({ post }) => {
               )}
             </div>
           )}
-          {user && (post.user.username === user.username || isAdmin) && (
-  <div
-    className="flex items-center gap-2 py-2 text-[var(--textColor)] text-sm cursor-pointer"
-    onClick={() => {
-      toggleListingMutation.mutate();
-      setDropdownOpen(false);
-    }}
-  >
-    <span>{post.isListed ? "Unlist" : "List"}</span>
-    {toggleListingMutation.isPending && (
-      <span className="text-xs">(updating)</span>
-    )}
-  </div>
-)}
+
+          
+      {user && (post.user.username === user.username || isAdmin) && (
+          
+
+<button
+  onClick={() => toggleListing.mutate(!post.isListed)}
+  className="px-4 py-2 bg-blue-600 text-white rounded-md"
+>
+  {post.isListed ? "Unlist" : "Relist"}
+</button>
+          )}
+
 
           {user && (post.user.username === user.username || isAdmin) && (
             <div
