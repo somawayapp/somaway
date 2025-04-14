@@ -34,7 +34,7 @@ const PostMenuActions = ({ post }) => {
     mutationFn: async () => {
       const token = await getToken();
       return axios.patch(
-        `${import.meta.env.VITE_API_URL}/posts/${post._id}t`,
+        `${import.meta.env.VITE_API_URL}/posts/${post._id}`,
         {
           isListed: !post.isListed, // Toggle value
         },
