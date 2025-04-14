@@ -77,7 +77,7 @@ const PostMenuActions = ({ post }) => {
       const token = await getToken();
       return axios.patch(
         `${import.meta.env.VITE_API_URL}/posts/${post._id}`,
-        { isListed },
+        { isListed }, // Pass isListed in the body!
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -91,17 +91,17 @@ const PostMenuActions = ({ post }) => {
     },
     onError: (error) => {
       console.error("Toggle listing mutation failed:", error);
-    
+  
       const message =
-        error?.response?.data?.message || // Try known API error message structure
-        error?.response?.data ||          // Fall back to full data if no `message`
-        error?.message ||                 // Axios error message
+        error?.response?.data?.message ||
+        error?.response?.data ||
+        error?.message ||
         "Unknown error occurred.";
-    
+  
       toast.error(`Failed to update listing: ${message}`);
     }
-    
   });
+  
   
 
   
