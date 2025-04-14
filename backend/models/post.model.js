@@ -53,6 +53,10 @@ const postSchema = new Schema(
       type: Number,
       default: 0,
     },
+    isListed: {
+      type: Boolean,
+      default: true,
+    },
     location: {
       country: String,
       city: String,

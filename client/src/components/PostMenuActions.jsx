@@ -28,6 +28,28 @@ const PostMenuActions = ({ post }) => {
 
   const isAdmin = user?.publicMetadata?.role === "admin" || false;
   const isSaved = savedPosts?.data?.some((p) => p === post._id) || false;
+  const unlistMutation = useMutation({
+    mutationFn: async () => {
+      const token = await getToken();
+      return axios.patch(
+        `${import.meta.env.VITE_API_URL}/posts/${post._id}/unlist`,
+        {},
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+    },
+    onSuccess: () => {
+      toast.success("Post unlisted successfully!");
+      queryClient.invalidateQueries({ queryKey: ["post", post.slug] });
+    },
+    onError: (error) => {
+      toast.error(error.response.data);
+    },
+  });
+  
 
   const deleteMutation = useMutation({
     mutationFn: async () => {
@@ -119,7 +141,11 @@ const PostMenuActions = ({ post }) => {
     featureMutation.mutate();
     setDropdownOpen(false);
   };
-
+  const handleUnlist = () => {
+    unlistMutation.mutate();
+    setDropdownOpen(false);
+  };
+  
   const handleSave = () => {
     if (!user) {
       return navigate("/login");
@@ -191,6 +217,18 @@ const PostMenuActions = ({ post }) => {
               )}
             </div>
           )}
+           {user && (post.user.username === user.username || isAdmin) && (
+  <div
+    className="flex items-center gap-2 py-2 text-[var(--textColor)] text-sm cursor-pointer"
+    onClick={handleUnlist}
+  >
+    <span>Unlist</span>
+    {unlistMutation.isPending && (
+      <span className="text-xs">(in progress)</span>
+    )}
+  </div>
+)}
+
           {user && (
             <div
               className="flex items-center gap-2 py-2 text-[var(--textColor)] text-sm cursor-pointer"

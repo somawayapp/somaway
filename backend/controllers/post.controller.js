@@ -254,6 +254,46 @@ export const deletePost = async (req, res) => {
   res.status(200).json("Post has been deleted");
 };
 
+
+
+export const unlistPost = async (req, res) => {
+  const clerkUserId = req.auth.userId;
+
+  if (!clerkUserId) {
+    return res.status(401).json("Not authenticated!");
+  }
+
+  const role = req.auth.sessionClaims?.metadata?.role || "user";
+
+  // If the user is an admin, allow unlisting any post
+  if (role === "admin") {
+    const post = await Post.findById(req.params.id);
+
+    if (!post) {
+      return res.status(404).json("Post not found!");
+    }
+
+    post.isListed = false;
+    await post.save();
+    return res.status(200).json("Post has been unlisted");
+  }
+
+  // If the user is a regular user, they can only unlist their own posts
+  const user = await User.findOne({ clerkUserId });
+
+  const post = await Post.findOne({ _id: req.params.id, user: user._id });
+
+  if (!post) {
+    return res.status(403).json("You can only unlist your posts!");
+  }
+
+  post.isListed = false;
+  await post.save();
+
+  res.status(200).json("Post has been unlisted");
+};
+
+
 export const featurePost = async (req, res) => {
   const clerkUserId = req.auth.userId;
   const postId = req.body.postId;

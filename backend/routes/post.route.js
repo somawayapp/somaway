@@ -6,6 +6,7 @@ import {
   deletePost,
   uploadAuth,
   featurePost,
+  unlistPost,
 } from "../controllers/post.controller.js";
 import increaseVisit from "../middlewares/increaseVisit.js";
 import { requireAuth } from "@clerk/express"; // Import Clerk's requireAuth
@@ -19,5 +20,6 @@ router.post("/", (req, res, next) => {
   console.log("Auth State:", req.auth);
   next();
 }, requireAuth(), createPost);router.delete("/:id", deletePost);
+router.patch("/:id/unlist", requireAuth(), unlistPost);
 router.patch("/feature", featurePost);
 export default router 

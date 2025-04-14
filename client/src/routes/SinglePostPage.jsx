@@ -29,7 +29,6 @@ import LikeButton from "../components/LikeButton";
 import ContactInfo from "../components/ContactInfo";
 import { useAuth } from "@clerk/clerk-react";
 import { useUser } from '@clerk/clerk-react';
-
 import { useNavigate } from "react-router-dom";
 
 const fetchPost = async (slug) => {
