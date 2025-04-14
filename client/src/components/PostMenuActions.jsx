@@ -52,16 +52,12 @@ const PostMenuActions = ({ post }) => {
   const toggleListingMutation = useMutation({
     mutationFn: async () => {
       const token = await getToken();
-      return axios.patch(
-        `${import.meta.env.VITE_API_URL}/posts/${post._id}`,
-        {}, // no payload needed, your backend toggles automatically
-        {
+        return axios.patch(`${import.meta.env.VITE_API_URL}/posts/${post._id}`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
-        }
-      );
-    },
+        });
+      },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["post", post.slug] }); // or wherever you're storing post data
       toast.success("Listing status updated!");
