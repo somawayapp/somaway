@@ -267,29 +267,30 @@ export const togglePostListing = async (req, res) => {
 
   const role = req.auth.sessionClaims?.metadata?.role || "user";
 
-  if (role === "admin") {
-    const post = await Post.findByIdAndUpdate(
-      id,
+  try {
+    if (role === "admin") {
+      const post = await Post.findByIdAndUpdate(id, { isListed }, { new: true });
+      return res.status(200).json(post);
+    }
+
+    const user = await User.findOne({ clerkUserId });
+    const post = await Post.findOneAndUpdate(
+      { _id: id, user: user._id },
       { isListed },
       { new: true }
     );
-    return res.status(200).json(post);
+
+    if (!post) {
+      return res.status(403).json("You can update only your posts!");
+    }
+
+    res.status(200).json(post);
+  } catch (err) {
+    console.error("Error updating listing:", err);
+    res.status(500).json("Server error");
   }
-
-  const user = await User.findOne({ clerkUserId });
-
-  const post = await Post.findOneAndUpdate(
-    { _id: id, user: user._id },
-    { isListed },
-    { new: true }
-  );
-
-  if (!post) {
-    return res.status(403).json("You can update only your posts!");
-  }
-
-  res.status(200).json(post);
 };
+
 
 
 

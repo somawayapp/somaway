@@ -72,14 +72,12 @@ const PostMenuActions = ({ post }) => {
     },
   });
 
-
-
   const toggleListing = useMutation({
     mutationFn: async (isListed) => {
       const token = await getToken();
       return axios.patch(
         `${import.meta.env.VITE_API_URL}/posts/${post._id}`,
-        { isListed }, // body
+        { isListed },
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -87,14 +85,15 @@ const PostMenuActions = ({ post }) => {
         }
       );
     },
-    onSuccess: () => {
-      toast.success("Listing status updated!");
-      queryClient.invalidateQueries("posts"); // optional if using react-query
+    onSuccess: (data) => {
+      toast.success(`Post has been ${data.data.isListed ? "relisted" : "unlisted"}!`);
+      queryClient.invalidateQueries(); // Refresh post state
     },
     onError: (error) => {
-      toast.error(error.response.data);
+      toast.error(error.response?.data || "Something went wrong.");
     },
   });
+  
 
   
 
@@ -208,16 +207,14 @@ const PostMenuActions = ({ post }) => {
           )}
 
           
-      {user && (post.user.username === user.username || isAdmin) && (
-          
-
-<button
-  onClick={() => toggleListing.mutate(!post.isListed)}
-  className="px-4 py-2 bg-blue-600 text-white rounded-md"
->
-  {post.isListed ? "Unlist" : "Relist"}
-</button>
-          )}
+{user && (post.user.username === user.username || isAdmin) && (
+  <button
+    onClick={() => toggleListing.mutate(!post.isListed)}
+    className="w-full text-left px-4 py-2 text-sm hover:bg-[var(--softColor5)] text-[var(--textColor)]"
+  >
+    {post.isListed ? "Unlist" : "Relist"}
+  </button>
+)}
 
 
           {user && (post.user.username === user.username || isAdmin) && (
