@@ -283,7 +283,7 @@ export const unlistPost = async (req, res) => {
   const user = await User.findOne({ clerkUserId });
 
   if (!post.user.equals(user._id)) {
-    return res.status(403).json("You can only update your own posts!");
+    return res.status(403).json("You can only updat your own posts!");
   }
 
   post.isListed = isListed;
