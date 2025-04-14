@@ -12,7 +12,7 @@ const parseSearchParams = (searchParams) =>
 
 const fetchPosts = async (searchParams) => {
   const params = parseSearchParams(searchParams);
-  const res = await axios.get(`${import.meta.env.VITE_API_URL}/posts?sort=random$listed=true`, {
+  const res = await axios.get(`${import.meta.env.VITE_API_URL}/posts?sort=random`, {
     params,
 
   });
@@ -26,11 +26,12 @@ const fetchFeaturedPosts = async (searchParams) => {
   const params = {
     ...parseSearchParams(searchParams),
     featured: true,
+    listed: true,
     limit: 4,
     sort: "random",
   };
 
-  const res = await axios.get(`${import.meta.env.VITE_API_URL}/posts?sort=random&listed=true`, {
+  const res = await axios.get(`${import.meta.env.VITE_API_URL}/posts?sort=random`, {
     params,
   });
 
