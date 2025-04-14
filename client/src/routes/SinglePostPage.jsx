@@ -500,7 +500,7 @@ data.propertytype ? `${data.propertytype} ` : null,
 <p className="desc-content text-[var(--softTextColor)]">
   {data.desc?.length > 300 ? (
     <>
-<h1 className="text-[var(--softTextColor)] font-semibold  text-[20px] md:text-[22px]  ">About this property </h1>    
+<h1 className="text-[var(--softTextColor)] font-semibold  text-[20px] md:text-[22px]  ">Abouthis property </h1>    
   <span dangerouslySetInnerHTML={{ __html: data.desc.substring(0, 470) }} />
   <p  
   className="text-[var(--softTextColor)]  gap-1 text-[16px] md:text-[18px]  font-semibold mt-2  hover:shadow-xl  hover:text-[var(--textColor)]"
