@@ -271,7 +271,7 @@ data.propertytype ? `${data.propertytype} ` : null,
           
 <div className="w-full flex h-[300px] md:h-[500px] overflow-hidden rounded-xl relative transition duration-300">
       {/* Left Image */}
-      <div className="flex h-full overflow-hidden relative mr-1 md:mr-2 cursor-pointer">
+      <div className="flex-2 h-full overflow-hidden relative mr-1 md:mr-2 cursor-pointer">
         {mainImage && <img src={mainImage}  onClick={() => openPopup(0)} className="object-fill h-full w-full" alt="Main Image" />}
        
       <div className=" absolute top-3 right-3">
