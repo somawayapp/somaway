@@ -89,7 +89,7 @@ const SinglePostPage = () => {
   }, [user, isLoaded]);
   
   const handleShareToWhatsApp = () => {
-    const message = `🏠 Welcome to HodiHodi! 🌟\nLooking to rent, buy, or sell property? Whether it’s an apartment, house, office space, or land — Hodi is your trusted hub! 🏡\n\n✔️ List or browse properties for FREE\n✔️ Connect with tenants or landlords\n✔️ Explore reviews, filter by location, price & more!\n\nStart your journey today:\nhttps://makesomaway.com 🚪✨`;
+    const message = `🏠 Welcome to HodiHodi! 🌟\nLooking to rent, buy, or sell property? Whether it’s an apartment, house, office space, or land — HodiHodi is your trusted hub! 🏡\n\n✔️ List or browse properties for FREE\n✔️ Connect with tenants or landlords\n✔️ Explore reviews, filter by location, price & more!\n\nStart your journey today:\nhttps://makesomaway.com 🚪✨`;
   
     const url = `https://wa.me/?text=${encodeURIComponent(message + " ")}`;
   
@@ -271,7 +271,7 @@ data.propertytype ? `${data.propertytype} ` : null,
           
 <div className="w-full flex h-[300px] md:h-[500px] overflow-hidden rounded-xl relative transition duration-300">
       {/* Left Image */}
-      <div className="w-3/4  left-0 flex h-full overflow-hidden relative mr-1 md:mr-2 cursor-pointer">
+      <div className="flex-1 h-full overflow-hidden relative mr-1 md:mr-2 cursor-pointer">
         {mainImage && <img src={mainImage}  onClick={() => openPopup(0)} className="object-cover h-full w-full" alt="Main Image" />}
        
       <div className=" absolute top-3 right-3">
@@ -281,7 +281,7 @@ data.propertytype ? `${data.propertytype} ` : null,
       </div>
   
 {/* Right Side Images */}
-<div className="w-1/8 h-full right-0 flex flex-col overflow-hidden relative">
+<div className="w-1/4 h-full flex flex-col overflow-hidden relative">
   <div ref={rightDivRef} className="flex flex-col gap-1 md:gap-2 h-full">
     {/* Map through 4 items even if there are fewer than 4 images */}
     {Array.from({ length: 4 }).map((_, index) => {
