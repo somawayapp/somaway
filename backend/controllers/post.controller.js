@@ -36,7 +36,6 @@ export const getPosts = async (req, res) => {
       pricemin,
       model,
       featured,
-      listed,
 
     } = req.query;
 
@@ -74,7 +73,6 @@ export const getPosts = async (req, res) => {
 
     if (model) query.model = model;
     if (featured) query.isFeatured = true;
-    if (listed) query.isListed = true;
 
     let sortObj = { createdAt: -1 };
     let useAggregation = false;
