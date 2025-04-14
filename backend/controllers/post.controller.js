@@ -264,33 +264,31 @@ export const unlistPost = async (req, res) => {
   }
 
   const role = req.auth.sessionClaims?.metadata?.role || "user";
+  const { isListed } = req.body; // Get desired listing state
 
-  // If the user is an admin, allow unlisting any post
-  if (role === "admin") {
-    const post = await Post.findById(req.params.id);
-
-    if (!post) {
-      return res.status(404).json("Post not found!");
-    }
-
-    post.isListed = false;
-    await post.save();
-    return res.status(200).json("Post has been unlisted");
+  // Find the post first
+  const post = await Post.findById(req.params.id);
+  if (!post) {
+    return res.status(404).json("Post not found!");
   }
 
-  // If the user is a regular user, they can only unlist their own posts
+  // Admins can modify any post
+  if (role === "admin") {
+    post.isListed = isListed;
+    await post.save();
+    return res.status(200).json("Post listing status updated by admin");
+  }
+
+  // Regular users can only modify their own posts
   const user = await User.findOne({ clerkUserId });
 
-  const post = await Post.findOne({ _id: req.params.id, user: user._id });
-
-  if (!post) {
-    return res.status(403).json("You can only unlist your posts!");
+  if (!post.user.equals(user._id)) {
+    return res.status(403).json("You can only update your own posts!");
   }
 
-  post.isListed = false;
+  post.isListed = isListed;
   await post.save();
-
-  res.status(200).json("Post has been unlisted");
+  res.status(200).json("Post listing status updated");
 };
 
 
