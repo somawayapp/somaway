@@ -299,7 +299,7 @@ export const togglePostListing = async (req, res) => {
 
 export const toggleFeatured = async (req, res) => {
   const { id } = req.params;
-  const { isFeatured } = req.body;
+  const { isFeatured, featuredUntil } = req.body;
   const clerkUserId = req.auth.userId;
 
   if (!clerkUserId) {
@@ -309,17 +309,22 @@ export const toggleFeatured = async (req, res) => {
   const role = req.auth.sessionClaims?.metadata?.role || "user";
 
   try {
-    if (role === "admin") {
-      const post = await Post.findByIdAndUpdate(id, { isFeatured}, { new: true });
-      return res.status(200).json(post);
-    }
+    const update = {
+      isFeatured,
+      featuredUntil: isFeatured ? featuredUntil : null, // null if unboosting
+    };
 
-    const user = await User.findOne({ clerkUserId });
-    const post = await Post.findOneAndUpdate(
-      { _id: id, user: user._id },
-      { isFeatured },
-      { new: true }
-    );
+    let post;
+    if (role === "admin") {
+      post = await Post.findByIdAndUpdate(id, update, { new: true });
+    } else {
+      const user = await User.findOne({ clerkUserId });
+      post = await Post.findOneAndUpdate(
+        { _id: id, user: user._id },
+        update,
+        { new: true }
+      );
+    }
 
     if (!post) {
       return res.status(403).json("You can update only your posts!");
@@ -331,6 +336,7 @@ export const toggleFeatured = async (req, res) => {
     res.status(500).json("Server error");
   }
 };
+
 
 
 

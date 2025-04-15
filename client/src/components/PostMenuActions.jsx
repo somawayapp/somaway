@@ -10,6 +10,8 @@ const PostMenuActions = ({ post }) => {
   const { getToken } = useAuth();
   const navigate = useNavigate();
 
+  const [selectedDuration, setSelectedDuration] = useState(1); // default to 1 day
+
   const {
     isPending,
     error,
@@ -27,7 +29,6 @@ const PostMenuActions = ({ post }) => {
   });
 
   const isAdmin = user?.publicMetadata?.role === "admin" || false;
-  const isSaved = savedPosts?.data?.some((p) => p === post._id) || false;
 
   const deleteMutation = useMutation({
     mutationFn: async () => {
@@ -49,28 +50,7 @@ const PostMenuActions = ({ post }) => {
 
   const queryClient = useQueryClient();
 
-  const saveMutation = useMutation({
-    mutationFn: async () => {
-      const token = await getToken();
-      return axios.patch(
-        `${import.meta.env.VITE_API_URL}/users/save`,
-        {
-          postId: post._id,
-        },
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
-    },
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["savedPosts"] });
-    },
-    onError: (error) => {
-      toast.error(error.response.data);
-    },
-  });
+
 
   const toggleListing = useMutation({
     mutationFn: async (isListed) => {
@@ -104,14 +84,13 @@ const PostMenuActions = ({ post }) => {
   
   
 
-  
 
   const toggleFeatured = useMutation({
-    mutationFn: async (isFeatured) => {
+    mutationFn: async ({ isFeatured, featuredUntil }) => {
       const token = await getToken();
       return axios.patch(
         `${import.meta.env.VITE_API_URL}/posts/feature/${post._id}`,
-        { isFeatured }, // Pass isListed in the body!
+        { isFeatured, featuredUntil },
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -205,12 +184,52 @@ const PostMenuActions = ({ post }) => {
           className="absolute right-0 bg-[var(--textColore)] border-[var(--softColor7)] rounded shadow-lg p-2 mt-2 w-48"
         >
 {user && (post.user.username === user.username || isAdmin) && (
-  <button
-    onClick={() => toggleFeatured.mutate(!post.isFeatured)}
-    className="w-full text-left px-4  text-sm hover:bg-[var(--softColor5)] text-[var(--textColor)]"
-  >
-    {post.isFeatured ? "Unboost this listing" : "Boost this listing"}
-  </button>
+  <div className="px-4 py-2">
+    <button
+      onClick={() => {
+        if (!post.isFeatured && !selectedDuration) {
+          toast.error("Please select a duration for featuring.");
+          return;
+        }
+
+        toggleFeatured.mutate({
+          isFeatured: !post.isFeatured,
+          featuredUntil: !post.isFeatured
+            ? new Date(Date.now() + selectedDuration * 24 * 60 * 60 * 1000) // Add X days
+            : null,
+        });
+      }}
+      className="w-full text-left text-sm hover:bg-[var(--softColor5)] text-[var(--textColor)]"
+    >
+      {post.isFeatured ? "Unboost this listing" : "Boost this listing"}
+    </button>
+
+    {!post.isFeatured && (
+      <select
+        className="mt-2 w-full border rounded text-sm"
+        value={selectedDuration}
+        onChange={(e) => setSelectedDuration(parseInt(e.target.value))}
+      >
+        <option value="">Select duration</option>
+        <option value="1">1 day</option>
+        <option value="2">2 days</option>
+        <option value="3">3 days</option>
+        <option value="4">4 days</option>
+        <option value="5">5 days</option>
+        <option value="6">6 days</option>
+        <option value="7">1 week</option>
+        <option value="14">2 weeks</option>
+        <option value="21">3 weeks</option>
+        <option value="30">1 month</option>
+        <option value="60">2 months</option>
+        <option value="90">3 months</option>
+        <option value="120">4 months</option>
+        <option value="150">5 months</option>
+        <option value="180">6 months</option>
+        <option value="364">1 year</option>
+      </select>
+    )}
+  </div>
 )}
 
           
@@ -224,6 +243,7 @@ const PostMenuActions = ({ post }) => {
 )}
 
 {user && (post.user.username === user.username || isAdmin) && (
+ 
   <button
     onClick={() => toggleListing.mutate(!post.isListed)}
     className="w-full text-left px-4  text-sm hover:bg-[var(--softColor5)] text-[var(--textColor)]"
@@ -236,7 +256,7 @@ const PostMenuActions = ({ post }) => {
               className="flex items-center px-4 gap-2 py-2 text-[var(--textColor)] text-sm cursor-pointer"
               onClick={handleDelete}
             >
-              <span>Delete</span>
+              <span>Delete this property</span>
               {deleteMutation.isPending && (
                 <span className="text-xs">(in progress)</span>
               )}
