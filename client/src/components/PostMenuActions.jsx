@@ -10,7 +10,9 @@ const PostMenuActions = ({ post }) => {
   const { getToken } = useAuth();
   const navigate = useNavigate();
 
-  const [selectedDuration, setSelectedDuration] = useState(1); // default to 1 day
+  const [isBoosting, setIsBoosting] = useState(false);
+const [selectedDuration, setSelectedDuration] = useState(1); // default to 1 day
+
 
   const {
     isPending,
@@ -98,9 +100,11 @@ const PostMenuActions = ({ post }) => {
         }
       );
     },
+ 
     onSuccess: (data) => {
       toast.success(`Post has been ${data.data.isFeatured ? "Boosted" : "Unboosted"}!`);
-      queryClient.invalidateQueries(); // Refresh post state
+      setIsBoosting(false); // reset boosting mode UI
+      queryClient.invalidateQueries(); // Refresh post state everywhere
     },
     onError: (error) => {
       console.error("Toggle listing mutation failed:", error);
@@ -168,7 +172,7 @@ const PostMenuActions = ({ post }) => {
 {dropdownOpen && (
   <div
     ref={dropdownRef}
-    className="absolute right-0 bg-[var(--textColore)] border-[var(--softColor7)] rounded shadow-lg p-2 mt-2 w-48"
+    className="absolute right-0 bg-[var(--textColore)] border-[var(--softColor7)] rounded shadow-lg p-2 mt-2 w-full"
     onClick={() => setDropdownOpen(false)} // Close dropdown when clicking inside
   >
     {/* Dropdown content */}
@@ -183,31 +187,49 @@ const PostMenuActions = ({ post }) => {
           ref={dropdownRef}
           className="absolute right-0 bg-[var(--textColore)] border-[var(--softColor7)] rounded shadow-lg p-2 mt-2 w-48"
         >
-{user && (post.user.username === user.username || isAdmin) && (
-  <div className="px-4 py-2">
+          
+          {user && (post.user.username === user.username || isAdmin) && (
+  <div className="px-4 py-2 space-y-2">
+    {/* Button */}
     <button
       onClick={() => {
-        if (!post.isFeatured && !selectedDuration) {
-          toast.error("Please select a duration for featuring.");
-          return;
-        }
+        if (!post.isFeatured) {
+          if (!isBoosting) {
+            setIsBoosting(true); // Open duration chooser
+            return;
+          }
 
-        toggleFeatured.mutate({
-          isFeatured: !post.isFeatured,
-          featuredUntil: !post.isFeatured
-            ? new Date(Date.now() + selectedDuration * 24 * 60 * 60 * 1000) // Add X days
-            : null,
-        });
+          // If already boosting, proceed with mutation
+          if (!selectedDuration) {
+            toast.error("Please select a duration.");
+            return;
+          }
+
+          const untilDate = new Date(Date.now() + selectedDuration * 24 * 60 * 60 * 1000);
+          toggleFeatured.mutate({
+            isFeatured: true,
+            featuredUntil: untilDate,
+          });
+
+          setIsBoosting(false);
+        } else {
+          // Unboost directly
+          toggleFeatured.mutate({
+            isFeatured: false,
+            featuredUntil: null,
+          });
+        }
       }}
       className="w-full text-left text-sm hover:bg-[var(--softColor5)] text-[var(--textColor)]"
     >
       {post.isFeatured ? "Unboost this listing" : "Boost this listing"}
     </button>
 
-    {!post.isFeatured && (
+    {/* Duration Selector */}
+    {!post.isFeatured && isBoosting && (
       <select
-        className="mt-2 w-full border border-[var(--softbg4)]  bg-[var(--bg)]   text-[var(--textColor)]  rounded text-sm"
-        value={selectedDuration}
+      className="mt-2 w-full border border-[var(--softbg4)]  bg-[var(--bg)]   text-[var(--textColor)]  rounded text-sm"
+      value={selectedDuration}
         onChange={(e) => setSelectedDuration(parseInt(e.target.value))}
       >
         <option value="">Select duration</option>
@@ -231,6 +253,7 @@ const PostMenuActions = ({ post }) => {
     )}
   </div>
 )}
+
 
           
 {user && (post.user.username === user.username || isAdmin) && (
