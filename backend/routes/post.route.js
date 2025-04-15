@@ -5,7 +5,7 @@ import {
   createPost,
   deletePost,
   uploadAuth,
-  featurePost,
+  toggleFeatured,
   togglePostListing,
 } from "../controllers/post.controller.js";
 import increaseVisit from "../middlewares/increaseVisit.js";
@@ -20,5 +20,5 @@ router.post("/", (req, res, next) => {
 console.log("Auth State:", req.auth); next();}, requireAuth(), createPost);
 router.delete("/:id", deletePost);
 router.patch("/:id", togglePostListing);
-router.patch("/feature", featurePost);
+router.patch("/feature/:id", toggleFeatured);
 export default router 

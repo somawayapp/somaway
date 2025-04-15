@@ -106,14 +106,12 @@ const PostMenuActions = ({ post }) => {
 
   
 
-  const featureMutation = useMutation({
-    mutationFn: async () => {
+  const toggleFeatured = useMutation({
+    mutationFn: async (isFeatured) => {
       const token = await getToken();
       return axios.patch(
-        `${import.meta.env.VITE_API_URL}/posts/feature`,
-        {
-          postId: post._id,
-        },
+        `${import.meta.env.VITE_API_URL}/posts/feature/${post._id}`,
+        { isFeatured }, // Pass isListed in the body!
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -121,14 +119,23 @@ const PostMenuActions = ({ post }) => {
         }
       );
     },
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["post", post.slug] });
+    onSuccess: (data) => {
+      toast.success(`Post has been ${data.data.isFeatured ? "Unboosted" : "Boosted"}!`);
+      queryClient.invalidateQueries(); // Refresh post state
     },
     onError: (error) => {
-      toast.error(error.response.data);
-    },
+      console.error("Toggle listing mutation failed:", error);
+  
+      const message =
+        error?.response?.data?.message ||
+        error?.response?.data ||
+        error?.message ||
+        "Unknown error occurred.";
+  
+      toast.error(`Failed to update listing: ${message}`);
+    }
   });
-
+  
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const dropdownRef = useRef(null);
 
@@ -154,13 +161,7 @@ const PostMenuActions = ({ post }) => {
     setDropdownOpen(false);
   };
 
-  const handleSave = () => {
-    if (!user) {
-      return navigate("/login");
-    }
-    saveMutation.mutate();
-    setDropdownOpen(false);
-  };
+
 
   return (
 <div className="relative z-10">
@@ -203,29 +204,33 @@ const PostMenuActions = ({ post }) => {
           ref={dropdownRef}
           className="absolute right-0 bg-[var(--textColore)] border-[var(--softColor7)] rounded shadow-lg p-2 mt-2 w-48"
         >
-          {isAdmin && (
-            <div
-              className="flex items-center gap-2 py-2 text-[var(--textColor)] text-sm cursor-pointer"
-              onClick={handleFeature}
-            >
-              <span>Feature</span>
-              {featureMutation.isPending && (
-                <span className="text-xs">(in progress)</span>
-              )}
-            </div>
-          )}
+{user && (post.user.username === user.username || isAdmin) && (
+  <button
+    onClick={() => toggleFeatured.mutate(!post.isFeatured)}
+    className="w-full text-left px-4  text-sm hover:bg-[var(--softColor5)] text-[var(--textColor)]"
+  >
+    {post.isFeatured ? "Unboost" : "Reboost"}
+  </button>
+)}
 
           
 {user && (post.user.username === user.username || isAdmin) && (
   <button
     onClick={() => toggleListing.mutate(!post.isListed)}
-    className="w-full text-left px-4 py-2 text-sm hover:bg-[var(--softColor5)] text-[var(--textColor)]"
+    className="w-full text-left px-4  text-sm hover:bg-[var(--softColor5)] text-[var(--textColor)]"
   >
     {post.isListed ? "Unlist" : "Relist"}
   </button>
 )}
 
-
+{user && (post.user.username === user.username || isAdmin) && (
+  <button
+    onClick={() => toggleListing.mutate(!post.isListed)}
+    className="w-full text-left px-4  text-sm hover:bg-[var(--softColor5)] text-[var(--textColor)]"
+  >
+    {post.isListed ? "Not vacant" : "Vacant"}
+  </button>
+)}
           {user && (post.user.username === user.username || isAdmin) && (
             <div
               className="flex items-center gap-2 py-2 text-[var(--textColor)] text-sm cursor-pointer"
@@ -237,14 +242,7 @@ const PostMenuActions = ({ post }) => {
               )}
             </div>
           )}
-          {user && (
-            <div
-              className="flex items-center gap-2 py-2 text-[var(--textColor)] text-sm cursor-pointer"
-              onClick={handleSave}
-            >
-              <span>{isSaved ? "Unsave" : "Save"}</span>
-            </div>
-          )}
+       
         </div>
       )}
     </div>

@@ -399,7 +399,7 @@ const AddListing = () => {
       checked={isFeatured}
       onChange={() => setIsFeatured(!isFeatured)}
     />
-    Mark as Featured
+    Boost your Listing
   </div>
 
   {isFeatured && (
@@ -420,6 +420,13 @@ const AddListing = () => {
       <option value="30">1 month</option>
       <option value="60">2 months</option>
       <option value="90">3 months</option>
+      <option value="120">4 months</option>
+      <option value="150">5 months</option>
+      <option value="180">6 months</option>
+      <option value="364">1 year</option>
+
+
+
     </select>
   )}
 </label>
