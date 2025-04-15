@@ -120,7 +120,7 @@ const PostMenuActions = ({ post }) => {
       );
     },
     onSuccess: (data) => {
-      toast.success(`Post has been ${data.data.isFeatured ? "Unboosted" : "Boosted"}!`);
+      toast.success(`Post has been ${data.data.isFeatured ? "Boosted" : "Unboosted"}!`);
       queryClient.invalidateQueries(); // Refresh post state
     },
     onError: (error) => {
