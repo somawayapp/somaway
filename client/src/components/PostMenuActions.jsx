@@ -206,7 +206,7 @@ const PostMenuActions = ({ post }) => {
 
     {!post.isFeatured && (
       <select
-        className="mt-2 w-full border rounded text-sm"
+        className="mt-2 w-full border border-[var(--softbg4)]  bg-[var(--bg)]   text-[var(--textColor)]  rounded text-sm"
         value={selectedDuration}
         onChange={(e) => setSelectedDuration(parseInt(e.target.value))}
       >
