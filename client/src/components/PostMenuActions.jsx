@@ -209,7 +209,7 @@ const PostMenuActions = ({ post }) => {
     onClick={() => toggleFeatured.mutate(!post.isFeatured)}
     className="w-full text-left px-4  text-sm hover:bg-[var(--softColor5)] text-[var(--textColor)]"
   >
-    {post.isFeatured ? "Unboost" : "Reboost"}
+    {post.isFeatured ? "Unboost this listing" : "Boost this listing"}
   </button>
 )}
 
@@ -219,7 +219,7 @@ const PostMenuActions = ({ post }) => {
     onClick={() => toggleListing.mutate(!post.isListed)}
     className="w-full text-left px-4  text-sm hover:bg-[var(--softColor5)] text-[var(--textColor)]"
   >
-    {post.isListed ? "Unlist" : "Relist"}
+    {post.isListed ? " Unlist this property" : "Relist this property"}
   </button>
 )}
 
@@ -228,12 +228,12 @@ const PostMenuActions = ({ post }) => {
     onClick={() => toggleListing.mutate(!post.isListed)}
     className="w-full text-left px-4  text-sm hover:bg-[var(--softColor5)] text-[var(--textColor)]"
   >
-    {post.isListed ? "Not vacant" : "Vacant"}
+    {post.isListed ? "This property is Not vacant" : " This property is Vacant"}
   </button>
 )}
           {user && (post.user.username === user.username || isAdmin) && (
             <div
-              className="flex items-center gap-2 py-2 text-[var(--textColor)] text-sm cursor-pointer"
+              className="flex items-center px-4 gap-2 py-2 text-[var(--textColor)] text-sm cursor-pointer"
               onClick={handleDelete}
             >
               <span>Delete</span>

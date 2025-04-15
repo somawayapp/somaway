@@ -317,7 +317,7 @@ export const toggleFeatured = async (req, res) => {
     const user = await User.findOne({ clerkUserId });
     const post = await Post.findOneAndUpdate(
       { _id: id, user: user._id },
-      { isListed },
+      { isFeatured },
       { new: true }
     );
 
