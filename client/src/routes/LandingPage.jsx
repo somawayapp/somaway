@@ -94,7 +94,7 @@ const LandingPage = () => {
    </div>
    <img
      src="/house.jpg"
-     className="h-[100px] md:h-[400px] rounded-xl px-9 md:px-[80px] mx-auto "
+     className="w-full  rounded-xl mx-auto "
    />
  </div>
 
