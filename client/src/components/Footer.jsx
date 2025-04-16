@@ -39,7 +39,6 @@ const Footer = () => {
               <li><a href="/" className="text-[var(--softTextColor)] hover:text-[var(--softTextColor)]">Listings</a></li>
               <li><a href="/reviews" className="text-[var(--softTextColor)] hover:text-[var(--softTextColor)]">Reviews</a></li>
               <li><a href="/coming-soon" className="text-[var(--softTextColor)] hover:text-[var(--softTextColor)]">Blog</a></li>
-              <li><a href="/coming-soon" className="text-[var(--softTextColor)] hover:text-[var(--softTextColor)]">FAQ</a></li>
             </ul>
           </nav>
         </div>

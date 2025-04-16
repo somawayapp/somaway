@@ -14,6 +14,7 @@ const AboutPage = () => {
     <div>
 <Navbar/>     
 
+<div>
 
 
       <div
@@ -183,6 +184,7 @@ const AboutPage = () => {
   </div>
 </div>
 
+</div>
     
          
    </div>
