@@ -92,7 +92,7 @@ const LandingPage = () => {
   {/* Background image */}
   <img
     src="/house.jpg"
-    className="w-full  mx-auto"
+    className="w-full h-[50vh] md:h-[70vh] mx-auto"
     alt="Dream home"
   />
 </div>
@@ -227,13 +227,7 @@ className="w-8 h-8 mb-6 mx-auto md:mx-0 md:ml-0"
 <p className="mt-2 text-sm md:text-lg">
 Contact us makesomaway@gmail.com or call +254 703 394794
 </p>
-<button
-to="/"
-className="mt-9 bg-[var(--textColor)] text-[var(--bg)] py-4 text-extrabold text-xl md:text-3xl 
-  px-8 rounded-[40px] cursor-pointer hover:bg-white hover:text-black"
->
-Discover
-</button>
+
 </div>
 </div>
 
@@ -242,66 +236,10 @@ Discover
    
 </div>
 
-      {/* Floating Section 
-      
-      <div
-  className={` flex items-center hidden sm:block  mx-auto justify-between px-5 py-3 transition-opacity 
-    duration-300 ${isVisible ? "opacity-100" : "opacity-0 pointer-events-none"} sm:opacity-100 sm:pointer-events-auto  `}
- 
->
+
+  
 
 
-        <Link to="/" className="flex items-center mt-[10px] gap-1 text-lg font-bold md:text-2xl">
-        <img src="/x.png"  className="w-50 h-20 lg:w-50 lg:h-20" />
-
-<span className="text-[var(--textLogo)] text-[30px] lg:text-[90px]"></span>
-
-</Link>  
-
-      
-
- 
-      </div>
-      */}
-
-   {/*
-
-      <div  style={{ zIndex: 100004 }} className="mb-[45px] md:mb-[30px] mt-[15px] md:mt-[20px] sticky top-0.5 md:top-2 ">
-  <Maincategories />
-</div>
-     */}
-     
-        <Hero />
-
-   <Partners />
-
-
-   <div
-         className="bg-[var(--bodyBg)] p-4 md:p-9 mt-[10px] mx-3 md:mx-9 rounded-lg md:rounded-[30px]
-           text-white text-center animate-fadeIn flex flex-col items-center justify-center"
-       >
-       
-
-         <div className="flex bg-[var(--bd2)] flex-col max-w-full md:max-w-[900px] m gap-2 md:gap-4 rounded-lg md:rounded-[20px] p-2 md:p-6 md:flex-row">
-  <img
-    src="/heropic.jpg"
-    className="w-[200px] rounded-lg md:rounded-[20px] md:w-2/5 mx-auto md:mx-0"
-  />
-  <div className="md:w-3/5 items-start justify-start md:text-left">
-    <p className="text-xs mt-5 md:mt-9 text-[var(--bg2)]  md:text-md">ABOUT US</p>
-    <p className="text-md mt-1 md:mt-2 text-[var(--bg)] md:text-2xl font-semibold">
-      Still wondering what is Hodii app?
-    </p>
-    <p className="text-sm text-[var(--bg)] mt-1 md:mt-2 md:text-lg">
-      Hodii is a global EdTech startup with Kenyan roots. Hodii app offers
-      15-minute bite-sized non-fiction book summaries catered to your everyday
-      needs. We are mission-driven and passionate about self-improvement.
-    </p>
-  </div>
-</div>
-
-       
-       </div>
 
 
 
