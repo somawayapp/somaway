@@ -15,7 +15,7 @@ const StoryLine = () => {
   <div
     className="sticky top-0  bg-cover bg-center h-screen w-full flex flex-col 
       items-center justify-center text-white text-center overflow-y-auto"
-    style={{ backgroundImage: "url('/bgbook.webp')" }}
+    style={{ backgroundImage: "url('/thumbnail2.jpg')" }}
   >
   
   </div>
@@ -25,14 +25,14 @@ const StoryLine = () => {
 
 <div className="h-full p-1 box-border">
       <h1 className="text-3xl md:text-6xl  font-bold">
-        Enjoy summarized nonfiction
+        Find your dream home
       </h1>
-      <h1 className="text-3xl md:text-6xl font-bold">bestsellers</h1>
+      <h1 className="text-3xl md:text-6xl font-bold">here!</h1>
       <p className="mt-2 text-md md:text-xl">
-        Grasp the book’s key ideas in less than 5 minutes
-      </p>
+     in less than 5 minutes, where dreams become reality. 
+          </p>
       <button className="mt-9 bg-white text-black py-3 text-bold px-6 rounded-lg cursor-pointer hover:bg-gray-200">
-        Get Started
+        Dream now
       </button>
     </div>
 </div>
@@ -48,16 +48,16 @@ const StoryLine = () => {
           Get new knowledge easily
         </h1>
         <p className="mt-2 text-md md:text-xl">
-          Let’s check how many titles you can finish in a month with  Hodi! Tell us how
+        Browse a collection of more than 20 000 listings and  
         </p>
         <p className="mt-2 text-md md:text-xl">
-          much time you’d like to spend on reading:
-        </p>
+        find your dream home in less than 5 minutes 
+                </p>
         <button
           className="mt-9 bg-black text-white py-4 text-extrabold text-2xl md:text-5xl 
             px-8 rounded-[40px] cursor-pointer hover:bg-[#FF5A5F]   "
         >
-          30 titles/month
+         for free!
         </button>
       </div>
       <img
@@ -82,7 +82,7 @@ const StoryLine = () => {
     
           <div className="max-w-[900px] text-center mx-auto">
             <h1 className="my-8 lg:text-6xl text-2xl mb-2 mt-4 lg:mb-5 lg:mt-8 font-bold text-[var(--textColor)]">
-              Join 40+ million learners around the world
+              Join 40+ million dreamers around the world
             </h1>
             <p className="text-[var(--textColor)] pl-9 pr-5  text-md md:text-xl mb-5 md:mb-7">
               60K 
