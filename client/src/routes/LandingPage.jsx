@@ -237,6 +237,14 @@ className="w-8 h-8 mb-6 mx-auto md:mx-0 md:ml-0"
 
       <StoryLine />
 
+      <div className="flex items-center justify-center text-[var(--textColor)] mx-auto">
+  <div className="text-center">
+    <p className="mt-2 text-sm md:text-lg">
+      Contact us Hodii@gmail.com or call +254 703 394794
+    </p>
+  </div>
+</div>
+
       <Footer />
 
 

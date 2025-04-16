@@ -31,9 +31,14 @@ const StoryLine = () => {
       <p className="mt-2 text-md md:text-xl">
      In less than 5 minutes. Hodii, where dreams come true. 
           </p>
-      <button className="mt-9 bg-white text-black py-3 text-bold px-6 rounded-lg cursor-pointer hover:bg-gray-200">
-        Dream now
-      </button>
+          import { Link } from 'react-router-dom';
+
+<Link to="/">
+  <button className="mt-9 bg-white text-black py-3 font-bold px-6 rounded-lg cursor-pointer hover:bg-gray-200">
+    Dream now
+  </button>
+</Link>
+
     </div>
 </div>
 
@@ -78,10 +83,10 @@ const StoryLine = () => {
     
           <div className="max-w-[900px] text-center mx-auto">
             <h1 className="my-8 lg:text-6xl text-2xl mb-2 mt-4 lg:mb-5 lg:mt-8 font-bold text-[var(--textColor)]">
-              Join 40+ million dreamers around the world
+              Join 4+ million dreamers around the nation
             </h1>
             <p className="text-[var(--textColor)] pl-9 pr-5  text-md md:text-xl mb-5 md:mb-7">
-              60K 
+              20K 
               <span>
                 <Link
                   className="rounded-2xl py-1 ml-1 mr-1  px-3 text-white bg-orange-500 inline-flex items-center gap-2"
@@ -89,31 +94,21 @@ const StoryLine = () => {
                   5 <FaStar className="text-white" />
                 </Link>
               </span>
-              reviews on App Store and Google Play
+              rated listings available all for free
             </p>
     
-            <div className="flex justify-center gap-4 mt-6">
-              <img
-                src="/google-play.svg"
-                className="h-5 border border-2 border-[var(--textColore)]  rounded-lg h-auto object-contain"
-              />
-              <img
-                src="/app-store.svg"
-                className="h-5 h-auto border border-2 border-[var(--textColore)]  rounded-lg object-contain"
-              />
-            </div>
           </div>
     
           <div className="grid grid-cols-1 mx-auto max-w-[1200px] md:grid-cols-3 gap-6 mt-8 w-full px-4">
   {[
-    {
-      text: "Everything you need to be motivated, to learn & to self improve is all here. I actually do believe that this is the best book summuary app. This works very good for me. Thank you.",
+    { 
+      text: "“I was tired of walking from estate to estate just to find a decent rental. Hodii changed everything. I found my new apartment within two days, all from my phone. This platform is a lifesaver.” — Diana K., Nairobi,",
     },
     {
-      text: "The selections are on point and the summaries are excellent! I read them at all times 🐶 and have in turn, ordered a few selections! REALLY loving the app, its layout, daily selections and features!",
+      text: "“Buying my first home felt overwhelming—until I discovered Somaway. The filters were super helpful, the listings were legit, and I could compare prices without pressure. I ended up finding a house that checked every box. I still can’t believe how smooth it was.”— Michael O.,Nairobi, ",
     },
     {
-      text: "The app is so easy to use. I use it after school and it's great. I love the fact that the chapters are short, so you can finish them quickly. Very knowledgeable.",
+      text: " “As an agent, Somaway has become my go-to tool. I can list properties, get quality leads, and manage viewings all in one place. It’s cut down my workload and helped me close deals faster. Honestly, it’s a game-changer for this industry.” — Sarah M., Property Agent, Mombasa",
     },
   ].map((review, index) => (
     <div
@@ -130,7 +125,7 @@ const StoryLine = () => {
             />
           ))}
       </div>
-      <p className="text-sm md:text-lg  text-[var(--textColor)]">{`"${review.text}"`}</p>
+      <p className="text-sm md:text-lg  text-[var(--textColor)]">{`${review.text}"`}</p>
     </div>
   ))}
 </div>
