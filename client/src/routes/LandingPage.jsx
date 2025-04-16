@@ -84,8 +84,8 @@ const LandingPage = () => {
     <div className="relative w-full text-white text-center">
   <div className="absolute top-[50px] left-1/2 transform -translate-x-1/2 z-10 flex flex-col items-center">
     <h1 className="text-3xl md:text-6xl font-bold">Hodii</h1>
-    <p className="mt-2 text-md md:text-xl">
-      Where dreams come true    </p>
+    <p className="mt-2 text-md md:text-2xl">
+      Where all dreams come true    </p>
   </div>
 
   {/* Background image */}
@@ -106,15 +106,15 @@ const LandingPage = () => {
 <div className="grid grid-cols-1 mx-auto md:grid-cols-3 gap-6 mt-8 w-full px-4">
   {[
     {
-      text: "2024 –  Somaway founded by Lexanda Mbelenzi",
+      text: "2024 –  Hodii founded by Lexanda Mbelenzi",
       icon: "rocket.svg",
     },
     {
-      text: " Somaway has grown from a 1-person startup into a team of 5+ people in 3 months",
+      text: " Hodii has grown from a 1-person startup into a team of 5+ people in 3 months",
       icon: "smile.svg",
     },
     {
-      text: "Now,  Somaway has offices in London, Nairobi, and San Francisco.",
+      text: "Now,  Hodii has offices in Nairobi, Mombasa, and Kisumu.",
       icon: "pin.svg",
     },
   ].map((item, index) => (
@@ -150,13 +150,13 @@ const LandingPage = () => {
 <div className="flex-1  text-center  md:text-left">
 <h3 className="text-3xl md:text-5xl font-bold mt-4 mb-4">How did the idea of Hodii come?</h3>
 <p className="text-sm md:text-lg max-w-md mb-6">
- I never thought that i would have
- to move out and go house hunting again, but trust me, i can't find a house online even four years later and i am not hawking for a whole week
- out in the sun, mud and dust.
- The idea of  building an all in one real-estate marketplace first came to me during my day day in campus. It was probably the hotest and 
- dustiest day of the year. The kind of eperience you never want to go through twice. 
- I believe that there are other people out there who share the same pain point and i'd better make this idea come true.
+I never thought I’d have to move out and go house hunting again. But here I am—four years later—and I still can’t find a decent house online. 
+And trust me, I’m not about to spend a whole week under the scorching sun, trudging through mud and dust.
 
+The idea of building an all-in-one real estate marketplace first came to me during my campus days. It was probably the hottest, dustiest day of
+ the year—one of those experiences you never want to go through twice.
+
+I know I’m not alone in this. There are countless others who’ve faced the same frustration. That’s why I’m determined to bring this idea to life.
 </p>
 <img 
 src="/love.svg" 
@@ -164,12 +164,12 @@ className="w-8 h-8 mb-6 mx-auto md:mx-0 md:ml-0"
 />
 
  <p className="font-semibold text-md">Lexanda Mbelenzi</p>
-<p className="text-sm text-opacity-80"> Somaway CEO and founder</p>
+<p className="text-sm text-opacity-80"> Hodii Founder & CEO</p>
 </div>
 
 {/* Adjust vertical alignment with self-start or self-end */}
 <div className=" self-end ">
-<img src="/ceo.png" className=" h-[500px] top-0 md:top-[150px] mt-0 md:mt-[300px] object-cover" />
+<img src="/ceo.png" className=" h-[500px] top-0 md:top-[150px] mr-0 md:mr-[42px] mt-0 md:mt-[300px] object-cover" />
 </div>
 </div>
 
@@ -189,15 +189,15 @@ className="w-8 h-8 mb-6 mx-auto md:mx-0 md:ml-0"
 <div className="grid grid-cols-1 mx-auto md:grid-cols-3 gap-6 mt-8 w-full px-4">
   {[
     {
-      text: "Who we are –  Somaway is a non-fiction book summary app",
+      text: "Who we are – Hodii is an all-in-one real estate marketplace built to make house hunting effortless, and accessible.",
       icon: "negotiation.webp",
     },
     {
-      text: "Mission - Empower every curious mind with the tools to learn, grow, and create.",
+      text: "Mission – To simplify and transform the way people find, rent, or buy homes by offering a smarter, stress-free experience.",
       icon: "business-and-career.webp",
     },
     {
-      text: "Vission - To become the world’s leading platform for self-education and growth.",
+      text: "Vision – To become the go-to real estate platform for millions, redefining property discovery across Africa and beyond.",
       icon: "self-growth.webp",
     },
   ].map((item, index) => (
@@ -221,14 +221,7 @@ className="w-8 h-8 mb-6 mx-auto md:mx-0 md:ml-0"
 </div>
 </div>
 
-<div className="flex items-center justify-center text-[var(--textColor)] mx-auto">
-<div className="text-center">
-<p className="mt-2 text-sm md:text-lg">
-Contact us makesomaway@gmail.com or call +254 703 394794
-</p>
 
-</div>
-</div>
 
 </div>
 

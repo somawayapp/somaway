@@ -45,7 +45,7 @@ const StoryLine = () => {
     >
       <div className="h-full p-2  box-border">
         <h1 className="text-3xl md:text-6xl mt-[20px] md:mt-[70px] font-bold">
-        Make house hunting easier        </h1>
+        We make house hunting easier        </h1>
         <p className="mt-2 text-md md:text-xl">
         Browse a collection of more than 20 000 listings and  
         </p>
