@@ -79,8 +79,9 @@ const LandingPage = () => {
     <div>
 
 
+
+
     <div className="relative w-full text-white text-center">
-  {/* Text content absolutely positioned on top of image */}
   <div className="absolute top-[50px] left-1/2 transform -translate-x-1/2 z-10 flex flex-col items-center">
     <h1 className="text-3xl md:text-6xl font-bold">Hodii</h1>
     <p className="mt-2 text-md md:text-xl">
@@ -96,6 +97,8 @@ const LandingPage = () => {
   />
 </div>
 
+
+<div >
 
 
 <div className="flex   px-4 md:px-[80px] flex-col items-center justify-center">
