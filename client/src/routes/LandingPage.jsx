@@ -169,7 +169,7 @@ className="w-8 h-8 mb-6 mx-auto md:mx-0 md:ml-0"
 </div>
 
 {/* Adjust vertical alignment with self-start or self-end */}
-<div className=" self-end  z-10">
+<div className=" self-end ">
 <img src="/ceo.png" className=" h-[500px] top-0 md:top-[150px] mt-0 md:mt-[300px] object-cover" />
 </div>
 </div>

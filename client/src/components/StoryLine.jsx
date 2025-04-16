@@ -148,102 +148,11 @@ const StoryLine = () => {
  
 
 
-    <div
-      className="relative bg-[#7a00da] w-full  shadow-md 
-        text-white text-center animate-fadeIn flex flex-col items-center justify-center"
-    >
-      <div className="h-full p-2  box-border">
-        <h1 className="text-3xl md:text-6xl mt-[20px] md:mt-[70px] font-bold">
-          Go premium now 
-        </h1>
-        <p className="mt-2 text-md md:text-xl">
-        Experience unlimited acces to our exclusive book summaries 
-              </p>
-        <p className="mt-2 text-md md:text-xl">
-          on a premium model for only $4.99 per month :
-        </p>
-        <Link to="/premium">
-        <button
-        className="mt-9 bg-black text-white py-4 text-extrabold text-2xl md:text-5xl 
-        px-8 rounded-[40px] cursor-pointer hover:text-black hover:bg-white"
->
-
-        $4.99 US/month
-      </button>
-        
-        </Link>
-      
-      </div>
-      <img
-        src="/illustration.svg"
-        className="max-w-full h-auto mx-auto mt-8"
-      />
-    </div>
-
-    <div className="flex flex-col px-3 md:px-9 items-center justify-center">
-  <div>
-    <div className="flex flex-col items-center justify-center mb-[40px] pt-9 pb-9 rounded-2xl gap-5">
-      <div className="grid grid-cols-1 mx-auto md:grid-cols-3 gap-6 mt-8 w-full px-4">
-        {[
-          {
-            text: "Who we are –  Hodii is a non-fiction book summary app",
-            icon: "negotiation.webp",
-          },
-          {
-            text: "Mission - Empower every curious mind with the tools to learn, grow, and create.",
-            icon: "business-and-career.webp",
-          },
-          {
-            text: "Vission - To become the world’s leading platform for self-education and growth.",
-            icon: "self-growth.webp",
-          },
-        ].map((item, index) => (
-          <div
-            key={index}
-            className="bg-[var(--bd)] shadow-2xl rounded-2xl md:rounded-[20px] p-4 md:px-8 flex flex-col items-start text-left relative"
-          >
-            {/* Icon */}
-            <img
-              src={item.icon}
-              className="absolute top-4 left-4 w-12 h-18 md:w-20 md;h-30"
-            />
-            {/* Text */}
-            <p className="text-lg md:text-2xl font-bold text-[var(--textColor)] mt-[70px] md:mt-[150px] ">
-              {item.text}
-            </p>
-          </div>
-        ))}
-      </div>
-    </div>
-  </div>
-</div>
-
-    <div className="flex justify-between  mb-15  md:mb-[40px] pt-5 p-3  md:p-9 overflow-x-hidden   bg-[#7a00da] 
-        items-center gap-5 flex-col md:flex-row">
-      <div>
-      <h1 className="my-8 text-center lg:text-5xl text-2xl ml-2 pl-2 md:pl-0 mb-2 mt-4 lg:mb-5 lg:mt-8 text-white font-bold">
-      Get smarter in just 5 minutes</h1>
-      <p className="text-white pl-2 md:pl-0 text-center md:text-left pr-4 ml-2 text-md mb-5 md:mb-7 md:text-xl">Grasp the book’s key ideas in less than 5 minutes
-
-</p>
-<div className="flex justify-center md:justify-start">
-<Link
-            to="/login"
-            className="w-full items-center ml-4 md:ml-2 mr-4 text-center  text-md md:text-xl sm:w-auto px-4 md:px-6  py-3 md:py-3 bg-white 
-            text-black font-semibold  rounded-md hover:text-white hover:bg-black"
-          >
-            Get Started    
-          </Link>
-</div>
     
-    </div>
 
-     <img
-            src="/group.svg"
-            className="w-100 md:w-180  h-40 md:h-80  md:mr-[40px] mr-0 object-cover "
-          />   
-          
-          </div>
+    
+
+ 
 
 
 
