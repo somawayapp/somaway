@@ -44,12 +44,12 @@ const StoryLine = () => {
         text-black text-center animate-fadeIn flex flex-col items-center justify-center"
     >
       <div className="h-full p-2  box-border">
-        <h1 className="text-3xl md:text-6xl mt-[20px] md:mt-[70px] font-bold">
+        <h1 className="text-2xl md:text-6xl mt-[40px] md:mt-[70px] font-bold">
         We make house hunting easier        </h1>
-        <p className="mt-2 text-md md:text-xl">
+        <p className="mt-2 text-sm md:text-xl">
         Browse a collection of more than 20 000 listings and  
         </p>
-        <p className="mt-2 text-md md:text-xl">
+        <p className="mt-2 text-sm md:text-xl">
         find your dream home in less than 5 minutes 
                 </p>
         <button
@@ -74,10 +74,7 @@ const StoryLine = () => {
     <div className="flex flex-col px-3 md:px-9 items-center justify-center">
       <div className="mt-0 mb:mt-[45px]">
         <div className="flex flex-col items-center justify-center mt-[60px] md:mt-[120px] mb-[40px] pt-9 pb-9 rounded-2xl gap-5">
-          <img
-            src="/group-16087.svg"
-            className="w-50 md:w-100 h-20 md:h-40 object-cover"
-          />
+         
     
           <div className="max-w-[900px] text-center mx-auto">
             <h1 className="my-8 lg:text-6xl text-2xl mb-2 mt-4 lg:mb-5 lg:mt-8 font-bold text-[var(--textColor)]">

@@ -100,7 +100,7 @@ const LandingPage = () => {
 <div >
 
 
-<div className="flex   px-4 md:px-[80px] flex-col items-center justify-center">
+<div className="flex   md:px-[80px] flex-col items-center justify-center">
 <div>
 <div className="flex flex-col items-center justify-center mb-[40px] pt-9 pb-9 rounded-2xl gap-5">
 <div className="grid grid-cols-1 mx-auto md:grid-cols-3 gap-6 mt-8 w-full px-4">
@@ -128,7 +128,7 @@ const LandingPage = () => {
         className="absolute top-4 left-4 w-12 h-12 md:w-20 md;h-20"
       />
       {/* Text */}
-      <p className="text-lg md:text-2xl font-bold text-[var(--textColor)] mt-[70px] md:mt-[150px] ">
+      <p className="text-lg md:text-2xl font-bold text-[var(--textColor)] mt-[70px] md:mt-[100px] ">
         {item.text}
       </p>
     </div>
@@ -183,7 +183,7 @@ className="w-8 h-8 mb-6 mx-auto md:mx-0 md:ml-0"
 
 
 
-<div className="flex flex-col  px-4 md:px-[80px] items-center justify-center">
+<div className="flex flex-col md:px-[80px] items-center justify-center">
 <div>
 <div className="flex flex-col items-center justify-center mb-[40px] pt-9 pb-9 rounded-2xl gap-5">
 <div className="grid grid-cols-1 mx-auto md:grid-cols-3 gap-6 mt-8 w-full px-4">
@@ -211,7 +211,7 @@ className="w-8 h-8 mb-6 mx-auto md:mx-0 md:ml-0"
         className="absolute top-4 left-4 w-12 h-18 md:w-20 md;h-30"
       />
       {/* Text */}
-      <p className="text-lg md:text-2xl font-bold text-[var(--textColor)] mt-[70px] md:mt-[150px] ">
+      <p className="text-lg md:text-2xl font-bold text-[var(--textColor)] mt-[70px] md:mt-[100px] ">
         {item.text}
       </p>
     </div>
