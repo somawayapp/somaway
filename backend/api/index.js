@@ -61,22 +61,34 @@ app.use(
 // Middleware for unfeaturing expired posts
 
 // Middleware for unfeaturing expired posts
+// Middleware for unfeaturing expired posts and unlisting outdated ones
 const unfeatureCleanerMiddleware = async (req, res, next) => {
   try {
     // Get the current time in Nairobi (EAT)
-    const now = moment().tz('Africa/Nairobi');  // Current time in Nairobi's time zone
+    const now = moment().tz('Africa/Nairobi');
 
-    // Update the posts that are featured and expired based on Nairobi time
-    const result = await Post.updateMany(
-      { isFeatured: true, featuredUntil: { $lte: now.toDate() } }, // Convert moment to native Date
+    // Unfeature expired posts
+    const unfeatured = await Post.updateMany(
+      { isFeatured: true, featuredUntil: { $lte: now.toDate() } },
       { isFeatured: false, featuredUntil: null }
     );
 
-    console.log(`[Middleware] Unfeatured ${result.modifiedCount} posts at ${now.toISOString()}`);
+    console.log(`[Middleware] Unfeatured ${unfeatured.modifiedCount} posts at ${now.toISOString()}`);
+
+    // Unlist posts that haven't been updated in the last 28 days
+    const thresholdDate = moment(now).subtract(28, 'days').toDate();
+
+    const unlisted = await Post.updateMany(
+      { isListed: true, updatedAt: { $lte: thresholdDate } },
+      { isListed: false }
+    );
+
+    console.log(`[Middleware] Unlisted ${unlisted.modifiedCount} posts not updated since ${thresholdDate.toISOString()}`);
   } catch (err) {
-    console.error('[Middleware] Error cleaning featured posts:', err);
+    console.error('[Middleware] Error cleaning posts:', err);
   }
-  next(); // Proceed to the next middleware or route handler
+
+  next();
 };
 
 
