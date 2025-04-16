@@ -99,36 +99,7 @@ const StoryLine = () => {
     
           </div>
     
-          <div className="grid grid-cols-1 mx-auto max-w-[1200px] md:grid-cols-3 gap-6 mt-8 w-full px-4">
-  {[
-    { 
-      text: "I was tired of walking from estate to estate just to find a decent rental. Hodii changed everything. I found my new apartment within two days, all from my phone. This platform is a lifesaver. — Diana K., Nairobi,",
-    },
-    {
-      text: "Buying my first home felt overwhelming—until I discovered Somaway. The filters were super helpful, the listings were legit, and I could compare prices without pressure. I ended up finding a house that checked every box. I still can’t believe how smooth it was.— Michael O.,Nairobi, ",
-    },
-    {
-      text: "As an agent, Somaway has become my go-to tool. I can list properties, get quality leads, and manage viewings all in one place. It’s cut down my workload and helped me close deals faster. Honestly, it’s a game-changer for this industry. — Sarah M., Property Agent, Mombasa",
-    },
-  ].map((review, index) => (
-    <div
-      key={index}
-      className="bg-[var(--bd)] shadow-2xl rounded-3xl p-4 md:px-8  flex flex-col items-center text-center"
-    >
-      <div className="flex gap-1 mb-2">
-        {Array(5)
-          .fill(0)
-          .map((_, starIndex) => (
-            <FaStar
-              key={starIndex}
-              className="text-yellow-500 w-[25px] text-orange-500"
-            />
-          ))}
-      </div>
-      <p className="text-sm md:text-lg  text-[var(--textColor)]">{`"${review.text}"`}</p>
-    </div>
-  ))}
-</div>
+      
 
         </div>
       </div>
