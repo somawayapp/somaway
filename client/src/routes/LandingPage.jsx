@@ -85,13 +85,12 @@ const LandingPage = () => {
   <div className="absolute top-[50px] left-1/2 transform -translate-x-1/2 z-10 flex flex-col items-center">
     <h1 className="text-3xl md:text-6xl font-bold">Hodii</h1>
     <p className="mt-2 text-md md:text-xl">
-      Making your dream home a reality everyday
-    </p>
+      Where dreams come true    </p>
   </div>
 
   {/* Background image */}
   <img
-    src="/house.jpg"
+    src="/thumbail2.jpg"
     className="w-full md:h-[90vh] mx-auto"
     alt="Dream home"
   />
