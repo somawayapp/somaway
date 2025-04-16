@@ -74,7 +74,7 @@ const LandingPage = () => {
 
 
 
-    <div className="mb-9 px-4 md:px-[80px] flex flex-col gap-0">
+    <div className="mb-9  flex flex-col gap-0">
 
     <div>
 
@@ -83,9 +83,9 @@ const LandingPage = () => {
    className="relative bg-[#7a00da] px-4 md:px-[80px] mt-[20px] md:mt-[50px] w-full shadow-md 
      text-white text-center animate-fadeIn flex flex-col items-center justify-center"
  >
-   <div className="h-full p-2  max-w-[900px] mx-auto box-border">
-   <h1 className="text-3xl md:text-6xl mt-[20px] md:mt-[70px] font-bold">
-      Hodi
+   <div className="h-full p-2   mx-auto box-border">
+   <h1 className="text-3xl md:text-6xl font-bold">
+      Hodii
              </h1>
      <p className="mt-2 text-md md:text-xl">
          Making your dream home come true everyday               </p>
@@ -94,7 +94,7 @@ const LandingPage = () => {
    </div>
    <img
      src="/house.jpg"
-     className="h-[100px] md:h-[400px] px-9 md:px-[80px] mx-auto "
+     className="h-[100px] md:h-[400px] rounded-xl px-9 md:px-[80px] mx-auto "
    />
  </div>
 
@@ -149,23 +149,14 @@ const LandingPage = () => {
 
 <div className="flex flex-col pl-3 pr-3 pt-12 md:pt-0  md:pl-[100px] lg:pl-[200px] md:flex-row items-center justify-between  z-10 text-black">
 <div className="flex-1  text-center  md:text-left">
-<h3 className="text-3xl md:text-5xl font-bold mb-4">How did the idea of Hodii come?</h3>
+<h3 className="text-3xl md:text-5xl font-bold mt-4 mb-4">How did the idea of Hodii come?</h3>
 <p className="text-sm md:text-lg max-w-md mb-6">
-
-It was on my first day in campus. Unfortunately the school did not have any remaining hostel space so i had to find myself
-    a rental outside the school on the same day. It was probably the hottest day of the year and the dustiest day of the month. 
-   I spent my entire day knocking doors until evening came and i had not found a place yet. Every door that flang open was 
-   either an arrogant caretaker or "no vacants here". I tarmaced for four days but couldn't find the perfect and afordable place. 
-
-  The following day, when asking a stranger for directions, she suggested that maybe i should try searching online. With a sigh of relief i 
-  found a nice shaded place and started doom scrolling and cold calling for hours just to end up disapointed. Most of the houses listed online
-  were years old on the plartforms which made that they were no longer vacant, and some even had fake pictures and prices.
-  
-   Later on in the  day while taking my last lap around, i had this idea ringing in my mind, "what if i created this plartform, a place that
-   would solve all this problems, a place where i could find a house in less than 30 seconds and move in?" But it was just an idea. 
-   I had no choice but to keep tracking and fourtunately i found a fair place in the week that followed. I never thought that i would have
-  to move out and go house hunting again, but trust me, i can't find a house online four years later and i am not hawking for a whole week.
-  Ibelieve that there are other people out there who share the same pain point and i'd better make this idea come true.
+ I never thought that i would have
+ to move out and go house hunting again, but trust me, i can't find a house online even four years later and i am not hawking for a whole week
+ out in the sun, mud and dust.
+ The idea of  building an all in one real-estate marketplace first came to me during my day day in campus. It was probably the hotest and 
+ dustiest day of the year. The kind of eperience you never want to go through twice. 
+ I believe that there are other people out there who share the same pain point and i'd better make this idea come true.
 
 </p>
 <img 
