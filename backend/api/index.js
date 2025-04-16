@@ -76,7 +76,7 @@ const unfeatureCleanerMiddleware = async (req, res, next) => {
     console.log(`[Middleware] Unfeatured ${unfeatured.modifiedCount} posts at ${now.toISOString()}`);
 
     // Unlist posts that haven't been updated in the last 28 days
-    const thresholdDate = moment(now).subtract(5, 'minutes').toDate();
+    const thresholdDate = moment(now).subtract(8, 'days').toDate();
 
     const unlisted = await Post.updateMany(
       { isListed: true, updatedAt: { $lte: thresholdDate } },
