@@ -19,8 +19,6 @@ import PremiumPage from "./routes/PremiumPage.jsx";
 import SettingsPage from "./routes/SettingsPage.jsx";
 import TermsAndConditions from "./routes/termsandconditionsPage.jsx";
 import SubscriptionPage from "./routes/SubscriptionPage.jsx";
-import ReviewsHomePage from "./routes/ReviewsHompage.jsx";
-import ReviewsPostPage from "./routes/ReviewsPostPage.jsx";
 import AddListingReview from "./routes/AddListingReview.jsx";
 import AddListing from "./routes/AddListing.jsx";
 import SubscriptionTerms from "./routes/subscriptiontermsPage.jsx";
@@ -60,15 +58,7 @@ const router = createBrowserRouter([
         path: "/coming-soon",
         element: <ComingSoon />,
       },
-      {
-        path: "/reviews",
-        element: <ReviewsHomePage />,
-      },
-      
-      {
-        path: "/reviews/:slug",
-        element: <ReviewsPostPage />,
-      },
+  
       {
         path: "/:slug",
         element: <SinglePostPage />,
