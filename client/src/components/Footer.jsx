@@ -38,7 +38,7 @@ const Footer = () => {
             <ul className="space-y-2">
               <li><a href="/" className="text-[var(--softTextColor)] hover:text-[var(--softTextColor)]">Listings</a></li>
               <li><a href="/reviews" className="text-[var(--softTextColor)] hover:text-[var(--softTextColor)]">Reviews</a></li>
-              <li><a href="/coming-soon" className="text-[var(--softTextColor)] hover:text-[var(--softTextColor)]">Blog</a></li>
+              <li><a href="/help" className="text-[var(--softTextColor)] hover:text-[var(--softTextColor)]">Help Center</a></li>
             </ul>
           </nav>
         </div>

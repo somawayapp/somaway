@@ -225,7 +225,11 @@
 
 
 
-         
+            <Link
+              to="/help"
+              className="block py-2 text-[var(--softTextColor)]  hover:text-[#fc3239]  p-2 rounded-xl"
+             onClick={() => setOpen(false)}              > Help center      
+              </Link>
             
              <Link
               to="/settings"
