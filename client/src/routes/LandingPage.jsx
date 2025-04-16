@@ -90,7 +90,7 @@ const LandingPage = () => {
 
   {/* Background image */}
   <img
-    src="/thumbail2.jpg"
+    src="/thumbnail2.jpg"
     className="w-full md:h-[90vh] mx-auto"
     alt="Dream home"
   />
