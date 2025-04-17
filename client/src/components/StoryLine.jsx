@@ -63,10 +63,7 @@ const StoryLine = () => {
          for free!
         </button>
       </div>
-      <img
-        src="/pic3.svg"
-        className="max-w-full h-auto mx-auto mt-8"
-      />
+    
     </div>
   </div>
 </div>
@@ -88,7 +85,7 @@ const StoryLine = () => {
               20K 
               <span>
                 <Link
-                  className="rounded-2xl py-1 ml-1 mr-1  px-3 text-white bg-orange-500 inline-flex items-center gap-2"
+                  className="rounded-2xl py-1 ml-1 mr-1  px-3 text-white bg-[#FF5A5F]  inline-flex items-center gap-2"
                 >
                   5 <FaStar className="text-white" />
                 </Link>
@@ -104,10 +101,10 @@ const StoryLine = () => {
       text: "I was tired of walking from estate to estate just to find a decent rental. Hodii changed everything. I found my new apartment within two days, all from my phone. This platform is a lifesaver. — Diana K., Nairobi",
     },
     {
-      text: "Buying my first home felt overwhelming—until I discovered Hodii. The listings were legit, and I could compare prices without pressure. I ended up finding a house and I still can’t believe how smooth it was. — Michael O., Nairobi",
+      text: "Buying my first home felt overwhelming—until I discovered Hodii. The listings, prices and pictures were all legit. I ended up finding a house and I still can’t believe how smooth it was. — Michael O., Nairobi",
     },
     {
-      text: "As an agent, Hodii has become my go-to tool. I can list properties, get quality leads, and manage viewings all in one place. It’s a game-changer that has cut down my workload and helped me close deals faster. — Sarah M., Property Agent, Mombasa",
+      text: "As an agent, Hodii has become a game-changer for me. I can list properties and get quality leads all in one place. It has cut down my workload and helped me close deals faster. — Sarah M., Property Agent, Mombasa",
     },
   ].map((review, index) => (
     <div
