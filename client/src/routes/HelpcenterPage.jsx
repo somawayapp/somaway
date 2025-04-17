@@ -7,22 +7,21 @@ const HelpCenter = () => {
     <div>
          <Navbar/>
 
-    <div className="py-10 px-6 mt-9 font-sans leading-relaxed bg-[var(--bg)] text-[var(--softTextColor)]">
+    <div className="py-10 px-6 mt-6  bg-[var(--bg)] text-[var(--textColor)] text-[14px] md:text-[16px]">
       <div className="max-w-4xl mx-auto">
-        <div className="mb-8 flex items-center gap-2 text-xl text-blue-500">
-          <FaQuestionCircle />
-          <h1 className="text-5xl font-semibold  text-center text-[var(--softTextColor)]">Hi, how can we help?   </h1>
+        <div className="mb-8 flex items-center justify-center gap-2 text-xl">
+          <h1 className="text-3xl md:text-6xl font-semibold  justify-center text-center text-[var(--textColor)]">Hi, how can we help?   </h1>
         </div>
 
         {/* Agent/Landlord Help */}
-        <div className="mb-8 p-6  bg-[var(--bg)]  rounded-md shadow-md">
+        <div className="mb-8 p-6  bg-[var(--bg)]  rounded-md ">
           <div className="mb-4 flex items-center gap-2 text-lg text-blue-500">
             <FaUser />
-            <h2 className="text-2xl font-semibold text-[var(--softTextColor)]">For Agents and Landlords</h2>
+            <h2 className="text-2xl md:text-3xl font-semibold text-[var(--textColor)]">For Agents and Landlords</h2>
           </div>
 
           <div className="mb-4">
-            <h3 className="text-lg font-semibold text-[var(--softTextColor)] mb-2 flex items-center gap-1"><span className="text-blue-500"><FaSignInAlt /></span> How to Login</h3>
+            <h3 className="text-lg font-semibold text-[var(--textColor)] mb-2 flex items-center gap-1"><span className="text-blue-500"><FaSignInAlt /></span> How to Login</h3>
             <p className="mb-2">
               To login to your Agent or Landlord account, follow these steps:
             </p>
@@ -37,7 +36,7 @@ const HelpCenter = () => {
           </div>
 
           <div className="mb-4">
-            <h3 className="text-lg font-semibold text-[var(--softTextColor)] mb-2 flex items-center gap-1"><FaPlusCircle className="text-green-500" /> How to Create a Listing</h3>
+            <h3 className="text-lg font-semibold text-[var(--textColor)] mb-2 flex items-center gap-1"><FaPlusCircle className="text-green-500" /> How to Create a Listing</h3>
             <p className="mb-2">
               To list a property on Hodii, please follow these steps:
             </p>
@@ -69,7 +68,7 @@ const HelpCenter = () => {
           </div>
 
           <div className="mb-4">
-            <h3 className="text-lg font-semibold text-[var(--softTextColor)] mb-2 flex items-center gap-1"><FaRocket className="text-purple-500" /> Boosting Your Listing</h3>
+            <h3 className="text-lg font-semibold text-[var(--textColor)] mb-2 flex items-center gap-1"><FaRocket className="text-purple-500" /> Boosting Your Listing</h3>
             <p className="mb-2">
               To increase your listing's visibility, you can boost it:
             </p>
@@ -83,7 +82,7 @@ const HelpCenter = () => {
           </div>
 
           <div className="mb-4">
-            <h3 className="text-lg font-semibold text-[var(--softTextColor)] mb-2 flex items-center gap-1"><FaArrowUp className="text-yellow-500" /> Unboosting Your Listing</h3>
+            <h3 className="text-lg font-semibold text-[var(--textColor)] mb-2 flex items-center gap-1"><FaArrowUp className="text-yellow-500" /> Unboosting Your Listing</h3>
             <p className="mb-2">
               You can stop boosting your listing at any time:
             </p>
@@ -96,30 +95,30 @@ const HelpCenter = () => {
           </div>
 
           <div className="mb-4">
-            <h3 className="text-lg font-semibold text-[var(--softTextColor)] mb-2">Managing Inquiries</h3>
+            <h3 className="text-lg font-semibold text-[var(--textColor)] mb-2">Managing Inquiries</h3>
             <p>View and manage inquiries in your dashboard's <span className="font-bold text-red-500">"Inquiries"</span> section. Respond promptly.</p>
           </div>
 
           <div>
-            <h3 className="text-lg font-semibold text-[var(--softTextColor)] mb-2">Updating Your Profile</h3>
+            <h3 className="text-lg font-semibold text-[var(--textColor)] mb-2">Updating Your Profile</h3>
             <p>Keep your profile updated in <span className="font-bold text-red-500">"Profile"</span> or <span className="font-bold text-red-500">"Account Settings"</span>. Ensure contact details are accurate.</p>
           </div>
         </div>
 
         {/* User (Tenant/Buyer) Help */}
-        <div className="mb-8 p-6  bg-[var(--bg)]  rounded-md shadow-md">
+        <div className="mb-8 p-6  bg-[var(--bg)]  rounded-md ">
           <div className="mb-4 flex items-center gap-2 text-lg text-blue-500">
             <FaSearch />
-            <h2 className="text-2xl font-semibold text-[var(--softTextColor)]">For Tenants and Buyers</h2>
+            <h2 className="text-2xl md:text-3xl font-semibold text-[var(--textColor)]">For Tenants and Buyers</h2>
           </div>
 
           <div className="mb-4">
-            <h3 className="text-lg font-semibold text-[var(--softTextColor)] mb-2">Viewing Listings</h3>
+            <h3 className="text-lg font-semibold text-[var(--textColor)] mb-2">Viewing Listings</h3>
             <p>Viewing property listings on Hodii is <span className="font-bold text-green-500">free</span> for all users.</p>
           </div>
 
           <div className="mb-4">
-            <h3 className="text-lg font-semibold text-[var(--softTextColor)] mb-2 flex items-center gap-1"><FaPhone className="text-blue-500" /> Accessing Contact Information</h3>
+            <h3 className="text-lg font-semibold text-[var(--textColor)] mb-2 flex items-center gap-1"><FaPhone className="text-blue-500" /> Accessing Contact Information</h3>
             <p className="mb-2">
               To view the contact information of the agent or landlord:
             </p>
@@ -130,7 +129,7 @@ const HelpCenter = () => {
           </div>
 
           <div className="mb-4">
-            <h3 className="text-lg font-semibold text-[var(--softTextColor)] mb-2 flex items-center gap-1"><FaSearch className="text-indigo-500" /> Searching and Filtering Listings</h3>
+            <h3 className="text-lg font-semibold text-[var(--textColor)] mb-2 flex items-center gap-1"><FaSearch className="text-indigo-500" /> Searching and Filtering Listings</h3>
             <p className="mb-2">
               Find your perfect property using our search and filtering options:
             </p>
@@ -150,7 +149,7 @@ const HelpCenter = () => {
           </div>
 
           <div className="mb-4">
-            <h3 className="text-lg font-semibold text-[var(--softTextColor)] mb-2 flex items-center gap-1"><FaMapMarkerAlt className="text-teal-500" /> Location-Based Search</h3>
+            <h3 className="text-lg font-semibold text-[var(--textColor)] mb-2 flex items-center gap-1"><FaMapMarkerAlt className="text-teal-500" /> Location-Based Search</h3>
             <p className="mb-2">
               Find properties in specific areas easily:
             </p>
@@ -179,22 +178,22 @@ const HelpCenter = () => {
           </div>
 
           <div className="mb-4">
-            <h3 className="text-lg font-semibold text-[var(--softTextColor)] mb-2 flex items-center gap-1"><FaStar className="text-orange-500" /> Adding Reviews</h3>
+            <h3 className="text-lg font-semibold text-[var(--textColor)] mb-2 flex items-center gap-1"><FaStar className="text-orange-500" /> Adding Reviews</h3>
             <p>You <span className="font-bold text-red-500">must be logged in</span> to add a review for a property or agent/landlord. Look for the review option on the listing or profile page.</p>
           </div>
 
           <div className="mb-4">
-            <h3 className="text-lg font-semibold text-[var(--softTextColor)] mb-2">Saving Favorite Listings</h3>
+            <h3 className="text-lg font-semibold text-[var(--textColor)] mb-2">Saving Favorite Listings</h3>
             <p>Click the <span className="font-bold text-red-500">"Save"</span> or <span className="font-bold text-red-500">heart</span> icon to save listings. View them in your account dashboard.</p>
           </div>
 
           <div className="mb-4">
-            <h3 className="text-lg font-semibold text-[var(--softTextColor)] mb-2">Contacting Agents/Landlords</h3>
+            <h3 className="text-lg font-semibold text-[var(--textColor)] mb-2">Contacting Agents/Landlords</h3>
             <p>Once contact information is unlocked (login or share), you can contact the agent/landlord via the provided phone or WhatsApp.</p>
           </div>
 
           <div>
-            <h3 className="text-lg font-semibold text-[var(--softTextColor)] mb-2 flex items-center gap-1"><FaShareAlt className="text-blue-500" /> Sharing Listings</h3>
+            <h3 className="text-lg font-semibold text-[var(--textColor)] mb-2 flex items-center gap-1"><FaShareAlt className="text-blue-500" /> Sharing Listings</h3>
             <p>Share listings easily using the <span className="font-bold text-red-500">"Share"</span> button on the listing page via social media or messaging apps.</p>
           </div>
         </div>
