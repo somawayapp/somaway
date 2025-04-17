@@ -23,11 +23,11 @@ const AddListingReview = () => {
 
   const mutation = useMutation({
     mutationFn: async (newPost) =>
-      axios.post(`${import.meta.env.VITE_API_URL}/reviews`, newPost), // Ensure VITE_API_URL is set
+      axios.post(`${import.meta.env.VITE_API_URL}/history`, newPost), // Ensure VITE_API_URL is set
     onSuccess: (res) => {
       toast.success("Listing has been created!");
       // Ensure the response structure has `res.data.slug`
-      navigate(`/reviews/${res.data.slug}`);
+      navigate(`/history/${res.data.slug}`);
     },
     onError: (error) => {
       toast.error(error.response?.data?.message || "An error occurred while creating the listing");

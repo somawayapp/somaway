@@ -38,7 +38,7 @@ const ReviewPostItem = ({ review }) => {
       {/* Image with Link */}
 
       <div className="w-1/4">
-      <Link to={`/reviews/${review.slug}`} className="block">
+      <Link to={`/history/${review.slug}`} className="block">
   <div className="relative w-full h-full aspect-[3/3] rounded-xl  overflow-hidden">
     {/* Scrollable Image Container */}
     <div             ref={scrollRef}
@@ -93,7 +93,7 @@ const ReviewPostItem = ({ review }) => {
 
 
 <div className=" w-3/4 ">
-<Link to={`/reviews/${review.slug}`} className="block">
+<Link to={`/history/${review.slug}`} className="block">
 
 
 <p

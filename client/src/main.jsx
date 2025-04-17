@@ -23,6 +23,7 @@ import AddListing from "./routes/AddListing.jsx";
 import SubscriptionTerms from "./routes/subscriptiontermsPage.jsx";
 import PrivacyPolicy from "./routes/privacypolicyPage.jsx";
 import HelpCenter from "./routes/HelpcenterPage.jsx";
+import HistoryPage from "./routes/HistoryPage.jsx";
 
 const queryClient = new QueryClient();
 
@@ -40,6 +41,10 @@ const router = createBrowserRouter([
       {
         path: "/",
         element: <Homepage />,
+      },
+      {
+        path: "/history",
+        element: <HistoryPage />,
       },
       {
         path: "/terms",

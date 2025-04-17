@@ -63,8 +63,9 @@ const SubscriptionTerms = () => {
 
         <h2 className="text-xl font-semibold">Refunds</h2>
         <p>
-          Unless explicitly stated in a specific payment model or Subscription offer or as required by applicable law, Subscription fees are 
-          non-refundable. We do not provide refunds or credits for any partial subscription periods or unused services.
+          Unless explicitly stated in a specific payment model or Subscription offer or as required by applicable law, Subscription fees or and 
+          any other fee paid either for boosting or listing are non-refundable. We do not provide refunds or credits for any partial subscription
+           periods or unused services.
         </p>
 
         <h2 className="text-xl font-semibold">Changes to Subscription Plans and Pricing</h2>
