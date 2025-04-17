@@ -41,7 +41,6 @@ const StoryLine = () => {
       <p className="mt-2 text-md md:text-xl">
      In less than 5 minutes. Hodii, where dreams come true. 
           </p>
-          import { Link } from 'react-router-dom';
 
 <Link to="/">
   <button className="mt-9 bg-white text-black py-3 font-bold px-6 rounded-lg cursor-pointer hover:bg-gray-200">
