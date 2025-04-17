@@ -14,9 +14,9 @@ const HelpCenter = () => {
         </div>
 
         {/* Agent/Landlord Help Section */}
-        <section className=" rounded-lg p-6 mb-8">
+        <section className=" rounded-lg mb-8">
           <div className="flex items-center space-x-3  mb-4">
-            <h2 className="text-xl md:text-3xl font-semibold text-[var(--textColor)]">For Agents and Landlords</h2>
+            <h2 className="text-xl md:text-3xl font-semibold ml-4 text-[var(--softTextColor)]">For Agents and Landlords</h2>
           </div>
           <div className="space-y-4 md:space-y-9 ">
             {/* Login Instructions */}
@@ -117,9 +117,9 @@ const HelpCenter = () => {
         </section>
 
         {/* User (Tenant/Buyer) Help Section */}
-        <section className=" p-6 mt-5 ">
+        <section className="  mt-5 ">
         <div className="flex items-center space-x-3  mb-4">
-        <h2 className="text-xl md:text-3xl font-semibold text-[var(--softTextColor)]">For Tenants and Buyers</h2>
+        <h2 className="text-xl md:text-3xl ml-4 font-semibold text-[var(--softTextColor)]">For Tenants and Buyers</h2>
           </div>
           <div className="space-y-4 md:space-y-9 ">
             {/* Viewing Listings */}
