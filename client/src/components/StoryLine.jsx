@@ -13,7 +13,7 @@ const StoryLine = () => {
 <div>
   {/* Background Section */}
   <div
-    className="sticky top-40  bg-cover bg-center h-screen w-full flex flex-col 
+    className="sticky top-10  bg-cover bg-center h-screen w-full flex flex-col 
       items-center justify-center text-white text-center overflow-y-auto"
     style={{ backgroundImage: "url('/house.jpg')" }}
   >
@@ -29,7 +29,7 @@ const StoryLine = () => {
       </h1>
       <h1 className="text-3xl md:text-6xl font-bold">here!</h1>
       <p className="mt-2 text-md md:text-xl">
-     In less than 5 minutes. Hodii, where dreams come true. 
+     In less than 5 minutes. Hodii, where all dreams come true. 
           </p>
 
 <Link to="/">
@@ -57,7 +57,7 @@ const StoryLine = () => {
         find your dream home in less than 5 minutes 
                 </p>
         <button
-          className="mt-9 bg-black text-white py-4 text-extrabold text-2xl md:text-5xl 
+          className="mt-9 bg-black text-white mb-9  py-4 text-extrabold text-2xl md:text-5xl 
             px-8 rounded-[40px] cursor-pointer hover:bg-[#FF5A5F]   "
         >
          for free!
@@ -79,7 +79,7 @@ const StoryLine = () => {
     
           <div className="max-w-[900px] text-center mx-auto">
             <h1 className="my-8 lg:text-6xl text-2xl mb-2 mt-4 lg:mb-5 lg:mt-8 font-bold text-[var(--textColor)]">
-              Join 4+ million dreamers around the nation
+              Join 4+ million dreamers around the world
             </h1>
             <p className="text-[var(--textColor)] pl-9 pr-5  text-md md:text-xl mb-5 md:mb-7">
               20K 
