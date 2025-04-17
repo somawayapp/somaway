@@ -12,137 +12,240 @@ import {
   FaArrowUp,
   FaPhone,
 } from 'react-icons/fa';
-import Navbar from '../components/Navbar';
-import Footer from '../components/Footer';
-
-const SectionTitle = ({ icon: Icon, children }) => (
-  <div className="flex items-center gap-2 mb-4">
-    <Icon className="text-blue-500 text-xl" />
-    <h2 className="text-2xl md:text-3xl font-semibold text-[var(--textColor)]">{children}</h2>
-  </div>
-);
-
-const HelpItem = ({ icon: Icon, title, children }) => (
-  <div className="mb-8">
-    <h3 className="flex items-center text-lg font-semibold text-[var(--textColor)] gap-2 mb-2">
-      {Icon && <Icon className="text-blue-500" />} {title}
-    </h3>
-    <div className="text-[var(--softTextColor)]">{children}</div>
-  </div>
-);
+import Navbar from '../components/Navbar'; // Assuming you have a Navbar component
+import Footer from '../components/Footer'; // Assuming you have a Footer component
 
 const HelpCenter = () => {
   return (
-    <div className="bg-[var(--bg)] min-h-screen">
-      <Navbar />
-
-      <section className="py-16 px-6 max-w-5xl mx-auto">
-        <div className="text-center mb-12">
-          <h1 className="text-4xl md:text-5xl font-bold text-[var(--textColor)]">
-            Hi, how can we help?
-          </h1>
+    <div className="bg-[var(--bg)] py-16">
+      <Navbar /> {/* Include your Navbar */}
+      <div className="container mx-auto px-4 md:px-8">
+        <div className="text-center justify-center mb-12">
+          <h1 className="text-2xl md:text-5xl font-semibold text-[var(--textColor)] mb-2">How can we help you?</h1>
+          <p className="text-gray-600">Find answers to common questions and get the support you need.</p>
         </div>
 
-        {/* Agent & Landlord Section */}
-        <div className="bg-white dark:bg-[var(--card)] rounded-2xl p-8 shadow-md mb-12">
-          <SectionTitle icon={FaUser}>For Agents and Landlords</SectionTitle>
+        {/* Agent/Landlord Help Section */}
+        <section className="bg-white rounded-lg shadow-md p-6 mb-8">
+          <div className="flex items-center space-x-3 mb-4">
+            <FaUser className="text-blue-500 text-xl md:text-3xl" />
+            <h2 className="text-xl md:text-3xl font-semibold text-[var(--softTextColor)]">For Agents and Landlords</h2>
+          </div>
+          <div className="space-y-4">
+            {/* Login Instructions */}
+            <div className="rounded-md border border-gray-200 p-4">
+              <h3 className="flex items-center space-x-2 font-semibold text-[var(--softTextColor)] mb-2">
+                <FaSignInAlt className="text-blue-500" />
+                <span>Logging In</span>
+              </h3>
+              <p className="text-gray-600 mb-2">Having trouble logging in? Here's how:</p>
+              <ul className="list-disc pl-5 text-gray-600">
+                <li>Go to the Hodii website or open the mobile app.</li>
+                <li>Click on the <strong className="text-indigo-600">"Log In"</strong> button.</li>
+                <li>Enter your registered <strong className="text-indigo-600">email address</strong> or <strong className="text-indigo-600">phone number</strong>.</li>
+                <li>Enter your <strong className="text-indigo-600">password</strong>.</li>
+                <li>Click the <strong className="text-indigo-600">"Submit"</strong> or <strong className="text-indigo-600">"Log In"</strong> button.</li>
+                <li>
+                  <button className="text-sm text-blue-500 hover:underline focus:outline-none">
+                    Forgot Password?
+                  </button>
+                </li>
+              </ul>
+            </div>
 
-          <HelpItem icon={FaSignInAlt} title="How to Login">
-            <ul className="list-disc pl-6 space-y-1">
-              <li>Go to the Hodii website or open the mobile app.</li>
-              <li>Click on the <strong className="text-red-500">"Login"</strong> button.</li>
-              <li>Enter your registered <strong className="text-red-500">email</strong> or <strong className="text-red-500">phone</strong>.</li>
-              <li>Enter your <strong className="text-red-500">password</strong>.</li>
-              <li>Click <strong className="text-red-500">"Submit"</strong>.</li>
-              <li>Forgot password? Use the <strong className="text-red-500">"Forgot Password"</strong> link.</li>
-            </ul>
-          </HelpItem>
+            {/* Creating a Listing Instructions */}
+            <div className="rounded-md border border-gray-200 p-4">
+              <h3 className="flex items-center space-x-2 font-semibold text-[var(--softTextColor)] mb-2">
+                <FaPlusCircle className="text-green-500" />
+                <span>Creating a Listing</span>
+              </h3>
+              <p className="text-gray-600 mb-2">Ready to list your property? Follow these steps:</p>
+              <ol className="list-decimal pl-5 text-gray-600">
+                <li>First, <strong className="text-indigo-600">log in</strong> to your account.</li>
+                <li>Navigate to the <strong className="text-indigo-600">"Add Listing"</strong> page.</li>
+                <li>Carefully fill in all the <strong className="text-indigo-600">required information</strong>:
+                  <ul className="list-disc pl-5 mt-2">
+                    <li>Property Type (e.g., House, Apartment)</li>
+                    <li>Location (Address, City, Region)</li>
+                    <li>Price (Sale or Rent)</li>
+                    <li>Bedrooms and Bathrooms</li>
+                    <li>Property Size</li>
+                    <li>Key Features and Amenities</li>
+                    <li>Upload <strong className="text-indigo-600">high-quality photos</strong>.</li>
+                    <li>Write a detailed <strong className="text-indigo-600">description</strong>.</li>
+                  </ul>
+                </li>
+                <li>Click the <strong className="text-indigo-600">"Create Listing"</strong> or <strong className="text-indigo-600">"Submit"</strong> button.</li>
+                <li><strong className="font-semibold">Listing Duration:</strong> Active for <strong className="text-indigo-600">28 days</strong>. Update availability afterwards.</li>
+                <li><strong className="font-semibold">Updating Availability:</strong> Go to your <strong className="text-indigo-600">"Listings"</strong> page and find the <strong className="text-indigo-600">"Update Availability"</strong> option.</li>
+                <li><strong className="font-semibold">Deleting or Unlisting:</strong>
+                  <ul className="list-disc pl-5 mt-2">
+                    <li><strong className="text-indigo-600">"Delete"</strong>: Permanently remove the listing.</li>
+                    <li><strong className="text-indigo-600">"Unlist"</strong>: Hide from users, keep info saved. Relist later.</li>
+                    <li>Find these options on your <strong className="text-indigo-600">"Listings"</strong> page.</li>
+                  </ul>
+                </li>
+              </ol>
+            </div>
 
-          <HelpItem icon={FaPlusCircle} title="How to Create a Listing">
-            <ul className="list-disc pl-6 space-y-1">
-              <li>Login to your account.</li>
-              <li>Go to the <strong className="text-red-500">"Add Listing"</strong> page.</li>
-              <li>Fill in all required details including photos and description.</li>
-              <li>Click <strong className="text-red-500">"Create Listing"</strong>.</li>
-              <li><strong>Duration:</strong> Listings last <strong className="text-red-500">28 days</strong>.</li>
-              <li>Update or delete listings from the <strong className="text-red-500">"Listings"</strong> page.</li>
-            </ul>
-          </HelpItem>
+            {/* Boosting Your Listing Instructions */}
+            <div className="rounded-md border border-gray-200 p-4">
+              <h3 className="flex items-center space-x-2 font-semibold text-[var(--softTextColor)] mb-2">
+                <FaRocket className="text-purple-500" />
+                <span>Boosting Your Listing</span>
+              </h3>
+              <p className="text-gray-600 mb-2">Want more visibility? Here's how to boost your listing:</p>
+              <ol className="list-decimal pl-5 text-gray-600">
+                <li>Go to your <strong className="text-indigo-600">"Listings"</strong> page.</li>
+                <li>Find the listing and click <strong className="text-indigo-600">"Boost Listing"</strong>.</li>
+                <li>Select a <strong className="text-indigo-600">boosting package</strong> (duration and price).</li>
+                <li>Follow the payment instructions.</li>
+                <li>Once paid, your listing will be boosted and appear higher in search results.</li>
+              </ol>
+            </div>
 
-          <HelpItem icon={FaRocket} title="Boosting Your Listing">
-            <ul className="list-disc pl-6 space-y-1">
-              <li>Navigate to your <strong className="text-red-500">"Listings"</strong> page.</li>
-              <li>Click <strong className="text-red-500">"Boost Listing"</strong>.</li>
-              <li>Select a <strong className="text-red-500">package</strong> and complete payment.</li>
-              <li>Your listing will rank higher in search results.</li>
-            </ul>
-          </HelpItem>
+            {/* Unboosting Your Listing Instructions */}
+            <div className="rounded-md border border-gray-200 p-4">
+              <h3 className="flex items-center space-x-2 font-semibold text-[var(--softTextColor)] mb-2">
+                <FaArrowUp className="text-yellow-500" />
+                <span>Unboosting Your Listing</span>
+              </h3>
+              <p className="text-gray-600 mb-2">Need to stop boosting? Here's how:</p>
+              <ol className="list-decimal pl-5 text-gray-600">
+                <li>Go to your <strong className="text-indigo-600">"Listings"</strong> page.</li>
+                <li>Find the boosted listing (usually indicated).</li>
+                <li>Click <strong className="text-indigo-600">"Unboost Listing"</strong> or <strong className="text-indigo-600">"Stop Boosting"</strong>.</li>
+                <li>Note: Refunds for remaining boost time may not be provided.</li>
+              </ol>
+            </div>
 
-          <HelpItem icon={FaArrowUp} title="Unboosting Your Listing">
-            <ul className="list-disc pl-6 space-y-1">
-              <li>Go to <strong className="text-red-500">"Listings"</strong>.</li>
-              <li>Find the boosted listing and click <strong className="text-red-500">"Unboost"</strong>.</li>
-              <li>No refunds are offered for unused boost time.</li>
-            </ul>
-          </HelpItem>
+            {/* Managing Inquiries */}
+            <div className="rounded-md border border-gray-200 p-4">
+              <h3 className="font-semibold text-[var(--softTextColor)] mb-2">Managing Inquiries</h3>
+              <p className="text-gray-600">View and manage inquiries in your dashboard's <strong className="text-indigo-600">"Inquiries"</strong> section. Respond promptly.</p>
+            </div>
 
-          <HelpItem title="Managing Inquiries">
-            <p>Use the <strong className="text-red-500">"Inquiries"</strong> section in your dashboard to view and respond.</p>
-          </HelpItem>
+            {/* Updating Your Profile */}
+            <div className="rounded-md border border-gray-200 p-4">
+              <h3 className="font-semibold text-[var(--softTextColor)] mb-2">Updating Your Profile</h3>
+              <p className="text-gray-600">Keep your profile updated in <strong className="text-indigo-600">"Profile"</strong> or <strong className="text-indigo-600">"Account Settings"</strong>. Ensure contact details are accurate.</p>
+            </div>
+          </div>
+        </section>
 
-          <HelpItem title="Updating Your Profile">
-            <p>Go to <strong className="text-red-500">"Profile"</strong> or <strong className="text-red-500">"Account Settings"</strong> to update contact details.</p>
-          </HelpItem>
-        </div>
+        {/* User (Tenant/Buyer) Help Section */}
+        <section className="bg-white rounded-lg shadow-md p-6 mb-8">
+          <div className="flex items-center space-x-3 mb-4">
+            <FaSearch className="text-blue-500 text-xl md:text-3xl" />
+            <h2 className="text-xl md:text-3xl font-semibold text-[var(--softTextColor)]">For Tenants and Buyers</h2>
+          </div>
+          <div className="space-y-4">
+            {/* Viewing Listings */}
+            <div className="rounded-md border border-gray-200 p-4">
+              <h3 className="font-semibold text-[var(--softTextColor)] mb-2">Viewing Listings</h3>
+              <p className="text-gray-600">Viewing property listings on Hodii is <strong className="text-green-500">free</strong> for all users.</p>
+            </div>
 
-        {/* Buyer/Tenant Section */}
-        <div className="bg-white dark:bg-[var(--card)] rounded-2xl p-8 shadow-md">
-          <SectionTitle icon={FaSearch}>For Tenants and Buyers</SectionTitle>
+            {/* Accessing Contact Information */}
+            <div className="rounded-md border border-gray-200 p-4">
+              <h3 className="flex items-center space-x-2 font-semibold text-[var(--softTextColor)] mb-2">
+                <FaPhone className="text-blue-500" />
+                <span>Accessing Contact Information</span>
+              </h3>
+              <p className="text-gray-600 mb-2">To view the contact information of the agent or landlord:</p>
+              <ul className="list-disc pl-5 text-gray-600">
+                <li><strong className="text-indigo-600">Log In:</strong> Create an account and log in to see contact details.</li>
+                <li><strong className="text-indigo-600">Share to WhatsApp:</strong> Share the listing to at least one WhatsApp group to unlock contact info.</li>
+              </ul>
+            </div>
 
-          <HelpItem title="Viewing Listings">
-            <p>All property listings are <strong className="text-green-500">free</strong> to view.</p>
-          </HelpItem>
+            {/* Searching and Filtering Listings */}
+            <div className="rounded-md border border-gray-200 p-4">
+              <h3 className="flex items-center space-x-2 font-semibold text-[var(--softTextColor)] mb-2">
+                <FaSearch className="text-indigo-500" />
+                <span>Searching and Filtering Listings</span>
+              </h3>
+              <p className="text-gray-600 mb-2">Find your perfect property using our search and filtering options:</p>
+              <ol className="list-decimal pl-5 text-gray-600">
+                <li>Click the <strong className="text-indigo-600">"Search"</strong> button.</li>
+                <li>A <strong className="text-indigo-600">filter panel</strong> will appear. Filters include:
+                  <ul className="list-disc pl-5 mt-2">
+                    <li><strong className="font-semibold">Price Range</strong> (min and max)</li>
+                    <li><strong className="font-semibold">Location</strong> (city, region, area)</li>
+                    <li><strong className="font-semibold">Property Type</strong> (House, Apartment, Land)</li>
+                    <li><strong className="font-semibold">Number of Bedrooms</strong></li>
+                    <li><strong className="font-semibold">Number of Bathrooms</strong></li>
+                    <li>Other <strong className="font-semibold">amenities</strong> and <strong className="font-semibold">features</strong>.</li>
+                  </ul>
+                </li>
+                <li><strong className="font-semibold">Updating Filters:</strong> Click the <strong className="text-indigo-600">"x"</strong> or <strong className="text-indigo-600">"clear"</strong> to remove. Adjust values and click <strong className="text-indigo-600">"Apply"</strong> or <strong className="text-indigo-600">"Search"</strong> to change.</li>
+              </ol>
+            </div>
 
-          <HelpItem icon={FaPhone} title="Accessing Contact Information">
-            <ul className="list-disc pl-6 space-y-1">
-              <li><strong className="text-red-500">Login</strong> to your account.</li>
-              <li>Share the listing to a WhatsApp group to unlock contacts.</li>
-            </ul>
-          </HelpItem>
+            {/* Location-Based Search */}
+            <div className="rounded-md border border-gray-200 p-4">
+              <h3 className="flex items-center space-x-2 font-semibold text-[var(--softTextColor)] mb-2">
+                <FaMapMarkerAlt className="text-teal-500" />
+                <span>Location-Based Search</span>
+              </h3>
+              <p className="text-gray-600 mb-2">Find properties in specific areas easily:</p>
+              <ul className="list-disc pl-5 text-gray-600">
+                <li><strong className="font-semibold">Map Circling:</strong>
+                  <ul className="list-disc pl-5 mt-2">
+                    <li>Open <strong className="text-indigo-600">"Map View"</strong> on the search page.</li>
+                    <li>Draw a circle on the map with your finger or mouse.</li>
+                    <li>Listings within the circle will be displayed.</li>
+                  </ul>
+                </li>
+                <li><strong className="font-semibold">Radius Search from Landmark/Place:</strong>
+                  <ul className="list-disc pl-5 mt-2">
+                    <li>Type a <strong className="text-indigo-600">landmark</strong> or <strong className="text-indigo-600">place name</strong> in the location search bar.</li>
+                    <li>Select a <strong className="text-indigo-600">radius</strong> (e.g., 1km, 5km) to search around it.</li>
+                  </ul>
+                </li>
+                <li><strong className="font-semibold">Search from Current Location:</strong>
+                  <ul className="list-disc pl-5 mt-2">
+                    <li>Enable your device's location services.</li>
+                    <li>Click <strong className="text-indigo-600">"Search Near Me"</strong> or a location icon.</li>
+                    <li>Listings near your current location will be shown.</li>
+                  </ul>
+                </li>
+              </ul>
+            </div>
 
-          <HelpItem icon={FaSearch} title="Searching and Filtering Listings">
-            <ul className="list-disc pl-6 space-y-1">
-              <li>Click <strong className="text-red-500">"Search"</strong> and use filters such as price, location, property type, etc.</li>
-              <li>Clear or update filters as needed.</li>
-            </ul>
-          </HelpItem>
+            {/* Adding Reviews */}
+            <div className="rounded-md border border-gray-200 p-4">
+              <h3 className="flex items-center space-x-2 font-semibold text-[var(--softTextColor)] mb-2">
+                <FaStar className="text-orange-500" />
+                <span>Adding Reviews</span>
+              </h3>
+              <p className="text-gray-600">You <strong className="text-indigo-600">must be logged in</strong> to add a review for a property or agent/landlord. Look for the review option on the listing or profile page.</p>
+            </div>
 
-          <HelpItem icon={FaMapMarkerAlt} title="Location-Based Search">
-            <ul className="list-disc pl-6 space-y-1">
-              <li>Use <strong className="text-red-500">"Map View"</strong> and draw an area.</li>
-              <li>Search by radius around a landmark or your current location.</li>
-            </ul>
-          </HelpItem>
+            {/* Saving Favorite Listings */}
+            <div className="rounded-md border border-gray-200 p-4">
+              <h3 className="font-semibold text-[var(--softTextColor)] mb-2">Saving Favorite Listings</h3>
+              <p className="text-gray-600">Click the <strong className="text-indigo-600">"Save"</strong> or <strong className="text-indigo-600">heart</strong> icon to save listings. View them in your account dashboard.</p>
+            </div>
 
-          <HelpItem icon={FaStar} title="Adding Reviews">
-            <p>You must <strong className="text-red-500">log in</strong> to leave a review on a listing or agent profile.</p>
-          </HelpItem>
+            {/* Contacting Agents/Landlords */}
+            <div className="rounded-md border border-gray-200 p-4">
+              <h3 className="font-semibold text-[var(--softTextColor)] mb-2">Contacting Agents/Landlords</h3>
+              <p className="text-gray-600">Once contact information is unlocked (login or share), you can contact the agent/landlord via the provided phone or WhatsApp.</p>
+            </div>
 
-          <HelpItem title="Saving Favorite Listings">
-            <p>Click the <strong className="text-red-500">"Save"</strong> or heart icon on listings to add to your favorites.</p>
-          </HelpItem>
-
-          <HelpItem title="Contacting Agents/Landlords">
-            <p>Once contact details are unlocked, use the phone or WhatsApp link to reach out.</p>
-          </HelpItem>
-
-          <HelpItem icon={FaShareAlt} title="Sharing Listings">
-            <p>Use the <strong className="text-red-500">"Share"</strong> button to send via messaging or social media.</p>
-          </HelpItem>
-        </div>
-      </section>
-
-      <Footer />
+            {/* Sharing Listings */}
+            <div className="rounded-md border border-gray-200 p-4">
+              <h3 className="flex items-center space-x-2 font-semibold text-[var(--softTextColor)] mb-2">
+                <FaShareAlt className="text-blue-500" />
+                <span>Sharing Listings</span>
+              </h3>
+              <p className="text-gray-600">Share listings easily using the <strong className="text-indigo-600">"Share"</strong> button on the listing page via social media or messaging apps.</p>
+            </div>
+          </div>
+        </section>
+      </div>
+      <Footer /> {/* Include your Footer */}
     </div>
   );
 };
