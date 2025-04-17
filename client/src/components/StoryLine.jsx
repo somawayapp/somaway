@@ -105,10 +105,10 @@ const StoryLine = () => {
       text: "I was tired of walking from estate to estate just to find a decent rental. Hodii changed everything. I found my new apartment within two days, all from my phone. This platform is a lifesaver. — Diana K., Nairobi",
     },
     {
-      text: "Buying my first home felt overwhelming—until I discovered Hodii. The listings were legit, and I could compare prices without pressure. I ended up finding a house and i still can’t believe how smooth it was. — Michael O., Nairobi",
+      text: "Buying my first home felt overwhelming—until I discovered Somaway. The filters were super helpful, the listings were legit, and I could compare prices without pressure. I ended up finding a house that checked every box. I still can’t believe how smooth it was. — Michael O., Nairobi",
     },
     {
-      text: "As an agent, Hodii has become my go-to tool. I can list properties and get quality leads all in one place. It’s cut down my workload and helped me close deals faster. Honestly, it’s a game-changer for this industry. — Sarah M., Property Agent, Mombasa",
+      text: "As an agent, Somaway has become my go-to tool. I can list properties, get quality leads, and manage viewings all in one place. It’s cut down my workload and helped me close deals faster. Honestly, it’s a game-changer for this industry. — Sarah M., Property Agent, Mombasa",
     },
   ]
   
