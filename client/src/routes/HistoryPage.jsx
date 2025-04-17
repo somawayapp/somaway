@@ -5,7 +5,7 @@ import Search from "../components/Search";
 import { Link } from "react-router-dom";
 import CategoriesScroll from "../components/CategoriesScroll";
 import Footer from "../components/Footer";
-import Navbar from "../components/navbar2";
+import Navbar from "../components/navbar";
 import SpinnerMini from "../components/Loader";
 import PostList from "../components/PostList";
 import { Helmet } from "react-helmet";
