@@ -64,7 +64,7 @@ from ${author || 'top authors'}in minutes. Elevate your mind—only on Hodi!`} /
    
 
        <div className="pt-4 md:pt-6  ">
-       <div className="md:px-[80px]  mt-2 px-4">
+       <div className="md:px-[80px] px-4">
         <HistoryPropertySwitcher/>
 
         </div>

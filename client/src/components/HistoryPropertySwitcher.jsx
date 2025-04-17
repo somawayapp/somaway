@@ -33,10 +33,10 @@ export default function HistoryPropertySwitcher() {
       {isNotRootPath && (
         <div className="flex justify-between gap-2 block  md:gap-4 items-center w-full max-w-sm">
           {/* Clickable text */}
-          <div className="cursor-pointer">
+          <div className="cursor-pointer justify-left ">
             <p
               onClick={handleGoHome}
-              className="text-md  cursor-pointer text-[var(--softTextColor)] font-bold hover:underline"
+              className="text-md  cursor-pointer  text-left text-[var(--softTextColor)] font-bold hover:underline"
             >
               Remove all filters
             </p>
@@ -62,10 +62,10 @@ export default function HistoryPropertySwitcher() {
      
 
       {isRootPathWithoutSearchParams && (
-        <div className="flex justify-between  gap-0 md:gap-4 items-center w-full max-w-sm">
+        <div className="flex justify-left  gap-0 md:gap-4 items-center w-full max-w-sm">
           {/* Clickable text */}
           <div>
-            <p className="text-md  md:text-3xl text-[var(--softTextColor)] font-bold hover:underline">
+            <p className="text-md  md:text-3xl text-left text-[var(--softTextColor)] font-bold hover:underline">
              Property history& reviews
             </p>
            
