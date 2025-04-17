@@ -159,7 +159,7 @@ const HistoryPostList = () => {
   return (
     <div className="gap-2 grid grid-cols-1 md:grid-cols-4 md:gap-6 scrollbar-hide">
       {displayedPosts.map((post) => (
-        <ReviewPostItem key={post._id} post={post} />
+        <PostListItem key={post._id} post={post} />
       ))}
     </div>
   );
