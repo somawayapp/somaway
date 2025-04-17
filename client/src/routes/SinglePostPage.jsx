@@ -5,7 +5,7 @@ import PostMenuActions from "../components/PostMenuActions";
 import Comments from "../components/Comments";
 import axios from "axios";
 import { useQuery } from "@tanstack/react-query";
-import Navbar from "../components/navbar";
+import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import { useEffect } from "react";
 import { Helmet } from "react-helmet";
