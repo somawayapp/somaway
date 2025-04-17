@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 
 const ReviewPostItem = ({ post }) => {
-  const images = post.img || [];
+  const images = Array.isArray(post.img) ? post.img : post.img ? [post.img] : [];
   const [currentIndex, setCurrentIndex] = useState(0);
   const scrollRef = useRef(null); // Reference for scrolling container
 
