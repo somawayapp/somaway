@@ -205,7 +205,6 @@ className="w-8 h-8 mb-6 mx-auto md:mx-0 md:ml-0"
 
 
 
-      <StoryLine />
 
       <div className="flex items-center justify-center text-[var(--textColor)] mx-auto">
   <div className="text-center">
