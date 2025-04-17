@@ -1,45 +1,35 @@
 import React from 'react';
 import {
-  FaQuestionCircle,
   FaUser,
-  FaPlusCircle,
-  FaSignInAlt,
-  FaSearch,
-  FaMapMarkerAlt,
-  FaStar,
-  FaShareAlt,
-  FaRocket,
-  FaArrowUp,
-  FaPhone,
+
 } from 'react-icons/fa';
 import Navbar from '../components/Navbar'; // Assuming you have a Navbar component
 import Footer from '../components/Footer'; // Assuming you have a Footer component
 
 const HelpCenter = () => {
   return (
-    <div className="bg-[var(--bg)] py-16">
+    <div className="bg-[var(--bg)] ">
       <Navbar /> {/* Include your Navbar */}
-      <div className="container mx-auto px-4 md:px-8">
+      <div className="max-w-4xl mx-auto px-4 mt-6 text-[14px] md:text-[16px] md:px-8">
         <div className="text-center justify-center mb-12">
           <h1 className="text-2xl md:text-5xl font-semibold text-[var(--textColor)] mb-2">How can we help you?</h1>
-          <p className="text-gray-600">Find answers to common questions and get the support you need.</p>
+          <p className="0">Find answers to common questions and get the support you need.</p>
         </div>
 
         {/* Agent/Landlord Help Section */}
-        <section className="bg-white rounded-lg shadow-md p-6 mb-8">
+        <section className="bg-white rounded-lg p-6 mb-8">
           <div className="flex items-center space-x-3 mb-4">
             <FaUser className="text-blue-500 text-xl md:text-3xl" />
             <h2 className="text-xl md:text-3xl font-semibold text-[var(--softTextColor)]">For Agents and Landlords</h2>
           </div>
           <div className="space-y-4">
             {/* Login Instructions */}
-            <div className="rounded-md border border-gray-200 p-4">
-              <h3 className="flex items-center space-x-2 font-semibold text-[var(--softTextColor)] mb-2">
-                <FaSignInAlt className="text-blue-500" />
-                <span>Logging In</span>
+            <div className="rounded-md shadow-md border border-[var(--softbg5)] p-4">
+            <h3 className="flex items-center text-lg md:text-2xl space-x-2 font-semibold text-[var(--softTextColor)] mb-2">
+            <span>Logging In</span>
               </h3>
-              <p className="text-gray-600 mb-2">Having trouble logging in? Here's how:</p>
-              <ul className="list-disc pl-5 text-gray-600">
+              <p className="0 mb-2">Having trouble logging in? Here's how:</p>
+              <ul className="list-disc pl-5 0">
                 <li>Go to the Hodii website or open the mobile app.</li>
                 <li>Click on the <strong className="text-indigo-600">"Log In"</strong> button.</li>
                 <li>Enter your registered <strong className="text-indigo-600">email address</strong> or <strong className="text-indigo-600">phone number</strong>.</li>
@@ -54,13 +44,12 @@ const HelpCenter = () => {
             </div>
 
             {/* Creating a Listing Instructions */}
-            <div className="rounded-md border border-gray-200 p-4">
-              <h3 className="flex items-center space-x-2 font-semibold text-[var(--softTextColor)] mb-2">
-                <FaPlusCircle className="text-green-500" />
+            <div className="rounded-md shadow-md border border-[var(--softbg5)] p-4">
+              <h3 className="flex items-center text-lg md:text-2xl space-x-2 font-semibold text-[var(--softTextColor)] mb-2">
                 <span>Creating a Listing</span>
               </h3>
-              <p className="text-gray-600 mb-2">Ready to list your property? Follow these steps:</p>
-              <ol className="list-decimal pl-5 text-gray-600">
+              <p className="0 mb-2">Ready to list your property? Follow these steps:</p>
+              <ol className="list-decimal pl-5 0">
                 <li>First, <strong className="text-indigo-600">log in</strong> to your account.</li>
                 <li>Navigate to the <strong className="text-indigo-600">"Add Listing"</strong> page.</li>
                 <li>Carefully fill in all the <strong className="text-indigo-600">required information</strong>:
@@ -89,13 +78,12 @@ const HelpCenter = () => {
             </div>
 
             {/* Boosting Your Listing Instructions */}
-            <div className="rounded-md border border-gray-200 p-4">
-              <h3 className="flex items-center space-x-2 font-semibold text-[var(--softTextColor)] mb-2">
-                <FaRocket className="text-purple-500" />
+            <div className="rounded-md shadow-md border border-[var(--softbg5)] p-4">
+              <h3 className="flex items-center text-lg md:text-2xl space-x-2 font-semibold text-[var(--softTextColor)] mb-2">
                 <span>Boosting Your Listing</span>
               </h3>
-              <p className="text-gray-600 mb-2">Want more visibility? Here's how to boost your listing:</p>
-              <ol className="list-decimal pl-5 text-gray-600">
+              <p className="0 mb-2">Want more visibility? Here's how to boost your listing:</p>
+              <ol className="list-decimal pl-5 0">
                 <li>Go to your <strong className="text-indigo-600">"Listings"</strong> page.</li>
                 <li>Find the listing and click <strong className="text-indigo-600">"Boost Listing"</strong>.</li>
                 <li>Select a <strong className="text-indigo-600">boosting package</strong> (duration and price).</li>
@@ -105,13 +93,12 @@ const HelpCenter = () => {
             </div>
 
             {/* Unboosting Your Listing Instructions */}
-            <div className="rounded-md border border-gray-200 p-4">
-              <h3 className="flex items-center space-x-2 font-semibold text-[var(--softTextColor)] mb-2">
-                <FaArrowUp className="text-yellow-500" />
+            <div className="rounded-md shadow-md border border-[var(--softbg5)] p-4">
+              <h3 className="flex items-center text-lg md:text-2xl space-x-2 font-semibold text-[var(--softTextColor)] mb-2">
                 <span>Unboosting Your Listing</span>
               </h3>
-              <p className="text-gray-600 mb-2">Need to stop boosting? Here's how:</p>
-              <ol className="list-decimal pl-5 text-gray-600">
+              <p className="0 mb-2">Need to stop boosting? Here's how:</p>
+              <ol className="list-decimal pl-5 0">
                 <li>Go to your <strong className="text-indigo-600">"Listings"</strong> page.</li>
                 <li>Find the boosted listing (usually indicated).</li>
                 <li>Click <strong className="text-indigo-600">"Unboost Listing"</strong> or <strong className="text-indigo-600">"Stop Boosting"</strong>.</li>
@@ -120,15 +107,15 @@ const HelpCenter = () => {
             </div>
 
             {/* Managing Inquiries */}
-            <div className="rounded-md border border-gray-200 p-4">
+            <div className="rounded-md shadow-md border border-[var(--softbg5)] p-4">
               <h3 className="font-semibold text-[var(--softTextColor)] mb-2">Managing Inquiries</h3>
-              <p className="text-gray-600">View and manage inquiries in your dashboard's <strong className="text-indigo-600">"Inquiries"</strong> section. Respond promptly.</p>
+              <p className="0">View and manage inquiries in your dashboard's <strong className="text-indigo-600">"Inquiries"</strong> section. Respond promptly.</p>
             </div>
 
             {/* Updating Your Profile */}
-            <div className="rounded-md border border-gray-200 p-4">
+            <div className="rounded-md shadow-md border border-[var(--softbg5)] p-4">
               <h3 className="font-semibold text-[var(--softTextColor)] mb-2">Updating Your Profile</h3>
-              <p className="text-gray-600">Keep your profile updated in <strong className="text-indigo-600">"Profile"</strong> or <strong className="text-indigo-600">"Account Settings"</strong>. Ensure contact details are accurate.</p>
+              <p className="0">Keep your profile updated in <strong className="text-indigo-600">"Profile"</strong> or <strong className="text-indigo-600">"Account Settings"</strong>. Ensure contact details are accurate.</p>
             </div>
           </div>
         </section>
@@ -141,32 +128,30 @@ const HelpCenter = () => {
           </div>
           <div className="space-y-4">
             {/* Viewing Listings */}
-            <div className="rounded-md border border-gray-200 p-4">
+            <div className="rounded-md shadow-md border border-[var(--softbg5)] p-4">
               <h3 className="font-semibold text-[var(--softTextColor)] mb-2">Viewing Listings</h3>
-              <p className="text-gray-600">Viewing property listings on Hodii is <strong className="text-green-500">free</strong> for all users.</p>
+              <p className="0">Viewing property listings on Hodii is <strong className="text-green-500">free</strong> for all users.</p>
             </div>
 
             {/* Accessing Contact Information */}
-            <div className="rounded-md border border-gray-200 p-4">
-              <h3 className="flex items-center space-x-2 font-semibold text-[var(--softTextColor)] mb-2">
-                <FaPhone className="text-blue-500" />
+            <div className="rounded-md shadow-md border border-[var(--softbg5)] p-4">
+              <h3 className="flex items-center text-lg md:text-2xl space-x-2 font-semibold text-[var(--softTextColor)] mb-2">
                 <span>Accessing Contact Information</span>
               </h3>
-              <p className="text-gray-600 mb-2">To view the contact information of the agent or landlord:</p>
-              <ul className="list-disc pl-5 text-gray-600">
+              <p className="0 mb-2">To view the contact information of the agent or landlord:</p>
+              <ul className="list-disc pl-5 0">
                 <li><strong className="text-indigo-600">Log In:</strong> Create an account and log in to see contact details.</li>
                 <li><strong className="text-indigo-600">Share to WhatsApp:</strong> Share the listing to at least one WhatsApp group to unlock contact info.</li>
               </ul>
             </div>
 
             {/* Searching and Filtering Listings */}
-            <div className="rounded-md border border-gray-200 p-4">
-              <h3 className="flex items-center space-x-2 font-semibold text-[var(--softTextColor)] mb-2">
-                <FaSearch className="text-indigo-500" />
+            <div className="rounded-md shadow-md border border-[var(--softbg5)] p-4">
+              <h3 className="flex items-center text-lg md:text-2xl space-x-2 font-semibold text-[var(--softTextColor)] mb-2">
                 <span>Searching and Filtering Listings</span>
               </h3>
-              <p className="text-gray-600 mb-2">Find your perfect property using our search and filtering options:</p>
-              <ol className="list-decimal pl-5 text-gray-600">
+              <p className="0 mb-2">Find your perfect property using our search and filtering options:</p>
+              <ol className="list-decimal pl-5 0">
                 <li>Click the <strong className="text-indigo-600">"Search"</strong> button.</li>
                 <li>A <strong className="text-indigo-600">filter panel</strong> will appear. Filters include:
                   <ul className="list-disc pl-5 mt-2">
@@ -183,13 +168,12 @@ const HelpCenter = () => {
             </div>
 
             {/* Location-Based Search */}
-            <div className="rounded-md border border-gray-200 p-4">
-              <h3 className="flex items-center space-x-2 font-semibold text-[var(--softTextColor)] mb-2">
-                <FaMapMarkerAlt className="text-teal-500" />
+            <div className="rounded-md shadow-md border border-[var(--softbg5)] p-4">
+              <h3 className="flex items-center text-lg md:text-2xl space-x-2 font-semibold text-[var(--softTextColor)] mb-2">
                 <span>Location-Based Search</span>
               </h3>
-              <p className="text-gray-600 mb-2">Find properties in specific areas easily:</p>
-              <ul className="list-disc pl-5 text-gray-600">
+              <p className="0 mb-2">Find properties in specific areas easily:</p>
+              <ul className="list-disc pl-5 0">
                 <li><strong className="font-semibold">Map Circling:</strong>
                   <ul className="list-disc pl-5 mt-2">
                     <li>Open <strong className="text-indigo-600">"Map View"</strong> on the search page.</li>
@@ -214,33 +198,31 @@ const HelpCenter = () => {
             </div>
 
             {/* Adding Reviews */}
-            <div className="rounded-md border border-gray-200 p-4">
-              <h3 className="flex items-center space-x-2 font-semibold text-[var(--softTextColor)] mb-2">
-                <FaStar className="text-orange-500" />
+            <div className="rounded-md shadow-md border border-[var(--softbg5)] p-4">
+              <h3 className="flex items-center text-lg md:text-2xl space-x-2 font-semibold text-[var(--softTextColor)] mb-2">
                 <span>Adding Reviews</span>
               </h3>
-              <p className="text-gray-600">You <strong className="text-indigo-600">must be logged in</strong> to add a review for a property or agent/landlord. Look for the review option on the listing or profile page.</p>
+              <p className="0">You <strong className="text-indigo-600">must be logged in</strong> to add a review for a property or agent/landlord. Look for the review option on the listing or profile page.</p>
             </div>
 
             {/* Saving Favorite Listings */}
-            <div className="rounded-md border border-gray-200 p-4">
+            <div className="rounded-md shadow-md border border-[var(--softbg5)] p-4">
               <h3 className="font-semibold text-[var(--softTextColor)] mb-2">Saving Favorite Listings</h3>
-              <p className="text-gray-600">Click the <strong className="text-indigo-600">"Save"</strong> or <strong className="text-indigo-600">heart</strong> icon to save listings. View them in your account dashboard.</p>
+              <p className="0">Click the <strong className="text-indigo-600">"Save"</strong> or <strong className="text-indigo-600">heart</strong> icon to save listings. View them in your account dashboard.</p>
             </div>
 
             {/* Contacting Agents/Landlords */}
-            <div className="rounded-md border border-gray-200 p-4">
+            <div className="rounded-md shadow-md border border-[var(--softbg5)] p-4">
               <h3 className="font-semibold text-[var(--softTextColor)] mb-2">Contacting Agents/Landlords</h3>
-              <p className="text-gray-600">Once contact information is unlocked (login or share), you can contact the agent/landlord via the provided phone or WhatsApp.</p>
+              <p className="0">Once contact information is unlocked (login or share), you can contact the agent/landlord via the provided phone or WhatsApp.</p>
             </div>
 
             {/* Sharing Listings */}
-            <div className="rounded-md border border-gray-200 p-4">
-              <h3 className="flex items-center space-x-2 font-semibold text-[var(--softTextColor)] mb-2">
-                <FaShareAlt className="text-blue-500" />
+            <div className="rounded-md shadow-md border border-[var(--softbg5)] p-4">
+              <h3 className="flex items-center text-lg md:text-2xl space-x-2 font-semibold text-[var(--softTextColor)] mb-2">
                 <span>Sharing Listings</span>
               </h3>
-              <p className="text-gray-600">Share listings easily using the <strong className="text-indigo-600">"Share"</strong> button on the listing page via social media or messaging apps.</p>
+              <p className="0">Share listings easily using the <strong className="text-indigo-600">"Share"</strong> button on the listing page via social media or messaging apps.</p>
             </div>
           </div>
         </section>
