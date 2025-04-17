@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import { FaStar } from 'react-icons/fa';
-
+import { Link } from "react-router-dom";
 
 const StoryLine = () => {
   const reviews = [
