@@ -13,7 +13,7 @@ const StoryLine = () => {
 <div>
   {/* Background Section */}
   <div
-    className="sticky top-0  bg-cover bg-center h-screen w-full flex flex-col 
+    className="sticky top-40  bg-cover bg-center h-screen w-full flex flex-col 
       items-center justify-center text-white text-center overflow-y-auto"
     style={{ backgroundImage: "url('/house.jpg')" }}
   >
@@ -104,7 +104,7 @@ const StoryLine = () => {
       text: "Buying my first home felt overwhelming—until I discovered Hodii. The listings, prices and pictures were all legit. I ended up finding a house and I still can’t believe how smooth it was. — Michael O., Nairobi",
     },
     {
-      text: "As an agent, Hodii has become a game-changer for me. I can list properties and get quality leads all in one place. It has cut down my workload and helped me close deals faster. — Sarah M., Property Agent, Mombasa",
+      text: "Hodii has become a game-changer for me. I can list properties and get quality leads all in one place. It has cut down my workload and helped me close deals faster. — Sarah M., Property Agent, Mombasa",
     },
   ].map((review, index) => (
     <div
