@@ -99,7 +99,7 @@ const ReviewPostItem = ({ review }) => {
 <p
 
 className="text-[var(--softTextColor)]  font-semibold capitalize mt-2 md:mt-1  text-[14px]  "
-> Nairobi, Keny
+> Nairobi, Kenya
 
 </p>
 

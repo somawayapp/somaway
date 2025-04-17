@@ -74,7 +74,7 @@ from ${author || 'top authors'}in minutes. Elevate your mind—only on Hodi!`} /
   
 
         <div className="flex flex-col justify-between items-center relative min-h-[75vh]">
-      <PostList />
+      <HistoryPostList />
      
     </div>
       </div>
