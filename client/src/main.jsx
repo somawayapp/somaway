@@ -83,7 +83,7 @@ const router = createBrowserRouter([
    
       {
         path: "/about",
-        element: <LandingPage />,
+        element: <AboutPage />,
       },
       {
         path: "/premium",
