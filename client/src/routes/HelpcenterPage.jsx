@@ -1,8 +1,5 @@
 import React from 'react';
-import {
-  FaUser,
 
-} from 'react-icons/fa';
 import Navbar from '../components/Navbar'; // Assuming you have a Navbar component
 import Footer from '../components/Footer'; // Assuming you have a Footer component
 
@@ -19,7 +16,6 @@ const HelpCenter = () => {
         {/* Agent/Landlord Help Section */}
         <section className="bg-white rounded-lg p-6 mb-8">
           <div className="flex items-center space-x-3 mb-4">
-            <FaUser className="text-blue-500 text-xl md:text-3xl" />
             <h2 className="text-xl md:text-3xl font-semibold text-[var(--softTextColor)]">For Agents and Landlords</h2>
           </div>
           <div className="space-y-4">
@@ -123,7 +119,6 @@ const HelpCenter = () => {
         {/* User (Tenant/Buyer) Help Section */}
         <section className="bg-white rounded-lg shadow-md p-6 mb-8">
           <div className="flex items-center space-x-3 mb-4">
-            <FaSearch className="text-blue-500 text-xl md:text-3xl" />
             <h2 className="text-xl md:text-3xl font-semibold text-[var(--softTextColor)]">For Tenants and Buyers</h2>
           </div>
           <div className="space-y-4">
@@ -205,7 +200,6 @@ const HelpCenter = () => {
               <p className="0">You <strong className="text-indigo-600">must be logged in</strong> to add a review for a property or agent/landlord. Look for the review option on the listing or profile page.</p>
             </div>
 
-            {/* Saving Favorite Listings */}
             <div className="rounded-md shadow-md border border-[var(--softbg5)] p-4">
               <h3 className="font-semibold text-[var(--softTextColor)] mb-2">Saving Favorite Listings</h3>
               <p className="0">Click the <strong className="text-indigo-600">"Save"</strong> or <strong className="text-indigo-600">heart</strong> icon to save listings. View them in your account dashboard.</p>
