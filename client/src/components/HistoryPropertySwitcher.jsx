@@ -31,7 +31,7 @@ export default function HistoryPropertySwitcher() {
   return (
     <div className="w-full border p-3 border-[var(--softBg4)] rounded-xl mb-5 shadow-md flex flex-col items-center">
       {isNotRootPath && (
-        <div className="flex justify-between gap-2 block md:hidden md:gap-4 items-center w-full max-w-sm">
+        <div className="flex justify-between gap-2 block  md:gap-4 items-center w-full max-w-sm">
           {/* Clickable text */}
           <div className="cursor-pointer">
             <p
@@ -48,13 +48,13 @@ export default function HistoryPropertySwitcher() {
             onClick={handleGoHome}
             className="w-16 h-8 flex items-center rounded-full p-1 cursor-pointer transition-colors duration-300 bg-[var(--softTextColor)]"
           >
-            <div
-              className={`w-6 h-6 flex items-center justify-center text-[var(--softTextColor)] rounded-full shadow-md transform duration-300 ease-in-out ${
-                toggleState ? "translate-x-8 bg-[var(--bg)]" : "translate-x-0 bg-[var(--bg)]"
-              }`}
-            >
-              ✓
-            </div>
+             <div
+            className={`w-6 h-6 flex items-center justify-center text-[var(--softTextColor)] rounded-full shadow-md transform duration-300 ease-in-out ${
+              toggleState ? "translate-x-8 bg-[var(--bg)]" : "translate-x-0 bg-[var(--bg)]"
+            }`}
+          >
+            ✓
+          </div>
           </div>
         </div>
       )}
