@@ -146,7 +146,7 @@ const PostList = () => {
     return (
       <div className="flex flex-col items-center justify-center h-[50vh]">
         <button
-          onClick={() => (window.location.href = "/addlisting")}
+          onClick={() => (window.location.href = "/")}
           className="w-full px-6 py-3 rounded-xl border border-[var(--softBg4)] 
                      text-[var(--softTextColor)] shadow-md 
                      hover:text-[var(--textColor)] hover:shadow-xl text-center"
