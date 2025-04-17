@@ -62,10 +62,7 @@ from ${author || 'top authors'}in minutes. Elevate your mind—only on Hodi!`} /
    
 
        <div className="pt-4 md:pt-6  ">
-       <div className="md:px-[80px]  md:hidden block mt-2 px-4">
-        <PropertySwitcher/>
-
-        </div>
+         <p className="font-semibold text-md md:text-3xl">Property history& reviews</p>
 
        <div className="md:px-[80px] px-4">
        

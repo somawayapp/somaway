@@ -42,17 +42,26 @@ const ReviewPostItem = ({ post }) => {
       <Link to={`/history/${post.slug}`} className="block">
   <div className="relative w-full h-full aspect-[3/3] rounded-xl  overflow-hidden">
     {/* Scrollable Image Container */}
-    <div             ref={scrollRef}
-
-     className="flex overflow-x-auto aspect-[3/3]  snap-x snap-mandatory scroll-smooth scrollbar-hide">
-      {images.map((image, index) => (
-        <img
-          key={index}
-          src={image}
-          className="w-full h-full object-cover rounded-xl flex-shrink-0 snap-center"
-        />
-      ))}
+    <div
+  ref={scrollRef}
+  className="flex overflow-x-auto aspect-[3/3] snap-x snap-mandatory scroll-smooth scrollbar-hide"
+>
+  {images && images.length > 0 ? (
+    images.map((image, index) => (
+      <img
+        key={index}
+        src={image}
+        className="w-full h-full object-cover rounded-xl flex-shrink-0 snap-center"
+        alt={`Image ${index + 1}`}
+      />
+    ))
+  ) : (
+    <div className="w-full h-full flex items-center justify-center bg-gray-200 text-gray-500">
+      No image
     </div>
+  )}
+</div>
+
 
     {/* Dots inside the image at the bottom */}
     {images.length > 1 && (
