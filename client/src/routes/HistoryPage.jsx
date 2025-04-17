@@ -66,6 +66,7 @@ from ${author || 'top authors'}in minutes. Elevate your mind—only on Hodi!`} /
 
        <div className="md:px-[80px] px-4">
        
+       <p className="font-semibold text-md md:text-3xl pb-4 md:pb-6">Property history& reviews</p>
 
      
   
