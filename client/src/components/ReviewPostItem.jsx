@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 
 const ReviewPostItem = ({ review }) => {
-  const images = review.img || [];
+  const images = post.img || [];
   const [currentIndex, setCurrentIndex] = useState(0);
   const scrollRef = useRef(null); // Reference for scrolling container
 
@@ -38,7 +38,7 @@ const ReviewPostItem = ({ review }) => {
       {/* Image with Link */}
 
       <div className="w-1/4">
-      <Link to={`/history/${review.slug}`} className="block">
+      <Link to={`/history/${post.slug}`} className="block">
   <div className="relative w-full h-full aspect-[3/3] rounded-xl  overflow-hidden">
     {/* Scrollable Image Container */}
     <div             ref={scrollRef}
@@ -93,7 +93,7 @@ const ReviewPostItem = ({ review }) => {
 
 
 <div className=" w-3/4 ">
-<Link to={`/history/${review.slug}`} className="block">
+<Link to={`/history/${post.slug}`} className="block">
 
 
 <p
@@ -108,7 +108,7 @@ className="text-[var(--softTextColor)]  font-semibold capitalize mt-2 md:mt-1  t
 className="text-[var(--softTextColor)]  capitalize   text-[14px] "
 > 
 
-{review.propertyname ? ` ${review.propertyname.slice(0, 20)}` : ""} <span>|</span> <span>  {review.propertytype ? ` ${review.propertytype.slice(0, 20)}` : ""}
+{post.propertyname ? ` ${post.propertyname.slice(0, 20)}` : ""} <span>|</span> <span>  {post.propertytype ? ` ${post.propertytype.slice(0, 20)}` : ""}
 </span>
 </p>
 
@@ -118,7 +118,7 @@ className="text-[var(--softTextColor)]  capitalize   text-[14px] "
 className="text-[var(--softTextColor)]     text-[14px]"
 >  <span className="font-semibold text-[13px]">34</span> Reviews
 
-{review.reviewslength ? ` ${review.reviewslength}` : ""}
+{post.reviewslength ? ` ${post.reviewslength}` : ""}
 </p>
 
 
