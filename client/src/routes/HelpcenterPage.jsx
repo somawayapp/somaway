@@ -1,239 +1,201 @@
 import React from 'react';
-import styled from 'styled-components';
-import { FaQuestionCircle, FaUser, FaPlusCircle, FaSearch, FaMapMarkerAlt, FaStar, FaShareAlt } from 'react-icons/fa';
-
-const HelpCenterContainer = styled.div`
-  padding: 40px;
-  font-family: sans-serif;
-  line-height: 1.6;
-  background-color: #f9f9f9;
-  color: #333;
-`;
-
-const HelpSection = styled.div`
-  margin-bottom: 30px;
-  padding: 20px;
-  background-color: #fff;
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-`;
-
-const SectionTitle = styled.h2`
-  color: #007bff;
-  margin-top: 0;
-  margin-bottom: 15px;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-`;
-
-const SubsectionTitle = styled.h3`
-  color: #555;
-  margin-top: 20px;
-  margin-bottom: 10px;
-`;
-
-const HelpText = styled.p`
-  margin-bottom: 10px;
-`;
-
-const CodeBlock = styled.pre`
-  background-color: #eee;
-  padding: 10px;
-  border-radius: 4px;
-  overflow-x: auto;
-`;
-
-const List = styled.ul`
-  padding-left: 20px;
-  margin-bottom: 10px;
-`;
-
-const ListItem = styled.li`
-  margin-bottom: 5px;
-`;
-
-const Important = styled.span`
-  font-weight: bold;
-  color: #dc3545;
-`;
+import { FaQuestionCircle, FaUser, FaPlusCircle, FaSearch, FaMapMarkerAlt, FaStar, FaShareAlt, FaRocket, FaArrowUp, FaPhone } from 'react-icons/fa';
 
 const HelpCenter = () => {
   return (
-    <HelpCenterContainer>
-      <SectionTitle><FaQuestionCircle /> Welcome to the Hodii Help Center</SectionTitle>
+    <div className="py-10 px-6 font-sans leading-relaxed bg-gray-100 text-gray-800">
+      <div className="max-w-4xl mx-auto">
+        <div className="mb-8 flex items-center gap-2 text-xl text-blue-500">
+          <FaQuestionCircle />
+          <h1 className="text-3xl font-semibold text-gray-900">Welcome to the Hodii Help Center</h1>
+        </div>
 
-      {/* Agent/Landlord Help */}
-      <HelpSection>
-        <SectionTitle><FaUser /> For Agents and Landlords</SectionTitle>
+        {/* Agent/Landlord Help */}
+        <div className="mb-8 p-6 bg-white rounded-md shadow-md">
+          <div className="mb-4 flex items-center gap-2 text-lg text-blue-500">
+            <FaUser />
+            <h2 className="text-xl font-semibold text-gray-800">For Agents and Landlords</h2>
+          </div>
 
-        <SubsectionTitle>How to Login</SubsectionTitle>
-        <HelpText>
-          To login to your Agent or Landlord account, follow these steps:
-        </HelpText>
-        <List>
-          <ListItem>Go to the Hodii website or open the mobile app.</ListItem>
-          <ListItem>Click on the <Important>"Login"</Important> button, usually located at the top right of the page or within the app's main menu.</ListItem>
-          <ListItem>Enter your registered <Important>email address</Important> or <Important>phone number</Important>.</ListItem>
-          <ListItem>Enter your <Important>password</Important>.</ListItem>
-          <ListItem>Click the <Important>"Submit"</Important> or <Important>"Login"</Important> button to access your account.</ListItem>
-          <ListItem>If you've forgotten your password, click on the <Important>"Forgot Password?"</Important> link and follow the instructions to reset it.</ListItem>
-        </List>
+          <div className="mb-4">
+            <h3 className="text-lg font-semibold text-gray-700 mb-2 flex items-center gap-1"><span className="text-blue-500"><FaSignInAlt /></span> How to Login</h3>
+            <p className="mb-2">
+              To login to your Agent or Landlord account, follow these steps:
+            </p>
+            <ul className="list-disc pl-5 mb-2">
+              <li>Go to the Hodii website or open the mobile app.</li>
+              <li>Click on the <span className="font-bold text-red-500">"Login"</span> button, usually at the top right or in the menu.</li>
+              <li>Enter your registered <span className="font-bold text-red-500">email address</span> or <span className="font-bold text-red-500">phone number</span>.</li>
+              <li>Enter your <span className="font-bold text-red-500">password</span>.</li>
+              <li>Click the <span className="font-bold text-red-500">"Submit"</span> or <span className="font-bold text-red-500">"Login"</span> button.</li>
+              <li>If you forgot your password, click <span className="font-bold text-red-500">"Forgot Password?"</span> and follow the instructions.</li>
+            </ul>
+          </div>
 
-        <SubsectionTitle><FaPlusCircle /> How to Create a Listing</SubsectionTitle>
-        <HelpText>
-          To list a property on Hodii, please follow these steps:
-        </HelpText>
-        <List>
-          <ListItem>First, <Important>login</Important> to your Agent or Landlord account.</ListItem>
-          <ListItem>Navigate to the <Important>"Add Listing"</Important> page. This button is usually found on your dashboard or in a menu option like <Important>"Listings"</Important>.</ListItem>
-          <ListItem>Carefully fill in all the <Important>required information</Important> about the property. This typically includes:</ListItem>
-          <List>
-            <ListItem>Property Type (e.g., House, Apartment, Land, Commercial)</ListItem>
-            <ListItem>Location (Address, City, Region)</ListItem>
-            <ListItem>Price (Sale or Rent)</ListItem>
-            <ListItem>Number of Bedrooms and Bathrooms</ListItem>
-            <ListItem>Property Size (in square meters or feet)</ListItem>
-            <ListItem>Key Features and Amenities (e.g., Parking, Balcony, Security)</ListItem>
-            <ListItem><Important>High-quality photos</Important> of the property (upload multiple images for better visibility).</ListItem>
-            <ListItem>A detailed <Important>description</Important> of the property and its surroundings.</ListItem>
-          </List>
-          <ListItem>Once you have filled in all the necessary details and uploaded photos, click the <Important>"Create Listing"</Important> or <Important>"Submit"</Important> button.</ListItem>
-          <ListItem><Important>Listing Duration:</Important> Your listing will be active for <Important>28 days</Important>. After this period, you will need to update its availability to keep it listed.</ListItem>
-          <ListItem><Important>Updating Availability:</Important> To update the availability of your listing after 28 days, go to your <Important>"Listings"</Important> page, find the relevant listing, and look for an <Important>"Update Availability"</Important> button or option.</ListItem>
-          <ListItem><Important>Deleting or Unlisting:</Important>
-            <List>
-              <ListItem><Important>"Delete"</Important>: This will permanently remove the listing from the platform.</ListItem>
-              <ListItem><Important>"Unlist"</Important>: This will make the listing invisible to users but keep the information saved in your account. You can relist it later.</ListItem>
-              You can find options to delete or unlist your listings on your <Important>"Listings"</Important> page.
-            </List>
-          </ListItem>
-        </List>
+          <div className="mb-4">
+            <h3 className="text-lg font-semibold text-gray-700 mb-2 flex items-center gap-1"><FaPlusCircle className="text-green-500" /> How to Create a Listing</h3>
+            <p className="mb-2">
+              To list a property on Hodii, please follow these steps:
+            </p>
+            <ul className="list-disc pl-5 mb-2">
+              <li>First, <span className="font-bold text-red-500">login</span> to your account.</li>
+              <li>Navigate to the <span className="font-bold text-red-500">"Add Listing"</span> page (on your dashboard or menu).</li>
+              <li>Carefully fill in all the <span className="font-bold text-red-500">required information</span>:</li>
+              <ul className="list-disc pl-8 mb-2">
+                <li>Property Type (e.g., House, Apartment)</li>
+                <li>Location (Address, City, Region)</li>
+                <li>Price (Sale or Rent)</li>
+                <li>Bedrooms and Bathrooms</li>
+                <li>Property Size</li>
+                <li>Key Features and Amenities</li>
+                <li><span className="font-bold text-red-500">High-quality photos</span> (upload multiple).</li>
+                <li>A detailed <span className="font-bold text-red-500">description</span>.</li>
+              </ul>
+              <li>Click the <span className="font-bold text-red-500">"Create Listing"</span> or <span className="font-bold text-red-500">"Submit"</span> button.</li>
+              <li><span className="font-bold">Listing Duration:</span> Active for <span className="font-bold text-red-500">28 days</span>. Update availability afterwards.</li>
+              <li><span className="font-bold">Updating Availability:</span> Go to your <span className="font-bold text-red-500">"Listings"</span> page and find the <span className="font-bold text-red-500">"Update Availability"</span> option.</li>
+              <li><span className="font-bold">Deleting or Unlisting:</span>
+                <ul className="list-disc pl-8">
+                  <li><span className="font-bold text-red-500">"Delete"</span>: Permanently remove the listing.</li>
+                  <li><span className="font-bold text-red-500">"Unlist"</span>: Hide from users, keep info saved. Relist later.</li>
+                  Find these options on your <span className="font-bold text-red-500">"Listings"</span> page.
+                </ul>
+              </li>
+            </ul>
+          </div>
 
-        <SubsectionTitle><FaRocket /> Boosting Your Listing</SubsectionTitle>
-        <HelpText>
-          To increase the visibility of your listing, you can boost it. Here's how:
-        </HelpText>
-        <List>
-          <ListItem>Navigate to your <Important>"Listings"</Important> page.</ListItem>
-          <ListItem>Find the listing you want to boost and look for a <Important>"Boost Listing"</Important> button or option.</ListItem>
-          <ListItem>You will be presented with different <Important>boosting packages</Important> or options, often with varying durations and prices.</ListItem>
-          <ListItem>Select the duration for which you want to boost your listing (e.g., 3 days, 7 days, 14 days).</ListItem>
-          <ListItem>Follow the payment instructions to complete the boosting process. You will likely need to enter your payment details.</ListItem>
-          <ListItem>Once the payment is successful, your listing will be boosted and will appear higher in search results and potentially in featured sections for the chosen duration.</ListItem>
-        </List>
+          <div className="mb-4">
+            <h3 className="text-lg font-semibold text-gray-700 mb-2 flex items-center gap-1"><FaRocket className="text-purple-500" /> Boosting Your Listing</h3>
+            <p className="mb-2">
+              To increase your listing's visibility, you can boost it:
+            </p>
+            <ul className="list-disc pl-5 mb-2">
+              <li>Go to your <span className="font-bold text-red-500">"Listings"</span> page.</li>
+              <li>Find the listing and click <span className="font-bold text-red-500">"Boost Listing"</span>.</li>
+              <li>Select a <span className="font-bold text-red-500">boosting package</span> (duration and price).</li>
+              <li>Follow the payment instructions.</li>
+              <li>Once paid, your listing will be boosted and appear higher in search results.</li>
+            </ul>
+          </div>
 
-        <SubsectionTitle><FaArrowUp /> Unboosting Your Listing</SubsectionTitle>
-        <HelpText>
-          You can stop boosting your listing at any time:
-        </HelpText>
-        <List>
-          <ListItem>Go to your <Important>"Listings"</Important> page.</ListItem>
-          <ListItem>Find the currently boosted listing. There will usually be an indicator showing that it's boosted.</ListItem>
-          <ListItem>Look for an <Important>"Unboost Listing"</Important> or <Important>"Stop Boosting"</Important> button or option associated with that listing.</ListItem>
-          <ListItem>Click the button to stop the boost. Please note that you may not receive a refund for any remaining time on the boost.</ListItem>
-        </List>
+          <div className="mb-4">
+            <h3 className="text-lg font-semibold text-gray-700 mb-2 flex items-center gap-1"><FaArrowUp className="text-yellow-500" /> Unboosting Your Listing</h3>
+            <p className="mb-2">
+              You can stop boosting your listing at any time:
+            </p>
+            <ul className="list-disc pl-5 mb-2">
+              <li>Go to your <span className="font-bold text-red-500">"Listings"</span> page.</li>
+              <li>Find the boosted listing (usually indicated).</li>
+              <li>Click <span className="font-bold text-red-500">"Unboost Listing"</span> or <span className="font-bold text-red-500">"Stop Boosting"</span>.</li>
+              <li>Note: Refunds for remaining boost time may not be provided.</li>
+            </ul>
+          </div>
 
-        {/* Add more Agent/Landlord help topics here */}
-        <SubsectionTitle>Managing Inquiries</SubsectionTitle>
-        <HelpText>
-          You can view and manage inquiries from potential tenants or buyers through your dashboard or a dedicated <Important>"Inquiries"</Important> section. Respond promptly to messages to ensure effective communication.
-        </HelpText>
+          <div className="mb-4">
+            <h3 className="text-lg font-semibold text-gray-700 mb-2">Managing Inquiries</h3>
+            <p>View and manage inquiries in your dashboard's <span className="font-bold text-red-500">"Inquiries"</span> section. Respond promptly.</p>
+          </div>
 
-        <SubsectionTitle>Updating Your Profile</SubsectionTitle>
-        <HelpText>
-          Keep your profile information up-to-date by navigating to the <Important>"Profile"</Important> or <Important>"Account Settings"</Important> page. Ensure your contact details are accurate.
-        </HelpText>
+          <div>
+            <h3 className="text-lg font-semibold text-gray-700 mb-2">Updating Your Profile</h3>
+            <p>Keep your profile updated in <span className="font-bold text-red-500">"Profile"</span> or <span className="font-bold text-red-500">"Account Settings"</span>. Ensure contact details are accurate.</p>
+          </div>
+        </div>
 
-      </HelpSection>
+        {/* User (Tenant/Buyer) Help */}
+        <div className="mb-8 p-6 bg-white rounded-md shadow-md">
+          <div className="mb-4 flex items-center gap-2 text-lg text-blue-500">
+            <FaSearch />
+            <h2 className="text-xl font-semibold text-gray-800">For Tenants and Buyers</h2>
+          </div>
 
-      {/* User (Tenant/Buyer) Help */}
-      <HelpSection>
-        <SectionTitle><FaSearch /> For Tenants and Buyers</SectionTitle>
+          <div className="mb-4">
+            <h3 className="text-lg font-semibold text-gray-700 mb-2">Viewing Listings</h3>
+            <p>Viewing property listings on Hodii is <span className="font-bold text-green-500">free</span> for all users.</p>
+          </div>
 
-        <SubsectionTitle>Viewing Listings</SubsectionTitle>
-        <HelpText>
-          Viewing property listings on Hodii is <Important>free</Important> for all users. You can browse through numerous properties without any initial cost.
-        </HelpText>
+          <div className="mb-4">
+            <h3 className="text-lg font-semibold text-gray-700 mb-2 flex items-center gap-1"><FaPhone className="text-blue-500" /> Accessing Contact Information</h3>
+            <p className="mb-2">
+              To view the contact information of the agent or landlord:
+            </p>
+            <ul className="list-disc pl-5 mb-2">
+              <li><span className="font-bold text-red-500">Login:</span> Create an account and log in to see contact details.</li>
+              <li><span className="font-bold text-red-500">Share to WhatsApp:</span> Share the listing to at least one WhatsApp group to unlock contact info.</li>
+            </ul>
+          </div>
 
-        <SubsectionTitle><FaPhone /> Accessing Contact Information</SubsectionTitle>
-        <HelpText>
-          To view the contact information of the agent or landlord for a specific listing, you have two options:
-        </HelpText>
-        <List>
-          <ListItem><Important>Login:</Important> Create an account and log in to the Hodii platform. Once logged in, the contact details will be visible on the listing page.</ListItem>
-          <ListItem><Important>Share to WhatsApp:</Important> Alternatively, you can share the listing to at least one WhatsApp group. After successfully sharing, the contact information will be revealed on the listing page.</ListItem>
-        </List>
+          <div className="mb-4">
+            <h3 className="text-lg font-semibold text-gray-700 mb-2 flex items-center gap-1"><FaSearch className="text-indigo-500" /> Searching and Filtering Listings</h3>
+            <p className="mb-2">
+              Find your perfect property using our search and filtering options:
+            </p>
+            <ul className="list-disc pl-5 mb-2">
+              <li>Click the <span className="font-bold text-red-500">"Search"</span> button (usually at the top).</li>
+              <li>A <span className="font-bold text-red-500">filter panel</span> will appear. Filters include:</li>
+              <ul className="list-disc pl-8 mb-2">
+                <li><span className="font-bold">Price Range</span> (min and max)</li>
+                <li><span className="font-bold">Location</span> (city, region, area)</li>
+                <li><span className="font-bold">Property Type</span> (House, Apartment, Land)</li>
+                <li><span className="font-bold">Number of Bedrooms</span></li>
+                <li><span className="font-bold">Number of Bathrooms</span></li>
+                <li>Other <span className="font-bold">amenities</span> and <span className="font-bold">features</span>.</li>
+              </ul>
+              <li><span className="font-bold">Updating Filters:</span> Click the <span className="font-bold text-red-500">"x"</span> or <span className="font-bold text-red-500">"clear"</span> to remove. Adjust values and click <span className="font-bold text-red-500">"Apply"</span> or <span className="font-bold text-red-500">"Search"</span> to change.</li>
+            </ul>
+          </div>
 
-        <SubsectionTitle><FaSearch /> Searching and Filtering Listings</SubsectionTitle>
-        <HelpText>
-          To find the perfect property, you can use our powerful search and filtering options:
-        </HelpText>
-        <List>
-          <ListItem>Click the <Important>"Search"</Important> button, usually located at the top of the page or within the app.</ListItem>
-          <ListItem>A <Important>filter panel</Important> will pop up, allowing you to specify your criteria. Common filters include:</ListItem>
-          <List>
-            <ListItem><Important>Price Range</Important> (minimum and maximum price)</ListItem>
-            <ListItem><Important>Location</Important> (city, region, specific area)</ListItem>
-            <ListItem><Important>Property Type</Important> (House, Apartment, Land, Commercial)</ListItem>
-            <ListItem><Important>Number of Bedrooms</Important></ListItem>
-            <ListItem><Important>Number of Bathrooms</Important></ListItem>
-            {/* Add more common filters */}
-            <ListItem>Other specific <Important>amenities</Important> and <Important>features</Important>.</ListItem>
-          </List>
-          <ListItem><Important>Updating Filters:</Important> To remove a filter, simply click the <Important>"x"</Important> or <Important>"clear"</Important> button next to the applied filter. To change a filter, adjust the values within the filter panel and click <Important>"Apply"</Important> or <Important>"Search"</Important> again.</ListItem>
-        </List>
+          <div className="mb-4">
+            <h3 className="text-lg font-semibold text-gray-700 mb-2 flex items-center gap-1"><FaMapMarkerAlt className="text-teal-500" /> Location-Based Search</h3>
+            <p className="mb-2">
+              Find properties in specific areas easily:
+            </p>
+            <ul className="list-disc pl-5 mb-2">
+              <li><span className="font-bold">Map Circling:</span>
+                <ul className="list-disc pl-8 mb-2">
+                  <li>Open <span className="font-bold text-red-500">"Map View"</span> on the search page.</li>
+                  <li>Draw a circle on the map with your finger or mouse.</li>
+                  <li>Listings within the circle will be displayed.</li>
+                </ul>
+              </li>
+              <li><span className="font-bold">Radius Search from Landmark/Place:</span>
+                <ul className="list-disc pl-8 mb-2">
+                  <li>Type a <span className="font-bold text-red-500">landmark</span> or <span className="font-bold text-red-500">place name</span> in the location search bar.</li>
+                  <li>Select a <span className="font-bold text-red-500">radius</span> (e.g., 1km, 5km) to search around it.</li>
+                </ul>
+              </li>
+              <li><span className="font-bold">Search from Current Location:</span>
+                <ul className="list-disc pl-8 mb-2">
+                  <li>Enable your device's location services.</li>
+                  <li>Click <span className="font-bold text-red-500">"Search Near Me"</span> or a location icon.</li>
+                  <li>Listings near your current location will be shown.</li>
+                </ul>
+              </li>
+            </ul>
+          </div>
 
-        <SubsectionTitle><FaMapMarkerAlt /> Location-Based Search</SubsectionTitle>
-        <HelpText>
-          Finding properties in specific areas is easy with our location search features:
-        </HelpText>
-        <List>
-          <ListItem><Important>Map Circling:</Important>
-            <List>
-              <ListItem>Open the <Important>"Map View"</Important> on the search page.</ListItem>
-              <ListItem>Use your finger (on mobile) or mouse to draw a circle on the map around the area you are interested in.</ListItem>
-              <ListItem>The platform will then display listings only within the circled region.</ListItem>
-            </List>
-          </ListItem>
-          <ListItem><Important>Radius Search from Landmark/Place:</Important>
-            <List>
-              <ListItem>In the location search bar, type a specific <Important>landmark</Important> or <Important>place name</Important> (e.g., "Ruiru Town Centre", "Thika Level 5 Hospital").</ListItem>
-              <ListItem>You will then be able to select a <Important>radius</Important> (e.g., 1km, 5km, 10km) around that landmark to search within.</ListItem>
-            </List>
-          </ListItem>
-          <ListItem><Important>Search from Current Location:</Important>
-            <List>
-              <ListItem>Ensure your device's location services are enabled.</ListItem>
-              <ListItem>On the search page, look for an option like <Important>"Search Near Me"</Important> or a location icon.</ListItem>
-              <ListItem>Clicking this will automatically search for listings within a certain radius of your current location.</ListItem>
-            </List>
-          </ListItem>
-        </List>
+          <div className="mb-4">
+            <h3 className="text-lg font-semibold text-gray-700 mb-2 flex items-center gap-1"><FaStar className="text-orange-500" /> Adding Reviews</h3>
+            <p>You <span className="font-bold text-red-500">must be logged in</span> to add a review for a property or agent/landlord. Look for the review option on the listing or profile page.</p>
+          </div>
 
-        <SubsectionTitle><FaStar /> Adding Reviews</SubsectionTitle>
-        <HelpText>
-          To add a review for a property or agent/landlord, you <Important>must be logged in</Important> to your Hodii account. Once logged in, you will usually find an option to leave a review on the listing page or the agent/landlord's profile.
-        </HelpText>
+          <div className="mb-4">
+            <h3 className="text-lg font-semibold text-gray-700 mb-2">Saving Favorite Listings</h3>
+            <p>Click the <span className="font-bold text-red-500">"Save"</span> or <span className="font-bold text-red-500">heart</span> icon to save listings. View them in your account dashboard.</p>
+          </div>
 
-        {/* Add more User help topics here */}
-        <SubsectionTitle>Saving Favorite Listings</SubsectionTitle>
-        <HelpText>
-          You can save listings you are interested in by clicking the <Important>"Save"</Important> or <Important>heart</Important> icon on the listing page. You can then view your saved listings in your account dashboard.
-        </HelpText>
+          <div className="mb-4">
+            <h3 className="text-lg font-semibold text-gray-700 mb-2">Contacting Agents/Landlords</h3>
+            <p>Once contact information is unlocked (login or share), you can contact the agent/landlord via the provided phone or email.</p>
+          </div>
 
-        <SubsectionTitle>Contacting Agents/Landlords</SubsectionTitle>
-        <HelpText>
-          Once you have unlocked the contact information (by logging in or sharing), you can directly contact the agent or landlord via phone or email provided on the listing.
-        </HelpText>
-
-        <SubsectionTitle><FaShareAlt /> Sharing Listings</SubsectionTitle>
-        <HelpText>
-          You can easily share listings with friends or family using the <Important>"Share"</Important> button on the listing page. This will typically allow you to share via various social media platforms or messaging apps.
-        </HelpText>
-
-      </HelpSection>
-    </HelpCenterContainer>
+          <div>
+            <h3 className="text-lg font-semibold text-gray-700 mb-2 flex items-center gap-1"><FaShareAlt className="text-blue-500" /> Sharing Listings</h3>
+            <p>Share listings easily using the <span className="font-bold text-red-500">"Share"</span> button on the listing page via social media or messaging apps.</p>
+          </div>
+        </div>
+      </div>
+    </div>
   );
 };
 
