@@ -1,4 +1,5 @@
 
+  
 import { useState } from "react";
 import { useLocation } from "react-router-dom"; // Import useLocation from react-router-dom
 import Search from "../components/Search";
@@ -13,6 +14,7 @@ import { useEffect } from "react";
 import { MessageCircle } from "lucide-react"; // Importing the icon
 import PropertySwitcher from "../components/PropertySwitcher";
 import HistoryPostList from "../components/HistoryPostlist";
+import HistoryPropertySwitcher from "../components/HistoryPropertySwitcher";
 
 const HistoryPage = () => {
 
@@ -62,10 +64,13 @@ from ${author || 'top authors'}in minutes. Elevate your mind—only on Hodi!`} /
    
 
        <div className="pt-4 md:pt-6  ">
+       <div className="md:px-[80px]  mt-2 px-4">
+        <HistoryPropertySwitcher/>
+
+        </div>
 
        <div className="md:px-[80px] px-4">
        
-       <p className="font-semibold text-md md:text-3xl pb-4 pl-1 md:pl-2 md:pb-6">Property history& reviews</p>
 
      
   
@@ -86,7 +91,3 @@ from ${author || 'top authors'}in minutes. Elevate your mind—only on Hodi!`} /
   );
 };
 export default HistoryPage;
-
-
-
- 
