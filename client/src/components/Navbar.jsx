@@ -1,7 +1,11 @@
 
+
+
+
   import { useState, useEffect } from "react";
   import { Link } from "react-router-dom";
   import { SignedIn, SignedOut, UserButton } from "@clerk/clerk-react";
+  
   import "../index.css";
   import { AiOutlineMenu } from "react-icons/ai";
   import Avatar from "./Avatar";
@@ -87,7 +91,7 @@
                  </Link>
                 <button
                   type="button"
-                  className=" p-4 md:py-1 md:pl-4 md:pr-2 border-[1px]  border-[var(--softBg4)]  flex  flex-row  items-center   gap-3  rounded-full  hover:shadow-lg shadow-md  cursor-pointer   hover:shadow-md   transition duration-300"
+                  className=" p-4 md:py-1 md:pl-4 md:pr-2 border-[1px]  border-[var(--softBg4)]  flex  flex-row  items-center   gap-3   rounded-full   cursor-pointer   hover:shadow-lg shadow-md   transition duration-300"
                 >
                   <AiOutlineMenu />
                   <div className="hidden md:flex items-center justify-center">
@@ -177,13 +181,13 @@
 
             <SignedIn>
             <Link
-              to="/add"
+              to="/addlisting"
               className="block py-2 text-[var(--softTextColor)]   hover:text-[#fc3239]  p-2 rounded-xl"
             onClick={() => setOpen(false)}          > Add listing     
           </Link>
           </SignedIn>
 
-          <Link
+            <Link
               to="/addlistingreview"
               className="block py-2 text-[var(--softTextColor)]   hover:text-[#fc3239]  p-2 rounded-xl"
             onClick={() => setOpen(false)}          > Add Review     
