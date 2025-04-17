@@ -18,7 +18,7 @@ const HelpCenter = () => {
           </div>
 
           <div className="mb-4">
-            <h3 className="text-lg font-semibold text-gray-700 mb-2 flex items-center gap-1"><span className="text-blue-500"><FaSignInAlt /></span> How to Login</h3>
+            <h3 className="text-lg font-semibold text-gray-700 mb-2 flex items-center gap-1"><span className="text-blue-500"><FaUser /></span> How to Login</h3>
             <p className="mb-2">
               To login to your Agent or Landlord account, follow these steps:
             </p>
@@ -186,7 +186,7 @@ const HelpCenter = () => {
 
           <div className="mb-4">
             <h3 className="text-lg font-semibold text-gray-700 mb-2">Contacting Agents/Landlords</h3>
-            <p>Once contact information is unlocked (login or share), you can contact the agent/landlord via the provided phone or email.</p>
+            <p>Once contact information is unlocked (login or share), you can contact the agent/landlord via the provided phone or WhatsApp.</p>
           </div>
 
           <div>
