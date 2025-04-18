@@ -2,7 +2,7 @@ import { useState, useRef } from "react";
 import { Link } from "react-router-dom";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 
-const ReviewPostItem = ({ post }) => {
+const HistoryPostItem = ({ post }) => {
   const images = Array.isArray(post.img) ? post.img : [];
 
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -140,4 +140,4 @@ className="text-[var(--softTextColor)]     text-[14px]"
   );
 };
 
-export default ReviewPostItem;
+export default HistoryPostItem;
