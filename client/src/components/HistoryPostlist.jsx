@@ -147,7 +147,7 @@ const HistoryPostList = () => {
         {Array(8)
           .fill(0)
           .map((_, index) => (
-            <div key={index} className="relative aspect-[3/3] w-full">
+            <div key={index} className="relative aspect-[3/1] w-full">
               <div className="absolute inset-0 bg-[var(--softBg4)] animate-pulse rounded-xl md:rounded-2xl"></div>
             </div>
           ))}
