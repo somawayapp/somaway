@@ -1,8 +1,9 @@
+import PostListItem from "./PostListItem";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import { useSearchParams } from "react-router-dom";
 import { useEffect, useState, useRef } from "react";
-import HistoryPostItem from "./HistoryPostItem";
+import ReviewPostItem from "./ReviewPostItem";
 
 // Utility to convert URLSearchParams to plain object
 const parseSearchParams = (searchParams) =>
@@ -124,7 +125,7 @@ const HistoryPostList = () => {
     return (
       <div className="flex flex-col items-center justify-center h-[50vh]">
         <button
-          onClick={() => (window.location.href = "/")}
+          onClick={() => (window.location.href = "/addlisting")}
           className="w-full px-6 py-3 rounded-xl border border-[var(--softBg4)] 
                      text-[var(--softTextColor)] shadow-md 
                      hover:text-[var(--textColor)] hover:shadow-xl text-center"
@@ -136,24 +137,24 @@ const HistoryPostList = () => {
     );
   }
 
-  // Placeholder loading tiles before posts are shown
-  if (displayedPosts.length === 0) {
+  if (displayedReviews.length === 0) {
     return (
       <div style={{ display: "grid", gridTemplateColumns: columns }} className="gap-6 md:gap-9 scrollbar-hide">
-      {Array(8).fill(0).map((_, index) => (
-        <div key={index} className="relative aspect-[3/1] w-full">
-          <div className="absolute inset-0 bg-[var(--softBg4)] animate-pulse rounded-xl md:rounded-2xl"></div>
-        </div>
-      ))}
-    </div>
+        {Array(8).fill(0).map((_, index) => (
+          <div key={index} className="relative aspect-[3/1] w-full">
+            <div className="absolute inset-0 bg-[var(--softBg4)] animate-pulse rounded-xl md:rounded-2xl"></div>
+          </div>
+        ))}
+      </div>
     );
   }
 
   // Render the posts
   return (
-    <div style={{ display: "grid", gridTemplateColumns: columns }} className="gap-6 md:gap-9 scrollbar-hide">
+     
+      <div style={{ display: "grid", gridTemplateColumns: columns }} className="gap-6 md:gap-9 scrollbar-hide">
       {displayedPosts.map((post) => (
-        <HistoryPostItem key={post._id} post={post} />
+        <ReviewPostItem key={post._id} post={post} />
       ))}
     </div>
   );
