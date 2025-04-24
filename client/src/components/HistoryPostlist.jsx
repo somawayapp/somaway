@@ -3,8 +3,7 @@ import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import { useSearchParams } from "react-router-dom";
 import { useEffect, useState, useRef } from "react";
-import ReviewPostItem from "./ReviewPostItem";
-
+import HistoryPostItem from "./HistoryPostItem";
 // Utility to convert URLSearchParams to plain object
 const parseSearchParams = (searchParams) =>
   searchParams instanceof URLSearchParams
@@ -154,7 +153,7 @@ const HistoryPostList = () => {
      
       <div style={{ display: "grid", gridTemplateColumns: columns }} className="gap-6 md:gap-9 scrollbar-hide">
       {displayedPosts.map((post) => (
-        <ReviewPostItem key={post._id} post={post} />
+        <HistoryPostItem key={post._id} post={post} />
       ))}
     </div>
   );
