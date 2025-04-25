@@ -55,6 +55,7 @@ const PostList = () => {
   const [searchParams] = useSearchParams();
   const [displayedPosts, setDisplayedPosts] = useState([]);
   const [showMessage, setShowMessage] = useState(false);
+  const queryClient = useQueryClient();
 
   useEffect(() => {
     const updateColumns = () => {
@@ -74,6 +75,13 @@ const PostList = () => {
     updateColumns();
     return () => window.removeEventListener("resize", updateColumns);
   }, []);
+
+  useEffect(() => {
+    // Invalidate the query when the component unmounts or when navigating away
+    return () => {
+      queryClient.invalidateQueries(["posts"]);
+    };
+  }, [queryClient]);
 
   const {
     data: allPosts = [],

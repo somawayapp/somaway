@@ -29,6 +29,7 @@ const HistoryPostList = () => {
   const [searchParams] = useSearchParams();
   const [displayedPosts, setDisplayedPosts] = useState([]);
   const [showMessage, setShowMessage] = useState(false);
+  const queryClient = useQueryClient();
 
   // Batching control
   const indexRef = useRef(0);
@@ -53,6 +54,14 @@ const HistoryPostList = () => {
     updateColumns();
     return () => window.removeEventListener("resize", updateColumns);
   }, []);
+
+  useEffect(() => {
+    // Invalidate the query when the component unmounts or when navigating away
+    return () => {
+      queryClient.invalidateQueries(["posts"]);
+      queryClient.invalidateQueries(["featured"]);
+    };
+  }, [queryClient]);
 
   const {
     data: allPosts = [],
