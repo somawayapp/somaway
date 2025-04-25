@@ -4,7 +4,7 @@ import { Home, Compass, User, Search, Settings } from "lucide-react";
 
 const MobileControls = () => {
   return (
-<div className="fixed bottom-0 left-1/2 transform -translate-x-1/2 flex justify-between bg-[var(--bg)] 
+<div className="fixed bottom-0   border-t border-t-[var(--softBg4)]left-1/2 transform -translate-x-1/2 flex justify-between bg-[var(--bg)] 
     pl-4 pr-4 pt-3 pb-3 shadow-lg w-[100%] md:hidden">
     
 

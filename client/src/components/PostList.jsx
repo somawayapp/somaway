@@ -171,7 +171,7 @@ const PostList = () => {
   }
 
   return (
-    <div style={{ display: "grid", gridTemplateColumns: columns }} className="gap-6 md:gap-9 scrollbar-hide">
+    <div  style={{ display: "grid", gridTemplateColumns: columns, height: 'calc(100vw * 8)' }} className="gap-6 md:gap-9 scrollbar-hide">
       {displayedPosts.map((post) => (
         <PostListItem key={post._id} post={post} />
       ))}
@@ -180,5 +180,7 @@ const PostList = () => {
 };
 
 export default PostList;
+
+
 
 

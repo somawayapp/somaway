@@ -151,7 +151,7 @@ const HistoryPostList = () => {
   // Render the posts
   return (
      
-      <div style={{ display: "grid", gridTemplateColumns: columns }} className="gap-6 md:gap-9 scrollbar-hide">
+      <div style={{ display: "grid", gridTemplateColumns: columns,  height: 'calc(100vw * 16)' }} className="gap-6 md:gap-9 scrollbar-hide">
       {displayedPosts.map((post) => (
         <HistoryPostItem key={post._id} post={post} />
       ))}
