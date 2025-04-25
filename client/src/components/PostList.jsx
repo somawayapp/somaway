@@ -85,8 +85,7 @@ const PostList = () => {
   }, [queryClient]);
 
 
-
-  const { data: allPosts, refetch: refetchPosts, status: postsStatus } = useQuery({
+  const { data: allPosts, error: postsError, refetch: refetchPosts, status: postsStatus } = useQuery({
     queryKey: ["posts", searchParams.toString()],
     queryFn: () => fetchPosts(searchParams),
     staleTime: 1000 * 60 * 10,

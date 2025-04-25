@@ -66,7 +66,7 @@ const HistoryPostList = () => {
     };
   }, [queryClient]);
 
-  const { data: allPosts, refetch: refetchPosts, status: postsStatus } = useQuery({
+  const { data: allPosts, error: postsError, refetch: refetchPosts, status: postsStatus } = useQuery({
     queryKey: ["posts", searchParams.toString()],
     queryFn: () => fetchPosts(searchParams),
     staleTime: 1000 * 60 * 10,
@@ -77,6 +77,7 @@ const HistoryPostList = () => {
   useEffect(() => {
     refetchPosts();
   }, [refetchPosts]);
+
 
   useEffect(() => {
     const timer = setTimeout(() => {
