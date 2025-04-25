@@ -66,16 +66,17 @@ const HistoryPostList = () => {
     };
   }, [queryClient]);
 
-  const {
-    data: allPosts = [],
-    error: postsError,
-    status: postsStatus,
-  } = useQuery({
+  const { data: allPosts, refetch: refetchPosts, status: postsStatus } = useQuery({
     queryKey: ["posts", searchParams.toString()],
     queryFn: () => fetchPosts(searchParams),
     staleTime: 1000 * 60 * 10,
     cacheTime: 1000 * 60 * 30,
   });
+  
+  // Trigger a refetch when you navigate to this page
+  useEffect(() => {
+    refetchPosts();
+  }, [refetchPosts]);
 
   useEffect(() => {
     const timer = setTimeout(() => {
