@@ -158,15 +158,17 @@ const PostList = () => {
     );
   }
 
+ 
+    
   if (displayedPosts.length === 0) {
     return (
-      <div style={{ display: "grid", gridTemplateColumns: columns }} className="gap-6 md:gap-9 scrollbar-hide">
-      {Array(8).fill(0).map((_, index) => (
-        <div style={{ height: 'calc(w * 3)' }} key={index} className="relative aspect-[3/3]">
-          <div className="absolute inset-0 bg-[var(--softBg4)] animate-pulse rounded-xl md:rounded-2xl"></div>
-        </div>
-      ))}
-    </div>
+      <div style={{ display: "grid", gridTemplateColumns: columns }}  className="gap-6  md:gap-9 scrollbar-hide">
+        {Array(8).fill(0).map((_, index) => (
+          <div key={index} className="relative aspect-[3/3] w-full h-full">
+            <div className="absolute inset-0 bg-[var(--softBg4)] animate-pulse rounded-xl md:rounded-2xl"></div>
+          </div>
+        ))}
+      </div>
     );
   }
 
