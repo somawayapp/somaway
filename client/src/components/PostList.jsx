@@ -160,33 +160,14 @@ const PostList = () => {
 
   if (displayedPosts.length === 0) {
     return (
-      <div
-        style={{
-          display: "grid",
-          gridTemplateColumns: columns || "repeat(4, 1fr)", // Fallback to 4 columns if `columns` is undefined
-        }}
-        className="gap-6 md:gap-9 scrollbar-hide"
-      >
-        {Array(8).fill(0).map((_, index) => (
-          <div
-            key={index}
-            className="relative"
-            style={{
-              width: '100%', // Ensure the div takes full width
-              paddingBottom: '100%', // This ensures a 1:1 aspect ratio (height = width)
-            }}
-          >
-            <div
-              className="absolute inset-0 bg-[var(--softBg4)] animate-pulse rounded-xl md:rounded-2xl"
-              style={{ height: '100%' }} // Ensure the background fills the height of the element
-            ></div>
+      <div style={{ display: "grid", gridTemplateColumns: columns, height:"100vh"}} className="gap-6 md:gap-9  scrollbar-hide">
+       {Array(8).fill(0).map((_, index) => (
+          <div key={index} className="relative aspect-[3/3] w-full h-full">
+            <div className="absolute inset-0 bg-[var(--softBg4)] animate-pulse rounded-xl md:rounded-2xl"></div>
           </div>
         ))}
       </div>
     );
-    
-    
-    
   }
 
   return (
