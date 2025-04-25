@@ -16,7 +16,7 @@ const fetchPosts = async (searchParams) => {
     listed: true,
     sort: "random",
   };
-    const res = await axios.get(`${import.meta.env.VITE_API_URL}/posts?sort=random`, {
+    const res = await axios.get(`${import.meta.env.VITE_API_URL}/posts?sort=random&listed=true`, {
     params,
   });
 

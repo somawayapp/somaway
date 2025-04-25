@@ -15,7 +15,7 @@ const fetchPosts = async (searchParams) => {
     ...parseSearchParams(searchParams),
     sort: "random",
   };
-  const res = await axios.get(`${import.meta.env.VITE_API_URL}/posts`, {
+  const res = await axios.get(`${import.meta.env.VITE_API_URL}/posts?sort=random`, {
     params,
   });
 
@@ -139,7 +139,7 @@ const HistoryPostList = () => {
   if (displayedPosts.length === 0) {
     return (
       <div style={{ display: "grid", gridTemplateColumns: columns, width:"100vw"}} className="gap-6 md:gap-9  px-4 md:px-[80px] overflow-y-auto scrollbar-hide">
-       {Array(8).fill(0).map((_, index) => (
+       {Array(16).fill(0).map((_, index) => (
           <div key={index} className="relative aspect-[3/1] w-full h-full">
             <div className="absolute inset-0 bg-[var(--softBg4)] animate-pulse rounded-xl md:rounded-2xl"></div>
           </div>
