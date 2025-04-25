@@ -4,6 +4,9 @@ import axios from "axios";
 import { useSearchParams } from "react-router-dom";
 import { useEffect, useState, useRef } from "react";
 import HistoryPostItem from "./HistoryPostItem";
+import { useQueryClient } from "@tanstack/react-query";
+
+
 // Utility to convert URLSearchParams to plain object
 const parseSearchParams = (searchParams) =>
   searchParams instanceof URLSearchParams
