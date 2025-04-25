@@ -3,7 +3,6 @@ import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import { useSearchParams } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { useQueryClient } from "@tanstack/react-query";
 
 // Utility to convert URLSearchParams to plain object
 const parseSearchParams = (searchParams) =>
@@ -17,7 +16,7 @@ const fetchPosts = async (searchParams) => {
     listed: true,
     sort: "random",
   };
-    const res = await axios.get(`${import.meta.env.VITE_API_URL}/posts?sort=random&listed=true`, {
+    const res = await axios.get(`${import.meta.env.VITE_API_URL}/posts?sort=random`, {
     params,
   });
 
@@ -56,7 +55,6 @@ const PostList = () => {
   const [searchParams] = useSearchParams();
   const [displayedPosts, setDisplayedPosts] = useState([]);
   const [showMessage, setShowMessage] = useState(false);
-  const queryClient = useQueryClient();
 
   useEffect(() => {
     const updateColumns = () => {
@@ -77,25 +75,23 @@ const PostList = () => {
     return () => window.removeEventListener("resize", updateColumns);
   }, []);
 
-  useEffect(() => {
-    // Invalidate the query when the component unmounts or when navigating away
-    return () => {
-      queryClient.invalidateQueries(["posts"]);
-    };
-  }, [queryClient]);
-
-
-  const { data: allPosts, error: postsError, refetch: refetchPosts, status: postsStatus } = useQuery({
+  const {
+    data: allPosts = [],
+    error: postsError,
+    status: postsStatus,
+    refetch, // Add the refetch function here
+  } = useQuery({
     queryKey: ["posts", searchParams.toString()],
     queryFn: () => fetchPosts(searchParams),
     staleTime: 1000 * 60 * 10,
     cacheTime: 1000 * 60 * 30,
+    refetchOnWindowFocus: true, // Refetch on window/tab focus
   });
-  
-  // Trigger a refetch when you navigate to this page
+
   useEffect(() => {
-    refetchPosts();
-  }, [refetchPosts]);
+    // Force refetch when the component is opened (mounted)
+    refetch();
+  }, [refetch]);
 
   const {
     data: featuredPosts = [],

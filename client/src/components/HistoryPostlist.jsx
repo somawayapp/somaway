@@ -4,9 +4,6 @@ import axios from "axios";
 import { useSearchParams } from "react-router-dom";
 import { useEffect, useState, useRef } from "react";
 import HistoryPostItem from "./HistoryPostItem";
-import { useQueryClient } from "@tanstack/react-query";
-
-
 // Utility to convert URLSearchParams to plain object
 const parseSearchParams = (searchParams) =>
   searchParams instanceof URLSearchParams
@@ -18,7 +15,7 @@ const fetchPosts = async (searchParams) => {
     ...parseSearchParams(searchParams),
     sort: "random",
   };
-  const res = await axios.get(`${import.meta.env.VITE_API_URL}/posts?sort=random`, {
+  const res = await axios.get(`${import.meta.env.VITE_API_URL}/posts`, {
     params,
   });
 
@@ -32,7 +29,6 @@ const HistoryPostList = () => {
   const [searchParams] = useSearchParams();
   const [displayedPosts, setDisplayedPosts] = useState([]);
   const [showMessage, setShowMessage] = useState(false);
-  const queryClient = useQueryClient();
 
   // Batching control
   const indexRef = useRef(0);
@@ -58,26 +54,23 @@ const HistoryPostList = () => {
     return () => window.removeEventListener("resize", updateColumns);
   }, []);
 
-  useEffect(() => {
-    // Invalidate the query when the component unmounts or when navigating away
-    return () => {
-      queryClient.invalidateQueries(["posts"]);
-      queryClient.invalidateQueries(["featured"]);
-    };
-  }, [queryClient]);
-
-  const { data: allPosts, error: postsError, refetch: refetchPosts, status: postsStatus } = useQuery({
+  const {
+    data: allPosts = [],
+    error: postsError,
+    status: postsStatus,
+    refetch, // Add the refetch function here
+  } = useQuery({
     queryKey: ["posts", searchParams.toString()],
     queryFn: () => fetchPosts(searchParams),
     staleTime: 1000 * 60 * 10,
     cacheTime: 1000 * 60 * 30,
+    refetchOnWindowFocus: true, // Refetch on window/tab focus
   });
-  
-  // Trigger a refetch when you navigate to this page
-  useEffect(() => {
-    refetchPosts();
-  }, [refetchPosts]);
 
+  useEffect(() => {
+    // Force refetch when the component is opened (mounted)
+    refetch();
+  }, [refetch]);
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -85,6 +78,8 @@ const HistoryPostList = () => {
     }, 3000);
     return () => clearTimeout(timer);
   }, []);
+
+
 
   useEffect(() => {
     if (!Array.isArray(allPosts)) {
