@@ -102,12 +102,12 @@ const CategoriesScroll = ({ setOpen }) => {
                 key={propertytype}
                 onClick={() => handleClickPropertytype(slug)}
                 className={`flex flex-col items-center justify-center gap-2 text-[var(--softTextColor)] group transition-transform duration-200 
-                  hover:scale-110 text-sm md:text-md bg-[var(--bg)] px-1 md:px-[16px]
+                  hover:scale-105 text-sm md:text-md bg-[var(--bg)] px-1 md:px-[16px]
                   ${currentPropertytype === propertytype ? 'text-[var(--textColor)]' : ''}`}
               >
                 {icons[propertytype] && (
                   <span
-                    className={`transition-transform duration-200 group-hover:scale-110 group-hover:text-[var(--textColor)] ${
+                    className={`transition-transform duration-200 group-hover:scale-105 group-hover:text-[var(--textColor)] ${
                       currentPropertytype === propertytype ? 'text-[var(--textColor)]' : 'text-[var(--softBg5)]'
                     }`}
                     style={{
@@ -120,7 +120,7 @@ const CategoriesScroll = ({ setOpen }) => {
                   </span>
                 )}
                 <span
-                  className={`group-hover:text-[var(--textColor)] transition-transform duration-200 group-hover:scale-110 capitalize font-normal text-[13px] md:text-sm pb-[4px]
+                  className={`group-hover:text-[var(--textColor)] transition-transform duration-200 group-hover:scale-105 capitalize font-normal text-[13px] md:text-sm pb-[4px]
                     ${currentPropertytype === propertytype ? 'text-[var(--textColor)] border-b-2 border-[var(--textColor)]' : ''}`}
                 >
                   {propertytype}
@@ -137,7 +137,7 @@ const CategoriesScroll = ({ setOpen }) => {
           {showRightButton && (
             <button
               onClick={() => scroll("right")}
-              className="absolute right-[250px] top-[37%]  hover:scale-105 transform -translate-y-1/2 hidden md:block border-[1px] border-[var(--softBg4)] bg-[var(--bg)] bg-opacity-85 rounded-full px-[12px] py-[4px]  z-10"
+              className="absolute right-[250px] top-[37%]  transition-transform duration-200 group-hover:scale-105 transform -translate-y-1/2 hidden md:block border-[1px] border-[var(--softBg4)] bg-[var(--bg)] bg-opacity-85 rounded-full px-[12px] py-[4px]  z-10"
             >
               <span className="text-[var(--softTextColor)] font-bold">&gt;</span>
             </button>
@@ -147,7 +147,7 @@ const CategoriesScroll = ({ setOpen }) => {
           {showLeftButton && (
             <button
               onClick={() => scroll("left")}
-              className="absolute left-1 top-[37%] hover:scale-105  transform -translate-y-1/2 hidden md:block border-[1px]  border-[var(--softBg4)] bg-[var(--bg)] bg-opacity-85 rounded-full  px-[12px] py-[4px] z-10"
+              className="absolute left-1 top-[37%] transition-transform duration-200 group-hover:scale-105  transform -translate-y-1/2 hidden md:block border-[1px]  border-[var(--softBg4)] bg-[var(--bg)] bg-opacity-85 rounded-full  px-[12px] py-[4px] z-10"
             >
               <span className="text-[var(--softTextColor)] font-bold">&lt;</span>
             </button>
