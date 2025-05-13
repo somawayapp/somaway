@@ -83,10 +83,10 @@ const CategoriesScroll = ({ setOpen }) => {
   }, []);
 
   return (
-    <div className="relative  md:shadow-sm">
+    <div className="relative  md:shadow-md">
       <div className="px-4 md:px-[80px]">
         
-        <div className="relative flex items-start mb-0 md:mb-5">
+        <div className="relative flex items-start mb-0 md:mb-6">
           
           {/* Scrollable Categories */}
           <div
@@ -102,12 +102,12 @@ const CategoriesScroll = ({ setOpen }) => {
                 onClick={() => handleClickPropertytype(slug)}
                 className={`flex flex-col items-center justify-center gap-2 md:gap-3 text-[var(--softTextColor)] group transform group:hover:scale-105 group-hover:text-[var(--textColor)] text-sm
                   md:text-md bg-[var(--bg)] px-1 md:px-[16px] transition-all 
-                  ${currentPropertytype === propertytype ? 'border-b-2 pt-2 border-[var(--textColor)] text-[var(--textColor)]' : ''}`}  
+                  ${currentPropertytype === propertytype ? 'border-b-2 pt-3 border-[var(--textColor)] text-[var(--textColor)]' : ''}`}  
                 data-aos="fade-left"
               >
                 {icons[propertytype] && (
                   <span
-                    className={`group-hover:text-[var(--textColor)] ${
+                    className={`group-hover:text-[var(--textColor)] transform group:hover:scale-105 ${
                       currentPropertytype === propertytype ? 'text-[var(--textColor)]' : 'text-[var(--softBg5)]'
                     }`}
                     style={{
@@ -120,7 +120,7 @@ const CategoriesScroll = ({ setOpen }) => {
                   </span>
                 )}
                 <span
-                  className={`group-hover:text-[var(--textColor)] capitalize font-normal text-[13px] md:text-sm ${
+                  className={`group-hover:text-[var(--textColor)] transform group:hover:scale-105 capitalize font-normal text-[13px] md:text-sm ${
                     currentPropertytype === propertytype ? 'text-[var(--textColor)]' : ''
                   }`}
                 >
@@ -137,7 +137,7 @@ const CategoriesScroll = ({ setOpen }) => {
           {showRightButton && (
             <button
               onClick={() => scroll("right")}
-              className="absolute right-[250px] top-[37%] transform -translate-y-1/2 hidden md:block border-[1px] border-[var(--softBg4)] bg-[var(--bg)] bg-opacity-85 rounded-full px-[12px] py-[4px]  z-10"
+              className="absolute right-[250px] top-[37%]  hover:scale-105 transform -translate-y-1/2 hidden md:block border-[1px] border-[var(--softBg4)] bg-[var(--bg)] bg-opacity-85 rounded-full px-[12px] py-[4px]  z-10"
             >
               <span className="text-[var(--softTextColor)] font-bold">&gt;</span>
             </button>
@@ -147,7 +147,7 @@ const CategoriesScroll = ({ setOpen }) => {
           {showLeftButton && (
             <button
               onClick={() => scroll("left")}
-              className="absolute left-1 top-[37%]  transform -translate-y-1/2 hidden md:block border-[1px]  border-[var(--softBg4)] bg-[var(--bg)] bg-opacity-85 rounded-full  px-[12px] py-[4px] z-10"
+              className="absolute left-1 top-[37%] hover:scale-105  transform -translate-y-1/2 hidden md:block border-[1px]  border-[var(--softBg4)] bg-[var(--bg)] bg-opacity-85 rounded-full  px-[12px] py-[4px] z-10"
             >
               <span className="text-[var(--softTextColor)] font-bold">&lt;</span>
             </button>
