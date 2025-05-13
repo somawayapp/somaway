@@ -99,16 +99,17 @@ const CategoriesScroll = ({ setOpen }) => {
               return (
                 <Link
                 key={propertytype}
-                onClick={() => {
-                  handleClickPropertytype(slug);
-                }}
+                onClick={() => handleClickPropertytype(slug)}
                 className={`flex flex-col items-center justify-center gap-2 md:gap-3 text-[var(--softTextColor)] group transform group:hover:scale-105 group-hover:text-[var(--textColor)] text-sm
-                  md:text-md bg-[var(--bg)] px-1 md:px-[16px]  transition-all 
-                  ${currentPropertytype === propertytype ? 'border-b-2 border-[var(--textColor)]' : ''}`}  data-aos="fade-left"
+                  md:text-md bg-[var(--bg)] px-1 md:px-[16px] transition-all 
+                  ${currentPropertytype === propertytype ? 'border-b-2 pt-2 border-[var(--textColor)] text-[var(--textColor)]' : ''}`}  
+                data-aos="fade-left"
               >
                 {icons[propertytype] && (
                   <span
-                    className="text-[var(--softBg5)] group-hover:text-[var(--textColor)]"
+                    className={`group-hover:text-[var(--textColor)] ${
+                      currentPropertytype === propertytype ? 'text-[var(--textColor)]' : 'text-[var(--softBg5)]'
+                    }`}
                     style={{
                       fontSize: window.innerWidth <= 768 ? "20px" : "25px",
                       display: "flex",
@@ -118,10 +119,15 @@ const CategoriesScroll = ({ setOpen }) => {
                     {icons[propertytype]}
                   </span>
                 )}
-                <span className="text-[13px] font-normal group-hover:text-[var(--textColor)] md:text-sm  capitalize">
+                <span
+                  className={`group-hover:text-[var(--textColor)] capitalize font-normal text-[13px] md:text-sm ${
+                    currentPropertytype === propertytype ? 'text-[var(--textColor)]' : ''
+                  }`}
+                >
                   {propertytype}
                 </span>
               </Link>
+              
               
               );
             })}
