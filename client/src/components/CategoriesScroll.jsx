@@ -120,7 +120,7 @@ const CategoriesScroll = ({ setOpen }) => {
                 )}
                 <span
                   className={`group-hover:text-[var(--textColor)] transform group:hover:scale-105 capitalize font-normal text-[13px] md:text-sm ${
-                    currentPropertytype === propertytype ? 'text-[var(--textColor)] pt-3' : ''
+                    currentPropertytype === propertytype ? 'text-[var(--textColor)] pb-3' : ''
                   }`}
                 >
                   {propertytype}
