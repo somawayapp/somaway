@@ -91,7 +91,8 @@ const CategoriesScroll = ({ setOpen }) => {
           {/* Scrollable Categories */}
           <div
             ref={containerRef}
-            className="flex gap-4 overflow-x-auto scrollbar-hide pr-2"
+            className="flex gap-4 overflow-x-auto scrollbar-hide pr-2"        data-aos="fade-left"
+
             style={{ whiteSpace: "nowrap", flex: 1 }}
           >
             {propertytypes.map((propertytype) => {
@@ -100,7 +101,6 @@ const CategoriesScroll = ({ setOpen }) => {
                 <Link
                 key={propertytype}
                 onClick={() => handleClickPropertytype(slug)}
-                data-aos="fade-left"
                 className={`flex flex-col items-center justify-center gap-2 text-[var(--softTextColor)] group transition-transform duration-200 
                   hover:scale-110 text-sm md:text-md bg-[var(--bg)] px-1 md:px-[16px]
                   ${currentPropertytype === propertytype ? 'text-[var(--textColor)]' : ''}`}
