@@ -85,10 +85,7 @@ const router = createBrowserRouter([
         path: "/subscribe",
         element: <SubscriptionPage />,
       },
-      {
-        path: "/settings",
-        element: <SettingsPage />,
-      },
+      
    
       {
         path: "/about",

@@ -5,7 +5,7 @@
   import { useState, useEffect } from "react";
   import { Link } from "react-router-dom";
   import { SignedIn, SignedOut, UserButton } from "@clerk/clerk-react";
-  
+  import ThemeToggler from "./Theme";
   import "../index.css";
   import { AiOutlineMenu } from "react-icons/ai";
   import Avatar from "./Avatar";
@@ -240,11 +240,11 @@
              onClick={() => setOpen(false)}              > Help center      
               </Link>
             
-             <Link
-              to="/settings"
-              className="block py-2 text-[var(--softTextColor)]  hover:text-[#fc3239]  p-2 rounded-xl"
-              onClick={() => setOpen(false)}              > Settings     
-                  </Link>
+             <Link  className="block py-2  p-2 "
+              onClick={() => setOpen(false)}              >          
+                 <ThemeToggler />
+             </Link>
+             
               </div>
           
           </div>

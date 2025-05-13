@@ -8,7 +8,9 @@ import { GiOfficeChair, GiShop, GiCastle, GiCargoCrate } from "react-icons/gi";
 import { FaSwimmingPool, FaWifi, FaParking, FaLeaf, FaBabyCarriage } from 'react-icons/fa';
 import { MdBalcony, MdAir, MdFitnessCenter, MdSecurity, MdOutlineBackup} from 'react-icons/md';
 import { ArrowUpCircle } from "lucide-react";
+import { useLocation, useNavigate, useSearchParams } from "react-router-dom";
 import PropertySwitcher from "./PropertySwitcher";
+
 const propertytypes = [
   "apartment",
   "studio",
@@ -45,6 +47,14 @@ const CategoriesScroll = ({ setOpen }) => {
   const containerRef = useRef(null);
   const [showLeftButton, setShowLeftButton] = useState(false);
   const [showRightButton, setShowRightButton] = useState(false);
+  const [searchParams, setSearchParams] = useSearchParams();
+
+
+  const handleClickPropertytype = (propertytype) => {
+    const newParams = new URLSearchParams(searchParams.toString());
+    newParams.set('propertytype', propertytype);
+    setSearchParams(newParams); // Triggers rerender with updated model param
+  };
 
   const scroll = (direction) => {
     const scrollAmount = 200;
@@ -88,10 +98,12 @@ const CategoriesScroll = ({ setOpen }) => {
               return (
                 <Link
                   key={propertytype}
-                  to={`/?propertytype=${slug}`}
+                  onClick={() => {
+                    handleClickPropertytype(slug);
+                    setOpen(false);
+                  }}
                   className="flex flex-col items-center justify-center gap-2 md:gap-3 text-[var(--softTextColor)] hover:text-[var(--textColor)] text-sm
-                  md:text-md bg-[var(--bg)] rounded-xl pr-2 md:pr-[32px] pb-3 transition-all"
-                  onClick={() => setOpen(false)}
+                  md:text-md bg-[var(--bg)] rounded-xl pr-2 md:pr-[32px] pb-4  transition-all"
                 >
                   {icons[propertytype] && (
                     <span
@@ -105,7 +117,7 @@ const CategoriesScroll = ({ setOpen }) => {
                       {icons[propertytype]}
                     </span>
                   )}
-                  <span className="text-xs font-normal md:text-sm">{propertytype}</span>
+                  <span className="text-[13px] font-normal md:text-sm capitalize ">{propertytype}</span>
                 </Link>
               );
             })}

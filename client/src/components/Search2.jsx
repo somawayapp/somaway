@@ -118,7 +118,7 @@ const Search2 = () => {
   <div className="flex flex-row items-center relative gap-2 w-full justify-between">
     {/* Location */}
     <div className="relative hover:bg-[var(--softBg4)] rounded-full group p-2 flex flex-col items-start text-left flex-1">
-      <small className="text-[12px] ml-4 font-semibold text-[var(--softTextColor)] transition">
+      <small className="text-[13px] ml-4 font-semibold text-[var(--softTextColor)] transition">
         {filters.location || "Anywhere"}
       </small>
     </div>
@@ -127,14 +127,14 @@ const Search2 = () => {
 
     {/* Property Size */}
     <div className="relative hover:bg-[var(--softBg4)] rounded-full group p-2 flex flex-col items-start text-left flex-1">
-      <small className="text-[12px] font-semibold text-[var(--softTextColor)] transition">
+      <small className="text-[13px] font-semibold text-[var(--softTextColor)] transition">
         {filters.propertytype || "Any type"}
       </small>
     </div>
 
     {/* Search Icon */}
     <div className="p-2 flex-shrink-0">
-      <div className="p-3 bg-[#fc3239] rounded-full text-white transition-transform duration-300 hover:scale-110 hover:bg-[#d82930]">
+      <div className="p-2 bg-[#fc3239] rounded-full text-white transition-transform duration-300 hover:scale-110 hover:bg-[#d82930]">
         <FaSearch className="text-[12px]" />
       </div>
     </div>
