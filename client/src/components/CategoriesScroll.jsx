@@ -83,7 +83,7 @@ const CategoriesScroll = ({ setOpen }) => {
   }, []);
 
   return (
-    <div className="relative  md:shadow-md">
+    <div className="relative  md:shadow-sm">
       <div className="px-4 md:px-[80px]">
         
         <div className="relative flex items-start mb-0 md:mb-5">
@@ -102,12 +102,13 @@ const CategoriesScroll = ({ setOpen }) => {
                 onClick={() => {
                   handleClickPropertytype(slug);
                 }}
-                className="flex flex-col items-center justify-center gap-2 md:gap-3 text-[var(--softTextColor)] group transform group:hover:scale-105 group-hover:text-[var(--textColor)] text-sm
-                  md:text-md bg-[var(--bg)] pr-2 md:pr-[32px] pb-3 transition-all"  data-aos="fade-left"
+                className={`flex flex-col items-center justify-center gap-2 md:gap-3 text-[var(--softTextColor)] group transform group:hover:scale-105 group-hover:text-[var(--textColor)] text-sm
+                  md:text-md bg-[var(--bg)] pr-2 md:pr-[32px] pb-3 transition-all
+                  ${currentPropertytype === propertytype ? 'border-b-2 border-[var(--textColor)]' : ''}`}  data-aos="fade-left"
               >
                 {icons[propertytype] && (
                   <span
-                    className="text-[var(--softBg5)] group-hover:text-[var(--softTextColor)]"
+                    className="text-[var(--softBg5)] group-hover:text-[var(--textColor)]"
                     style={{
                       fontSize: window.innerWidth <= 768 ? "20px" : "25px",
                       display: "flex",
@@ -117,8 +118,7 @@ const CategoriesScroll = ({ setOpen }) => {
                     {icons[propertytype]}
                   </span>
                 )}
-                <span className={`text-[13px] font-normal md:text-sm mb-1 capitalize  
-                ${currentPropertytype === propertytype ? 'border-b-2 border-[var(--textColor)]' : ''}`} >
+                <span className="text-[13px] font-normal md:text-sm pb-1 capitalize">
                   {propertytype}
                 </span>
               </Link>
