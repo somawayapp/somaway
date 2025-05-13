@@ -91,7 +91,7 @@ const CategoriesScroll = ({ setOpen }) => {
           {/* Scrollable Categories */}
           <div
             ref={containerRef}
-            className="flex gap-4 overflow-x-auto scrollbar-hide pr-2"        data-aos="fade-left"
+            className="flex gap-4 overflow-x-auto scrollbar-hide pr-2"       
 
             style={{ whiteSpace: "nowrap", flex: 1 }}
           >
