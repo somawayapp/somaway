@@ -100,7 +100,6 @@ const CategoriesScroll = ({ setOpen }) => {
                   key={propertytype}
                   onClick={() => {
                     handleClickPropertytype(slug);
-                    setOpen(false);
                   }}
                   className="flex flex-col items-center justify-center gap-2 md:gap-3 text-[var(--softTextColor)] hover:text-[var(--textColor)] text-sm
                   md:text-md bg-[var(--bg)] rounded-xl pr-2 md:pr-[32px] pb-4  transition-all"
