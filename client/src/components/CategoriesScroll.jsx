@@ -102,7 +102,7 @@ const CategoriesScroll = ({ setOpen }) => {
                 onClick={() => handleClickPropertytype(slug)}
                 className={`flex flex-col items-center justify-center gap-2 text-[var(--softTextColor)] group transform group:hover:scale-110 group-hover:text-[var(--textColor)] text-sm
                   md:text-md bg-[var(--bg)] px-1 md:px-[16px] transition-all 
-                  ${currentPropertytype === propertytype ? 'border-b-2 border-[var(--textColor)] text-[var(--textColor)]' : ''}`  }   >
+                  ${currentPropertytype === propertytype ? 'border-b-2 border-[var(--textColor)] text-[var(--textColor)]' : ''} `  }   >
                 {icons[propertytype] && (
                   <span
                     className={`group-hover:text-[var(--textColor)] transform group:hover:scale-110 ${
@@ -119,7 +119,7 @@ const CategoriesScroll = ({ setOpen }) => {
                 )}
                 <span
                   className={`group-hover:text-[var(--textColor)] transform group:hover:scale-110 capitalize font-normal text-[13px] md:text-sm ${
-                    currentPropertytype === propertytype ? 'text-[var(--textColor)] mb-2' : ''
+                    currentPropertytype === propertytype ? 'text-[var(--textColor)]' : ''
                   }`}
                 >
                   {propertytype}
