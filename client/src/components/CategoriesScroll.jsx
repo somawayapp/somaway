@@ -48,6 +48,7 @@ const CategoriesScroll = ({ setOpen }) => {
   const [showLeftButton, setShowLeftButton] = useState(false);
   const [showRightButton, setShowRightButton] = useState(false);
   const [searchParams, setSearchParams] = useSearchParams();
+  const currentPropertytype = searchParams.get('propertytype'); // Get current model
 
 
   const handleClickPropertytype = (propertytype) => {
@@ -97,27 +98,31 @@ const CategoriesScroll = ({ setOpen }) => {
               const slug = propertytype.toLowerCase().replace(/\s+/g, "").replace(/&/g, "-");
               return (
                 <Link
-                  key={propertytype}
-                  onClick={() => {
-                    handleClickPropertytype(slug);
-                  }}
-                  className="flex flex-col items-center justify-center gap-2 md:gap-3 text-[var(--softTextColor)] hover:text-[var(--textColor)] text-sm
-                  md:text-md bg-[var(--bg)] rounded-xl pr-2 md:pr-[32px] pb-4  transition-all"
-                >
-                  {icons[propertytype] && (
-                    <span
-                      className="text-[var(--softBg5)] hover:text-[var(--softTextColor)]"
-                      style={{
-                        fontSize: window.innerWidth <= 768 ? "20px" : "25px",
-                        display: "flex",
-                        alignItems: "center",
-                      }}
-                    >
-                      {icons[propertytype]}
-                    </span>
-                  )}
-                  <span className="text-[13px] font-normal md:text-sm capitalize ">{propertytype}</span>
-                </Link>
+                key={propertytype}
+                onClick={() => {
+                  handleClickPropertytype(slug);
+                }}
+                className={`flex flex-col items-center justify-center gap-2 md:gap-3 text-[var(--softTextColor)] group transform group:hover:scale-105 group-hover:text-[var(--textColor)] text-sm
+                  md:text-md bg-[var(--bg)] rounded-xl pr-2 md:pr-[32px] pb-4 transition-all
+                  ${currentPropertytype === propertytype ? 'border-b-2 border-[var(--textColor)]' : ''}`}  data-aos="fade-left"
+              >
+                {icons[propertytype] && (
+                  <span
+                    className="text-[var(--softBg5)] group-hover:text-[var(--softTextColor)]"
+                    style={{
+                      fontSize: window.innerWidth <= 768 ? "20px" : "25px",
+                      display: "flex",
+                      alignItems: "center",
+                    }}
+                  >
+                    {icons[propertytype]}
+                  </span>
+                )}
+                <span className="text-[13px] font-normal md:text-sm capitalize">
+                  {propertytype}
+                </span>
+              </Link>
+              
               );
             })}
           </div>
