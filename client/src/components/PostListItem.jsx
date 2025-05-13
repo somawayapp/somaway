@@ -38,7 +38,7 @@ const PostListItem = ({ post }) => {
   };
 
   return (
-    <div className="relative gap-2 md:gap-4 group mb-3 md:mb-[15px] overflow-hidden rounded-xl">
+    <div className="relative gap-2 md:gap-4 group mb-3 md:mb-[15px] overflow-hidden  rounded-xl">
       <Link to={`/${post.slug}`} className="block">
         <div className="relative w-full h-full aspect-[3/3] rounded-xl overflow-hidden">
           <div
@@ -50,7 +50,7 @@ const PostListItem = ({ post }) => {
                 <img
                   key={index}
                   src={image}
-                  className="w-full h-full object-cover rounded-xl flex-shrink-0 snap-center"
+                  className="w-full h-full object-cover  transition-transform duration-200 group-hover:scale-105 rounded-xl flex-shrink-0 snap-center"
                   alt={`image-${index}`}
                 />
               ))
@@ -77,7 +77,7 @@ const PostListItem = ({ post }) => {
         </div>
       </Link>
 
-      <div className="absolute top-3 right-3">
+      <div className="absolute top-3  transition-transform duration-200 group-hover:scale-105 right-3">
         <LikeButton postId={post._id} />
       </div>
 
