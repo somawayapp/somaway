@@ -72,7 +72,7 @@
   
              {/* Show on medium screens and larger */}
              <Link to="/" className="flex items-center gap-1 text-xl font-bold md:text-3xl hidden md:flex">
-              <img src="/airlogo2.png" className="md:h-8" />
+              <img src="/logo22.png" className="md:h-8" />
              </Link>
     
              <Search2 />
@@ -244,7 +244,7 @@
               onClick={() => setOpen(false)}              >          
                  <ThemeToggler />
              </Link>
-             
+
               </div>
           
           </div>

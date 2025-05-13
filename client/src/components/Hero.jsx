@@ -26,8 +26,8 @@ const Hero = () => {
           </p>
           <Link
             to="/login"
-            className="w-full text-center mt-3 md:mt-0 sm:w-auto px-4 md:px-12 py-3 md:py-3 bg-[#fc3239]   text-white font-semibold
-             rounded-md hover:bg-[#FF5A5F]   "
+            className="w-full text-center mt-3 md:mt-0 sm:w-auto px-4 md:px-12 py-3 md:py-3bg-[#2F74FD]  text-white font-semibold
+             rounded-md hover:bg-[#0556f7]   "
           >
             Get Started
           </Link>

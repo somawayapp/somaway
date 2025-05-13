@@ -134,7 +134,7 @@ const Search2 = () => {
 
     {/* Search Icon */}
     <div className="p-2 flex-shrink-0">
-      <div className="p-2 bg-[#fc3239] rounded-full text-white transition-transform duration-300 hover:scale-110 hover:bg-[#d82930]">
+      <div className="p-2 bg-[#2F74FD]  rounded-full text-white transition-transform duration-300 hover:scale-110  hover:bg-[#0556f7]">
         <FaSearch className="text-[12px]" />
       </div>
     </div>
@@ -351,7 +351,7 @@ const Search2 = () => {
       </button>
     )}
     <button
-      className={`flex-1 py-3 bg-[#fc3239] text-white rounded-md ${
+      className={`flex-1 py-3 bg-[#2F74FD] hover:bg-[#0556f7] text-white rounded-md ${
         step === 1 ? "w-full" : ""
       }`}
       onClick={handleNext}
