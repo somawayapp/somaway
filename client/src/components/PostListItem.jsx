@@ -43,14 +43,14 @@ const PostListItem = ({ post }) => {
         <div className="relative w-full h-full aspect-[3/3] rounded-xl overflow-hidden">
           <div
             ref={scrollRef}
-            className="flex overflow-x-auto aspect-[3/3] snap-x snap-mandatory scroll-smooth scrollbar-hide"
+            className="flex overflow-x-auto aspect-[3/3] snap-x snap-mandatory scroll-smooth scrollbar-hide transition-transform duration-200 group-hover:scale-105"
           >
             {images.length > 0 ? (
               images.map((image, index) => (
                 <img
                   key={index}
                   src={image}
-                  className="w-full h-full object-cover  transition-transform duration-200 group-hover:scale-105 rounded-xl flex-shrink-0 snap-center"
+                  className="w-full h-full object-cover  rounded-xl flex-shrink-0 snap-center"
                   alt={`image-${index}`}
                 />
               ))
@@ -77,7 +77,7 @@ const PostListItem = ({ post }) => {
         </div>
       </Link>
 
-      <div className="absolute top-3  transition-transform duration-200 group-hover:scale-105 right-3">
+      <div className="absolute top-3 right-3">
         <LikeButton postId={post._id} />
       </div>
 
