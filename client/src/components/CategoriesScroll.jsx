@@ -103,7 +103,7 @@ const CategoriesScroll = ({ setOpen }) => {
                   handleClickPropertytype(slug);
                 }}
                 className={`flex flex-col items-center justify-center gap-2 md:gap-3 text-[var(--softTextColor)] group transform group:hover:scale-105 group-hover:text-[var(--textColor)] text-sm
-                  md:text-md bg-[var(--bg)] px-1 md:px-[16px]  transition-all pb-4
+                  md:text-md bg-[var(--bg)] px-1 md:px-[16px]  transition-all 
                   ${currentPropertytype === propertytype ? 'border-b-2 border-[var(--textColor)]' : ''}`}  data-aos="fade-left"
               >
                 {icons[propertytype] && (
