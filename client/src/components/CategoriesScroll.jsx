@@ -86,7 +86,7 @@ const CategoriesScroll = ({ setOpen }) => {
     <div className="relative  md:shadow-md">
       <div className="px-4 md:px-[80px]">
         
-        <div className="relative flex items-start mb-0 md:mb-6">
+        <div className="relative flex items-start mb-0 md:mb-8">
           
           {/* Scrollable Categories */}
           <div
@@ -100,13 +100,13 @@ const CategoriesScroll = ({ setOpen }) => {
                 <Link
                 key={propertytype}
                 onClick={() => handleClickPropertytype(slug)}
-                className={`flex flex-col items-center justify-center gap-2 md:gap-3 text-[var(--softTextColor)] group transform group:hover:scale-105 group-hover:text-[var(--textColor)] text-sm
+                className={`flex flex-col items-center justify-center gap-2 text-[var(--softTextColor)] group transform group:hover:scale-110 group-hover:text-[var(--textColor)] text-sm
                   md:text-md bg-[var(--bg)] px-1 md:px-[16px] transition-all 
                   ${currentPropertytype === propertytype ? 'border-b-2 border-[var(--textColor)] text-[var(--textColor)]' : ''}`}  
               >
                 {icons[propertytype] && (
                   <span
-                    className={`group-hover:text-[var(--textColor)] transform group:hover:scale-105 ${
+                    className={`group-hover:text-[var(--textColor)] transform group:hover:scale-110 ${
                       currentPropertytype === propertytype ? 'text-[var(--textColor)]' : 'text-[var(--softBg5)]'
                     }`}
                     style={{
@@ -119,8 +119,8 @@ const CategoriesScroll = ({ setOpen }) => {
                   </span>
                 )}
                 <span
-                  className={`group-hover:text-[var(--textColor)] transform group:hover:scale-105 capitalize font-normal text-[13px] md:text-sm ${
-                    currentPropertytype === propertytype ? 'text-[var(--textColor)] pb-3' : ''
+                  className={`group-hover:text-[var(--textColor)] transform group:hover:scale-110 capitalize font-normal text-[13px] md:text-sm ${
+                    currentPropertytype === propertytype ? 'text-[var(--textColor)] pb-2' : ''
                   }`}
                 >
                   {propertytype}
