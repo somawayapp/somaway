@@ -1,6 +1,5 @@
 
 import { useState } from "react";
-import { useLocation } from "react-router-dom"; // Import useLocation from react-router-dom
 import Search from "../components/Search";
 import { Link } from "react-router-dom";
 import CategoriesScroll from "../components/CategoriesScroll";
@@ -13,6 +12,8 @@ import { useEffect } from "react";
 import { MessageCircle } from "lucide-react"; // Importing the icon
 import { FaMap } from "react-icons/fa";
 import PropertySwitcher from "../components/PropertySwitcher";
+import { useLocation, useNavigate } from "react-router-dom";
+
 
 const HomePage = () => {
 
@@ -31,7 +32,18 @@ const HomePage = () => {
   const author = params.get("author");
   const search = params.get("search");
   const cat = params.get("cat"); 
-
+  const navigate = useNavigate();
+  
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  
+    const params = new URLSearchParams(location.search);
+    if (!params.has("listed")) {
+      params.set("listed", "true");
+      navigate(`${location.pathname}?${params.toString()}`, { replace: true });
+    }
+  }, [location.search, location.pathname, navigate]);
+  
   const displayText = [
     search ? `Search: ${search}` : "",
     sort ? `Sort: ${sort}` : "",
