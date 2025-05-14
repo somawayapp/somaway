@@ -98,10 +98,8 @@ export default function PropertySwitcher() {
 
  
 
-
-  <div className="flex justify-between ">
-<div className="justify-start" >
-<p
+  <div className="flex justify-between items-center">
+  <p
     onClick={() => handleClickFilter("")}
     className={`text-sm text-[var(--softTextColor)] hover:underline ${
       searchParams.toString() === "" ? "font-bold underline" : ""
@@ -109,16 +107,11 @@ export default function PropertySwitcher() {
   >
     Property Reviews & History
   </p>
-</div>
 
-<div className="left-0" >
   <SlidersHorizontal
     onClick={() => setShowDropdown((prev) => !prev)}
     className="w-8 h-4 cursor-pointer transition-transform duration-200 hover:scale-105 text-[var(--textColor)]"
   />
-  </div>
-
-
 </div>
 
 
