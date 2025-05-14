@@ -78,15 +78,15 @@ export default function PropertySwitcher() {
          {showDropdown && (
   isMdOrLarger ? (
     // Modal
-    <div className="fixed inset w-[225px] z-50 flex">
+    <div className="inset w-[225px] z-50 flex">
       <div className="mt-2 bg-[var(--bg)]  w-[225px] border border-[var(--softBg4)] rounded-md shadow-md p-3 text-sm space-y-2">
       {[...searchParams.entries()].map(([key, value]) => (
         <div key={key} className="flex justify-between items-center">
-          <span className="text-[var(--softTextColor)]">
+          <span className="text-[var(--softTextColor)] capitalize">
             {key}: <span className="font-semibold">{value}</span>
           </span>
           <button
-            className="text-blue-500 ml-1 text-xs md:text-sm hover:underline"
+            className="text-blue-600 ml-1 text-xs font-semibold md:text-sm hover:underline"
             onClick={() => removeParam(key)}
           >
             Remove
@@ -95,7 +95,7 @@ export default function PropertySwitcher() {
       ))}
       <button
         onClick={clearAllParams}
-        className="mt-2 text-blue-600 text-xs md:text-sm font-bold hover:underline"
+        className="mt-2 text-blue-600 text-xs md:text-sm font-semibold hover:underline"
       >
         Clear All Filters
       </button>
@@ -106,11 +106,11 @@ export default function PropertySwitcher() {
     <div className="mt-2 bg-[var(--bg)] border border-[var(--softBg4)] rounded-md shadow-md p-3 text-sm space-y-2">
       {[...searchParams.entries()].map(([key, value]) => (
         <div key={key} className="flex justify-between items-center">
-          <span className="text-[var(--softTextColor)]">
+          <span className="text-[var(--softTextColor)] capitalize">
             {key}: <span className="font-semibold">{value}</span>
           </span>
           <button
-            className="text-blue-500 ml-1 text-xs hover:underline"
+            className="text-blue-500 ml-1 font-semibold text-sm hover:underline"
             onClick={() => removeParam(key)}
           >
             Remove
@@ -119,7 +119,7 @@ export default function PropertySwitcher() {
       ))}
       <button
         onClick={clearAllParams}
-        className="mt-2 text-blue-600 text-xs font-bold hover:underline"
+        className="mt-2 text-blue-600 text-sm font-semibold hover:underline"
       >
         Clear All Filters
       </button>

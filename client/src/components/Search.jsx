@@ -51,6 +51,12 @@ const Search = () => {
   const [step, setStep] = useState(1);
   const isScrolledUp = useScrollDirection(10); // Using debounced scroll
 
+const handleModelChange = (model) => {
+  const newParams = new URLSearchParams(searchParams.toString());
+  newParams.set("model", model);
+  setSearchParams(newParams);
+};
+
 
   const [filters, setFilters] = useState({
     location: "",
@@ -107,19 +113,32 @@ const Search = () => {
         {/* Rent & Sale Links */}
         {!isScrolledUp && (
   
-        <div
-          className={`flex justify-center gap-[60px] transition-all duration-300 ${
-            isScrolledUp ? "opacity-0 translate-y-[-20px] mb-0  pointer-events-none" : " mb-6 mt-[35px] opacity-100 translate-y-0"
-          }`}
-        >
-          <a href="?model=forrent" className="text-sm font-semibold  text-[var(--softTextColor)] hover:underline">
-         For Rent
-          </a>
-   
-          <a href="?model=forsale" className="text-sm font-normal text-[var(--softTextColor)] hover:underline">
-          For Sale
-          </a>
-        </div> )}
+  <div
+  className={`flex justify-center gap-[60px] transition-all duration-300 ${
+    isScrolledUp
+      ? "opacity-0 translate-y-[-20px] mb-0 pointer-events-none"
+      : "mb-6 mt-[35px] opacity-100 translate-y-0"
+  }`}
+>
+  <button
+    onClick={() => handleModelChange("forrent")}
+    className={`text-sm ${
+      searchParams.get("model") === "forrent" ? "font-semibold" : "font-normal"
+    } text-[var(--softTextColor)] hover:underline`}
+  >
+    For Rent
+  </button>
+
+  <button
+    onClick={() => handleModelChange("forsale")}
+    className={`text-sm ${
+      searchParams.get("model") === "forsale" ? "font-semibold" : "font-normal"
+    } text-[var(--softTextColor)] hover:underline`}
+  >
+    For Sale
+  </button>
+</div>
+)}
   
   
   
