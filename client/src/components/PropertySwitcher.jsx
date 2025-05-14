@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useLocation, useNavigate, useSearchParams } from "react-router-dom";
-import { Filter } from "lucide-react";
+import { SlidersHorizontal } from "lucide-react";
 
 export default function PropertySwitcher() {
   const location = useLocation();
@@ -44,13 +44,17 @@ export default function PropertySwitcher() {
       {/* Dropdown with Active Search Params */}
       {location.search && (
         <div className="w-full max-w-sm mb-3">
+         <div className=" flex justify-between">
          <button
-  className="text-sm text-[var(--softTextColor)] underline font-semibold flex items-center gap-2"
-  onClick={() => setShowDropdown((prev) => !prev)}
->
-  {showDropdown ? "Hide Filters" : "Show Active Filters"}
-  <Filter className="w-4 h-4 text-[var(--softTextColor)]" />
-</button>
+        className="text-sm text-[var(--softTextColor)] underline font-semibold flex items-center gap-2"
+         onClick={() => setShowDropdown((prev) => !prev)}>
+         {showDropdown ? "Hide Filters" : "Show Active Filters"}
+        </button>
+
+        <SlidersHorizontal className="w-4 h-4 text-[var(--softTextColor)]" />
+
+
+         </div>
 
 
           {showDropdown && (
