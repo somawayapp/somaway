@@ -2,6 +2,21 @@ import { useEffect, useState } from "react";
 import { useLocation, useNavigate, useSearchParams } from "react-router-dom";
 import { SlidersHorizontal } from "lucide-react";
 
+function useIsMdOrLarger() {
+  const [isMdOrLarger, setIsMdOrLarger] = useState(window.innerWidth >= 768);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMdOrLarger(window.innerWidth >= 768);
+    };
+
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  return isMdOrLarger;
+}
+
 export default function PropertySwitcher() {
   const location = useLocation();
   const navigate = useNavigate();
@@ -9,6 +24,8 @@ export default function PropertySwitcher() {
   const [searchParams, setSearchParams] = useSearchParams();
   const currentModel = searchParams.get('model'); // Get current model
   const [showDropdown, setShowDropdown] = useState(true); // NEW: for dropdown toggle
+  const isMdOrLarger = useIsMdOrLarger();
+
 
   const handleClickFilter = (listedValue) => {
     const newParams = new URLSearchParams(searchParams.toString());
@@ -58,30 +75,64 @@ export default function PropertySwitcher() {
          </div>
 
 
-          {showDropdown && (
-            <div className="mt-2 bg-[var(--bg)] border border-[var(--softBg4)] rounded-md shadow-md p-3 text-sm space-y-2">
-              {[...searchParams.entries()].map(([key, value]) => (
-                <div key={key} className="flex justify-between items-center">
-                  <span className="text-[var(--softTextColor)]">
-                    {key}: <span className="font-semibold">{value}</span>
-                  </span>
-                  <button
-                    className="text-blue-500 ml-1 text-xs hover:underline"
-                    onClick={() => removeParam(key)}
-                  >
-                    Remove
-                  </button>
-                </div>
-              ))}
+         {showDropdown && (
+  isMdOrLarger ? (
+    // Modal
+    <div className="fixed inset-0 bg-black bg-opacity-40 z-50 flex justify-center items-center">
+      <div className="bg-[var(--bg)] border border-[var(--softBg4)] rounded-md shadow-lg p-5 w-full max-w-md text-sm space-y-2 relative">
+        <button
+          onClick={() => setShowDropdown(false)}
+          className="absolute top-2 right-2 text-[var(--softTextColor)] hover:text-red-500 text-xs"
+        >
+          Close ✕
+        </button>
+        {[...searchParams.entries()].map(([key, value]) => (
+          <div key={key} className="flex justify-between items-center">
+            <span className="text-[var(--softTextColor)]">
+              {key}: <span className="font-semibold">{value}</span>
+            </span>
+            <button
+              className="text-blue-500 ml-1 text-xs hover:underline"
+              onClick={() => removeParam(key)}
+            >
+              Remove
+            </button>
+          </div>
+        ))}
+        <button
+          onClick={clearAllParams}
+          className="mt-2 text-blue-600 text-xs font-bold hover:underline"
+        >
+          Clear All Filters
+        </button>
+      </div>
+    </div>
+  ) : (
+    // Existing Dropdown
+    <div className="mt-2 bg-[var(--bg)] border border-[var(--softBg4)] rounded-md shadow-md p-3 text-sm space-y-2">
+      {[...searchParams.entries()].map(([key, value]) => (
+        <div key={key} className="flex justify-between items-center">
+          <span className="text-[var(--softTextColor)]">
+            {key}: <span className="font-semibold">{value}</span>
+          </span>
+          <button
+            className="text-blue-500 ml-1 text-xs hover:underline"
+            onClick={() => removeParam(key)}
+          >
+            Remove
+          </button>
+        </div>
+      ))}
+      <button
+        onClick={clearAllParams}
+        className="mt-2 text-blue-600 text-xs font-bold hover:underline"
+      >
+        Clear All Filters
+      </button>
+    </div>
+  )
+)}
 
-              <button
-                onClick={clearAllParams}
-                className="mt-2 text-blue-600 text-xs font-bold hover:underline"
-              >
-                Clear All Filters
-              </button>
-            </div>
-          )}
         </div>
       )}
 
@@ -108,7 +159,7 @@ export default function PropertySwitcher() {
   
         <p
           onClick={() => handleClickFilter("true")}
-          className={`text-sm text-[var(--softTextColor)]cursor-pointer hover:underline ${
+          className={`text-sm text-[var(--softTextColor)] cursor-pointer hover:underline ${
             searchParams.get("listed") === "true" ? "font-bold underline" : ""
           }`}
         >
