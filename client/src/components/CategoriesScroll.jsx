@@ -70,7 +70,7 @@ const CategoriesScroll = ({ setOpen }) => {
     if (!containerRef.current) return;
     const { scrollLeft, scrollWidth, clientWidth } = containerRef.current;
     setShowLeftButton(scrollLeft > 0);
-    setShowRightButton(scrollLeft + clientWidth -380 < scrollWidth);
+    setShowRightButton(scrollLeft + clientWidth -390 < scrollWidth);
   };
 
   useEffect(() => {
@@ -86,7 +86,7 @@ const CategoriesScroll = ({ setOpen }) => {
     <div className="relative  md:shadow-md">
       <div className="px-4 md:px-[80px]">
         
-        <div className="relative flex items-start mb-0 md:mb-6">
+        <div className="relative flex items-start ">
           
           {/* Scrollable Categories */}
           <div
@@ -137,7 +137,8 @@ const CategoriesScroll = ({ setOpen }) => {
           {showRightButton && (
             <button
               onClick={() => scroll("right")}
-              className="absolute right-[250px] top-[37%]  transition-transform duration-200 group-hover:scale-105 transform -translate-y-1/2 hidden md:block border-[1px] border-[var(--softBg4)] bg-[var(--bg)] bg-opacity-85 rounded-full px-[12px] py-[4px]  z-10"
+              className="absolute right-[260px] top-[37%]  transition-transform duration-200 group-hover:scale-105 transform -translate-y-1/2 
+              hidden md:block border-[1px] border-[var(--softBg4)] bg-[var(--bg)] bg-opacity-85 rounded-full px-[12px] py-[4px]  z-10"
             >
               <span className="text-[var(--softTextColor)] font-bold">&gt;</span>
             </button>
@@ -147,7 +148,8 @@ const CategoriesScroll = ({ setOpen }) => {
           {showLeftButton && (
             <button
               onClick={() => scroll("left")}
-              className="absolute left-1 top-[37%] transition-transform duration-200 group-hover:scale-105  transform -translate-y-1/2 hidden md:block border-[1px]  border-[var(--softBg4)] bg-[var(--bg)] bg-opacity-85 rounded-full  px-[12px] py-[4px] z-10"
+              className="absolute left-1 top-[37%] transition-transform duration-200 group-hover:scale-105  transform -translate-y-1/2 hidden 
+              md:block border-[1px]  border-[var(--softBg4)] bg-[var(--bg)] bg-opacity-85 rounded-full  px-[12px] py-[4px] z-10"
             >
               <span className="text-[var(--softTextColor)] font-bold">&lt;</span>
             </button>

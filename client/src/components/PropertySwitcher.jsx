@@ -76,7 +76,7 @@ export default function PropertySwitcher() {
 
               <button
                 onClick={clearAllParams}
-                className="mt-2 text-red-600 text-xs font-bold hover:underline"
+                className="mt-2 text-blue-600 text-xs font-bold hover:underline"
               >
                 Clear All Filters
               </button>
@@ -91,7 +91,7 @@ export default function PropertySwitcher() {
    {isRootPathWithoutSearchParams && (
     <div className="w-full">
       <div className="flex flex-col gap-2 w-full">
-        <div className="flex justify-between items-center w-full">
+        <div className="flex justify-between gap-2 items-center w-full">
           <p
             onClick={() => handleClickFilter("")}
             className={`text-sm text-[var(--softTextColor)] hover:underline ${
