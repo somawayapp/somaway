@@ -10,11 +10,12 @@ export default function PropertySwitcher() {
   const currentModel = searchParams.get('model'); // Get current model
   const [showDropdown, setShowDropdown] = useState(true); // NEW: for dropdown toggle
 
-  const handleClickModel = (model) => {
+  const handleClickFilter = (listedValue) => {
     const newParams = new URLSearchParams(searchParams.toString());
-    newParams.set('model', model);
+    newParams.set('listed', listedValue); // 'true' or 'false'
     setSearchParams(newParams);
   };
+  
 
   const handleToggle = () => {
     const newState = !toggleState;
@@ -84,69 +85,33 @@ export default function PropertySwitcher() {
         </div>
       )}
 
-      {/* Filter Toggle UI for non-root search page */}
-      {isNotRootPath && (
-        <div className="flex justify-between gap-2 block  md:gap-4 items-center w-full max-w-sm">
-          <div className="cursor-pointer">
-            <p
-              onClick={handleGoHome}
-              className="text-md cursor-pointer text-[var(--softTextColor)] font-bold hover:underline"
-            >
-              Search filters
-            </p>
-            <div className="cursor-pointer flex flex-col justify-between ">
-              <p
-                onClick={() => handleClickModel('forsale')}
-                className={`text-sm text-[var(--softTextColor)] hover:underline ${currentModel === 'forsale' ? 'font-bold underline' : ''}`}
-              >
-                Buy/ Rent
-              </p>
-              <p
-                onClick={() => handleClickModel('forrent')}
-                className={`text-sm text-[var(--softTextColor)] hover:underline ${currentModel === 'forrent' ? 'font-bold underline' : ''}`}
-              >
-                History/ Reviews
-              </p>
-            </div>
-          </div>
-
-          <div
-            onClick={handleGoHome}
-            className="w-16 h-8 flex items-center rounded-full p-1 cursor-pointer transition-colors duration-300 bg-[var(--softTextColor)]"
-          >
-            <div
-              className={`w-6 h-6 flex items-center justify-center text-[var(--softTextColor)] rounded-full shadow-md transform duration-300 ease-in-out ${
-                toggleState ? "translate-x-8 bg-[var(--bg)]" : "translate-x-0 bg-[var(--bg)]"
-              }`}
-            >
-              ✓
-            </div>
-          </div>
-        </div>
-      )}
+   
 
       {/* UI if no search params */}
       {isRootPathWithoutSearchParams && (
         <div className="flex justify-between block  gap-0 md:gap-4 items-center w-full max-w-sm">
-          <div>
-            <p className="text-md text-[var(--softTextColor)] font-bold hover:underline">
-              Buy or rent property
-            </p>
-            <div className="cursor-pointer flex flex-col justify-between ">
-              <p
-                onClick={() => handleClickModel('forsale')}
-                className={`text-sm text-[var(--softTextColor)] hover:underline ${currentModel === 'forsale' ? 'font-bold underline' : ''}`}
-              >
-                For Sale
-              </p>
-              <p
-                onClick={() => handleClickModel('forrent')}
-                className={`text-sm text-[var(--softTextColor)] hover:underline ${currentModel === 'forrent' ? 'font-bold underline' : ''}`}
-              >
-                For Rent
-              </p>
-            </div>
-          </div>
+       <div className="cursor-pointer">
+  <p className="text-md cursor-pointer text-[var(--softTextColor)] font-bold hover:underline">
+    Search filters
+  </p>
+
+  <div className="cursor-pointer flex flex-col justify-between">
+    <p
+      onClick={() => handleClickFilter("true")}
+      className={`text-sm text-[var(--softTextColor)] hover:underline ${searchParams.get("listed") === "true" ? "font-bold underline" : ""}`}
+    >
+      Buy/ Rent
+    </p>
+
+    <p
+      onClick={() => handleClickFilter("false")}
+      className={`text-sm text-[var(--softTextColor)] hover:underline ${searchParams.get("listed") === "false" ? "font-bold underline" : ""}`}
+    >
+      History/ Reviews
+    </p>
+  </div>
+</div>
+
         </div>
       )}
     </div>
