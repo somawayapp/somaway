@@ -45,14 +45,14 @@ export default function PropertySwitcher() {
       {/* Dropdown with Active Search Params */}
       {location.search && (
         <div className="w-full max-w-sm mb-3">
-         <div className=" flex gap-6 justify-between">
+         <div className=" flex gap-6 mt-1 justify-between">
          <button
         className="text-sm ml-1 text-[var(--softTextColor)] transition-transform duration-200 hover:scale-105 underline font-semibold flex items-center gap-2"
          onClick={() => setShowDropdown((prev) => !prev)}>
          {showDropdown ? "Hide Filters" : "Show Active Filters"}
         </button>
 
-        <SlidersHorizontal      onClick={() => setShowDropdown((prev) => !prev)}  className="w-8 h-4 font-semibold hover:thumb transition-transform duration-200 hover:scale-105 text-[var(--textColor)]" />
+        <SlidersHorizontal      onClick={() => setShowDropdown((prev) => !prev)}  className="w-8 h-4 font-semibold cursor-pointer transition-transform duration-200 hover:scale-105 text-[var(--textColor)]" />
 
 
          </div>
@@ -66,7 +66,7 @@ export default function PropertySwitcher() {
                     {key}: <span className="font-semibold">{value}</span>
                   </span>
                   <button
-                    className="text-red-500 text-xs hover:underline"
+                    className="text-red-500 ml-1 text-xs hover:underline"
                     onClick={() => removeParam(key)}
                   >
                     Remove
@@ -91,31 +91,21 @@ export default function PropertySwitcher() {
       {isRootPathWithoutSearchParams && (
         <div className="flex justify-between block  gap-0 md:gap-4 items-center w-full max-w-sm">
        <div className="cursor-pointer">
-       <div className=" flex gap-6 justify-between">
-         <button
-        className="text-sm ml-1 text-[var(--softTextColor)] transition-transform duration-200 hover:scale-105 underline font-semibold flex items-center gap-2"
-         onClick={() => setShowDropdown((prev) => !prev)}>
-         {showDropdown ? "Hide Filters" : "Show Active Filters"}
-        </button>
-
-        <SlidersHorizontal      onClick={() => setShowDropdown((prev) => !prev)}  className="w-8 h-4 font-semibold hover:thumb transition-transform duration-200 hover:scale-105 text-[var(--textColor)]" />
-
-
-         </div>
+     
 
   <div className="cursor-pointer flex flex-col justify-between">
     <p
       onClick={() => handleClickFilter("true")}
       className={`text-sm text-[var(--softTextColor)] hover:underline ${searchParams.get("listed") === "true" ? "font-bold underline" : ""}`}
     >
-      Vacant Property
+      Go to Vacant Homes
     </p>
 
     <p
       onClick={() => handleClickFilter("")}
-      className={`text-sm text-[var(--softTextColor)] hover:underline ${searchParams.get("listed") === "" ? "font-bold underline" : ""}`}
+      className={`text-sm text-[var(--softTextColor)] hover:underline ${searchParams.get("") === "" ? "font-bold underline" : ""}`}
     >
-      History/ Reviews
+      These are Property Reviews & History
     </p>
   </div>
 </div>
