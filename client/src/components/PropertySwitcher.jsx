@@ -61,7 +61,7 @@ export default function PropertySwitcher() {
     <div className="w-full border p-3 border-[var(--softBg4)] rounded-xl mb-5 md:mb-3 shadow-md flex flex-col items-center relative">
       {/* Dropdown with Active Search Params */}
       {location.search && (
-        <div className="w-full mb-3">
+        <div className="w-full md:min-w-[250px] mb-3">
          <div className=" flex gap-6 mt-1 justify-between">
          <button
         className="text-sm ml-1 text-[var(--softTextColor)] transition-transform duration-200 hover:scale-105 underline font-semibold flex items-center gap-2"
@@ -78,7 +78,7 @@ export default function PropertySwitcher() {
          {showDropdown && (
   isMdOrLarger ? (
     // Modal
-    <div className="fixed inset z-50 flex">
+    <div className="fixed inset min-w-[250px] z-50 flex">
       <div className="mt-2 bg-[var(--bg)] border border-[var(--softBg4)] rounded-md shadow-md p-3 text-sm space-y-2">
       {[...searchParams.entries()].map(([key, value]) => (
         <div key={key} className="flex justify-between items-center">
