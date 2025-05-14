@@ -70,7 +70,7 @@ const CategoriesScroll = ({ setOpen }) => {
     if (!containerRef.current) return;
     const { scrollLeft, scrollWidth, clientWidth } = containerRef.current;
     setShowLeftButton(scrollLeft > 0);
-    setShowRightButton(scrollLeft + clientWidth -390 < scrollWidth);
+    setShowRightButton(scrollLeft + clientWidth -400 < scrollWidth);
   };
 
   useEffect(() => {
@@ -137,7 +137,7 @@ const CategoriesScroll = ({ setOpen }) => {
           {showRightButton && (
             <button
               onClick={() => scroll("right")}
-              className="absolute right-[260px] top-[37%]  transition-transform duration-200 group-hover:scale-105 transform -translate-y-1/2 
+              className="absolute right-[265px] top-[37%]  transition-transform duration-200 group-hover:scale-105 transform -translate-y-1/2 
               hidden md:block border-[1px] border-[var(--softBg4)] bg-[var(--bg)] bg-opacity-85 rounded-full px-[12px] py-[4px]  z-10"
             >
               <span className="text-[var(--softTextColor)] font-bold">&gt;</span>

@@ -91,7 +91,7 @@ export default function PropertySwitcher() {
    {isRootPathWithoutSearchParams && (
     <div className="w-full">
       <div className="flex flex-col gap-2 w-full">
-        <div className="flex justify-between gap-2 items-center w-full">
+        <div className="flex justify-between gap-4 items-center w-full">
           <p
             onClick={() => handleClickFilter("")}
             className={`text-sm text-[var(--softTextColor)] hover:underline ${
