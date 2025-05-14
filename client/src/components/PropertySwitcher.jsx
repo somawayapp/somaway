@@ -78,8 +78,8 @@ export default function PropertySwitcher() {
          {showDropdown && (
   isMdOrLarger ? (
     // Modal
-    <div className="fixed inset min-w-[225px] z-50 flex">
-      <div className="mt-2 bg-[var(--bg)]  min-w-[200px] border border-[var(--softBg4)] rounded-md shadow-md p-3 text-sm space-y-2">
+    <div className="fixed inset w-[225px] z-50 flex">
+      <div className="mt-2 bg-[var(--bg)]  w-[225px] border border-[var(--softBg4)] rounded-md shadow-md p-3 text-sm space-y-2">
       {[...searchParams.entries()].map(([key, value]) => (
         <div key={key} className="flex justify-between items-center">
           <span className="text-[var(--softTextColor)]">
