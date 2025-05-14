@@ -46,12 +46,12 @@ export default function PropertySwitcher() {
         <div className="w-full max-w-sm mb-3">
          <div className=" flex justify-between">
          <button
-        className="text-sm text-[var(--softTextColor)] underline font-semibold flex items-center gap-2"
+        className="text-sm ml-1 text-[var(--softTextColor)] underline font-semibold flex items-center gap-2"
          onClick={() => setShowDropdown((prev) => !prev)}>
          {showDropdown ? "Hide Filters" : "Show Active Filters"}
         </button>
 
-        <SlidersHorizontal className="w-4 h-4 text-[var(--softTextColor)]" />
+        <SlidersHorizontal      onClick={() => setShowDropdown((prev) => !prev)}  className="w-6 h-4 text-[var(--textColor)]" />
 
 
          </div>
@@ -92,20 +92,20 @@ export default function PropertySwitcher() {
               onClick={handleGoHome}
               className="text-md cursor-pointer text-[var(--softTextColor)] font-bold hover:underline"
             >
-              Remove all filters
+              Search filters
             </p>
             <div className="cursor-pointer flex flex-col justify-between ">
               <p
                 onClick={() => handleClickModel('forsale')}
                 className={`text-sm text-[var(--softTextColor)] hover:underline ${currentModel === 'forsale' ? 'font-bold underline' : ''}`}
               >
-                For Sale
+                Buy/ Rent
               </p>
               <p
                 onClick={() => handleClickModel('forrent')}
                 className={`text-sm text-[var(--softTextColor)] hover:underline ${currentModel === 'forrent' ? 'font-bold underline' : ''}`}
               >
-                For Rent
+                History/ Reviews
               </p>
             </div>
           </div>
