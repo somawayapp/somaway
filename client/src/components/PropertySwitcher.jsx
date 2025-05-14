@@ -98,7 +98,7 @@ export default function PropertySwitcher() {
 
  
 
-  <div className="flex justify-between items-center">
+  <div className="flex w-full justify-between items-center">
   <p
     onClick={() => handleClickFilter("")}
     className={`text-sm text-[var(--softTextColor)] hover:underline ${
@@ -110,9 +110,10 @@ export default function PropertySwitcher() {
 
   <SlidersHorizontal
     onClick={() => setShowDropdown((prev) => !prev)}
-    className="w-8 h-4 cursor-pointer transition-transform duration-200 hover:scale-105 text-[var(--textColor)]"
+    className="w-5 h-5 cursor-pointer transition-transform duration-200 hover:scale-105 text-[var(--textColor)]"
   />
 </div>
+
 
 
 
