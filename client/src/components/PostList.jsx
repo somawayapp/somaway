@@ -10,14 +10,27 @@ const parseSearchParams = (searchParams) =>
     ? Object.fromEntries([...searchParams])
     : {};
 
-const fetchPosts = async (searchParams) => {
-  const params = {
-    ...parseSearchParams(searchParams),
-    sort: "random",
-  };
-    const res = await axios.get(`${import.meta.env.VITE_API_URL}/posts?sort=random`, {
-    params,
-  });
+    const fetchPosts = async (searchParams) => {
+      const paramsFromURL = parseSearchParams(searchParams);
+    
+      const params = {
+        // listed: if 'listed' is explicitly present in URL, use it; otherwise default to "true"
+        listed: paramsFromURL.hasOwnProperty("listed") ? paramsFromURL.listed : "true",
+    
+        // sort: use from URL or fallback to "random"
+        sort: paramsFromURL.sort || "random",
+    
+        // Include all other query params (e.g., cat, author, search)
+        ...paramsFromURL,
+      };
+    
+      const res = await axios.get(`${import.meta.env.VITE_API_URL}/posts`, {
+        params,
+      });
+    
+      return res.data;
+    };
+    
 
   const posts = res.data?.posts;
   console.log("Fetched posts:", posts);
@@ -29,6 +42,7 @@ const fetchFeaturedPosts = async (searchParams) => {
     ...parseSearchParams(searchParams),
     featured: true,
     limit: 4,
+    listed: true,
     sort: "random",
   };
 
