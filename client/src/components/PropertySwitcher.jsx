@@ -5,34 +5,81 @@ export default function PropertySwitcher() {
   const location = useLocation();
   const navigate = useNavigate();
   const [toggleState, setToggleState] = useState(false); // false = forrent, true = forsale
-  const [toggleModelState, setToggleModelState] = useState(false); // UI toggle for root page
   const [searchParams, setSearchParams] = useSearchParams();
   const currentModel = searchParams.get('model'); // Get current model
+  const [showDropdown, setShowDropdown] = useState(false); // NEW: for dropdown toggle
 
   const handleClickModel = (model) => {
     const newParams = new URLSearchParams(searchParams.toString());
     newParams.set('model', model);
-    setSearchParams(newParams); // Triggers rerender with updated model param
+    setSearchParams(newParams);
   };
 
   const handleToggle = () => {
     const newState = !toggleState;
     setToggleState(newState);
-    navigate("/"); // Always go to home when toggling
+    navigate("/");
   };
 
   const handleGoHome = () => {
     navigate("/");
   };
 
+  const removeParam = (key) => {
+    const newParams = new URLSearchParams(searchParams.toString());
+    newParams.delete(key);
+    setSearchParams(newParams);
+  };
+
+  const clearAllParams = () => {
+    setSearchParams({});
+  };
+
   const isNotRootPath = location.pathname === "/" && location.search !== "";
   const isRootPathWithoutSearchParams = location.pathname === "/" && !location.search;
 
   return (
-    <div className="w-full border p-3 border-[var(--softBg4)] rounded-xl mb-5 shadow-md flex flex-col items-center">
+    <div className="w-full border p-3 border-[var(--softBg4)] rounded-xl mb-5 shadow-md flex flex-col items-center relative">
+      {/* Dropdown with Active Search Params */}
+      {location.search && (
+        <div className="w-full max-w-sm mb-3">
+          <button
+            className="text-sm text-[var(--softTextColor)] underline font-semibold"
+            onClick={() => setShowDropdown((prev) => !prev)}
+          >
+            {showDropdown ? "Hide Filters" : "Show Active Filters"}
+          </button>
+
+          {showDropdown && (
+            <div className="mt-2 bg-[var(--bg)] border border-[var(--softBg4)] rounded-md shadow-md p-3 text-sm space-y-2">
+              {[...searchParams.entries()].map(([key, value]) => (
+                <div key={key} className="flex justify-between items-center">
+                  <span className="text-[var(--softTextColor)]">
+                    {key}: <span className="font-semibold">{value}</span>
+                  </span>
+                  <button
+                    className="text-red-500 text-xs hover:underline"
+                    onClick={() => removeParam(key)}
+                  >
+                    Remove
+                  </button>
+                </div>
+              ))}
+
+              <button
+                onClick={clearAllParams}
+                className="mt-2 text-red-600 text-xs font-bold hover:underline"
+              >
+                Clear All Filters
+              </button>
+            </div>
+          )}
+        </div>
+      )}
+
+      {/* Filter Toggle UI for non-root search page */}
       {isNotRootPath && (
         <div className="flex justify-between gap-2 block md:hidden md:gap-4 items-center w-full max-w-sm">
-          {/* Clickable text */}
           <div className="cursor-pointer">
             <p
               onClick={handleGoHome}
@@ -43,69 +90,37 @@ export default function PropertySwitcher() {
             <div className="cursor-pointer flex flex-col justify-between md:hidden">
               <p
                 onClick={() => handleClickModel('forsale')}
-                className={`text-sm text-[var(--softTextColor)] hover:underline ${
-                  currentModel === 'forsale' ? 'font-bold underline' : ''
-                }`}
+                className={`text-sm text-[var(--softTextColor)] hover:underline ${currentModel === 'forsale' ? 'font-bold underline' : ''}`}
               >
                 For Sale
               </p>
-
               <p
                 onClick={() => handleClickModel('forrent')}
-                className={`text-sm text-[var(--softTextColor)] hover:underline ${
-                  currentModel === 'forrent' ? 'font-bold underline' : ''
-                }`}
+                className={`text-sm text-[var(--softTextColor)] hover:underline ${currentModel === 'forrent' ? 'font-bold underline' : ''}`}
               >
                 For Rent
               </p>
             </div>
           </div>
 
-          {/* Fancy Toggle Switch */}
           <div
             onClick={handleGoHome}
             className="w-16 h-8 flex items-center rounded-full p-1 cursor-pointer transition-colors duration-300 bg-[var(--softTextColor)]"
           >
-              <div
-            className={`w-6 h-6 flex items-center justify-center text-[var(--softTextColor)] rounded-full shadow-md transform duration-300 ease-in-out ${
-              toggleState ? "translate-x-8 bg-[var(--bg)]" : "translate-x-0 bg-[var(--bg)]"
-            }`}
-          >
-            ✓
-          </div>
+            <div
+              className={`w-6 h-6 flex items-center justify-center text-[var(--softTextColor)] rounded-full shadow-md transform duration-300 ease-in-out ${
+                toggleState ? "translate-x-8 bg-[var(--bg)]" : "translate-x-0 bg-[var(--bg)]"
+              }`}
+            >
+              ✓
+            </div>
           </div>
         </div>
       )}
 
-      <div className="flex justify-between hidden md:flex gap-2 md:gap-4 items-center w-full max-w-sm">
-        {/* Clickable text */}
-        <div onClick={handleGoHome} className="cursor-pointer">
-          <p className="text-md text-[var(--softTextColor)] font-bold hover:underline">
-            Remove all filters
-          </p>
-          <p className="text-sm md:hidden block text-[var(--softTextColor)] font-normal">
-            go back home
-          </p>
-        </div>
-
-        {/* Fancy Toggle Switch */}
-        <div
-          onClick={handleToggle}
-          className="w-16 h-8 flex items-center rounded-full p-1 cursor-pointer transition-colors duration-300 bg-[var(--softTextColor)]"
-        >
-          <div
-            className={`w-6 h-6 flex items-center justify-center text-[var(--softTextColor)] rounded-full shadow-md transform duration-300 ease-in-out ${
-              toggleState ? "translate-x-8 bg-[var(--bg)]" : "translate-x-0 bg-[var(--bg)]"
-            }`}
-          >
-            ✓
-          </div>
-        </div>
-      </div>
-
+      {/* UI if no search params */}
       {isRootPathWithoutSearchParams && (
         <div className="flex justify-between block md:hidden gap-0 md:gap-4 items-center w-full max-w-sm">
-          {/* Clickable text */}
           <div>
             <p className="text-md text-[var(--softTextColor)] font-bold hover:underline">
               Buy or rent property
@@ -113,25 +128,18 @@ export default function PropertySwitcher() {
             <div className="cursor-pointer flex flex-col justify-between md:hidden">
               <p
                 onClick={() => handleClickModel('forsale')}
-                className={`text-sm text-[var(--softTextColor)] hover:underline ${
-                  currentModel === 'forsale' ? 'font-bold underline' : ''
-                }`}
+                className={`text-sm text-[var(--softTextColor)] hover:underline ${currentModel === 'forsale' ? 'font-bold underline' : ''}`}
               >
                 For Sale
               </p>
-
               <p
                 onClick={() => handleClickModel('forrent')}
-                className={`text-sm text-[var(--softTextColor)] hover:underline ${
-                  currentModel === 'forrent' ? 'font-bold underline' : ''
-                }`}
+                className={`text-sm text-[var(--softTextColor)] hover:underline ${currentModel === 'forrent' ? 'font-bold underline' : ''}`}
               >
                 For Rent
               </p>
             </div>
           </div>
-
-        
         </div>
       )}
     </div>
