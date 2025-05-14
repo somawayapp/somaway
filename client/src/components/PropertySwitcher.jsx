@@ -111,7 +111,7 @@ export default function PropertySwitcher() {
   </p>
 </div>
 
-<div className="justify-end" >
+<div className="left-0" >
   <SlidersHorizontal
     onClick={() => setShowDropdown((prev) => !prev)}
     className="w-8 h-4 cursor-pointer transition-transform duration-200 hover:scale-105 text-[var(--textColor)]"
