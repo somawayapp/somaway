@@ -66,7 +66,7 @@ export default function PropertySwitcher() {
          <button
         className="text-sm ml-1 text-[var(--softTextColor)] transition-transform duration-200 hover:scale-105 underline font-semibold flex items-center gap-2"
          onClick={() => setShowDropdown((prev) => !prev)}>
-         {showDropdown ? "Hide Filters" : "Show Active Filters"}
+         {showDropdown ? "Hide all Active Filters" : "Show all Active Filters"}
         </button>
 
         <SlidersHorizontal      onClick={() => setShowDropdown((prev) => !prev)}  className="w-8 h-4 font-semibold cursor-pointer transition-transform duration-200 hover:scale-105 text-[var(--textColor)]" />
