@@ -1,8 +1,9 @@
-import { useState, useRef } from "react";
 import { Link } from "react-router-dom";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import LikeButton from "./LikeButton";
 import Star from "./Star";
+import { useState, useRef, useEffect } from "react";
+
 
 const PostListItem = ({ post }) => {
   const images = Array.isArray(post.img) ? post.img : [];
@@ -37,12 +38,26 @@ const PostListItem = ({ post }) => {
     }
   };
 
+  // 👇 This keeps the dot in sync when swiping manually
+  const handleScroll = () => {
+    if (scrollRef.current) {
+      const scrollLeft = scrollRef.current.scrollLeft;
+      const containerWidth = scrollRef.current.clientWidth;
+      const index = Math.round(scrollLeft / containerWidth);
+      setCurrentIndex(index);
+    }
+  };
+
+
+
+
   return (
     <div className="relative gap-2 md:gap-4 group mb-3 md:mb-[15px] overflow-hidden  rounded-xl">
       <Link to={`/${post.slug}`} className="block">
         <div className="relative w-full h-full aspect-[3/3] rounded-xl overflow-hidden">
           <div
             ref={scrollRef}
+            onScroll={handleScroll} // 👈 Add this line
             className="flex overflow-x-auto aspect-[3/3] snap-x snap-mandatory scroll-smooth scrollbar-hide transition-transform duration-200 group-hover:scale-105"
           >
             {images.length > 0 ? (
