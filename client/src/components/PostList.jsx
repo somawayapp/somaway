@@ -28,9 +28,7 @@ const parseSearchParams = (searchParams) =>
         params,
       });
     
-      return res.data;
-    };
-    
+      
 
   const posts = res.data?.posts;
   console.log("Fetched posts:", posts);
