@@ -76,6 +76,10 @@ const PostListItem = ({ post }) => {
             )}
           </div>
 
+          <div className="absolute rounded-full hover:bg-[#0556f7] bg-[#2F74FD] bottom-3 right-3 px-3 py-1 text-white text-sm font-medium">
+       {post.listed ? "Available" : "Unavailable"}
+       </div>
+
           {/* Dots */}
           {images.length > 1 && (
             <div className="absolute bottom-3 left-1/2 transform -translate-x-1/2 flex gap-1 px-2 py-1 rounded-full">
@@ -96,9 +100,7 @@ const PostListItem = ({ post }) => {
         <LikeButton postId={post._id} />
       </div>
 
-      <div className="absolute rounded-full hover:bg-[#0556f7] bg-[#2F74FD] bottom-3 right-3 px-3 py-1 text-white text-sm font-medium">
-     {post.listed ? "Available" : "Unavailable"}
-      </div>
+    
 
 
       {/* Arrows */}
