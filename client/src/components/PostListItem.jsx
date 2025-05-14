@@ -96,6 +96,11 @@ const PostListItem = ({ post }) => {
         <LikeButton postId={post._id} />
       </div>
 
+      <div className="absolute rounded-full hover:bg-[#0556f7] bg-[#2F74FD] bottom-3 right-3 px-3 py-1 text-white text-sm font-medium">
+     {post.listed ? "Available" : "Unavailable"}
+      </div>
+
+
       {/* Arrows */}
       {images.length > 1 && (
         <>

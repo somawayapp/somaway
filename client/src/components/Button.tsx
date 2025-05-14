@@ -19,7 +19,7 @@ const Button: React.FC<ButtonProps> = ({
   return (
     <button
       className={cn(
-        `disabled:bg-[#0556f7]  disabled:cursor-not-allowed rounded hover:bg-[#0556f7] transition w-full bg-[#2F74FD] text-white py-[8px] `,
+        `disabled:bg-[#0556f7]  disabled:cursor-not-allowed rounded hover:bg-[#0556f7] bg-[#2F74FD] transition w-full  text-white py-[8px] `,
         size === "small"
           ? " text-[16px] font-medium "
           : " text-[18px] font-semibold",
