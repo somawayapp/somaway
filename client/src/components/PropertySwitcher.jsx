@@ -111,7 +111,7 @@ export default function PropertySwitcher() {
 
   <SlidersHorizontal
     onClick={() => setShowDropdown((prev) => !prev)}
-    className="w-8 h-4 cursor-pointer transition-transform duration-200 hover:scale-105 text-[var(--textColor)] self-center"
+    className="w-8 h-4 cursor-pointer justify-end transition-transform duration-200 hover:scale-105 text-[var(--textColor)] self-center"
   />
 </div>
 
