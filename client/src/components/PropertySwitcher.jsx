@@ -99,20 +99,22 @@ export default function PropertySwitcher() {
  
 
 
-<div className=" flex gap-3 justify-between">
-<p
-  onClick={() => handleClickFilter("")}
-  className={`text-sm text-[var(--softTextColor)] hover:underline ${
-    searchParams.toString() === "" ? "font-bold underline" : ""
-  }`}
->
-  Property Reviews & History
-</p>
+  <div className="flex items-center justify-between gap-3">
+  <p
+    onClick={() => handleClickFilter("")}
+    className={`text-sm text-[var(--softTextColor)] hover:underline ${
+      searchParams.toString() === "" ? "font-bold underline" : ""
+    }`}
+  >
+    Property Reviews & History
+  </p>
 
-        <SlidersHorizontal      onClick={() => setShowDropdown((prev) => !prev)}  className="w-8 h-4 font-semibold cursor-pointer transition-transform duration-200 hover:scale-105 text-[var(--textColor)]" />
+  <SlidersHorizontal
+    onClick={() => setShowDropdown((prev) => !prev)}
+    className="w-8 h-4 cursor-pointer transition-transform duration-200 hover:scale-105 text-[var(--textColor)] self-center"
+  />
+</div>
 
-
-         </div>
 
 
     <p
