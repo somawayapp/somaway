@@ -45,14 +45,14 @@ export default function PropertySwitcher() {
       {/* Dropdown with Active Search Params */}
       {location.search && (
         <div className="w-full max-w-sm mb-3">
-         <div className=" flex justify-between">
+         <div className=" flex gap-6 justify-between">
          <button
-        className="text-sm ml-1 text-[var(--softTextColor)] underline font-semibold flex items-center gap-2"
+        className="text-sm ml-1 text-[var(--softTextColor)] transition-transform duration-200 hover:scale-105 underline font-semibold flex items-center gap-2"
          onClick={() => setShowDropdown((prev) => !prev)}>
          {showDropdown ? "Hide Filters" : "Show Active Filters"}
         </button>
 
-        <SlidersHorizontal      onClick={() => setShowDropdown((prev) => !prev)}  className="w-6 h-4 text-[var(--textColor)]" />
+        <SlidersHorizontal      onClick={() => setShowDropdown((prev) => !prev)}  className="w-8 h-4 font-semibold hoover:thumb transition-transform duration-200 hover:scale-105 text-[var(--textColor)]" />
 
 
          </div>
@@ -105,7 +105,7 @@ export default function PropertySwitcher() {
 
     <p
       onClick={() => handleClickFilter("false")}
-      className={`text-sm text-[var(--softTextColor)] hover:underline ${searchParams.get("listed") === "false" ? "font-bold underline" : ""}`}
+      className={`text-sm text-[var(--softTextColor)] hover:underline ${searchParams.get("listed") === "" ? "font-bold underline" : ""}`}
     >
       History/ Reviews
     </p>
