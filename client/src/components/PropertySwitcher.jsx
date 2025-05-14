@@ -52,7 +52,7 @@ export default function PropertySwitcher() {
          {showDropdown ? "Hide Filters" : "Show Active Filters"}
         </button>
 
-        <SlidersHorizontal      onClick={() => setShowDropdown((prev) => !prev)}  className="w-8 h-4 font-semibold hoover:thumb transition-transform duration-200 hover:scale-105 text-[var(--textColor)]" />
+        <SlidersHorizontal      onClick={() => setShowDropdown((prev) => !prev)}  className="w-8 h-4 font-semibold hover:thumb transition-transform duration-200 hover:scale-105 text-[var(--textColor)]" />
 
 
          </div>
@@ -91,20 +91,28 @@ export default function PropertySwitcher() {
       {isRootPathWithoutSearchParams && (
         <div className="flex justify-between block  gap-0 md:gap-4 items-center w-full max-w-sm">
        <div className="cursor-pointer">
-  <p className="text-md cursor-pointer text-[var(--softTextColor)] font-bold hover:underline">
-    Search filters
-  </p>
+       <div className=" flex gap-6 justify-between">
+         <button
+        className="text-sm ml-1 text-[var(--softTextColor)] transition-transform duration-200 hover:scale-105 underline font-semibold flex items-center gap-2"
+         onClick={() => setShowDropdown((prev) => !prev)}>
+         {showDropdown ? "Hide Filters" : "Show Active Filters"}
+        </button>
+
+        <SlidersHorizontal      onClick={() => setShowDropdown((prev) => !prev)}  className="w-8 h-4 font-semibold hover:thumb transition-transform duration-200 hover:scale-105 text-[var(--textColor)]" />
+
+
+         </div>
 
   <div className="cursor-pointer flex flex-col justify-between">
     <p
       onClick={() => handleClickFilter("true")}
       className={`text-sm text-[var(--softTextColor)] hover:underline ${searchParams.get("listed") === "true" ? "font-bold underline" : ""}`}
     >
-      Buy/ Rent
+      Vacant Property
     </p>
 
     <p
-      onClick={() => handleClickFilter("false")}
+      onClick={() => handleClickFilter("")}
       className={`text-sm text-[var(--softTextColor)] hover:underline ${searchParams.get("listed") === "" ? "font-bold underline" : ""}`}
     >
       History/ Reviews
