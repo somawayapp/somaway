@@ -44,7 +44,7 @@ export default function PropertySwitcher() {
     <div className="w-full border p-3 border-[var(--softBg4)] rounded-xl mb-5 shadow-md flex flex-col items-center relative">
       {/* Dropdown with Active Search Params */}
       {location.search && (
-        <div className="w-full max-w-sm mb-3">
+        <div className="w-full mb-3">
          <div className=" flex gap-6 mt-1 justify-between">
          <button
         className="text-sm ml-1 text-[var(--softTextColor)] transition-transform duration-200 hover:scale-105 underline font-semibold flex items-center gap-2"
@@ -89,7 +89,7 @@ export default function PropertySwitcher() {
 
       {/* UI if no search params */}
       {isRootPathWithoutSearchParams && (
-        <div className="flex justify-between block  gap-0 md:gap-4 items-center w-full max-w-sm">
+        <div className="flex justify-between block  gap-0 md:gap-4 items-center w-full">
        <div className="cursor-pointer">
      
 
