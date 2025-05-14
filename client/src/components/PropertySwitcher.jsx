@@ -61,10 +61,10 @@ export default function PropertySwitcher() {
     <div className="w-full border p-3 border-[var(--softBg4)] rounded-xl mb-5 md:mb-3 shadow-md flex flex-col items-center relative">
       {/* Dropdown with Active Search Params */}
       {location.search && (
-        <div className="w-full md:hidden md:min-w-[225px] mb-3">
+        <div className="w-full md:min-w-[225px] mb-3">
          <div className=" flex gap-6 mt-1 justify-between">
          <button
-        className="text-sm ml-1 text-[var(--softTextColor)] transition-transform duration-200 hover:scale-105 underline font-semibold flex items-center gap-2"
+        className="text-sm md:hidden  ml-1 text-[var(--softTextColor)] transition-transform duration-200 hover:scale-105 underline font-semibold flex items-center gap-2"
          onClick={() => setShowDropdown((prev) => !prev)}>
          {showDropdown ? "Hide all Active Filters" : "Show all Active Filters"}
         </button>
