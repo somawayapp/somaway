@@ -77,7 +77,7 @@ const PostListItem = ({ post }) => {
           </div>
 
           <div className="absolute rounded-full hover:bg-[#0556f7] bg-[#2F74FD] bottom-3 right-3 px-3 py-1 text-white text-sm font-medium">
-  {post.islisted === true || post.islisted === "true" ? "Available" : "Unavailable"}
+  {post.isListed === true || post.isListed === "true" ? "Available" : "Unavailable"}
 </div>
 
 
