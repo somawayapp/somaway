@@ -61,91 +61,72 @@ export default function PropertySwitcher() {
     <div className="w-full border p-3 border-[var(--softBg4)] rounded-xl mb-5 md:mb-3 shadow-md flex flex-col items-center relative">
       {/* Dropdown with Active Search Params */}
       {location.search && (
-        <div className="w-full md:min-w-[225px] mb-3">
-         <div className=" flex gap-6 mt-1 md:hidden  justify-between">
-         <button
-        className="text-sm  ml-1 text-[var(--softTextColor)] transition-transform duration-200 hover:scale-105 underline font-semibold flex items-center gap-2"
-         onClick={() => setShowDropdown((prev) => !prev)}>
-         {showDropdown ? "Hide all Active Filters" : "Show all Active Filters"}
-        </button>
+  <div className="w-full md:min-w-[225px] mb-3 relative">
+    {/* Toggle Button (always visible) */}
+    <div className="flex gap-6 mt-1 justify-between">
+      <button
+        className="text-sm ml-1 text-[var(--softTextColor)] transition-transform duration-200 hover:scale-105 underline font-semibold flex items-center gap-2"
+        onClick={() => setShowDropdown((prev) => !prev)}
+      >
+        {showDropdown ? "Hide all Active Filters" : "Show all Active Filters"}
+      </button>
 
-        <SlidersHorizontal      onClick={() => setShowDropdown((prev) => !prev)}  className="w-8 h-4 font-semibold cursor-pointer transition-transform duration-200 hover:scale-105 text-[var(--textColor)]" />
+      <SlidersHorizontal
+        onClick={() => setShowDropdown((prev) => !prev)}
+        className="w-8 h-4 font-semibold cursor-pointer transition-transform duration-200 hover:scale-105 text-[var(--textColor)]"
+      />
+    </div>
 
-
-         </div>
-
-
-         {showDropdown && (
-  isMdOrLarger ? (
-    // Modal
-    <div className="relative w-full md:min-w-[225px] mb-3">
-  <div className="flex gap-6 mt-1 justify-between">
-    <button
-      className="text-sm ml-1 text-[var(--softTextColor)] transition-transform duration-200 hover:scale-105 underline font-semibold flex items-center gap-2"
-      onClick={() => setShowDropdown((prev) => !prev)}
-    >
-      {showDropdown ? "Hide all Active Filters" : "Show all Active Filters"}
-    </button>
-
-    <SlidersHorizontal
-      onClick={() => setShowDropdown((prev) => !prev)}
-      className="w-8 h-4 font-semibold cursor-pointer transition-transform duration-200 hover:scale-105 text-[var(--textColor)]"
-    />
+    {/* Only this part is conditionally rendered */}
+    {showDropdown && (
+      isMdOrLarger ? (
+        <div className="absolute right-0 mt-2 bg-[var(--bg)] w-[225px] border border-[var(--softBg4)] rounded-md shadow-md p-3 text-sm space-y-2 z-50">
+          {[...searchParams.entries()].map(([key, value]) => (
+            <div key={key} className="flex justify-between items-center">
+              <span className="text-[var(--softTextColor)] capitalize">
+                {key}: <span className="font-semibold">{value}</span>
+              </span>
+              <button
+                className="text-blue-600 ml-1 text-xs font-semibold md:text-sm hover:underline"
+                onClick={() => removeParam(key)}
+              >
+                Remove
+              </button>
+            </div>
+          ))}
+          <button
+            onClick={clearAllParams}
+            className="mt-2 text-blue-600 text-xs md:text-sm font-semibold hover:underline"
+          >
+            Clear All Filters
+          </button>
+        </div>
+      ) : (
+        <div className="mt-2 bg-[var(--bg)] border border-[var(--softBg4)] rounded-md shadow-md p-3 text-sm space-y-2">
+          {[...searchParams.entries()].map(([key, value]) => (
+            <div key={key} className="flex justify-between items-center">
+              <span className="text-[var(--softTextColor)] capitalize">
+                {key}: <span className="font-semibold">{value}</span>
+              </span>
+              <button
+                className="text-blue-500 ml-1 font-semibold text-sm hover:underline"
+                onClick={() => removeParam(key)}
+              >
+                Remove
+              </button>
+            </div>
+          ))}
+          <button
+            onClick={clearAllParams}
+            className="mt-2 text-blue-600 text-sm font-semibold hover:underline"
+          >
+            Clear All Filters
+          </button>
+        </div>
+      )
+    )}
   </div>
-
-  {showDropdown && isMdOrLarger && (
-    <div className="absolute right-0 mt-2 bg-[var(--bg)] w-[225px] border border-[var(--softBg4)] rounded-md shadow-md p-3 text-sm space-y-2 z-50">
-      {[...searchParams.entries()].map(([key, value]) => (
-        <div key={key} className="flex justify-between items-center">
-          <span className="text-[var(--softTextColor)] capitalize">
-            {key}: <span className="font-semibold">{value}</span>
-          </span>
-          <button
-            className="text-blue-600 ml-1 text-xs font-semibold md:text-sm hover:underline"
-            onClick={() => removeParam(key)}
-          >
-            Remove
-          </button>
-        </div>
-      ))}
-      <button
-        onClick={clearAllParams}
-        className="mt-2 text-blue-600 text-xs md:text-sm font-semibold hover:underline"
-      >
-        Clear All Filters
-      </button>
-    </div>
-  )}
-</div>
-
-  ) : (
-    // Existing Dropdown
-    <div className="mt-2 bg-[var(--bg)] border border-[var(--softBg4)] rounded-md shadow-md p-3 text-sm space-y-2">
-      {[...searchParams.entries()].map(([key, value]) => (
-        <div key={key} className="flex justify-between items-center">
-          <span className="text-[var(--softTextColor)] capitalize">
-            {key}: <span className="font-semibold">{value}</span>
-          </span>
-          <button
-            className="text-blue-500 ml-1 font-semibold text-sm hover:underline"
-            onClick={() => removeParam(key)}
-          >
-            Remove
-          </button>
-        </div>
-      ))}
-      <button
-        onClick={clearAllParams}
-        className="mt-2 text-blue-600 text-sm font-semibold hover:underline"
-      >
-        Clear All Filters
-      </button>
-    </div>
-  )
 )}
-
-        </div>
-      )}
 
    
 
