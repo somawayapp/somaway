@@ -61,7 +61,7 @@ from ${author || 'top authors'}in minutes. Elevate your mind—only on Hodi!`} /
        <Navbar/>
    
 
-       <div className="pt-4  ">
+       <div className="pt-3  ">
        <CategoriesScroll/>
        <div className="md:px-[80px]  md:hidden block mt-3 px-4">
         <PropertySwitcher/>

@@ -83,7 +83,7 @@ const CategoriesScroll = ({ setOpen }) => {
   }, []);
 
   return (
-    <div className="relative  md:shadow-md">
+    <div className="relative mb-4  md:shadow-md">
       <div className="px-4 md:px-[80px]">
         
         <div className="relative flex items-start ">
@@ -91,7 +91,7 @@ const CategoriesScroll = ({ setOpen }) => {
           {/* Scrollable Categories */}
           <div
             ref={containerRef}
-            className="flex gap-4 overflow-x-auto scrollbar-hide pr-2"       
+            className="flex gap-4 pt-2 overflow-x-auto scrollbar-hide pr-2"       
 
             style={{ whiteSpace: "nowrap", flex: 1 }}
           >
