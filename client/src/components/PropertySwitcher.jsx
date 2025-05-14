@@ -98,7 +98,7 @@ export default function PropertySwitcher() {
 
     <p
       onClick={() => handleClickFilter("")}
-      className={`text-sm text-[var(--softTextColor)] hover:underline ${searchParams.get("") === "" ? "font-bold underline" : ""}`}
+      className={`text-sm text-[var(--softTextColor)] hover:underline ${searchParams.get("") === "true" ? "font-bold underline" : ""}`}
     >
       These are Property Reviews & History
     </p>
