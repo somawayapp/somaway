@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useLocation, useNavigate, useSearchParams } from "react-router-dom";
+import { Filter } from "lucide-react";
 
 export default function PropertySwitcher() {
   const location = useLocation();
@@ -7,7 +8,7 @@ export default function PropertySwitcher() {
   const [toggleState, setToggleState] = useState(false); // false = forrent, true = forsale
   const [searchParams, setSearchParams] = useSearchParams();
   const currentModel = searchParams.get('model'); // Get current model
-  const [showDropdown, setShowDropdown] = useState(false); // NEW: for dropdown toggle
+  const [showDropdown, setShowDropdown] = useState(true); // NEW: for dropdown toggle
 
   const handleClickModel = (model) => {
     const newParams = new URLSearchParams(searchParams.toString());
@@ -43,12 +44,14 @@ export default function PropertySwitcher() {
       {/* Dropdown with Active Search Params */}
       {location.search && (
         <div className="w-full max-w-sm mb-3">
-          <button
-            className="text-sm text-[var(--softTextColor)] underline font-semibold"
-            onClick={() => setShowDropdown((prev) => !prev)}
-          >
-            {showDropdown ? "Hide Filters" : "Show Active Filters"}
-          </button>
+         <button
+  className="text-sm text-[var(--softTextColor)] underline font-semibold flex items-center gap-2"
+  onClick={() => setShowDropdown((prev) => !prev)}
+>
+  {showDropdown ? "Hide Filters" : "Show Active Filters"}
+  <Filter className="w-4 h-4 text-[var(--softTextColor)]" />
+</button>
+
 
           {showDropdown && (
             <div className="mt-2 bg-[var(--bg)] border border-[var(--softBg4)] rounded-md shadow-md p-3 text-sm space-y-2">
@@ -79,7 +82,7 @@ export default function PropertySwitcher() {
 
       {/* Filter Toggle UI for non-root search page */}
       {isNotRootPath && (
-        <div className="flex justify-between gap-2 block md:hidden md:gap-4 items-center w-full max-w-sm">
+        <div className="flex justify-between gap-2 block  md:gap-4 items-center w-full max-w-sm">
           <div className="cursor-pointer">
             <p
               onClick={handleGoHome}
@@ -87,7 +90,7 @@ export default function PropertySwitcher() {
             >
               Remove all filters
             </p>
-            <div className="cursor-pointer flex flex-col justify-between md:hidden">
+            <div className="cursor-pointer flex flex-col justify-between ">
               <p
                 onClick={() => handleClickModel('forsale')}
                 className={`text-sm text-[var(--softTextColor)] hover:underline ${currentModel === 'forsale' ? 'font-bold underline' : ''}`}
@@ -120,12 +123,12 @@ export default function PropertySwitcher() {
 
       {/* UI if no search params */}
       {isRootPathWithoutSearchParams && (
-        <div className="flex justify-between block md:hidden gap-0 md:gap-4 items-center w-full max-w-sm">
+        <div className="flex justify-between block  gap-0 md:gap-4 items-center w-full max-w-sm">
           <div>
             <p className="text-md text-[var(--softTextColor)] font-bold hover:underline">
               Buy or rent property
             </p>
-            <div className="cursor-pointer flex flex-col justify-between md:hidden">
+            <div className="cursor-pointer flex flex-col justify-between ">
               <p
                 onClick={() => handleClickModel('forsale')}
                 className={`text-sm text-[var(--softTextColor)] hover:underline ${currentModel === 'forsale' ? 'font-bold underline' : ''}`}
