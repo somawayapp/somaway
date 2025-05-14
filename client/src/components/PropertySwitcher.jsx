@@ -96,14 +96,23 @@ export default function PropertySwitcher() {
   <div className="cursor-pointer flex flex-col justify-between">
  
 
-  <p
+ 
+
+
+<div className=" flex gap-6 mt-1 justify-between">
+<p
   onClick={() => handleClickFilter("")}
   className={`text-sm text-[var(--softTextColor)] hover:underline ${
     searchParams.toString() === "" ? "font-bold underline" : ""
   }`}
 >
- Now veiwing Property Reviews & History
+  Property Reviews & History
 </p>
+
+        <SlidersHorizontal      onClick={() => setShowDropdown((prev) => !prev)}  className="w-8 h-4 font-semibold cursor-pointer transition-transform duration-200 hover:scale-105 text-[var(--textColor)]" />
+
+
+         </div>
 
 
     <p
