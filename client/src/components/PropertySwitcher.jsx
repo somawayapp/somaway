@@ -99,7 +99,7 @@ export default function PropertySwitcher() {
  
 
 
-<div className=" flex gap-6 mt-1 justify-between">
+<div className=" flex gap-3 justify-between">
 <p
   onClick={() => handleClickFilter("")}
   className={`text-sm text-[var(--softTextColor)] hover:underline ${
