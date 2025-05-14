@@ -122,18 +122,22 @@ const handleModelChange = (model) => {
 >
   <button
     onClick={() => handleModelChange("forrent")}
-    className={`text-sm ${
-      searchParams.get("model") === "forrent" ? "font-semibold" : "font-normal"
-    } text-[var(--softTextColor)] hover:underline`}
+    className={`relative text-sm text-[var(--softTextColor)] hover:underline transition-all ${
+      searchParams.get("model") === "forrent"
+        ? "font-semibold after:content-[''] after:absolute after:h-[2px] after:bg-[var(--textColor)] after:left-0 after:right-0 after:bottom-[-2px]"
+        : "font-normal"
+    }`}
   >
     For Rent
   </button>
 
   <button
     onClick={() => handleModelChange("forsale")}
-    className={`text-sm ${
-      searchParams.get("model") === "forsale" ? "font-semibold" : "font-normal"
-    } text-[var(--softTextColor)] hover:underline`}
+    className={`relative text-sm text-[var(--softTextColor)] hover:underline transition-all ${
+      searchParams.get("model") === "forsale"
+        ? "font-semibold after:content-[''] after:absolute after:h-[2px] after:bg-[var(--textColor)] after:left-0 after:right-0 after:bottom-[-2px]"
+        : "font-normal"
+    }`}
   >
     For Sale
   </button>
