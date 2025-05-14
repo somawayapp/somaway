@@ -66,7 +66,7 @@ export default function PropertySwitcher() {
                     {key}: <span className="font-semibold">{value}</span>
                   </span>
                   <button
-                    className="text-red-500 ml-1 text-xs hover:underline"
+                    className="text-blue-500 ml-1 text-xs hover:underline"
                     onClick={() => removeParam(key)}
                   >
                     Remove
@@ -100,7 +100,8 @@ export default function PropertySwitcher() {
 
 
   <div className="flex justify-between ">
-  <p
+<div className="justify-start" >
+<p
     onClick={() => handleClickFilter("")}
     className={`text-sm text-[var(--softTextColor)] hover:underline ${
       searchParams.toString() === "" ? "font-bold underline" : ""
@@ -108,11 +109,16 @@ export default function PropertySwitcher() {
   >
     Property Reviews & History
   </p>
+</div>
 
+<div className="justify-end" >
   <SlidersHorizontal
     onClick={() => setShowDropdown((prev) => !prev)}
     className="w-8 h-4 cursor-pointer transition-transform duration-200 hover:scale-105 text-[var(--textColor)]"
   />
+  </div>
+
+
 </div>
 
 

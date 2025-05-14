@@ -102,12 +102,12 @@ const CategoriesScroll = ({ setOpen }) => {
                 key={propertytype}
                 onClick={() => handleClickPropertytype(slug)}
                 className={`flex flex-col items-center justify-center gap-2 text-[var(--softTextColor)] group transition-transform duration-200 
-                  hover:scale-105 text-sm md:text-md bg-[var(--bg)] px-1 md:px-[16px]
+                  hover:scale-102 md:hover:scale-105 text-sm md:text-md bg-[var(--bg)] px-1 md:px-[16px]
                   ${currentPropertytype === propertytype ? 'text-[var(--textColor)]' : ''}`}
               >
                 {icons[propertytype] && (
                   <span
-                    className={`transition-transform duration-200 group-hover:scale-105 group-hover:text-[var(--textColor)] ${
+                    className={`transition-transform duration-200 md:group-hover:scale-105 group-hover:text-[var(--textColor)] ${
                       currentPropertytype === propertytype ? 'text-[var(--textColor)]' : 'text-[var(--softBg5)]'
                     }`}
                     style={{
@@ -120,7 +120,7 @@ const CategoriesScroll = ({ setOpen }) => {
                   </span>
                 )}
                 <span
-                  className={`group-hover:text-[var(--textColor)] transition-transform duration-200 group-hover:scale-105 capitalize font-normal text-[13px] md:text-sm pb-[4px] md:pb-[4]
+                  className={`group-hover:text-[var(--textColor)] transition-transform duration-200  md:group-hover:scale-105 capitalize font-normal text-[13px] md:text-sm pb-[4px] md:pb-[4]
                     ${currentPropertytype === propertytype ? 'text-[var(--textColor)] border-b-2 border-[var(--textColor)]' : ''}`}
                 >
                   {propertytype}
