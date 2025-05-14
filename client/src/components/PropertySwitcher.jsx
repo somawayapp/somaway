@@ -99,7 +99,7 @@ export default function PropertySwitcher() {
  
 
 
-  <div className="flex items-center justify-between w-full">
+  <div className="flex justify-between ">
   <p
     onClick={() => handleClickFilter("")}
     className={`text-sm text-[var(--softTextColor)] hover:underline ${
