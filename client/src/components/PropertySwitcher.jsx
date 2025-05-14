@@ -94,18 +94,20 @@ export default function PropertySwitcher() {
      
 
   <div className="cursor-pointer flex flex-col justify-between">
-    <p
-      onClick={() => handleClickFilter("true")}
-      className={`text-sm text-[var(--softTextColor)] hover:underline ${searchParams.get("listed") === "true" ? "font-bold underline" : ""}`}
-    >
-      Go to Vacant Homes
-    </p>
+ 
 
     <p
       onClick={() => handleClickFilter("")}
       className={`text-sm text-[var(--softTextColor)] hover:underline ${searchParams.get("") === "" ? "font-bold underline" : ""}`}
     >
       These are Property Reviews & History
+    </p>
+
+    <p
+      onClick={() => handleClickFilter("true")}
+      className={`text-sm text-[var(--softTextColor)] hover:underline ${searchParams.get("listed") === "true" ? "font-bold underline" : ""}`}
+    >
+      Go to Vacant Homes
     </p>
   </div>
 </div>
