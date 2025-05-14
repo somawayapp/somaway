@@ -88,45 +88,36 @@ export default function PropertySwitcher() {
    
 
       {/* UI if no search params */}
-      {isRootPathWithoutSearchParams && (
-     <div className="flex justify-between block gap-0 md:gap-4 items-center w-full">
-     <div className="cursor-pointer">
-       <div className="cursor-pointer flex flex-col justify-between">
-         <div className="flex w-full justify-between items-center">
-          
-
- 
-
-  <p
-    onClick={() => handleClickFilter("")}
-    className={`text-sm text-[var(--softTextColor)] hover:underline ${
-      searchParams.toString() === "" ? "font-bold underline" : ""
-    }`}
-  >
-    Property Reviews & History
-  </p>
-
-  <SlidersHorizontal
-    onClick={() => setShowDropdown((prev) => !prev)}
-    className="w-5 h-5 cursor-pointer transition-transform duration-200 hover:scale-105 text-[var(--textColor)]"
-  />
-</div>
-
-
-
-
-
-    <p
-      onClick={() => handleClickFilter("true")}
-      className={`text-sm text-[var(--softTextColor)] hover:underline ${searchParams.get("listed") === "true" ? "font-bold underline" : ""}`}
-    >
-      Go to Vacant Homes
-    </p>
-  </div>
-</div>
-
+   {isRootPathWithoutSearchParams && (
+    <div className="w-full">
+      <div className="flex flex-col gap-2 w-full">
+        <div className="flex justify-between items-center w-full">
+          <p
+            onClick={() => handleClickFilter("")}
+            className={`text-sm text-[var(--softTextColor)] hover:underline ${
+              searchParams.toString() === "" ? "font-bold underline" : ""
+            }`}
+          >
+            Property Reviews & History
+          </p>
+          <SlidersHorizontal
+            onClick={() => setShowDropdown((prev) => !prev)}
+            className="w-5 h-5 cursor-pointer transition-transform duration-200 hover:scale-105 text-[var(--textColor)]"
+          />
         </div>
-      )}
+  
+        <p
+          onClick={() => handleClickFilter("true")}
+          className={`text-sm text-[var(--softTextColor)] hover:underline ${
+            searchParams.get("listed") === "true" ? "font-bold underline" : ""
+          }`}
+        >
+          Go to Vacant Homes
+        </p>
+      </div>
+    </div>
+  )}
+  
     </div>
   );
 }
