@@ -78,34 +78,28 @@ export default function PropertySwitcher() {
          {showDropdown && (
   isMdOrLarger ? (
     // Modal
-    <div className="fixed inset-0 bg-black bg-opacity-40 z-50 flex justify-center items-center">
-      <div className="bg-[var(--bg)] border border-[var(--softBg4)] rounded-md shadow-lg p-5 w-full max-w-md text-sm space-y-2 relative">
-        <button
-          onClick={() => setShowDropdown(false)}
-          className="absolute top-2 right-2 text-[var(--softTextColor)] hover:text-red-500 text-xs"
-        >
-          Close ✕
-        </button>
-        {[...searchParams.entries()].map(([key, value]) => (
-          <div key={key} className="flex justify-between items-center">
-            <span className="text-[var(--softTextColor)]">
-              {key}: <span className="font-semibold">{value}</span>
-            </span>
-            <button
-              className="text-blue-500 ml-1 text-xs hover:underline"
-              onClick={() => removeParam(key)}
-            >
-              Remove
-            </button>
-          </div>
-        ))}
-        <button
-          onClick={clearAllParams}
-          className="mt-2 text-blue-600 text-xs font-bold hover:underline"
-        >
-          Clear All Filters
-        </button>
-      </div>
+    <div className="fixed inset z-50 flex">
+      <div className="mt-2 bg-[var(--bg)] border border-[var(--softBg4)] rounded-md shadow-md p-3 text-sm space-y-2">
+      {[...searchParams.entries()].map(([key, value]) => (
+        <div key={key} className="flex justify-between items-center">
+          <span className="text-[var(--softTextColor)]">
+            {key}: <span className="font-semibold">{value}</span>
+          </span>
+          <button
+            className="text-blue-500 ml-1 text-xs hover:underline"
+            onClick={() => removeParam(key)}
+          >
+            Remove
+          </button>
+        </div>
+      ))}
+      <button
+        onClick={clearAllParams}
+        className="mt-2 text-blue-600 text-xs font-bold hover:underline"
+      >
+        Clear All Filters
+      </button>
+    </div>
     </div>
   ) : (
     // Existing Dropdown
