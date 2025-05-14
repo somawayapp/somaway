@@ -41,7 +41,7 @@ export default function PropertySwitcher() {
   const isRootPathWithoutSearchParams = location.pathname === "/" && !location.search;
 
   return (
-    <div className="w-full border p-3 border-[var(--softBg4)] rounded-xl mb-3 shadow-md flex flex-col items-center relative">
+    <div className="w-full border p-3 border-[var(--softBg4)] rounded-xl mb-5 md:mb-3 shadow-md flex flex-col items-center relative">
       {/* Dropdown with Active Search Params */}
       {location.search && (
         <div className="w-full mb-3">
@@ -108,7 +108,7 @@ export default function PropertySwitcher() {
   
         <p
           onClick={() => handleClickFilter("true")}
-          className={`text-sm text-[var(--softTextColor)] hover:underline ${
+          className={`text-sm text-[var(--softTextColor)]cursor-pointer hover:underline ${
             searchParams.get("listed") === "true" ? "font-bold underline" : ""
           }`}
         >
