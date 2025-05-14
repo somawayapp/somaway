@@ -120,7 +120,7 @@ const CategoriesScroll = ({ setOpen }) => {
                   </span>
                 )}
                 <span
-                  className={`group-hover:text-[var(--textColor)] transition-transform duration-200  md:group-hover:scale-105 capitalize font-normal text-[13px] md:text-sm 
+                  className={`group-hover:text-[var(--textColor)] transition-transform duration-200  md:group-hover:scale-105 capitalize font-normal text-[13px] md:text-sm pb-[4px] 
                     ${currentPropertytype === propertytype ? 'text-[var(--textColor)] border-b-2 border-[var(--textColor)]' : ''}`}
                 >
                   {propertytype}
@@ -156,9 +156,7 @@ const CategoriesScroll = ({ setOpen }) => {
           )}
   
           {/* PropertySwitcher always visible at the end */}
-          <div className="flex-shrink-0 hidden md:block pl-[60px]">
-            <PropertySwitcher />
-          </div>
+         
         </div>
       </div>
     </div>
