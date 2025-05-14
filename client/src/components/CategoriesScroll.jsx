@@ -83,7 +83,7 @@ const CategoriesScroll = ({ setOpen }) => {
   }, []);
 
   return (
-    <div className="relative mb-4  md:shadow-md">
+    <div className="relative md:mb-5  md:shadow-md">
       <div className="px-4 md:px-[80px]">
         
         <div className="relative flex items-start ">
