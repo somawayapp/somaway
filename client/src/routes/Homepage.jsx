@@ -77,7 +77,7 @@ from ${author || 'top authors'}in minutes. Elevate your mind—only on Hodi!`} /
         <div className="flex flex-col justify-between items-center relative min-h-[75vh]">
       <PostList />
       <Link
-        style={{ zIndex: 100004 }}
+        style={{ zIndex: 100001 }}
         to=""
         className="px-5 md:px-8 py-2 md:py-3 bg-[var(--softTextColori)] text-[14px] md:text-[16px]
        sticky  bottom-[60px]  md:bottom-[30px] left-1/2 -translate-x-1/2 rounded-full text-[var(--softBg)]

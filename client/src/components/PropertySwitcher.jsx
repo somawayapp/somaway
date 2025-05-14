@@ -78,8 +78,23 @@ export default function PropertySwitcher() {
          {showDropdown && (
   isMdOrLarger ? (
     // Modal
-     <div className="relative w-[225px] z-10 flex">
-     <div className="mt-2 bg-[var(--bg)]  w-[225px] border border-[var(--softBg4)] rounded-md shadow-md p-3 text-sm space-y-2">
+    <div className="relative w-full md:min-w-[225px] mb-3">
+  <div className="flex gap-6 mt-1 justify-between">
+    <button
+      className="text-sm ml-1 text-[var(--softTextColor)] transition-transform duration-200 hover:scale-105 underline font-semibold flex items-center gap-2"
+      onClick={() => setShowDropdown((prev) => !prev)}
+    >
+      {showDropdown ? "Hide all Active Filters" : "Show all Active Filters"}
+    </button>
+
+    <SlidersHorizontal
+      onClick={() => setShowDropdown((prev) => !prev)}
+      className="w-8 h-4 font-semibold cursor-pointer transition-transform duration-200 hover:scale-105 text-[var(--textColor)]"
+    />
+  </div>
+
+  {showDropdown && isMdOrLarger && (
+    <div className="absolute right-0 mt-2 bg-[var(--bg)] w-[225px] border border-[var(--softBg4)] rounded-md shadow-md p-3 text-sm space-y-2 z-50">
       {[...searchParams.entries()].map(([key, value]) => (
         <div key={key} className="flex justify-between items-center">
           <span className="text-[var(--softTextColor)] capitalize">
@@ -100,7 +115,9 @@ export default function PropertySwitcher() {
         Clear All Filters
       </button>
     </div>
-    </div>
+  )}
+</div>
+
   ) : (
     // Existing Dropdown
     <div className="mt-2 bg-[var(--bg)] border border-[var(--softBg4)] rounded-md shadow-md p-3 text-sm space-y-2">
