@@ -102,7 +102,7 @@ export default function PropertySwitcher() {
     searchParams.toString() === "" ? "font-bold underline" : ""
   }`}
 >
-  Property Reviews & History
+ <span className="hidden md:flex mr-1">Now veiwing</span> Property Reviews & History
 </p>
 
 
