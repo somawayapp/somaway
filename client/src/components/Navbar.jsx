@@ -74,10 +74,10 @@
               <img src="/betlogo.png" className="md:h-8" />
              </Link>
     
-             <div className="flex items-center justify-between flex-row gap-2 md:gap-9">
-             <p className=" text-[##35c091] "> All sports</p>              
-               <p className="text-[#fff] hover:text-[#35c091]"> In play</p>              
-             <p className="text-[#fff] hover:text-[#35c091]" > Casinos</p>              
+             <div className="flex items-center text-sm font-semibold justify-between flex-row gap-2 md:gap-9">
+             <p className=" text-[#35c091] "> All sports</p>              
+               <p className="text-[#f2f2] hover:text-[#35c091]"> In play</p>              
+             <p className="text-[#f2f2] hover:text-[#35c091]" > Casinos</p>              
 
             </div>
 
@@ -88,7 +88,7 @@
               to="/addlistingreview">
               <button
                 type="button"
-                className="hidden md:block text-sm font-semibold border-[1px] border-[#EBD402]  py-3 px-4 rounded-full hover:bg-[#358F74]
+                className="hidden md:block text-sm font-semibold border-[1px] border-[#EBD402]  py-2 px-4 rounded-full hover:bg-[#358F74]
                  transition cursor-pointer text-[#EBD402]"
               >
                 join
@@ -112,7 +112,7 @@
           
            <Link
                 type="button"
-                className=" text-sm font-semibold pr-2 rounded-full transition cursor-pointer"
+                className=" text-sm font-semibold px-2  pr-2 rounded-full transition cursor-pointer"
               >
                 Log in
                  
