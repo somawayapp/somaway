@@ -64,7 +64,7 @@
   
           return(
           <div  style={{ zIndex: 100004, }}
-             className="flex justify-center items-center flex-col relative w-full px-4 md:px-[80px] gap-3 py-2  md:gap-6 flex sticky top-0  text-[var(--TextColor)] bg-[var(--bg)] md:border-b  border-b-[var(--softBg4)] " >
+             className="flex justify-center items-center flex-col relative w-full px-4 md:px-[80px] gap-3 py-2  md:gap-6 flex sticky top-0  text-[var(--TextColor)] bg-[#09714B] md:border-b  border-b-[var(--softBg4)] " >
       
       
             <div className="relative w-full  mt-2 gap-2 md:gap-6 flex flex-row items-center  text-[var(--TextColor)]  justify-between  bg-[var(--bg)] "           >
@@ -72,10 +72,15 @@
   
              {/* Show on medium screens and larger */}
              <Link to="/" className="flex items-center gap-1 text-xl font-bold md:text-3xl hidden md:flex">
-              <img src="/logo22.png" className="md:h-8" />
+              <img src="/betlogo.png" className="md:h-8" />
              </Link>
     
-             <Search2 />
+             <div className="flex items-center justify-between flex-row gap-2 md:gap-9">
+             <p className=" text-[#358F74] "> All sports</p>              
+               <p className="text-[#358F74]"> In play</p>              
+             <p className="text-[#358F74]"> Casinos</p>              
+
+            </div>
 
              <div className="flex items-center justify-between flex-row gap-2 md:gap-9">
               <div className="relative"  onClick={() => setOpen((prev) => !prev)}>
@@ -84,9 +89,9 @@
               to="/addlistingreview">
               <button
                 type="button"
-                className="hidden md:block text-sm font-semibold py-3 px-4 rounded-full hover:bg-[var(--softBg4)] transition cursor-pointer text-[var(--softBg5)]"
+                className="hidden md:block text-sm font-semibold border-[#EBD402]  py-3 px-4 rounded-full hover:bg-[var(--softBg4)] transition cursor-pointer text-[#EBD402]"
               >
-                Add Listing
+                join
                  </button>
                  </Link>
                 <button
@@ -98,19 +103,22 @@
           
           
            <SignedIn>
-            <div className="flex items-center  w-[38px] h-[38px] justify-center">
+            <div className="flex items-center  w-[28px] h-[28px] justify-center">
            <UserButton />
            </div>
            </SignedIn>
   
           
-          
+           <Link
+                type="button"
+                className=" text-sm font-semibold py-3 px-4 rounded-full hover:bg-[var(--softBg4)] transition cursor-pointer text-[var(--softBg5)]"
+              >
+                join
+                 
+                 </Link>
+
            <SignedOut>
-           <img
-            className="rounded-full text-[14px] w-[38px] h-[38px] select-none"
-            alt="Avatar"
-            src="/placeholder.jpg"
-            />
+         
             </SignedOut>
            </div>
   
