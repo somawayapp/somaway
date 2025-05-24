@@ -110,7 +110,7 @@
                  </Link>
                 <button
                   type="button"
-                  className="  py-1 pl-4 pr-2 border-[1px]  text-[#EBD402]  border-[#EBD402]  flex  flex-row  items-center   gap-3   rounded-full  
+                  className="  py-1 pl-2 md:pl-4 pr-2 border-[1px]  text-[#EBD402]  border-[#EBD402]  flex  flex-row  items-center   gap-3   rounded-full  
                    cursor-pointer   hover:bg-[#358F74] shadow-md   transition duration-300"
                 >
                   <AiOutlineMenu />
@@ -127,7 +127,7 @@
 
            <Link
                 type="button"
-                className=" text-xs md:text-sm font-semibold py-1  pr-2 rounded-full transition cursor-pointer"
+                className=" text-xs md:text-sm font-semibold py-1   md:pr-2 rounded-full transition cursor-pointer"
               >
                 Log in
                  
@@ -273,7 +273,7 @@
   
            </div>
 
-            <div className="flex  md:hidden mt-4 text-sm font-semibold justify-between flex-row ">
+            <div className="flex  md:hidden mt-4 text-sm font-semibold justify-between gap-auto flex-row ">
              <p className=" text-[#1ff8b0] hover:text-[#1ff8b0] transition cursor-pointer "> All sports</p>              
                <p className="text-[#f2f2f2] hover:text-[#1ff8b0] transition cursor-pointer"> In play</p>              
              <p className="text-[#f2f2f2] hover:text-[#1ff8b0] transition cursor-pointer" > Casinos</p>              
