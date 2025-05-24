@@ -73,9 +73,23 @@
              <Link to="/" className="flex items-center gap-1 text-xl font-bold md:text-3xl hidden md:flex">
               <img src="/betlogo.png" className="md:h-8" />
              </Link>
+              <Link
+              to="/addlistingreview">
+              <button
+                type="button"
+                className="md:hidden  text-sm font-semibold border-[1px] border-[#EBD402]  py-2 px-4 rounded-full hover:bg-[#358F74]
+                 transition cursor-pointer text-[#EBD402]"
+              >
+                join
+                 </button>
+                 </Link>
+
+               <Link to="/" className="flex items-center gap-1 text-xl font-bold md:text-3xl md:hidden">
+              <img src="/betlogo2.png" className="h-8" />
+             </Link>
     
-             <div className="flex items-center text-sm font-semibold justify-between flex-row gap-2 md:gap-9">
-             <p className=" text-[#1ff8b0] transition cursor-pointer "> All sports</p>              
+             <div className="flex hidden md:flex items-center text-sm font-semibold justify-between flex-row gap-2 md:gap-9">
+             <p className=" text-[#1ff8b0] hover:text-[#1ff8b0] transition cursor-pointer "> All sports</p>              
                <p className="text-[#f2f2f2] hover:text-[#1ff8b0] transition cursor-pointer"> In play</p>              
              <p className="text-[#f2f2f2] hover:text-[#1ff8b0] transition cursor-pointer" > Casinos</p>              
 
@@ -100,7 +114,7 @@
                    cursor-pointer   hover:bg-[#358F74] shadow-md   transition duration-300"
                 >
                   <AiOutlineMenu />
-                  <div className="hidden md:flex items-center justify-center">
+                  <div className="flex items-center justify-center">
           
           
            <SignedIn>
@@ -109,7 +123,8 @@
            </div>
            </SignedIn>
   
-          
+                     <SignedOut>
+
            <Link
                 type="button"
                 className=" text-sm font-semibold py-1  pr-2 rounded-full transition cursor-pointer"
@@ -118,8 +133,6 @@
                  
                  </Link>
 
-           <SignedOut>
-         
             </SignedOut>
            </div>
   
@@ -260,7 +273,13 @@
   
            </div>
 
-          
+            <div className="flex  md:hidden  items-center text-sm font-semibold justify-between flex-row gap-2 md:gap-9">
+             <p className=" text-[#1ff8b0] hover:text-[#1ff8b0] transition cursor-pointer "> All sports</p>              
+               <p className="text-[#f2f2f2] hover:text-[#1ff8b0] transition cursor-pointer"> In play</p>              
+             <p className="text-[#f2f2f2] hover:text-[#1ff8b0] transition cursor-pointer" > Casinos</p>              
+
+            </div>
+
         </div>
     );
   };
