@@ -88,14 +88,16 @@
               to="/addlistingreview">
               <button
                 type="button"
-                className="hidden md:block text-sm font-semibold border-[#EBD402]  py-3 px-4 rounded-full hover:bg-[var(--softBg4)] transition cursor-pointer text-[#EBD402]"
+                className="hidden md:block text-sm font-semibold border-[1px] border-[#EBD402]  py-3 px-4 rounded-full hover:bg-[#358F74]
+                 transition cursor-pointer text-[#EBD402]"
               >
                 join
                  </button>
                  </Link>
                 <button
                   type="button"
-                  className=" p-4 md:py-1 md:pl-4 md:pr-2 border-[1px]  border-[var(--softBg4)]  flex  flex-row  items-center   gap-3   rounded-full   cursor-pointer   hover:shadow-lg shadow-md   transition duration-300"
+                  className=" p-4 md:py-1 md:pl-4 md:pr-2 border-[1px]  text-[#EBD402]  border-[#EBD402]  flex  flex-row  items-center   gap-3   rounded-full  
+                   cursor-pointer   hover:bg-[#358F74] shadow-md   transition duration-300"
                 >
                   <AiOutlineMenu />
                   <div className="hidden md:flex items-center justify-center">
@@ -112,7 +114,7 @@
                 type="button"
                 className=" text-sm font-semibold py-3 px-4 rounded-full hover:bg-[var(--softBg4)] transition cursor-pointer text-[var(--softBg5)]"
               >
-                join
+                Log in
                  
                  </Link>
 
