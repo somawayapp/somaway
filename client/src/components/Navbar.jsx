@@ -85,7 +85,7 @@
                  </Link>
 
                <Link to="/" className="flex items-center gap-1 text-xl font-bold md:text-3xl md:hidden">
-              <img src="/betlogo2.png" className="h-[20px]" />
+              <img src="/betlogo2.png" className="h-[50px]" />
              </Link>
     
              <div className="flex hidden md:flex items-center text-sm font-semibold justify-between flex-row gap-2 md:gap-9">
@@ -110,7 +110,7 @@
                  </Link>
                 <button
                   type="button"
-                  className="  py-1 pl-2 md:pl-4 pr-2 border-[1px]  text-[#EBD402]  border-[#EBD402]  flex  flex-row  items-center   gap-3   rounded-full  
+                  className="  py-1 pl-2 md:pl-4 pr-2 border-[1px]  text-[#EBD402]  border-[#EBD402]  flex  flex-row  items-center   gap-2 md:gap-3  rounded-full  
                    cursor-pointer   hover:bg-[#358F74] shadow-md   transition duration-300"
                 >
                   <AiOutlineMenu />
@@ -273,7 +273,7 @@
   
            </div>
 
-            <div className="flex  md:hidden mt-4 text-sm font-semibold justify-between gap-auto flex-row ">
+            <div className="flex  md:hidden mt-2 text-sm font-semibold justify-between gap-6 flex-row ">
              <p className=" text-[#1ff8b0] hover:text-[#1ff8b0] transition cursor-pointer "> All sports</p>              
                <p className="text-[#f2f2f2] hover:text-[#1ff8b0] transition cursor-pointer"> In play</p>              
              <p className="text-[#f2f2f2] hover:text-[#1ff8b0] transition cursor-pointer" > Casinos</p>              
