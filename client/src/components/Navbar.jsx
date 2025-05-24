@@ -11,8 +11,7 @@
   import Avatar from "./Avatar";
   import { useNavigate, useSearchParams } from "react-router-dom";
   import { FaSearch, FaTimes } from "react-icons/fa";
-  import Search from "./Search";
-  import Search2 from "./Search2";
+
   
   
   const Navbar = () => {
@@ -64,10 +63,10 @@
   
           return(
           <div  style={{ zIndex: 100004, }}
-             className="flex justify-center items-center flex-col relative w-full px-4 md:px-[80px] gap-3 py-2  md:gap-6 flex sticky top-0  text-[var(--TextColor)] bg-[#09714B] md:border-b  border-b-[var(--softBg4)] " >
+             className="flex justify-center items-center flex-col relative w-full  gap-3 py-2  md:gap-6 flex sticky top-0  text-[var(--TextColor)] bg-[#09714B] md:border-b  border-b-[var(--softBg4)] " >
       
       
-            <div className="relative w-full  mt-2 gap-2 md:gap-6 flex flex-row items-center  text-[var(--TextColor)]  justify-between  bg-[var(--bg)] "           >
+            <div className="relative w-full  mt-2 gap-2 md:gap-6 flex flex-row items-center  text-[var(--TextColor)]  justify-between  px-4 md:px-[80px] "           >
   
   
              {/* Show on medium screens and larger */}
@@ -259,9 +258,7 @@
   
            </div>
 
-            <div className="hidden md:block">
-              <Search/>
-            </div>
+          
         </div>
     );
   };
