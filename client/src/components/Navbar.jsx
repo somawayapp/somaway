@@ -112,7 +112,7 @@
           
            <Link
                 type="button"
-                className=" text-sm font-semibold py-2  pr-2 rounded-full transition cursor-pointer"
+                className=" text-sm font-semibold py-1  pr-2 rounded-full transition cursor-pointer"
               >
                 Log in
                  

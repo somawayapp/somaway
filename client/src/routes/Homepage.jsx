@@ -57,14 +57,14 @@ from ${author || 'top authors'}in minutes. Elevate your mind—only on Hodi!`} /
   <link rel="canonical" href={`${window.location.href}`} />
   
 </Helmet>
-       <div className="md:px-[80px] px-4 justify-between flex px-4 flex-row text-xs ">
-       <div className="gap-2 md:gap-6">
+       <div className="md:px-[80px] px-4 justify-between flex py-4 flex-row text-xs ">
+       <div className="gap-2 md:gap-6 flex flex-row">
            <p className=" text-[#f2f2f2] transition cursor-pointer "> Sports</p>              
             <p className="text-[var(--softTextColori)] hover:text-[#1ff8b0] transition cursor-pointer"> Fantasy</p>              
              <p className="text-[var(--softTextColori)] hover:text-[#1ff8b0] transition cursor-pointer" > Casinos</p>              
 
        </div>
-       <div className="gap-2 md:gap-6">
+       <div className="gap-2 md:gap-6 flex flex-row">
             <p className="text-[var(--softTextColori)] hover:text-[#1ff8b0] transition cursor-pointer"> Responsible gambling</p>              
              <p className="text-[var(--softTextColori)] hover:text-[#1ff8b0] transition cursor-pointer" > Help</p>              
 
