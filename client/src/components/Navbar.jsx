@@ -75,9 +75,9 @@
              </Link>
     
              <div className="flex items-center text-sm font-semibold justify-between flex-row gap-2 md:gap-9">
-             <p className=" text-[#35c091] "> All sports</p>              
-               <p className="text-[#f2f2] hover:text-[#35c091]"> In play</p>              
-             <p className="text-[#f2f2] hover:text-[#35c091]" > Casinos</p>              
+             <p className=" text-[#4fcca2] transition cursor-pointer "> All sports</p>              
+               <p className="text-[#f2f2f2] hover:text-[#4fcca2] transition cursor-pointer"> In play</p>              
+             <p className="text-[#f2f2f2] hover:text-[#4fcca2] transition cursor-pointer" > Casinos</p>              
 
             </div>
 
@@ -112,7 +112,7 @@
           
            <Link
                 type="button"
-                className=" text-sm font-semibold px-2  pr-2 rounded-full transition cursor-pointer"
+                className=" text-sm font-semibold px-3  pr-2 rounded-full transition cursor-pointer"
               >
                 Log in
                  
