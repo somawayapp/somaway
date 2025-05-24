@@ -9,8 +9,8 @@
 @tailwind utilities;
 
 :root {
-  --bg: white;
-  --textColor: black;
+  --bg: #252525;
+  --textColor: white;
   --softBg: #f0f0f0;
   
   --softTextColor: #626262;
@@ -43,7 +43,7 @@ a {
 }
 
 .dark {
-  --bg: #010102;
+  --bg: #252525;
   --textColor: #dfecf5;
   --TextColor: #dfecf5;
 

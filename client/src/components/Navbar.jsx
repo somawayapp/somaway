@@ -63,10 +63,10 @@
   
           return(
           <div  style={{ zIndex: 100004, }}
-             className="flex justify-center items-center flex-col relative w-full  gap-3 py-2  md:gap-6 flex sticky top-0  text-[var(--TextColor)] bg-[#09714B] md:border-b  border-b-[var(--softBg4)] " >
+             className="flex justify-center items-center flex-col relative w-full  gap-3 py-2 md:py-3  md:gap-6 flex sticky top-0  text-[var(--TextColor)] bg-[#09714B] md:border-b  border-b-[var(--softBg4)] " >
       
       
-            <div className="relative w-full  mt-2 gap-2 md:gap-6 flex flex-row items-center  text-[var(--TextColor)]  justify-between  px-4 md:px-[80px] "           >
+            <div className="relative w-full   gap-2 md:gap-6 flex flex-row items-center  text-[var(--TextColor)]  justify-between  px-4 md:px-[80px] "           >
   
   
              {/* Show on medium screens and larger */}
@@ -75,9 +75,9 @@
              </Link>
     
              <div className="flex items-center justify-between flex-row gap-2 md:gap-9">
-             <p className=" text-[#358F74] "> All sports</p>              
-               <p className="text-[#358F74]"> In play</p>              
-             <p className="text-[#358F74]"> Casinos</p>              
+             <p className=" text-[##35c091] "> All sports</p>              
+               <p className="text-[#fff] hover:text-[#35c091]"> In play</p>              
+             <p className="text-[#fff] hover:text-[#35c091]" > Casinos</p>              
 
             </div>
 
@@ -112,7 +112,7 @@
           
            <Link
                 type="button"
-                className=" text-sm font-semibold py-3 px-4 rounded-full hover:bg-[var(--softBg4)] transition cursor-pointer text-[var(--softBg5)]"
+                className=" text-sm font-semibold pr-2 rounded-full transition cursor-pointer"
               >
                 Log in
                  
