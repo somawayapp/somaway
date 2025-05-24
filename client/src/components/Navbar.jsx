@@ -63,7 +63,7 @@
   
           return(
           <div  style={{ zIndex: 100004, }}
-             className="flex justify-center items-center flex-col relative w-full  gap-3 py-2 md:py-3  md:gap-6 flex sticky top-0  text-[var(--TextColor)] bg-[#09714B] md:border-b  border-b-[var(--softBg4)] " >
+             className="flex justify-center items-center flex-col relative w-full  gap-3 py-2 md:py-3  md:gap-6 flex sticky top-0  text-[var(--TextColor)] bg-[#027B5B] md:border-b  border-b-[var(--softBg4)] " >
       
       
             <div className="relative w-full   gap-2 md:gap-6 flex flex-row items-center  text-[var(--TextColor)]  justify-between  px-4 md:px-[80px] "           >
@@ -273,7 +273,7 @@
   
            </div>
 
-            <div className="flex  md:hidden mt-2 text-sm font-semibold justify-between gap-6 flex-row ">
+            <div className="flex  md:hidden mb-2 text-sm font-semibold justify-between gap-9 flex-row ">
              <p className=" text-[#1ff8b0] hover:text-[#1ff8b0] transition cursor-pointer "> All sports</p>              
                <p className="text-[#f2f2f2] hover:text-[#1ff8b0] transition cursor-pointer"> In play</p>              
              <p className="text-[#f2f2f2] hover:text-[#1ff8b0] transition cursor-pointer" > Casinos</p>              
