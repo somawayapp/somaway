@@ -10,7 +10,6 @@ const Sidebar = () => {
       title: "TRENDING",
       items: [
     { name: "PSL", icon: "⚽ " },      
-     { name: "IPL", icon: "🏏" },                  
     { name: "IRE vs WI", icon: "🥅" },              
     { name: "NBA Playoffs", icon: "🏀" },            
     { name: "Monaco Grand Prix", icon: "🏎️" },      
@@ -24,7 +23,6 @@ const Sidebar = () => {
       { name: "Daily Draw", icon: "🎟️" },  
     { name: "Weekly Winners", icon: "🏆" },    
     { name: "Monthly Jackpot", icon: "🎯" }, 
-    { name: "Live", icon: "📺" },   
       ],
     },
   ];
