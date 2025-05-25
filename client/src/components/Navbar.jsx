@@ -84,19 +84,20 @@
                  </button>
                  </Link>
 
-             <div className="relative flex items-center justify-center w-full py-2">
-              {/* Logo (only visible on small screens) */}
-                 <Link to="/" className="absolute left-4 md:hidden">
-                <img src="/betlogo2.png" className="h-[50px]" alt="Logo" />
-                </Link>
+            <div className="relative w-full flex items-center justify-center py-2">
+  {/* Logo only on small screens */}
+  <Link to="/" className="absolute left-4 md:hidden">
+    <img src="/betlogo2.png" className="h-[50px]" alt="Logo" />
+  </Link>
 
-                 {/* Center nav links (hidden on small screens, visible on md and up) */}
-                  <div className="hidden md:flex items-center text-sm font-semibold justify-center gap-9">
-                  <p className="text-[#1ff8b0] hover:text-[#1ff8b0] transition cursor-pointer">All sports</p>
-                   <p className="text-[#f2f2f2] hover:text-[#1ff8b0] transition cursor-pointer">In play</p>
-                  <p className="text-[#f2f2f2] hover:text-[#1ff8b0] transition cursor-pointer">Casinos</p>
-                  </div>
-                   </div>
+  {/* Nav links - centered on md+ screens */}
+  <div className="hidden md:flex items-center text-sm font-semibold gap-9">
+    <p className="text-[#1ff8b0] hover:text-[#1ff8b0] transition cursor-pointer">All sports</p>
+    <p className="text-[#f2f2f2] hover:text-[#1ff8b0] transition cursor-pointer">In play</p>
+    <p className="text-[#f2f2f2] hover:text-[#1ff8b0] transition cursor-pointer">Casinos</p>
+  </div>
+</div>
+
 
 
              <div className="flex items-center justify-between flex-row gap-2 md:gap-9">
@@ -277,7 +278,7 @@
   
            </div>
 
-      <div className="grid grid-cols-3 md:hidden mb-2 px-4  text-sm font-semibold">
+      <div className="grid grid-cols-3 md:hidden mb-2 px-4  gap-[10%] text-sm font-semibold">
       <p className="text-left text-[#1ff8b0] hover:text-[#1ff8b0] transition cursor-pointer">All sports</p>
       <p className="text-center text-[#f2f2f2] hover:text-[#1ff8b0] transition cursor-pointer">In-play</p>
       <p className="text-right text-[#f2f2f2] hover:text-[#1ff8b0] transition cursor-pointer">Casinos</p>
