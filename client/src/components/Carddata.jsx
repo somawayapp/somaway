@@ -3,32 +3,32 @@ import { Button } from "@mui/material";
 
 const cardData = [
   {
-    image: "/win1.png",
+    image: "/win1.jpg",
     title: "Win Ksh 1 Million",
     desc: "Bet only 1 shilling and stand a chance to win 1 million shillings instantly.",
   },
   {
-    image: "/win2.png",
+    image: "/win2.jpg",
     title: "Win Ksh 100,000",
     desc: "Turn 1 shilling into 100,000 shillings with one lucky bet.",
   },
   {
-    image: "/win3.png",
+    image: "/win3.jpg",
     title: "Win Ksh 10,000",
     desc: "One shilling could be your ticket to 10,000 shillings today.",
   },
   {
-    image: "/win4.png",
+    image: "/win4.jpg",
     title: "Win Ksh 1,000",
     desc: "Bet 1 shilling and you could walk away with 1,000 shillings.",
   },
   {
-    image: "/win5.png",
+    image: "/win5.jpg",
     title: "Win Ksh 100",
     desc: "Your single shilling could win you 100 shillings!",
   },
   {
-    image: "/win6.png",
+    image: "/win6.jpg",
     title: "Win Ksh 10",
     desc: "Even 1 shilling can win you 10 shillings. Start small, win big!",
   },
