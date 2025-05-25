@@ -76,16 +76,10 @@ from ${author || 'top authors'}in minutes. Elevate your mind—only on Hodi!`} /
 
      
   
-
-{/* Main layout with Sidebar and Content */}
 <div className="flex flex-col md:flex-row min-h-[75vh] relative">
-  {/* Sidebar space holder so layout doesn’t jump on desktop */}
-  <div className="hidden md:block w-[16%] min-w-fit" />
-  
-  {/* Main Content */}
-  <div className="flex-1">
+  <Sidebar />
+<div className="flex-1 md:ml-[21%] min-ml-[350px]">
     <PostList />
-    <Footer />
   </div>
 </div>
 

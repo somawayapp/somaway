@@ -31,11 +31,11 @@ const Sidebar = () => {
 
   return (
            <div>
-  {/* Desktop Sidebar */}
-  <div className="hidden md:flex fixed top-0 left-0 flex-col h-screen w-[16%] min-w-fit border-r border-black py-4 overflow-y-auto whitespace-nowrap bg-black z-10">
+  {/* Fixed Sidebar */}
+  <div className="hidden md:flex fixed flex-col h-screen w-[16%] border-r border-black py-4 overflow-y-scroll whitespace-nowrap min-w-fit">
     {sections.map((section, idx) => (
       <div key={idx} className="mb-9">
-        <h2 className="text-sm font-bold mb-3 text-[#1ff8b0]">
+        <h2 className="text-sm font-bold mb-3" style={{ color: "#1ff8b0" }}>
           {section.title}
         </h2>
         <ul className="space-y-3">
@@ -54,8 +54,8 @@ const Sidebar = () => {
     ))}
   </div>
 
-  {/* Mobile Horizontal Menu */}
-  <div className="md:hidden w-full overflow-x-auto whitespace-nowrap no-scrollbar py-3 flex gap-3 bg-black">
+  {/* Mobile Horizontal Scroll Menu */}
+  <div className="md:hidden w-full overflow-x-auto whitespace-nowrap no-scrollbar py-3 flex gap-3">
     {sections.flatMap((section) => section.items).map((item, i) => (
       <div
         key={i}
@@ -70,8 +70,15 @@ const Sidebar = () => {
       </div>
     ))}
   </div>
-</div>
 
+  {/* Main Content with Sidebar Offset */}
+  <div className="flex flex-col md:flex-row min-h-[75vh]">
+    <div className="flex-1 md:ml-[16%]">
+      <PostList />
+      <Footer />
+    </div>
+  </div>
+</div>
 
 
   );
