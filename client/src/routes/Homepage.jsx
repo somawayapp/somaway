@@ -40,7 +40,7 @@ const HomePage = () => {
     return (
       <>
 
-       <div className="no-scrollbar overflow-hidden h-screen">
+       <div className=" h-screen">
   <Helmet>
     <title>
       {cat && author 
@@ -77,21 +77,22 @@ const HomePage = () => {
 
   <Navbar />
 
-  <div className="md:px-[5%] px-4 h-[calc(100vh-120px)]"> {/* adjust 64px if your nav height is different */}
-    <div className="flex h-full md:flex-row overflow-hidden">
-      
-      {/* Sidebar */}
-      <div className="w-full hidden md:block md:w-[16%] h-full overflow-y-auto border-r-2 pr-8 border-[#131413]">
-        <Sidebar />
-      </div>
+ <div className="md:px-[5%] px-4"> {/* Remove fixed height here */}
+  <div className="flex md:flex-row"> {/* Remove h-full & overflow-hidden */}
+    
+    {/* Sidebar */}
+    <div className="w-full hidden md:block md:w-[16%] h-screen overflow-y-auto border-r-2 pr-8 border-[#1b1f1c]">
+      <Sidebar />
+    </div>
 
-      {/* card List */}
-    <div className="flex-1  overflow-y-auto md:px-8">
-        <BettingChances />
-        <Footer />
-      </div>
+    {/* Card List */}
+    <div className="flex-1 md:px-8"> {/* Remove overflow-y-auto here */}
+      <BettingChances />
+      <Footer />
     </div>
   </div>
+</div>
+
 </div>
 
 
