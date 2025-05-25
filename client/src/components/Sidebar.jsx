@@ -32,7 +32,7 @@ const Sidebar = () => {
   return (
             <div>
 
-<div className="hidden md:flex fixed flex-col h-screen w-[16%] border-r border-black py-4 overflow-y-scroll whitespace-nowrap no-scrollbar min-w-fit">
+<div className="hidden md:flex fixed flex-col h-screen w-[16%] border-r border-black py-4 overflow-y-scroll whitespace-nowrap  min-w-fit">
       {sections.map((section, idx) => (
         <div key={idx} className="mb-9">
           <h2 className="text-sm font-bold mb-3" style={{ color: "#1ff8b0" }}>

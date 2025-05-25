@@ -448,11 +448,4 @@ body {
 
 
 
-/* Tailwind config - add this in your global CSS */
-.no-scrollbar::-webkit-scrollbar {
-  display: none;
-}
-.no-scrollbar {
-  -ms-overflow-style: none;  /* IE and Edge */
-  scrollbar-width: none;     /* Firefox */
-}
+
