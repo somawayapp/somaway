@@ -53,7 +53,7 @@ from ${author || 'top authors'}in minutes. Elevate your mind—only on Hodi!`} /
   <link rel="canonical" href={`${window.location.href}`} />
   
 </Helmet>
-       <div style={{ zIndex: 100004, }} className="md:px-[5%] bg-[#027B5B] px-4 sticky top-0 justify-between flex py-4 flex-row text-xs ">
+       <div style={{ zIndex: 100004, }} className="md:px-[5%] bg-[var(--bg)] px-4 sticky top-0 justify-between flex py-4 flex-row text-xs ">
        <div className="gap-2 md:gap-6 flex flex-row">
            <p className=" text-[#f2f2f2] hover:text-[#1ff8b0] transition cursor-pointer "> Sports</p>              
             <p className="text-[var(--softTextColori)] hover:text-[#1ff8b0] transition cursor-pointer"> Fantasy</p>              
@@ -78,7 +78,7 @@ from ${author || 'top authors'}in minutes. Elevate your mind—only on Hodi!`} /
   
 <div className="flex flex-col md:flex-row min-h-[75vh] relative">
   <Sidebar />
-  <div className="flex-1 md:ml-[21%] min-ml-[20%]">
+<div className="flex-1 md:ml-[21%] min-ml-[20%]">
     <PostList />
   </div>
 </div>
