@@ -30,48 +30,49 @@ const Sidebar = () => {
   ];
 
   return (
-            <div>
+           <div>
+  {/* Desktop Sidebar */}
+  <div className="hidden md:flex fixed top-0 left-0 flex-col h-screen w-[16%] min-w-fit border-r border-black py-4 overflow-y-auto whitespace-nowrap bg-black z-10">
+    {sections.map((section, idx) => (
+      <div key={idx} className="mb-9">
+        <h2 className="text-sm font-bold mb-3 text-[#1ff8b0]">
+          {section.title}
+        </h2>
+        <ul className="space-y-3">
+          {section.items.map((item, i) => (
+            <li key={i} className="group flex items-center gap-3 cursor-pointer">
+              <span className="text-xl group-hover:scale-110 transition-transform duration-150">
+                {item.icon}
+              </span>
+              <span className="text-[#f2f2f2] group-hover:text-[#1ff8b0] text-sm font-semibold">
+                {item.name}
+              </span>
+            </li>
+          ))}
+        </ul>
+      </div>
+    ))}
+  </div>
 
-<div className="hidden md:flex fixed flex-col h-screen w-[16%] border-r border-black py-4 overflow-y-scroll whitespace-nowrap  min-w-fit">
-      {sections.map((section, idx) => (
-        <div key={idx} className="mb-9">
-          <h2 className="text-sm font-bold mb-3" style={{ color: "#1ff8b0" }}>
-            {section.title}
-          </h2>
-          <ul className="space-y-3">
-            {section.items.map((item, i) => (
-              <li key={i} className="group flex items-center gap-3 cursor-pointer">
-                <span className="text-xl group-hover:scale-110 transition-transform duration-150">
-                  {item.icon}
-                </span>
-                <span className="text-[#f2f2f2] group-hover:text-[#1ff8b0] text-sm font-semibold">
-                  {item.name}
-                </span>
-              </li>
-            ))}
-          </ul>
-        </div>
-      ))}
-    </div>
-    
-
-
-    <div className="md:hidden w-full overflow-x-auto whitespace-nowrap no-scrollbar py-3 flex gap-3">
-  {sections.flatMap((section) => section.items).map((item, i) => (
-    <div
-      key={i}
-      className="flex flex-col items-center justify-center min-w-[70px] cursor-pointer group"
-    >
-      <span className="text-xl group-hover:scale-110 transition-transform duration-150">
-        {item.icon}
-      </span>
-      <span className="text-[10px] mt-1 text-[#f2f2f2] group-hover:text-[#1ff8b0] text-center font-semibold">
-        {item.name}
-      </span>
-    </div>
-  ))}
+  {/* Mobile Horizontal Menu */}
+  <div className="md:hidden w-full overflow-x-auto whitespace-nowrap no-scrollbar py-3 flex gap-3 bg-black">
+    {sections.flatMap((section) => section.items).map((item, i) => (
+      <div
+        key={i}
+        className="flex flex-col items-center justify-center min-w-[70px] cursor-pointer group"
+      >
+        <span className="text-xl group-hover:scale-110 transition-transform duration-150">
+          {item.icon}
+        </span>
+        <span className="text-[10px] mt-1 text-[#f2f2f2] group-hover:text-[#1ff8b0] text-center font-semibold">
+          {item.name}
+        </span>
+      </div>
+    ))}
+  </div>
 </div>
-        </div>
+
+
 
   );
 };
