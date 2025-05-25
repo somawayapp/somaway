@@ -81,7 +81,7 @@ const HomePage = () => {
   <div className="flex md:flex-row"> {/* Remove h-full & overflow-hidden */}
     
     {/* Sidebar */}
-    <div className="w-full hidden sticky top-[125px] md:block md:w-[16%] h-[calc(100vh-120px)] overflow-y-auto border-r-2 pr-8 border-[#1b1f1c]">
+    <div className="w-full hidden sticky top-[110px] md:block md:w-[16%] h-[calc(100vh-130px)] overflow-y-auto border-r-2 pr-8 border-[#1b1f1c]">
       <Sidebar />
     </div>
 
