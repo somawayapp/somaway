@@ -36,7 +36,7 @@ const cardData = [
 
 export default function BettingChances() {
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6  py-8 border-2 border-[#111] bg-[var(--bg)]">
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6  py-8  bg-[var(--bg)]">
       {cardData.map((item, i) => (
         <motion.div
           key={i}
@@ -44,7 +44,7 @@ export default function BettingChances() {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.4, delay: i * 0.1 }}
-          className="overflow-hidden shadow-lg rounded-2xl bg-gradient-to-br from-[#111] to-[#1a1a1a] text-white flex flex-col"
+          className="overflow-hidden shadow-lg rounded-2xl bg-gradient-to-br from-[#111] to-[#1a1a1a] border-2 border-[#1a1a1a] text-white flex flex-col"
         >
           <img
             src={item.image}
