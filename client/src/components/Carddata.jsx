@@ -54,7 +54,7 @@ export default function BettingChances() {
           <div className="p-5 flex flex-col flex-grow">
             <h2 className="text-xl font-bold mb-2">{item.title}</h2>
             <p className="text-sm text-gray-300 mb-4">{item.desc}</p>
-            <button className="mt-auto bg-[#11110d] py-2 hover:bg-[#f8f1af] text-[#EBD402] rounded-2xl font-semibold w-full hover:scale-105 transition-transform duration-200">
+            <button className="mt-auto bg-[#11110d] py-2 hover:bg-[#161610] text-[#EBD402] rounded-2xl font-semibold w-full hover:scale-105 transition-transform duration-200">
               Play Now
             </button>
           </div>
