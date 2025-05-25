@@ -76,8 +76,8 @@ from ${author || 'top authors'}in minutes. Elevate your mind—only on Hodi!`} /
 
   
   
-<div className="flex flex-col md:flex-row ">
-    <div className="flex h-[90vh] overflow-y-auto ">
+<div className="flex flex-col h-[95vh] md:flex-row ">
+    <div className="flex h-[100vh] overflow-y-auto ">
 
      <Sidebar /> </div>
 
