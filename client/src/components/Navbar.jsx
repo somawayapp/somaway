@@ -84,16 +84,20 @@
                  </button>
                  </Link>
 
-               <Link to="/" className="flex items-center gap-1 text-xl font-bold md:text-3xl md:hidden">
-              <img src="/betlogo2.png" className="h-[50px]" />
-             </Link>
-    
-             <div className="flex hidden md:flex items-center text-sm font-semibold justify-between flex-row gap-2 md:gap-9">
-             <p className=" text-[#1ff8b0] hover:text-[#1ff8b0] transition cursor-pointer "> All sports</p>              
-               <p className="text-[#f2f2f2] hover:text-[#1ff8b0] transition cursor-pointer"> In play</p>              
-             <p className="text-[#f2f2f2] hover:text-[#1ff8b0] transition cursor-pointer" > Casinos</p>              
+             <div className="relative flex items-center justify-center w-full py-2">
+              {/* Logo (only visible on small screens) */}
+                 <Link to="/" className="absolute left-4 md:hidden">
+                <img src="/betlogo2.png" className="h-[50px]" alt="Logo" />
+                </Link>
 
-            </div>
+                 {/* Center nav links (hidden on small screens, visible on md and up) */}
+                  <div className="hidden md:flex items-center text-sm font-semibold justify-center gap-9">
+                  <p className="text-[#1ff8b0] hover:text-[#1ff8b0] transition cursor-pointer">All sports</p>
+                   <p className="text-[#f2f2f2] hover:text-[#1ff8b0] transition cursor-pointer">In play</p>
+                  <p className="text-[#f2f2f2] hover:text-[#1ff8b0] transition cursor-pointer">Casinos</p>
+                  </div>
+                   </div>
+
 
              <div className="flex items-center justify-between flex-row gap-2 md:gap-9">
               <div className="relative"  onClick={() => setOpen((prev) => !prev)}>
@@ -273,12 +277,12 @@
   
            </div>
 
-            <div className="flex  md:hidden mb-2 text-sm font-semibold justify-between gap-9 flex-row ">
-             <p className=" text-[#1ff8b0] hover:text-[#1ff8b0] transition cursor-pointer "> All sports</p>              
-               <p className="text-[#f2f2f2] hover:text-[#1ff8b0] transition cursor-pointer"> In play</p>              
-             <p className="text-[#f2f2f2] hover:text-[#1ff8b0] transition cursor-pointer" > Casinos</p>              
+      <div className="grid grid-cols-3 md:hidden mb-2 px-4  text-sm font-semibold">
+      <p className="text-left text-[#1ff8b0] hover:text-[#1ff8b0] transition cursor-pointer">All sports</p>
+      <p className="text-center text-[#f2f2f2] hover:text-[#1ff8b0] transition cursor-pointer">In-play</p>
+      <p className="text-right text-[#f2f2f2] hover:text-[#1ff8b0] transition cursor-pointer">Casinos</p>
+      </div>
 
-            </div>
 
         </div>
     );
