@@ -30,7 +30,9 @@ const Sidebar = () => {
   ];
 
   return (
-    <div className="hidden md:flex flex-col pr-[8%] border-r border-black p-4 min-w-fit">
+            <div>
+
+    <div className="hidden fixed md:flex flex-col pr-[8%] border-r border-black p-4  overflow-y-auto whitespace-nowrap no-scrollbar min-w-fit">
       {sections.map((section, idx) => (
         <div key={idx} className="mb-9">
           <h2 className="text-sm font-bold mb-3" style={{ color: "#1ff8b0" }}>
@@ -51,6 +53,26 @@ const Sidebar = () => {
         </div>
       ))}
     </div>
+    
+
+
+    <div className="md:hidden w-full overflow-x-auto whitespace-nowrap no-scrollbar py-3 px-2 flex gap-6">
+  {sections.flatMap((section) => section.items).map((item, i) => (
+    <div
+      key={i}
+      className="flex flex-col items-center justify-center min-w-[70px] cursor-pointer group"
+    >
+      <span className="text-2xl group-hover:scale-110 transition-transform duration-150">
+        {item.icon}
+      </span>
+      <span className="text-xs mt-1 text-[#f2f2f2] group-hover:text-[#1ff8b0] text-center font-semibold">
+        {item.name}
+      </span>
+    </div>
+  ))}
+</div>
+        </div>
+
   );
 };
 
