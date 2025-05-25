@@ -9,6 +9,7 @@ const Sidebar = () => {
     {
       title: "TRENDING",
       items: [
+    { name: "PSL", icon: "🏎️" },      
      { name: "IPL", icon: "🏏" },                  
     { name: "IRE vs WI", icon: "🥅" },              
     { name: "NBA Playoffs", icon: "🏀" },            
@@ -31,7 +32,7 @@ const Sidebar = () => {
   return (
     <div className="hidden md:flex flex-col pr-[8%] border-r border-black p-4 min-w-fit">
       {sections.map((section, idx) => (
-        <div key={idx} className="mb-6">
+        <div key={idx} className="mb-9">
           <h2 className="text-sm font-bold mb-3" style={{ color: "#1ff8b0" }}>
             {section.title}
           </h2>

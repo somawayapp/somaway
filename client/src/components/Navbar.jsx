@@ -88,7 +88,7 @@
               <img src="/betlogo2.png" className="h-[50px]" />
              </Link>
     
-             <div className="flex ml-[-25%] hidden md:flex items-center text-sm font-semibold justify-between flex-row gap-2 md:gap-9">
+             <div className="flex ml-[-30%] hidden md:flex items-center text-sm font-semibold justify-between flex-row gap-2 md:gap-9">
              <p className=" text-[#1ff8b0] hover:text-[#1ff8b0] transition cursor-pointer "> All sports</p>              
                <p className="text-[#f2f2f2] hover:text-[#1ff8b0] transition cursor-pointer"> In play</p>              
              <p className="text-[#f2f2f2] hover:text-[#1ff8b0] transition cursor-pointer" > Casinos</p>              
