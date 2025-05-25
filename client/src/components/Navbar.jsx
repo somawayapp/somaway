@@ -63,7 +63,7 @@
   
           return(
           <div  style={{ zIndex: 100004, }}
-             className="flex justify-center items-center flex-col relative w-full  gap-3 py-2 md:py-3  md:gap-6 flex sticky top-0  text-[var(--TextColor)] bg-[#027B5B] md:border-b  border-b-[var(--softBg4)] " >
+             className="flex justify-between  flex-col relative w-full  gap-3 py-2 md:py-3  md:gap-6 flex sticky top-0  text-[var(--TextColor)] bg-[#027B5B] md:border-b  border-b-[var(--softBg4)] " >
       
       
             <div className="relative w-full   gap-2 md:gap-6 flex flex-row items-center  text-[var(--TextColor)]  justify-between  px-4 md:px-[80px] "           >
@@ -88,7 +88,7 @@
               <img src="/betlogo2.png" className="h-[50px]" />
              </Link>
     
-             <div className="flex hidden md:flex items-center text-sm font-semibold justify-between flex-row gap-2 md:gap-9">
+             <div className="flex ml-[-5%] hidden md:flex items-center text-sm font-semibold justify-between flex-row gap-2 md:gap-9">
              <p className=" text-[#1ff8b0] hover:text-[#1ff8b0] transition cursor-pointer "> All sports</p>              
                <p className="text-[#f2f2f2] hover:text-[#1ff8b0] transition cursor-pointer"> In play</p>              
              <p className="text-[#f2f2f2] hover:text-[#1ff8b0] transition cursor-pointer" > Casinos</p>              
