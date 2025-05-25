@@ -3,7 +3,7 @@ import React from "react";
 const Sidebar = () => {
   const sections = [
     {
-      title: "OFFERS",
+      title: "",
       items: [ { name: "Offers", icon: "💎" },],
     },
     {
@@ -29,7 +29,7 @@ const Sidebar = () => {
   ];
 
   return (
-    <div className="hidden md:flex flex-col pr-[20%] border-r border-black p-4 min-w-fit">
+    <div className="hidden md:flex flex-col pr-[8%] border-r border-black p-4 min-w-fit">
       {sections.map((section, idx) => (
         <div key={idx} className="mb-6">
           <h2 className="text-sm font-bold mb-3" style={{ color: "#1ff8b0" }}>
@@ -41,7 +41,7 @@ const Sidebar = () => {
                 <span className="text-xl group-hover:scale-110 transition-transform duration-150">
                   {item.icon}
                 </span>
-                <span className="opacity-0 text-[#f2f2f2] group-hover:text-[#1ff8b0] group-hover:opacity-100 transition-opacity duration-200 text-sm font-medium">
+                <span className="text-[#f2f2f2] group-hover:text-[#1ff8b0] text-sm font-semibold">
                   {item.name}
                 </span>
               </li>
