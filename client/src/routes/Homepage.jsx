@@ -78,7 +78,7 @@ from ${author || 'top authors'}in minutes. Elevate your mind—only on Hodi!`} /
   
 <div className="flex flex-col md:flex-row min-h-[75vh] relative">
   <Sidebar />
-  <div className="flex-1 md:ml-[25%]">
+  <div className="flex-1 md:ml-[20%] md:min-ml-[15%]">
     <PostList />
   </div>
 </div>
