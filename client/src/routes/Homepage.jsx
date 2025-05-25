@@ -85,8 +85,8 @@ const HomePage = () => {
         <Sidebar />
       </div>
 
-      {/* Post List */}
-    <div className="flex-1 h-full overflow-y-auto md:px-8 hide-scrollbar">
+      {/* card List */}
+    <div className="flex-1  overflow-y-auto md:px-8">
         <BettingChances />
         <Footer />
       </div>
