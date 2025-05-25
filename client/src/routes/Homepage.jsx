@@ -74,14 +74,15 @@ from ${author || 'top authors'}in minutes. Elevate your mind—only on Hodi!`} /
        <div className="md:px-[5%] px-4">
        
 
-     
   
-  {/* Main Content with Sidebar Offset */}
-  <div className="flex flex-col md:flex-row min-h-[75vh]">
-    <div className="flex-1 md:ml-[16%]">
-      <PostList />
-      <Footer />
-    </div>
+  
+<div className="flex flex-col md:flex-row min-h-[75vh] ">
+  <Sidebar />
+<div className="flex-1 md:ml-[21%] ">
+    <PostList />
+    <Footer/>
+
+  </div>
 </div>
 
 
