@@ -4,31 +4,32 @@ const Sidebar = () => {
   const sections = [
     {
       title: "OFFERS",
-      items: [],
+      items: [ { name: "Offers", icon: "💎" },],
     },
     {
       title: "TRENDING",
       items: [
-        { name: "IPL", icon: "🏏" },
-        { name: "EPL", icon: "⚽" },
-        { name: "Casinos", icon: "🎰" },
-        { name: "Honeypot", icon: "🍯" },
-        { name: "Jackpot", icon: "💰" },
+     { name: "IPL", icon: "🏏" },                  
+    { name: "IRE vs WI", icon: "🥅" },              
+    { name: "NBA Playoffs", icon: "🏀" },            
+    { name: "Monaco Grand Prix", icon: "🏎️" },      
+    { name: "Weekly Jackpot", icon: "🎉" },          
+    { name: "French Open", icon: "🎾" }, 
       ],
     },
     {
       title: "GAMES",
       items: [
-        { name: "Daily", icon: "📅" },
-        { name: "Weekly", icon: "🗓️" },
-        { name: "Monthly", icon: "📆" },
-        { name: "Live", icon: "🔴" },
+      { name: "Daily Draw", icon: "🎟️" },  
+    { name: "Weekly Winners", icon: "🏆" },    
+    { name: "Monthly Jackpot", icon: "🎯" }, 
+    { name: "Live", icon: "📺" },   
       ],
     },
   ];
 
   return (
-    <div className="hidden md:flex flex-col border-r border-black p-4 min-w-fit">
+    <div className="hidden md:flex flex-col pr-[20%] border-r border-black p-4 min-w-fit">
       {sections.map((section, idx) => (
         <div key={idx} className="mb-6">
           <h2 className="text-sm font-bold mb-3" style={{ color: "#1ff8b0" }}>
@@ -40,7 +41,7 @@ const Sidebar = () => {
                 <span className="text-xl group-hover:scale-110 transition-transform duration-150">
                   {item.icon}
                 </span>
-                <span className="opacity-0 group-hover:opacity-100 transition-opacity duration-200 text-sm font-medium">
+                <span className="opacity-0 text-[#f2f2f2] group-hover:text-[#1ff8b0] group-hover:opacity-100 transition-opacity duration-200 text-sm font-medium">
                   {item.name}
                 </span>
               </li>
