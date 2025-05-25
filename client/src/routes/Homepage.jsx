@@ -7,6 +7,7 @@ import Navbar from "../components/Navbar";
 import PostList from "../components/PostList";
 import { Helmet } from "react-helmet";
 import { useEffect } from "react";
+import BettingChances from "../components/Carddata";
 import Sidebar from "../components/Sidebar";
 
 const HomePage = () => {
@@ -86,7 +87,7 @@ const HomePage = () => {
 
       {/* Post List */}
       <div className="flex-1 h-full overflow-y-auto px-4 md:px-8">
-        <PostList />
+        <BettingChances />
         <Footer />
       </div>
     </div>

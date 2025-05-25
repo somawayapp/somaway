@@ -9,7 +9,7 @@ const Sidebar = () => {
     {
       title: "TRENDING",
       items: [
-    { name: "PSL", icon: "🏎️" },      
+    { name: "PSL", icon: "⚽ " },      
      { name: "IPL", icon: "🏏" },                  
     { name: "IRE vs WI", icon: "🥅" },              
     { name: "NBA Playoffs", icon: "🏀" },            
