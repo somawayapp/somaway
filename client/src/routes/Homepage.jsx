@@ -39,58 +39,60 @@ const HomePage = () => {
     return (
       <>
 
-        <div className="no-scrollbar">
-<Helmet>
-<title>
-  {cat && author 
-    ? `${cat} Book Summary by ${author} | Unlock Key Insights`   : cat  ? `${cat} Book Summaries | Learn from the Best` 
-      : author  ? `Book Summary by ${author} | Must-Read Summaries`  : 'Book Summaries'} | Hodi
-</title>
+       <div className="no-scrollbar overflow-hidden h-screen">
+  <Helmet>
+    <title>
+      {cat && author 
+        ? `${cat} Book Summary by ${author} | Unlock Key Insights`
+        : cat
+        ? `${cat} Book Summaries | Learn from the Best`
+        : author
+        ? `Book Summary by ${author} | Must-Read Summaries`
+        : "Book Summaries"} | Hodi
+    </title>
+    <meta
+      name="description"
+      content={`Explore top book summaries in the ${cat || "self-growth"} category. Gain insights from ${
+        author || "top authors"
+      } in minutes. Elevate your mind—only on Hodi!`}
+    />
+    <link rel="canonical" href={`${window.location.href}`} />
+  </Helmet>
 
-<meta name="description"   content={` Explore top book summaries in the ${cat || 'self-growth'} category. Gain insights 
-from ${author || 'top authors'}in minutes. Elevate your mind—only on Hodi!`} />
-  
-  <link rel="canonical" href={`${window.location.href}`} />
-  
-</Helmet>
-       <div style={{ zIndex: 100004, }} className="md:px-[5%] bg-[var(--bg)] px-4 sticky top-0 justify-between flex py-4 flex-row text-xs ">
-       <div className="gap-2 md:gap-6 flex flex-row">
-           <p className=" text-[#f2f2f2] hover:text-[#1ff8b0] transition cursor-pointer "> Sports</p>              
-            <p className="text-[var(--softTextColori)] hover:text-[#1ff8b0] transition cursor-pointer"> Fantasy</p>              
-             <p className="text-[var(--softTextColori)] hover:text-[#1ff8b0] transition cursor-pointer" > Casinos</p>              
-
-       </div>
-       <div className="gap-2 md:gap-6 flex flex-row">
-            <p className="text-[var(--softTextColori)] hover:text-[#1ff8b0] transition cursor-pointer"> Responsible gambling</p>              
-             <p className="text-[var(--softTextColori)] hover:text-[#1ff8b0] transition cursor-pointer" > Help</p>              
-
-       </div>
-       </div>
-       <Navbar/>
-   
-
-      
-
-       <div className="md:px-[5%] px-4">
-       
-
-  
-  
-<div className="flex flex-col h-[80vh] md:flex-row overflow-x-hidden">
-  <div className="flex h-[90vh] overflow-y-auto overflow-x-hidden border-r pr-8 border-black">
-    <Sidebar />
+  <div
+    style={{ zIndex: 100004 }}
+    className="md:px-[5%] bg-[var(--bg)] px-4 sticky top-0 justify-between flex py-4 flex-row text-xs"
+  >
+    <div className="gap-2 md:gap-6 flex flex-row">
+      <p className="text-[#f2f2f2] hover:text-[#1ff8b0] transition cursor-pointer">Sports</p>
+      <p className="text-[var(--softTextColori)] hover:text-[#1ff8b0] transition cursor-pointer">Fantasy</p>
+      <p className="text-[var(--softTextColori)] hover:text-[#1ff8b0] transition cursor-pointer">Casinos</p>
+    </div>
+    <div className="gap-2 md:gap-6 flex flex-row">
+      <p className="text-[var(--softTextColori)] hover:text-[#1ff8b0] transition cursor-pointer">Responsible gambling</p>
+      <p className="text-[var(--softTextColori)] hover:text-[#1ff8b0] transition cursor-pointer">Help</p>
+    </div>
   </div>
 
-  <div className="flex-1 ml-0 md:ml-[5%] h-[90vh] overflow-y-auto overflow-x-hidden px-4 md:px-8">
-    <PostList />
-    <Footer />
+  <Navbar />
+
+  <div className="md:px-[5%] px-4 h-[calc(100vh-120px)]"> {/* adjust 64px if your nav height is different */}
+    <div className="flex h-full md:flex-row overflow-hidden">
+      
+      {/* Sidebar */}
+      <div className="w-full md:w-[28%] h-full overflow-y-auto border-r pr-8 border-black">
+        <Sidebar />
+      </div>
+
+      {/* Post List */}
+      <div className="flex-1 h-full overflow-y-auto px-4 md:px-8">
+        <PostList />
+        <Footer />
+      </div>
+    </div>
   </div>
 </div>
 
-
-
-
-       </div>        </div>
 
 
   
