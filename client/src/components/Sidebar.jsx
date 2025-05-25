@@ -71,13 +71,7 @@ const Sidebar = () => {
     ))}
   </div>
 
-  {/* Main Content with Sidebar Offset */}
-  <div className="flex flex-col md:flex-row min-h-[75vh]">
-    <div className="flex-1 md:ml-[16%]">
-      <PostList />
-      <Footer />
-    </div>
-  </div>
+
 </div>
 
 
