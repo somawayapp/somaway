@@ -81,12 +81,12 @@ const HomePage = () => {
     <div className="flex h-full md:flex-row overflow-hidden">
       
       {/* Sidebar */}
-      <div className="w-full hidden md:block md:w-[16%] h-full overflow-y-auto border-r-2 pr-8 border-[#1a1a1a]">
+      <div className="w-full hidden md:block md:w-[16%] h-full overflow-y-auto border-r-2 pr-8 border-[#131413]">
         <Sidebar />
       </div>
 
       {/* Post List */}
-      <div className="flex-1 h-full overflow-y-auto md:px-8">
+    <div className="flex-1 h-full overflow-y-auto md:px-8 hide-scrollbar">
         <BettingChances />
         <Footer />
       </div>

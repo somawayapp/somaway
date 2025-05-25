@@ -9,7 +9,7 @@
 @tailwind utilities;
 
 :root {
-  --bg: #252525;
+  --bg: #181a19;
   --textColor: white;
   --softBg: #f0f0f0;
   
@@ -445,4 +445,15 @@ body {
 .scrollbar-hidden {
   -ms-overflow-style: none; /* IE & Edge */
   scrollbar-width: none; /* Firefox */
+}
+
+
+@media (max-width: 767px) {
+  .hide-scrollbar {
+    scrollbar-width: none; /* Firefox */
+  }
+
+  .hide-scrollbar::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, Opera */
+  }
 }
