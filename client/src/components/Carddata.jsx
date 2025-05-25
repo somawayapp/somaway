@@ -1,4 +1,3 @@
-import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
 
@@ -45,21 +44,20 @@ export default function BettingChances() {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.4, delay: i * 0.1 }}
+          className="overflow-hidden shadow-lg rounded-2xl bg-gradient-to-br from-[#111] to-[#1a1a1a] text-white flex flex-col"
         >
-          <Card className="overflow-hidden shadow-lg rounded-2xl bg-gradient-to-br from-[#111] to-[#1a1a1a] text-white">
-            <img
-              src={item.image}
-              alt={item.title}
-              className="w-full h-48 object-cover object-center hover:scale-105 transition-transform duration-300"
-            />
-            <CardContent className="p-5">
-              <h2 className="text-xl font-bold mb-2">{item.title}</h2>
-              <p className="text-sm text-gray-300 mb-4">{item.desc}</p>
-              <Button className="bg-[#1ff8b0] text-black font-semibold w-full hover:scale-105 transition-transform duration-200">
-                Play Now
-              </Button>
-            </CardContent>
-          </Card>
+          <img
+            src={item.image}
+            alt={item.title}
+            className="w-full h-48 object-cover object-center hover:scale-105 transition-transform duration-300"
+          />
+          <div className="p-5 flex flex-col flex-grow">
+            <h2 className="text-xl font-bold mb-2">{item.title}</h2>
+            <p className="text-sm text-gray-300 mb-4">{item.desc}</p>
+            <Button className="mt-auto bg-[#1ff8b0] text-black font-semibold w-full hover:scale-105 transition-transform duration-200">
+              Play Now
+            </Button>
+          </div>
         </motion.div>
       ))}
     </div>
