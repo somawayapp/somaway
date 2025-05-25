@@ -86,7 +86,7 @@ const HomePage = () => {
       </div>
 
       {/* Post List */}
-      <div className="flex-1 h-full overflow-y-auto px-4 md:px-8">
+      <div className="flex-1 h-full overflow-y-auto  md:px-8">
         <BettingChances />
         <Footer />
       </div>
