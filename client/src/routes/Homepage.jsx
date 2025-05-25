@@ -80,7 +80,7 @@ const HomePage = () => {
     <div className="flex h-full md:flex-row overflow-hidden">
       
       {/* Sidebar */}
-      <div className="w-full  h-full overflow-y-auto border-r pr-8 border-black">
+      <div className="w-full md:w-[16%] h-full overflow-y-auto border-r pr-8 border-black">
         <Sidebar />
       </div>
 
