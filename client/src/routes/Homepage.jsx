@@ -81,7 +81,7 @@ from ${author || 'top authors'}in minutes. Elevate your mind—only on Hodi!`} /
 
      <Sidebar /> </div>
 
-  <div className="flex-1 ml-0 md:ml-[10%] h-[100vh] overflow-y-auto px-4 md:px-8">
+  <div className="flex-1 ml-0 md:ml-[5%] h-[100vh] overflow-y-auto px-4 md:px-8">
     <PostList />
     <Footer />
   </div>
