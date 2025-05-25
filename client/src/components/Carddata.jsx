@@ -36,7 +36,7 @@ const cardData = [
 
 export default function BettingChances() {
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6  py-8 border-1 border-[var(--bg)] bg-[var(--bg)]">
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6  py-8 border-1 border-black bg-[var(--bg)]">
       {cardData.map((item, i) => (
         <motion.div
           key={i}
