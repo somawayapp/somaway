@@ -9,6 +9,7 @@ import { Helmet } from "react-helmet";
 import { useEffect } from "react";
 import BettingChances from "../components/Carddata";
 import Sidebar from "../components/Sidebar";
+import Sidebar2 from "../components/Sidebar2";
 
 const HomePage = () => {
 
@@ -92,7 +93,7 @@ const HomePage = () => {
     </div>
 
      <div className="w-full hidden sticky top-[110px] md:block md:w-[16%] h-[calc(100vh-130px)] overflow-y-auto border-r-2 pr-8 border-[#1b1f1c]">
-      <Sidebar />
+      <Sidebar2 />
     </div>
   </div>
 </div>
