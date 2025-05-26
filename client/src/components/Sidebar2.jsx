@@ -3,7 +3,7 @@ import { motion, useAnimation } from "framer-motion";
 
 const Sidebar2 = () => {
   const total = 1_000_000;
-  const current = 750_000;
+  const current = 324_768;
   const percentage = Math.round((current / total) * 100);
 
   const controls = useAnimation();
