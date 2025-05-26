@@ -36,8 +36,8 @@ const Sidebar2 = () => {
   return (
     <div className="w-full px-[5%] py-5 overflowy-none h-[calc(100vh-130px)]  text-white flex flex-col items-center gap-6">
       {/* Gauge */}
-      <div className="relative w-40 h-40 flex justify-center items-center">
-        <svg className="w-full h-full rotate-[135deg] hover:scale-102 transition-transform duration-300" viewBox="0 0 200 200">
+     <div className="relative w-40 h-40 flex justify-center items-center">
+        <svg className="w-full h-full rotate-[135deg] hover:scale-[1.02] transition-transform duration-300  " viewBox="0 0 200 200">
           <circle
             cx="100"
             cy="100"
@@ -78,7 +78,7 @@ const Sidebar2 = () => {
       <div className="text-center">
         <p className="text-sm text-gray-300">Total Amount</p>
         <motion.p
-          className="text-xl font-bold text-[#ffd700] hover:scale-102 transition-transform duration-300"
+          className="text-xl font-bold text-[#ffd700] hover:scale-[1.02] transition-transform duration-300 "
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 1, duration: 0.5 }}
