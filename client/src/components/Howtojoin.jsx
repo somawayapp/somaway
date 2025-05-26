@@ -55,14 +55,11 @@ const HowToJoin = () => {
 
       {/* Join Button */}
       {!joining && !submitted && (
-        <motion.button
-          onClick={handleJoinClick}
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.95 }}
-          className="bg-[#f36dff] text-white font-semibold px-6 py-2 rounded-xl shadow-md hover:bg-[#d855e3] transition"
-        >
-          Join Now
-        </motion.button>
+       
+         <button onClick={handleJoinClick}
+           className="mt-auto bg-[#020201] py-4 hover:bg-[#0e0e06] text-[#EBD402] rounded-2xl font-semibold w-full hover:scale-102 transition-transform duration-200">
+              Play Now
+            </button>
       )}
 
       {/* Input Form */}
