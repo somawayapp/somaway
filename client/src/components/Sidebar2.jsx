@@ -34,7 +34,7 @@ const Sidebar2 = () => {
   ];
 
   return (
-    <div className="w-full md:w-[20%] p-5 bg-[#1a1a1a] text-white flex flex-col items-center gap-6">
+    <div className="w-full p-5 bg-[#1a1a1a] text-white flex flex-col items-center gap-6">
       {/* Gauge */}
       <div className="relative w-40 h-40 flex justify-center items-center">
         <svg className="w-full h-full rotate-[135deg]" viewBox="0 0 200 200">

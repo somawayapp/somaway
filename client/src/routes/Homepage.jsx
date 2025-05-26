@@ -92,7 +92,7 @@ const HomePage = () => {
       <Footer />
     </div>
 
-     <div className="w-full hidden sticky top-[110px] md:block md:w-[16%] h-[calc(100vh-130px)] overflow-y-auto border-r-2 pr-8 border-[#1b1f1c]">
+     <div className="w-full hidden sticky top-[110px] md:block md:w-[26%] h-[calc(100vh-130px)] overflow-y-auto border-r-2 pr-8 border-[#1b1f1c]">
       <Sidebar2 />
     </div>
   </div>
