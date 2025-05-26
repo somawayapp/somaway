@@ -63,7 +63,7 @@
   
           return(
           <div  style={{ zIndex: 100004, }}
-             className="flex justify-between  flex-col relative w-full  gap-3 py-2 md:py-3  md:gap-6 flex sticky top-[48px]  text-[var(--TextColor)] bg-[#027B5B] md:border-b  border-b-[var(--softBg4)] " >
+             className="flex justify-between  flex-col relative w-full  gap-3 py-2 md:py-3  md:gap-6 flex sticky top-[48px]  text-[var(--TextColor)] bg-[#71027b] md:border-b  border-b-[var(--softBg4)] " >
       
       
             <div className="relative w-full   gap-2 md:gap-6 flex flex-row items-center  text-[var(--TextColor)]  justify-between  px-4 md:px-[5%] "           >
@@ -77,7 +77,7 @@
               to="/addlistingreview">
               <button
                 type="button"
-                className="md:hidden  text-xs font-semibold border-[1px] border-[#EBD402]  py-2 px-4 rounded-full hover:bg-[#358F74]
+                className="md:hidden  text-xs font-semibold border-[1px] border-[#EBD402]  py-2 px-4 rounded-full hover:bg-[#f36dff]
                  transition cursor-pointer text-[#EBD402]"
               >
                 join
@@ -89,9 +89,9 @@
              </Link>
     
              <div className="flex ml-[-30%] hidden md:flex items-center text-sm font-semibold justify-between flex-row gap-2 md:gap-9">
-             <p className=" text-[#1ff8b0] hover:text-[#1ff8b0] transition cursor-pointer "> All sports</p>              
-               <p className="text-[#f2f2f2] hover:text-[#1ff8b0] transition cursor-pointer"> In play</p>              
-             <p className="text-[#f2f2f2] hover:text-[#1ff8b0] transition cursor-pointer" > Casinos</p>              
+             <p className=" text-[#f36dff] hover:text-[#f36dff] transition cursor-pointer "> All sports</p>              
+               <p className="text-[#f2f2f2] hover:text-[#f36dff] transition cursor-pointer"> In play</p>              
+             <p className="text-[#f2f2f2] hover:text-[#f36dff] transition cursor-pointer" > Casinos</p>              
 
             </div>
 
@@ -103,7 +103,7 @@
               to="/addlistingreview">
               <button
                 type="button"
-                className="hidden md:block text-sm font-semibold border-[1px] border-[#EBD402]  py-2 px-4 rounded-full hover:bg-[#358F74]
+                className="hidden md:block text-sm font-semibold border-[1px] border-[#EBD402]  py-2 px-4 rounded-full hover:bg-[#f36dff]
                  transition cursor-pointer text-[#EBD402]"
               >
                 join
@@ -112,7 +112,7 @@
                 <button
                   type="button"
                   className="  py-1 pl-2 md:pl-4 pr-2 border-[1px]  text-[#EBD402]  border-[#EBD402]  flex  flex-row  items-center   gap-2 md:gap-3  rounded-full  
-                   cursor-pointer   hover:bg-[#358F74] shadow-md   transition duration-300"
+                   cursor-pointer   hover:bg-[#f36dff] shadow-md   transition duration-300"
                 >
                   <AiOutlineMenu />
                   <div className="flex items-center justify-center">
@@ -275,9 +275,9 @@
            </div>
 
       <div className="grid grid-cols-3 md:hidden mb-2 px-6 text-sm font-semibold">
-      <p className="text-left text-[#1ff8b0] hover:text-[#1ff8b0] transition cursor-pointer">All sports</p>
-      <p className="text-center text-[#f2f2f2] hover:text-[#1ff8b0] transition cursor-pointer">In-play</p>
-      <p className="text-right text-[#f2f2f2] hover:text-[#1ff8b0] transition cursor-pointer">Casinos</p>
+      <p className="text-left text-[#f36dff] hover:text-[#f36dff] transition cursor-pointer">All sports</p>
+      <p className="text-center text-[#f2f2f2] hover:text-[#f36dff] transition cursor-pointer">In-play</p>
+      <p className="text-right text-[#f2f2f2] hover:text-[#f36dff] transition cursor-pointer">Casinos</p>
       </div>
 
 

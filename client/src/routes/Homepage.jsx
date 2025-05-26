@@ -65,13 +65,13 @@ const HomePage = () => {
     className="md:px-[5%] bg-[var(--bg)] px-4 sticky top-0 justify-between flex py-4 flex-row text-xs"
   >
     <div className="gap-2 md:gap-6 flex flex-row">
-      <p className="text-[#f2f2f2] hover:text-[#1ff8b0] transition cursor-pointer">Sports</p>
-      <p className="text-[var(--softTextColori)] hover:text-[#1ff8b0] transition cursor-pointer">Fantasy</p>
-      <p className="text-[var(--softTextColori)] hover:text-[#1ff8b0] transition cursor-pointer">Casinos</p>
+      <p className="text-[#f2f2f2] hover:text-[#f36dff] transition cursor-pointer">Sports</p>
+      <p className="text-[var(--softTextColori)] hover:text-[#f36dff] transition cursor-pointer">Fantasy</p>
+      <p className="text-[var(--softTextColori)] hover:text-[#f36dff] transition cursor-pointer">Casinos</p>
     </div>
     <div className="gap-2 md:gap-6 flex flex-row">
-      <p className="text-[var(--softTextColori)] hover:text-[#1ff8b0] transition cursor-pointer">Responsible gambling</p>
-      <p className="text-[var(--softTextColori)] hover:text-[#1ff8b0] transition cursor-pointer">Help</p>
+      <p className="text-[var(--softTextColori)] hover:text-[#f36dff] transition cursor-pointer">Responsible gambling</p>
+      <p className="text-[var(--softTextColori)] hover:text-[#f36dff] transition cursor-pointer">Help</p>
     </div>
   </div>
 
@@ -89,6 +89,10 @@ const HomePage = () => {
     <div className="flex-1 md:px-8"> {/* Remove overflow-y-auto here */}
       <BettingChances />
       <Footer />
+    </div>
+
+     <div className="w-full hidden sticky top-[110px] md:block md:w-[16%] h-[calc(100vh-130px)] overflow-y-auto border-r-2 pr-8 border-[#1b1f1c]">
+      <Sidebar />
     </div>
   </div>
 </div>

@@ -33,7 +33,7 @@ const Sidebar = () => {
   <div className="hidden md:flex  flex-col w-[16%]  py-4 overflow-y-scroll whitespace-nowrap min-w-fit">
     {sections.map((section, idx) => (
       <div key={idx} className="mb-9">
-        <h2 className="text-sm font-bold mb-3" style={{ color: "#1ff8b0" }}>
+        <h2 className="text-sm font-bold mb-3" style={{ color: "#f36dff" }}>
           {section.title}
         </h2>
         <ul className="space-y-3">
@@ -42,7 +42,7 @@ const Sidebar = () => {
               <span className="text-xl group-hover:scale-110 transition-transform duration-150">
                 {item.icon}
               </span>
-              <span className="text-[#f2f2f2] group-hover:text-[#1ff8b0] text-sm font-semibold">
+              <span className="text-[#f2f2f2] group-hover:text-[#f36dff] text-sm font-semibold">
                 {item.name}
               </span>
             </li>
@@ -62,7 +62,7 @@ const Sidebar = () => {
         <span className="text-xl group-hover:scale-110 transition-transform duration-150">
           {item.icon}
         </span>
-        <span className="text-[10px] mt-1 text-[#f2f2f2] group-hover:text-[#1ff8b0] text-center font-semibold">
+        <span className="text-[10px] mt-1 text-[#f2f2f2] group-hover:text-[#f36dff] text-center font-semibold">
           {item.name}
         </span>
       </div>
