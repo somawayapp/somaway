@@ -75,10 +75,10 @@ const Sidebar2 = () => {
       </div>
 
       {/* Total Amount */}
-      <div className="text-center">
+      <div className="text-center hover:scale-[1.02] transition-transform duration-300">
         <p className="text-sm text-gray-300">Total Amount</p>
         <motion.p
-          className="text-xl font-bold text-[#ffd700] hover:scale-[1.02] transition-transform duration-300 "
+          className="text-xl font-bold text-[#ffd700]  "
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 1, duration: 0.5 }}

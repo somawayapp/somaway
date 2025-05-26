@@ -4,7 +4,7 @@ const Sidebar = () => {
   const sections = [
     {
       title: "",
-      items: [ { name: "Offers", icon: "💎" },],
+      items: [ { name: "Winners", icon: "💎" },],
     },
     {
       title: "TRENDING",

@@ -89,9 +89,9 @@
              </Link>
     
              <div className="flex ml-[-30%] hidden md:flex items-center text-sm font-semibold justify-between flex-row gap-2 md:gap-9">
-             <p className=" text-[#f36dff] hover:text-[#f36dff] transition cursor-pointer "> All sports</p>              
-               <p className="text-[#f2f2f2] hover:text-[#f36dff] transition cursor-pointer"> In play</p>              
-             <p className="text-[#f2f2f2] hover:text-[#f36dff] transition cursor-pointer" > Casinos</p>              
+             <p className="text-left text-[#f36dff] hover:text-[#f36dff] transition cursor-pointer">1 shiling</p>
+            <p className="text-center text-[#f2f2f2] hover:text-[#f36dff] transition cursor-pointer">To Win</p>
+            <p className="text-right text-[#f2f2f2] hover:text-[#f36dff] transition cursor-pointer">1 Million</p>             
 
             </div>
 
@@ -275,9 +275,9 @@
            </div>
 
       <div className="grid grid-cols-3 md:hidden mb-2 px-6 text-sm font-semibold">
-      <p className="text-left text-[#f36dff] hover:text-[#f36dff] transition cursor-pointer">All sports</p>
-      <p className="text-center text-[#f2f2f2] hover:text-[#f36dff] transition cursor-pointer">In-play</p>
-      <p className="text-right text-[#f2f2f2] hover:text-[#f36dff] transition cursor-pointer">Casinos</p>
+      <p className="text-left text-[#f36dff] hover:text-[#f36dff] transition cursor-pointer">1 shiling</p>
+      <p className="text-center text-[#f2f2f2] hover:text-[#f36dff] transition cursor-pointer">To Win</p>
+      <p className="text-right text-[#f2f2f2] hover:text-[#f36dff] transition cursor-pointer">1 Million</p>
       </div>
 
 
