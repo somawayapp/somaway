@@ -30,7 +30,7 @@ const Sidebar = () => {
   return (
            <div>
   {/* Fixed Sidebar */}
-  <div className="hidden md:flex  flex-col   py-4 overflow-y-scroll whitespace-nowrap min-w-fit">
+  <div className="hidden md:flex  flex-col  px-[5%]   py-5 overflow-y-scroll whitespace-nowrap min-w-fit">
     {sections.map((section, idx) => (
       <div key={idx} className="mb-9">
         <h2 className="text-sm font-bold mb-3" style={{ color: "#f36dff" }}>

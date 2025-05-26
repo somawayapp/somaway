@@ -78,7 +78,7 @@ const HomePage = () => {
 
   <Navbar />
 
- <div className="md:px-[5%] px-4"> {/* Remove fixed height here */}
+ <div className=""> {/* Remove fixed height here */}
   <div className="flex md:flex-row"> {/* Remove h-full & overflow-hidden */}
     
     {/* Sidebar */}
