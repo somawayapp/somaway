@@ -10,7 +10,7 @@ import { useEffect } from "react";
 import BettingChances from "../components/Carddata";
 import Sidebar from "../components/Sidebar";
 import Sidebar2 from "../components/Sidebar2";
-
+import HowToJoin from "../components/Howtojoin";
 const HomePage = () => {
 
   useEffect(() => {
@@ -90,6 +90,8 @@ const HomePage = () => {
     <div className="flex-1 md:px-8"> {/* Remove overflow-y-auto here */}
       <BettingChances />
       <Footer />
+            <HowToJoin />
+
     </div>
 
      <div className="w-full hidden sticky top-[110px] md:block md:w-[23%] h-[calc(100vh-130px)] overflow-y-auto border-l-2  border-[#1b1f1c]">
