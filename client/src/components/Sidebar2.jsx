@@ -34,7 +34,7 @@ const Sidebar2 = () => {
   ];
 
   return (
-    <div className="w-full p-5 bg-[#1a1a1a] text-white flex flex-col items-center gap-6">
+    <div className="w-full p-5  text-white flex flex-col items-center gap-6">
       {/* Gauge */}
       <div className="relative w-40 h-40 flex justify-center items-center">
         <svg className="w-full h-full rotate-[135deg]" viewBox="0 0 200 200">
@@ -100,12 +100,12 @@ const Sidebar2 = () => {
 
       {/* Players List */}
       <motion.div
-        className="w-full mt-6"
+        className="w-full mt-6 text-center"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 2, duration: 0.5 }}
       >
-        <h3 className="text-sm font-bold text-[#f36dff] mb-2">Players:</h3>
+        <h3 className="text-sm h-[40%]  overflow-y-auto font-bold text-[#f36dff] mb-2">Players:</h3>
         <ul className="space-y-1 text-sm">
           {dummyPlayers.map((player, idx) => (
             <motion.li
