@@ -19,26 +19,19 @@ const Footer = () => {
           </nav>
         </div>
 
-        {/* Company Section */}
-        <div>
-          <h4 className="text-lg font-semibold mb-4">Company</h4>
-          <nav>
-            <ul className="space-y-2">
-              <li><a href="/about" className="text-[var(--softTextColor)] hover:text-[var(--softTextColor)]">About</a></li>
-              <li><a href="/coming-soon" className="text-[var(--softTextColor)] hover:text-[var(--softTextColor)]">Careers</a></li>
-              <li><a href="/coming-soon" className="text-[var(--softTextColor)] hover:text-[var(--softTextColor)]">Affiliates</a></li>
-            </ul>
-          </nav>
-        </div>
+
 
         {/* Resources Section */}
         <div>
           <h4 className="text-lg font-semibold mb-4">Resources</h4>
           <nav>
             <ul className="space-y-2">
-              <li><a href="/" className="text-[var(--softTextColor)] hover:text-[var(--softTextColor)]">Listings</a></li>
-              <li><a href="/history" className="text-[var(--softTextColor)] hover:text-[var(--softTextColor)]">Reviews</a></li>
+              <li><a href="/" className="text-[var(--softTextColor)] hover:text-[var(--softTextColor)]">Home</a></li>
+              <li><a href="/about" className="text-[var(--softTextColor)] hover:text-[var(--softTextColor)]">About</a></li>
+              <li><a href="/picing" className="text-[var(--softTextColor)] hover:text-[var(--softTextColor)]">Pricig</a></li>
+             <li><a href="/join" className="text-[var(--softTextColor)] hover:text-[var(--softTextColor)]">How to join</a></li>
               <li><a href="/help" className="text-[var(--softTextColor)] hover:text-[var(--softTextColor)]">Help Center</a></li>
+
             </ul>
           </nav>
         </div>
@@ -50,7 +43,7 @@ const Footer = () => {
             <ul className="space-y-2">
               <li><a href="/privacy" className="text-[var(--softTextColor)] hover:text-[var(--softTextColor)]">Privacy Policy</a></li>
               <li><a href="/terms" className="text-[var(--softTextColor)] hover:text-[var(--softTextColor)]">Terms and Conditions</a></li>
-              <li><a href="/subscription-terms" className="text-[var(--softTextColor)] hover:text-[var(--softTextColor)]">Subscription Terms</a></li>
+              <li><a href="/Payment-terms" className="text-[var(--softTextColor)] hover:text-[var(--softTextColor)]">Subscription Terms</a></li>
             </ul>
           </nav>
         </div>
@@ -59,7 +52,7 @@ const Footer = () => {
       {/* Bottom Info Section */}
       <div className="mt-8 text-center border-t border-[var(--softBg)]  mb-[100px] md:mb-0  pt-4">
         <p className="text-[var(--softTextColor)]">
-          © {currentYear},  Hodii App Limited, Waiyaki way , 1st floor, Westend towers, Westlands, Nairobi
+          © {currentYear},  Shilingi Limited, Waiyaki way , 1st floor, Westend towers, Westlands, Nairobi
        
           <a href="mailto:support@soma.ia.com" className="text-[var(--softTextColor)] pl-1 hover:text-[var(--softTextColor)]">
             support: Hodii@gmail.com

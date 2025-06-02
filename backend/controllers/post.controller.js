@@ -76,6 +76,15 @@ export const getPosts = async (req, res) => {
     if (featured) query.isFeatured = true;
     if (listed) query.isListed = true;
 
+//sort and sarch users by phone numbers and names maybe, latst, oldest, 
+//when someone joins the games their  needs to be a submit form  where someone can be able to enter their phone number and then we 
+// will need to be able to text them the  sms to pay one shiling and once the payment has been authtiticated then we will nee to add 
+// their phone  number and extract their full name and ad them to the database. update the total price 
+//
+
+//we will have to find  a  way in which we can publicly how the hash draw code and pulicly show the drawinf= d proceess on how the
+//  winner will  be selcted.
+
 
     let sortObj = { createdAt: -1 };
     let useAggregation = false;
@@ -162,7 +171,7 @@ export const getPost = async (req, res) => {
   }
 };
 
-// Keep the rest of your methods as they are...
+// Keep the rest of the methods as they are...
 
 
 

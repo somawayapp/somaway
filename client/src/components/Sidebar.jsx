@@ -7,22 +7,21 @@ const Sidebar = () => {
       items: [ { name: "Winners", icon: "💎" },],
     },
     {
-      title: "TRENDING",
+      title: "Resources",
       items: [
-    { name: "PSL", icon: "⚽ " },      
-    { name: "IRE vs WI", icon: "🥅" },              
-    { name: "NBA Playoffs", icon: "🏀" },            
-    { name: "Monaco Grand Prix", icon: "🏎️" },      
-    { name: "Weekly Jackpot", icon: "🎉" },          
-    { name: "French Open", icon: "🎾" }, 
+    { name: "Home", icon: "⚽ " },      
+    { name: "About ", icon: "🥅" },              
+    { name: "Pricing", icon: "🏀" },            
+    { name: "How to join", icon: "🏎️" },      
+    { name: "Help Center", icon: "🎉" },          
       ],
     },
     {
-      title: "GAMES",
+      title: "Legal",
       items: [
-      { name: "Daily Draw", icon: "🎟️" },  
-    { name: "Weekly Winners", icon: "🏆" },    
-    { name: "Monthly Jackpot", icon: "🎯" }, 
+      { name: "Privacy Policy  ", icon: "🎟️" },  
+    { name: "Trms and Conditions ", icon: "🏆" },    
+    { name: "Payment terms ", icon: "🎯" }, 
       ],
     },
   ];
