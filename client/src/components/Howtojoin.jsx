@@ -17,7 +17,7 @@ const HowToJoin = () => {
   };
 
   return (
-    <div className="w-full max-w-3xl mx-auto p-6 bg-[#121212] text-white rounded-2xl shadow-2xl space-y-6">
+    <div className="w-full  mx-auto p-6 bg-[#121212] text-white rounded-2xl shadow-2xl space-y-6">
       <h2 className="text-3xl font-bold text-[#f36dff] text-center">
         How to Join and Play
       </h2>
@@ -56,7 +56,7 @@ const HowToJoin = () => {
       {/* Join Button */}
       {!joining && !submitted && (
        
-         <button onClick={handleJoinClick}
+         <button  onClick={handleJoinClick}
            className="mt-auto bg-[#020201] py-4 hover:bg-[#0e0e06] text-[#EBD402] rounded-2xl font-semibold w-full hover:scale-102 transition-transform duration-200">
               Play Now
             </button>

@@ -3,7 +3,7 @@ import { Button } from "@mui/material";
 
 const cardData = [
   {
-    image: "/spin.webp",
+    image: "/spin.jpg",
     title: "Win Ksh 1 Million",
     desc: "Bet only 1 shilling and stand a chance to win 1 million shillings instantly.",
   },
