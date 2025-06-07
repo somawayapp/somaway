@@ -10,11 +10,32 @@ const HowToJoin = () => {
     setJoining(true);
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    if (!phone) return;
-    setSubmitted(true);
-  };
+ 
+
+  const handleSubmit = async (e) => {
+  e.preventDefault();
+  if (!phone) return;
+
+  try {
+const res = await fetch("https://somawayapi.vercel.app/mpesa/stk-push", {
+  method: "POST",
+  headers: { "Content-Type": "application/json" },
+  body: JSON.stringify({ phone }),
+});
+    
+    const data = await res.json();
+
+    if (data.success) {
+      setSubmitted(true);
+    } else {
+      alert("Failed to send payment prompt. Try again.");
+    }
+  } catch (err) {
+    console.error(err);
+    alert("Error initiating payment.");
+  }
+};
+
 
   return (
     <div className="w-full  mx-auto p-6 bg-[#121212] text-white rounded-2xl shadow-2xl space-y-6">

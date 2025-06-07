@@ -14,6 +14,7 @@ import ratingRouter from '../routes/rating.route.js';
 import likeRouter from '../routes/like.route.js';
 import Post from "../models/post.model.js"; // Import Post model
 import moment from 'moment-timezone'; // Import moment-timezone
+import mpesaRouter from '../routes/mpesa.route.js';
 
 
 dotenv.config();
@@ -103,6 +104,7 @@ app.use('/comments', commentRouter);
 app.use('/webhook', webhookRouter);
 app.use('/ratings', ratingRouter);
 app.use('/likes', likeRouter);
+app.use('/mpesa', mpesaRouter);
 
 // Debug route to confirm server is running
 app.get('/debug', (req, res) => {

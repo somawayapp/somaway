@@ -31,7 +31,7 @@ export default function BettingChances() {
             <h2 className="text-xl font-bold mb-2">{item.title}</h2>
             <p className="text-sm text-gray-300 mb-4">{item.desc}</p>
             <button className="mt-auto bg-[#020201] py-4 hover:bg-[#0e0e06] text-[#EBD402] rounded-2xl font-semibold w-full hover:scale-102 transition-transform duration-200">
-              Play Now
+              join  Now
             </button>
           </div>
         </motion.div>
