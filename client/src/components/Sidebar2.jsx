@@ -38,7 +38,9 @@ const Sidebar2 = () => {
     }, 20);
   }, [summary, controls]);
 
-
+  if (!summary) {
+    return <div className="text-white text-center">Loading...</div>;
+  }
 
   const { current, total, percentage, estimatedTime, players } = summary;
 
