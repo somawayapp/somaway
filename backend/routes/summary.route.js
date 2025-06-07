@@ -4,69 +4,35 @@ import moment from "moment";
 
 const router = express.Router();
 
-router.get("/", async (req, res) => {
+router.get("/summary", async (req, res) => {
   try {
     const total = 1_000_000;
 
-    // Current total amount
+    // Total amount collected
     const aggregation = await PhoneModel.aggregate([
       { $group: { _id: null, totalAmount: { $sum: "$amount" } } }
     ]);
     const current = aggregation[0]?.totalAmount || 0;
 
-    const now = moment();
-    const since = moment().subtract(24, "hours");
+    // Get entries from the last 24 hours
+    const since = moment().subtract(24, "hours").toDate();
+    const recentCount = await PhoneModel.countDocuments({ createdAt: { $gte: since } });
 
-    // Group by hour within the last 24 hours
-    const hourlyData = await PhoneModel.aggregate([
-      {
-        $match: {
-          createdAt: { $gte: since.toDate(), $lte: now.toDate() },
-        },
-      },
-      {
-        $group: {
-          _id: {
-            hour: { $hour: "$createdAt" },
-            day: { $dayOfMonth: "$createdAt" },
-            month: { $month: "$createdAt" },
-            year: { $year: "$createdAt" },
-          },
-          hourlySum: { $sum: "$amount" },
-        },
-      },
-      {
-        $sort: {
-          "_id.year": 1,
-          "_id.month": 1,
-          "_id.day": 1,
-          "_id.hour": 1,
-        },
-      },
-    ]);
-
-    // Use the last few hours (e.g. 6) to estimate current trend
-    const recentHours = hourlyData.slice(-6);
-    const averagePerHour =
-      recentHours.reduce((sum, hr) => sum + hr.hourlySum, 0) /
-      (recentHours.length || 1);
-
+    // Estimate time to reach full amount
     const remaining = total - current;
-    const estimatedHours = averagePerHour > 0
-      ? Math.ceil(remaining / averagePerHour)
-      : "Unknown";
+    const estimatedDays = recentCount > 0 ? Math.ceil((remaining / (recentCount * 1))) : "Unknown";
 
+    // Get latest players (sorted by newest)
     const players = await PhoneModel.find({}, { name: 1, phone: 1 })
       .sort({ createdAt: -1 })
-      .limit(1000)
+      .limit(1000000000)
       .lean();
 
     res.json({
       current,
       total,
       percentage: Math.round((current / total) * 100),
-      estimatedTime: estimatedHours === "Unknown" ? "Unknown" : `${estimatedHours} hour(s)`,
-      hourlyRate: averagePerHour.toFixed(2),
+      estimatedTime: estimatedDays === "Unknown" ? "Unknown" : `${estimatedDays} day(s)`,
       players,
     });
   } catch (err) {
