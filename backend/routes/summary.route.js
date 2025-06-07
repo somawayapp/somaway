@@ -1,81 +1,141 @@
-import express from "express";
-import PhoneModel from "../models/Phone.model.js";
-import moment from "moment";
+import React, { useEffect, useState } from "react";
+import { motion, useAnimation } from "framer-motion";
+import axios from "axios";
 
-const router = express.Router();
+const Sidebar2 = () => {
+  const controls = useAnimation();
+  const [data, setData] = useState(null);
+  const [displayedPercentage, setDisplayedPercentage] = useState(0);
+  const [error, setError] = useState(null);
 
-router.get("/", async (req, res) => {
-  try {
-    const total = 1_000_000;
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const res = await axios.get("https://somawayapi.vercel.app/summary");
+        setData(res.data);
 
-    // Total amount collected so far
-    const aggregation = await PhoneModel.aggregate([
-      { $group: { _id: null, totalAmount: { $sum: "$amount" } } }
-    ]);
-    const current = aggregation[0]?.totalAmount || 0;
+        await controls.start({
+          strokeDashoffset: 440 - (440 * res.data.percentage) / 100,
+          transition: { duration: 2, ease: "easeInOut" },
+        });
 
-    // Get all entries from the last 24 hours sorted by time ascending
-    const since = moment().subtract(24, "hours").toDate();
-    const payments = await PhoneModel.find(
-      { createdAt: { $gte: since } },
-      { amount: 1, createdAt: 1 }
-    ).sort({ createdAt: 1 }).lean();
-
-    // Bucket payments into 12 intervals of 2 hours each
-    const buckets = Array(12).fill(0); // 12 intervals * 2 hours = 24 hours
-    const now = Date.now();
-
-    payments.forEach(entry => {
-      const hoursAgo = (now - new Date(entry.createdAt).getTime()) / (1000 * 60 * 60); // hours ago
-      const bucketIndex = Math.floor((24 - hoursAgo) / 2);
-      if (bucketIndex >= 0 && bucketIndex < 12) {
-        buckets[bucketIndex] += entry.amount;
+        let currentPercent = 0;
+        const interval = setInterval(() => {
+          currentPercent++;
+          setDisplayedPercentage(currentPercent);
+          if (currentPercent >= res.data.percentage) clearInterval(interval);
+        }, 20);
+      } catch (err) {
+        console.error("Failed to load summary:", err);
+        setError("Failed to load data. Please try again later.");
       }
-    });
+    };
 
-    // Calculate average growth between buckets
-    let totalGrowth = 0;
-    let activePeriods = 0;
+    fetchData();
+  }, [controls]);
 
-    for (let i = 1; i < buckets.length; i++) {
-      const change = buckets[i] - buckets[i - 1];
-      if (change !== 0) {
-        totalGrowth += change;
-        activePeriods++;
-      }
-    }
-
-    const avgGrowthPerInterval = activePeriods ? totalGrowth / activePeriods : 0;
-    const growthPerHour = avgGrowthPerInterval / 2; // since each interval is 2 hours
-
-    // Estimate time to reach total based on current growth rate
-    const remaining = total - current;
-    const estimatedHours = growthPerHour > 0 ? Math.ceil(remaining / growthPerHour) : "Unknown";
-
-    const estimatedTime =
-      estimatedHours === "Unknown"
-        ? "Unknown"
-        : estimatedHours >= 24
-        ? `${Math.floor(estimatedHours / 24)} day(s) ${estimatedHours % 24} hour(s)`
-        : `${estimatedHours} hour(s)`;
-
-    // Get latest players (sorted newest first)
-    const players = await PhoneModel.find({}, { name: 1, phone: 1 })
-      .sort({ createdAt: -1 })
-      .limit(1000)
-      .lean();
-
-    res.json({
-      current,
-      total,
-      percentage: Math.round((current / total) * 100),
-      estimatedTime,
-      players,
-    });
-  } catch (err) {
-    console.error("Summary fetch error:", err);
-    res.status(500).json({ error: "Failed to fetch summary" });
+  if (error) {
+    return (
+      <div className="w-full px-[5%] py-5 h-[calc(100vh-130px)] text-white flex justify-center items-center">
+        <p className="text-red-500">{error}</p>
+      </div>
+    );
   }
-});
 
-export default router;
+
+
+  return (
+    <div className="w-full px-[5%] py-5 overflow-y-none h-[calc(100vh-130px)] text-white flex flex-col items-center gap-6">
+      {/* Gauge */}
+      <div className="relative w-40 h-40 flex justify-center items-center">
+        <svg className="w-full h-full rotate-[135deg]" viewBox="0 0 200 200">
+          <circle
+            cx="100"
+            cy="100"
+            r="70"
+            fill="none"
+            stroke="#3a3a3a"
+            strokeWidth="20"
+            strokeDasharray="440"
+            strokeDashoffset="0"
+          />
+          <motion.circle
+            cx="100"
+            cy="100"
+            r="70"
+            fill="none"
+            stroke="url(#grad)"
+            strokeWidth="20"
+            strokeLinecap="round"
+            strokeDasharray="440"
+            strokeDashoffset="440"
+            animate={controls}
+          />
+          <defs>
+            <linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="0%" stopColor="#f36dff" />
+              <stop offset="100%" stopColor="#ffd700" />
+            </linearGradient>
+          </defs>
+        </svg>
+        <div className="absolute text-center">
+          <p className="text-3xl font-bold text-[#f36dff]">{displayedPercentage}%</p>
+          <p className="text-xs text-gray-400 mt-1">PROGRESS</p>
+        </div>
+      </div>
+
+      {/* Total Amount */}
+      <div className="text-center hover:scale-[1.02] transition-transform duration-300">
+        <p className="text-sm text-gray-300">Total Amount</p>
+        <motion.p
+          className="text-xl font-bold text-[#ffd700]"
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 1, duration: 0.5 }}
+        >
+          {data.current.toLocaleString()} / {data.total.toLocaleString()}
+        </motion.p>
+      </div>
+
+      {/* Estimated Time */}
+      <motion.div
+        className="text-center"
+        initial={{ opacity: 0, y: 10 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 1.5, duration: 0.5 }}
+      >
+        <p className="text-sm text-gray-300">Estimated Time to Full</p>
+        <p className="text-lg font-medium text-[#f36dff]">{data.estimatedTime}</p>
+      </motion.div>
+
+      {/* Players List */}
+      <motion.div
+        className="w-full mt-6 text-center h-[40%] overflow-y-scroll"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 2, duration: 0.5 }}
+      >
+        <h3 className="text-sm font-bold text-[#f36dff] mb-2">Players:</h3>
+        <ul className="space-y-1 text-sm max-h-[200px] overflow-auto">
+          {data.players.length > 0 ? (
+            data.players.map((player, idx) => (
+              <motion.li
+                key={idx}
+                className="text-[#f2f2f2] hover:text-[#ffd700] transition"
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: 2.1 + idx * 0.05 }}
+              >
+                {player.name} - {player.phone}
+              </motion.li>
+            ))
+          ) : (
+            <li>No players found.</li>
+          )}
+        </ul>
+      </motion.div>
+    </div>
+  );
+};
+
+export default Sidebar2;
