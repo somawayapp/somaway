@@ -8,54 +8,58 @@ router.get("/", async (req, res) => {
   try {
     const total = 1_000_000;
 
-    // Current total amount
+    // Total amount collected so far
     const aggregation = await PhoneModel.aggregate([
       { $group: { _id: null, totalAmount: { $sum: "$amount" } } }
     ]);
     const current = aggregation[0]?.totalAmount || 0;
 
-    const now = moment();
-    const since = moment().subtract(24, "hours");
+    // Get all entries from the last 24 hours sorted by time ascending
+    const since = moment().subtract(24, "hours").toDate();
+    const payments = await PhoneModel.find(
+      { createdAt: { $gte: since } },
+      { amount: 1, createdAt: 1 }
+    ).sort({ createdAt: 1 }).lean();
 
-    // Group by hour within the last 24 hours
-    const hourlyData = await PhoneModel.aggregate([
-      {
-        $match: {
-          createdAt: { $gte: since.toDate(), $lte: now.toDate() },
-        },
-      },
-      {
-        $group: {
-          _id: {
-            hour: { $hour: "$createdAt" },
-            day: { $dayOfMonth: "$createdAt" },
-            month: { $month: "$createdAt" },
-            year: { $year: "$createdAt" },
-          },
-          hourlySum: { $sum: "$amount" },
-        },
-      },
-      {
-        $sort: {
-          "_id.year": 1,
-          "_id.month": 1,
-          "_id.day": 1,
-          "_id.hour": 1,
-        },
-      },
-    ]);
+    // Bucket payments into 12 intervals of 2 hours each
+    const buckets = Array(12).fill(0); // 12 intervals * 2 hours = 24 hours
+    const now = Date.now();
 
-    // Use the last few hours (e.g. 6) to estimate current trend
-    const recentHours = hourlyData.slice(-6);
-    const averagePerHour =
-      recentHours.reduce((sum, hr) => sum + hr.hourlySum, 0) /
-      (recentHours.length || 1);
+    payments.forEach(entry => {
+      const hoursAgo = (now - new Date(entry.createdAt).getTime()) / (1000 * 60 * 60); // hours ago
+      const bucketIndex = Math.floor((24 - hoursAgo) / 2);
+      if (bucketIndex >= 0 && bucketIndex < 12) {
+        buckets[bucketIndex] += entry.amount;
+      }
+    });
 
+    // Calculate average growth between buckets
+    let totalGrowth = 0;
+    let activePeriods = 0;
+
+    for (let i = 1; i < buckets.length; i++) {
+      const change = buckets[i] - buckets[i - 1];
+      if (change !== 0) {
+        totalGrowth += change;
+        activePeriods++;
+      }
+    }
+
+    const avgGrowthPerInterval = activePeriods ? totalGrowth / activePeriods : 0;
+    const growthPerHour = avgGrowthPerInterval / 2; // since each interval is 2 hours
+
+    // Estimate time to reach total based on current growth rate
     const remaining = total - current;
-    const estimatedHours = averagePerHour > 0
-      ? Math.ceil(remaining / averagePerHour)
-      : "Unknown";
+    const estimatedHours = growthPerHour > 0 ? Math.ceil(remaining / growthPerHour) : "Unknown";
 
+    const estimatedTime =
+      estimatedHours === "Unknown"
+        ? "Unknown"
+        : estimatedHours >= 24
+        ? `${Math.floor(estimatedHours / 24)} day(s) ${estimatedHours % 24} hour(s)`
+        : `${estimatedHours} hour(s)`;
+
+    // Get latest players (sorted newest first)
     const players = await PhoneModel.find({}, { name: 1, phone: 1 })
       .sort({ createdAt: -1 })
       .limit(1000)
@@ -65,8 +69,7 @@ router.get("/", async (req, res) => {
       current,
       total,
       percentage: Math.round((current / total) * 100),
-      estimatedTime: estimatedHours === "Unknown" ? "Unknown" : `${estimatedHours} hour(s)`,
-      hourlyRate: averagePerHour.toFixed(2),
+      estimatedTime,
       players,
     });
   } catch (err) {
