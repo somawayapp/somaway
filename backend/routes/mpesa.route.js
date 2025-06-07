@@ -1,17 +1,15 @@
-// mpesa.route.js
-import express from "express";
-import axios from "axios";
-import moment from "moment";
-
+// server.js (or mpesaController.js)
+const express = require("express");
+const axios = require("axios");
+const moment = require("moment");
 const router = express.Router();
 
 const consumerKey = "z065hfN3Nna7pdDvG0GbtQljszI1tPtjEmxORAmzfRH4ObDd";
 const consumerSecret = "z7EGGOUkyiAmwP6HVLA2jQzMKZVYADU4Er7D9lBpiAWuIAM35kHgyAWvKb9FpZui";
-const shortCode = "174379";
+const shortCode = "174379"; // For sandbox
 const passkey = "Oe28D4x6ndfKH7jSfjCd/N2XkHcq59PwfxrMg+JCNbfEZ95zgNHR3cBSrGbwVTQgm0nvtDDCFppoNmk+0eCv5D5X0p4vfY+GMLrkd8iKd1isQzxf1FeHwBRuJhkXxa14pttvdFPmZgfQE41blN/Re16GN+ABApp8GPf0muEffViAaPuKKu0oz6gHmMbaPl+NMiybN2qXRg5r7d0y22QIWgDzj4nEBRzsupy1M4f8X2Chincj/1+aYdN8IOWTgpRWBF6LqCosot274Vx+U9lL0PkmiLZYZEQ/HfNoyZoSHBL77Y3Aqls8207tp9BQiWF93y9YfR2XOQSsd1mkR/GEYA==";
-const callbackURL = "https://makesomaway.com/mpesa/callback";
-
-/function formatPhoneNumber(phone) {
+const callbackURL = "https://makesomaway.com/mpesa/callback"; // Can be mocked for now
+function formatPhoneNumber(phone) {
   if (!phone) return null;
 
   let digits = phone.replace(/\D/g, ""); // Remove non-digit chars
