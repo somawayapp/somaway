@@ -8,7 +8,6 @@
   import ThemeToggler from "./Theme";
   import "../index.css";
   import { AiOutlineMenu } from "react-icons/ai";
-  import Avatar from "./Avatar";
   import { useNavigate, useSearchParams } from "react-router-dom";
   import { FaSearch, FaTimes } from "react-icons/fa";
 
