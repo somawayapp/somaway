@@ -7,7 +7,6 @@ const Sidebar2 = () => {
   const controls = useAnimation();
 
   useEffect(() => {
-    // Fetch data from the summary API
     const fetchData = async () => {
       try {
         const res = await fetch("https://somawayapi.vercel.app/summary");
@@ -38,11 +37,11 @@ const Sidebar2 = () => {
     }, 20);
   }, [summary, controls]);
 
-  if (!summary) {
-    return <div className="text-white text-center">Loading...</div>;
-  }
-
-  const { current, total, percentage, estimatedTime, players } = summary;
+  const current = summary?.current ?? 0;
+  const total = summary?.total ?? 0;
+  const percentage = summary?.percentage ?? 0;
+  const estimatedTime = summary?.estimatedTime ?? "-";
+  const players = summary?.players ?? [];
 
   return (
     <div className="w-full px-[5%] py-5 overflowy-none h-[calc(100vh-130px)] text-white flex flex-col items-center gap-6">
@@ -78,9 +77,10 @@ const Sidebar2 = () => {
             </linearGradient>
           </defs>
         </svg>
-        {/* Center Percentage Text */}
         <div className="absolute text-center">
-          <p className="text-3xl font-bold text-[#f36dff]">{displayedPercentage}%</p>
+          <p className="text-3xl font-bold text-[#f36dff]">
+            {displayedPercentage}%
+          </p>
           <p className="text-xs text-gray-400 mt-1">PROGRESS</p>
         </div>
       </div>
