@@ -2,7 +2,6 @@ import { Outlet, useLocation } from "react-router-dom";
 
 import { useEffect } from "react";
 import Navbar from "../components/Navbar";
-import MobileControls from "../components/MobileControls";
 import { ThemeProvider } from "../../themecontext";
 
 const MainLayout = () => {
@@ -48,7 +47,6 @@ return (
 
   <div className="container  mx-auto  ">
     <Outlet />
-    <MobileControls/>
 
   </div>
   </ThemeProvider>
