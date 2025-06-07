@@ -4,50 +4,52 @@ import { motion, AnimatePresence } from "framer-motion";
 const HowToJoin = () => {
   const [joining, setJoining] = useState(false);
   const [phone, setPhone] = useState("");
+  const [username, setUsername] = useState("");
   const [submitted, setSubmitted] = useState(false);
 
   const handleJoinClick = () => {
     setJoining(true);
   };
 
- 
-
   const handleSubmit = async (e) => {
-  e.preventDefault();
-  if (!phone) return;
-
-  try {
-const res = await fetch("https://somawayapi.vercel.app/mpesa/stk-push", {
-  method: "POST",
-  headers: { "Content-Type": "application/json" },
-  body: JSON.stringify({ phone }),
-});
-    
-    const data = await res.json();
-
-    if (data.success) {
-      setSubmitted(true);
-    } else {
-      alert("Failed to send payment prompt. Try again.");
+    e.preventDefault();
+    if (!phone || !username) {
+      alert("Username and phone number are required.");
+      return;
     }
-  } catch (err) {
-    console.error(err);
-    alert("Error initiating payment.");
-  }
-};
 
+    try {
+      const res = await fetch("https://somawayapi.vercel.app/mpesa/stk-push", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ phone, username }),
+      });
+
+      const data = await res.json();
+
+      if (data.success) {
+        setSubmitted(true);
+      } else {
+        alert("Failed to send payment prompt. Try again.");
+      }
+    } catch (err) {
+      console.error(err);
+      alert("Error initiating payment.");
+    }
+  };
 
   return (
-    <div className="w-full  mx-auto p-6 bg-[#121212] text-white rounded-2xl shadow-2xl space-y-6">
+    <div className="w-full mx-auto p-6 bg-[#121212] text-white rounded-2xl shadow-2xl space-y-6">
       <h2 className="text-3xl font-bold text-[#f36dff] text-center">
         How to Join and Play
       </h2>
 
+      {/* Descriptions and instructions */}
       <p className="text-gray-300 text-sm leading-relaxed">
         By joining the game, you agree to all our{" "}
         <span className="text-[#ffd700] font-medium">Terms and Conditions</span>.
         To participate, click the <strong>Join</strong> button below and enter your
-        <strong> M-Pesa phone number</strong>. You’ll receive a prompt to send
+        <strong> M-Pesa phone number</strong> and a <strong>username</strong>. You’ll receive a prompt to send
         <strong> 1 KES</strong> to <strong>Shilingi Ltd</strong>. After confirming
         and entering your M-Pesa PIN, 1 shilling will be deducted and stashed
         into the honey pot.
@@ -76,11 +78,12 @@ const res = await fetch("https://somawayapi.vercel.app/mpesa/stk-push", {
 
       {/* Join Button */}
       {!joining && !submitted && (
-       
-         <button  onClick={handleJoinClick}
-           className="mt-auto bg-[#020201] py-4 hover:bg-[#0e0e06] text-[#EBD402] rounded-2xl font-semibold w-full hover:scale-102 transition-transform duration-200">
-              Play Now
-            </button>
+        <button
+          onClick={handleJoinClick}
+          className="mt-auto bg-[#020201] py-4 hover:bg-[#0e0e06] text-[#EBD402] rounded-2xl font-semibold w-full hover:scale-102 transition-transform duration-200"
+        >
+          Play Now
+        </button>
       )}
 
       {/* Input Form */}
@@ -92,14 +95,22 @@ const res = await fetch("https://somawayapi.vercel.app/mpesa/stk-push", {
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0 }}
-            className="flex flex-col sm:flex-row gap-3 items-center"
+            className="flex flex-col gap-3"
           >
+            <input
+              type="text"
+              placeholder="Enter your username"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+              className="p-2 rounded-lg text-black focus:outline-none"
+              required
+            />
             <input
               type="tel"
               placeholder="Enter M-Pesa number (e.g. 07XX...)"
               value={phone}
               onChange={(e) => setPhone(e.target.value)}
-              className="p-2 rounded-lg w-full sm:w-auto flex-grow text-black focus:outline-none"
+              className="p-2 rounded-lg text-black focus:outline-none"
               required
             />
             <button
@@ -128,7 +139,7 @@ const res = await fetch("https://somawayapi.vercel.app/mpesa/stk-push", {
             complete the transaction.
             <br />
             Your contribution will now be added to the stash and you’ll appear
-            on the leaderboard!
+            on the leaderboard as <strong>{username}</strong>!
           </motion.div>
         )}
       </AnimatePresence>

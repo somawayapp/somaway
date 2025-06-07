@@ -1,6 +1,7 @@
 import express from "express";
 import axios from "axios";
 import moment from "moment";
+import PhoneModel from "../models/Phone.model";
 
 const router = express.Router();
 
@@ -51,14 +52,15 @@ const getAccessToken = async () => {
 
 
 // STK Push
+import Phone from "../models/Phone.js"; // adjust path as needed
+
 router.post("/stk-push", async (req, res) => {
-  let { phone } = req.body;
+  let { phone, name } = req.body; // include name from frontend
   const amount = 1;
   const timestamp = moment().format("YYYYMMDDHHmmss");
   const password = Buffer.from(shortCode + passkey + timestamp).toString("base64");
 
   phone = formatPhoneNumber(phone);
-
   if (!phone) {
     return res.status(400).json({ success: false, error: "Invalid phone number format" });
   }
@@ -87,11 +89,30 @@ router.post("/stk-push", async (req, res) => {
       }
     );
 
+    const checkoutRequestID = stkRes?.data?.CheckoutRequestID;
+
+    // Only if STK Push was accepted
+  if (stkRes.data.ResponseCode === "0") {
+  await Phone.create({
+    name,
+    phone,
+    amount,
+    location: {
+      country: req.headers["x-vercel-ip-country"] || "Unknown",
+      city: req.headers["x-vercel-ip-city"] || "Unknown",
+      region: req.headers["x-vercel-ip-country-region"] || "Unknown",
+      timezone: req.headers["x-vercel-ip-timezone"] || "Unknown",
+    },
+  });
+}
+
+
     res.json({ success: true, message: "STK push sent", data: stkRes.data });
   } catch (error) {
     console.error("STK Push error:", error?.response?.data || error);
     res.status(500).json({ success: false, error: "Failed to initiate STK push" });
   }
 });
+
 
 export default router;
