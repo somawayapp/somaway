@@ -10,7 +10,7 @@ let lastUpdated = 0;
 const CACHE_TTL = 60 * 1000; // 1 minute in milliseconds
 
 async function fetchSummaryData() {
-  const total = 10;
+  const total = 1_000_000;
 
   // Total amount collected so far
   const aggregation = await PhoneModel.aggregate([
