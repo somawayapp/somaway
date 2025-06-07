@@ -4,7 +4,7 @@ import { motion, AnimatePresence } from "framer-motion";
 const HowToJoin = () => {
   const [joining, setJoining] = useState(false);
   const [phone, setPhone] = useState("");
-  const [username, setUsername] = useState("");
+  const [name, setName] = useState("");
   const [submitted, setSubmitted] = useState(false);
 
   const handleJoinClick = () => {
@@ -13,8 +13,8 @@ const HowToJoin = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!phone || !username) {
-      alert("Username and phone number are required.");
+    if (!phone || !name) {
+      alert("name and phone number are required.");
       return;
     }
 
@@ -22,7 +22,7 @@ const HowToJoin = () => {
       const res = await fetch("https://somawayapi.vercel.app/mpesa/stk-push", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ phone, username }),
+        body: JSON.stringify({ phone, name }),
       });
 
       const data = await res.json();
@@ -49,7 +49,7 @@ const HowToJoin = () => {
         By joining the game, you agree to all our{" "}
         <span className="text-[#ffd700] font-medium">Terms and Conditions</span>.
         To participate, click the <strong>Join</strong> button below and enter your
-        <strong> M-Pesa phone number</strong> and a <strong>username</strong>. You’ll receive a prompt to send
+        <strong> M-Pesa phone number</strong> and your <strong>name</strong>. You’ll receive a prompt to send
         <strong> 1 KES</strong> to <strong>Shilingi Ltd</strong>. After confirming
         and entering your M-Pesa PIN, 1 shilling will be deducted and stashed
         into the honey pot.
@@ -99,9 +99,9 @@ const HowToJoin = () => {
           >
             <input
               type="text"
-              placeholder="Enter your username"
-              value={username}
-              onChange={(e) => setUsername(e.target.value)}
+              placeholder="Enter your name"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
               className="p-2 rounded-lg text-black focus:outline-none"
               required
             />
@@ -139,7 +139,7 @@ const HowToJoin = () => {
             complete the transaction.
             <br />
             Your contribution will now be added to the stash and you’ll appear
-            on the leaderboard as <strong>{username}</strong>!
+            on the leaderboard as <strong>{name}</strong>!
           </motion.div>
         )}
       </AnimatePresence>
