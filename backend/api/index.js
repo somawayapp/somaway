@@ -40,7 +40,7 @@ app.use(
     origin: function (origin, callback) {
       const allowedOrigins = [
         'https://makesomaway.com',
-        'https://www.makesomaway.com', 
+        'https://www.makesomaway.com',
         'https://somawayclient.vercel.app',
         'https://blogifiyclient.vercel.app',
         'http://localhost:5173',
@@ -48,7 +48,7 @@ app.use(
         'https://xtechnewsletter.com',
       ];
 
-      if (allowedOrigins.indexOf(origin) !== -1 || !origin) {
+      if (!origin || allowedOrigins.includes(origin)) {
         callback(null, true);
       } else {
         callback(new Error('Not allowed by CORS'));
@@ -56,6 +56,7 @@ app.use(
     },
     methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE'],
     allowedHeaders: ['Content-Type', 'Authorization'],
+    credentials: true, // 🔥 this ensures the right CORS headers are sent
   })
 );
 
