@@ -88,9 +88,16 @@ const HomePage = () => {
     {/* Card List */}
     <div className="flex-1 md:px-8"> {/* Remove overflow-y-auto here */}
       <BettingChances />
-       <HowToJoin />
+       <div className=" hidden ">   
+           <HowToJoin />
+
+        </div>
        <div className=" md:hidden ">   
        <Sidebar2 />
+         <div className=" md:hidden ">   
+           <HowToJoin />
+
+        </div>
 
        </div>
         <Footer />
