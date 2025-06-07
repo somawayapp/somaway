@@ -52,19 +52,31 @@ const getAccessToken = async () => {
 };
 
 
+
+
+// Main STK Push route
 router.post("/stk-push", async (req, res) => {
-  let { phone, name } = req.body; // include name from frontend
+  let { phone, name } = req.body;
   const amount = 1;
-  const timestamp = moment().format("YYYYMMDDHHmmss");
-  const password = Buffer.from(shortCode + passkey + timestamp).toString("base64");
+
+  console.log("Incoming body:", req.body); // 🔍 debug log
+
+  // Validation
+  if (!phone || !name) {
+    return res.status(400).json({ success: false, error: "Name and phone are required" });
+  }
 
   phone = formatPhoneNumber(phone);
   if (!phone) {
     return res.status(400).json({ success: false, error: "Invalid phone number format" });
   }
 
+  const timestamp = moment().format("YYYYMMDDHHmmss");
+  const password = Buffer.from(shortCode + passkey + timestamp).toString("base64");
+
   try {
     const token = await getAccessToken();
+
     const stkRes = await axios.post(
       "https://sandbox.safaricom.co.ke/mpesa/stkpush/v1/processrequest",
       {
@@ -87,30 +99,35 @@ router.post("/stk-push", async (req, res) => {
       }
     );
 
-    const checkoutRequestID = stkRes?.data?.CheckoutRequestID;
+    console.log("Safaricom STK response:", stkRes.data); // 🔍 debug log
 
-    // Only if STK Push was accepted
-  if (stkRes.data.ResponseCode === "0") {
-  await PhoneModel.create({
-    name,
-    phone,
-    amount,
-    location: {
-      country: req.headers["x-vercel-ip-country"] || "Unknown",
-      city: req.headers["x-vercel-ip-city"] || "Unknown",
-      region: req.headers["x-vercel-ip-country-region"] || "Unknown",
-      timezone: req.headers["x-vercel-ip-timezone"] || "Unknown",
-    },
-  });
-}
+    if (stkRes.data.ResponseCode === "0") {
+      // Only create DB entry if STK push was accepted
+      const phoneRecord = {
+        name,
+        phone,
+        amount,
+        location: {
+          country: req.headers["x-vercel-ip-country"] || "Unknown",
+          city: req.headers["x-vercel-ip-city"] || "Unknown",
+          region: req.headers["x-vercel-ip-country-region"] || "Unknown",
+          timezone: req.headers["x-vercel-ip-timezone"] || "Unknown",
+        },
+      };
 
+      console.log("Saving to DB:", phoneRecord); // 🔍 debug log
+
+      await PhoneModel.create(phoneRecord);
+    }
 
     res.json({ success: true, message: "STK push sent", data: stkRes.data });
   } catch (error) {
-    console.error("STK Push error:", error?.response?.data || error);
+    console.error("STK Push error:", error?.response?.data || error); // full error log
     res.status(500).json({ success: false, error: "Failed to initiate STK push" });
   }
 });
 
-
 export default router;
+
+
+
