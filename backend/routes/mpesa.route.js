@@ -36,8 +36,10 @@ function formatPhoneNumber(phone) {
 }
 
 // Get access token
+
 const getAccessToken = async () => {
   const auth = Buffer.from(`${consumerKey}:${consumerSecret}`).toString("base64");
+  console.log("Auth header:", `Basic ${auth}`);
   const res = await axios.get(
     "https://sandbox.safaricom.co.ke/oauth/v1/generate?grant_type=client_credentials",
     {
@@ -46,6 +48,7 @@ const getAccessToken = async () => {
   );
   return res.data.access_token;
 };
+
 
 // STK Push
 router.post("/stk-push", async (req, res) => {
