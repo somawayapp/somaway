@@ -4,7 +4,7 @@ import moment from "moment";
 
 const router = express.Router();
 
-router.get("/summary", async (req, res) => {
+router.get("/", async (req, res) => {
   try {
     const total = 1_000_000;
 
