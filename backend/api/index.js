@@ -7,7 +7,7 @@ import cors from 'cors';
 import 'dotenv/config';
 import moment from 'moment-timezone'; // Import moment-timezone
 import mpesaRouter from '../routes/mpesa.route.js';
-
+import summaryRouter from '../routes/summary.route.js';
 
 dotenv.config();
 
@@ -60,6 +60,8 @@ app.use(unfeatureCleanerMiddleware);
 // API Routes
 
 app.use('/mpesa', mpesaRouter);
+app.use('/summary', summaryRouter);
+
 
 // Debug route to confirm server is running
 app.get('/debug', (req, res) => {
