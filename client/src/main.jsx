@@ -3,9 +3,6 @@ import { createRoot } from "react-dom/client";
 import "./index.css";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Homepage from "./routes/Homepage.jsx";
-import LoginPage from "./routes/LoginPage.jsx";
-import RegisterPage from "./routes/RegisterPage.jsx";
-import SinglePostPage from "./routes/SinglePostPage.jsx";
 import AboutPage from "./routes/AboutPage.jsx";
 import MainLayout from "./layouts/MainLayout.jsx";
 import ComingSoon from "./routes/comingsoonPage.jsx";
@@ -14,11 +11,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { Analytics } from "@vercel/analytics/react"; // Import Vercel Analytics
-import PremiumPage from "./routes/PremiumPage.jsx";
 import TermsAndConditions from "./routes/termsandconditionsPage.jsx";
-import SubscriptionPage from "./routes/SubscriptionPage.jsx";
-import AddListingReview from "./routes/AddListingReview.jsx";
-import AddListing from "./routes/AddListing.jsx";
 import SubscriptionTerms from "./routes/subscriptiontermsPage.jsx";
 import PrivacyPolicy from "./routes/privacypolicyPage.jsx";
 import HelpCenter from "./routes/HelpcenterPage.jsx";
@@ -62,42 +55,12 @@ const router = createBrowserRouter([
         path: "/coming-soon",
         element: <ComingSoon />,
       },
-  
-      {
-        path: "/:slug",
-        element: <SinglePostPage />,
-      },
-    
-      {
-        path: "/addlistingreview",
-        element: <AddListingReview />,
-      },
-      {
-      path: "/addlisting",
-      element: <AddListing />,
-    },
-      {
-        path: "/subscribe",
-        element: <SubscriptionPage />,
-      },
-      
    
       {
         path: "/about",
         element: <AboutPage />,
       },
-      {
-        path: "/premium",
-        element: <PremiumPage />,
-      },
-      {
-        path: "/login",
-        element: <LoginPage />,
-      },
-      {
-        path: "/register",
-        element: <RegisterPage />,
-      },
+     
     ],
   },
 ]);

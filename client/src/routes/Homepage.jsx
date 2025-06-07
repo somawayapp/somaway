@@ -4,7 +4,6 @@ import { useLocation } from "react-router-dom"; // Import useLocation from react
 import { Link } from "react-router-dom";
 import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
-import PostList from "../components/PostList";
 import { Helmet } from "react-helmet";
 import { useEffect } from "react";
 import BettingChances from "../components/Carddata";

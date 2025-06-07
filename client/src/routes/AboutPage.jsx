@@ -1,9 +1,7 @@
 import { useEffect, useState, useRef } from "react";
 import Navbar from "../components/Navbar";
-import StoryLine from "../components/StoryLine";
 import Footer from "../components/Footer";
 import { Helmet } from "react-helmet";
-import SpinnerMini from "../components/Loader";
 
 const AboutPage = () => {
   const [loading, setLoading] = useState(true);
@@ -23,7 +21,6 @@ const AboutPage = () => {
     <>
     {loading ? (
       <div className="flex justify-center items-center h-screen">
-        <SpinnerMini />
       </div>
     ) : (
       <div>
@@ -233,7 +230,6 @@ className="w-8 h-8 mb-6 mx-auto md:mx-0 md:ml-0"
 
 
 
-      <StoryLine />
 
       <div className="flex items-center justify-center text-[var(--textColor)] mx-auto">
   <div className="text-center">
