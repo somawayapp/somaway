@@ -32,9 +32,7 @@ const Sidebar2 = () => {
     fetchData();
   }, [controls]);
 
-  if (!data) {
-    return <div className="text-white p-4">Loading...</div>;
-  }
+
 
   return (
     <div className="w-full px-[5%] py-5 overflowy-none h-[calc(100vh-130px)] text-white flex flex-col items-center gap-6">
