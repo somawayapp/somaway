@@ -89,12 +89,16 @@ const HomePage = () => {
     <div className="flex-1 md:px-8"> {/* Remove overflow-y-auto here */}
       <BettingChances />
        <HowToJoin />
+       <div className=" md:hidden ">   
+       <Sidebar2 />
+
+       </div>
         <Footer />
 
 
     </div>
 
-     <div className="w-full  md:sticky md:top-[110px] md:block md:w-[23%] h-[calc(100vh-130px)] overflow-y-auto border-l-2  border-[#1b1f1c]">
+     <div className="w-full hiden  md:sticky md:top-[110px] md:block md:w-[23%] h-[calc(100vh-130px)] overflow-y-auto border-l-2  border-[#1b1f1c]">
       <Sidebar2 />
     </div>
   </div>
