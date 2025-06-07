@@ -1,7 +1,7 @@
 import express from "express";
 import axios from "axios";
 import moment from "moment";
-import PhoneModel from "../models/Phone.model";
+import PhoneModel from "../models/Phone.model.js";
 
 
 const router = express.Router();
