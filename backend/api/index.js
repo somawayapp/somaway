@@ -55,7 +55,6 @@ app.use(
 
 
 // Apply the unfeature cleaner middleware globally
-app.use(unfeatureCleanerMiddleware);
 
 // API Routes
 
