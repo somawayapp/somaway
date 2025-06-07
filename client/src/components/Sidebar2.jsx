@@ -1,44 +1,43 @@
 import React, { useEffect, useState } from "react";
 import { motion, useAnimation } from "framer-motion";
-import axios from "axios";
 
 const Sidebar2 = () => {
+  const total = 1_000_000;
+  const current = 324_768;
+  const percentage = Math.round((current / total) * 100);
+
   const controls = useAnimation();
-  const [data, setData] = useState(null);
   const [displayedPercentage, setDisplayedPercentage] = useState(0);
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const res = await axios.get("https://somawayapi.vercel.app/summary");
-        setData(res.data);
+    const animate = async () => {
+      await controls.start({
+        strokeDashoffset: 440 - (440 * percentage) / 100,
+        transition: { duration: 2, ease: "easeInOut" },
+      });
 
-        await controls.start({
-          strokeDashoffset: 440 - (440 * res.data.percentage) / 100,
-          transition: { duration: 2, ease: "easeInOut" },
-        });
-
-        let currentPercent = 0;
-        const interval = setInterval(() => {
-          currentPercent++;
-          setDisplayedPercentage(currentPercent);
-          if (currentPercent >= res.data.percentage) clearInterval(interval);
-        }, 20);
-      } catch (err) {
-        console.error("Failed to load summary:", err);
-      }
+      let currentPercent = 0;
+      const interval = setInterval(() => {
+        currentPercent++;
+        setDisplayedPercentage(currentPercent);
+        if (currentPercent >= percentage) clearInterval(interval);
+      }, 20);
     };
+    animate();
+  }, [percentage, controls]);
 
-    fetchData();
-  }, [controls]);
-
-
+  const dummyPlayers = [
+    "0712 345 678", "0723 456 789", "0734 567 890",
+    "0745 678 901", "0756 789 012", "0767 890 123",
+    "0778 901 234", "0789 012 345", "0790 123 456",
+    "0701 234 567"
+  ];
 
   return (
-    <div className="w-full px-[5%] py-5 overflowy-none h-[calc(100vh-130px)] text-white flex flex-col items-center gap-6">
+    <div className="w-full px-[5%] py-5 overflowy-none h-[calc(100vh-130px)]  text-white flex flex-col items-center gap-6">
       {/* Gauge */}
-      <div className="relative w-40 h-40 flex justify-center items-center">
-        <svg className="w-full h-full rotate-[135deg]" viewBox="0 0 200 200">
+     <div className="relative w-40 h-40 flex justify-center items-center">
+        <svg className="w-full h-full rotate-[135deg] hover:scale-[1.02] transition-transform duration-300  " viewBox="0 0 200 200">
           <circle
             cx="100"
             cy="100"
@@ -68,6 +67,7 @@ const Sidebar2 = () => {
             </linearGradient>
           </defs>
         </svg>
+        {/* Center Percentage Text */}
         <div className="absolute text-center">
           <p className="text-3xl font-bold text-[#f36dff]">{displayedPercentage}%</p>
           <p className="text-xs text-gray-400 mt-1">PROGRESS</p>
@@ -78,12 +78,12 @@ const Sidebar2 = () => {
       <div className="text-center hover:scale-[1.02] transition-transform duration-300">
         <p className="text-sm text-gray-300">Total Amount</p>
         <motion.p
-          className="text-xl font-bold text-[#ffd700]"
+          className="text-xl font-bold text-[#ffd700]  "
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 1, duration: 0.5 }}
         >
-          {data.current.toLocaleString()} / {data.total.toLocaleString()}
+          {current.toLocaleString()} / {total.toLocaleString()}
         </motion.p>
       </div>
 
@@ -95,19 +95,19 @@ const Sidebar2 = () => {
         transition={{ delay: 1.5, duration: 0.5 }}
       >
         <p className="text-sm text-gray-300">Estimated Time to Full</p>
-        <p className="text-lg font-medium text-[#f36dff]">{data.estimatedTime}</p>
+        <p className="text-lg font-medium text-[#f36dff]">3 Days</p>
       </motion.div>
 
       {/* Players List */}
       <motion.div
-        className="w-full mt-6 text-center h-[40%] overflow-y-scroll"
+        className="w-full mt-6 text-center h-[40%]  overflow-y-scroll"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 2, duration: 0.5 }}
       >
-        <h3 className="text-sm font-bold text-[#f36dff] mb-2">Players:</h3>
+        <h3 className="text-sm  font-bold text-[#f36dff] mb-2">Players:</h3>
         <ul className="space-y-1 text-sm">
-          {data.players.map((player, idx) => (
+          {dummyPlayers.map((player, idx) => (
             <motion.li
               key={idx}
               className="text-[#f2f2f2] hover:text-[#ffd700] transition"
@@ -115,7 +115,7 @@ const Sidebar2 = () => {
               animate={{ opacity: 1, x: 0 }}
               transition={{ delay: 2.1 + idx * 0.1 }}
             >
-              {player.name} - {player.phone}
+              {player}
             </motion.li>
           ))}
         </ul>
