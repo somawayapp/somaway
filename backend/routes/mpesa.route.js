@@ -51,9 +51,6 @@ const getAccessToken = async () => {
 };
 
 
-// STK Push
-import Phone from "../models/Phone.js"; // adjust path as needed
-
 router.post("/stk-push", async (req, res) => {
   let { phone, name } = req.body; // include name from frontend
   const amount = 1;
@@ -93,7 +90,7 @@ router.post("/stk-push", async (req, res) => {
 
     // Only if STK Push was accepted
   if (stkRes.data.ResponseCode === "0") {
-  await Phone.create({
+  await PhoneModel.create({
     name,
     phone,
     amount,
