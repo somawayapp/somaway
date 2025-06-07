@@ -44,7 +44,7 @@ const Sidebar2 = () => {
   const players = summary?.players ?? [];
 
   return (
-    <div className="w-full md:px-[5%] py-1  md:y5  overflowy-none h-[calc(100vh-130px)] text-white flex flex-col items-center gap-6">
+    <div className="w-full md:px-[5%] py-1  md:py-5 overflowy-none h-[calc(100vh-130px)] text-white flex flex-col items-center gap-6">
       {/* Gauge */}
       <div className="relative w-40 h-40 flex justify-center items-center">
         <svg className="w-full h-full rotate-[135deg]" viewBox="0 0 200 200">
