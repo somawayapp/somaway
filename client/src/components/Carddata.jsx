@@ -11,7 +11,13 @@ const cardData = [
  
 ];
 
-const [joining, setJoining] = useState(false);
+
+
+
+
+export default function BettingChances() {
+
+  const [joining, setJoining] = useState(false);
   const [phone, setPhone] = useState("");
   const [name, setName] = useState("");
   const [submitted, setSubmitted] = useState(false);
@@ -64,9 +70,6 @@ const [loading, setLoading] = useState(false);
 };
 
 
-
-
-export default function BettingChances() {
   return (
     <div className="grid grid-cols-1 gap-6  py-8  bg-[var(--bg)]">
       {cardData.map((item, i) => (
