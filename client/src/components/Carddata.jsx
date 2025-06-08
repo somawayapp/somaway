@@ -189,11 +189,7 @@ const [loading, setLoading] = useState(false);
 
           </div>
 
-            <img
-            src={item.image}
-            alt={item.title}
-            className="w-full  md:hidden h-full object-cover object-center hover:scale-102 transition-transform duration-300"
-          />
+           
         </motion.div>
       ))}
     </div>
