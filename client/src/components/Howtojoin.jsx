@@ -6,37 +6,54 @@ const HowToJoin = () => {
   const [phone, setPhone] = useState("");
   const [name, setName] = useState("");
   const [submitted, setSubmitted] = useState(false);
+  const [acceptedTerms, setAcceptedTerms] = useState(false);
+const [loading, setLoading] = useState(false);
+
 
   const handleJoinClick = () => {
     setJoining(true);
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    if (!phone || !name) {
-      alert("name and phone number are required.");
-      return;
+ const handleSubmit = async (e) => {
+  e.preventDefault();
+  if (!phone || !name) {
+    alert("name and phone number are required.");
+    return;
+  }
+  if (!acceptedTerms) {
+    alert("Please accept the terms and conditions to continue.");
+    return;
+  }
+  
+  if (!/^07\d{8}$/.test(phone)) {
+  alert("Please enter a valid M-Pesa phone number starting with 07...");
+  return;
+}
+
+
+  setLoading(true);
+  try {
+    const res = await fetch("https://somawayapi.vercel.app/mpesa/stk-push", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ phone, name }),
+    });
+
+    const data = await res.json();
+
+    if (data.success) {
+      setSubmitted(true);
+    } else {
+      alert("Failed to send payment prompt. Try again.");
     }
+  } catch (err) {
+    console.error(err);
+    alert("Error initiating payment.");
+  } finally {
+    setLoading(false);
+  }
+};
 
-    try {
-      const res = await fetch("https://somawayapi.vercel.app/mpesa/stk-push", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ phone, name }),
-      });
-
-      const data = await res.json();
-
-      if (data.success) {
-        setSubmitted(true);
-      } else {
-        alert("Failed to send payment prompt. Try again.");
-      }
-    } catch (err) {
-      console.error(err);
-      alert("Error initiating payment.");
-    }
-  };
 
   return (
     <div className="w-full mx-auto p-6 bg-[#121212] text-white rounded-2xl shadow-2xl space-y-6">
