@@ -82,7 +82,7 @@ export default function BettingChances() {
           <img
             src={item.image}
             alt={item.title}
-            className="w-full  h-full object-cover object-center hover:scale-102 transition-transform duration-300"
+            className="w-full  hidden h-full object-cover object-center hover:scale-102 transition-transform duration-300"
           />
           <div className="p-5 flex flex-col flex-grow">
             <h2 className="text-xl font-bold mb-2">{item.title}</h2>
@@ -183,7 +183,11 @@ export default function BettingChances() {
         )}
       </AnimatePresence>
 
-
+          <img
+            src={item.image}
+            alt={item.title}
+            className="w-full  md:hidden h-full object-cover object-center hover:scale-102 transition-transform duration-300"
+          />
 
           </div>
         </motion.div>
