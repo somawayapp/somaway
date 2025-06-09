@@ -44,7 +44,7 @@ const Spinner = () => {
   const players = summary?.players ?? [];
 
   return (
-           <div className="w-40 h-40 rounded-full bg-[var(--bg)] shadow-lg flex items-center justify-center p-2">
+           <div className="w-30 h-30 rounded-full bg-[var(--bg)] shadow-lg flex items-center justify-center p-1">
       <svg className="w-full h-full rotate-[135deg]" viewBox="0 0 200 200">
         <circle
           cx="100"
