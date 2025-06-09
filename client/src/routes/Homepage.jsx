@@ -82,7 +82,7 @@ const HomePage = () => {
   <div className="flex md:flex-row relative"> {/* Add relative to allow absolute child */}
 
     {/* Sidebar */}
-    <div className="w-full hidden sticky top-[517px] md:block md:w-[23%] h-[calc(100vh-130px)] overflow-y-auto border-r-2 border-[#1b1f1c]">
+    <div className="w-full hidden sticky top-[-17px] md:block md:w-[23%] h-[calc(100vh-130px)] overflow-y-auto border-r-2 border-[#1b1f1c]">
       <Sidebar />
     </div>
 
