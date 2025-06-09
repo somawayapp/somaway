@@ -78,33 +78,36 @@ const HomePage = () => {
 
   <Navbar />
 
- <div className=""> {/* Remove fixed height here */}
-  <div className="flex md:flex-row"> {/* Remove h-full & overflow-hidden */}
-    
+<div className=""> {/* Remove fixed height here */}
+  <div className="flex md:flex-row relative"> {/* Add relative to allow absolute child */}
+
     {/* Sidebar */}
     <div className="w-full hidden sticky top-[110px] md:block md:w-[23%] h-[calc(100vh-130px)] overflow-y-auto border-r-2 border-[#1b1f1c]">
       <Sidebar />
     </div>
+
+    {/* Spinner in center, over both nav and cards */}
+    <div className="absolute left-1/2 transform -translate-x-1/2 z-50 -top-10 md:top-[80px]">
       <Spinner />
-
-    {/* Card List */}
-    <div className="flex-1 md:px-8"> {/* Remove overflow-y-auto here */}
-      <BettingChances />
-       <HowToJoin />
-       <div className=" md:hidden ">   
-       <Sidebar2 />
-
-       </div>
-        <Footer />
-
-
     </div>
 
-     <div className="w-full hidden  md:sticky md:top-[110px] md:block md:w-[23%] h-[calc(100vh-130px)] overflow-y-auto border-l-2  border-[#1b1f1c]">
+    {/* Card List */}
+    <div className="flex-1 md:px-8">
+      <BettingChances />
+      <HowToJoin />
+      <div className="md:hidden">
+        <Sidebar2 />
+      </div>
+      <Footer />
+    </div>
+
+    {/* Right Sidebar */}
+    <div className="w-full hidden md:sticky md:top-[110px] md:block md:w-[23%] h-[calc(100vh-130px)] overflow-y-auto border-l-2 border-[#1b1f1c]">
       <Sidebar2 />
     </div>
   </div>
 </div>
+
 
 </div>
 
