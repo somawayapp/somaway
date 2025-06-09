@@ -85,11 +85,11 @@ const HomePage = () => {
     <div className="w-full hidden sticky top-[110px] md:block md:w-[23%] h-[calc(100vh-130px)] overflow-y-auto border-r-2 border-[#1b1f1c]">
       <Sidebar />
     </div>
+      <Spinner />
 
     {/* Card List */}
     <div className="flex-1 md:px-8"> {/* Remove overflow-y-auto here */}
       <BettingChances />
-      <Spinner />
        <HowToJoin />
        <div className=" md:hidden ">   
        <Sidebar2 />
