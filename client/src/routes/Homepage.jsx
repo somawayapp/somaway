@@ -82,12 +82,12 @@ const HomePage = () => {
   <div className="flex md:flex-row relative"> {/* Add relative to allow absolute child */}
 
     {/* Sidebar */}
-    <div className="w-full hidden sticky top-[-17px] md:block md:w-[23%] h-[calc(100vh-130px)] overflow-y-auto border-r-2 border-[#1b1f1c]">
+    <div className="w-full hidden sticky top-[110px] md:block md:w-[23%] h-[calc(100vh-130px)] overflow-y-auto border-r-2 border-[#1b1f1c]">
       <Sidebar />
     </div>
 
     {/* Spinner in center, over both nav and cards */}
-<div className="fixed left-1/2 top-18 transform -translate-x-1/2 z-[100006]">
+<div className="fixed left-1/2 top-[54] transform -translate-x-1/2 z-[100006]">
   <Spinner />
 </div>
 
