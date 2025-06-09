@@ -87,9 +87,12 @@ const HomePage = () => {
     </div>
 
     {/* Spinner in center, over both nav and cards */}
-    <div  style={{ zIndex: 100006, }} className="relative left-1/2 transform -translate-x-1/2 z-50 -top-20 md:top-[80px]">
-      <Spinner />
-    </div>
+   <div
+  className="fixed left-1/2 transform -translate-x-1/2 top-16 md:top-[80px] z-[100006]"
+>
+  <Spinner />
+</div>
+
 
     {/* Card List */}
     <div className="flex-1 md:px-8">
