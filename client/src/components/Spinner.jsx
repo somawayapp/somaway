@@ -1,3 +1,6 @@
+import React, { useEffect, useState } from "react";
+import { motion, useAnimation } from "framer-motion";
+
 const Spinner = () => {
   const [summary, setSummary] = useState(null);
   const [displayedPercentage, setDisplayedPercentage] = useState(0);
@@ -13,6 +16,7 @@ const Spinner = () => {
         console.error("Failed to fetch summary:", err);
       }
     };
+
     fetchData();
   }, []);
 
@@ -33,8 +37,14 @@ const Spinner = () => {
     }, 20);
   }, [summary, controls]);
 
+  const current = summary?.current ?? 0;
+  const total = summary?.total ?? 0;
+  const percentage = summary?.percentage ?? 0;
+  const estimatedTime = summary?.estimatedTime ?? "-";
+  const players = summary?.players ?? [];
+
   return (
-    <div className="w-40 h-40 rounded-full bg-[var(--bg)] shadow-lg flex items-center justify-center p-2">
+           <div className="w-40 h-40 rounded-full bg-[var(--bg)] shadow-lg flex items-center justify-center p-2">
       <svg className="w-full h-full rotate-[135deg]" viewBox="0 0 200 200">
         <circle
           cx="100"
@@ -72,6 +82,9 @@ const Spinner = () => {
         <p className="text-xs text-gray-400 mt-1">PROGRESS</p>
       </div>
     </div>
+
+  
   );
 };
 
+export default Spinner;
