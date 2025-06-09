@@ -10,6 +10,7 @@ import BettingChances from "../components/Carddata";
 import Sidebar from "../components/Sidebar";
 import Sidebar2 from "../components/Sidebar2";
 import HowToJoin from "../components/Howtojoin";
+import Spinner from "../components/Spinner";
 const HomePage = () => {
 
   useEffect(() => {
@@ -87,17 +88,11 @@ const HomePage = () => {
 
     {/* Card List */}
     <div className="flex-1 md:px-8"> {/* Remove overflow-y-auto here */}
-\              <BettingChances />
-       <div className=" hidden  md:block  ">   
-           <HowToJoin />
-
-        </div>
+      <BettingChances />
+      <Spinner />
+       <HowToJoin />
        <div className=" md:hidden ">   
        <Sidebar2 />
-         <div className=" md:hidden ">   
-           <HowToJoin />
-
-        </div>
 
        </div>
         <Footer />

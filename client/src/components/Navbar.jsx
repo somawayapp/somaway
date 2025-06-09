@@ -62,10 +62,7 @@
   
           return(
           <div  style={{ zIndex: 100004, }}
-
-  className="flex justify-between flex-col relative w-full gap-3 py-2 md:py-3 md:gap-6 sticky top-[48px] text-[var(--TextColor)] bg-[#65026e] md:border-b border-b-[var(--softBg4)] 
-             bg-[url('/spin.jpg')] bg-cover bg-center md:bg-none"
->
+             className="flex justify-between  flex-col relative w-full  gap-3 py-2 md:py-3  md:gap-6 flex sticky top-[48px]  text-[var(--TextColor)] bg-[#65026e] md:border-b  border-b-[var(--softBg4)] " >
       
       
             <div className="relative w-full   gap-2 md:gap-6 flex flex-row items-center  text-[var(--TextColor)]  justify-between  px-4 md:px-[5%] "           >
