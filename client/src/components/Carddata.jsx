@@ -25,6 +25,16 @@ export default function BettingChances() {
 const [loading, setLoading] = useState(false);
 
 
+
+  const handleShareToWhatsApp = () => {
+    const message = `🏠 Welcome to Hodii! 🌟\nLooking to rent, buy, or sell property? Whether it’s an apartment, house, office space, or land — Hodii is your trusted hub! 🏡\n\n✔️ List or browse properties for FREE\n✔️ Connect with tenants or landlords\n✔️ Explore reviews, filter by location, price & more!\n\nStart your journey today:\nhttps://makesomaway.com 🚪✨`;
+  
+    const url = `https://wa.me/?text=${encodeURIComponent(message + " ")}`;
+  
+    window.open(url, '_blank');
+    localStorage.setItem('lastShared', Date.now().toString());
+  };
+
   const handleJoinClick = () => {
     setJoining(true);
   };
@@ -100,6 +110,13 @@ const [loading, setLoading] = useState(false);
           Join Now
         </button>
       )}
+
+        <button
+      onClick={handleShareToWhatsApp}
+          className="mt-auto bg-[#020201] py-4 hover:bg-[#0e0e06] text-[#EBD402] rounded-2xl font-semibold w-full hover:scale-102 transition-transform duration-200"
+        >
+          Join Now
+        </button>
 
       {/* Input Form */}
      
