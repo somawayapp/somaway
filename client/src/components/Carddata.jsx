@@ -33,28 +33,28 @@ and no idea what to do with it?
 
 Now it just sits in your pocket.
 On the floor of a matatu.
-Lost.
-Meaningless.
+Lost. Meaningless.
 
-But someone built a space for that shilling.
-A place where all the small things come together.
-Where everyone gets a shot.
-An equal chance — to take part, with just one shilling.
-One. No more.
+I was there once too —
+holding that same lonely coin,
+wondering what good it could ever do.
 
-And when that space fills —
-One million members.
-Each contributing just 1 shilling —
+Until one day, it hit me:
+I wasn’t alone.
 
-Someone gets lifted.
-A random member, chosen publicly, will walk away with 1 million KES.
-Not because they had more.
-But because they showed up.
-It could be you. Or me.
-All it takes is a shilling.
+What if a million people each contributed a single shilling?
+Where every member gives just one coin,
+and everyone gets exactly one chance — equal to everyone else.
 
-I put mine in.
-Thought maybe you’d want to too.
+Once the community pot reaches 1 million shillings,
+a random beneficiary is publicly selected to take it all home.
+
+One shilling.
+One million.
+One lucky winner.
+
+Join us today —
+Your forgotten coin could be your lucky break.
 👉\n\nStart your journey today:\nhttps://makesomaway.com ✨`;
   
     const url = `https://wa.me/?text=${encodeURIComponent(message + " ")}`;
