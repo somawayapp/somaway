@@ -166,14 +166,12 @@
             onClick={() => setOpen(false)}          > sign up    
           </Link>   
 
-          <SignedOut>
 
        <Link
          to="/login"
          className="block py-2 text-[var(--softTextColor)]   hover:text-[#fc3239]  p-2 rounded-xl"
           onClick={() => setOpen(false)}          > log in     
                </Link>
-         </SignedOut>
 
 
           <Link
