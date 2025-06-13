@@ -28,34 +28,18 @@ const [loading, setLoading] = useState(false);
 
   const handleShareToWhatsApp = () => {
     const message = `
-Ever walked out of a supermarket with a single shilling in your hand,
-and no idea what to do with it?
+A million people take part, each contributing a single shilling
+Where everyone gets exactly one chance — equal to everyone else.
 
-Now it just sits in your pocket.
-On the floor of a matatu.
-Lost. Meaningless.
-
-I was there once too —
-holding that same lonely coin,
-wondering what good it could ever do.
-
-Until one day, it hit me:
-I wasn’t alone.
-
-What if a million people each contributed a single shilling?
-Where every member gives just one coin,
-and everyone gets exactly one chance — equal to everyone else.
-
-Once the community pot reaches 1 million shillings,
-a random beneficiary is publicly selected to take it all home.
+Once the community stash reaches 1 million shillings,
+a random lucky winner is publicly selected to take it all home.
 
 One shilling.
 One million.
 One lucky winner.
 
 Join us today —
-Your forgotten coin could be your lucky break.
-👉\n\nStart your journey today:\nhttps://makesomaway.com ✨`;
+ 👉\n\n Shilingi yaweza kupa mamili:\nhttps://makesomaway.com ✨`;
   
     const url = `https://wa.me/?text=${encodeURIComponent(message + " ")}`;
   
