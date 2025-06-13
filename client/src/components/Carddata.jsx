@@ -27,16 +27,9 @@ const [loading, setLoading] = useState(false);
 
 
   const handleShareToWhatsApp = () => {
-    const message = `No matter what you’ve heard, size does matter —
-But these days, it’s not about how big something is.
-It’s about the small things. The forgotten ones. The quiet chances.
-
+    const message = `
 Ever walked out of a supermarket with a single shilling in your hand,
 and no idea what to do with it?
-
-There was a time one shilling could get you salt. Sugar. Even bread.
-You could walk in with a coin and leave with food — and change.
-But not anymore.
 
 Now it just sits in your pocket.
 On the floor of a matatu.
@@ -62,7 +55,7 @@ All it takes is a shilling.
 
 I put mine in.
 Thought maybe you’d want to too.
-👉\n\nStart your journey today:\nhttps://makesomaway.com 🚪✨`;
+👉\n\nStart your journey today:\nhttps://makesomaway.com ✨`;
   
     const url = `https://wa.me/?text=${encodeURIComponent(message + " ")}`;
   
