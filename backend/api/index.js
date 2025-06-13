@@ -1,4 +1,3 @@
-import { clerkMiddleware, requireAuth } from '@clerk/express';
 import express from 'express';
 import mongoose from 'mongoose';
 import dotenv from 'dotenv';
@@ -14,8 +13,6 @@ const app = express();
 
 
 
-// Use Clerk middleware
-app.use(clerkMiddleware({ clerkClient }));
 
 // Middleware for JSON parsing
 app.use(express.json({ limit: "50mb" }));
