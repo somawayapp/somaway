@@ -4,7 +4,6 @@
 
   import { useState, useEffect } from "react";
   import { Link } from "react-router-dom";
-  import { SignedIn, SignedOut, UserButton } from "@clerk/clerk-react";
   import ThemeToggler from "./Theme";
   import "../index.css";
   import { AiOutlineMenu } from "react-icons/ai";
@@ -117,13 +116,9 @@
                   <div className="flex items-center justify-center">
           
           
-           <SignedIn>
             <div className="flex items-center  w-[28px] h-[28px] justify-center">
-           <UserButton />
            </div>
-           </SignedIn>
   
-                     <SignedOut>
 
            <Link
                 type="button"
@@ -133,7 +128,6 @@
                  
                  </Link>
 
-            </SignedOut>
            </div>
   
             </button>
@@ -165,14 +159,12 @@
   
          <div className="flex flex-col">
   
-          <SignedOut>
 
             <Link
               to="/register"
               className="block py-2 text-[var(--softTextColor)] font-semibold  hover:text-[#fc3239] p-2 rounded-xl"
             onClick={() => setOpen(false)}          > sign up    
           </Link>   
-          </SignedOut>
 
           <SignedOut>
 
@@ -201,13 +193,11 @@
              onClick={() => setOpen(false)}          > Property History     
             </Link>
 
-            <SignedIn>
             <Link
               to="/addlisting"
               className="block py-2 text-[var(--softTextColor)]   hover:text-[#fc3239]  p-2 rounded-xl"
             onClick={() => setOpen(false)}          > Add listing     
           </Link>
-          </SignedIn>
 
             <Link
               to="/addlistingreview"
@@ -215,30 +205,24 @@
             onClick={() => setOpen(false)}          > Add Review     
           </Link>
 
-           <SignedIn>
             <Link
               to="/profile"
               className="block py-2 text-[var(--softTextColor)]   hover:text-[#fc3239]  p-2 rounded-xl"
               onClick={() => setOpen(false)}          > Profile     
              </Link>
-             </SignedIn>
 
 
-             <SignedIn>
               <Link
               to="/listings"
               className="block py-2 text-[var(--softTextColor)]   hover:text-[#fc3239]  p-2 rounded-xl"
                onClick={() => setOpen(false)}          > My listings    
                </Link>
-             </SignedIn>
 
-             <SignedIn>
               <Link
               to="/wishlist"
               className="block py-2 text-[var(--softTextColor)]   hover:text-[#fc3239]  p-2 rounded-xl"
               onClick={() => setOpen(false)}          > My wishlist       
                </Link>
-               </SignedIn>
 
             <Link
               to="/premium"
