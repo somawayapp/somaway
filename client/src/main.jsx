@@ -17,13 +17,8 @@ import HelpCenter from "./routes/HelpcenterPage.jsx";
 
 const queryClient = new QueryClient();
 
-// Hardcoded Clerk publishable key
 
-const clerkPublishableKey = process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY || "pk_live_Y2xlcmsubWFrZXNvbWF3YXkuY29tJA";
 
-if (!clerkPublishableKey) {
-    throw new Error("Missing Clerk Publishable Key!");
-}
 const router = createBrowserRouter([
   {
     element: <MainLayout />,
@@ -66,7 +61,7 @@ const router = createBrowserRouter([
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
-\      <QueryClientProvider client={queryClient}>
+     <QueryClientProvider client={queryClient}>
         <RouterProvider router={router} />
         <ToastContainer position="bottom-right" />
         <Analytics />
