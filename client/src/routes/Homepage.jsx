@@ -77,21 +77,7 @@ const HomePage = () => {
           </div>
         </div>
 
-        <Navbar />
-
-        {/* Main Body */}
-        <div className="flex md:flex-row relative px-4 md:px-0">
-          {/* Left Sidebar */}
-          <div className="hidden md:block md:w-[23%] sticky top-[110px] h-[calc(100vh-130px)] overflow-y-auto border-r-2 border-[#1b1f1c]">
-            <Sidebar />
-          </div>
-
-
-
-          {/* Right Sidebar */}
-          <div className="hidden md:block md:w-[23%] sticky top-[110px] h-[calc(100vh-130px)] overflow-y-auto border-l-2 border-[#1b1f1c]">
-          </div>
-        </div>
+     
       </div>
     </>
   );
