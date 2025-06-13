@@ -1,7 +1,3 @@
-
-
-
-
 import { useState, useEffect } from "react";
 import { useLocation, Link } from "react-router-dom";
 import { Helmet } from "react-helmet";
@@ -100,18 +96,14 @@ const HomePage = () => {
               <>
                 <div className="text-[var(--softTextColori)] py-4">{displayText}</div>
                 <BettingChances />
-                <HowToJoin />
                 <div className="md:hidden">
-                  <Sidebar2 />
                 </div>
-                <Footer />
               </>
             )}
           </div>
 
           {/* Right Sidebar */}
           <div className="hidden md:block md:w-[23%] sticky top-[110px] h-[calc(100vh-130px)] overflow-y-auto border-l-2 border-[#1b1f1c]">
-            <Sidebar2 />
           </div>
         </div>
       </div>
