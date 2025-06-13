@@ -2,7 +2,6 @@ import { clerkMiddleware, requireAuth } from '@clerk/express';
 import express from 'express';
 import mongoose from 'mongoose';
 import dotenv from 'dotenv';
-import { createClerkClient } from '@clerk/backend';
 import cors from 'cors';
 import 'dotenv/config';
 import moment from 'moment-timezone'; // Import moment-timezone
@@ -13,11 +12,7 @@ dotenv.config();
 
 const app = express();
 
-// Initialize Clerk Client
-const clerkClient = createClerkClient({
-  secretKey: process.env.CLERK_SECRET_KEY,
-  publishableKey: process.env.VITE_CLERK_PUBLISHABLE_KEY,
-});
+
 
 // Use Clerk middleware
 app.use(clerkMiddleware({ clerkClient }));
