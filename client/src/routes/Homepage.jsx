@@ -1,14 +1,18 @@
+
+
+
+
 import { useState, useEffect } from "react";
 import { useLocation, Link } from "react-router-dom";
 import { Helmet } from "react-helmet";
-
+import HowToJoin from "../components/Howtojoin";
 import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
 import BettingChances from "../components/Carddata";
 import Sidebar from "../components/Sidebar";
 import Sidebar2 from "../components/Sidebar2";
-import HowToJoin from "../components/HowToJoin"; // Ensure correct casing
 import Spinner from "../components/Spinner";
+
 
 const HomePage = () => {
   const location = useLocation();
