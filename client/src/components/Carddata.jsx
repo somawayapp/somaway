@@ -62,7 +62,7 @@ All it takes is a shilling.
 
 I put mine in.
 Thought maybe you’d want to too.
-👉 [yourlink.com]\n\nStart your journey today:\nhttps://makesomaway.com 🚪✨`;
+👉\n\nStart your journey today:\nhttps://makesomaway.com 🚪✨`;
   
     const url = `https://wa.me/?text=${encodeURIComponent(message + " ")}`;
   
@@ -150,7 +150,7 @@ Thought maybe you’d want to too.
       onClick={handleShareToWhatsApp}
           className="mt-auto bg-[#020201] py-4 hover:bg-[#0e0e06] text-[#EBD402] rounded-2xl font-semibold w-full hover:scale-102 transition-transform duration-200"
         >
-          Join Now
+          Share 
         </button>
 
       {/* Input Form */}
