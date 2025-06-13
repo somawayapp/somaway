@@ -86,21 +86,7 @@ const HomePage = () => {
             <Sidebar />
           </div>
 
-          {/* Content Area */}
-          <div className="flex-1 md:px-8">
-            {loading ? (
-              <div className="flex justify-center py-20">
-                <Spinner />
-              </div>
-            ) : (
-              <>
-                <div className="text-[var(--softTextColori)] py-4">{displayText}</div>
-                <BettingChances />
-                <div className="md:hidden">
-                </div>
-              </>
-            )}
-          </div>
+
 
           {/* Right Sidebar */}
           <div className="hidden md:block md:w-[23%] sticky top-[110px] h-[calc(100vh-130px)] overflow-y-auto border-l-2 border-[#1b1f1c]">
