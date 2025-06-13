@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import Navbar from "./components/Navbar";
-\import "../index.css"; // Assuming styles are in App.css
+import "../index.css"; // Assuming styles are in App.css
 
 const App = () => {
   const [zIndexObsolete, setZIndexObsolete] = useState(false);
@@ -11,7 +11,7 @@ const App = () => {
 
   return (
     <div className={zIndexObsolete ? 'z-index-obsolete' : ''}>
-\
+
       <div >
         {/* NAVBAR */}
         <Navbar />
