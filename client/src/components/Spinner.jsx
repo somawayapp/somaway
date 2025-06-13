@@ -37,11 +37,6 @@ const Spinner = () => {
     }, 20);
   }, [summary, controls]);
 
-  const current = summary?.current ?? 0;
-  const total = summary?.total ?? 0;
-  const percentage = summary?.percentage ?? 0;
-  const estimatedTime = summary?.estimatedTime ?? "-";
-  const players = summary?.players ?? [];
 
   return (
            <div className="w-32 h-32  md:hidden  rounded-full bg-[var(--bg)] shadow-lg flex items-center justify-center p-1">
