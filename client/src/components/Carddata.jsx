@@ -25,51 +25,6 @@ export default function BettingChances() {
 const [loading, setLoading] = useState(false);
 
 
-
-  const handleShareToWhatsApp = () => {
-    const message = `No matter what you’ve heard, size does matter —
-But these days, it’s not about how big something is.
-It’s about the small things. The forgotten ones. The quiet chances.
-
-Ever walked out of a supermarket with a single shilling in your hand,
-and no idea what to do with it?
-
-There was a time one shilling could get you salt. Sugar. Even bread.
-You could walk in with a coin and leave with food — and change.
-But not anymore.
-
-Now it just sits in your pocket.
-On the floor of a matatu.
-Lost.
-Meaningless.
-
-But someone built a space for that shilling.
-A place where all the small things come together.
-Where everyone gets a shot.
-An equal chance — to take part, with just one shilling.
-One. No more.
-
-And when that space fills —
-One million members.
-Each contributing just 1 shilling —
-
-Someone gets lifted.
-A random member, chosen publicly, will walk away with 1 million KES.
-Not because they had more.
-But because they showed up.
-It could be you. Or me.
-All it takes is a shilling.
-
-I put mine in.
-Thought maybe you’d want to too.
-👉\n\nStart your journey today:\nhttps://makesomaway.com 🚪✨`;
-  
-    const url = `https://wa.me/?text=${encodeURIComponent(message + " ")}`;
-  
-    window.open(url, '_blank');
-    localStorage.setItem('lastShared', Date.now().toString());
-  };
-
   const handleJoinClick = () => {
     setJoining(true);
   };
@@ -145,13 +100,6 @@ Thought maybe you’d want to too.
           Join Now
         </button>
       )}
-
-        <button
-      onClick={handleShareToWhatsApp}
-          className="mt-auto bg-[#020201] py-4 hover:bg-[#0e0e06] text-[#EBD402] rounded-2xl font-semibold w-full hover:scale-102 transition-transform duration-200"
-        >
-          Share 
-        </button>
 
       {/* Input Form */}
      
