@@ -18,7 +18,7 @@ const HowToJoin = () => {
       {/* Descriptions and instructions */}
       <p className="text-gray-300 text-sm leading-relaxed">
         By joining the initiative, you agree to all our{" "}
-      <a href="/terms" className="text-[#ffd700] font-medium">
+      <a href="/terms" className="text-[#ffd700] mr-1 font-medium">
       Terms and Conditions
       </a>
         To participate, click the <strong>Join</strong> button above and enter your
