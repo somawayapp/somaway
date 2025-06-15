@@ -87,7 +87,7 @@ const HomePage = () => {
     </div>
 
     {/* Spinner in center, over both nav and cards */}
-<div className="fixed left-1/2 top-[110px] transform -translate-x-1/2 z-[100006]">
+<div className="fixed left-1/2 top-[90px] transform -translate-x-1/2 z-[100006]">
   <Spinner />
 </div>
 

@@ -6,7 +6,7 @@ const cardData = [
   {
     image: "/spin.jpg",
     title: "Win Ksh 1 Million",
-    desc: "Bet only 1 shilling and stand a chance to win 1 million shillings instantly.",
+    desc: "Join by stashing only 1 shilling and stand a chance to win 1 million shillings Everyone gets only one entry.",
   },
  
 ];
@@ -127,9 +127,9 @@ Join us today for just one shilling —
 
         <button
       onClick={handleShareToWhatsApp}
-          className=" bg-[#020201] py-4  md:py-5 mt-3 md:mt-6 hover:bg-[#0e0e06] text-[#EBD402] rounded-2xl font-semibold w-full hover:scale-102 transition-transform duration-200"
+          className=" bg-[#020201] py-4  md:py-5 mt-3 md:mt-4 hover:bg-[#0e0e06] text-[#EBD402] rounded-2xl font-semibold w-full hover:scale-102 transition-transform duration-200"
         >
-          Share with friends
+          Invite friends
         </button>
 
 
