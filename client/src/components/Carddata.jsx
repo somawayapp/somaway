@@ -6,7 +6,7 @@ const cardData = [
   {
     image: "/spin.jpg",
     title: "Win Ksh 1 Million",
-    desc: "Join by stashing only 1 shilling and stand a chance to win 1 million shillings Everyone gets only one entry.",
+    desc: "Join by stashing only 1 shilling and stand a chance to win 1 million shillings Everyone gets only one entry, that's fare and equal for everyone.",
   },
  
 ];

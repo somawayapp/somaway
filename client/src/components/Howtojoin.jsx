@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { Link } from "react-router-dom";
+
 
 const HowToJoin = () => {
 
@@ -15,10 +17,12 @@ const HowToJoin = () => {
 
       {/* Descriptions and instructions */}
       <p className="text-gray-300 text-sm leading-relaxed">
-        By joining the game, you agree to all our{" "}
-        <span className="text-[#ffd700] font-medium">Terms and Conditions</span>.
-        To participate, click the <strong>Join</strong> button below and enter your
-        <strong> M-Pesa phone number</strong> and your <strong>name</strong>. You’ll receive a prompt to send
+        By joining the initiative, you agree to all our{" "}
+      <a href="/terms" className="text-[#ffd700] font-medium">
+      Terms and Conditions
+      </a>
+        To participate, click the <strong>Join</strong> button above and enter your
+        <strong> M-Pesa phone number starting with 07... </strong> and your <strong> full legal name</strong>. You’ll receive a prompt to send
         <strong> 1 KES</strong> to <strong>Shilingi Ltd</strong>. After confirming
         and entering your M-Pesa PIN, 1 shilling will be deducted and stashed
         into the honey pot.
