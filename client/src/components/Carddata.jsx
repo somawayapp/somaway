@@ -113,9 +113,8 @@ Join us today for just one shilling —
             <h2 className="text-xl font-bold mb-2">{item.title}</h2>
             <p className="text-sm text-gray-300 mb-4">{item.desc}</p>
 
-            
+
            
-           <div className="gap-2 md:gap-4">
                  {/* Join Button */}
       {!joining && !submitted && (
         <button
@@ -128,11 +127,10 @@ Join us today for just one shilling —
 
         <button
       onClick={handleShareToWhatsApp}
-          className="mt-auto bg-[#020201] py-4 hover:bg-[#0e0e06] text-[#EBD402] rounded-2xl font-semibold w-full hover:scale-102 transition-transform duration-200"
+          className="mt-auto bg-[#020201] py-4 mt-4 md:mt-6 hover:bg-[#0e0e06] text-[#EBD402] rounded-2xl font-semibold w-full hover:scale-102 transition-transform duration-200"
         >
           Share to friends
         </button>
-           </div>
 
 
       {/* Input Form */}
