@@ -86,7 +86,7 @@ const Sidebar2 = () => {
       </div>
 
       {/* Total Amount */}
-      <div className="text-center hover:scale-[1.02] transition-transform duration-300">
+      <div className="text-center  mt-9 md:mt-0 hover:scale-[1.02] transition-transform duration-300">
         <p className="text-sm text-gray-300">Total Amount</p>
         <motion.p
           className="text-xl font-bold text-[#ffd700]"
