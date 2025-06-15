@@ -28,8 +28,9 @@ const [loading, setLoading] = useState(false);
 
   const handleShareToWhatsApp = () => {
     const message = `
+One million shillings!
 A million people take part, each contributing a single shilling
-Where everyone gets exactly one chance — equal to everyone else.
+Where everyone gets only one chance — equal to everyone else.
 
 Once the community stash reaches 1 million shillings,
 a random lucky winner is publicly selected to take it all home.
@@ -38,8 +39,8 @@ One shilling.
 One million.
 One lucky winner.
 
-Join us today —
- 👉\n\n Shilingi yaweza kupa mamili:\nhttps://makesomaway.com ✨`;
+Join us today for just one shilling —
+ 👉\n\n Shilingi yaweza kupa mamili. Visit:\nhttps://makesomaway.com ✨`;
   
     const url = `https://wa.me/?text=${encodeURIComponent(message + " ")}`;
   
@@ -111,9 +112,11 @@ Join us today —
           <div className="p-5 flex flex-col flex-grow">
             <h2 className="text-xl font-bold mb-2">{item.title}</h2>
             <p className="text-sm text-gray-300 mb-4">{item.desc}</p>
+
+            
            
-           
-     {/* Join Button */}
+           <div className="gap-2 md:gap-4">
+                 {/* Join Button */}
       {!joining && !submitted && (
         <button
           onClick={handleJoinClick}
@@ -127,8 +130,10 @@ Join us today —
       onClick={handleShareToWhatsApp}
           className="mt-auto bg-[#020201] py-4 hover:bg-[#0e0e06] text-[#EBD402] rounded-2xl font-semibold w-full hover:scale-102 transition-transform duration-200"
         >
-          Share 
+          Share to friends
         </button>
+           </div>
+
 
       {/* Input Form */}
      
