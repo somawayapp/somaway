@@ -28,7 +28,7 @@ const [loading, setLoading] = useState(false);
 
   const handleShareToWhatsApp = () => {
     const message = `
-One million shillings!
+One shiling gives you a chance to win one million shillings!
 A million people take part, each contributing a single shilling
 Where everyone gets only one chance — equal to everyone else.
 
@@ -94,7 +94,7 @@ Join us today for just one shilling —
 
 
   return (
-    <div className="grid grid-cols-1 gap-6  py-8  bg-[var(--bg)]">
+    <div className="grid grid-cols-1 gap-6  pb-8  pt-4  bg-[var(--bg)]">
       {cardData.map((item, i) => (
         <motion.div
           key={i}
@@ -127,9 +127,9 @@ Join us today for just one shilling —
 
         <button
       onClick={handleShareToWhatsApp}
-          className="mt-auto bg-[#020201] py-4 mt-4 md:mt-6 hover:bg-[#0e0e06] text-[#EBD402] rounded-2xl font-semibold w-full hover:scale-102 transition-transform duration-200"
+          className=" bg-[#020201] py-4  md:py-5 mt-3 md:mt-6 hover:bg-[#0e0e06] text-[#EBD402] rounded-2xl font-semibold w-full hover:scale-102 transition-transform duration-200"
         >
-          Share to friends
+          Share with friends
         </button>
 
 
