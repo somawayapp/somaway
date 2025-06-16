@@ -15,18 +15,17 @@ const HowToJoin = () => {
         How to Join and Play
       </h2>
 
-      {/* Descriptions and instructions */}
-      <p className="text-gray-300 text-sm leading-relaxed">
-        By joining the initiative, you agree to all our{" "}
-      <a href="/terms" className="text-[#ffd700] mr-1 font-medium">
-      Terms and Conditions
-      </a>
-        To participate, click the <strong>Join</strong> button above and enter your
-        <strong> M-Pesa phone number starting with 07... </strong> and your <strong> full legal name</strong>. You’ll receive a prompt to send
-        <strong> 1 KES</strong> to <strong>Shilingi Ltd</strong>. After confirming
-        and entering your M-Pesa PIN, 1 shilling will be deducted and stashed
-        into the pool .
-      </p>
+   <p className="text-gray-300 text-sm leading-relaxed">
+  By participating in this initiative, you agree to our{" "}
+  <a href="/terms" className="text-[#ffd700] mr-1 font-medium">
+    Terms and Conditions
+  </a>
+  .
+  To join, simply click the <strong>Join</strong> button above and provide your <strong>M-Pesa phone number (starting with 07...)</strong>
+   along with your <strong>full legal name</strong>. You will receive a secure prompt to send <strong>1 KES</strong> to <strong>Shilingi 
+  Ltd</strong>. Once you confirm and enter your M-Pesa PIN, the amount will be automatically deducted and added to the community stash.
+</p>
+
 
    <p className="text-gray-300 text-sm leading-relaxed">
   <strong>Participation Rules:</strong> Each phone number can only contribute once with <strong>1 KES</strong> to ensure fairness 
