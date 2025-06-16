@@ -6,7 +6,7 @@ const cardData = [
   {
     image: "/spin.jpg",
     title: "Win Ksh 1 Million",
-    desc: "Join by stashing only 1 shilling and stand a chance to win 1 million shillings Everyone gets only one entry, that's fare and equal for everyone.",
+    desc: "Join a community-powered luck pool where everyone has a fair shot to win 1 million shillings by stashing only 1 shilling.",
   },
  
 ];
@@ -29,6 +29,9 @@ const [loading, setLoading] = useState(false);
   const handleShareToWhatsApp = () => {
     const message = `
 One shiling gives you a chance to win one million shillings!
+
+Join a community-powered luck pool where everyone has a fair shot to win 1 million shillings by stashing only 1 shilling.
+
 A million people take part, each contributing a single shilling
 Where everyone gets only one chance — equal to everyone else.
 
@@ -39,7 +42,7 @@ One shilling.
 One million.
 One lucky winner.
 
-Join us today for just one shilling —
+Join now for just one bob —
  👉\n\n Shilingi yaweza kupa mamili. Visit:\nhttps://makesomaway.com ✨`;
   
     const url = `https://wa.me/?text=${encodeURIComponent(message + " ")}`;
