@@ -7,235 +7,108 @@ const TermsAndConditions = () => {
              <div>      
             <Navbar/>
 
-            <div className="text-[var(--softTextColor)] bg-[var(--bg)] space-y-6   max-w-[1100px] mx-auto mt-8 md:mt-[40px]  mb-8 md:mb-[40px] px-4 md:px-[80px]">
-            <h1 className="text-2xl md:text-4xl font-bold">Terms and Conditions of Use (the “Terms”)</h1>
-           <p>
-              Please read these Terms carefully before accessing or using the services made available,
-              accessed, published or otherwise offered through   <a href="https://www.hodii.com" target="_blank" rel="noopener noreferrer" className="text-blue-500 underline hover:text-blue-700">  www.hodii.com </a>  
-               (the "Site"). By accessing or using
-              the Site, you agree to be bound by these Terms. Please note that you will be required to review and agree
-              to our  <a href="https://www.hodii.com/privacy" target="_blank" rel="noopener noreferrer" className="text-blue-500 underline hover:text-blue-700">    Privacy Policy    </a>
-               before you can access and use the Site.
-            </p>
-      
-            <h2 className="text-xl font-semibold">Definitions</h2>
-            <p>
-              For the purposes of these terms the terms: <br />
-             <span className="font-semibold  hover-thumb">Hodii, we, our</span>  and <span className="font-semibold  hover-thumb">us</span> refer to Hodii Limited; and <br />
-              Site refers to   <a href="https://www.hodii.com" target="_blank" rel="noopener noreferrer" className="text-blue-500 underline hover:text-blue-700">  www.hodii.com </a>, and mobile versions of these websites and software applications
-              derived from these websites for mobile devices. <br />
-              Advertisers and listers refer to private sellers, agents, property developers, landlords and
-              ancillary partners.
-            </p>
-      
-            <h2 className="text-xl font-semibold">Personal information</h2>
-            <p>
-              You do not have to create an account in order to use the Site, but certain areas of our Site
-              are only available to registered users. If you decide to create an account on the Site and become
-              a registered user, you will be required to submit certain personal information as part of the
-              registration process. Our Privacy governs how we deal with your personal information. Please review
-              the  <a href="https://www.hodii.com/privacy" target="_blank" rel="noopener noreferrer" className="text-blue-500 underline hover:text-blue-700">    Privacy Policy    </a>
-               carefully to understand our practices.
-            </p>
-      
-            <h2 className="text-xl font-semibold">Copyright and trademarks</h2>
-            <p>
-              All the content on the Site, including service marks, trade marks, designs, code, images, advertising
-              content, advertiser identities, logos, property content, product information, general content,
-              pricing data, advertisements, advertiser details, user interface design, software and all other
-              forms of media or information published on the site from time to time (the “Content”) is owned or
-              otherwise licensed by Hodii unless otherwise indicated, and, where applicable, is protected by local
-              and international law on copyright and intellectual property.
-              <br />
-              You agree not to infringe on any of the intellectual property rights in the Content or any other material
-              owned by third parties, and undertake not to reproduce the materials without the express permission in
-              writing of the owners of the intellectual property rights. To obtain permission for the use of the Content
-              on the Site, please email  <a href="mailto:privacy@hodii.com" className="text-blue-500 underline hover:text-blue-700"> privacy@hodii.com</a>
+            <div className="text-[var(--softTextColor)] bg-[var(--bg)] space-y-6   max-w-[1100px] mx-auto mt-8 md:mt-[40px]  mb-8 md:mb-[40px] px-4 md:px-[80px]"><h1 className="text-2xl md:text-4xl font-bold">Terms and Conditions of Use (the “Terms”)</h1>
+<p>
+  Please read these Terms carefully before accessing or using the services made available,
+  accessed, published or otherwise offered through 
+  <a href="https://www.shilingi.co.ke" target="_blank" rel="noopener noreferrer" className="text-blue-500 underline hover:text-blue-700"> www.shilingi.co.ke </a>
+  (the "Site"). By accessing or using the Site or participating in the Shilingi game ("Game"), you agree to be bound by these Terms and our 
+  <a href="https://www.shilingi.co.ke/privacy" target="_blank" rel="noopener noreferrer" className="text-blue-500 underline hover:text-blue-700"> Privacy Policy </a>.
+</p>
 
-            </p>
+<h2 className="text-xl font-semibold mt-6">1. Introduction</h2>
+<p>
+  Shilingi is a community-based micro-contribution platform operated by Shilingi Ltd, registered in Kenya. Our platform allows individuals to contribute exactly 1 KES via mobile money (e.g., M-Pesa) for a chance to be randomly selected as a winner when the collective pool reaches 1,000,000 KES. 80% of the total pool is awarded to the winner, and 20% supports the platform and community operations.
+</p>
 
-           
+<h2 className="text-xl font-semibold mt-6">2. Eligibility</h2>
+<p>
+  Participation is open to Kenyan residents aged 18 years and above, possessing a valid Safaricom number with active M-Pesa services. Each mobile number is eligible for only one entry per Game cycle. Multiple entries from the same number or use of automation/sim spoofing will lead to disqualification.
+</p>
 
-            <h2 className="text-xl font-semibold">Use of the Site</h2>
-            <p>
-              The information contained on this Site is for your personal use only. <br />
-              You should not sell, redistribute or use the information for any commercial purpose (including but not
-              limited to using advertiser’s contact details for unsolicited commercial correspondence). <br />
-              You should not become a registered user of the Site in order to access, modify, copy, reproduce,
-              republish, upload, post, transmit or distribute in any way any Content from this or any other version of
-              the Site on behalf of others for financial gain. <br />
-              You should not modify, copy, reproduce, republish, upload, post, transmit or distribute in any way any
-              Content from this or any other version of the Site, or use the Site for any purpose that is unlawful or
-              prohibited by these terms of use. <br />
-              You should not use data mining, robots, screen scraping, or similar data gathering and extraction tools
-              on this Site for establishing, maintaining, advancing or reproducing the Content on the Site on your own
-              website or in any other publication, except with Hodii Limited’s prior written consent. <br />
-              You agree that accessing membership and areas of the Site that require you to log in without permission
-              for non-personal or commercial use constitutes trespass. <br />
-              You may download material from this Site for your personal use provided you adhere to the copyright and
-              trademarks provision above and keep intact all copyright and other proprietary notices.
-            </p>
+<h2 className="text-xl font-semibold mt-6">3. How to Participate</h2>
+<ul className="list-disc pl-6">
+  <li>Send exactly 1 KES via the provided STK Push link or mobile prompt.</li>
+  <li>Your mobile number will be logged as one entry for the current Game.</li>
+  <li>Once the contribution pool reaches 1,000,000 KES, no further entries will be accepted.</li>
+</ul>
 
-            <h2 className="text-xl font-semibold">Property Reviews</h2>
-            <p>         
-             The reviews system on Hodii.com exists to help create a safe and transparent rental environment for everyone. Verified 
-             tenants and visitors are encouraged to share their honest experiences with listed properties to assist future renters in making 
-             informed decisions.
+<h2 className="text-xl font-semibold mt-6">4. Transparency and Public Display</h2>
+<p>
+  For accountability, Shilingi displays a public leaderboard showing the first name, county, and last three digits of the participant’s phone number. Real-time updates of the total pool, number of participants, and estimated time to draw are also displayed.
+</p>
 
-            </p>
+<h2 className="text-xl font-semibold mt-6">5. Draw and Winner Selection</h2>
+<p>
+  The draw is automated, randomized, and auditable. A hash-based function using participant data and a blockchain or timestamp-based seed may be used to ensure fairness. One participant will be selected randomly and notified through the phone number used.
+</p>
+<p>
+  The winner receives 80% of the total pool (800,000 KES). Payment is made to the winning number within 72 hours, subject to identity verification.
+</p>
 
-            <h2 className="text-xl font-semibold">Who Can Leave a Review</h2>
-             <p>Only users who have either:</p>
-              <li>Resided at a property, or</li>
-              <li>Visited the property in person (e.g., for a viewing or short stay)</li>
-             <p> are allowed to leave a review. All reviews must be based on real experiences. Reviews must remain respectful and professional.
-             </p> 
+<h2 className="text-xl font-semibold mt-6">6. Platform Fee</h2>
+<p>
+  The remaining 20% of the pool (200,000 KES) is retained by Shilingi Ltd to cover operations, development, support services, audits, community initiatives, and promotional activities.
+</p>
 
+<h2 className="text-xl font-semibold mt-6">7. Privacy and Data</h2>
+<p>
+  By participating, you consent to Shilingi collecting and processing personal data such as your mobile number, name, location, and transaction ID. This data is used to verify participants, prevent fraud, and display transparency metrics. Your data is stored securely and may be shared with third-party verification or audit services.
+</p>
 
+<h2 className="text-xl font-semibold mt-6">8. Refunds and Cancellation</h2>
+<p>
+  Contributions are non-refundable except where a technical error, double billing, or verified fraud has occurred. Shilingi Ltd reserves the right to cancel a Game if irregularities are detected or legal conditions require it. In such cases, valid participants may receive refunds.
+</p>
 
+<h2 className="text-xl font-semibold mt-6">9. Disqualification</h2>
+<p>
+  You may be disqualified for:
+</p>
+<ul className="list-disc pl-6">
+  <li>Submitting more than one entry using the same number.</li>
+  <li>Using SIM swap techniques or multiple registrations.</li>
+  <li>Attempting to hack, exploit, or reverse-engineer the system.</li>
+  <li>Engaging in fraud or misrepresentation.</li>
+</ul>
 
+<h2 className="text-xl font-semibold mt-6">10. Intellectual Property</h2>
+<p>
+  All platform designs, logos, backend logic, and systems are the intellectual property of Shilingi Ltd. Reproduction or repurposing of these elements is prohibited without written consent.
+</p>
 
+<h2 className="text-xl font-semibold mt-6">11. Limitation of Liability</h2>
+<p>
+  Shilingi Ltd shall not be held liable for indirect, incidental, or consequential damages, nor for system delays or failures beyond its control (including M-Pesa failures, internet outages, or legal prohibitions).
+</p>
 
-            <h2 className="text-xl font-semibold">Review Visibility and Property Unlisting</h2>
-            <p>Landlords may choose to unlist a property at any time. This action will remove the property from discovery, search results, and featured pages.
-               <br />
-               However, existing reviews will remain visible under the property’s historical review page.
-               <br />
-               This ensures renters can access public experiences tied to a property, even if it is no longer actively listed.
+<h2 className="text-xl font-semibold mt-6">12. Dispute Resolution</h2>
+<p>
+  In the event of a dispute, parties agree to first attempt resolution through Shilingi’s internal complaints system. If unresolved, disputes may be escalated to BCLB (Betting Control and Licensing Board) or Kenyan courts.
+</p>
 
-            </p>
+<h2 className="text-xl font-semibold mt-6">13. Modification of Terms</h2>
+<p>
+  Shilingi Ltd reserves the right to modify these Terms at any time. Changes will be communicated via the Site. Your continued use of the Site or Game after updates constitutes agreement to the revised Terms.
+</p>
 
-            <h2 className="text-xl font-semibold">Review Removal</h2>
-            <p>
-             Hodii does not remove reviews based on disagreement or unfavorable content.
-            <br />
-            We may remove reviews if:
-            <br />
-            They contain hate speech, personal attacks, or offensive language.
-            <br />
-            They are proven to be false or written by non-renters/visitors.
-            <br />
-            They include confidential personal data or violate laws.
+<h2 className="text-xl font-semibold mt-6">14. Governing Law</h2>
+<p>
+  These Terms are governed by the laws of Kenya. Any disputes shall be handled by competent courts in the Republic of Kenya.
+</p>
 
+<h2 className="text-xl font-semibold mt-6">15. Contact Information</h2>
+<p>
+  For any support or queries, contact us at:
+</p>
+<ul className="list-disc pl-6">
+  <li>Email: help@shilingi.co.ke</li>
+  <li>Phone: +254 700 000 000</li>
+  <li>Website: <a href="https://www.shilingi.co.ke" className="text-blue-500 underline hover:text-blue-700">www.shilingi.co.ke</a></li>
+</ul>
 
-            </p>
-
-      
-            <h2 className="text-xl font-semibold">Information does not constitute professional advice</h2>
-            <p>
-              You acknowledge and agree that the information published on the Site is intended to provide general
-              information in summary form on property and other issues. It does constitute advice which should be
-              relied upon. (including but not limited to user reviews, comments and ratings linked to any property or listing) <br />
-              Hodii does not endorse or recommend any of the advertisers, agents, property developers, private sellers,
-              ancillary partners, potential buyers property or services advertised on the Site. We strongly recommend
-              that you obtain your own independent legal, accounting, financial, customer reputation, reference,
-              background checking or taxation advice as appropriate prior to entering into any agreement with any of
-              the advertisers on the Site or any other third party. <br />
-              It is your sole responsibility to evaluate the accuracy, completeness and usefulness of all opinions,
-              advice, services, merchandise, products and other information provided through the Site. We will not be
-              liable to you for any decision you make or action you take in reliance on any information contained on
-              or omitted from the Site.
-            </p>
-      
-            <h2 className="text-xl font-semibold">No guarantees of availability</h2>
-            <p>
-              Hodii gives no guarantee to you of the continued availability of any particular property or product
-              advertised on the Site and will not be liable to you should an advertiser have sold or withdrawn a
-              property availability at any time prior to removal of the listing or resume from the Site.
-              <br />
-              Whilst we take efforts to ensure that advertisers and potential buyers are genuine and that the data
-              presented about the property or buyer is accurate, we give no guarantee to you that every property or
-              buyer description is free from errors or inaccuracies.
-            </p>
-      
-            <h2 className="text-xl font-semibold">Third party sites and links</h2>
-            <p>
-              The Site may provide links and pointers to internet sites maintained by third parties. These links are
-              provided to you only as a convenience, and the inclusion of any link does not imply endorsement of the
-              linked site by Hodii. <br />
-              Such linked sites are not under the control of Hodii and we are not responsible for the content (including
-              the accuracy, legality or decency of such content) of any linked site or any link contained in a linked
-              site. Hodii is also not responsible for any linked site’s compliance with intellectual property laws,
-              including copyrights, and will not be liable for any damages or loss arising in any way out of, in
-              connection with or incidental to any information or third party service provided by any third party.
-            </p>
-      
-            <h2 className="text-xl font-semibold">No guarantees as to the service</h2>
-            <p>
-              We do not warrant that the services generally available through the Site will be uninterrupted or
-              error-free, or that defects in the services will be corrected. You also acknowledge and understand that
-              Hodii cannot and does not guarantee or warrant that files available for downloading through the Site or
-              delivered via electronic mail through the Site will be free of infection or viruses, worms, Trojan horses
-              or other code that manifest destructive properties. You are responsible for implementing sufficient
-              procedures and checkpoints to satisfy your particular requirements for accuracy of data input and output,
-              and for maintaining a means external to the Site for the reconstruction of any lost data.
-            </p>
-      
-            <h2 className="text-xl font-semibold">Rights to shared information</h2>
-            <p>
-              We welcome ideas and feedback from you about all aspects of the Site. We may reproduce, distribute,
-              transmit, create derivative works of, and publicly display any materials and other information (including
-              ideas for new or improved products and services) that you submit to any public areas of the Site (such
-              as bulletin boards, forums and newsgroups) or by email or any other form of communication to us. Please
-              read our  <a href="https://www.hodii.com/privacy" target="_blank" rel="noopener noreferrer" className="text-blue-500 underline hover:text-blue-700">    Privacy Policy    </a>
-               for more information on how we deal with the information you share with us.
-            </p>
-      
-            <h2 className="text-xl font-semibold">The security of your information</h2>
-            <p>
-              While Hodii has in place safeguards and takes all due care in ensuring the privacy and integrity of the
-              personal information you provide, the possibility exists that this information could be unlawfully
-              observed by or disclosed to a third party while in transit over the internet or while stored on Hodii
-              systems or on the Site. Hodii disclaims all liability to you to the greatest extent possible under the
-              relevant laws should this occur. <br />
-              Please refer to our  <a href="https://www.hodii.com/privacy" target="_blank" rel="noopener noreferrer" className="text-blue-500 underline hover:text-blue-700">    Privacy Policy    </a>
-               for more information on this.
-            </p>
-      
-            <h2 className="text-xl font-semibold">Securing your login details</h2>
-            <p>
-              To become a registered user, you must provide a password and a user name. You are entirely responsible
-              for maintaining the confidentiality of your password and other login details. Furthermore, you are entirely
-              responsible for any and all activities that occur under your account. You may change your password at any
-              time by following the instructions on the Site. You may also change your login details by contacting
-              customer service. <br />
-              You shall immediately notify Hodii of any unauthorized use of your account or login details, or any other
-              breach of security known to you.
-            </p>
-      
-            <h2 className="text-xl font-semibold">No misrepresentations allowed</h2>
-            <p>
-              You undertake that you will not, either through any act or omission, mislead or deceive others in the
-              course of using the Site. Where a valid complaint is made by a third party or Hodii in the course of its
-              own investigations establishes that you have misled or deceived others, Hodii has the right to suspend
-              your account.
-            </p>
-      
-            <h2 className="text-xl font-semibold">Variation</h2>
-            <p>
-              Hodii may modify these terms at any time, and such modifications shall be effective immediately upon the
-              modified terms being posted on the Site. Where you are a registered user, Hodii may in its sole discretion
-              post a notification of the updated terms on your account.
-            </p>
-      
-            <h2 className="text-xl font-semibold">General provisions</h2>
-            <p>
-              If any part of these Terms is or becomes invalid, illegal or unenforceable, it shall be deemed modified
-              to the minimum extent necessary to make it valid, legal and enforceable. If modification is not possible,
-              the relevant provision shall be deemed deleted. Any modification to or deletion of a provision shall not
-              affect the validity and enforceability of the rest of these terms. <br />
-              We may transfer our rights and obligations under these Terms to another organisation. We will always tell
-              you in writing if this happens and we will ensure that the transfer will not affect your rights under
-              these Terms. <br />
-              Termination of these terms will not end those provisions that are capable of surviving the termination
-              of the terms, or affect any rights, remedies, obligations or liabilities of the parties that have accrued
-              up to the date of termination. <br />
-              These terms are governed by the laws of Kenya and you irrevocably submit to the exclusive jurisdiction
-              of its Courts.
-            </p>
-      
-            <p><strong>Last updated:</strong> 12th april 2025</p>
-          </div>
+<p className="text-sm text-gray-500 mt-4">Last updated: June 2025</p>
+</div>
           <Footer/>
 
           </div>
