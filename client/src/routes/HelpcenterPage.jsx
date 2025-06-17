@@ -1,227 +1,89 @@
-import React from 'react';
-
-import Navbar from '../components/Navbar'; // Assuming you have a Navbar component
-import Footer from '../components/Footer'; // Assuming you have a Footer component
+import React from "react";
+import Navbar from "../components/Navbar";
+import Footer from "../components/Footer";
 
 const HelpCenter = () => {
   return (
-    <div className="bg-[var(--bg)] ">
-      <Navbar /> {/* Include your Navbar */}
-      <div className="max-w-4xl mx-auto px-4 mt-6 text-[14px] md:text-[16px] md:px-8">
-        <div className="text-center justify-center mb-12">
-          <h1 className="text-2xl md:text-5xl font-semibold text-[var(--textColor)] mb-2">How can we help you?</h1>
-          <p className="0">Find answers to common questions and get the support you need.</p>
-        </div>
+    <div>
+      <Navbar />
+      <div className="bg-[var(--bg)] text-[var(--softTextColor)] max-w-[1100px] mx-auto px-4 md:px-[80px] py-12 space-y-10">
+        <h1 className="text-3xl md:text-5xl font-bold">Help Center</h1>
+        <p className="text-lg">
+          Welcome to the Shilingi Help Center. Below are answers to common questions and a quick guide to help you participate with confidence.
+        </p>
 
-        {/* Agent/Landlord Help Section */}
-        <section className=" rounded-lg mb-8">
-          <div className="flex items-center space-x-3  mb-4">
-            <h2 className="text-xl md:text-3xl font-semibold ml-4 text-[var(--softTextColor)]">For Agents and Landlords</h2>
-          </div>
-          <div className="space-y-4 md:space-y-9 ">
-            {/* Login Instructions */}
-            <div className="rounded-xl shadow-lg border-[1px] border-[var(--softBg4)] p-4">
-            <h3 className="flex items-center text-lg md:text-2xl space-x-2 font-semibold text-[var(--softTextColor)] mb-2">
-            <span>Logging In</span>
-              </h3>
-              <p className="0 mb-2">Having trouble logging in? Here's how:</p>
-              <ul className="list-disc pl-5 0">
-                <li>Go to the Hodii website or open the mobile app.</li>
-                <li>Click on the <strong className="font-semibold">"Log In"</strong> button.</li>
-                <li>Enter your registered <strong className="font-semibold">email address</strong> or <strong className="font-semibold">phone number</strong>.</li>
-                <li>Enter your <strong className="font-semibold">password</strong>.</li>
-                <li>Click the <strong className="font-semibold">"Submit"</strong> or <strong className="font-semibold">"Log In"</strong> button.</li>
-                <li>
-                  <button className="text-sm text-blue-500 hover:underline focus:outline-none">
-                    Forgot Password?
-                  </button>
-                </li>
-              </ul>
+        <section>
+          <h2 className="text-2xl font-semibold mt-8">🚀 How to Join</h2>
+          <ol className="list-decimal pl-6 mt-4 space-y-2">
+            <li>Visit <a href="https://www.shilingi.co.ke" className="text-blue-500 underline hover:text-blue-700">shilingi.co.ke</a></li>
+            <li>Click on the “Join with 1 KES” or “Play Now” button</li>
+            <li>Enter your Safaricom phone number and confirm the M-Pesa prompt (STK Push)</li>
+            <li>You’ll receive confirmation once your 1 KES is accepted</li>
+            <li>Your entry is recorded and publicly listed with your first name, county, and last 3 digits of your phone</li>
+          </ol>
+        </section>
+
+        <section>
+          <h2 className="text-2xl font-semibold mt-8">💬 Frequently Asked Questions</h2>
+
+          <div className="space-y-6 mt-4">
+
+            <div>
+              <h3 className="text-lg font-semibold">Q: Can I send more than 1 KES to increase my chances?</h3>
+              <p className="ml-4 text-base">No. To keep the game fair and equal for everyone, only one entry per phone number per game cycle is allowed. Multiple entries will be disqualified.</p>
             </div>
 
-            {/* Creating a Listing Instructions */}
-            <div className="rounded-xl shadow-lg border-[1px] border-[var(--softBg4)] p-4">
-              <h3 className="flex items-center text-lg md:text-2xl space-x-2 font-semibold text-[var(--softTextColor)] mb-2">
-                <span>Creating a Listing</span>
-              </h3>
-              <p className="0 mb-2">Ready to list your property? Follow these steps:</p>
-              <ol className="list-decimal pl-5 0">
-                <li>First, <strong className="font-semibold">log in</strong> to your account.</li>
-                <li>Navigate to the <strong className="font-semibold">"Add Listing"</strong> page.</li>
-                <li>Carefully fill in all the <strong className="font-semibold">required information</strong>:
-                  <ul className="list-disc pl-5 mt-2">
-                    <li>Property Type (e.g., House, Apartment)</li>
-                    <li>Location (Address, City, Region)</li>
-                    <li>Price (Sale or Rent)</li>
-                    <li>Bedrooms and Bathrooms</li>
-                    <li>Property Size</li>
-                    <li>Key Features and Amenities</li>
-                    <li>Upload <strong className="font-semibold">high-quality photos</strong>.</li>
-                    <li>Write a detailed <strong className="font-semibold">description</strong>.</li>
-                  </ul>
-                </li>
-                <li>Click the <strong className="font-semibold">"Create Listing"</strong> or <strong className="font-semibold">"Submit"</strong> button.</li>
-                <li><strong className="font-semibold">Listing Duration:</strong> Active for <strong className="font-semibold">28 days</strong>. Update availability afterwards.</li>
-                <li><strong className="font-semibold">Updating Availability:</strong> Go to your <strong className="font-semibold">"Listings"</strong> page and find the <strong className="font-semibold">"Update Availability"</strong> option.</li>
-                <li><strong className="font-semibold">Deleting or Unlisting:</strong>
-                  <ul className="list-disc pl-5 mt-2">
-                    <li><strong className="font-semibold">"Delete"</strong>: Permanently remove the listing.</li>
-                    <li><strong className="font-semibold">"Unlist"</strong>: Hide from users, keep info saved. Relist later.</li>
-                    <li>Find these options on your <strong className="font-semibold">"Listings"</strong> page.</li>
-                  </ul>
-                </li>
-              </ol>
+            <div>
+              <h3 className="text-lg font-semibold">Q: What happens to the money?</h3>
+              <p className="ml-4 text-base">When the pool reaches 1,000,000 KES, 80% (800,000 KES) goes to one randomly selected winner. The remaining 20% is used to run and sustain the platform.</p>
             </div>
 
-            {/* Boosting Your Listing Instructions */}
-            <div className="rounded-xl shadow-lg border-[1px] border-[var(--softBg4)] p-4">
-              <h3 className="flex items-center text-lg md:text-2xl space-x-2 font-semibold text-[var(--softTextColor)] mb-2">
-                <span>Boosting Your Listing</span>
-              </h3>
-              <p className="0 mb-2">Want more visibility? Here's how to boost your listing:</p>
-              <ol className="list-decimal pl-5 0">
-                <li>Go to your <strong className="font-semibold">"Listings"</strong> page.</li>
-                <li>Find the listing and click <strong className="font-semibold">"Boost Listing"</strong>.</li>
-                <li>Select a <strong className="font-semibold">boosting package</strong> (duration and price).</li>
-                <li>Follow the payment instructions.</li>
-                <li>Once paid, your listing will be boosted and appear higher in search results.</li>
-              </ol>
+            <div>
+              <h3 className="text-lg font-semibold">Q: How is the winner chosen?</h3>
+              <p className="ml-4 text-base">The winner is selected by an automated and transparent random draw system. We use cryptographic hashing and timestamp seeds to ensure fairness and auditability.</p>
             </div>
 
-            {/* Unboosting Your Listing Instructions */}
-            <div className="rounded-xl shadow-lg border-[1px] border-[var(--softBg4)] p-4">
-              <h3 className="flex items-center text-lg md:text-2xl space-x-2 font-semibold text-[var(--softTextColor)] mb-2">
-                <span>Unboosting Your Listing</span>
-              </h3>
-              <p className="0 mb-2">Need to stop boosting? Here's how:</p>
-              <ol className="list-decimal pl-5 0">
-                <li>Go to your <strong className="font-semibold">"Listings"</strong> page.</li>
-                <li>Find the boosted listing (usually indicated).</li>
-                <li>Click <strong className="font-semibold">"Unboost Listing"</strong> or <strong className="font-semibold">"Stop Boosting"</strong>.</li>
-                <li>Note: Refunds for remaining boost time may not be provided.</li>
-              </ol>
+            <div>
+              <h3 className="text-lg font-semibold">Q: When and how will the winner be paid?</h3>
+              <p className="ml-4 text-base">The winner is contacted through the phone number used. After identity verification, payment is sent via M-Pesa within 72 hours.</p>
             </div>
 
-            {/* Managing Inquiries */}
-            <div className="rounded-xl shadow-lg border-[1px] border-[var(--softBg4)] p-4">
-              <h3 className="font-semibold text-[var(--softTextColor)] mb-2">Managing Inquiries</h3>
-              <p className="0">View and manage inquiries in your dashboard's <strong className="font-semibold">"Inquiries"</strong> section. Respond promptly.</p>
+            <div>
+              <h3 className="text-lg font-semibold">Q: What details of participants are visible?</h3>
+              <p className="ml-4 text-base">Only your first name, county, and last 3 digits of your phone number are displayed publicly to maintain transparency and trust.</p>
             </div>
 
-            {/* Updating Your Profile */}
-            <div className="rounded-xl shadow-lg border-[1px] border-[var(--softBg4)] p-4">
-              <h3 className="font-semibold text-[var(--softTextColor)] mb-2">Updating Your Profile</h3>
-              <p className="0">Keep your profile updated in <strong className="font-semibold">"Profile"</strong> or <strong className="font-semibold">"Account Settings"</strong>. Ensure contact details are accurate.</p>
+            <div>
+              <h3 className="text-lg font-semibold">Q: Can I get a refund?</h3>
+              <p className="ml-4 text-base">All entries are final and non-refundable, unless there's a confirmed technical error or fraud. Contact our support team if you believe there’s a valid issue.</p>
             </div>
+
+            <div>
+              <h3 className="text-lg font-semibold">Q: Is this a betting or lottery app?</h3>
+              <p className="ml-4 text-base">No. Shilingi is a contribution-based game of chance. It operates transparently and is structured to empower micro-contributions for fun and community reward.</p>
+            </div>
+
+            <div>
+              <h3 className="text-lg font-semibold">Q: What if I didn’t receive the STK push?</h3>
+              <p className="ml-4 text-base">Ensure your M-Pesa line is active and has enough balance. Try again after a few minutes, or contact support.</p>
+            </div>
+
           </div>
         </section>
 
-        {/* User (Tenant/Buyer) Help Section */}
-        <section className="  mt-5 ">
-        <div className="flex items-center space-x-3  mb-4">
-        <h2 className="text-xl md:text-3xl ml-4 font-semibold text-[var(--softTextColor)]">For Tenants and Buyers</h2>
-          </div>
-          <div className="space-y-4 md:space-y-9 ">
-            {/* Viewing Listings */}
-            <div className="rounded-xl shadow-lg border-[1px] border-[var(--softBg4)] p-4">
-              <h3 className="font-semibold text-[var(--softTextColor)] mb-2">Viewing Listings</h3>
-              <p className="0">Viewing property listings on Hodii is <strong className="text-green-500">free</strong> for all users.</p>
-            </div>
-
-            {/* Accessing Contact Information */}
-            <div className="rounded-xl shadow-lg border-[1px] border-[var(--softBg4)] p-4">
-              <h3 className="flex items-center text-lg md:text-2xl space-x-2 font-semibold text-[var(--softTextColor)] mb-2">
-                <span>Accessing Contact Information</span>
-              </h3>
-              <p className="0 mb-2">To view the contact information of the agent or landlord:</p>
-              <ul className="list-disc pl-5 0">
-                <li><strong className="font-semibold">Log In:</strong> Create an account and log in to see contact details.</li>
-                <li><strong className="font-semibold">Share to WhatsApp:</strong> Share the listing to at least one WhatsApp group to unlock contact info.</li>
-              </ul>
-            </div>
-
-            {/* Searching and Filtering Listings */}
-            <div className="rounded-xl shadow-lg border-[1px] border-[var(--softBg4)] p-4">
-              <h3 className="flex items-center text-lg md:text-2xl space-x-2 font-semibold text-[var(--softTextColor)] mb-2">
-                <span>Searching and Filtering Listings</span>
-              </h3>
-              <p className="0 mb-2">Find your perfect property using our search and filtering options:</p>
-              <ol className="list-decimal pl-5 0">
-                <li>Click the <strong className="font-semibold">"Search"</strong> button.</li>
-                <li>A <strong className="font-semibold">filter panel</strong> will appear. Filters include:
-                  <ul className="list-disc pl-5 mt-2">
-                    <li><strong className="font-semibold">Price Range</strong> (min and max)</li>
-                    <li><strong className="font-semibold">Location</strong> (city, region, area)</li>
-                    <li><strong className="font-semibold">Property Type</strong> (House, Apartment, Land)</li>
-                    <li><strong className="font-semibold">Number of Bedrooms</strong></li>
-                    <li><strong className="font-semibold">Number of Bathrooms</strong></li>
-                    <li>Other <strong className="font-semibold">amenities</strong> and <strong className="font-semibold">features</strong>.</li>
-                  </ul>
-                </li>
-                <li><strong className="font-semibold">Updating Filters:</strong> Click the <strong className="font-semibold">"x"</strong> or <strong className="font-semibold">"clear"</strong> to remove. Adjust values and click <strong className="font-semibold">"Apply"</strong> or <strong className="font-semibold">"Search"</strong> to change.</li>
-              </ol>
-            </div>
-
-            {/* Location-Based Search */}
-            <div className="rounded-xl shadow-lg border-[1px] border-[var(--softBg4)] p-4">
-              <h3 className="flex items-center text-lg md:text-2xl space-x-2 font-semibold text-[var(--softTextColor)] mb-2">
-                <span>Location-Based Search</span>
-              </h3>
-              <p className="0 mb-2">Find properties in specific areas easily:</p>
-              <ul className="list-disc pl-5 0">
-                <li><strong className="font-semibold">Map Circling:</strong>
-                  <ul className="list-disc pl-5 mt-2">
-                    <li>Open <strong className="font-semibold">"Map View"</strong> on the search page.</li>
-                    <li>Draw a circle on the map with your finger or mouse.</li>
-                    <li>Listings within the circle will be displayed.</li>
-                  </ul>
-                </li>
-                <li><strong className="font-semibold">Radius Search from Landmark/Place:</strong>
-                  <ul className="list-disc pl-5 mt-2">
-                    <li>Type a <strong className="font-semibold">landmark</strong> or <strong className="font-semibold">place name</strong> in the location search bar.</li>
-                    <li>Select a <strong className="font-semibold">radius</strong> (e.g., 1km, 5km) to search around it.</li>
-                  </ul>
-                </li>
-                <li><strong className="font-semibold">Search from Current Location:</strong>
-                  <ul className="list-disc pl-5 mt-2">
-                    <li>Enable your device's location services.</li>
-                    <li>Click <strong className="font-semibold">"Search Near Me"</strong> or a location icon.</li>
-                    <li>Listings near your current location will be shown.</li>
-                  </ul>
-                </li>
-              </ul>
-            </div>
-
-            {/* Adding Reviews */}
-            <div className="rounded-xl shadow-lg border-[1px] border-[var(--softBg4)] p-4">
-              <h3 className="flex items-center text-lg md:text-2xl space-x-2 font-semibold text-[var(--softTextColor)] mb-2">
-                <span>Adding Reviews</span>
-              </h3>
-              <p className="0">You <strong className="font-semibold">must be logged in</strong> to add a review for a property or agent/landlord. Look for the review option on the listing or profile page.</p>
-            </div>
-
-            <div className="rounded-xl shadow-lg border-[1px] border-[var(--softBg4)] p-4">
-              <h3 className="font-semibold text-[var(--softTextColor)] mb-2">Saving Favorite Listings</h3>
-              <p className="0">Click the <strong className="font-semibold">"Save"</strong> or <strong className="font-semibold">heart</strong> icon to save listings. View them in your account dashboard.</p>
-            </div>
-
-            {/* Contacting Agents/Landlords */}
-            <div className="rounded-xl shadow-lg border-[1px] border-[var(--softBg4)] p-4">
-              <h3 className="font-semibold text-[var(--softTextColor)] mb-2">Contacting Agents/Landlords</h3>
-              <p className="0">Once contact information is unlocked (login or share), you can contact the agent/landlord via the provided phone or WhatsApp.</p>
-            </div>
-
-            {/* Sharing Listings */}
-            <div className="rounded-xl shadow-lg border-[1px] border-[var(--softBg4)] p-4">
-              <h3 className="flex items-center text-lg md:text-2xl space-x-2 font-semibold text-[var(--softTextColor)] mb-2">
-                <span>Sharing Listings</span>
-              </h3>
-              <p className="0">Share listings easily using the <strong className="font-semibold">"Share"</strong> button on the listing page via social media or messaging apps.</p>
-            </div>
-          </div>
+        <section>
+          <h2 className="text-2xl font-semibold mt-8">📞 Need More Help?</h2>
+          <p className="mt-2">
+            If your question isn't answered here, feel free to reach out to our support team.
+          </p>
+          <ul className="list-disc pl-6 mt-2">
+            <li>Email: support@shilingi.co.ke</li>
+            <li>Phone: +254 700 000 000</li>
+            <li>Live Chat: Available Mon–Fri, 9am to 5pm EAT</li>
+          </ul>
         </section>
       </div>
-      <Footer /> {/* Include your Footer */}
+      <Footer />
     </div>
   );
 };

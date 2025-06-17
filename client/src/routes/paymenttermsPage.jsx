@@ -2,7 +2,7 @@ import React from "react";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 
-const SubscriptionTerms = () => {
+const PaymentTerms = () => {
   return (
     <div>
       <Navbar />
@@ -98,4 +98,4 @@ const SubscriptionTerms = () => {
     </div>
   );
 };
-export default SubscriptionTerms;
+export default PaymentTerms;
