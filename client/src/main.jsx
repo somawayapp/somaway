@@ -11,7 +11,6 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { Analytics } from "@vercel/analytics/react"; // Import Vercel Analytics
 import TermsAndConditions from "./routes/termsandconditionsPage.jsx";
-import SubscriptionTerms from "./routes/subscriptiontermsPage.jsx";
 import PrivacyPolicy from "./routes/privacypolicyPage.jsx";
 import HelpCenter from "./routes/HelpcenterPage.jsx";
 import PaymentTerms from "./routes/paymenttermsPage.jsx";
