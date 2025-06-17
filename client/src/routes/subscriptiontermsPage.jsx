@@ -1,103 +1,101 @@
 import React from "react";
-import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
+import Footer from "../components/Footer";
 
 const SubscriptionTerms = () => {
   return (
     <div>
       <Navbar />
+      <div className="text-[var(--softTextColor)] bg-[var(--bg)] space-y-6 max-w-[1100px] mx-auto mt-8 md:mt-[40px] mb-8 md:mb-[40px] px-4 md:px-[80px]">
+        <h1 className="text-2xl md:text-4xl font-bold">Winner Payment Terms and Conditions</h1>
+        <p><strong>Effective Date:</strong> June 2025<br /><strong>Last Updated:</strong> June 16, 2025</p>
 
-      <div className="text-[var(--softTextColor)] bg-[var(--bg)] space-y-6 max-w-[1100px] mx-auto mt-8 md:mt-[40px] mb-8 md:mb-[40px] px-4 
-      md:px-[80px]">
-        <h1 className="text-2xl md:text-4xl font-bold">Subscription Terms and Conditions</h1>
-
+        <h2 className="text-xl font-semibold">1. Overview</h2>
         <p>
-          These Subscription Terms and Conditions (the “Subscription Terms”) govern your purchase and use of any subscription services 
-          (the “Subscription(s)”) offered by Hodii.com (referred to as “we”, “us”, or “our”) through our website 
-           <a href="https://www.hodii.com" target="_blank" rel="noopener noreferrer" className="text-blue-500 underline hover:text-blue-700"> 
-            www.hodii.com </a>  (the “Site”).
-           By purchasing a Subscription, you agree to be bound by these Subscription Terms, as well as our general <a href="/terms-and-conditions" 
-           className="text-blue-500 underline hover:text-blue-700" target="_blank" rel="noopener noreferrer">Terms and Conditions of Use</a>
-            and our <a href="/privacy-policy" className="text-blue-500 underline hover:text-blue-700" target="_blank" rel="noopener noreferrer">
-            Privacy Policy</a>, all of which are incorporated herein by reference.
+          This document outlines the terms and conditions under which Shilingi Ltd will disburse winnings to the selected participant (“Winner”) once a Game cycle has reached its goal of 1,000,000 KES in total contributions. These terms are part of the overall Terms and Conditions agreed to upon participation in the Game.
         </p>
 
-        <h2 className="text-xl font-semibold">Subscription Plans and Pricing</h2>
+        <h2 className="text-xl font-semibold">2. Eligibility for Payment</h2>
         <p>
-          We offer various Subscription plans with different features and benefits, as detailed on our Site. The pricing for each Subscription plan 
-          is clearly displayed on the Site and may be subject to change. We will provide reasonable notice of any changes to Subscription fees.
+          Only participants who:
+        </p>
+        <ul className="list-disc pl-6">
+          <li>Made a valid 1 KES contribution via M-Pesa</li>
+          <li>Were selected through the automated and randomized draw process</li>
+          <li>Pass identity and eligibility verification checks</li>
+        </ul>
+        <p>...shall be considered the “Winner” and eligible for payout.</p>
+
+        <h2 className="text-xl font-semibold">3. Payment Amount</h2>
+        <p>
+          The Winner is entitled to receive <strong>80% of the total Game pool</strong>, which is 800,000 KES if the full 1,000,000 KES is reached. The payout is fixed and not subject to negotiation.
         </p>
 
-        <h2 className="text-xl font-semibold">Billing and Payment</h2>
+        <h2 className="text-xl font-semibold">4. Verification Requirements</h2>
         <p>
-          By selecting a Subscription plan, you agree to pay the applicable fees as described on the Site at the time of purchase. Unless otherwise
-           stated, all fees are in KSh and are exclusive of any applicable taxes.
+          Prior to payment, the Winner must complete a verification process. This may include:
         </p>
-        <ul className="list-disc list-inside mb-4">
-          <li>Payment will be processed using the payment method you provide during the subscription process. You represent and warrant that you
-             have the legal right to use the payment method you provide.</li>
-          <li>For recurring subscriptions, your Subscription will automatically renew at the end of each billing cycle (e.g., monthly, annually)
-             unless you cancel it before the renewal date.</li>
-          <li>You authorize us to charge the applicable Subscription fees for each renewal period to your designated payment method.</li>
-          <li>If you choose a one-time payment model, you hereby authorize us to deduct the agreed-upon amount only once.</li>      
-        <li>If your payment method fails, we may suspend or terminate your Subscription until payment is successfully processed.</li>
-          <li>You are responsible for keeping your billing information current and accurate. You can update your payment details through your 
-            account settings on the Site.</li>
+        <ul className="list-disc pl-6">
+          <li>Presenting a valid national ID or passport</li>
+          <li>Verifying ownership of the M-Pesa number used to participate</li>
+          <li>Completing a short winner declaration form</li>
+        </ul>
+        <p>
+          Failure to complete verification within <strong>72 hours</strong> may result in disqualification and a redraw.
+        </p>
+
+        <h2 className="text-xl font-semibold">5. Disbursement Method</h2>
+        <p>
+          Payouts will be made via <strong>M-Pesa to the same number</strong> used during entry. No alternative payment channels will be used unless the original number is permanently inactive and verified as such.
+        </p>
+
+        <h2 className="text-xl font-semibold">6. Disbursement Timeline</h2>
+        <p>
+          Funds will be transferred within <strong>72 hours after successful verification</strong>. Weekends and public holidays may cause slight delays, but Shilingi Ltd will make reasonable efforts to ensure prompt disbursement.
+        </p>
+
+        <h2 className="text-xl font-semibold">7. Taxes and Deductions</h2>
+        <p>
+          In compliance with Kenyan law, a <strong>15% withholding tax</strong> may be applied on winnings exceeding the legally defined threshold. Shilingi Ltd is responsible for remitting such taxes to the Kenya Revenue Authority (KRA).
+        </p>
+
+        <h2 className="text-xl font-semibold">8. Disqualification of Winner</h2>
+        <p>
+          A selected winner may be disqualified if:
+        </p>
+        <ul className="list-disc pl-6">
+          <li>They cannot prove ownership of the phone number used</li>
+          <li>They fail to complete verification within the timeline</li>
+          <li>Fraud, automation, or tampering is detected</li>
+        </ul>
+        <p>In such cases, a redraw will occur and a new winner will be selected.</p>
+
+        <h2 className="text-xl font-semibold">9. Public Acknowledgement</h2>
+        <p>
+          By accepting the prize, the Winner consents to their first name, county, and last three digits of their phone number being displayed publicly on the Shilingi website and social media platforms for transparency and promotional purposes.
+        </p>
+
+        <h2 className="text-xl font-semibold">10. Disputes</h2>
+        <p>
+          Any disputes regarding winner selection or payout must first be raised through our internal support system. If unresolved, disputes may be referred to the Betting Control and Licensing Board (BCLB) or adjudicated by a Kenyan court.
+        </p>
+
+        <h2 className="text-xl font-semibold">11. No Guarantees or Liabilities</h2>
+        <p>
+          Shilingi Ltd does not guarantee payout in cases of legal prohibition, catastrophic failure, or systemic fraud. In such rare events, efforts will be made to refund verified entries proportionally or rerun the Game cycle.
+        </p>
+
+        <h2 className="text-xl font-semibold">12. Contact</h2>
+        <p>For payout-related concerns, contact:</p>
+        <ul className="list-disc pl-6">
+          <li>Email: winnings@shilingi.co.ke</li>
+          <li>Phone: +254 700 000 000</li>
         </ul>
 
-        <h2 className="text-xl font-semibold">Subscription Term and Renewal</h2>
-        <p>
-          The term of your Subscription will depend on the plan you choose (e.g., monthly, annually). Unless you cancel your Subscription,
-           it will automatically renew for the same period as your initial term.
-        </p>
-
-        <h2 className="text-xl font-semibold">Cancellation</h2>
-        <p>
-          You can cancel your Subscription at any time through your account settings on the Site. The cancellation will be effective at the end of 
-          your current billing cycle. You will continue to have access to the Subscription services until the end of that period.
-        </p>
-        <p>
-          We may also cancel or suspend your Subscription at any time for reasons including, but not limited to, violation of these Subscription
-           Terms or our Terms and Conditions of Use. In such cases, we will make reasonable efforts to notify you.
-        </p>
-
-        <h2 className="text-xl font-semibold">Refunds</h2>
-        <p>
-          Unless explicitly stated in a specific payment model or Subscription offer or as required by applicable law, Subscription fees or and 
-          any other fee paid either for boosting or listing are non-refundable. We do not provide refunds or credits for any partial subscription
-           periods or unused services.
-        </p>
-
-        <h2 className="text-xl font-semibold">Changes to Subscription Plans and Pricing</h2>
-        <p>
-          We reserve the right to modify our Subscription plans, features, and pricing at any time. We will provide you with reasonable advance 
-          notice of any material changes. Your continued use of the Subscription services after the effective date of such changes constitutes 
-          your acceptance of the modified Subscription Terms and pricing.
-        </p>
-
-        <h2 className="text-xl font-semibold">Termination</h2>
-        <p>
-          We may terminate your Subscription immediately without notice if you breach these Subscription Terms or our Terms and Conditions of Use.
-           Upon termination, your access to the Subscription services will cease.
-        </p>
-
-        <h2 className="text-xl font-semibold">Support</h2>
-        <p>
-          Information about customer support for our Subscriptions can be found on our Site's help or support pages.
-        </p>
-
-        <h2 className="text-xl font-semibold">Governing Law</h2>
-        <p>
-          These Subscription Terms shall be governed by and construed in accordance with the laws of Kenya, without regard to its conflict of law 
-          provisions. You agree to submit to the exclusive jurisdiction of the courts located in NRB, Kenya to resolve any disputes arising out of
-           or relating to these Subscription Terms or your Subscription.
-        </p>
-
-        <p><strong>Last updated:</strong> 12th april 2025</p>
+        <p className="text-sm text-gray-500 mt-4">Last updated: June 2025</p>
       </div>
       <Footer />
     </div>
   );
 };
-
 export default SubscriptionTerms;
