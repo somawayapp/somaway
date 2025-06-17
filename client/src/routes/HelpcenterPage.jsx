@@ -19,7 +19,7 @@ const HelpCenter = () => {
             <li>Click on the “Join with 1 KES” or “Play Now” button</li>
             <li>Enter your Safaricom phone number and confirm the M-Pesa prompt (STK Push)</li>
             <li>You’ll receive confirmation once your 1 KES is accepted</li>
-            <li>Your entry is recorded and publicly listed with your first name, county and last 3 digits of your phone</li>
+            <li>Your entry is recorded and publicly listed with your first name, county, and last 3 digits of your phone</li>
           </ol>
         </section>
 
