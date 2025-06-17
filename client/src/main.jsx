@@ -14,7 +14,7 @@ import TermsAndConditions from "./routes/termsandconditionsPage.jsx";
 import SubscriptionTerms from "./routes/subscriptiontermsPage.jsx";
 import PrivacyPolicy from "./routes/privacypolicyPage.jsx";
 import HelpCenter from "./routes/HelpcenterPage.jsx";
-
+import PaymentTerms from "./routes/paymenttermsPage.jsx";
 const queryClient = new QueryClient();
 
 
@@ -37,8 +37,8 @@ const router = createBrowserRouter([
         element: <HelpCenter />,
       },
       {
-        path: "/subscription-terms",
-        element: <SubscriptionTerms />,
+        path: "/Payment-terms",
+        element: <PaymentTerms />,
       },
     
       {
