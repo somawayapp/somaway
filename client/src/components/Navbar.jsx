@@ -69,7 +69,7 @@
   
              {/* Show on medium screens and larger */}
              <Link to="/" className="flex items-center gap-1 text-xl font-bold md:text-3xl hidden md:flex">
-              <img src="/bet.png" className="md:h-8" />
+              <img src="/shilingi.png" className="md:h-8 rounded-lg" />
              </Link>
               <Link
               to="/addlistingreview">
