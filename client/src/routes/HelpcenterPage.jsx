@@ -22,10 +22,9 @@ const HelpCenter = () => {
   </div>
 
 
-      <Navbar />
 
 
-      <div className="bg-[var(--bg)] text-[var(--softTextColor)] max-w-[1100px] mx-auto px-4 md:px-[110px] py-12 space-y-10">
+      <div className="bg-[var(--bg)] text-[var(--softTextColor)] max-w-[1100px] mx-auto px-4 md:px-[90px] py-12 space-y-10">
         <h1 className="text-3xl md:text-5xl font-bold">Help Center</h1>
         <p className="text-lg">
           Welcome to the Shilingi Help Center. Below are answers to common questions and a quick guide to help you participate with confidence.

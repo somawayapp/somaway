@@ -26,7 +26,7 @@ const PaymentTerms = () => {
 
 
 
-      <div className="text-[var(--softTextColor)] bg-[var(--bg)] space-y-6 max-w-[1100px] mx-auto mt-8 md:mt-[110px] mb-8 md:mb-[40px] px-4 md:px-[80px]">
+      <div className="text-[var(--softTextColor)] bg-[var(--bg)] space-y-6 max-w-[110px] mx-auto mt-8 md:mt-[110px] mb-8 md:mb-[40px] px-4 md:px-[80px]">
         <h1 className="text-2xl md:text-4xl font-bold">Winner Payment Terms and Conditions</h1>
         <p><strong>Effective Date:</strong> June 2025<br /><strong>Last Updated:</strong> June 26, 2025</p>
 
