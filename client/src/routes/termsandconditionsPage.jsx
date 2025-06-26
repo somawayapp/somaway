@@ -17,12 +17,12 @@ const TermsAndConditions = () => {
       <p className="text-[var(--softTextColori)] hover:text-[#f36dff] transition cursor-pointer">About</p>
     </div>
     <div className="gap-2 md:gap-6 flex flex-row">
-      <p className="text-[var(--softTextColori)] hover:text-[#f36dff] transition cursor-pointer">Responsible playing</p>
+      <p className="text-[var(--softTextColori)] hover:text-[#f36dff] transition cursor-pointer">Responsible particiation</p>
       <p className="text-[var(--softTextColori)] hover:text-[#f36dff] transition cursor-pointer">Help</p>
     </div>
   </div>
 
-  
+
       <div className="text-[var(--softTextColor)] bg-[var(--bg)] space-y-6 max-w-[1100px] mx-auto mt-8 md:mt-[110px] mb-8 md:mb-[40px] px-4 md:px-[80px]">
         <h1 className="text-2xl md:text-4xl font-bold">Terms and Conditions of Use (the “Terms”)</h1>
         <p>
