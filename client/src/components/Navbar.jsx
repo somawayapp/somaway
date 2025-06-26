@@ -59,7 +59,7 @@
 
   
           return(
-          <div  style={{ zIndex: 100004, }}
+          <div  style={{ zIndex: 100015, }}
              className="flex justify-between  flex-col relative w-full  gap-3 py-2 md:py-3  md:gap-6 flex sticky top-[48px]  text-[var(--TextColor)] bg-[#65026e] md:border-b  border-b-[var(--softBg4)] " >
       
       
