@@ -1,30 +1,43 @@
 import React from "react";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
+import Link from "next/link";
+
 
 const HelpCenter = () => {
   return (
     <div>
       
-  <div
-    style={{ zIndex: 100004 }}
-    className="md:px-[5%] bg-[var(--bg)] px-4 sticky top-0 justify-between flex py-4 flex-row text-xs"
-  >
-    <div className="gap-2 md:gap-6 flex flex-row">
+<div
+  style={{ zIndex: 100004 }}
+  className="md:px-[5%] bg-[var(--bg)] px-4 sticky top-0 justify-between flex py-4 flex-row text-xs"
+>
+  <div className="gap-2 md:gap-6 flex flex-row">
+    <Link href="/">
       <p className="text-[#f2f2f2] hover:text-[#f36dff] transition cursor-pointer">Home</p>
+    </Link>
+    <Link href="/terms">
       <p className="text-[var(--softTextColori)] hover:text-[#f36dff] transition cursor-pointer">Terms</p>
+    </Link>
+    <Link href="/about">
       <p className="text-[var(--softTextColori)] hover:text-[#f36dff] transition cursor-pointer">About</p>
-    </div>
-    <div className="gap-2 md:gap-6 flex flex-row">
-      <p className="text-[var(--softTextColori)] hover:text-[#f36dff] transition cursor-pointer">Responsible playing</p>
-      <p className="text-[var(--softTextColori)] hover:text-[#f36dff] transition cursor-pointer">Help</p>
-    </div>
+    </Link>
   </div>
+  <div className="gap-2 md:gap-6 flex flex-row">
+    <Link href="/help">
+      <p className="text-[var(--softTextColori)] hover:text-[#f36dff] transition cursor-pointer">Participate </p>
+    </Link>
+    <Link href="/help">
+      <p className="text-[var(--softTextColori)] hover:text-[#f36dff] transition cursor-pointer">Help</p>
+    </Link>
+  </div>
+</div>
+
+  <Navbar />
 
 
 
-
-      <div className="bg-[var(--bg)] text-[var(--softTextColor)] max-w-[1100px] mx-auto px-4 md:px-[90px] py-12 space-y-10">
+      <div className="bg-[var(--bg)] text-[var(--softTextColor)] max-w-[1100px] mx-auto px-4 md:px-[50px] py-12 space-y-10">
         <h1 className="text-3xl md:text-5xl font-bold">Help Center</h1>
         <p className="text-lg">
           Welcome to the Shilingi Help Center. Below are answers to common questions and a quick guide to help you participate with confidence.
@@ -99,8 +112,11 @@ const HelpCenter = () => {
             <li>Phone: +254 703 394 794</li>
           </ul>
         </section>
+
+
+              <Footer />
+
       </div>
-      <Footer />
     </div>
   );
 };

@@ -1,29 +1,41 @@
 import React from "react";
 import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
+import Link from "next/link";
+
 
 const TermsAndConditions = () => {
   return (
     <div>
       
-  <div
-    style={{ zIndex: 100004 }}
-    className="md:px-[5%] bg-[var(--bg)] px-4 sticky top-0 justify-between flex py-4 flex-row text-xs"
-  >
-    <div className="gap-2 md:gap-6 flex flex-row">
+<div
+  style={{ zIndex: 100004 }}
+  className="md:px-[5%] bg-[var(--bg)] px-4 sticky top-0 justify-between flex py-4 flex-row text-xs"
+>
+  <div className="gap-2 md:gap-6 flex flex-row">
+    <Link href="/">
       <p className="text-[#f2f2f2] hover:text-[#f36dff] transition cursor-pointer">Home</p>
+    </Link>
+    <Link href="/terms">
       <p className="text-[var(--softTextColori)] hover:text-[#f36dff] transition cursor-pointer">Terms</p>
+    </Link>
+    <Link href="/about">
       <p className="text-[var(--softTextColori)] hover:text-[#f36dff] transition cursor-pointer">About</p>
-    </div>
-    <div className="gap-2 md:gap-6 flex flex-row">
-      <p className="text-[var(--softTextColori)] hover:text-[#f36dff] transition cursor-pointer">Payment terms</p>
-      <p className="text-[var(--softTextColori)] hover:text-[#f36dff] transition cursor-pointer">Help</p>
-    </div>
+    </Link>
   </div>
+  <div className="gap-2 md:gap-6 flex flex-row">
+   <Link href="/help">
+       <p className="text-[var(--softTextColori)] hover:text-[#f36dff] transition cursor-pointer">Participate </p>
+     </Link>
+    <Link href="/help">
+      <p className="text-[var(--softTextColori)] hover:text-[#f36dff] transition cursor-pointer">Help</p>
+    </Link>
+  </div>
+</div>
 
       <Navbar />
 
-      <div className="text-[var(--softTextColor)] bg-[var(--bg)] space-y-6 max-w-[1100px] mx-auto mt-8 md:mt-[90px] mb-8 md:mb-[40px] px-4 md:px-[80px]">
+      <div className="text-[var(--softTextColor)] bg-[var(--bg)] space-y-6 max-w-[1100px] mx-auto mt-8 md:mt-[50px] mb-8 md:mb-[40px] px-4 md:px-[80px]">
         <h1 className="text-2xl md:text-4xl font-bold">Terms and Conditions of Use (the “Terms”)</h1>
         <p>
           Please read these Terms carefully before accessing or using the services made available,
@@ -198,8 +210,10 @@ const TermsAndConditions = () => {
           </ul>
 
         <p className="text-sm text-gray-500 mt-4">Last updated: June 2025</p>
+
+              <Footer />
+
       </div>
-      <Footer />
     </div>
   );
 };
