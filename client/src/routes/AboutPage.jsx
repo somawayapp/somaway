@@ -68,6 +68,20 @@ const AboutPage = () => {
 </Helmet>
 
 
+  <div
+    style={{ zIndex: 100004 }}
+    className="md:px-[5%] bg-[var(--bg)] px-4 sticky top-0 justify-between flex py-4 flex-row text-xs"
+  >
+    <div className="gap-2 md:gap-6 flex flex-row">
+      <p className="text-[#f2f2f2] hover:text-[#f36dff] transition cursor-pointer">Home</p>
+      <p className="text-[var(--softTextColori)] hover:text-[#f36dff] transition cursor-pointer">Terms</p>
+      <p className="text-[var(--softTextColori)] hover:text-[#f36dff] transition cursor-pointer">About</p>
+    </div>
+    <div className="gap-2 md:gap-6 flex flex-row">
+      <p className="text-[var(--softTextColori)] hover:text-[#f36dff] transition cursor-pointer">Responsible playing</p>
+      <p className="text-[var(--softTextColori)] hover:text-[#f36dff] transition cursor-pointer">Help</p>
+    </div>
+  </div>
 
     <div className="mb-9  flex flex-col gap-0">
 

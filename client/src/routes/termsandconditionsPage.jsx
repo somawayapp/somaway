@@ -6,7 +6,24 @@ const TermsAndConditions = () => {
   return (
     <div>
       <Navbar />
-      <div className="text-[var(--softTextColor)] bg-[var(--bg)] space-y-6 max-w-[1100px] mx-auto mt-8 md:mt-[40px] mb-8 md:mb-[40px] px-4 md:px-[80px]">
+      
+  <div
+    style={{ zIndex: 100004 }}
+    className="md:px-[5%] bg-[var(--bg)] px-4 sticky top-0 justify-between flex py-4 flex-row text-xs"
+  >
+    <div className="gap-2 md:gap-6 flex flex-row">
+      <p className="text-[#f2f2f2] hover:text-[#f36dff] transition cursor-pointer">Home</p>
+      <p className="text-[var(--softTextColori)] hover:text-[#f36dff] transition cursor-pointer">Terms</p>
+      <p className="text-[var(--softTextColori)] hover:text-[#f36dff] transition cursor-pointer">About</p>
+    </div>
+    <div className="gap-2 md:gap-6 flex flex-row">
+      <p className="text-[var(--softTextColori)] hover:text-[#f36dff] transition cursor-pointer">Responsible playing</p>
+      <p className="text-[var(--softTextColori)] hover:text-[#f36dff] transition cursor-pointer">Help</p>
+    </div>
+  </div>
+
+  
+      <div className="text-[var(--softTextColor)] bg-[var(--bg)] space-y-6 max-w-[1100px] mx-auto mt-8 md:mt-[110px] mb-8 md:mb-[40px] px-4 md:px-[80px]">
         <h1 className="text-2xl md:text-4xl font-bold">Terms and Conditions of Use (the “Terms”)</h1>
         <p>
           Please read these Terms carefully before accessing or using the services made available,
