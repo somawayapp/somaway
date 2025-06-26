@@ -5,7 +5,6 @@ import Footer from "../components/Footer";
 const HelpCenter = () => {
   return (
     <div>
-      <Navbar />
       
   <div
     style={{ zIndex: 100004 }}
@@ -22,7 +21,10 @@ const HelpCenter = () => {
     </div>
   </div>
 
-  
+
+      <Navbar />
+
+
       <div className="bg-[var(--bg)] text-[var(--softTextColor)] max-w-[1100px] mx-auto px-4 md:px-[110px] py-12 space-y-10">
         <h1 className="text-3xl md:text-5xl font-bold">Help Center</h1>
         <p className="text-lg">
