@@ -41,7 +41,7 @@ const HomePage = () => {
     return (
       <>
 
-       <div className="  overflow-x-none h-screen">
+       <div className="  overflow-x-none ">
   <Helmet>
     <title>
       {cat && author 
@@ -78,8 +78,8 @@ const HomePage = () => {
 
   <Navbar />
 
-<div className=""> {/* Remove fixed height here */}
-  <div className="flex md:flex-row relative"> {/* Add relative to allow absolute child */}
+<div className=""> 
+  <div className="flex md:flex-row relative"> 
 
     {/* Sidebar */}
     <div className="w-full hidden sticky top-[110px] md:block md:w-[23%] h-[calc(100vh-130px)] overflow-y-auto border-r-2 border-[#1b1f1c]">
