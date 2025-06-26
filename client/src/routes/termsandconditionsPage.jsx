@@ -16,7 +16,7 @@ const TermsAndConditions = () => {
       <p className="text-[var(--softTextColori)] hover:text-[#f36dff] transition cursor-pointer">About</p>
     </div>
     <div className="gap-2 md:gap-6 flex flex-row">
-      <p className="text-[var(--softTextColori)] hover:text-[#f36dff] transition cursor-pointer">Responsible particiation</p>
+      <p className="text-[var(--softTextColori)] hover:text-[#f36dff] transition cursor-pointer">Payment terms</p>
       <p className="text-[var(--softTextColori)] hover:text-[#f36dff] transition cursor-pointer">Help</p>
     </div>
   </div>

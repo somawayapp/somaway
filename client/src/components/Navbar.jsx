@@ -148,7 +148,7 @@
              font-sm text-md rounded-md shadow-md min-w-[19%] fixed top-[10%]  right-3 md:right-[80px] overflow-x-hidden transition-transform ease-in-out ${
            open ? "translate-x-0 visible" : "translate-x-full invisible" }`}
 
-          style={{ zIndex: 100016 }}>
+          style={{ zIndex: 100046 }}>
            <div>
   
           </div>
@@ -157,20 +157,6 @@
   
   
          <div className="flex flex-col">
-  
-
-            <Link
-              to="/register"
-              className="block py-2 text-[var(--softTextColor)] font-semibold  hover:text-[#fc3239] p-2 rounded-xl"
-            onClick={() => setOpen(false)}          > sign up    
-          </Link>   
-
-
-       <Link
-         to="/login"
-         className="block py-2 text-[var(--softTextColor)]   hover:text-[#fc3239]  p-2 rounded-xl"
-          onClick={() => setOpen(false)}          > log in     
-               </Link>
 
 
           <Link
@@ -178,55 +164,6 @@
               className="block py-2 text-[var(--softTextColor)]   hover:text-[#fc3239]  p-2 rounded-xl"
              onClick={() => setOpen(false)}          > Home     
             </Link>
-            
-            <Link
-              to="/history"
-              className="block py-2 text-[var(--softTextColor)]   hover:text-[#fc3239]  p-2 rounded-xl"
-             onClick={() => setOpen(false)}          > Reviews     
-            </Link>
-            <Link
-              to="/history"
-              className="block py-2 text-[var(--softTextColor)]   hover:text-[#fc3239]  p-2 rounded-xl"
-             onClick={() => setOpen(false)}          > Property History     
-            </Link>
-
-            <Link
-              to="/addlisting"
-              className="block py-2 text-[var(--softTextColor)]   hover:text-[#fc3239]  p-2 rounded-xl"
-            onClick={() => setOpen(false)}          > Add listing     
-          </Link>
-
-            <Link
-              to="/addlistingreview"
-              className="block py-2 text-[var(--softTextColor)]   hover:text-[#fc3239]  p-2 rounded-xl"
-            onClick={() => setOpen(false)}          > Add Review     
-          </Link>
-
-            <Link
-              to="/profile"
-              className="block py-2 text-[var(--softTextColor)]   hover:text-[#fc3239]  p-2 rounded-xl"
-              onClick={() => setOpen(false)}          > Profile     
-             </Link>
-
-
-              <Link
-              to="/listings"
-              className="block py-2 text-[var(--softTextColor)]   hover:text-[#fc3239]  p-2 rounded-xl"
-               onClick={() => setOpen(false)}          > My listings    
-               </Link>
-
-              <Link
-              to="/wishlist"
-              className="block py-2 text-[var(--softTextColor)]   hover:text-[#fc3239]  p-2 rounded-xl"
-              onClick={() => setOpen(false)}          > My wishlist       
-               </Link>
-
-            <Link
-              to="/premium"
-              className="block py-2 text-[var(--softTextColor)]  hover:text-[#fc3239]  p-2 rounded-xl"
-              onClick={() => setOpen(false)}              > Pricing       
-              </Link>
-
 
 
             <Link
@@ -235,6 +172,24 @@
               onClick={() => setOpen(false)}          > About Us 
             </Link>
 
+
+              <Link
+              to="/terms"
+              className="block py-2 text-[var(--softTextColor)]   hover:text-[#fc3239]  p-2 rounded-xl"
+              onClick={() => setOpen(false)}          >Terms & Conditions      
+               </Link>
+
+            <Link
+              to="/Payment-terms"
+              className="block py-2 text-[var(--softTextColor)]  hover:text-[#fc3239]  p-2 rounded-xl"
+              onClick={() => setOpen(false)}              > Payment Terms     
+              </Link>
+
+             <Link
+              to="/Privacy  "
+              className="block py-2 text-[var(--softTextColor)]  hover:text-[#fc3239]  p-2 rounded-xl"
+              onClick={() => setOpen(false)}              > Privacy policy     
+              </Link>
 
 
             <Link
