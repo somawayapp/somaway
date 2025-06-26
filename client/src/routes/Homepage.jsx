@@ -1,7 +1,7 @@
 
 import { useState } from "react";
 import { useLocation } from "react-router-dom"; // Import useLocation from react-router-dom
-import { Link } from "react-router-dom";
+import Link from "next/link";
 import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
 import { Helmet } from "react-helmet";
