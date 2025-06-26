@@ -71,10 +71,10 @@
               <img src="/shilingi.png" className="md:h-8 rounded-lg" />
              </Link>
               <Link
-              to="/addlistingreview">
+              to="/help">
               <button
                 type="button"
-                className="md:hidden  text-xs font-semibold border-[1px] border-[#EBD402]  py-2 px-4 rounded-full hover:bg-[#f36dff]
+                className="md:hidden  text-xs font-semibold border-[1px] border-[#EBD402]  py-2 px-4 rounded-full hover:bg-[#57025f]
                  transition cursor-pointer text-[#EBD402]"
               >
                 join
@@ -97,7 +97,7 @@
               <div className="relative"  onClick={() => setOpen((prev) => !prev)}>
               <div className="flex flex-row items-center gap-3">
               <Link
-              to="/addlistingreview">
+              to="/help">
               <button
                 type="button"
                 className="hidden md:block text-sm font-semibold border-[1px] border-[#EBD402]  py-2 px-4 rounded-full hover:bg-[#f36dff]
@@ -109,7 +109,7 @@
                 <button
                   type="button"
                   className="  py-1 pl-2 md:pl-4 pr-2 border-[1px]  text-[#EBD402]  border-[#EBD402]  flex  flex-row  items-center   gap-2 md:gap-3  rounded-full  
-                   cursor-pointer   hover:bg-[#f36dff] shadow-md   transition duration-300"
+                   cursor-pointer   hover:bg-[#57025f] shadow-md   transition duration-300"
                 >
                   <AiOutlineMenu />
                   <div className="flex items-center justify-center">
@@ -122,7 +122,7 @@
                 type="button"
                 className=" text-xs md:text-sm font-semibold py-1   md:pr-2 rounded-full transition cursor-pointer"
               >
-                Log in
+                Menu
                  
                  </Link>
 
