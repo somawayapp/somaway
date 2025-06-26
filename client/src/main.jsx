@@ -5,7 +5,6 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Homepage from "./routes/Homepage.jsx";
 import AboutPage from "./routes/AboutPage.jsx";
 import MainLayout from "./layouts/MainLayout.jsx";
-import ComingSoon from "./routes/comingsoonPage.jsx";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -44,10 +43,7 @@ const router = createBrowserRouter([
         path: "/privacy",
         element: <PrivacyPolicy />,
       },
-      {
-        path: "/coming-soon",
-        element: <ComingSoon />,
-      },
+  
    
       {
         path: "/about",
