@@ -147,7 +147,7 @@
              font-sm text-md rounded-md shadow-md min-w-[19%] fixed top-[10%]  right-3 md:right-[80px] overflow-x-hidden transition-transform ease-in-out ${
            open ? "translate-x-0 visible" : "translate-x-full invisible" }`}
 
-          style={{ zIndex: 100046 }}>
+          style={{ zIndex: 100017 }}>
            <div>
   
           </div>

@@ -61,20 +61,31 @@ const HomePage = () => {
     <link rel="canonical" href={`${window.location.href}`} />
   </Helmet>
 
-  <div
-    style={{ zIndex: 100004 }}
-    className="md:px-[5%] bg-[var(--bg)] px-4 sticky top-0 justify-between flex py-4 flex-row text-xs"
-  >
-    <div className="gap-2 md:gap-6 flex flex-row">
+<div
+  style={{ zIndex: 100004 }}
+  className="md:px-[5%] bg-[var(--bg)] px-4 sticky top-0 justify-between flex py-4 flex-row text-xs"
+>
+  <div className="gap-2 md:gap-6 flex flex-row">
+    <Link href="/">
       <p className="text-[#f2f2f2] hover:text-[#f36dff] transition cursor-pointer">Home</p>
+    </Link>
+    <Link href="/terms">
       <p className="text-[var(--softTextColori)] hover:text-[#f36dff] transition cursor-pointer">Terms</p>
+    </Link>
+    <Link href="/about">
       <p className="text-[var(--softTextColori)] hover:text-[#f36dff] transition cursor-pointer">About</p>
-    </div>
-    <div className="gap-2 md:gap-6 flex flex-row">
-      <p className="text-[var(--softTextColori)] hover:text-[#f36dff] transition cursor-pointer">Responsible playing</p>
-      <p className="text-[var(--softTextColori)] hover:text-[#f36dff] transition cursor-pointer">Help</p>
-    </div>
+    </Link>
   </div>
+  <div className="gap-2 md:gap-6 flex flex-row">
+   <Link href="/help">
+       <p className="text-[var(--softTextColori)] hover:text-[#f36dff] transition cursor-pointer">Participate </p>
+     </Link>
+    <Link href="/help">
+      <p className="text-[var(--softTextColori)] hover:text-[#f36dff] transition cursor-pointer">Help</p>
+    </Link>
+  </div>
+</div>
+
 
   <Navbar />
 
@@ -87,7 +98,7 @@ const HomePage = () => {
     </div>
 
     {/* Spinner in center, over both nav and cards */}
-<div style={{ zIndex: 100015, }}  className="fixed left-1/2 top-[90px] transform -translate-x-1/2 ">
+<div style={{ zIndex: 100015, }}  className="fixed left-1/2 top-[100px] transform -translate-x-1/2 ">
   <Spinner />
 </div>
 

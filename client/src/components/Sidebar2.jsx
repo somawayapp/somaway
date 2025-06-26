@@ -111,7 +111,7 @@ const Sidebar2 = () => {
 
       {/* Players List */}
       <motion.div
-        className="w-full mt-6 text-center h-[40%] overflow-y-scroll"
+        className="w-full mt-6 text-center h-[80%] md:h-[40%] overflow-y-scroll"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 2, duration: 0.5 }}
