@@ -12,14 +12,14 @@ const TermsAndConditions = () => {
           Please read these Terms carefully before accessing or using the services made available,
           accessed, published or otherwise offered through
           <a href="https://www.shilingi.co.ke" target="_blank" rel="noopener noreferrer" className="text-blue-500 underline hover:text-blue-700"> www.shilingi.co.ke</a>
-          (the "Site"). By accessing or using the Site or participating in the Shilingi game ("Game"),
+          (the "Site"). By accessing or using the Site or participating in the Shilingi contribution cycle ("cycle, initiative"),
           you agree to be bound by these Terms and our
           <a href="https://www.shilingi.co.ke/privacy" target="_blank" rel="noopener noreferrer" className="text-blue-500 underline hover:text-blue-700"> Privacy Policy</a>.
         </p>
 
         <h2 className="text-xl font-semibold mt-6">1. Introduction</h2>
         <p>
-          Shilingi is a micro-contribution and reward platform operated by Shilingi Ltd, a registered entity in Kenya.
+          Shilingi is a micro-contribution and reward platform operated by Shilingi community, in Kenya.
           Participants contribute a nominal amount of 1 Kenyan Shilling (KES) via mobile money (M-Pesa) to enter a pool.
           When the collective pool reaches 1,000,000 KES, a random winner is selected to receive 800,000 KES (80%), while
           200,000 KES (20%) is allocated to the platform for operational, audit, and community development purposes.
@@ -35,7 +35,7 @@ const TermsAndConditions = () => {
           <li>Possess an active Safaricom mobile number with M-Pesa enabled.</li>
         </ul>
         <p>
-          The Company reserves the right to request verification documents and may disqualify any individual who fails
+          We reserves the right to request verification documents and may disqualify any individual who fails
           to meet eligibility criteria or violates these Terms.
         </p>
 
@@ -44,7 +44,7 @@ const TermsAndConditions = () => {
         <ul className="list-disc pl-6">
           <li>Use the STK Push feature provided on the Site to send exactly 1 KES.</li>
           <li>Confirm your entry through the SMS prompt sent by Safaricom.</li>
-          <li>Only one entry per mobile number is permitted for each Game cycle.</li>
+          <li>Only one entry per mobile number is permitted for each contribution cycle.</li>
         </ul>
         <p>
           Any attempt to circumvent the one-entry rule, including use of multiple SIM cards, automation, or other
@@ -53,14 +53,14 @@ const TermsAndConditions = () => {
 
         <h2 className="text-xl font-semibold mt-6">4. Contribution Pool Management</h2>
         <p>
-          The total contribution pool is publicly visible and updated in real-time on the Site. Shilingi Ltd uses
-          automated scripts and backend systems to ensure real-time integrity of the data displayed. The company is not
+          The total contribution pool is publicly visible and updated in real-time on the Site. Shilingi  uses
+          automated scripts and backend systems to ensure real-time integrity of the data displayed. We are not
           liable for temporary inaccuracies caused by server downtimes or mobile API delays.
         </p>
 
         <h2 className="text-xl font-semibold mt-6">5. Winner Selection Process</h2>
         <p>
-          Once the pool reaches 1,000,000 KES, the Game closes and an automated selection process begins. The process
+          Once the pool reaches 1,000,000 KES, the cycle closes and an automated selection process begins. The process
           involves the use of hash functions based on publicly auditable data, including:
         </p>
         <ul className="list-disc pl-6">
@@ -75,7 +75,8 @@ const TermsAndConditions = () => {
 
         <h2 className="text-xl font-semibold mt-6">6. Payout Terms</h2>
         <p>
-          The payout to the winner is 800,000 KES, sent directly to their M-Pesa number. Taxes, if applicable, are the
+          The payout to the winner is 800,000 KES, sent directly to their M-Pesa number or another
+           agreed upon method incase or mobile transaction challenges. Taxes, if applicable, are the
           responsibility of the winner. The platform will retain 20% (200,000 KES) to fund audits, legal compliance,
           platform development, salaries, support, and community outreach.
         </p>
@@ -86,7 +87,7 @@ const TermsAndConditions = () => {
         </p>
         <ul className="list-disc pl-6">
           <li>Your mobile number</li>
-          <li>First name and location (for public display)</li>
+          <li>First name and location if applicable (for public display)</li>
           <li>Transaction timestamp and ID</li>
           <li>Device metadata (e.g., IP, browser)</li>
         </ul>
@@ -97,8 +98,9 @@ const TermsAndConditions = () => {
 
         <h2 className="text-xl font-semibold mt-6">8. Community Ethics and Transparency</h2>
         <p>
-          All valid contributions are displayed in a publicly accessible leaderboard. Your name, county, and the last
-          three digits of your mobile number will appear. This fosters public trust, prevents duplicate participation,
+          All valid contributions are displayed in a publicly accessible leaderboard. Your name, and partially hidden  digits of
+           your mobile number will appear.
+           This fosters public trust, prevents duplicate participation,
           and builds transparency.
         </p>
 
@@ -109,7 +111,7 @@ const TermsAndConditions = () => {
         <ul className="list-disc pl-6">
           <li>System malfunction or double billing</li>
           <li>Fraud or identity theft confirmed by M-Pesa</li>
-          <li>Game cancellation by Shilingi Ltd due to legal or technical reasons</li>
+          <li>Cycle cancellation by Shilingi  due to legal or technical reasons</li>
         </ul>
         <p>
           In such cases, refunds are processed within 14 business days. Refunds will be issued only to the originating
@@ -138,29 +140,28 @@ const TermsAndConditions = () => {
 
         <h2 className="text-xl font-semibold mt-6">12. Legal and Compliance</h2>
         <p>
-          Shilingi Ltd complies with relevant Kenyan laws and regulations including but not limited to:
+          Shilingi complies with relevant Kenyan laws and regulations including but not limited to:
         </p>
         <ul className="list-disc pl-6">
-          <li>Betting, Lotteries and Gaming Act (subject to legal clarification)</li>
-          <li>Data Protection Act (2019)</li>
+          <li>Data Protection Act</li>
           <li>Consumer Protection Act</li>
         </ul>
 
         <h2 className="text-xl font-semibold mt-6">13. Limitation of Liability</h2>
         <p>
-          Shilingi Ltd shall not be liable for indirect damages, losses, or delays caused by force majeure, M-Pesa outages,
+          Shilingi shall not be liable for indirect damages, losses, or delays caused by force majeure, M-Pesa outages,
           fraud, or misuse of the platform.
         </p>
 
         <h2 className="text-xl font-semibold mt-6">14. Dispute Resolution</h2>
         <p>
           Disputes should first be reported to Shilingi’s internal support. If unresolved within 14 days, disputes may be
-          escalated to BCLB or the Kenyan Judiciary.
-        </p>
+          escalated to the relative legal bodies.
+        </p>i
 
         <h2 className="text-xl font-semibold mt-6">15. Termination of Use</h2>
         <p>
-          Shilingi Ltd reserves the right to terminate or suspend access to the Site for any user suspected of malicious
+          Shilingi reserves the right to terminate or suspend access to the Site for any user suspected of malicious
           behavior, rule violations, or legal infractions.
         </p>
 
@@ -175,10 +176,9 @@ const TermsAndConditions = () => {
           For any questions, feedback, or dispute resolution, contact us:
         </p>
         <ul className="list-disc pl-6">
-          <li>Email: help@shilingi.co.ke</li>
-          <li>Phone: +254 700 000 000</li>
-          <li>Mailing Address: Shilingi Ltd, P.O. Box 12345, Nairobi, Kenya</li>
-        </ul>
+         <li>Email: shilingi@gmail.com</li>
+            <li>Phone: +254 703 394 794</li>
+          </ul>
 
         <p className="text-sm text-gray-500 mt-4">Last updated: June 2025</p>
       </div>

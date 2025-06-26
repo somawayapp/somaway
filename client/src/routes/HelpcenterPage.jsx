@@ -17,9 +17,9 @@ const HelpCenter = () => {
           <ol className="list-decimal pl-6 mt-4 space-y-2">
             <li>Visit <a href="https://www.shilingi.co.ke" className="text-blue-500 underline hover:text-blue-700">shilingi.co.ke</a></li>
             <li>Click on the “Join with 1 KES” or “Play Now” button</li>
-            <li>Enter your Safaricom phone number and confirm the M-Pesa prompt (STK Push)</li>
+            <li>Enter your Safaricom phone number starting with 07... and confirm the M-Pesa prompt (STK Push)</li>
             <li>You’ll receive confirmation once your 1 KES is accepted</li>
-            <li>Your entry is recorded and publicly listed with your first name, county, and last 3 digits of your phone</li>
+            <li>Your entry is recorded and publicly listed with your entred name, and last 3 digits of your phone partially hidden</li>
           </ol>
         </section>
 
@@ -30,7 +30,7 @@ const HelpCenter = () => {
 
             <div>
               <h3 className="text-lg font-semibold">Q: Can I send more than 1 KES to increase my chances?</h3>
-              <p className="ml-4 text-base">No. To keep the game fair and equal for everyone, only one entry per phone number per game cycle is allowed. Multiple entries will be disqualified.</p>
+              <p className="ml-4 text-base">No. To keep the participantion fair and equal for everyone, only one entry per phone number per cycle is allowed. Multiple entries will be disqualified.</p>
             </div>
 
             <div>
@@ -40,17 +40,17 @@ const HelpCenter = () => {
 
             <div>
               <h3 className="text-lg font-semibold">Q: How is the winner chosen?</h3>
-              <p className="ml-4 text-base">The winner is selected by an automated and transparent random draw system. We use cryptographic hashing and timestamp seeds to ensure fairness and auditability.</p>
+              <p className="ml-4 text-base">The winner is selected by an automated and transparent random draw system. We use hashing and timestamp seeds to ensure fairness and auditability.</p>
             </div>
 
             <div>
               <h3 className="text-lg font-semibold">Q: When and how will the winner be paid?</h3>
-              <p className="ml-4 text-base">The winner is contacted through the phone number used. After identity verification, payment is sent via M-Pesa within 72 hours.</p>
+              <p className="ml-4 text-base">The winner is contacted through the phone number used. After identity verification, payment is sent via M-Pesa within 7 days.</p>
             </div>
 
             <div>
               <h3 className="text-lg font-semibold">Q: What details of participants are visible?</h3>
-              <p className="ml-4 text-base">Only your first name, county, and last 3 digits of your phone number are displayed publicly to maintain transparency and trust.</p>
+              <p className="ml-4 text-base">Only your first name, and your partially hidden phone number are displayed publicly to maintain transparency and trust.</p>
             </div>
 
             <div>
@@ -60,12 +60,12 @@ const HelpCenter = () => {
 
             <div>
               <h3 className="text-lg font-semibold">Q: Is this a betting or lottery app?</h3>
-              <p className="ml-4 text-base">No. Shilingi is a contribution-based game of chance. It operates transparently and is structured to empower micro-contributions for fun and community reward.</p>
+              <p className="ml-4 text-base">No. Shilingi is a micro-contribution and reward platform. It operates transparently and is structured to empower micro-contributions for fun and community reward.</p>
             </div>
 
             <div>
               <h3 className="text-lg font-semibold">Q: What if I didn’t receive the STK push?</h3>
-              <p className="ml-4 text-base">Ensure your M-Pesa line is active and has enough balance. Try again after a few minutes, or contact support.</p>
+              <p className="ml-4 text-base">Ensure your M-Pesa line is active and has enough balance. Make sure to enter the correct number starting with 07... Try again after a few minutes, or contact support.</p>
             </div>
 
           </div>
@@ -77,9 +77,8 @@ const HelpCenter = () => {
             If your question isn't answered here, feel free to reach out to our support team.
           </p>
           <ul className="list-disc pl-6 mt-2">
-            <li>Email: support@shilingi.co.ke</li>
-            <li>Phone: +254 700 000 000</li>
-            <li>Live Chat: Available Mon–Fri, 9am to 5pm EAT</li>
+            <li>Email: shilingi@gmail.com</li>
+            <li>Phone: +254 703 394 794</li>
           </ul>
         </section>
       </div>

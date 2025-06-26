@@ -10,16 +10,17 @@ const PrivacyPolicy = () => {
         <h1 className="text-2xl md:text-4xl font-bold">Privacy Policy</h1>
 
         <p>
-          This Privacy Policy describes how Shilingi Ltd ("we", "us", or "our") collects, uses,
+          This Privacy Policy describes how Shilingi  ("we", "us", or "our") collects, uses,
           shares, and protects your information when you access or use our services through the
           website <a href="https://www.shilingi.co.ke" className="text-blue-500 underline hover:text-blue-700">www.shilingi.co.ke</a>
-          ("Site"). By using our Site and participating in the Shilingi Game ("Game"), you consent to
+          ("Site"). By using our Site and participating in the Shilingi initiative cycle  ("initiative, cycle "), you consent to
           the practices described in this Policy.
         </p>
 
         <h2 className="text-xl font-semibold">1. Information We Collect</h2>
         <ul className="list-disc pl-6">
-          <li>Personal Information: Full name, mobile phone number, M-Pesa transaction ID, county of residence.</li>
+          <li>Personal Information 1: User name and mobile phone number, M-Pesa transaction ID for all participants.</li>
+          <li>Personal Information 2: Full name, mobile phone number, M-Pesa transaction ID, county of residence for all winner participants.</li>
           <li>Technical Information: IP address, device ID, browser type, operating system, and usage patterns.</li>
           <li>Usage Data: Interactions with the Site, frequency of visits, entry history, and draw participation logs.</li>
           <li>Communications: Emails, support queries, or feedback provided by you.</li>
@@ -28,11 +29,11 @@ const PrivacyPolicy = () => {
         <h2 className="text-xl font-semibold">2. How We Use Your Information</h2>
         <ul className="list-disc pl-6">
           <li>To verify participant identity and eligibility.</li>
-          <li>To process your contributions and facilitate participation in the Game.</li>
+          <li>To process your contributions and facilitate participation in the initiative.</li>
           <li>To display anonymized participation data (e.g., partial names and phone digits) publicly.</li>
           <li>To detect and prevent fraud, abuse, and security issues.</li>
           <li>To improve user experience and platform functionality.</li>
-          <li>To communicate with you regarding Game results, updates, and support.</li>
+          <li>To communicate with you regarding cycle results, updates, and support.</li>
         </ul>
 
         <h2 className="text-xl font-semibold">3. Information Sharing and Disclosure</h2>
@@ -98,7 +99,7 @@ const PrivacyPolicy = () => {
 
         <h2 className="text-xl font-semibold">11. Automated Decision-Making</h2>
         <p>
-          Winner selection in the Game is based on automated systems using randomization algorithms. These
+          Winner selection in the cycle is based on automated systems using randomization algorithms. These
           systems are designed to be fair, transparent, and free of human bias.
         </p>
 
@@ -125,10 +126,9 @@ const PrivacyPolicy = () => {
           For questions or concerns regarding your data, contact us at:
         </p>
         <ul className="list-disc pl-6">
-          <li>Email: privacy@shilingi.co.ke</li>
-          <li>Phone: +254 700 000 000</li>
-          <li>Postal Address: P.O. Box 12345-00100, Nairobi, Kenya</li>
-        </ul>
+         <li>Email: shilingi@gmail.com</li>
+            <li>Phone: +254 703 394 794</li>
+          </ul>
 
         <p className="text-sm text-gray-500 mt-4">Last updated: June 2025</p>
       </div>

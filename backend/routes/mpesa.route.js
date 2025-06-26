@@ -90,7 +90,7 @@ router.post("/stk-push", async (req, res) => {
         PhoneNumber: phone,
         CallBackURL: callbackURL,
         AccountReference: "Shilingi",
-        TransactionDesc: "Join Game",
+        TransactionDesc: "Join cycle",
       },
       {
         headers: {
