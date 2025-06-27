@@ -211,7 +211,7 @@ Join now for just one bob —
           >
             ✅ A prompt has been sent to <strong>{phone}</strong>. Please confirm
             the payment of <strong>1 KES</strong> to{" "}
-            <strong>Shilingi Ltd</strong> via M-Pesa and enter your PIN to
+            <strong>Shilingi</strong> via M-Pesa and enter your PIN to
             complete the transaction.
             <br />
             Your contribution will now be added to the stash and you’ll appear

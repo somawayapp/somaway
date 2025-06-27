@@ -47,7 +47,7 @@ const HelpCenter = () => {
           <h2 className="text-2xl font-semibold mt-8">🚀 How to Join</h2>
           <ol className="list-decimal pl-6 mt-4 space-y-2">
             <li>Visit <a href="https://www.shilingi.co.ke" className="text-blue-500 underline hover:text-blue-700">shilingi.co.ke</a></li>
-            <li>Click on the “Join with 1 KES” or “Play Now” button</li>
+            <li>Click on the “Join with 1 KES” or Join Now” button</li>
             <li>Enter your Safaricom phone number starting with 07... and confirm the M-Pesa prompt (STK Push)</li>
             <li>You’ll receive confirmation once your 1 KES is accepted</li>
             <li>Your entry is recorded and publicly listed with your entred name, and last 3 digits of your phone partially hidden</li>

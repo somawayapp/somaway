@@ -121,7 +121,7 @@ const TermsAndConditions = () => {
           <li>Device metadata (e.g., IP, browser)</li>
         </ul>
         <p>
-          Shilingi Ltd will not sell or share your data with third parties except for fraud prevention or legal
+          Shilingi will not sell or share your data with third parties except for fraud prevention or legal
           obligations. All data is encrypted and stored on secure servers in compliance with Kenya’s Data Protection Act.
         </p>
 
