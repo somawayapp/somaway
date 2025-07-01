@@ -229,8 +229,6 @@ router.post("/stk-push", async (req, res) => {
 router.post("/callback", async (req, res) => {
   console.log("M-Pesa Callback received:", JSON.stringify(req.body, null, 2));
 
-  
-
   const { Body } = req.body;
   const { stkCallback } = Body;
 
@@ -239,12 +237,24 @@ router.post("/callback", async (req, res) => {
     return res.json({ ResultCode: 1, ResultDesc: "Invalid callback format" });
   }
 
-  const { CheckoutRequestID, ResultCode, MpesaReceiptNumber, PhoneNumber, Amount } = stkCallback.CallbackMetadata?.Item?.reduce((acc, item) => {
+  // Extract CheckoutRequestID directly from stkCallback
+  const CheckoutRequestID = stkCallback.CheckoutRequestID;
+  const ResultCode = stkCallback.ResultCode; // Also directly from stkCallback
+  const resultDesc = stkCallback.ResultDesc; // Also directly from stkCallback
+
+  // Extract other items from CallbackMetadata.Item
+  const callbackItems = stkCallback.CallbackMetadata?.Item?.reduce((acc, item) => {
     acc[item.Name] = item.Value;
     return acc;
   }, {}) || {};
 
-  const resultDesc = stkCallback.ResultDesc;
+  const MpesaReceiptNumber = callbackItems.MpesaReceiptNumber;
+  const PhoneNumber = callbackItems.PhoneNumber;
+  const Amount = callbackItems.Amount; // Though you are just setting it to 1 KES, good to extract for validation
+
+  // Add more detailed logging here to confirm extraction
+  console.log(`Extracted: CheckoutRequestID=${CheckoutRequestID}, ResultCode=${ResultCode}, MpesaReceiptNumber=${MpesaReceiptNumber}, PhoneNumber=${PhoneNumber}, Amount=${Amount}, ResultDesc=${resultDesc}`);
+
 
   try {
     const entry = await EntryModel.findOne({ transactionId: CheckoutRequestID });
@@ -276,6 +286,10 @@ router.post("/callback", async (req, res) => {
     res.json({ ResultCode: 1, ResultDesc: "Internal server error during callback processing" });
   }
 });
+
+
+
+
 
 // --- API to get current cycle status (for frontend to display) ---
 router.get("/cycle-status", async (req, res) => {
