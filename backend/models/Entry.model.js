@@ -6,51 +6,62 @@ const EntrySchema = new mongoose.Schema(
     name: {
       type: String,
       required: true,
-      trim: true,
     },
     phone: {
+      type: String, // Storing the encrypted phone number
+      required: true,
+    },
+    // ADD THIS NEW FIELD
+    phoneNumberHash: {
       type: String,
       required: true,
-      unique: true, // Ensure phone numbers are unique
+      // You might want a compound index for (phoneNumberHash, cycle) if phone numbers should be unique per cycle
+      // Example below will make phoneNumberHash unique globally, adjust as needed.
+      // unique: true // Consider making this unique per cycle if you want same number in different cycles
     },
     amount: {
       type: Number,
       required: true,
     },
     location: {
-      country: String,
-      city: String,
-      region: String,
-      timezone: String,
-    },
-    mpesaReceiptNumber: {
-      type: String,
-      unique: true, // Store and ensure unique M-Pesa receipt numbers
-      sparse: true, // Allows null values but enforces uniqueness for non-null values
+      country: { type: String, default: "Unknown" },
+      city: { type: String, default: "Unknown" },
+      region: { type: String, default: "Unknown" },
+      timezone: { type: String, default: "Unknown" },
     },
     status: {
       type: String,
       enum: ["Pending", "Completed", "Failed"],
       default: "Pending",
     },
-    transactionId: {
-      type: String, // Store the CheckoutRequestID from Safaricom
-      unique: true,
-      sparse: true,
-    },
-    // Add a field to track the cycle number if you plan to have multiple cycles
     cycle: {
       type: Number,
-      default: 1, // Start with cycle 1
+      required: true,
     },
+    transactionId: {
+      type: String,
+      unique: true,
+      sparse: true, // Allows multiple null values
+    },
+
+
+    mpesaReceiptNumber: {
+      type: String,
+      unique: true, // Store and ensure unique M-Pesa receipt numbers
+      sparse: true, // Allows null values but enforces uniqueness for non-null values
+    },
+
   },
   { timestamps: true }
 );
 
-// Index for faster lookups on phone and transactionId
-EntrySchema.index({ phone: 1 });
-EntrySchema.index({ transactionId: 1 });
 
-const Entry = mongoose.model("Entry", EntrySchema);
 
-export default Entry;
+// Optional: Add a compound unique index if a phone number should only appear once per cycle
+// This is generally a good idea for "duplicate entry" prevention
+EntrySchema.index({ phoneNumberHash: 1, cycle: 1 }, { unique: true });
+
+
+const EntryModel = mongoose.model("Entry", EntrySchema);
+
+export default EntryModel;

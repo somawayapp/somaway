@@ -18,6 +18,15 @@ const callbackURL = "https://somawayapi.vercel.app/mpesa/callback";
 const ENCRYPTION_KEY =  "8ab21ec1dd828cc6409d0ed55b876e0530dfbccd67e56f1318e684e555896f3d"; // Use a strong, environment-variable-stored key in production
 const IV_LENGTH = 16; // For AES-256-CBC
 
+
+
+// --- Helper Function for Hashing (NEW) ---
+function hashPhoneNumber(phone) {
+  // Always hash the *formatted* phone number
+  return crypto.createHash('sha256').update(phone).digest('hex');
+}
+
+
 // --- Helper Functions for Encryption ---
 function encrypt(text) {
   const iv = crypto.randomBytes(IV_LENGTH);
@@ -82,55 +91,57 @@ const MAX_PARTICIPANTS = 1000000; // 1 Million participants/Ksh
 const CURRENT_CYCLE = 1; // You might want to manage this dynamically later
 
 // --- Main STK Push route ---
+
+// --- Main STK Push route ---
 router.post("/stk-push", async (req, res) => {
-  let { phone, name } = req.body;
-  const amount = 1; // Always 1 KES
+  let { phone, name } = req.body;
+  const amount = 1; // Always 1 KES
 
-  console.log("Incoming body for STK push:", req.body);
+  console.log("Incoming body for STK push:", req.body);
 
-  // Validation
-  if (!phone || !name) {
-    return res.status(400).json({ success: false, error: "Name and phone are required" });
-  }
+  // Validation
+  if (!phone || !name) {
+    return res.status(400).json({ success: false, error: "Name and phone are required" });
+  }
 
-  phone = formatPhoneNumber(phone);
-  if (!phone) {
-    return res.status(400).json({ success: false, error: "Invalid phone number format" });
-  }
+  phone = formatPhoneNumber(phone);
+  if (!phone) {
+    return res.status(400).json({ success: false, error: "Invalid phone number format" });
+  }
 
-  // --- START DEBUG LOGGING FOR DUPLICATE CHECK ---
-  const encryptedPhoneForLookup = encrypt(phone);
-  console.log(`Checking for existing entry for encrypted phone: ${encryptedPhoneForLookup} in cycle: ${CURRENT_CYCLE}`);
-  // --- END DEBUG LOGGING ---
+  // --- HASH THE PHONE FOR LOOKUP (NEW) ---
+  const phoneNumberHash = hashPhoneNumber(phone);
+  console.log(`Checking for existing entry for phone hash: ${phoneNumberHash} in cycle: ${CURRENT_CYCLE}`);
+  // --- END HASHING FOR LOOKUP ---
 
-  // Check current participant count and total confirmed amount
-  try {
-    const totalParticipants = await EntryModel.countDocuments({
-      status: "Completed",
-      cycle: CURRENT_CYCLE,
-    });
-    const totalAmountConfirmed = (
-      await EntryModel.aggregate([
-        { $match: { status: "Completed", cycle: CURRENT_CYCLE } },
-        { $group: { _id: null, total: { $sum: "$amount" } } },
-      ])
-    )[0]?.total || 0;
+  // Check current participant count and total confirmed amount
+  try {
+    const totalParticipants = await EntryModel.countDocuments({
+      status: "Completed",
+      cycle: CURRENT_CYCLE,
+    });
+    const totalAmountConfirmed = (
+      await EntryModel.aggregate([
+        { $match: { status: "Completed", cycle: CURRENT_CYCLE } },
+        { $group: { _id: null, total: { $sum: "$amount" } } },
+      ])
+    )[0]?.total || 0;
 
-    if (totalParticipants >= MAX_PARTICIPANTS && totalAmountConfirmed >= MAX_PARTICIPANTS) {
-      return res.status(403).json({
-        success: false,
-        error: "Maximum participants reached for this cycle. No more entries allowed.",
-      });
-    }
+    if (totalParticipants >= MAX_PARTICIPANTS && totalAmountConfirmed >= MAX_PARTICIPANTS) {
+      return res.status(403).json({
+        success: false,
+        error: "Maximum participants reached for this cycle. No more entries allowed.",
+      });
+    }
 
-    // Check for duplicate phone number (already initiated or completed transaction)
-    const existingEntry = await EntryModel.findOne({
-      phone: encryptedPhoneForLookup, // Use the logged encrypted value
-      cycle: CURRENT_CYCLE,
-    });
+    // Check for duplicate phone number (already initiated or completed transaction)
+    const existingEntry = await EntryModel.findOne({
+      phoneNumberHash: phoneNumberHash, // <<<--- NOW USING THE HASH FOR LOOKUP
+      cycle: CURRENT_CYCLE,
+    });
 
-    if (existingEntry) {
-      console.log(`Existing entry found (encrypted): ${JSON.stringify(existingEntry)}`); // Log the found entry
+    if (existingEntry) {
+      console.log(`Existing entry found (encrypted): ${JSON.stringify(existingEntry)}`);
       // --- ADDED DECRYPTED LOGGING HERE ---
       try {
           const decryptedPhone = decrypt(existingEntry.phone);
@@ -141,26 +152,24 @@ router.post("/stk-push", async (req, res) => {
       }
       // --- END ADDED DECRYPTED LOGGING ---
 
-      if (existingEntry.status === "Completed") {
-        return res.status(409).json({
-          success: false,
-          error: "This phone number has already successfully participated in this cycle.",
-        });
-      } else if (existingEntry.status === "Pending") {
-        return res.status(409).json({
-          success: false,
-          error: "A transaction for this phone number is already pending. Please complete it or try again later.",
-        });
-      }
-    } else {
-        console.log("No existing entry found for this phone number in the current cycle."); // Log if no entry is found
-    }
-  } catch (dbError) {
-    console.error("Database check error:", dbError);
-    return res.status(500).json({ success: false, error: "Server error during entry check." });
-  }
-
-
+      if (existingEntry.status === "Completed") {
+        return res.status(409).json({
+          success: false,
+          error: "This phone number has already successfully participated in this cycle.",
+        });
+      } else if (existingEntry.status === "Pending") {
+        return res.status(409).json({
+          success: false,
+          error: "A transaction for this phone number is already pending. Please complete it or try again later.",
+        });
+      }
+    } else {
+        console.log("No existing entry found for this phone number in the current cycle.");
+    }
+  } catch (dbError) {
+    console.error("Database check error:", dbError);
+    return res.status(500).json({ success: false, error: "Server error during entry check." });
+  }
   // ... (rest of your STK push code) ...
 
 
