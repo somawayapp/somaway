@@ -76,7 +76,7 @@ const getAccessToken = async () => {
 };
 
 // --- Cycle Configuration ---
-const MAX_PARTICIPANTS = 1000000; // 1 Million participants/Ksh
+const MAX_PARTICIPANTS = 3; // 1 Million participants/Ksh
 const CURRENT_CYCLE = 1; // You might want to manage this dynamically later
 
 // --- Main STK Push route ---
@@ -99,12 +99,12 @@ router.post("/stk-push", async (req, res) => {
   // Check current participant count and total confirmed amount
   try {
     const totalParticipants = await EntryModel.countDocuments({
-      status: "Completed",
+      status: "pending",
       cycle: CURRENT_CYCLE,
     });
     const totalAmountConfirmed = (
       await EntryModel.aggregate([
-        { $match: { status: "Completed", cycle: CURRENT_CYCLE } },
+        { $match: { status: "pending", cycle: CURRENT_CYCLE } },
         { $group: { _id: null, total: { $sum: "$amount" } } },
       ])
     )[0]?.total || 0;
