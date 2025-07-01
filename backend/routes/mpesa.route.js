@@ -210,8 +210,10 @@ router.post("/stk-push", async (req, res) => {
 });
 
 // --- M-Pesa Callback Route ---
-router.post("/callback", async (req, res) => {
-  console.log("M-Pesa Callback received:", JSON.stringify(req.body, null, 2));
+
+  router.post("/callback", async (req, res) => {
+    console.log("M-Pesa Callback - Raw Request Body:", JSON.stringify(req.body, null, 2));
+  
 
   const { Body } = req.body;
   const { stkCallback } = Body;
