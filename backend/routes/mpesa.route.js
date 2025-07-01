@@ -15,7 +15,7 @@ const callbackURL = "https://somawayapi.vercel.app/mpesa/callback";
 
 
 // Encryption Configuration
-const ENCRYPTION_KEY = process.env.ENCRYPTION_KEY || crypto.randomBytes(32).toString("hex"); // Use a strong, environment-variable-stored key in production
+const ENCRYPTION_KEY =  "a1b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6e7f8a9b0c1d2e3f4a5b6c7d8e9f0a1b2"; // Use a strong, environment-variable-stored key in production
 const IV_LENGTH = 16; // For AES-256-CBC
 
 // --- Helper Functions for Encryption ---
