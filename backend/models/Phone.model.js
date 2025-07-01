@@ -1,45 +1,56 @@
-// --- utils/encryption.js ---
-import crypto from "crypto";
-
-const algorithm = "aes-256-cbc";
-const secretKey = process.env.ENCRYPTION_SECRET || "your-32-char-secret-key-123456";
-
-export function encrypt(text) {
-  const iv = crypto.randomBytes(16);
-  const cipher = crypto.createCipheriv(algorithm, Buffer.from(secretKey), iv);
-  let encrypted = cipher.update(text, "utf-8", "hex");
-  encrypted += cipher.final("hex");
-  return `${iv.toString("hex")}:${encrypted}`;
-}
-
-export function decrypt(text) {
-  const [ivHex, encryptedText] = text.split(":");
-  const decipher = crypto.createDecipheriv(
-    algorithm,
-    Buffer.from(secretKey),
-    Buffer.from(ivHex, "hex")
-  );
-  let decrypted = decipher.update(encryptedText, "hex", "utf8");
-  decrypted += decipher.final("utf8");
-  return decrypted;
-}
-
-
-// --- models/Phone.model.js ---
+// models/Entry.model.js
 import mongoose from "mongoose";
 
-const phoneSchema = new mongoose.Schema({
-  name: String,
-  phone: { type: String, unique: true },
-  amount: Number,
-  location: {
-    country: String,
-    city: String,
-    region: String,
-    timezone: String,
+const EntrySchema = new mongoose.Schema(
+  {
+    name: {
+      type: String,
+      required: true,
+      trim: true,
+    },
+    phone: {
+      type: String,
+      required: true,
+      unique: true, // Ensure phone numbers are unique
+    },
+    amount: {
+      type: Number,
+      required: true,
+    },
+    location: {
+      country: String,
+      city: String,
+      region: String,
+      timezone: String,
+    },
+    mpesaReceiptNumber: {
+      type: String,
+      unique: true, // Store and ensure unique M-Pesa receipt numbers
+      sparse: true, // Allows null values but enforces uniqueness for non-null values
+    },
+    status: {
+      type: String,
+      enum: ["Pending", "Completed", "Failed"],
+      default: "Pending",
+    },
+    transactionId: {
+      type: String, // Store the CheckoutRequestID from Safaricom
+      unique: true,
+      sparse: true,
+    },
+    // Add a field to track the cycle number if you plan to have multiple cycles
+    cycle: {
+      type: Number,
+      default: 1, // Start with cycle 1
+    },
   },
-  timestamp: { type: Date, default: Date.now },
-});
+  { timestamps: true }
+);
 
-export default mongoose.model("Phone", phoneSchema);
+// Index for faster lookups on phone and transactionId
+EntrySchema.index({ phone: 1 });
+EntrySchema.index({ transactionId: 1 });
 
+const Entry = mongoose.model("Entry", EntrySchema);
+
+export default Entry;
