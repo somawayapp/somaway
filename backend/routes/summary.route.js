@@ -1,5 +1,6 @@
 import express from "express";
-import PhoneModel from "../models/Phone.model.js";
+import EntryModel from "../models/Entry.model.js"; // Import the new Entry model
+
 import moment from "moment";
 
 const router = express.Router();
@@ -13,14 +14,14 @@ async function fetchSummaryData() {
   const total = 1_000_000;
 
   // Total amount collected so far
-  const aggregation = await PhoneModel.aggregate([
+  const aggregation = await EntryModel.aggregate([
     { $group: { _id: null, totalAmount: { $sum: "$amount" } } }
   ]);
   const current = aggregation[0]?.totalAmount || 0;
 
   // Get all entries from the last 24 hours sorted by time ascending
   const since = moment().subtract(24, "hours").toDate();
-  const payments = await PhoneModel.find(
+  const payments = await EntryModel.find(
     { createdAt: { $gte: since } },
     { amount: 1, createdAt: 1 }
   ).sort({ createdAt: 1 }).lean();
@@ -64,7 +65,7 @@ async function fetchSummaryData() {
       : `${estimatedHours} hour(s)`;
 
   // Get latest players
-  const players = await PhoneModel.find({}, { name: 1, phone: 1 })
+  const players = await EntryModel.find({}, { name: 1, phone: 1 })
     .sort({ createdAt: -1 })
     .limit(1000)
     .lean();
