@@ -11,7 +11,7 @@ const consumerKey = "z065hfN3Nna7pdDvG0GbtQljszI1tPtjEmxORAmzfRH4ObDd";
 const consumerSecret = "z7EGGOUkyiAmwP6HVLA2jQzMKZVYADU4Er7D9lBpiAWuIAM35kHgyAWvKb9FpZui";
 const shortCode = "174379"; // For sandbox
 const passkey = "bfb279f9aa9bdbcf158e97dd71a467cd2e0c893059b10f78e6b72ada1ed2c919";
-const callbackURL = "https://makesomaway.com/mpesa/callback"; // Can be mocked for now
+const callbackURL = "https://sandbox.safaricom.co.ke/mpesa/transactionstatus/v1/query"; // Can be mocked for now
 
 // Encryption Configuration
 const ENCRYPTION_KEY = process.env.ENCRYPTION_KEY || crypto.randomBytes(32).toString("hex"); // Use a strong, environment-variable-stored key in production
@@ -76,7 +76,7 @@ const getAccessToken = async () => {
 };
 
 // --- Cycle Configuration ---
-const MAX_PARTICIPANTS = 3; // 1 Million participants/Ksh
+const MAX_PARTICIPANTS = 1000000; // 1 Million participants/Ksh
 const CURRENT_CYCLE = 1; // You might want to manage this dynamically later
 
 // --- Main STK Push route ---
@@ -99,12 +99,12 @@ router.post("/stk-push", async (req, res) => {
   // Check current participant count and total confirmed amount
   try {
     const totalParticipants = await EntryModel.countDocuments({
-      status: "pending",
+      status: "Completed",
       cycle: CURRENT_CYCLE,
     });
     const totalAmountConfirmed = (
       await EntryModel.aggregate([
-        { $match: { status: "pending", cycle: CURRENT_CYCLE } },
+        { $match: { status: "Completed", cycle: CURRENT_CYCLE } },
         { $group: { _id: null, total: { $sum: "$amount" } } },
       ])
     )[0]?.total || 0;
