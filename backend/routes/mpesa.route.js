@@ -11,7 +11,8 @@ const consumerKey = "z065hfN3Nna7pdDvG0GbtQljszI1tPtjEmxORAmzfRH4ObDd";
 const consumerSecret = "z7EGGOUkyiAmwP6HVLA2jQzMKZVYADU4Er7D9lBpiAWuIAM35kHgyAWvKb9FpZui";
 const shortCode = "174379"; // For sandbox
 const passkey = "bfb279f9aa9bdbcf158e97dd71a467cd2e0c893059b10f78e6b72ada1ed2c919";
-const callbackURL = "https://somawayapi.vercel.app/mpesa/callback"; // Can be mocked for now
+const callbackURL = "https://somawayapi.vercel.app/mpesa/callback";
+
 
 // Encryption Configuration
 const ENCRYPTION_KEY = process.env.ENCRYPTION_KEY || crypto.randomBytes(32).toString("hex"); // Use a strong, environment-variable-stored key in production
@@ -209,7 +210,7 @@ router.post("/stk-push", async (req, res) => {
 });
 
 // --- M-Pesa Callback Route ---
-router.post("/mpesa/callback", async (req, res) => {
+router.post("/callback", async (req, res) => {
   console.log("M-Pesa Callback received:", JSON.stringify(req.body, null, 2));
 
   const { Body } = req.body;
