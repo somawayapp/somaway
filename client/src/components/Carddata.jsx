@@ -1,6 +1,5 @@
-// --- components/BettingChances.jsx ---
-import { Button } from "@mui/material";
-import React, { useState } from "react";
+// components/BettingChances.jsx
+import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
 const cardData = [
@@ -18,10 +17,34 @@ export default function BettingChances() {
   const [submitted, setSubmitted] = useState(false);
   const [acceptedTerms, setAcceptedTerms] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [cycleStatus, setCycleStatus] = useState(null); // New state for cycle status
+  const [errorMessage, setErrorMessage] = useState(""); // New state for error messages
+
+  useEffect(() => {
+    // Fetch cycle status on component mount
+    const fetchCycleStatus = async () => {
+      try {
+        const res = await fetch("https://somawayapi.vercel.app/mpesa/cycle-status");
+        const data = await res.json();
+        if (data.success) {
+          setCycleStatus(data);
+        } else {
+          console.error("Failed to fetch cycle status:", data.error);
+        }
+      } catch (err) {
+        console.error("Error fetching cycle status:", err);
+      }
+    };
+    fetchCycleStatus();
+
+    // Optionally, refetch status periodically if you want real-time updates without page refresh
+    const intervalId = setInterval(fetchCycleStatus, 30000); // Every 30 seconds
+    return () => clearInterval(intervalId); // Cleanup on unmount
+  }, []);
 
   const handleShareToWhatsApp = () => {
     const message = `
-One shiling gives you a chance to win one million shillings!
+One shilling gives you a chance to win one million shillings!
 
 Join a community-powered luck pool where everyone has a fair shot to win 1 million shillings by stashing only 1 shilling.
 
@@ -36,29 +59,39 @@ One million.
 One lucky winner.
 
 Join now for just one bob —
- 👉\n\n Shilingi yaweza kupa mamili. Visit:\nhttps://makesomaway.com ✨`;
+👉\n\n Shilingi yaweza kupa mamili. Visit:\nhttps://makesomaway.com ✨`;
 
     const url = `https://wa.me/?text=${encodeURIComponent(message + " ")}`;
-    window.open(url, '_blank');
-    localStorage.setItem('lastShared', Date.now().toString());
+
+    window.open(url, "_blank");
+    localStorage.setItem("lastShared", Date.now().toString());
   };
 
   const handleJoinClick = () => {
+    // Check if max has been reached before showing the form
+    if (cycleStatus && cycleStatus.isMaxReached) {
+      setErrorMessage("The maximum number of participants for this cycle has been reached.");
+      return;
+    }
     setJoining(true);
+    setErrorMessage(""); // Clear any previous errors
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setErrorMessage(""); // Clear previous errors
+
     if (!phone || !name) {
-      alert("Name and phone number are required.");
+      setErrorMessage("Name and phone number are required.");
       return;
     }
     if (!acceptedTerms) {
-      alert("Please accept the terms and conditions to continue.");
+      setErrorMessage("Please accept the terms and conditions to continue.");
       return;
     }
+
     if (!/^07\d{8}$/.test(phone)) {
-      alert("Please enter a valid M-Pesa phone number starting with 07...");
+      setErrorMessage("Please enter a valid M-Pesa phone number starting with 07...");
       return;
     }
 
@@ -74,12 +107,16 @@ Join now for just one bob —
 
       if (data.success) {
         setSubmitted(true);
+        setJoining(false); // Hide form
+        setPhone(""); // Clear input
+        setName(""); // Clear input
+        setAcceptedTerms(false); // Reset terms
       } else {
-        alert(data.error || "Failed to send payment prompt. Try again.");
+        setErrorMessage(data.error || "Failed to send payment prompt. Try again.");
       }
     } catch (err) {
       console.error(err);
-      alert("Error initiating payment.");
+      setErrorMessage("Error initiating payment. Please check your network connection.");
     } finally {
       setLoading(false);
     }
@@ -105,7 +142,40 @@ Join now for just one bob —
             <h2 className="text-xl font-bold mb-2">{item.title}</h2>
             <p className="text-sm text-gray-300 mb-4">{item.desc}</p>
 
-            {!joining && !submitted && (
+            {/* Cycle Status Display */}
+            {cycleStatus && (
+              <div className="text-sm text-gray-400 mb-4">
+                <p>
+                  Participants:{" "}
+                  <strong>
+                    {cycleStatus.currentParticipants.toLocaleString()} /{" "}
+                    {cycleStatus.maxParticipants.toLocaleString()}
+                  </strong>
+                </p>
+                <p>
+                  Amount Stashed:{" "}
+                  <strong>
+                    KES {cycleStatus.currentAmount.toLocaleString()} /{" "}
+                    {cycleStatus.maxParticipants.toLocaleString()}
+                  </strong>
+                </p>
+                {cycleStatus.isMaxReached && (
+                  <p className="text-red-400 font-semibold mt-2">
+                    Maximum participants reached for this cycle!
+                  </p>
+                )}
+              </div>
+            )}
+
+            {/* Error Message Display */}
+            {errorMessage && (
+              <div className="bg-red-800 p-3 rounded-xl text-sm mb-4 text-center">
+                {errorMessage}
+              </div>
+            )}
+
+            {/* Join Button */}
+            {!joining && !submitted && cycleStatus && !cycleStatus.isMaxReached && (
               <button
                 onClick={handleJoinClick}
                 className="mt-auto bg-[#020201] py-4 hover:bg-[#0e0e06] text-[#EBD402] rounded-2xl font-semibold w-full hover:scale-102 transition-transform duration-200"
@@ -114,13 +184,21 @@ Join now for just one bob —
               </button>
             )}
 
+            {/* Message when max is reached and not joining */}
+            {!joining && !submitted && cycleStatus && cycleStatus.isMaxReached && (
+              <p className="text-center text-red-400 font-semibold mt-auto p-4 border border-red-500 rounded-xl">
+                The maximum number of participants for this cycle has been reached. Please check back for the next cycle!
+              </p>
+            )}
+
             <button
               onClick={handleShareToWhatsApp}
-              className="bg-[#020201] py-4 md:py-5 mt-3 md:mt-4 hover:bg-[#0e0e06] text-[#EBD402] rounded-2xl font-semibold w-full hover:scale-102 transition-transform duration-200"
+              className=" bg-[#020201] py-4 md:py-5 mt-3 md:mt-4 hover:bg-[#0e0e06] text-[#EBD402] rounded-2xl font-semibold w-full hover:scale-102 transition-transform duration-200"
             >
               Invite friends
             </button>
 
+            {/* Input Form */}
             <AnimatePresence>
               {joining && !submitted && (
                 <motion.form
@@ -129,7 +207,7 @@ Join now for just one bob —
                   initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0 }}
-                  className="flex flex-col gap-3"
+                  className="flex flex-col gap-3 mt-4"
                 >
                   <input
                     type="text"
@@ -155,9 +233,9 @@ Join now for just one bob —
                       onChange={(e) => setAcceptedTerms(e.target.checked)}
                       className="accent-[#ffd700]"
                     />
-                    I accept the {" "}
+                    I accept the{" "}
                     <a
-                      href="/terms"
+                      href="/terms" // Update with your actual terms URL
                       target="_blank"
                       rel="noopener noreferrer"
                       className="text-[#ffd700] underline hover:text-yellow-400 transition-colors duration-200"
@@ -181,6 +259,7 @@ Join now for just one bob —
               )}
             </AnimatePresence>
 
+            {/* Confirmation Message */}
             <AnimatePresence>
               {submitted && (
                 <motion.div
@@ -188,10 +267,11 @@ Join now for just one bob —
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                   exit={{ opacity: 0 }}
-                  className="bg-green-800 p-4 rounded-xl text-sm"
+                  className="bg-green-800 p-4 rounded-xl text-sm mt-4"
                 >
                   ✅ A prompt has been sent to <strong>{phone}</strong>. Please confirm
-                  the payment of <strong>1 KES</strong> to <strong>Shilingi</strong> via M-Pesa and enter your PIN to
+                  the payment of <strong>1 KES</strong> to{" "}
+                  <strong>Shilingi</strong> via M-Pesa and enter your PIN to
                   complete the transaction.
                   <br />
                   Your contribution will now be added to the stash and you’ll appear
