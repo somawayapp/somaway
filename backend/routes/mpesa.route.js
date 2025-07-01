@@ -185,6 +185,7 @@ router.post("/stk-push", async (req, res) => {
       name: encrypt(name),
       phone: encrypt(phone),
       amount: amount,
+      phoneNumberHash: phoneNumberHash, 
       location: {
         country: req.headers["x-vercel-ip-country"] || "Unknown",
         city: req.headers["x-vercel-ip-city"] || "Unknown",
