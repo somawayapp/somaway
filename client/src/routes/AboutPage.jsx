@@ -104,12 +104,12 @@ const AboutPage = () => {
     <div>
 <div >
 
-<div className=" bg-[var(--bg)]   bg-cover bg-no-repeat" style={{ backgroundImage: "url('/bg.svg')" }}>
+<div className=" bg-[#6402db]   bg-cover bg-no-repeat" style={{ backgroundImage: "url('/bg.svg')" }}>
 
 
-<div className="flex flex-col pl-3 pr-3 pt-12 md:pt-0  md:pl-[100px] lg:pl-[200px] md:flex-row items-center justify-between  z-10 text-black">
+<div className="flex flex-col pl-3 pr-3 pt-12 md:pt-0  md:pl-[100px] lg:pl-[200px] md:flex-row items-center justify-between  z-10 text-white">
 <div className="flex-1  text-center  md:text-left">
-<h3 className="text-3xl md:text-5xl font-bold mt-4 mb-4">How did the idea of Hodii come?</h3>
+<h3 className="text-3xl md:text-5xl font-bold mt-4 mb-4">How did the idea of Shilingi come?</h3>
 <p className="text-sm md:text-lg max-w-md mb-6">
 I never thought I’d have to move out and go house hunting again. But here I am—four years later—and I still can’t find a decent house online. 
 And trust me, I’m not about to spend a whole week under the scorching sun, trudging through mud and dust.
