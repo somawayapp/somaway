@@ -102,73 +102,9 @@ const AboutPage = () => {
     <div className="mb-9  flex flex-col gap-0">
 
     <div>
-
-
-
-
-    <div className="relative w-full text-white text-center">
-  <div className="absolute top-[50px] left-1/2 transform -translate-x-1/2 z-10 flex flex-col items-center">
-    <h1 className="text-3xl md:text-6xl font-bold">Hodii</h1>
-    <p className="mt-2 text-md md:text-2xl">
-      Where all dreams come true    </p>
-  </div>
-
-  {/* Background image */}
-  <img
-    src="/thumbnail2.jpg"
-    className="w-full md:h-[90vh] mx-auto"
-    alt="Dream home"
-  />
-</div>
-
-
 <div >
 
-
-<div className="flex   md:px-[80px] flex-col items-center justify-center">
-<div>
-<div className="flex flex-col items-center justify-center mb-[40px] pt-9 pb-9 rounded-2xl gap-5">
-<div className="grid grid-cols-1 mx-auto md:grid-cols-3 gap-6 mt-8 w-full px-4">
-  {[
-    {
-      text: "2024 –  Hodii founded by Lexanda Mbelenzi",
-      icon: "rocket.svg",
-    },
-    {
-      text: " Hodii has grown from a 1-person startup into a team of 5+ people in 3 months",
-      icon: "smile.svg",
-    },
-    {
-      text: "Now,  Hodii has offices in Nairobi, Mombasa, and Kisumu.",
-      icon: "pin.svg",
-    },
-  ].map((item, index) => (
-    <div
-      key={index}
-      className="bg-[var(--bd)] shadow-2xl rounded-2xl md:rounded-[20px] p-4 md:px-8 flex flex-col items-start text-left relative"
-    >
-      {/* Icon */}
-      <img
-        src={item.icon}
-        className="absolute top-4 left-4 w-12 h-12 md:w-20 md;h-20"
-      />
-      {/* Text */}
-      <p className="text-lg md:text-2xl font-bold text-[var(--textColor)] mt-[70px] md:mt-[100px] ">
-        {item.text}
-      </p>
-    </div>
-  ))}
-</div>
-</div>
-</div>
-</div>
-
-
-
-
-
-
-<div className=" bg-[#6402db]   bg-cover bg-no-repeat" style={{ backgroundImage: "url('/bg.svg')" }}>
+<div className=" bg-[var(--bg)]   bg-cover bg-no-repeat" style={{ backgroundImage: "url('/bg.svg')" }}>
 
 
 <div className="flex flex-col pl-3 pr-3 pt-12 md:pt-0  md:pl-[100px] lg:pl-[200px] md:flex-row items-center justify-between  z-10 text-black">

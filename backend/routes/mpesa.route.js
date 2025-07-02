@@ -159,7 +159,7 @@ router.post("/stk-push", async (req, res) => {
         });
       } else if (existingEntry.status === "Pending") {
         return res.status(409).json({
-          success: false,
+          success: true,
           error: "A transaction for this phone number is already pending. Please complete it or try again later.",
         });
       }
