@@ -137,7 +137,7 @@ className="w-8 h-8 mb-6 mx-auto md:mx-0 md:ml-0"
 
 </div>
 
-<div className= "bg-[#6402db]  hidden md:block  h-[23vh]">
+<div className= "bg-[#65026e]  hidden md:block  h-[23vh]">
 
 </div>
 
