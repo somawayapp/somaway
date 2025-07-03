@@ -5,7 +5,7 @@ const Footer = () => {
 
   return (
     <footer className=" mt-5 px-4 md:px-[10px] mb-9  mt-[50px] text-[var(--softTextColor)] md:mt-[70px] font-medium text-sm border-t border-[var(--softBg)]">
-      <div className="container mx-auto grid pt-5  grid-cols-1 sm:grid-cols-2 md:grid-cols-4 justify-between">
+      <div className="container mx-auto grid pt-5  grid-cols-1 sm:grid-cols-2 md:grid-cols-4 flex justify-between">
         {/* Home Section */}
         <div>
           <h4 className="text-lg font-semibold mb-4">Home</h4>
