@@ -104,7 +104,7 @@ const AboutPage = () => {
     <div>
 <div >
 
-<div className=" bg-[#6402db]   bg-cover bg-no-repeat" style={{ backgroundImage: "url('/bg.svg')" }}>
+<div className=" bg-[#65026e]   bg-cover bg-no-repeat" style={{ backgroundImage: "url('/bg.svg')" }}>
 
 
 <div className="flex flex-col pl-3 pr-3 pt-12 md:pt-0  md:pl-[100px] lg:pl-[200px] md:flex-row items-center justify-between  z-10 text-white">
