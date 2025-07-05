@@ -135,18 +135,17 @@ const Sidebar2 = () => {
           className="text-xl font-bold text-[#ffd700]"
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.5, duration: 0.5 }} {/* Adjusted delay */}
+          transition={{ delay: 0.5, duration: 0.5 }}
         >
           {current.toLocaleString()} / {total.toLocaleString()}
         </motion.p>
       </div>
 
-      {/* Estimated Time */}
       <motion.div
         className="text-center"
         initial={{ opacity: 0, y: 10 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.7, duration: 0.5 }} {/* Adjusted delay */}
+        transition={{ delay: 0.7, duration: 0.5 }}
       >
         <p className="text-sm text-gray-300">Estimated Time to Full</p>
         <p className="text-lg font-medium text-[#f36dff]">{estimatedTime}</p>
@@ -206,23 +205,22 @@ const Sidebar2 = () => {
       {/* --- END NEW Search Bar --- */}
 
 
-      {/* Players List */}
       <motion.div
-        className="w-full mt-6 text-center h-[80%] md:h-[40%] overflow-y-auto" {/* Changed to overflow-y-auto */}
+        className="w-full mt-6 text-center h-[80%] md:h-[40%] overflow-y-auto"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ delay: 1.5, duration: 0.5 }} {/* Adjusted delay */}
+        transition={{ delay: 1.5, duration: 0.5 }} 
       >
         <h3 className="text-sm font-bold text-[#f36dff] mb-2">Participants:</h3>
         <ul className="space-y-1 text-sm">
           {players.length > 0 ? (
             players.map((player, idx) => (
               <motion.li
-                key={player._id || idx} {/* Use _id for better keying */}
+                key={player._id || idx} 
                 className="text-[#f2f2f2] hover:text-[#ffd700] transition"
                 initial={{ opacity: 0, x: -20 }}
                 animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: 1.6 + idx * 0.05 }} {/* Adjusted delay */}
+                transition={{ delay: 1.6 + idx * 0.05 }}
               >
                 {player.name} — {player.phone}
               </motion.li>
