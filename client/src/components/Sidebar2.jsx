@@ -6,12 +6,14 @@ const Sidebar2 = () => {
   const [displayedPercentage, setDisplayedPercentage] = useState(0);
   const controls = useAnimation();
 
-  // --- NEW: State for Search functionality ---
+  // --- State for Search functionality ---
   const [searchTerm, setSearchTerm] = useState("");
   const [searchResult, setSearchResult] = useState(null);
   const [searchLoading, setSearchLoading] = useState(false);
   const [searchError, setSearchError] = useState(null);
-  // --- END NEW State ---
+  // NEW: State for cycle
+  const [searchCycle, setSearchCycle] = useState("1"); // Set default to 1 as requested
+  // --- END State ---
 
   useEffect(() => {
     const fetchData = async () => {
@@ -48,38 +50,45 @@ const Sidebar2 = () => {
     }, 20); // This animates the number
   }, [summary, controls]);
 
-  // --- NEW: Handle Search ---
-// In Sidebar2.jsx, add this helper (ensure it's identical to backend's)
-const formatPhoneNumberClient = (phone) => {
+  // --- Helper for phone number formatting (identical to backend) ---
+  const formatPhoneNumberClient = (phone) => {
     let cleanPhone = phone.replace(/\D/g, "");
 
     if (cleanPhone.startsWith("0")) {
-        cleanPhone = "254" + cleanPhone.substring(1);
+      cleanPhone = "254" + cleanPhone.substring(1);
     } else if (cleanPhone.startsWith("7")) {
-        cleanPhone = "254" + cleanPhone;
+      cleanPhone = "254" + cleanPhone;
     } else if (cleanPhone.startsWith("+254")) {
-        cleanPhone = cleanPhone.substring(1);
+      cleanPhone = cleanPhone.substring(1);
     } else if (!cleanPhone.startsWith("254")) {
-        return null; // Invalid format
+      return null; // Invalid format
     }
 
     if (cleanPhone.length !== 12) {
-        return null;
+      return null;
     }
     return cleanPhone;
-};
+  };
 
-// Modify handleSearch:
-const handleSearch = async () => {
+  // --- Handle Search ---
+  const handleSearch = async () => {
     if (!searchTerm) {
-        setSearchError("Please enter a phone number to search.");
-        setSearchResult(null);
-        return;
+      setSearchError("Please enter a phone number to search.");
+      setSearchResult(null);
+      return;
     }
 
     const formattedSearchTerm = formatPhoneNumberClient(searchTerm);
     if (!formattedSearchTerm) {
-        setSearchError("Invalid phone number format. Please use 07XXXXXXXX, 7XXXXXXXX, or +254XXXXXXXX format.");
+      setSearchError("Invalid phone number format. Please use 07XXXXXXXX, 7XXXXXXXX, or +254XXXXXXXX format.");
+      setSearchResult(null);
+      return;
+    }
+
+    // NEW: Validate cycle input if it's dynamic
+    const cycleValue = parseInt(searchCycle);
+    if (isNaN(cycleValue) || cycleValue <= 0) { // Assuming cycles are positive integers
+        setSearchError("Invalid cycle number. Please enter a positive integer.");
         setSearchResult(null);
         return;
     }
@@ -89,23 +98,24 @@ const handleSearch = async () => {
     setSearchResult(null);
 
     try {
-        const encodedPhone = encodeURIComponent(formattedSearchTerm); // Use the formatted term
-        const res = await fetch(`https://somawayapi.vercel.app/search?phone=${encodedPhone}`);
-        const data = await res.json();
+      const encodedPhone = encodeURIComponent(formattedSearchTerm);
+      // NEW: Include cycle in the URL
+      const res = await fetch(`https://somawayapi.vercel.app/search?phone=${encodedPhone}&cycle=${cycleValue}`);
+      const data = await res.json();
 
-        if (data.success) {
-            setSearchResult(data.data);
-        } else {
-            setSearchError(data.message || "No entry found.");
-        }
+      if (data.success) {
+        setSearchResult(data.data);
+      } else {
+        setSearchError(data.message || "No entry found.");
+      }
     } catch (err) {
-        console.error("Search API error:", err);
-        setSearchError("Failed to perform search. Please try again.");
+      console.error("Search API error:", err);
+      setSearchError("Failed to perform search. Please try again.");
     } finally {
-        setSearchLoading(false);
+      setSearchLoading(false);
     }
-};
-  // --- END NEW Search Handlers ---
+  };
+  // --- END Search Handlers ---
 
   const current = summary?.current ?? 0;
   const total = summary?.total ?? 0;
@@ -195,7 +205,20 @@ const handleSearch = async () => {
             className="flex-grow p-2 rounded-md bg-gray-700 border border-gray-600 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#f36dff]"
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
-            onKeyPress={(e) => { // Allow pressing Enter to search
+            onKeyPress={(e) => {
+              if (e.key === 'Enter') {
+                handleSearch();
+              }
+            }}
+          />
+          {/* NEW: Input for Cycle */}
+          <input
+            type="number"
+            placeholder="Cycle (e.g., 1)"
+            className="p-2 rounded-md bg-gray-700 border border-gray-600 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#f36dff] w-24" // Adjust width as needed
+            value={searchCycle}
+            onChange={(e) => setSearchCycle(e.target.value)}
+            onKeyPress={(e) => {
               if (e.key === 'Enter') {
                 handleSearch();
               }
@@ -236,14 +259,14 @@ const handleSearch = async () => {
         className="w-full mt-6 text-center h-[80%] md:h-[40%] overflow-y-auto"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ delay: 1.5, duration: 0.5 }} 
+        transition={{ delay: 1.5, duration: 0.5 }}
       >
         <h3 className="text-sm font-bold text-[#f36dff] mb-2">Participants:</h3>
         <ul className="space-y-1 text-sm">
           {players.length > 0 ? (
             players.map((player, idx) => (
               <motion.li
-                key={player._id || idx} 
+                key={player._id || idx}
                 className="text-[#f2f2f2] hover:text-[#ffd700] transition"
                 initial={{ opacity: 0, x: -20 }}
                 animate={{ opacity: 1, x: 0 }}
