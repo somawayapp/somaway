@@ -111,13 +111,15 @@ const AboutPage = () => {
 <div className="flex-1  text-center  md:text-left">
 <h3 className="text-3xl md:text-5xl font-bold mt-4 mb-4">How did the idea of Shilingi come?</h3>
 <p className="text-sm md:text-lg max-w-md mb-6">
-I never thought I’d have to move out and go house hunting again. But here I am—four years later—and I still can’t find a decent house online. 
-And trust me, I’m not about to spend a whole week under the scorching sun, trudging through mud and dust.
+ONe day i walked out of the supermarket with three shilings, change not knowing what do to with it. there were days when this could buy you bread milk and some sweets and still take some change bac  home,
+but it has come to loose it value.  i walked home tossing the coins in the air and lost three of them on the way. finnaly when i got home the last coins
+slipped and fell on the coner of the bathroom and  everyday i kept seen it, just lying there. everyday i would wonder if the one shiling could fiind
+its value again. like a dustin outside the shop, where everyone would dump there one shilling coins and oce it got a good amount, some random
+shopper would be awarded with it.
 
-The idea of building an all-in-one real estate marketplace first came to me during my campus days. It was probably the hottest, dustiest day of
- the year—one of those experiences you never want to go through twice.
+but i dont ow a supprmarket. after contempleting on the  idea for so long i ended up decing to built a partform where anyoe weither from a shop or not, would be able to toss their coin 
+a comunity led initiavtive where each shiling matters. several weeks later here we hae shiling, bringing back the worth of your shiling. 
 
-I know I’m not alone in this. There are countless others who’ve faced the same frustration. That’s why I’m determined to bring this idea to life.
 </p>
 <img 
 src="/love.svg" 
