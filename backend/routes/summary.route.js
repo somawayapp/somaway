@@ -1,43 +1,16 @@
-// routes/search.router.js
 import express from "express";
-import EntryModel from "../models/Entry.model.js";
-import crypto from "crypto"; // For hashing and decryption
+import EntryModel from "../models/Entry.model.js"; // Import the Entry model
+import moment from "moment";
+import crypto from "crypto"; // <<< ADD THIS IMPORT for decrypt/encrypt (if used here)
 
 const router = express.Router();
 
 // IMPORTANT: Ensure ENCRYPTION_KEY is set as a Vercel Environment Variable
-const ENCRYPTION_KEY = process.env.ENCRYPTION_KEY || "8ab21ec1dd828cc6409d0ed55b876e0530dfbccd67e56f1318e684e555896f3d";
-const IV_LENGTH = 16;
+// DO NOT HARDCODE THIS KEY IN PRODUCTION. This is for demonstration if not using process.env
+const ENCRYPTION_KEY = process.env.ENCRYPTION_KEY || "8ab21ec1dd828cc6409d0ed55b876e0530dfbccd67e56f1318e684e555896f3d"; // FALLBACK for testing, but process.env is preferred
+const IV_LENGTH = 16; // For AES-256-CBC
 
-// --- Helper Functions (copied from mpesa.router.js, or import if possible) ---
-
-// Function to format phone number (Crucial for consistent hashing)
-const formatPhoneNumber = (phone) => {
-  // Remove any non-digit characters
-  let cleanPhone = phone.replace(/\D/g, "");
-
-  if (cleanPhone.startsWith("0")) {
-    cleanPhone = "254" + cleanPhone.substring(1);
-  } else if (cleanPhone.startsWith("7")) {
-    cleanPhone = "254" + cleanPhone;
-  } else if (cleanPhone.startsWith("+254")) {
-    cleanPhone = cleanPhone.substring(1);
-  } else if (!cleanPhone.startsWith("254")) {
-    return null; // Invalid format
-  }
-
-  if (cleanPhone.length !== 12) {
-    return null;
-  }
-  return cleanPhone;
-};
-
-// Function to hash phone number
-function hashPhoneNumber(phone) {
-  return crypto.createHash('sha256').update(phone).digest('hex');
-}
-
-// Function to decrypt (needed for displaying found data)
+// --- Helper Functions for Decryption (Assuming ENCRYPTION_KEY is available) ---
 function decrypt(text) {
   if (!ENCRYPTION_KEY) {
     throw new Error("ENCRYPTION_KEY is not set. Cannot decrypt.");
@@ -54,99 +27,122 @@ function decrypt(text) {
   return decrypted.toString();
 }
 
-// Function to mask phone number (for displaying search results securely)
-function maskPhoneNumber(phoneNumber) {
-  if (!phoneNumber || typeof phoneNumber !== 'string' || phoneNumber.length < 5) {
-    return "********";
+// In-memory cache
+let cache = null;
+let lastUpdated = 0;
+const CACHE_TTL = 60 * 1000; // 1 minute in milliseconds
+
+async function fetchSummaryData() {
+  const totalGoalAmount = 1_000_000; // Define your overall monetary goal here
+
+  // 1. Total amount collected so far (ONLY for "Completed" transactions)
+  const aggregation = await EntryModel.aggregate([
+    { $match: { status: "Completed" } }, // <<< Filter only completed
+    { $group: { _id: null, totalAmount: { $sum: "$amount" } } }
+  ]);
+  const currentAmountCollected = aggregation[0]?.totalAmount || 0;
+
+  // 2. Get all "Completed" entries from the last 24 hours sorted by time ascending
+  const since = moment().subtract(24, "hours").toDate();
+  const paymentsLast24Hours = await EntryModel.find(
+    { status: "Completed", createdAt: { $gte: since } }, // <<< Filter only completed
+    { amount: 1, createdAt: 1 }
+  ).sort({ createdAt: 1 }).lean();
+
+  // 3. Bucket payments into 12 intervals of 2 hours each
+  const buckets = Array(12).fill(0); // 12 intervals * 2 hours = 24 hours
+  const nowTimestamp = Date.now(); // Milliseconds since epoch
+
+  paymentsLast24Hours.forEach(entry => {
+    // Calculate hours ago relative to 'nowTimestamp'
+    const hoursAgo = (nowTimestamp - new Date(entry.createdAt).getTime()) / (1000 * 60 * 60);
+    // Determine bucket index: (24 - hoursAgo) gives hours until 'now', divide by 2 for 2-hour buckets
+    const bucketIndex = Math.floor((24 - hoursAgo) / 2);
+    if (bucketIndex >= 0 && bucketIndex < 12) {
+      buckets[bucketIndex] += entry.amount;
+    }
+  });
+
+  // 4. Calculate growth rate for estimation
+  // A simpler approach: total collected in last 24 hours
+  const totalCollectedInLast24Hours = paymentsLast24Hours.reduce((sum, entry) => sum + entry.amount, 0);
+  const growthRatePerHour = totalCollectedInLast24Hours / 24; // Average growth over last 24 hours
+
+  // 5. Estimate time to reach goal
+  const remainingAmount = totalGoalAmount - currentAmountCollected;
+  let estimatedHours = "Unknown";
+  let estimatedTime = "Unknown";
+
+  if (growthRatePerHour > 0) {
+    estimatedHours = Math.ceil(remainingAmount / growthRatePerHour);
+    if (estimatedHours < 0) estimatedHours = 0; // If goal already reached
+
+    if (estimatedHours === 0) {
+        estimatedTime = "Goal reached!";
+    } else if (estimatedHours < 24) {
+        estimatedTime = `${estimatedHours} hour(s)`;
+    } else {
+        const days = Math.floor(estimatedHours / 24);
+        const hours = estimatedHours % 24;
+        estimatedTime = `${days} day(s) ${hours} hour(s)`;
+    }
   }
-  const len = phoneNumber.length;
-  const firstPart = phoneNumber.substring(0, 5);
-  const lastPart = phoneNumber.substring(len - 3);
-  const stars = '*'.repeat(len - 5 - 3);
-  return `${firstPart}${stars}${lastPart}`;
+
+  // 6. Get latest participants (ONLY for "Completed" transactions) and Decrypt their data
+  const players = await EntryModel.find({ status: "Completed" }, { name: 1, phone: 1 }) // <<< Filter only completed
+    .sort({ createdAt: -1 })
+    .limit(1000)
+    .lean(); // .lean() makes it plain JavaScript objects, faster for processing
+
+  // Decrypt name and phone for each player
+  const decryptedPlayers = players.map(player => {
+    let decryptedName = "Error";
+    let decryptedPhone = "Error";
+    try {
+      decryptedName = decrypt(player.name);
+    } catch (e) {
+      console.error(`Error decrypting player name for ID ${player._id}:`, e.message);
+    }
+    try {
+      decryptedPhone = decrypt(player.phone);
+    } catch (e) {
+      console.error(`Error decrypting player phone for ID ${player._id}:`, e.message);
+    }
+    return {
+      _id: player._id,
+      name: decryptedName,
+      phone: decryptedPhone,
+      createdAt: player.createdAt // Keep original creation time
+    };
+  });
+
+
+  return {
+    current: currentAmountCollected,
+    total: totalGoalAmount,
+    percentage: Math.round((currentAmountCollected / totalGoalAmount) * 100),
+    estimatedTime,
+    players: decryptedPlayers, // <<< Use decrypted players
+  };
 }
 
-
-// --- Search Endpoint ---
-router.get("/search", async (req, res) => {
-  let { phone, cycle } = req.query; // Expect phone number and optional cycle from query params
-
-  // 1. Basic validation
-  if (!phone) {
-    return res.status(400).json({ success: false, message: "Phone number is required for search." });
-  }
-
-  // 2. Format the incoming phone number for consistent hashing
-  const formattedPhone = formatPhoneNumber(phone);
-  if (!formattedPhone) {
-    return res.status(400).json({ success: false, message: "Invalid phone number format." });
-  }
-
-  // 3. Hash the formatted phone number
-  const phoneNumberHash = hashPhoneNumber(formattedPhone);
-
-  console.log(`Search request for phone hash: ${phoneNumberHash}, cycle: ${cycle || 'any'}`);
-
+// API route with caching
+router.get("/", async (req, res) => {
   try {
-    // 4. Build query object
-    const query = {
-      phoneNumberHash: phoneNumberHash,
-      // Only search for 'Completed' status by default, as requested "listed in the stash"
-      status: "Completed"
-    };
-
-    // If cycle is provided, add it to the query
-    if (cycle) {
-      query.cycle = parseInt(cycle); // Ensure cycle is a number
-      if (isNaN(query.cycle)) {
-        return res.status(400).json({ success: false, message: "Invalid cycle number." });
-      }
-    }
-
-    // 5. Perform the search using the hash
-    const foundEntry = await EntryModel.findOne(query).lean();
-
-    if (foundEntry) {
-      console.log("Entry found in search. Decrypting for display.");
-      // Decrypt and mask found data
-      let decryptedName = "Error";
-      let decryptedPhone = "Error";
-      try {
-        decryptedName = decrypt(foundEntry.name);
-      } catch (e) {
-        console.error(`Error decrypting name for found entry ${foundEntry._id}:`, e.message);
-      }
-      try {
-        decryptedPhone = decrypt(foundEntry.phone);
-        // Only mask if decryption was successful
-        decryptedPhone = maskPhoneNumber(decryptedPhone);
-      } catch (e) {
-        console.error(`Error decrypting phone for found entry ${foundEntry._id}:`, e.message);
-      }
-
-      res.json({
-        success: true,
-        message: "Entry found!",
-        data: {
-          name: decryptedName,
-          phone: decryptedPhone, // Masked phone
-          status: foundEntry.status,
-          cycle: foundEntry.cycle,
-          createdAt: foundEntry.createdAt,
-          // You might choose to expose other non-sensitive fields
-        }
-      });
+    const now = Date.now();
+    if (!cache || now - lastUpdated > CACHE_TTL) {
+      console.log("Fetching new summary data (cache expired or not set)...");
+      cache = await fetchSummaryData();
+      lastUpdated = now;
+      console.log("Summary data fetched and cached.");
     } else {
-      console.log("No entry found for the provided details.");
-      res.status(404).json({
-        success: false,
-        message: "No entry found for this phone number in the completed stash for the specified cycle."
-      });
+      console.log("Serving summary data from cache.");
     }
 
-  } catch (error) {
-    console.error("Search error:", error);
-    res.status(500).json({ success: false, message: "Server error during search." });
+    res.json(cache);
+  } catch (err) {
+    console.error("Summary fetch error:", err);
+    res.status(500).json({ error: "Failed to fetch summary" });
   }
 });
 
