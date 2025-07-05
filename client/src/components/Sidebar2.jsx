@@ -67,7 +67,7 @@ const Sidebar2 = () => {
     try {
       // Use your API endpoint for search
       // Assuming your backend is at https://somawayapi.vercel.app and search route is /api/search-participant
-      const res = await fetch(`https://somawayapi.vercel.app/api/search-participant?phone=${encodeURIComponent(searchQuery.trim())}`);
+      const res = await fetch(`https://somawayapi.vercel.app/search?phone=${encodeURIComponent(searchQuery.trim())}`);
       const data = await res.json();
 
       if (data.success) {
