@@ -12,19 +12,21 @@ const IV_LENGTH = 16; // For AES-256-CBC
 // --- Helper Function for Hashing (Copied from mpesa.router.js) ---
 function hashPhoneNumber(phone) {
   // Always hash the *formatted* phone number
-  return crypto.createHash('sha256').update(phone).digest('hex');
+  const hashed = crypto.createHash('sha256').update(phone).digest('hex');
+  console.log(`[HashPhoneNumber] Hashed '${phone}' to '${hashed}'`);
+  return hashed;
 }
 
 // --- Helper Functions for Decryption (Copied from mpesa.router.js) ---
 function decrypt(text) {
   if (!text || typeof text !== 'string') {
-    // console.warn("Attempted to decrypt invalid or empty text:", text);
+    console.warn("[Decrypt] Attempted to decrypt invalid or empty text:", text);
     return null; // Or throw an error, depending on desired behavior
   }
   try {
     const textParts = text.split(":");
     if (textParts.length !== 2) {
-      console.error("Invalid encrypted text format for decryption:", text);
+      console.error("[Decrypt] Invalid encrypted text format for decryption:", text);
       return null;
     }
     const iv = Buffer.from(textParts.shift(), "hex");
@@ -32,49 +34,63 @@ function decrypt(text) {
     const decipher = crypto.createDecipheriv("aes-256-cbc", Buffer.from(ENCRYPTION_KEY, "hex"), iv);
     let decrypted = decipher.update(encryptedText);
     decrypted = Buffer.concat([decrypted, decipher.final()]);
+    console.log(`[Decrypt] Successfully decrypted a value.`); // Avoid logging the actual decrypted value for security
     return decrypted.toString();
   } catch (error) {
-    console.error("Decryption failed:", error.message, "Text:", text);
+    console.error("[Decrypt] Decryption failed:", error.message, "Text:", text);
     return null; // Return null or re-throw if decryption fails
   }
 }
 
 // --- Helper: Format phone number to 2547XXXXXXXX (Copied from mpesa.router.js) ---
 function formatPhoneNumber(phone) {
-  if (!phone) return null;
+  console.log(`[FormatPhoneNumber] Original phone: ${phone}`);
+  if (!phone) {
+    console.log("[FormatPhoneNumber] Phone number is null or empty.");
+    return null;
+  }
 
   let digits = phone.replace(/\D/g, ""); // Remove non-digit chars
+  console.log(`[FormatPhoneNumber] Digits after non-digit removal: ${digits}`);
 
   if (digits.startsWith("0")) {
     digits = "254" + digits.slice(1);
-  } else if (digits.startsWith("7")) {
+    console.log(`[FormatPhoneNumber] Started with 0, formatted to: ${digits}`);
+  } else if (digits.startsWith("7") && digits.length === 9) { // Assuming 07xxxxxxxx, so 7xxxxxxxx is 9 digits
     digits = "254" + digits;
+    console.log(`[FormatPhoneNumber] Started with 7, formatted to: ${digits}`);
   } else if (digits.startsWith("+254")) {
     digits = digits.slice(1); // remove plus sign
+    console.log(`[FormatPhoneNumber] Started with +254, formatted to: ${digits}`);
   }
 
   // Optionally validate length and ensure it's a mobile number
   if (digits.length !== 12 || !digits.startsWith("2547")) {
+    console.warn(`[FormatPhoneNumber] Final formatted number '${digits}' is invalid. Length: ${digits.length}, Starts with 2547: ${digits.startsWith("2547")}`);
     return null;
   }
-
+  console.log(`[FormatPhoneNumber] Successfully formatted to: ${digits}`);
   return digits;
 }
 
 // --- Search Route ---
 router.get("/", async (req, res) => {
   let { phone } = req.query; // Get phone from query parameters
+  console.log(`[Search Route] Received search request for phone: ${phone}`);
 
   if (!phone) {
+    console.log("[Search Route] Phone number is missing from query.");
     return res.status(400).json({ success: false, message: "Phone number is required for search." });
   }
 
   // Format and hash the incoming phone number for search
   const formattedPhone = formatPhoneNumber(phone);
   if (!formattedPhone) {
+    console.log(`[Search Route] Invalid phone number format for input: ${phone}`);
     return res.status(400).json({ success: false, message: "Invalid phone number format." });
   }
   const phoneNumberHash = hashPhoneNumber(formattedPhone);
+  console.log(`[Search Route] Searching for entries with phoneNumberHash: ${phoneNumberHash}`);
 
   try {
     // Find entries that are 'Completed' and match the phone hash
@@ -85,23 +101,38 @@ router.get("/", async (req, res) => {
       // cycle: CURRENT_CYCLE, // Uncomment and define if you want to search only current cycle
     }).sort({ createdAt: -1 }); // Show most recent first
 
+    console.log(`[Search Route] Found ${foundEntries.length} completed entries for hash: ${phoneNumberHash}`);
+
     if (foundEntries.length === 0) {
       return res.status(200).json({ success: true, message: "No completed entries found for this phone number.", results: [] });
     }
 
     // Decrypt the relevant fields for the results
-    const decryptedResults = foundEntries.map(entry => ({
-      name: decrypt(entry.name),
-      phone: decrypt(entry.phone), // Send back the decrypted phone to confirm
-      amount: entry.amount,
-      mpesaReceiptNumber: entry.mpesaReceiptNumber,
-      status: entry.status,
-      createdAt: entry.createdAt,
-      cycle: entry.cycle,
-    }));
+    const decryptedResults = foundEntries.map(entry => {
+      const decryptedName = decrypt(entry.name);
+      const decryptedPhone = decrypt(entry.phone); // This is where the phone number from DB is decrypted
+      console.log(`[Search Route] Decrypting entry ID: ${entry._id} - Name: ${decryptedName ? 'Decrypted' : 'Failed'}, Phone: ${decryptedPhone ? 'Decrypted' : 'Failed'}`);
+      return {
+        name: decryptedName,
+        phone: decryptedPhone, // Send back the decrypted phone to confirm
+        amount: entry.amount,
+        mpesaReceiptNumber: entry.mpesaReceiptNumber,
+        status: entry.status,
+        createdAt: entry.createdAt,
+        cycle: entry.cycle,
+      };
+    });
 
     // Filter out any entries where decryption might have failed (e.g., null name/phone)
-    const filteredResults = decryptedResults.filter(result => result.name !== null && result.phone !== null);
+    const filteredResults = decryptedResults.filter(result => {
+      const isValid = result.name !== null && result.phone !== null;
+      if (!isValid) {
+        console.warn("[Search Route] Filtering out an entry due to failed decryption of name or phone.");
+      }
+      return isValid;
+    });
+
+    console.log(`[Search Route] ${filteredResults.length} entries remaining after decryption and filtering.`);
 
     res.json({
       success: true,
@@ -110,9 +141,59 @@ router.get("/", async (req, res) => {
     });
 
   } catch (error) {
-    console.error("Error during participant search:", error);
+    console.error("[Search Route] Error during participant search:", error);
     res.status(500).json({ success: false, message: "Server error during search." });
   }
 });
+
+
+// --- ADMIN Route: Get and Decrypt All Completed Entries (for internal use/inspection) ---
+// IMPORTANT: This route should be heavily secured in a production environment.
+// It's for demonstration of decrypting all phone numbers from completed entries.
+router.get("/admin/decrypt-all-completed", async (req, res) => {
+    console.log("[Admin Decrypt Route] Attempting to retrieve and decrypt all completed entries.");
+    try {
+        const completedEntries = await EntryModel.find({ status: "Completed" }).sort({ createdAt: -1 });
+        console.log(`[Admin Decrypt Route] Found ${completedEntries.length} completed entries in the database.`);
+
+        if (completedEntries.length === 0) {
+            return res.status(200).json({ success: true, message: "No completed entries found to decrypt.", results: [] });
+        }
+
+        const decryptedData = completedEntries.map(entry => {
+            const decryptedName = decrypt(entry.name);
+            const decryptedPhone = decrypt(entry.phone);
+            console.log(`[Admin Decrypt Route] Decrypting entry ID: ${entry._id} - Phone: ${decryptedPhone ? decryptedPhone : 'Failed Decryption'}`); // Log the actual decrypted phone for this admin route
+
+            return {
+                _id: entry._id,
+                name: decryptedName,
+                phone: decryptedPhone, // Decrypted phone number
+                amount: entry.amount,
+                mpesaReceiptNumber: entry.mpesaReceiptNumber,
+                status: entry.status,
+                createdAt: entry.createdAt,
+                cycle: entry.cycle,
+                phoneNumberHash: entry.phoneNumberHash // Keep the hash for verification if needed
+            };
+        });
+
+        // Filter out entries where decryption of essential fields might have failed
+        const filteredDecryptedData = decryptedData.filter(item => item.name !== null && item.phone !== null);
+
+        console.log(`[Admin Decrypt Route] ${filteredDecryptedData.length} entries successfully decrypted after filtering.`);
+
+        res.json({
+            success: true,
+            message: `Successfully retrieved and decrypted ${filteredDecryptedData.length} completed entries.`,
+            results: filteredDecryptedData,
+        });
+
+    } catch (error) {
+        console.error("[Admin Decrypt Route] Error decrypting all completed entries:", error);
+        res.status(500).json({ success: false, message: "Server error during decryption of all completed entries." });
+    }
+});
+
 
 export default router;
