@@ -6,41 +6,29 @@ import crypto from "crypto"; // For hashing and decryption
 const router = express.Router();
 
 // IMPORTANT: Ensure ENCRYPTION_KEY is set as a Vercel Environment Variable
-const ENCRYPTION_KEY = process.env.ENCRYPTION_KEY; // Use process.env directly, remove fallback for production
+const ENCRYPTION_KEY = process.env.ENCRYPTION_KEY || "8ab21ec1dd828cc6409d0ed55b876e0530dfbccd67e56f1318e684e555896f3d";
 const IV_LENGTH = 16;
 
-// --- Helper Functions (Ensuring consistency with mpesa.router.js) ---
+// --- Helper Functions (copied from mpesa.router.js, or import if possible) ---
 
-// Function to format phone number (CRITICAL FOR HASHING CONSISTENCY)
+// Function to format phone number (Crucial for consistent hashing)
 const formatPhoneNumber = (phone) => {
-  console.log(`[formatPhoneNumber] Input: '${phone}'`); // Debug log
-
   // Remove any non-digit characters
   let cleanPhone = phone.replace(/\D/g, "");
 
-  // Convert to 254 format
-  if (cleanPhone.startsWith("07") || cleanPhone.startsWith("01")) { // Common Safaricom prefixes
+  if (cleanPhone.startsWith("0")) {
     cleanPhone = "254" + cleanPhone.substring(1);
-  } else if (cleanPhone.startsWith("7") || cleanPhone.startsWith("1")) { // If user enters 7... or 1...
+  } else if (cleanPhone.startsWith("7")) {
     cleanPhone = "254" + cleanPhone;
   } else if (cleanPhone.startsWith("+254")) {
-    cleanPhone = cleanPhone.substring(1); // Remove '+'
-  } else if (cleanPhone.startsWith("254") && cleanPhone.length === 12) {
-    // Already in 254 format and correct length, no change needed
-  }
-  // If it's none of the above, it's likely an invalid format
-  else {
-    console.log(`[formatPhoneNumber] Invalid initial format, returning null for: '${phone}'`);
-    return null;
+    cleanPhone = cleanPhone.substring(1);
+  } else if (!cleanPhone.startsWith("254")) {
+    return null; // Invalid format
   }
 
-  // Final length validation for 254XXXXXXXXX (12 digits)
   if (cleanPhone.length !== 12) {
-    console.log(`[formatPhoneNumber] Final length mismatch, returning null for: '${cleanPhone}'`);
     return null;
   }
-
-  console.log(`[formatPhoneNumber] Formatted output: '${cleanPhone}'`); // Debug log
   return cleanPhone;
 };
 
@@ -74,7 +62,7 @@ function maskPhoneNumber(phoneNumber) {
   const len = phoneNumber.length;
   const firstPart = phoneNumber.substring(0, 5);
   const lastPart = phoneNumber.substring(len - 3);
-  const stars = '*'.repeat(Math.max(0, len - 5 - 3)); // Ensure non-negative count of stars
+  const stars = '*'.repeat(len - 5 - 3);
   return `${firstPart}${stars}${lastPart}`;
 }
 
@@ -97,7 +85,7 @@ router.get("/", async (req, res) => {
   // 3. Hash the formatted phone number
   const phoneNumberHash = hashPhoneNumber(formattedPhone);
 
-  console.log(`Search request for formatted phone: '${formattedPhone}', hash: '${phoneNumberHash}', cycle: ${cycle || 'any'}`);
+  console.log(`Search request for phone hash: ${phoneNumberHash}, cycle: ${cycle || 'any'}`);
 
   try {
     // 4. Build query object
@@ -129,8 +117,9 @@ router.get("/", async (req, res) => {
         console.error(`Error decrypting name for found entry ${foundEntry._id}:`, e.message);
       }
       try {
-        let fullPhoneNumber = decrypt(foundEntry.phone); // Get the full decrypted number
-        decryptedPhone = maskPhoneNumber(fullPhoneNumber); // THEN mask it for display
+        decryptedPhone = decrypt(foundEntry.phone);
+        // Only mask if decryption was successful
+        decryptedPhone = maskPhoneNumber(decryptedPhone);
       } catch (e) {
         console.error(`Error decrypting phone for found entry ${foundEntry._id}:`, e.message);
       }
