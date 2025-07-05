@@ -119,13 +119,13 @@ I tossed the coins in the air on my way home, and three of them slipped away, ju
   important again?
 
 Everyday i would wonder if the one shiling could find
-its value again. like a dustin outside the shop, where everyone would dump there one shilling coins and oce it got  to a good amount, 
+its value again. Like a dustin placed outside the shop, where everyone would dump there one shilling coins and oce it got  to a good amount, 
 a random lucky shopper would be awarded with it. I don't own a shop, but that idea stuck with me.
 
-So, I decided to build something. A place online where anyone – can toss in their extra shillings. 
-It's a community thing, where every single shilling gets a chance to matter again.
+So, I decided to build something. A online platform where anyone – can toss in their extra shillings. 
+A community led initiative, where every single shilling gets a chance to matter again.
 
-After a few weeks, we have Shilling – bringing back the true worth of your shilling.
+After several months of building, we have Shilling – bringing back the true worth of your shilling.
 </p>
 <img 
 src="/love.svg" 
@@ -154,18 +154,20 @@ className="w-8 h-8 mb-6 mx-auto md:mx-0 md:ml-0"
 <div className="flex flex-col items-center justify-center mb-[40px] pt-9 pb-9 rounded-2xl gap-5">
 <div className="grid grid-cols-1 mx-auto md:grid-cols-3 gap-6 mt-8 w-full px-4">
   {[
-    {
-      text: "Who we are – Hodii is an all-in-one real estate marketplace built to make house hunting effortless, and accessible.",
-      icon: "negotiation.webp",
-    },
-    {
-      text: "Mission – To simplify and transform the way people find, rent, or buy homes by offering a smarter, stress-free experience.",
-      icon: "business-and-career.webp",
-    },
-    {
-      text: "Vision – To become the go-to real estate platform for millions, redefining property discovery across Africa and beyond.",
-      icon: "self-growth.webp",
-    },
+  [
+  {
+    "title": "Who We Are",
+    "text": "Shilingi is a micro-contribution and reward platform built for fun and community empowerment. We believe every small contribution can make a big difference."
+  },
+  {
+    "title": "Our Mission",
+    "text": "To build a trusted place where anyone can toss in their little bit, knowing it's part of something bigger. It's about bringing back the worth of every shilling, so you can join in the fun and stand a chance to change someone's life – or even your own. We do it all with trust, transparency, and teamwork."
+  },
+  {
+    "title": "Our Vision",
+    "text": "To be the go-to spot where everyone feels like their small contributions truly matters. We want to see millions of shillings, from all over, coming together to create real change, making sure every coin helps build a brighter, more connected community."
+  }
+]
   ].map((item, index) => (
     <div
       key={index}
@@ -205,7 +207,7 @@ className="w-8 h-8 mb-6 mx-auto md:mx-0 md:ml-0"
       <div className="flex items-center justify-center text-[var(--textColor)] mx-auto">
   <div className="text-center">
     <p className="mt-2 text-sm md:text-lg">
-      Contact us Hodii@gmail.com or call +254 703 394794
+      Contact us shilingi@gmail.com or call +254 703 394794
     </p>
   </div>
 </div>
