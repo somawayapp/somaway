@@ -154,20 +154,21 @@ className="w-8 h-8 mb-6 mx-auto md:mx-0 md:ml-0"
 <div className="flex flex-col items-center justify-center mb-[40px] pt-9 pb-9 rounded-2xl gap-5">
 <div className="grid grid-cols-1 mx-auto md:grid-cols-3 gap-6 mt-8 w-full px-4">
   {[
-  [
-  {
-    "title": "Who We Are",
-    "text": "Shilingi is a micro-contribution and reward platform built for fun and community empowerment. We believe every small contribution can make a big difference."
-  },
-  {
-    "title": "Our Mission",
-    "text": "To build a trusted place where anyone can toss in their little bit, knowing it's part of something bigger. It's about bringing back the worth of every shilling, so you can join in the fun and stand a chance to change someone's life – or even your own. We do it all with trust, transparency, and teamwork."
-  },
-  {
-    "title": "Our Vision",
-    "text": "To be the go-to spot where everyone feels like their small contributions truly matters. We want to see millions of shillings, from all over, coming together to create real change, making sure every coin helps build a brighter, more connected community."
-  }
-]
+    {
+      text: "Shilingi is a micro-contribution and reward platform built for fun and community empowerment. We believe every small contribution can make a big difference.",
+      icon: "negotiation.webp",
+    },
+    {
+      text: "To build a trusted place where anyone can toss in their little bit, knowing it's part of something bigger. It's about bringing back the worth of every shilling, so you can join in the fun and stand a chance to change someone's life – or even your own. We do it all with trust, transparency, and teamwork.",
+      icon: "business-and-career.webp",
+    },
+    {
+      text: "To be the go-to spot where everyone feels like their small contributions truly matters. We want to see millions of shillings, from all over, coming together to create real change, making sure every coin helps build a brighter, more connected community.",
+      icon: "self-growth.webp",
+    },
+
+
+
   ].map((item, index) => (
     <div
       key={index}
@@ -207,7 +208,7 @@ className="w-8 h-8 mb-6 mx-auto md:mx-0 md:ml-0"
       <div className="flex items-center justify-center text-[var(--textColor)] mx-auto">
   <div className="text-center">
     <p className="mt-2 text-sm md:text-lg">
-      Contact us shilingi@gmail.com or call +254 703 394794
+      Contact us Hodii@gmail.com or call +254 703 394794
     </p>
   </div>
 </div>
