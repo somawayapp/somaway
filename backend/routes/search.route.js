@@ -1,151 +1,287 @@
-// routes/search.router.js
-import express from "express";
-import EntryModel from "../models/Entry.model.js";
-import crypto from "crypto"; // For hashing and decryption
+import React, { useEffect, useState } from "react";
+import { motion, useAnimation } from "framer-motion";
 
-const router = express.Router();
+const Sidebar2 = () => {
+  const [summary, setSummary] = useState(null);
+  const [displayedPercentage, setDisplayedPercentage] = useState(0);
+  const controls = useAnimation();
 
-// IMPORTANT: Ensure ENCRYPTION_KEY is set as a Vercel Environment Variable
-const ENCRYPTION_KEY = process.env.ENCRYPTION_KEY || "8ab21ec1dd828cc6409d0ed55b876e0530dfbccd67e56f1318e684e555896f3d";
-const IV_LENGTH = 16;
+  // --- State for Search functionality ---
+  const [searchTerm, setSearchTerm] = useState("");
+  const [searchResult, setSearchResult] = useState(null);
+  const [searchLoading, setSearchLoading] = useState(false);
+  const [searchError, setSearchError] = useState(null);
+  // NEW: State for cycle
+  const [searchCycle, setSearchCycle] = useState("1"); // Set default to 1 as requested
+  // --- END State ---
 
-// --- Helper Functions (copied from mpesa.router.js, or import if possible) ---
-
-// Function to format phone number (Crucial for consistent hashing)
-const formatPhoneNumber = (phone) => {
-  // Remove any non-digit characters
-  let cleanPhone = phone.replace(/\D/g, "");
-
-  if (cleanPhone.startsWith("0")) {
-    cleanPhone = "254" + cleanPhone.substring(1);
-  } else if (cleanPhone.startsWith("7")) {
-    cleanPhone = "254" + cleanPhone;
-  } else if (cleanPhone.startsWith("+254")) {
-    cleanPhone = cleanPhone.substring(1);
-  } else if (!cleanPhone.startsWith("254")) {
-    return null; // Invalid format
-  }
-
-  if (cleanPhone.length !== 12) {
-    return null;
-  }
-  return cleanPhone;
-};
-
-// Function to hash phone number
-function hashPhoneNumber(phone) {
-  return crypto.createHash('sha256').update(phone).digest('hex');
-}
-
-// Function to decrypt (needed for displaying found data)
-function decrypt(text) {
-  if (!ENCRYPTION_KEY) {
-    throw new Error("ENCRYPTION_KEY is not set. Cannot decrypt.");
-  }
-  const textParts = text.split(":");
-  if (textParts.length !== 2) {
-      throw new Error("Invalid encrypted text format.");
-  }
-  const iv = Buffer.from(textParts.shift(), "hex");
-  const encryptedText = Buffer.from(textParts.join(":"), "hex");
-  const decipher = crypto.createDecipheriv("aes-256-cbc", Buffer.from(ENCRYPTION_KEY, "hex"), iv);
-  let decrypted = decipher.update(encryptedText);
-  decrypted = Buffer.concat([decrypted, decipher.final()]);
-  return decrypted.toString();
-}
-
-// Function to mask phone number (for displaying search results securely)
-function maskPhoneNumber(phoneNumber) {
-  if (!phoneNumber || typeof phoneNumber !== 'string' || phoneNumber.length < 5) {
-    return "********";
-  }
-  const len = phoneNumber.length;
-  const firstPart = phoneNumber.substring(0, 5);
-  const lastPart = phoneNumber.substring(len - 3);
-  const stars = '*'.repeat(len - 5 - 3);
-  return `${firstPart}${stars}${lastPart}`;
-}
-
-
-// --- Search Endpoint ---
-// In search.router.js, inside the GET / route:
-router.get("/", async (req, res) => {
-    let { phone, cycle } = req.query;
-
-    console.log(`Received search request - Raw phone: ${phone}, Cycle: ${cycle}`);
-
-    const formattedPhone = formatPhoneNumber(phone);
-    if (!formattedPhone) {
-        console.log(`Invalid format for phone: ${phone}`);
-        return res.status(400).json({ success: false, message: "Invalid phone number format." });
-    }
-    console.log(`Formatted phone: ${formattedPhone}`);
-
-    const phoneNumberHash = hashPhoneNumber(formattedPhone);
-    console.log(`Hashed phone for search: ${phoneNumberHash}`);
-
-    // ... rest of your code
-  try {
-    // 4. Build query object
-    const query = {
-      phoneNumberHash: phoneNumberHash,
-      // Only search for 'Completed' status by default, as requested "listed in the stash"
-      status: "Completed"
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const res = await fetch("https://somawayapi.vercel.app/summary");
+        const data = await res.json();
+        setSummary(data);
+      } catch (err) {
+        console.error("Failed to fetch summary:", err);
+      }
     };
 
-    // If cycle is provided, add it to the query
-    if (cycle) {
-      query.cycle = parseInt(cycle); // Ensure cycle is a number
-      if (isNaN(query.cycle)) {
-        return res.status(400).json({ success: false, message: "Invalid cycle number." });
-      }
+    fetchData();
+
+    // Optionally, refetch summary data periodically to keep it fresh
+    const intervalId = setInterval(fetchData, 60000); // Refetch every 60 seconds (matching backend cache TTL)
+    return () => clearInterval(intervalId); // Cleanup on component unmount
+  }, []);
+
+  useEffect(() => {
+    if (!summary) return;
+
+    const percentage = summary.percentage;
+    controls.start({
+      strokeDashoffset: 440 - (440 * percentage) / 100,
+      transition: { duration: 2, ease: "easeInOut" },
+    });
+
+    let currentPercent = 0;
+    const interval = setInterval(() => {
+      currentPercent++;
+      setDisplayedPercentage(currentPercent);
+      if (currentPercent >= percentage) clearInterval(interval);
+    }, 20); // This animates the number
+  }, [summary, controls]);
+
+  // --- Helper for phone number formatting (identical to backend) ---
+  const formatPhoneNumberClient = (phone) => {
+    let cleanPhone = phone.replace(/\D/g, "");
+
+    if (cleanPhone.startsWith("0")) {
+      cleanPhone = "254" + cleanPhone.substring(1);
+    } else if (cleanPhone.startsWith("7")) {
+      cleanPhone = "254" + cleanPhone;
+    } else if (cleanPhone.startsWith("+254")) {
+      cleanPhone = cleanPhone.substring(1);
+    } else if (!cleanPhone.startsWith("254")) {
+      return null; // Invalid format
     }
 
-    // 5. Perform the search using the hash
-    const foundEntry = await EntryModel.findOne(query).lean();
+    if (cleanPhone.length !== 12) {
+      return null;
+    }
+    return cleanPhone;
+  };
 
-    if (foundEntry) {
-      console.log("Entry found in search. Decrypting for display.");
-      // Decrypt and mask found data
-      let decryptedName = "Error";
-      let decryptedPhone = "Error";
-      try {
-        decryptedName = decrypt(foundEntry.name);
-      } catch (e) {
-        console.error(`Error decrypting name for found entry ${foundEntry._id}:`, e.message);
-      }
-      try {
-        decryptedPhone = decrypt(foundEntry.phone);
-        // Only mask if decryption was successful
-        decryptedPhone = maskPhoneNumber(decryptedPhone);
-      } catch (e) {
-        console.error(`Error decrypting phone for found entry ${foundEntry._id}:`, e.message);
-      }
-
-      res.json({
-        success: true,
-        message: "Entry found!",
-        data: {
-          name: decryptedName,
-          phone: decryptedPhone, // Masked phone
-          status: foundEntry.status,
-          cycle: foundEntry.cycle,
-          createdAt: foundEntry.createdAt,
-          // You might choose to expose other non-sensitive fields
-        }
-      });
-    } else {
-      console.log("No entry found for the provided details.");
-      res.status(404).json({
-        success: false,
-        message: "No entry found for this phone number in the completed stash for the specified cycle."
-      });
+  // --- Handle Search ---
+  const handleSearch = async () => {
+    if (!searchTerm) {
+      setSearchError("Please enter a phone number to search.");
+      setSearchResult(null);
+      return;
     }
 
-  } catch (error) {
-    console.error("Search error:", error);
-    res.status(500).json({ success: false, message: "Server error during search." });
-  }
-});
+    const formattedSearchTerm = formatPhoneNumberClient(searchTerm);
+    if (!formattedSearchTerm) {
+      setSearchError("Invalid phone number format. Please use 07XXXXXXXX, 7XXXXXXXX, or +254XXXXXXXX format.");
+      setSearchResult(null);
+      return;
+    }
 
-export default router;
+    // NEW: Validate cycle input if it's dynamic
+    const cycleValue = parseInt(searchCycle);
+    if (isNaN(cycleValue) || cycleValue <= 0) { // Assuming cycles are positive integers
+        setSearchError("Invalid cycle number. Please enter a positive integer.");
+        setSearchResult(null);
+        return;
+    }
+
+    setSearchLoading(true);
+    setSearchError(null);
+    setSearchResult(null);
+
+    try {
+      const encodedPhone = encodeURIComponent(formattedSearchTerm);
+      // NEW: Include cycle in the URL
+      const res = await fetch(`https://somawayapi.vercel.app/search?phone=${encodedPhone}&cycle=${cycleValue}`);
+      const data = await res.json();
+
+      if (data.success) {
+        setSearchResult(data.data);
+      } else {
+        setSearchError(data.message || "No entry found.");
+      }
+    } catch (err) {
+      console.error("Search API error:", err);
+      setSearchError("Failed to perform search. Please try again.");
+    } finally {
+      setSearchLoading(false);
+    }
+  };
+  // --- END Search Handlers ---
+
+  const current = summary?.current ?? 0;
+  const total = summary?.total ?? 0;
+  const percentage = summary?.percentage ?? 0;
+  const estimatedTime = summary?.estimatedTime ?? "-";
+  const players = summary?.players ?? [];
+
+  return (
+    <div className="w-full md:px-[5%] pb-9 md:py-5 overflow-y-auto h-[calc(100vh-130px)] text-white flex flex-col items-center gap-6">
+      {/* Gauge */}
+      <div className="relative w-40 hidden md:flex h-40 justify-center items-center">
+        <svg className="w-full h-full rotate-[135deg]" viewBox="0 0 200 200">
+          <circle
+            cx="100"
+            cy="100"
+            r="70"
+            fill="none"
+            stroke="#3a3a3a"
+            strokeWidth="20"
+            strokeDasharray="440"
+            strokeDashoffset="0"
+          />
+          <motion.circle
+            cx="100"
+            cy="100"
+            r="70"
+            fill="none"
+            stroke="url(#grad)"
+            strokeWidth="20"
+            strokeLinecap="round"
+            strokeDasharray="440"
+            strokeDashoffset="440"
+            animate={controls}
+          />
+          <defs>
+            <linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="0%" stopColor="#f36dff" />
+              <stop offset="100%" stopColor="#ffd700" />
+            </linearGradient>
+          </defs>
+        </svg>
+        <div className="absolute text-center">
+          <p className="text-3xl font-bold text-[#f36dff]">
+            {displayedPercentage}%
+          </p>
+          <p className="text-xs text-gray-400 mt-1">PROGRESS</p>
+        </div>
+      </div>
+
+      {/* Total Amount */}
+      <div className="text-center mt-9 md:mt-0 hover:scale-[1.02] transition-transform duration-300">
+        <p className="text-sm text-gray-300">Total Amount</p>
+        <motion.p
+          className="text-xl font-bold text-[#ffd700]"
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.5, duration: 0.5 }}
+        >
+          {current.toLocaleString()} / {total.toLocaleString()}
+        </motion.p>
+      </div>
+
+      <motion.div
+        className="text-center"
+        initial={{ opacity: 0, y: 10 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.7, duration: 0.5 }}
+      >
+        <p className="text-sm text-gray-300">Estimated Time to Full</p>
+        <p className="text-lg font-medium text-[#f36dff]">{estimatedTime}</p>
+      </motion.div>
+
+      {/* --- NEW: Search Bar --- */}
+      <motion.div
+        className="w-full px-4 mt-6"
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 1.0, duration: 0.5 }}
+      >
+        <h3 className="text-sm font-bold text-[#f36dff] mb-2 text-center">
+          Search Your Entry:
+        </h3>
+        <div className="flex flex-col sm:flex-row gap-2 justify-center">
+          <input
+            type="text"
+            placeholder="Enter your phone number (e.g., 07XXXXXXXX)"
+            className="flex-grow p-2 rounded-md bg-gray-700 border border-gray-600 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#f36dff]"
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+            onKeyPress={(e) => {
+              if (e.key === 'Enter') {
+                handleSearch();
+              }
+            }}
+          />
+          {/* NEW: Input for Cycle */}
+          <input
+            type="number"
+            placeholder="Cycle (e.g., 1)"
+            className="p-2 rounded-md bg-gray-700 border border-gray-600 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#f36dff] w-24" // Adjust width as needed
+            value={searchCycle}
+            onChange={(e) => setSearchCycle(e.target.value)}
+            onKeyPress={(e) => {
+              if (e.key === 'Enter') {
+                handleSearch();
+              }
+            }}
+          />
+          <button
+            onClick={handleSearch}
+            className="px-4 py-2 bg-[#ffd700] text-gray-900 rounded-md font-semibold hover:bg-[#ffc107] transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+            disabled={searchLoading}
+          >
+            {searchLoading ? "Searching..." : "Search"}
+          </button>
+        </div>
+
+        {searchLoading && <p className="text-center text-sm text-gray-400 mt-2">Loading...</p>}
+        {searchError && <p className="text-center text-sm text-red-400 mt-2">{searchError}</p>}
+
+        {searchResult && (
+          <motion.div
+            className="mt-4 p-3 bg-gray-800 rounded-md border border-gray-700 text-center"
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.3 }}
+          >
+            <h4 className="text-md font-bold text-[#ffd700]">Your Entry Found!</h4>
+            <p className="text-sm text-gray-300">Name: {searchResult.name}</p>
+            <p className="text-sm text-gray-300">Phone: {searchResult.phone}</p>
+            <p className="text-sm text-gray-300">Status: {searchResult.status}</p>
+            <p className="text-sm text-gray-300">Cycle: {searchResult.cycle}</p>
+            <p className="text-xs text-gray-400 mt-1">Joined: {new Date(searchResult.createdAt).toLocaleString()}</p>
+          </motion.div>
+        )}
+      </motion.div>
+      {/* --- END NEW Search Bar --- */}
+
+
+      <motion.div
+        className="w-full mt-6 text-center h-[80%] md:h-[40%] overflow-y-auto"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 1.5, duration: 0.5 }}
+      >
+        <h3 className="text-sm font-bold text-[#f36dff] mb-2">Participants:</h3>
+        <ul className="space-y-1 text-sm">
+          {players.length > 0 ? (
+            players.map((player, idx) => (
+              <motion.li
+                key={player._id || idx}
+                className="text-[#f2f2f2] hover:text-[#ffd700] transition"
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: 1.6 + idx * 0.05 }}
+              >
+                {player.name} — {player.phone}
+              </motion.li>
+            ))
+          ) : (
+            <p className="text-gray-400">No participants yet.</p>
+          )}
+        </ul>
+      </motion.div>
+    </div>
+  );
+};
+
+export default Sidebar2;
