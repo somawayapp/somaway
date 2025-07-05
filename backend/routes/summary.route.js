@@ -1,16 +1,16 @@
+// routes/summary.router.js
 import express from "express";
 import EntryModel from "../models/Entry.model.js"; // Import the Entry model
 import moment from "moment";
-import crypto from "crypto"; // <<< ADD THIS IMPORT for decrypt/encrypt (if used here)
+import crypto from "crypto";
 
 const router = express.Router();
 
 // IMPORTANT: Ensure ENCRYPTION_KEY is set as a Vercel Environment Variable
-// DO NOT HARDCODE THIS KEY IN PRODUCTION. This is for demonstration if not using process.env
-const ENCRYPTION_KEY = process.env.ENCRYPTION_KEY || "8ab21ec1dd828cc6409d0ed55b876e0530dfbccd67e56f1318e684e555896f3d"; // FALLBACK for testing, but process.env is preferred
+const ENCRYPTION_KEY = process.env.ENCRYPTION_KEY; // Use process.env directly, remove fallback for production
 const IV_LENGTH = 16; // For AES-256-CBC
 
-// --- Helper Functions for Decryption (Assuming ENCRYPTION_KEY is available) ---
+// --- Helper Functions for Decryption ---
 function decrypt(text) {
   if (!ENCRYPTION_KEY) {
     throw new Error("ENCRYPTION_KEY is not set. Cannot decrypt.");
@@ -27,17 +27,32 @@ function decrypt(text) {
   return decrypted.toString();
 }
 
+// --- Helper for Phone Number Masking (Already exists, but ensuring it's here) ---
+function maskPhoneNumber(phoneNumber) {
+  if (!phoneNumber || typeof phoneNumber !== 'string' || phoneNumber.length < 5) {
+    return "********"; // Return masked if invalid or too short
+  }
+  const len = phoneNumber.length;
+  // Show first 5 digits, then stars, then last 3 digits
+  // Example: 254712345678 -> 25471****078
+  const firstPart = phoneNumber.substring(0, 5);
+  const lastPart = phoneNumber.substring(len - 3);
+  const stars = '*'.repeat(Math.max(0, len - 5 - 3)); // Ensure non-negative count of stars
+  return `${firstPart}${stars}${lastPart}`;
+}
+
+
 // In-memory cache
 let cache = null;
 let lastUpdated = 0;
 const CACHE_TTL = 60 * 1000; // 1 minute in milliseconds
 
 async function fetchSummaryData() {
-  const totalGoalAmount = 1_000_000; // Define your overall monetary goal here
+  const totalGoalAmount = 1_000_000;
 
   // 1. Total amount collected so far (ONLY for "Completed" transactions)
   const aggregation = await EntryModel.aggregate([
-    { $match: { status: "Completed" } }, // <<< Filter only completed
+    { $match: { status: "Completed" } },
     { $group: { _id: null, totalAmount: { $sum: "$amount" } } }
   ]);
   const currentAmountCollected = aggregation[0]?.totalAmount || 0;
@@ -45,18 +60,16 @@ async function fetchSummaryData() {
   // 2. Get all "Completed" entries from the last 24 hours sorted by time ascending
   const since = moment().subtract(24, "hours").toDate();
   const paymentsLast24Hours = await EntryModel.find(
-    { status: "Completed", createdAt: { $gte: since } }, // <<< Filter only completed
+    { status: "Completed", createdAt: { $gte: since } },
     { amount: 1, createdAt: 1 }
   ).sort({ createdAt: 1 }).lean();
 
   // 3. Bucket payments into 12 intervals of 2 hours each
-  const buckets = Array(12).fill(0); // 12 intervals * 2 hours = 24 hours
-  const nowTimestamp = Date.now(); // Milliseconds since epoch
+  const buckets = Array(12).fill(0);
+  const nowTimestamp = Date.now();
 
   paymentsLast24Hours.forEach(entry => {
-    // Calculate hours ago relative to 'nowTimestamp'
     const hoursAgo = (nowTimestamp - new Date(entry.createdAt).getTime()) / (1000 * 60 * 60);
-    // Determine bucket index: (24 - hoursAgo) gives hours until 'now', divide by 2 for 2-hour buckets
     const bucketIndex = Math.floor((24 - hoursAgo) / 2);
     if (bucketIndex >= 0 && bucketIndex < 12) {
       buckets[bucketIndex] += entry.amount;
@@ -64,9 +77,8 @@ async function fetchSummaryData() {
   });
 
   // 4. Calculate growth rate for estimation
-  // A simpler approach: total collected in last 24 hours
   const totalCollectedInLast24Hours = paymentsLast24Hours.reduce((sum, entry) => sum + entry.amount, 0);
-  const growthRatePerHour = totalCollectedInLast24Hours / 24; // Average growth over last 24 hours
+  const growthRatePerHour = totalCollectedInLast24Hours / 24;
 
   // 5. Estimate time to reach goal
   const remainingAmount = totalGoalAmount - currentAmountCollected;
@@ -75,7 +87,7 @@ async function fetchSummaryData() {
 
   if (growthRatePerHour > 0) {
     estimatedHours = Math.ceil(remainingAmount / growthRatePerHour);
-    if (estimatedHours < 0) estimatedHours = 0; // If goal already reached
+    if (estimatedHours < 0) estimatedHours = 0;
 
     if (estimatedHours === 0) {
         estimatedTime = "Goal reached!";
@@ -89,12 +101,12 @@ async function fetchSummaryData() {
   }
 
   // 6. Get latest participants (ONLY for "Completed" transactions) and Decrypt their data
-  const players = await EntryModel.find({ status: "Completed" }, { name: 1, phone: 1 }) // <<< Filter only completed
+  const players = await EntryModel.find({ status: "Completed" }, { name: 1, phone: 1 })
     .sort({ createdAt: -1 })
     .limit(1000)
-    .lean(); // .lean() makes it plain JavaScript objects, faster for processing
+    .lean();
 
-  // Decrypt name and phone for each player
+  // Decrypt name and phone for each player, AND APPLY MASKING
   const decryptedPlayers = players.map(player => {
     let decryptedName = "Error";
     let decryptedPhone = "Error";
@@ -104,25 +116,25 @@ async function fetchSummaryData() {
       console.error(`Error decrypting player name for ID ${player._id}:`, e.message);
     }
     try {
-      decryptedPhone = decrypt(player.phone);
+      let fullPhoneNumber = decrypt(player.phone); // First decrypt to get full number
+      decryptedPhone = maskPhoneNumber(fullPhoneNumber); // THEN mask it for display
     } catch (e) {
       console.error(`Error decrypting player phone for ID ${player._id}:`, e.message);
     }
     return {
       _id: player._id,
       name: decryptedName,
-      phone: decryptedPhone,
-      createdAt: player.createdAt // Keep original creation time
+      phone: decryptedPhone, // This will now be masked
+      createdAt: player.createdAt
     };
   });
-
 
   return {
     current: currentAmountCollected,
     total: totalGoalAmount,
     percentage: Math.round((currentAmountCollected / totalGoalAmount) * 100),
     estimatedTime,
-    players: decryptedPlayers, // <<< Use decrypted players
+    players: decryptedPlayers, // Use decrypted (and now masked) players
   };
 }
 
