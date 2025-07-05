@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from "react";
+// components/Sidebar2.jsx (or wherever your Sidebar2 is located)
+import React, { useEffect, useState, useRef } from "react"; // Import useRef
 import { motion, useAnimation } from "framer-motion";
 
 const Sidebar2 = () => {
@@ -6,15 +7,14 @@ const Sidebar2 = () => {
   const [displayedPercentage, setDisplayedPercentage] = useState(0);
   const controls = useAnimation();
 
-  // --- State for Search functionality ---
-  const [searchTerm, setSearchTerm] = useState("");
-  const [searchResult, setSearchResult] = useState(null);
+  // --- NEW STATE FOR SEARCH ---
+  const [searchQuery, setSearchQuery] = useState("");
+  const [searchResults, setSearchResults] = useState([]);
   const [searchLoading, setSearchLoading] = useState(false);
   const [searchError, setSearchError] = useState(null);
-  // NEW: State for cycle
-  const [searchCycle, setSearchCycle] = useState("1"); // Set default to 1 as requested
-  // --- END State ---
+  const searchInputRef = useRef(null); // Ref for input focus
 
+  // Existing useEffect for fetching summary
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -27,12 +27,12 @@ const Sidebar2 = () => {
     };
 
     fetchData();
-
-    // Optionally, refetch summary data periodically to keep it fresh
-    const intervalId = setInterval(fetchData, 60000); // Refetch every 60 seconds (matching backend cache TTL)
+    // Set up an interval to refresh summary every, say, 30 seconds
+    const intervalId = setInterval(fetchData, 30000); // Fetch every 30 seconds
     return () => clearInterval(intervalId); // Cleanup on component unmount
   }, []);
 
+  // Existing useEffect for gauge animation
   useEffect(() => {
     if (!summary) return;
 
@@ -47,86 +47,64 @@ const Sidebar2 = () => {
       currentPercent++;
       setDisplayedPercentage(currentPercent);
       if (currentPercent >= percentage) clearInterval(interval);
-    }, 20); // This animates the number
+    }, 20);
+    return () => clearInterval(interval); // Cleanup interval
   }, [summary, controls]);
 
-  // --- Helper for phone number formatting (identical to backend) ---
-  const formatPhoneNumberClient = (phone) => {
-    let cleanPhone = phone.replace(/\D/g, "");
-
-    if (cleanPhone.startsWith("0")) {
-      cleanPhone = "254" + cleanPhone.substring(1);
-    } else if (cleanPhone.startsWith("7")) {
-      cleanPhone = "254" + cleanPhone;
-    } else if (cleanPhone.startsWith("+254")) {
-      cleanPhone = cleanPhone.substring(1);
-    } else if (!cleanPhone.startsWith("254")) {
-      return null; // Invalid format
-    }
-
-    if (cleanPhone.length !== 12) {
-      return null;
-    }
-    return cleanPhone;
-  };
-
-  // --- Handle Search ---
-  const handleSearch = async () => {
-    if (!searchTerm) {
-      setSearchError("Please enter a phone number to search.");
-      setSearchResult(null);
-      return;
-    }
-
-    const formattedSearchTerm = formatPhoneNumberClient(searchTerm);
-    if (!formattedSearchTerm) {
-      setSearchError("Invalid phone number format. Please use 07XXXXXXXX, 7XXXXXXXX, or +254XXXXXXXX format.");
-      setSearchResult(null);
-      return;
-    }
-
-    // NEW: Validate cycle input if it's dynamic
-    const cycleValue = parseInt(searchCycle);
-    if (isNaN(cycleValue) || cycleValue <= 0) { // Assuming cycles are positive integers
-        setSearchError("Invalid cycle number. Please enter a positive integer.");
-        setSearchResult(null);
-        return;
-    }
-
+  // --- NEW SEARCH FUNCTIONALITY ---
+  const handleSearch = async (e) => {
+    e.preventDefault(); // Prevent default form submission
     setSearchLoading(true);
     setSearchError(null);
-    setSearchResult(null);
+    setSearchResults([]); // Clear previous results
+
+    if (!searchQuery.trim()) {
+      setSearchError("Please enter a phone number to search.");
+      setSearchLoading(false);
+      return;
+    }
 
     try {
-      const encodedPhone = encodeURIComponent(formattedSearchTerm);
-      // NEW: Include cycle in the URL
-      const res = await fetch(`https://somawayapi.vercel.app/search?phone=${encodedPhone}&cycle=${cycleValue}`);
+      // Use your API endpoint for search
+      // Assuming your backend is at https://somawayapi.vercel.app and search route is /api/search-participant
+      const res = await fetch(`https://somawayapi.vercel.app/api/search-participant?phone=${encodeURIComponent(searchQuery.trim())}`);
       const data = await res.json();
 
       if (data.success) {
-        setSearchResult(data.data);
+        if (data.results && data.results.length > 0) {
+          setSearchResults(data.results);
+        } else {
+          setSearchError(data.message || "No results found.");
+        }
       } else {
-        setSearchError(data.message || "No entry found.");
+        setSearchError(data.message || "An error occurred during search.");
       }
     } catch (err) {
-      console.error("Search API error:", err);
-      setSearchError("Failed to perform search. Please try again.");
+      console.error("Failed to search:", err);
+      setSearchError("Failed to connect to search server.");
     } finally {
       setSearchLoading(false);
     }
   };
-  // --- END Search Handlers ---
+
+  // Focus on search input when component mounts (optional)
+  useEffect(() => {
+    if (searchInputRef.current) {
+      searchInputRef.current.focus();
+    }
+  }, []);
+
 
   const current = summary?.current ?? 0;
   const total = summary?.total ?? 0;
   const percentage = summary?.percentage ?? 0;
   const estimatedTime = summary?.estimatedTime ?? "-";
-  const players = summary?.players ?? [];
+  const players = summary?.players ?? []; // The list of all participants from summary
 
   return (
     <div className="w-full md:px-[5%] pb-9 md:py-5 overflow-y-auto h-[calc(100vh-130px)] text-white flex flex-col items-center gap-6">
       {/* Gauge */}
-      <div className="relative w-40 hidden md:flex h-40 justify-center items-center">
+      <div className="relative w-40 hidden md:flex h-40 flex justify-center items-center">
         <svg className="w-full h-full rotate-[135deg]" viewBox="0 0 200 200">
           <circle
             cx="100"
@@ -172,114 +150,108 @@ const Sidebar2 = () => {
           className="text-xl font-bold text-[#ffd700]"
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.5, duration: 0.5 }}
+          transition={{ delay: 1, duration: 0.5 }}
         >
           {current.toLocaleString()} / {total.toLocaleString()}
         </motion.p>
       </div>
 
+      {/* Estimated Time */}
       <motion.div
         className="text-center"
         initial={{ opacity: 0, y: 10 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.7, duration: 0.5 }}
+        transition={{ delay: 1.5, duration: 0.5 }}
       >
         <p className="text-sm text-gray-300">Estimated Time to Full</p>
         <p className="text-lg font-medium text-[#f36dff]">{estimatedTime}</p>
       </motion.div>
 
-      {/* --- NEW: Search Bar --- */}
+      {/* --- NEW SEARCH BAR --- */}
       <motion.div
         className="w-full px-4 mt-6"
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 1.0, duration: 0.5 }}
+        transition={{ delay: 1.8, duration: 0.5 }}
       >
-        <h3 className="text-sm font-bold text-[#f36dff] mb-2 text-center">
-          Search Your Entry:
-        </h3>
-        <div className="flex flex-col sm:flex-row gap-2 justify-center">
+        <form onSubmit={handleSearch} className="flex flex-col gap-2">
           <input
-            type="text"
-            placeholder="Enter your phone number (e.g., 07XXXXXXXX)"
-            className="flex-grow p-2 rounded-md bg-gray-700 border border-gray-600 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#f36dff]"
-            value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
-            onKeyPress={(e) => {
-              if (e.key === 'Enter') {
-                handleSearch();
-              }
-            }}
-          />
-          {/* NEW: Input for Cycle */}
-          <input
-            type="number"
-            placeholder="Cycle (e.g., 1)"
-            className="p-2 rounded-md bg-gray-700 border border-gray-600 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#f36dff] w-24" // Adjust width as needed
-            value={searchCycle}
-            onChange={(e) => setSearchCycle(e.target.value)}
-            onKeyPress={(e) => {
-              if (e.key === 'Enter') {
-                handleSearch();
-              }
-            }}
+            ref={searchInputRef}
+            type="tel" // Use type="tel" for phone numbers
+            placeholder="Search by phone number (e.g., 0712345678)"
+            className="w-full p-2 bg-[#2a2a2a] border border-[#f36dff] rounded-md text-white placeholder-gray-500 focus:outline-none focus:ring-1 focus:ring-[#ffd700]"
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            disabled={searchLoading}
           />
           <button
-            onClick={handleSearch}
-            className="px-4 py-2 bg-[#ffd700] text-gray-900 rounded-md font-semibold hover:bg-[#ffc107] transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+            type="submit"
+            className="w-full bg-[#f36dff] text-white py-2 rounded-md hover:bg-[#d858e6] transition-colors duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
             disabled={searchLoading}
           >
-            {searchLoading ? "Searching..." : "Search"}
+            {searchLoading ? "Searching..." : "Search Participant"}
           </button>
-        </div>
-
-        {searchLoading && <p className="text-center text-sm text-gray-400 mt-2">Loading...</p>}
-        {searchError && <p className="text-center text-sm text-red-400 mt-2">{searchError}</p>}
-
-        {searchResult && (
-          <motion.div
-            className="mt-4 p-3 bg-gray-800 rounded-md border border-gray-700 text-center"
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.3 }}
-          >
-            <h4 className="text-md font-bold text-[#ffd700]">Your Entry Found!</h4>
-            <p className="text-sm text-gray-300">Name: {searchResult.name}</p>
-            <p className="text-sm text-gray-300">Phone: {searchResult.phone}</p>
-            <p className="text-sm text-gray-300">Status: {searchResult.status}</p>
-            <p className="text-sm text-gray-300">Cycle: {searchResult.cycle}</p>
-            <p className="text-xs text-gray-400 mt-1">Joined: {new Date(searchResult.createdAt).toLocaleString()}</p>
-          </motion.div>
+        </form>
+        {searchError && (
+          <p className="text-red-400 text-sm mt-2 text-center">{searchError}</p>
         )}
       </motion.div>
-      {/* --- END NEW Search Bar --- */}
 
-
-      <motion.div
-        className="w-full mt-6 text-center h-[80%] md:h-[40%] overflow-y-auto"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 1.5, duration: 0.5 }}
-      >
-        <h3 className="text-sm font-bold text-[#f36dff] mb-2">Participants:</h3>
-        <ul className="space-y-1 text-sm">
-          {players.length > 0 ? (
-            players.map((player, idx) => (
+      {/* --- SEARCH RESULTS DISPLAY --- */}
+      {searchResults.length > 0 && (
+        <motion.div
+          className="w-full mt-6 text-center h-[fit-content] max-h-[calc(100vh-600px)] overflow-y-auto border-t border-gray-700 pt-4"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.2, duration: 0.5 }}
+        >
+          <h3 className="text-sm font-bold text-[#ffd700] mb-2">Search Results:</h3>
+          <ul className="space-y-1 text-sm">
+            {searchResults.map((result, idx) => (
               <motion.li
-                key={player._id || idx}
+                key={idx}
+                className="text-[#f2f2f2] hover:text-[#f36dff] transition p-1 bg-[#2a2a2a] rounded-md my-1"
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: 0.1 + idx * 0.05 }}
+              >
+                {result.name} - {result.phone} <br />
+                <span className="text-xs text-gray-400">
+                  Receipt: {result.mpesaReceiptNumber || 'N/A'} (Cycle: {result.cycle})
+                </span>
+              </motion.li>
+            ))}
+          </ul>
+        </motion.div>
+      )}
+
+      {/* Players List (Conditionally rendered or below search results) */}
+      {/* You might want to hide the full player list if search results are displayed
+          or make it clear which list is which.
+          For now, I'll put it below the search results and add a check. */}
+      {searchResults.length === 0 && ( // Only show the main list if no search results are active
+        <motion.div
+          className="w-full mt-6 text-center h-[80%] md:h-[40%] overflow-y-scroll"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 2, duration: 0.5 }}
+        >
+          <h3 className="text-sm font-bold text-[#f36dff] mb-2">Recent Participants:</h3>
+          <ul className="space-y-1 text-sm">
+            {players.map((player, idx) => (
+              <motion.li
+                key={idx}
                 className="text-[#f2f2f2] hover:text-[#ffd700] transition"
                 initial={{ opacity: 0, x: -20 }}
                 animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: 1.6 + idx * 0.05 }}
+                transition={{ delay: 2.1 + idx * 0.05 }}
               >
                 {player.name} — {player.phone}
               </motion.li>
-            ))
-          ) : (
-            <p className="text-gray-400">No participants yet.</p>
-          )}
-        </ul>
-      </motion.div>
+            ))}
+          </ul>
+        </motion.div>
+      )}
     </div>
   );
 };

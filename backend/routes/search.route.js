@@ -5,147 +5,112 @@ import crypto from "crypto"; // For hashing and decryption
 
 const router = express.Router();
 
-// IMPORTANT: Ensure ENCRYPTION_KEY is set as a Vercel Environment Variable
-const ENCRYPTION_KEY = process.env.ENCRYPTION_KEY || "8ab21ec1dd828cc6409d0ed55b876e0530dfbccd67e56f1318e684e555896f3d";
-const IV_LENGTH = 16;
+// Encryption Configuration (MUST BE THE SAME AS YOUR M-PESA ROUTER)
+const ENCRYPTION_KEY = "8ab21ec1dd828cc6409d0ed55b876e0530dfbccd67e56f1318e684e555896f3d"; // Use a strong, environment-variable-stored key in production
+const IV_LENGTH = 16; // For AES-256-CBC
 
-// --- Helper Functions (copied from mpesa.router.js, or import if possible) ---
-
-// Function to format phone number (Crucial for consistent hashing)
-const formatPhoneNumber = (phone) => {
-  // Remove any non-digit characters
-  let cleanPhone = phone.replace(/\D/g, "");
-
-  if (cleanPhone.startsWith("0")) {
-    cleanPhone = "254" + cleanPhone.substring(1);
-  } else if (cleanPhone.startsWith("7")) {
-    cleanPhone = "254" + cleanPhone;
-  } else if (cleanPhone.startsWith("+254")) {
-    cleanPhone = cleanPhone.substring(1);
-  } else if (!cleanPhone.startsWith("254")) {
-    return null; // Invalid format
-  }
-
-  if (cleanPhone.length !== 12) {
-    return null;
-  }
-  return cleanPhone;
-};
-
-// Function to hash phone number
+// --- Helper Function for Hashing (Copied from mpesa.router.js) ---
 function hashPhoneNumber(phone) {
+  // Always hash the *formatted* phone number
   return crypto.createHash('sha256').update(phone).digest('hex');
 }
 
-// Function to decrypt (needed for displaying found data)
+// --- Helper Functions for Decryption (Copied from mpesa.router.js) ---
 function decrypt(text) {
-  if (!ENCRYPTION_KEY) {
-    throw new Error("ENCRYPTION_KEY is not set. Cannot decrypt.");
+  if (!text || typeof text !== 'string') {
+    // console.warn("Attempted to decrypt invalid or empty text:", text);
+    return null; // Or throw an error, depending on desired behavior
   }
-  const textParts = text.split(":");
-  if (textParts.length !== 2) {
-      throw new Error("Invalid encrypted text format.");
+  try {
+    const textParts = text.split(":");
+    if (textParts.length !== 2) {
+      console.error("Invalid encrypted text format for decryption:", text);
+      return null;
+    }
+    const iv = Buffer.from(textParts.shift(), "hex");
+    const encryptedText = Buffer.from(textParts.join(":"), "hex");
+    const decipher = crypto.createDecipheriv("aes-256-cbc", Buffer.from(ENCRYPTION_KEY, "hex"), iv);
+    let decrypted = decipher.update(encryptedText);
+    decrypted = Buffer.concat([decrypted, decipher.final()]);
+    return decrypted.toString();
+  } catch (error) {
+    console.error("Decryption failed:", error.message, "Text:", text);
+    return null; // Return null or re-throw if decryption fails
   }
-  const iv = Buffer.from(textParts.shift(), "hex");
-  const encryptedText = Buffer.from(textParts.join(":"), "hex");
-  const decipher = crypto.createDecipheriv("aes-256-cbc", Buffer.from(ENCRYPTION_KEY, "hex"), iv);
-  let decrypted = decipher.update(encryptedText);
-  decrypted = Buffer.concat([decrypted, decipher.final()]);
-  return decrypted.toString();
 }
 
-// Function to mask phone number (for displaying search results securely)
-function maskPhoneNumber(phoneNumber) {
-  if (!phoneNumber || typeof phoneNumber !== 'string' || phoneNumber.length < 5) {
-    return "********";
+// --- Helper: Format phone number to 2547XXXXXXXX (Copied from mpesa.router.js) ---
+function formatPhoneNumber(phone) {
+  if (!phone) return null;
+
+  let digits = phone.replace(/\D/g, ""); // Remove non-digit chars
+
+  if (digits.startsWith("0")) {
+    digits = "254" + digits.slice(1);
+  } else if (digits.startsWith("7")) {
+    digits = "254" + digits;
+  } else if (digits.startsWith("+254")) {
+    digits = digits.slice(1); // remove plus sign
   }
-  const len = phoneNumber.length;
-  const firstPart = phoneNumber.substring(0, 5);
-  const lastPart = phoneNumber.substring(len - 3);
-  const stars = '*'.repeat(len - 5 - 3);
-  return `${firstPart}${stars}${lastPart}`;
+
+  // Optionally validate length and ensure it's a mobile number
+  if (digits.length !== 12 || !digits.startsWith("2547")) {
+    return null;
+  }
+
+  return digits;
 }
 
-
-// --- Search Endpoint ---
+// --- Search Route ---
 router.get("/", async (req, res) => {
-  let { phone, cycle } = req.query; // Expect phone number and optional cycle from query params
+  let { phone } = req.query; // Get phone from query parameters
 
-  // 1. Basic validation
   if (!phone) {
     return res.status(400).json({ success: false, message: "Phone number is required for search." });
   }
 
-  // 2. Format the incoming phone number for consistent hashing
+  // Format and hash the incoming phone number for search
   const formattedPhone = formatPhoneNumber(phone);
   if (!formattedPhone) {
     return res.status(400).json({ success: false, message: "Invalid phone number format." });
   }
-
-  // 3. Hash the formatted phone number
   const phoneNumberHash = hashPhoneNumber(formattedPhone);
 
-  console.log(`Search request for phone hash: ${phoneNumberHash}, cycle: ${cycle || 'any'}`);
-
   try {
-    // 4. Build query object
-    const query = {
+    // Find entries that are 'Completed' and match the phone hash
+    const foundEntries = await EntryModel.find({
       phoneNumberHash: phoneNumberHash,
-      // Only search for 'Completed' status by default, as requested "listed in the stash"
-      status: "Completed"
-    };
+      status: "Completed",
+      // You might also want to search across all cycles or a specific cycle
+      // cycle: CURRENT_CYCLE, // Uncomment and define if you want to search only current cycle
+    }).sort({ createdAt: -1 }); // Show most recent first
 
-    // If cycle is provided, add it to the query
-    if (cycle) {
-      query.cycle = parseInt(cycle); // Ensure cycle is a number
-      if (isNaN(query.cycle)) {
-        return res.status(400).json({ success: false, message: "Invalid cycle number." });
-      }
+    if (foundEntries.length === 0) {
+      return res.status(200).json({ success: true, message: "No completed entries found for this phone number.", results: [] });
     }
 
-    // 5. Perform the search using the hash
-    const foundEntry = await EntryModel.findOne(query).lean();
+    // Decrypt the relevant fields for the results
+    const decryptedResults = foundEntries.map(entry => ({
+      name: decrypt(entry.name),
+      phone: decrypt(entry.phone), // Send back the decrypted phone to confirm
+      amount: entry.amount,
+      mpesaReceiptNumber: entry.mpesaReceiptNumber,
+      status: entry.status,
+      createdAt: entry.createdAt,
+      cycle: entry.cycle,
+    }));
 
-    if (foundEntry) {
-      console.log("Entry found in search. Decrypting for display.");
-      // Decrypt and mask found data
-      let decryptedName = "Error";
-      let decryptedPhone = "Error";
-      try {
-        decryptedName = decrypt(foundEntry.name);
-      } catch (e) {
-        console.error(`Error decrypting name for found entry ${foundEntry._id}:`, e.message);
-      }
-      try {
-        decryptedPhone = decrypt(foundEntry.phone);
-        // Only mask if decryption was successful
-        decryptedPhone = maskPhoneNumber(decryptedPhone);
-      } catch (e) {
-        console.error(`Error decrypting phone for found entry ${foundEntry._id}:`, e.message);
-      }
+    // Filter out any entries where decryption might have failed (e.g., null name/phone)
+    const filteredResults = decryptedResults.filter(result => result.name !== null && result.phone !== null);
 
-      res.json({
-        success: true,
-        message: "Entry found!",
-        data: {
-          name: decryptedName,
-          phone: decryptedPhone, // Masked phone
-          status: foundEntry.status,
-          cycle: foundEntry.cycle,
-          createdAt: foundEntry.createdAt,
-          // You might choose to expose other non-sensitive fields
-        }
-      });
-    } else {
-      console.log("No entry found for the provided details.");
-      res.status(404).json({
-        success: false,
-        message: "No entry found for this phone number in the completed stash for the specified cycle."
-      });
-    }
+    res.json({
+      success: true,
+      message: `${filteredResults.length} completed entries found.`,
+      results: filteredResults,
+    });
 
   } catch (error) {
-    console.error("Search error:", error);
+    console.error("Error during participant search:", error);
     res.status(500).json({ success: false, message: "Server error during search." });
   }
 });
