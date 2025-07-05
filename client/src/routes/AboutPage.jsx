@@ -155,15 +155,15 @@ className="w-8 h-8 mb-6 mx-auto md:mx-0 md:ml-0"
 <div className="grid grid-cols-1 mx-auto md:grid-cols-3 gap-6 mt-8 w-full px-4">
   {[
     {
-      text: "Shilingi is a micro-contribution and reward platform built for fun and community empowerment. We believe every small contribution can make a big difference.",
+      text: "About Us - Shilingi is a micro-contribution and reward platform built for fun and community empowerment. We believe every small contribution can make a big difference.",
       icon: "negotiation.webp",
     },
     {
-      text: "To build a trusted place where anyone can toss in their little bit, knowing it's part of something bigger. It's about bringing back the worth of every shilling, so you can join in the fun and stand a chance to change someone's life – or even your own. We do it all with trust, transparency, and teamwork.",
+      text: " Our Mission - To build a trusted place where anyone can toss in their little bit, knowing it's part of something bigger and stand a chance to change someone's life – or even your own. We do it all with trust, transparency, and teamwork.",
       icon: "business-and-career.webp",
     },
     {
-      text: "To be the go-to spot where everyone feels like their small contributions truly matters. We want to see millions of shillings, from all over, coming together to create real change, making sure every coin helps build a brighter, more connected community.",
+      text: "Our Vision - To be the go-to spot where everyone feels like their small contributions truly matters. Millions of people coming together to create real change, making sure every coin helps build a brighter, more connected community.",
       icon: "self-growth.webp",
     },
 
