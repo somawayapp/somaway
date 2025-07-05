@@ -40,7 +40,6 @@ const Footer = () => {
         </div>
       </div>
 
-      ---
 
       {/* Bottom Info Section - Centered */}
       <div className="mt-8 text-center border-t border-[var(--softBg)] mb-[100px] md:mb-0 pt-4">

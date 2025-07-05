@@ -160,40 +160,40 @@
 
           <Link
               to="/"
-              className="block py-2 text-[var(--softTextColor)]   hover:text-[#fc3239]  p-2 rounded-xl"
+              className="block py-2 text-[var(--softTextColor)]   hover:text-[#65026e]  p-2 rounded-xl"
              onClick={() => setOpen(false)}          > Home     
             </Link>
 
 
             <Link
               to="/about"
-              className="block py-2 text-[var(--softTextColor)]  hover:text-[#fc3239]  p-2 rounded-xl"
+              className="block py-2 text-[var(--softTextColor)]  hover:text-[#65026e]  p-2 rounded-xl"
               onClick={() => setOpen(false)}          > About Us 
             </Link>
 
 
               <Link
               to="/terms"
-              className="block py-2 text-[var(--softTextColor)]   hover:text-[#fc3239]  p-2 rounded-xl"
+              className="block py-2 text-[var(--softTextColor)]   hover:text-[#65026e]  p-2 rounded-xl"
               onClick={() => setOpen(false)}          >Terms & Conditions      
                </Link>
 
             <Link
               to="/Payment-terms"
-              className="block py-2 text-[var(--softTextColor)]  hover:text-[#fc3239]  p-2 rounded-xl"
+              className="block py-2 text-[var(--softTextColor)]  hover:text-[#65026e]  p-2 rounded-xl"
               onClick={() => setOpen(false)}              > Payment Terms     
               </Link>
 
              <Link
               to="/Privacy"
-              className="block py-2 text-[var(--softTextColor)]  hover:text-[#fc3239]  p-2 rounded-xl"
+              className="block py-2 text-[var(--softTextColor)]  hover:text-[#65026e]  p-2 rounded-xl"
               onClick={() => setOpen(false)}              > Privacy policy     
               </Link>
 
 
             <Link
               to="/help"
-              className="block py-2 text-[var(--softTextColor)]  hover:text-[#fc3239]  p-2 rounded-xl"
+              className="block py-2 text-[var(--softTextColor)]  hover:text-[#65026e]  p-2 rounded-xl"
              onClick={() => setOpen(false)}              > Help center      
               </Link>
             
