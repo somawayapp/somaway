@@ -33,8 +33,8 @@ function maskPhoneNumber(phoneNumber) {
         return phoneNumber; // Return as is if not a valid string or too short to mask
     }
     // Keep first 3 digits, mask the middle, keep last 2 digits
-    const firstPart = phoneNumber.substring(0, 3);
-    const lastPart = phoneNumber.substring(phoneNumber.length - 2);
+    const firstPart = phoneNumber.substring(0, 5);
+    const lastPart = phoneNumber.substring(phoneNumber.length - 5);
     const maskedPart = '*'.repeat(phoneNumber.length - 5); // Mask the rest
     return `${firstPart}${maskedPart}${lastPart}`;
 }
