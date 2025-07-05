@@ -49,35 +49,62 @@ const Sidebar2 = () => {
   }, [summary, controls]);
 
   // --- NEW: Handle Search ---
-  const handleSearch = async () => {
+// In Sidebar2.jsx, add this helper (ensure it's identical to backend's)
+const formatPhoneNumberClient = (phone) => {
+    let cleanPhone = phone.replace(/\D/g, "");
+
+    if (cleanPhone.startsWith("0")) {
+        cleanPhone = "254" + cleanPhone.substring(1);
+    } else if (cleanPhone.startsWith("7")) {
+        cleanPhone = "254" + cleanPhone;
+    } else if (cleanPhone.startsWith("+254")) {
+        cleanPhone = cleanPhone.substring(1);
+    } else if (!cleanPhone.startsWith("254")) {
+        return null; // Invalid format
+    }
+
+    if (cleanPhone.length !== 12) {
+        return null;
+    }
+    return cleanPhone;
+};
+
+// Modify handleSearch:
+const handleSearch = async () => {
     if (!searchTerm) {
-      setSearchError("Please enter a phone number to search.");
-      setSearchResult(null);
-      return;
+        setSearchError("Please enter a phone number to search.");
+        setSearchResult(null);
+        return;
+    }
+
+    const formattedSearchTerm = formatPhoneNumberClient(searchTerm);
+    if (!formattedSearchTerm) {
+        setSearchError("Invalid phone number format. Please use 07XXXXXXXX, 7XXXXXXXX, or +254XXXXXXXX format.");
+        setSearchResult(null);
+        return;
     }
 
     setSearchLoading(true);
     setSearchError(null);
-    setSearchResult(null); // Clear previous results
+    setSearchResult(null);
 
     try {
-      // Encode the phone number for the URL
-      const encodedPhone = encodeURIComponent(searchTerm);
-      const res = await fetch(`https://somawayapi.vercel.app/search?phone=${encodedPhone}`);
-      const data = await res.json();
+        const encodedPhone = encodeURIComponent(formattedSearchTerm); // Use the formatted term
+        const res = await fetch(`https://somawayapi.vercel.app/search?phone=${encodedPhone}`);
+        const data = await res.json();
 
-      if (data.success) {
-        setSearchResult(data.data); // Store the found entry
-      } else {
-        setSearchError(data.message || "No entry found.");
-      }
+        if (data.success) {
+            setSearchResult(data.data);
+        } else {
+            setSearchError(data.message || "No entry found.");
+        }
     } catch (err) {
-      console.error("Search API error:", err);
-      setSearchError("Failed to perform search. Please try again.");
+        console.error("Search API error:", err);
+        setSearchError("Failed to perform search. Please try again.");
     } finally {
-      setSearchLoading(false);
+        setSearchLoading(false);
     }
-  };
+};
   // --- END NEW Search Handlers ---
 
   const current = summary?.current ?? 0;
