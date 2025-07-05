@@ -110,16 +110,22 @@ const AboutPage = () => {
 <div className="flex flex-col pl-3 pr-3 pt-12 md:pt-0  md:pl-[100px] lg:pl-[200px] md:flex-row items-center justify-between  z-10 text-white">
 <div className="flex-1  text-center  md:text-left">
 <h3 className="text-3xl md:text-5xl font-bold mt-4 mb-4">How did the idea of Shilingi come?</h3>
-<p className="text-sm md:text-lg max-w-md mb-6">
-ONe day i walked out of the supermarket with three shilings, change not knowing what do to with it. there were days when this could buy you bread milk and some sweets and still take some change bac  home,
-but it has come to loose it value.  i walked home tossing the coins in the air and lost three of them on the way. finnaly when i got home the last coins
-slipped and fell on the coner of the bathroom and  everyday i kept seen it, just lying there. everyday i would wonder if the one shiling could fiind
-its value again. like a dustin outside the shop, where everyone would dump there one shilling coins and oce it got a good amount, some random
-shopper would be awarded with it.
+<p className="text-sm md:text-lg max-w-lg mb-6">
+One day i walked out of the supermarket with three shillings in my hand, hardly any money at all these days. I remember when that
+ could buy so much – bread, milk, sweets, and even get some change back. Now, it just feels… small.
 
-but i dont ow a supprmarket. after contempleting on the  idea for so long i ended up decing to built a partform where anyoe weither from a shop or not, would be able to toss their coin 
-a comunity led initiavtive where each shiling matters. several weeks later here we hae shiling, bringing back the worth of your shiling. 
+I tossed the coins in the air on my way home, and three of them slipped away, just gone. When I finally got inside, the last shilling
+ rolled into a corner of the bathroom. I saw it every day, just sitting there, and I kept wondering: Could this one shilling ever feel
+  important again?
 
+Everyday i would wonder if the one shiling could find
+its value again. like a dustin outside the shop, where everyone would dump there one shilling coins and oce it got  to a good amount, 
+a random lucky shopper would be awarded with it. I don't own a shop, but that idea stuck with me.
+
+So, I decided to build something. A place online where anyone – can toss in their extra shillings. 
+It's a community thing, where every single shilling gets a chance to matter again.
+
+After a few weeks, we have Shilling – bringing back the true worth of your shilling.
 </p>
 <img 
 src="/love.svg" 
