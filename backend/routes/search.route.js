@@ -68,7 +68,7 @@ function maskPhoneNumber(phoneNumber) {
 
 
 // --- Search Endpoint ---
-router.get("/search", async (req, res) => {
+router.get("/", async (req, res) => {
   let { phone, cycle } = req.query; // Expect phone number and optional cycle from query params
 
   // 1. Basic validation
