@@ -34,10 +34,11 @@ function decrypt(text) {
     const decipher = crypto.createDecipheriv("aes-256-cbc", Buffer.from(ENCRYPTION_KEY, "hex"), iv);
     let decrypted = decipher.update(encryptedText);
     decrypted = Buffer.concat([decrypted, decipher.final()]);
-    console.log(`[Decrypt] Successfully decrypted a value.`); // Avoid logging the actual decrypted value for security
+    // For general decryption, avoid logging the actual value here to prevent accidental logging of sensitive data
+    // console.log(`[Decrypt] Successfully decrypted a value.`);
     return decrypted.toString();
   } catch (error) {
-    console.error("[Decrypt] Decryption failed:", error.message, "Text:", text);
+    console.error("[Decrypt] Decryption failed:", error.message, "Text (partial):", text.substring(0, 30) + "..."); // Log partial text for errors
     return null; // Return null or re-throw if decryption fails
   }
 }
@@ -163,7 +164,12 @@ router.get("/admin/decrypt-all-completed", async (req, res) => {
         const decryptedData = completedEntries.map(entry => {
             const decryptedName = decrypt(entry.name);
             const decryptedPhone = decrypt(entry.phone);
-            console.log(`[Admin Decrypt Route] Decrypting entry ID: ${entry._id} - Phone: ${decryptedPhone ? decryptedPhone : 'Failed Decryption'}`); // Log the actual decrypted phone for this admin route
+
+            // ********************************************************************
+            // *** THIS IS THE LOG YOU REQUESTED: LOGGING THE DECRYPTED PHONE ***
+            // ********************************************************************
+            console.log(`[Admin Decrypt Route] Decrypted Entry ID: ${entry._id}, Phone: ${decryptedPhone}, Name: ${decryptedName}`);
+            // ********************************************************************
 
             return {
                 _id: entry._id,
