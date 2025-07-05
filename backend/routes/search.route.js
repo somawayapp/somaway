@@ -57,7 +57,7 @@ function decrypt(text) {
 // Function to mask phone number (for displaying search results securely)
 function maskPhoneNumber(phoneNumber) {
   if (!phoneNumber || typeof phoneNumber !== 'string' || phoneNumber.length < 5) {
-    return "***";
+    return "********";
   }
   const len = phoneNumber.length;
   const firstPart = phoneNumber.substring(0, 5);
@@ -68,23 +68,25 @@ function maskPhoneNumber(phoneNumber) {
 
 
 // --- Search Endpoint ---
-// In search.router.js, inside the GET / route:
 router.get("/", async (req, res) => {
-    let { phone, cycle } = req.query;
+  let { phone, cycle } = req.query; // Expect phone number and optional cycle from query params
 
-    console.log(`Received search request - Raw phone: ${phone}, Cycle: ${cycle}`);
+  // 1. Basic validation
+  if (!phone) {
+    return res.status(400).json({ success: false, message: "Phone number is required for search." });
+  }
 
-    const formattedPhone = formatPhoneNumber(phone);
-    if (!formattedPhone) {
-        console.log(`Invalid format for phone: ${phone}`);
-        return res.status(400).json({ success: false, message: "Invalid phone number format." });
-    }
-    console.log(`Formatted phone: ${formattedPhone}`);
+  // 2. Format the incoming phone number for consistent hashing
+  const formattedPhone = formatPhoneNumber(phone);
+  if (!formattedPhone) {
+    return res.status(400).json({ success: false, message: "Invalid phone number format." });
+  }
 
-    const phoneNumberHash = hashPhoneNumber(formattedPhone);
-    console.log(`Hashed phone for search: ${phoneNumberHash}`);
+  // 3. Hash the formatted phone number
+  const phoneNumberHash = hashPhoneNumber(formattedPhone);
 
-    // ... rest of your code
+  console.log(`Search request for phone hash: ${phoneNumberHash}, cycle: ${cycle || 'any'}`);
+
   try {
     // 4. Build query object
     const query = {
