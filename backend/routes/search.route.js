@@ -6,6 +6,7 @@ import crypto from "crypto"; // For hashing and decryption
 const router = express.Router();
 
 // Encryption Configuration (MUST BE THE SAME AS YOUR M-PESA ROUTER)
+// IMPORTANT: In a real application, load this from environment variables (e.g., process.env.ENCRYPTION_KEY)
 const ENCRYPTION_KEY = "8ab21ec1dd828cc6409d0ed55b876e0530dfbccd67e56f1318e684e555896f3d"; // Use a strong, environment-variable-stored key in production
 const IV_LENGTH = 16; // For AES-256-CBC
 
@@ -64,14 +65,7 @@ function formatPhoneNumber(phone) {
   return digits;
 }
 
----
-
-## The Working Search Code (Designed for your current data state)
-
-This version prioritizes finding the match based on the **decrypted phone number** for entries marked "Completed", as your database has `undefined` hashes for some records.
-
-```javascript
-// --- Main Search Route ---
+// --- Main Search Route (Designed to find entries even with 'undefined' phoneNumberHash) ---
 router.get("/", async (req, res) => {
   let { phone } = req.query; // Get phone from query parameters
   console.log(`\n[Search Route] Received search request for phone: ${phone}`);
@@ -91,16 +85,17 @@ router.get("/", async (req, res) => {
   console.log(`[Search Route] Hashed incoming phone for search (this is what we'll compare against): ${searchPhoneNumberHash}`);
 
   try {
-    // 1. Fetch ALL entries that are 'Completed'.
-    // We *cannot* directly query by phoneNumberHash IF it's undefined in some documents.
-    // Instead, we'll fetch completed ones and filter in application memory.
+    // Strategy: Fetch ALL entries that are 'Completed'.
+    // We cannot reliably query by 'phoneNumberHash' directly in the DB
+    // because some of your existing entries have it as 'undefined'.
+    // So, we'll fetch them and then filter in application memory.
     const allCompletedEntries = await EntryModel.find({ status: "Completed" }).sort({ createdAt: -1 });
 
     console.log(`[Search Route] Found ${allCompletedEntries.length} entries with status 'Completed' in the DB. Now processing them.`);
 
     const foundMatchingEntries = [];
 
-    // 2. Iterate through each fetched 'Completed' entry, decrypt its phone, re-hash, and compare.
+    // Iterate through each fetched 'Completed' entry, decrypt its phone, re-hash, and compare.
     for (const entry of allCompletedEntries) {
       const decryptedEntryPhone = decrypt(entry.phone); // DECRYPT the stored phone
 
@@ -110,22 +105,24 @@ router.get("/", async (req, res) => {
         if (formattedEntryPhone) {
           const entryPhoneNumberHash = hashPhoneNumber(formattedEntryPhone); // RE-HASH the formatted decrypted phone
 
+          // Log the comparison to demonstrate what's happening
           console.log(`[Search Route] Comparing search hash '${searchPhoneNumberHash}' with entry ${entry._id}'s RE-GENERATED hash '${entryPhoneNumberHash}'. Stored hash (may be undefined): ${entry.phoneNumberHash}`);
 
           if (entryPhoneNumberHash === searchPhoneNumberHash) {
             console.log(`[Search Route] --- !!! MATCH FOUND FOR ENTRY ID: ${entry._id} !!! ---`);
             foundMatchingEntries.push({
-              name: decrypt(entry.name), // Decrypt name for results
+              _id: entry._id, // Include ID in result
+              name: decrypt(entry.name), // Decrypt name for response
               phone: decryptedEntryPhone, // Use the decrypted phone in the response
               amount: entry.amount,
               mpesaReceiptNumber: entry.mpesaReceiptNumber,
               status: entry.status,
               createdAt: entry.createdAt,
               cycle: entry.cycle,
-              // For debugging, you might still want to see the stored hash (undefined or not)
-              storedPhoneNumberHash: entry.phoneNumberHash
+              storedPhoneNumberHash: entry.phoneNumberHash // Show the hash as it's stored in DB (for debugging)
             });
           } else {
+            // This log helps debug why an entry might not be found
             console.log(`[Search Route] No hash match for entry ID: ${entry._id}.`);
           }
         } else {
@@ -154,3 +151,98 @@ router.get("/", async (req, res) => {
     res.status(500).json({ success: false, message: "Server error during search." });
   }
 });
+
+
+// --- ADMIN Route: Get and Decrypt All Completed Entries (for inspection/debugging) ---
+router.get("/admin/decrypt-all-completed", async (req, res) => {
+    console.log("\n[Admin Decrypt Route] Attempting to retrieve and decrypt all completed entries.");
+    try {
+        const completedEntries = await EntryModel.find({ status: "Completed" }).sort({ createdAt: -1 });
+        console.log(`[Admin Decrypt Route] Found ${completedEntries.length} completed entries in the database.`);
+
+        if (completedEntries.length === 0) {
+            return res.status(200).json({ success: true, message: "No completed entries found to decrypt.", results: [] });
+        }
+
+        const decryptedData = completedEntries.map(entry => {
+            const decryptedName = decrypt(entry.name);
+            const decryptedPhone = decrypt(entry.phone);
+
+            // This log explicitly shows the actual decrypted phone and the stored hash (undefined or not)
+            console.log(`[Admin Decrypt Route] Decrypted Entry ID: ${entry._id}, Phone: ${decryptedPhone}, Name: ${decryptedName}, Status: ${entry.status}, Stored Hashed Phone: ${entry.phoneNumberHash}`);
+
+            return {
+                _id: entry._id,
+                name: decryptedName,
+                phone: decryptedPhone,
+                amount: entry.amount,
+                mpesaReceiptNumber: entry.mpesaReceiptNumber,
+                status: entry.status,
+                createdAt: entry.createdAt,
+                cycle: entry.cycle,
+                phoneNumberHash: entry.phoneNumberHash // Also include the stored hash in the API response
+            };
+        });
+
+        // Filter out any entries where decryption of essential fields might have failed
+        const filteredDecryptedData = decryptedData.filter(item => item.name !== null && item.phone !== null);
+
+        console.log(`[Admin Decrypt Route] ${filteredDecryptedData.length} entries successfully decrypted after filtering.`);
+
+        res.json({
+            success: true,
+            message: `Successfully retrieved and decrypted ${filteredDecryptedData.length} completed entries.`,
+            results: filteredDecryptedData,
+        });
+
+    } catch (error) {
+        console.error("[Admin Decrypt Route] Error decrypting all completed entries:", error);
+        res.status(500).json({ success: false, message: "Server error during decryption of all completed entries." });
+    }
+});
+
+
+// --- ADMIN Route: Log All Data in the DB (for inspection/debugging) ---
+router.get("/admin/log-all-db-data", async (req, res) => {
+    console.log("\n------------------------------------------------------------------");
+    console.log("[ADMIN LOG ALL DB DATA] Starting to fetch and log ALL entries from the database.");
+    console.log("------------------------------------------------------------------");
+    try {
+        const allEntries = await EntryModel.find({}); // Fetch ALL entries
+        console.log(`[ADMIN LOG ALL DB DATA] Found ${allEntries.length} total entries in the database.`);
+
+        if (allEntries.length === 0) {
+            console.log("[ADMIN LOG ALL DB DATA] No entries found in the database to log.");
+        } else {
+            allEntries.forEach(entry => {
+                const decryptedName = decrypt(entry.name);
+                const decryptedPhone = decrypt(entry.phone);
+
+                console.log(`
+                    [ADMIN LOG ALL DB DATA] Entry ID:       ${entry._id}
+                    [ADMIN LOG ALL DB DATA] Name (Decrypted): ${decryptedName}
+                    [ADMIN LOG ALL DB DATA] Phone (Decrypted): ${decryptedPhone}
+                    [ADMIN LOG ALL DB DATA] Hashed Phone:     ${entry.phoneNumberHash}
+                    [ADMIN LOG ALL DB DATA] Amount:           ${entry.amount}
+                    [ADMIN LOG ALL DB DATA] M-Pesa Receipt:   ${entry.mpesaReceiptNumber}
+                    [ADMIN LOG ALL DB DATA] Status:           ${entry.status}
+                    [ADMIN LOG ALL DB DATA] Created At:       ${entry.createdAt}
+                    [ADMIN LOG ALL DB DATA] Cycle:            ${entry.cycle}
+                    ------------------------------------------------------------------
+                `);
+            });
+            console.log(`[ADMIN LOG ALL DB DATA] Finished logging ${allEntries.length} entries.`);
+        }
+
+        res.json({ success: true, message: "All database entries have been logged to the console." });
+
+    } catch (error) {
+        console.error("[ADMIN LOG ALL DB DATA] Error fetching and logging all entries:", error);
+        res.status(500).json({ success: false, message: "Server error during full database logging." });
+    } finally {
+        console.log("------------------------------------------------------------------\n");
+    }
+});
+
+
+export default router;
