@@ -42,24 +42,19 @@ const HomePage = () => {
       <>
 
        <div className="  overflow-x-none ">
-  <Helmet>
-    <title>
-      {cat && author 
-        ? `${cat} Book Summary by ${author} | Unlock Key Insights`
-        : cat
-        ? `${cat} Book Summaries | Learn from the Best`
-        : author
-        ? `Book Summary by ${author} | Must-Read Summaries`
-        : "Book Summaries"} | Hodi
-    </title>
-    <meta
-      name="description"
-      content={`Explore top book summaries in the ${cat || "self-growth"} category. Gain insights from ${
-        author || "top authors"
-      } in minutes. Elevate your mind—only on Hodi!`}
-    />
-    <link rel="canonical" href={`${window.location.href}`} />
-  </Helmet>
+<Helmet>
+  <title>Shilingi - Your Micro-Contribution & Reward Platform for Community Empowerment</title>
+
+  <meta
+    name="description"
+    content="Shilingi is a fun and trusted micro-contribution and reward platform. Toss in your little bit to make a big difference, empower communities, and stand a chance to change lives. Built on transparency and teamwork."
+  />
+
+  <meta
+    name="keywords"
+    content="micro-contribution, community empowerment, reward platform, shilingi, crowdfunding, social giving, collective impact, small contributions, big difference, trust, transparency, teamwork, fun contributions, life-changing, community building, digital giving, peer-to-peer giving, grassroots funding, shared prosperity, collective action, social impact, online community, mutual support, participation, financial inclusion, digital rewards, community fund, easy giving, secure contributions, positive change"
+  />
+</Helmet>
 
 <div
   style={{ zIndex: 100004 }}

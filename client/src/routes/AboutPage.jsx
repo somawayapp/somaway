@@ -27,6 +27,19 @@ const AboutPage = () => {
       </div>
     ) : (
       <div>
+<Helmet>
+  <title>Shilingi - Your Micro-Contribution & Reward Platform for Community Empowerment</title>
+
+  <meta
+    name="description"
+    content="Shilingi is a fun and trusted micro-contribution and reward platform. Toss in your little bit to make a big difference, empower communities, and stand a chance to change lives. Built on transparency and teamwork."
+  />
+
+  <meta
+    name="keywords"
+    content="micro-contribution, community empowerment, reward platform, shilingi, crowdfunding, social giving, collective impact, small contributions, big difference, trust, transparency, teamwork, fun contributions, life-changing, community building, digital giving, peer-to-peer giving, grassroots funding, shared prosperity, collective action, social impact, online community, mutual support, participation, financial inclusion, digital rewards, community fund, easy giving, secure contributions, positive change"
+  />
+</Helmet>
 
 <div
   style={{ zIndex: 100004 }}
@@ -59,43 +72,7 @@ const AboutPage = () => {
 
 
       <div>
-        <Helmet>
-        <title>The #1 Free App to Unlock the Best Ideas from Top Books! - Hodii Best Book Summaries</title>
-
-        <meta name="description" content="Hodii is the #1 award-winning book summary app and website, trusted by 40M+ users worldwide and 100K+ daily readers. Get smarter in just 15 minutes with our free, concise summaries of best-selling books. Join us today—learn and grow, one book summary at a time! " />
-
-        <meta name="keywords" content="book summaries, knowledge empowerment, bestselling books, transformative ideas, thought leadership, business books, self-help summaries, industry insights, personal growth, productivity hacks, motivation, innovation strategies, creative thinking, mind mastery, leadership skills, financial wisdom, success mindset, breakthrough thinking, wisdom for life, practical knowledge, learning shortcuts, brain boost, rapid reading, book digest, quick reads, success stories, entrepreneurial mindset, modern wisdom, elite knowledge, mastery techniques, global perspectives, future readiness, book analysis, idea extraction, in-depth reviews, concise knowledge, summary breakdowns, book wisdom, mental expansion, critical thinking, intellectual growth, top books, influential reads, advanced thinking, ultimate book digest, life hacks, professional growth, career mastery, mindset shift, paradigm transformation, unconventional wisdom, practical insights, top nonfiction books, skill enhancement, brain optimization, cognitive skills, mind enhancement, top book reviews, wisdom harvesting, fast knowledge, core ideas, rapid insights, strategic intelligence, innovation fuel, personal development, growth mindset, self-mastery, breakthrough books, smart reading, fast tracking wisdom, peak performance, visionary thinking, knowledge domination, unbeatable learning" />
-
- 
-  <meta property="og:title" content="Hodii - Elevate Your Mind" />
-  <meta property="og:description" content="Achieve greatness with Hodi. Explore groundbreaking book summaries that transform your life." />
-  <meta property="og:image" content="/images/Hodi-og.jpg" />
-  <meta property="og:url" content={`${window.location.href}`} />
-  <meta property="og:type" content="website" />
-  
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Hodii - Elevate Your Mind" />
-  <meta name="twitter:description" content="Revolutionize your thinking with powerful book insights on Hodi." />
-  <meta name="twitter:image" content="/images/Hodi-twitter.jpg" />
-  
-  <script type="application/ld+json">
-    {`{
-      "@context": "https://schema.org",
-      "@type": "WebSite",
-      "name": "Hodi",
-      "url": "${window.location.href}",
-      "potentialAction": {
-        "@type": "SearchAction",
-        "target": "${window.location.href}/search?q={search_term_string}",
-        "query-input": "required name=search_term_string"
-      }
-    }`}
-  </script>
-  
-  <link rel="canonical" href={`${window.location.href}`} />
-  
-  <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
-</Helmet>
+      
 
 
 
