@@ -28,8 +28,7 @@ const AboutPage = () => {
     ) : (
       <div>
 <Helmet>
-  <title>Shilingi - Your Micro-Contribution & Reward Platform for Community Empowerment</title>
-
+<title>Shilingi: Every Shilling Counts - Bringing Back the Value of a Shilling</title>
   <meta
     name="description"
     content="Shilingi is a fun and trusted micro-contribution and reward platform. Toss in your little bit to make a big difference, empower communities, and stand a chance to change lives. Built on transparency and teamwork."

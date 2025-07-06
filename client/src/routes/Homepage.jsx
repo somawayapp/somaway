@@ -43,7 +43,7 @@ const HomePage = () => {
 
        <div className="  overflow-x-none ">
 <Helmet>
-  <title>Shilingi - Your Micro-Contribution & Reward Platform for Community Empowerment</title>
+  <title>Shilingi: Every Shilling Counts - Bringing Back the Value of a Shilling</title>
 
   <meta
     name="description"
