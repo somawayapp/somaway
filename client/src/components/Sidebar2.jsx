@@ -168,37 +168,7 @@ const Sidebar2 = () => {
       </motion.div>
 
       {/* --- NEW SEARCH BAR --- */}
-      <motion.div
-        className="w-full px-4 mt-6"
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 1.8, duration: 0.5 }}
-      >
-        <form onSubmit={handleSearch} className="flex flex-col gap-2">
-          <input
-            ref={searchInputRef}
-            type="tel" // Use type="tel" for phone numbers
-            placeholder="Search by phone number (e.g., 0712345678)"
-            className="w-full p-2 bg-[#2a2a2a] border border-[#f36dff] rounded-md text-white placeholder-gray-500 focus:outline-none focus:ring-1 focus:ring-[#ffd700]"
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-            disabled={searchLoading}
-          />
-          <button
-            type="submit"
-            className="w-full bg-[#f36dff] text-white py-2 rounded-md hover:bg-[#d858e6] transition-colors duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
-            disabled={searchLoading}
-          >
-            {searchLoading ? "Searching..." : "Search Participant"}
-          </button>
-        </form>
-        {searchError && (
-          <p className="text-red-400 text-sm mt-2 text-center">{searchError}</p>
-        )}
-      </motion.div>
-
-      {/* --- SEARCH RESULTS DISPLAY --- */}
-            {/* --- NEW: Search Bar --- */}
+         {/* --- NEW: Search Bar --- */}
       <motion.div
         className="w-full px-4 mt-6"
         initial={{ opacity: 0, y: 20 }}
@@ -213,8 +183,8 @@ const Sidebar2 = () => {
             type="text"
             placeholder="Enter your phone number (e.g., 07XXXXXXXX)"
             className="flex-grow p-2 rounded-md bg-gray-700 border border-gray-600 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#f36dff]"
-            value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
             onKeyPress={(e) => { // Allow pressing Enter to search
               if (e.key === 'Enter') {
                 handleSearch();
@@ -263,7 +233,7 @@ const Sidebar2 = () => {
           animate={{ opacity: 1 }}
           transition={{ delay: 2, duration: 0.5 }}
         >
-          <h3 className="text-sm font-bold text-[#f36dff] mb-2"> Participants:</h3>
+          <h3 className="text-sm font-bold text-[#f36dff] mb-2">Recent Participants:</h3>
           <ul className="space-y-1 text-sm">
             {players.map((player, idx) => (
               <motion.li
