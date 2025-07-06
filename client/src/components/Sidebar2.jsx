@@ -224,7 +224,7 @@ const Sidebar2 = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.3 }}
           >
-            <h4 className="text-md font-bold text-[#ffd700]">Your Entry Found!</h4>
+            <h4 className="text-md font-bold text-[#ffd700]">Search Results!</h4>
             <p className="text-sm text-gray-300">Name: {result.name}</p>
             <p className="text-sm text-gray-300">Phone: {result.phone}</p>
             <p className="text-sm text-gray-300">Status: {result.status}</p>
@@ -238,6 +238,11 @@ const Sidebar2 = () => {
           </ul>
         </motion.div>
       )}
+       
+
+        <div className="border-t mt-2 border-gray-700">
+
+        </div>
 
       {/* Players List (Conditionally rendered or below search results) */}
       {/* You might want to hide the full player list if search results are displayed
@@ -245,15 +250,18 @@ const Sidebar2 = () => {
           For now, I'll put it below the search results and add a check. */}
       {searchResults.length === 0 && ( // Only show the main list if no search results are active
 
+       
+
 
           <motion.div
-          className="w-full mt-2 text-center h-[fit-content] max-h-[calc(100vh-600px)] p-3 bg-gray-800 overflow-y-auto border-t border-gray-700"
+          className="w-full mt-2 text-center h-[fit-content] max-h-[calc(100vh-600px)] p-3 bg-gray-800 overflow-y-auto "
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.2, duration: 0.5 }}
         >
           <ul className="space-y-1 text-sm">
-          
+          <h4 className="text-md font-bold text-[#ffd700]">  Participants </h4>
+
            
 
           {players.map((player, idx) => (
