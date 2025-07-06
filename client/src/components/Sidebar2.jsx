@@ -203,7 +203,7 @@ const Sidebar2 = () => {
         {searchLoading && <p className="text-center text-sm text-gray-400 mt-2">Loading...</p>}
         {searchError && <p className="text-center text-sm text-red-400 mt-2">{searchError}</p>}
 
-        {searchResult && (
+        {searchResults && (
           <motion.div
             className="mt-4 p-3 bg-gray-800 rounded-md border border-gray-700 text-center"
             initial={{ opacity: 0, y: 10 }}
@@ -211,11 +211,11 @@ const Sidebar2 = () => {
             transition={{ duration: 0.3 }}
           >
             <h4 className="text-md font-bold text-[#ffd700]">Your Entry Found!</h4>
-            <p className="text-sm text-gray-300">Name: {searchResult.name}</p>
-            <p className="text-sm text-gray-300">Phone: {searchResult.phone}</p>
-            <p className="text-sm text-gray-300">Status: {searchResult.status}</p>
-            <p className="text-sm text-gray-300">Cycle: {searchResult.cycle}</p>
-            <p className="text-xs text-gray-400 mt-1">Joined: {new Date(searchResult.createdAt).toLocaleString()}</p>
+            <p className="text-sm text-gray-300">Name: {searchResults.name}</p>
+            <p className="text-sm text-gray-300">Phone: {searchResults.phone}</p>
+            <p className="text-sm text-gray-300">Status: {searchResults.status}</p>
+            <p className="text-sm text-gray-300">Cycle: {searchResults.cycle}</p>
+            <p className="text-xs text-gray-400 mt-1">Joined: {new Date(searchResults.createdAt).toLocaleString()}</p>
           </motion.div>
         )}
       </motion.div>
