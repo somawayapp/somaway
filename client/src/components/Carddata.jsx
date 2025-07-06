@@ -4,7 +4,7 @@ import { motion, AnimatePresence } from "framer-motion";
 
 const cardData = [
   {
-    image: "/spin.jpg",
+    image: "/shilingibanner.png",
     title: "Win Ksh 1 Million",
     desc: "Join a community-powered luck pool where everyone has a fair shot to win 1 million shillings by stashing only 1 shilling.",
   },
