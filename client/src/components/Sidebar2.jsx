@@ -198,32 +198,59 @@ const Sidebar2 = () => {
       </motion.div>
 
       {/* --- SEARCH RESULTS DISPLAY --- */}
-      {searchResults.length > 0 && (
-        <motion.div
-          className="w-full mt-6 text-center h-[fit-content] max-h-[calc(100vh-600px)] overflow-y-auto border-t border-gray-700 pt-4"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.2, duration: 0.5 }}
-        >
-          <h3 className="text-sm font-bold text-[#ffd700] mb-2">Search Results:</h3>
-          <ul className="space-y-1 text-sm">
-            {searchResults.map((result, idx) => (
-              <motion.li
-                key={idx}
-                className="text-[#f2f2f2] hover:text-[#f36dff] transition p-1 bg-[#2a2a2a] rounded-md my-1"
-                initial={{ opacity: 0, x: -20 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: 0.1 + idx * 0.05 }}
-              >
-                {result.name} - {result.phone} <br />
-                <span className="text-xs text-gray-400">
-                  Receipt: {result.mpesaReceiptNumber || 'N/A'} (Cycle: {result.cycle})
-                </span>
-              </motion.li>
-            ))}
-          </ul>
-        </motion.div>
-      )}
+            {/* --- NEW: Search Bar --- */}
+      <motion.div
+        className="w-full px-4 mt-6"
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 1.0, duration: 0.5 }}
+      >
+        <h3 className="text-sm font-bold text-[#f36dff] mb-2 text-center">
+          Search Your Entry:
+        </h3>
+        <div className="flex flex-col sm:flex-row gap-2 justify-center">
+          <input
+            type="text"
+            placeholder="Enter your phone number (e.g., 07XXXXXXXX)"
+            className="flex-grow p-2 rounded-md bg-gray-700 border border-gray-600 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#f36dff]"
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+            onKeyPress={(e) => { // Allow pressing Enter to search
+              if (e.key === 'Enter') {
+                handleSearch();
+              }
+            }}
+          />
+          <button
+            onClick={handleSearch}
+            className="px-4 py-2 bg-[#ffd700] text-gray-900 rounded-md font-semibold hover:bg-[#ffc107] transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+            disabled={searchLoading}
+          >
+            {searchLoading ? "Searching..." : "Search"}
+          </button>
+        </div>
+
+        {searchLoading && <p className="text-center text-sm text-gray-400 mt-2">Loading...</p>}
+        {searchError && <p className="text-center text-sm text-red-400 mt-2">{searchError}</p>}
+
+        {searchResult && (
+          <motion.div
+            className="mt-4 p-3 bg-gray-800 rounded-md border border-gray-700 text-center"
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.3 }}
+          >
+            <h4 className="text-md font-bold text-[#ffd700]">Your Entry Found!</h4>
+            <p className="text-sm text-gray-300">Name: {searchResult.name}</p>
+            <p className="text-sm text-gray-300">Phone: {searchResult.phone}</p>
+            <p className="text-sm text-gray-300">Status: {searchResult.status}</p>
+            <p className="text-sm text-gray-300">Cycle: {searchResult.cycle}</p>
+            <p className="text-xs text-gray-400 mt-1">Joined: {new Date(searchResult.createdAt).toLocaleString()}</p>
+          </motion.div>
+        )}
+      </motion.div>
+      {/* --- END NEW Search Bar --- */}
+
 
       {/* Players List (Conditionally rendered or below search results) */}
       {/* You might want to hide the full player list if search results are displayed
@@ -236,7 +263,7 @@ const Sidebar2 = () => {
           animate={{ opacity: 1 }}
           transition={{ delay: 2, duration: 0.5 }}
         >
-          <h3 className="text-sm font-bold text-[#f36dff] mb-2">Recent Participants:</h3>
+          <h3 className="text-sm font-bold text-[#f36dff] mb-2"> Participants:</h3>
           <ul className="space-y-1 text-sm">
             {players.map((player, idx) => (
               <motion.li
