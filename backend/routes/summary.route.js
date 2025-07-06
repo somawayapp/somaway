@@ -29,25 +29,58 @@ function decrypt(text) {
 
 // Function to mask phone numbers
 function maskPhoneNumber(phoneNumber) {
-    if (typeof phoneNumber !== 'string' || phoneNumber.length < 6) { // Minimum length to show 3 start, 3 masked.
-        return phoneNumber; // Return as is if not a valid string or too short to mask 3 digits and show start.
+    if (typeof phoneNumber !== 'string') {
+        return phoneNumber;
     }
 
-    const firstPartLength = 3; // Number of digits to show at the beginning
-    const maskedPartLength = 3; // Exactly 3 asterisks
-    
-    // Calculate how many digits are left to show at the end
-    const lastPartLength = phoneNumber.length - firstPartLength - maskedPartLength;
+    // Sanitize the input: remove spaces, dashes, parentheses.
+    let cleanNumber = phoneNumber.replace(/[\s-()]/g, '');
 
-    // If lastPartLength is negative, it means the number is too short to show
-    // the firstPart, the maskedPart, and still have a positive lastPart.
-    // We already handled phoneNumber.length < 6, so lastPartLength will be >= 0 here.
-    
-    const firstPart = phoneNumber.substring(0, firstPartLength);
-    const maskedPart = '*'.repeat(maskedPartLength);
-    const lastPart = phoneNumber.substring(phoneNumber.length - lastPartLength);
-    
-    return `${firstPart}${maskedPart}${lastPart}`;
+    let prefix = '';
+    let coreNumber = cleanNumber;
+
+    // Handle +254 prefix
+    if (cleanNumber.startsWith('+254')) {
+        prefix = '+254';
+        coreNumber = cleanNumber.substring(4);
+    } 
+    // Handle leading 0 (common for domestic calls in Kenya)
+    else if (cleanNumber.startsWith('0') && cleanNumber.length > 1) {
+        prefix = '0';
+        coreNumber = cleanNumber.substring(1);
+    }
+    // If it's a 9-digit number without 0 or +254, treat it as is (e.g., 7XXXXXXXX)
+    // If it's not starting with 254 or 0, we'll assume it's the core number directly.
+    // This part requires careful consideration of expected input formats.
+
+    // Minimum length for a meaningful mask (e.g., 3 masked + 2 at start + 2 at end)
+    // For 9-digit core numbers, this allows 3 visible, 3 masked, 3 visible.
+    // For 10-digit core numbers, this allows 3 visible, 3 masked, 4 visible.
+    if (coreNumber.length < 7) { 
+        return phoneNumber; // Too short to mask 3 digits in the center and show sufficient visible parts.
+    }
+
+    const maskedLength = 3;
+    const remainingVisibleLength = coreNumber.length - maskedLength;
+
+    // Calculate how many digits to show before the masked part
+    const visibleStartLength = Math.floor(remainingVisibleLength / 2);
+    // Calculate how many digits to show after the masked part
+    const visibleEndLength = remainingVisibleLength - visibleStartLength;
+
+    const maskedPart = '*'.repeat(maskedLength);
+
+    const start = coreNumber.substring(0, visibleStartLength);
+    const end = coreNumber.substring(coreNumber.length - visibleEndLength);
+
+    // If there's no original prefix, just return the masked core number.
+    // Otherwise, combine the original prefix with the masked core number.
+    if (prefix === '') {
+        return `${start}${maskedPart}${end}`;
+    } else {
+        // Reconstruct with the original prefix (e.g., +254 or 0)
+        return `${prefix}${start}${maskedPart}${end}`;
+    }
 }
 
 
