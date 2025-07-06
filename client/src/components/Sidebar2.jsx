@@ -244,15 +244,19 @@ const Sidebar2 = () => {
           or make it clear which list is which.
           For now, I'll put it below the search results and add a check. */}
       {searchResults.length === 0 && ( // Only show the main list if no search results are active
-        <motion.div
-          className="w-full mt-6 text-center h-[80%] md:h-[40%] overflow-y-scroll"
+
+
+          <motion.div
+          className="w-full mt-2 text-center h-[fit-content] max-h-[calc(100vh-600px)] p-3 bg-gray-800 overflow-y-auto border-t border-gray-700"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ delay: 2, duration: 0.5 }}
+          transition={{ delay: 0.2, duration: 0.5 }}
         >
-          <h3 className="text-sm font-bold text-[#f36dff] mb-2"> Participant List:</h3>
           <ul className="space-y-1 text-sm">
-            {players.map((player, idx) => (
+          
+           
+
+          {players.map((player, idx) => (
               <motion.li
                 key={idx}
                 className="text-[#f2f2f2] hover:text-[#ffd700] transition"
@@ -263,8 +267,13 @@ const Sidebar2 = () => {
                 {player.name} — {player.phone}
               </motion.li>
             ))}
+             
           </ul>
         </motion.div>
+
+
+
+    
       )}
     </div>
   );
