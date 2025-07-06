@@ -168,8 +168,7 @@ const Sidebar2 = () => {
       </motion.div>
 
       {/* --- NEW SEARCH BAR --- */}
-         {/* --- NEW: Search Bar --- */}
-      <motion.div
+         <motion.div
         className="w-full px-4 mt-6"
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
@@ -203,24 +202,42 @@ const Sidebar2 = () => {
         {searchLoading && <p className="text-center text-sm text-gray-400 mt-2">Loading...</p>}
         {searchError && <p className="text-center text-sm text-red-400 mt-2">{searchError}</p>}
 
-        {searchResults && (
-          <motion.div
+  
+      </motion.div>
+    
+
+      {/* --- SEARCH RESULTS DISPLAY --- */}
+      {searchResults.length > 0 && (
+        <motion.div
+          className="w-full mt-6 text-center h-[fit-content] max-h-[calc(100vh-600px)] overflow-y-auto border-t border-gray-700 pt-4"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.2, duration: 0.5 }}
+        >
+          <ul className="space-y-1 text-sm">
+            {searchResults.map((result, idx) => (
+
+               <motion.div
+             key={idx}
             className="mt-4 p-3 bg-gray-800 rounded-md border border-gray-700 text-center"
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.3 }}
           >
             <h4 className="text-md font-bold text-[#ffd700]">Your Entry Found!</h4>
-            <p className="text-sm text-gray-300">Name: {searchResults.name}</p>
-            <p className="text-sm text-gray-300">Phone: {searchResults.phone}</p>
-            <p className="text-sm text-gray-300">Status: {searchResults.status}</p>
-            <p className="text-sm text-gray-300">Cycle: {searchResults.cycle}</p>
-            <p className="text-xs text-gray-400 mt-1">Joined: {new Date(searchResults.createdAt).toLocaleString()}</p>
+            <p className="text-sm text-gray-300">Name: {result.name}</p>
+            <p className="text-sm text-gray-300">Phone: {result.phone}</p>
+            <p className="text-sm text-gray-300">Status: {result.status}</p>
+            <p className="text-sm text-gray-300">Cycle: {result.cycle}</p>
+            <p className="text-xs text-gray-400 mt-1">Joined: {new Date(result.createdAt).toLocaleString()}</p>
           </motion.div>
-        )}
-      </motion.div>
-      {/* --- END NEW Search Bar --- */}
 
+
+             
+            ))}
+          </ul>
+        </motion.div>
+      )}
 
       {/* Players List (Conditionally rendered or below search results) */}
       {/* You might want to hide the full player list if search results are displayed
