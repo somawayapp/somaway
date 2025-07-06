@@ -2,6 +2,8 @@ import React from "react";
 import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
 import Link from "next/link";
+import { Helmet } from "react-helmet";
+
 
 
 const TermsAndConditions = () => {
