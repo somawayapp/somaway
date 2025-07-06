@@ -169,7 +169,7 @@ const Sidebar2 = () => {
 
       {/* --- NEW SEARCH BAR --- */}
          <motion.div
-        className="w-full px-4 mt-6"
+        className="w-full px-4 mt-5"
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 1.0, duration: 0.5 }}
@@ -209,7 +209,7 @@ const Sidebar2 = () => {
       {/* --- SEARCH RESULTS DISPLAY --- */}
       {searchResults.length > 0 && (
         <motion.div
-          className="w-full mt-6 text-center h-[fit-content] max-h-[calc(100vh-600px)] overflow-y-auto border-t border-gray-700 pt-4"
+          className="w-full mt-3 text-center h-[fit-content] max-h-[calc(100vh-600px)] overflow-y-auto border-t border-gray-700 pt-4"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.2, duration: 0.5 }}
@@ -219,7 +219,7 @@ const Sidebar2 = () => {
 
                <motion.div
              key={idx}
-            className="mt-4 p-3 bg-gray-800 rounded-md border border-gray-700 text-center"
+            className="mt-3 p-3 bg-gray-800 rounded-md border border-gray-700 text-center"
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.3 }}
