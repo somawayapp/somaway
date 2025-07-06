@@ -240,7 +240,7 @@ const Sidebar2 = () => {
       )}
        
 
-        <div style="border-top: 1px solid gray; margin-top: 8px;"></div>
+     <hr className="border-t border-gray-700 mt-2" />
 
       {/* Players List (Conditionally rendered or below search results) */}
       {/* You might want to hide the full player list if search results are displayed
