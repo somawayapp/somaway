@@ -214,7 +214,7 @@ Join now for just one bob —
                     placeholder="Enter your name"
                     value={name}
                     onChange={(e) => setName(e.target.value)}
-                    className="p-2 rounded-lg text-black focus:outline-none"
+                    className="flex-grow p-2 rounded-md bg-gray-700 border border-gray-600 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#f36dff]"
                     required
                   />
                   <input
@@ -222,7 +222,7 @@ Join now for just one bob —
                     placeholder="Enter M-Pesa number (e.g. 07XX...)"
                     value={phone}
                     onChange={(e) => setPhone(e.target.value)}
-                    className="p-2 rounded-lg text-black focus:outline-none"
+                    className="flex-grow p-2 rounded-md bg-gray-700 border border-gray-600 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#f36dff]"
                     required
                   />
 
