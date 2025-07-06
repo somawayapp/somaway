@@ -110,7 +110,7 @@ className="w-8 h-8 mb-6 mx-auto md:mx-0 md:ml-0"
 />
 
  <p className="font-semibold text-md">Lexanda Mbelenzi</p>
-<p className="text-sm text-opacity-80"> Hodii Founder & CEO</p>
+<p className="text-sm text-opacity-80"> Shilingi Founder & CEO</p>
 </div>
 
 {/* Adjust vertical alignment with self-start or self-end */}
