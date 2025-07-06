@@ -29,13 +29,24 @@ function decrypt(text) {
 
 // Function to mask phone numbers
 function maskPhoneNumber(phoneNumber) {
-    if (typeof phoneNumber !== 'string' || phoneNumber.length < 4) {
-        return phoneNumber; // Return as is if not a valid string or too short to mask
+    if (typeof phoneNumber !== 'string' || phoneNumber.length < 6) { // Minimum length to show 3 start, 3 masked.
+        return phoneNumber; // Return as is if not a valid string or too short to mask 3 digits and show start.
     }
-    // Keep first 3 digits, mask the middle, keep last 2 digits
-    const firstPart = phoneNumber.substring(0, 5);
-    const lastPart = phoneNumber.substring(phoneNumber.length - 5);
-    const maskedPart = '*'.repeat(phoneNumber.length - 5); // Mask the rest
+
+    const firstPartLength = 3; // Number of digits to show at the beginning
+    const maskedPartLength = 3; // Exactly 3 asterisks
+    
+    // Calculate how many digits are left to show at the end
+    const lastPartLength = phoneNumber.length - firstPartLength - maskedPartLength;
+
+    // If lastPartLength is negative, it means the number is too short to show
+    // the firstPart, the maskedPart, and still have a positive lastPart.
+    // We already handled phoneNumber.length < 6, so lastPartLength will be >= 0 here.
+    
+    const firstPart = phoneNumber.substring(0, firstPartLength);
+    const maskedPart = '*'.repeat(maskedPartLength);
+    const lastPart = phoneNumber.substring(phoneNumber.length - lastPartLength);
+    
     return `${firstPart}${maskedPart}${lastPart}`;
 }
 

@@ -250,7 +250,7 @@ const Sidebar2 = () => {
           animate={{ opacity: 1 }}
           transition={{ delay: 2, duration: 0.5 }}
         >
-          <h3 className="text-sm font-bold text-[#f36dff] mb-2">Recent Participants:</h3>
+          <h3 className="text-sm font-bold text-[#f36dff] mb-2"> Participant List:</h3>
           <ul className="space-y-1 text-sm">
             {players.map((player, idx) => (
               <motion.li
