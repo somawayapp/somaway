@@ -68,7 +68,7 @@
   
              {/* Show on medium screens and larger */}
              <Link to="/" className="flex items-center gap-1 text-xl font-bold md:text-3xl hidden md:flex">
-              <img src="/shilingi.png" className="md:h-8 rounded-lg" />
+              <img src="/logo.png" className="md:h-8 rounded-lg" />
              </Link>
               <Link
               to="/help">
@@ -82,7 +82,7 @@
                  </Link>
 
            <Link to="/" className="flex items-center gap-1 text-xl font-bold md:text-3xl md:hidden">
-              <img src="/shilingi.png" className="h-[50px]" />
+              <img src="/logo.png" className="h-[50px]" />
              </Link>
     
              <div className="flex ml-[-30%] hidden md:flex items-center text-sm font-semibold justify-between flex-row gap-2 md:gap-9">
