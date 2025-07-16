@@ -153,18 +153,18 @@ router.post("/stk-push", async (req, res) => {
 
       
 
-      if (existingEntry.status === "Completed") {
-        return res.status(409).json({
-          success: false,
-          error: "This phone number has already successfully participated in this cycle.",
-        });
-      } else if (existingEntry.status === "Pending") {
-        return res.status(200).json({
-          success: true,
-          error: "A transaction for this phone number is already pending. Please complete it or try again later.",
-        });
+        if (existingEntry.status === "Completed") {
+    return res.status(409).json({
+      success: false,
+      error: "This phone number has already successfully participated in this cycle.",
+    });
+  }
 
-    
+  if (existingEntry.status === "Pending") {
+    console.log("Pending entry found. Deleting it to allow new transaction.");
+    await EntryModel.deleteOne({ _id: existingEntry._id });
+  }
+}
 
 
 
