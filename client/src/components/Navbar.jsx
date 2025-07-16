@@ -83,9 +83,7 @@
                  </button>
                  </Link>
 
-           <Link to="/" className="flex items-center gap-1 text-xl font-bold md:text-3xl md:hidden">
-              <img src="/logo.png" className="h-[50px]" />
-             </Link>
+          
     
              <div className="flex ml-[-30%] hidden md:flex items-center text-sm font-semibold justify-between flex-row gap-2 md:gap-9">
              <p className="text-left text-[#f36dff] hover:text-[#f36dff] transition cursor-pointer">1 shiling</p>

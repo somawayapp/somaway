@@ -1,12 +1,16 @@
 import mongoose from "mongoose";
+import dotenv from "dotenv";
+
+dotenv.config(); // load env variables
 
 const connectDB = async () => {
   try {
-    const uri = "mongodb+srv://makesomaway:makesomaway@cluster0.movbe.mongodb.net/app?retryWrites=true&w=majority&appName=Cluster0";
-    
+    const uri = process.env.MONGO_URI;
+
     if (!uri) {
-      throw new Error("DATABASE_URL is missing in environment variables.");
+      throw new Error("MONGO_URI not found in .env file");
     }
+
 
     await mongoose.connect(uri, {
       ssl: true,

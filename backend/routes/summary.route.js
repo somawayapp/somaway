@@ -2,12 +2,14 @@ import express from "express";
 import EntryModel from "../models/Entry.model.js"; // Import the Entry model
 import moment from "moment";
 import crypto from "crypto"; // <<< ADD THIS IMPORT for decrypt/encrypt (if used here)
+import dotenv from "dotenv";
+dotenv.config();
 
 const router = express.Router();
 
 // IMPORTANT: Ensure ENCRYPTION_KEY is set as a Vercel Environment Variable
 // DO NOT HARDCODE THIS KEY IN PRODUCTION. This is for demonstration if not using process.env
-const ENCRYPTION_KEY = process.env.ENCRYPTION_KEY || "8ab21ec1dd828cc6409d0ed55b876e0530dfbccd67e56f1318e684e555896f3d"; // FALLBACK for testing, but process.env is preferred
+const ENCRYPTION_KEY = process.env.ENCRYPTION_KEY;
 const IV_LENGTH = 16; // For AES-256-CBC
 
 // --- Helper Functions for Decryption (Assuming ENCRYPTION_KEY is available) ---

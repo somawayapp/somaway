@@ -2,12 +2,14 @@
 import express from "express";
 import EntryModel from "../models/Entry.model.js";
 import crypto from "crypto"; // For hashing and decryption
+import dotenv from "dotenv";
+dotenv.config();
 
 const router = express.Router();
 
 // Encryption Configuration (MUST BE THE SAME AS YOUR M-PESA ROUTER)
 // IMPORTANT: In a real application, load this from environment variables (e.g., process.env.ENCRYPTION_KEY)
-const ENCRYPTION_KEY = "8ab21ec1dd828cc6409d0ed55b876e0530dfbccd67e56f1318e684e555896f3d"; // Use a strong, environment-variable-stored key in production
+const ENCRYPTION_KEY = process.env.ENCRYPTION_KEY;
 const IV_LENGTH = 16; // For AES-256-CBC
 
 // --- Helper Function for Hashing ---

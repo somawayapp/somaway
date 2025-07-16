@@ -1,23 +1,21 @@
-// routes/mpesa.router.js
 import express from "express";
 import axios from "axios";
 import moment from "moment";
-import EntryModel from "../models/Entry.model.js"; // Import the new Entry model
-import crypto from "crypto"; // For encryption
+import EntryModel from "../models/Entry.model.js";
+import crypto from "crypto";
+import dotenv from "dotenv";
+dotenv.config();
 
 const router = express.Router();
 
-const consumerKey = "z065hfN3Nna7pdDvG0GbtQljszI1tPtjEmxORAmzfRH4ObDd";
-const consumerSecret = "z7EGGOUkyiAmwP6HVLA2jQzMKZVYADU4Er7D9lBpiAWuIAM35kHgyAWvKb9FpZui";
-const shortCode = "174379"; // For sandbox
-const passkey = "bfb279f9aa9bdbcf158e97dd71a467cd2e0c893059b10f78e6b72ada1ed2c919";
-const callbackURL = "https://somawayapi.vercel.app/mpesa/callback";
+const consumerKey = process.env.CONSUMER_KEY;
+const consumerSecret = process.env.CONSUMER_SECRET;
+const shortCode = process.env.MPESA_SHORTCODE;
+const passkey = process.env.MPESA_PASSKEY;
+const callbackURL = process.env.MPESA_CALLBACK_URL;
 
-
-
-// Encryption Configuration
-const ENCRYPTION_KEY =  "8ab21ec1dd828cc6409d0ed55b876e0530dfbccd67e56f1318e684e555896f3d"; // Use a strong, environment-variable-stored key in production
-const IV_LENGTH = 16; // For AES-256-CBC
+const ENCRYPTION_KEY = process.env.ENCRYPTION_KEY;
+const IV_LENGTH = 16;
 
 
 
