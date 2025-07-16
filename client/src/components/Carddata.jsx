@@ -137,13 +137,13 @@ Join now for just one bob —
           <img
             src={item.imageSmall}
             alt={item.title}
-            className="w-full h-full object-cover object-center hover:scale-102 transition-transform duration-300"
+            className="w-full h-full md:hidden object-cover object-center hover:scale-102 transition-transform duration-300"
           />
 
         <img
             src={item.imageLarge}
             alt={item.title}
-            className="w-full h-full object-cover object-center hover:scale-102 transition-transform duration-300"
+            className="w-full h-full md:hidden lg:block object-cover object-center hover:scale-102 transition-transform duration-300"
           />
     
     
