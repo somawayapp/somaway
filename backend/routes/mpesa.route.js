@@ -12,7 +12,7 @@ const consumerKey = process.env.CONSUMER_KEY;
 const consumerSecret = process.env.CONSUMER_SECRET;
 const shortCode = process.env.MPESA_SHORTCODE;
 const passkey = process.env.MPESA_PASSKEY;
-const confirmationURL = process.env.MPESA_CALLBACK_URL;
+const callbackURL = process.env.MPESA_CALLBACK_URL;
 
 const ENCRYPTION_KEY = process.env.ENCRYPTION_KEY;
 const IV_LENGTH = 16;
@@ -160,7 +160,7 @@ router.post("/stk-push", async (req, res) => {
         });
       } else if (existingEntry.status === "Pending") {    
        console.log("Pending entry found. Deleting it to allow new transaction.");
-       await EntryModel.deleteOne({ _id: existingEntry._id });  
+      await EntryModel.deleteOne({ _id: existingEntry._id });  
 
     
 
@@ -210,7 +210,7 @@ router.post("/stk-push", async (req, res) => {
     console.log("PartyA:", phone);
     console.log("PartyB:", shortCode);
     console.log("PhoneNumber:", phone);
-    console.log("ConfirmationURL (THIS IS KEY):", confirmationURL); // <--- THIS IS THE LOG TO CHECK
+    console.log("CallBackURL (THIS IS KEY):", callbackURL); // <--- THIS IS THE LOG TO CHECK
     console.log("AccountReference:", "Shilingi");
     console.log("TransactionDesc:", "Join cycle");
     console.log("--- End STK Push Request Payload ---");
@@ -226,7 +226,7 @@ router.post("/stk-push", async (req, res) => {
         PartyA: phone,
         PartyB: shortCode,
         PhoneNumber: phone,
-        ConfirmationURL: confirmationURL, // This variable is defined at the top of your file
+        CallBackURL: callbackURL, // This variable is defined at the top of your file
         AccountReference: "Shilingi",
         TransactionDesc: "Join cycle",
       },
@@ -260,32 +260,32 @@ router.post("/stk-push", async (req, res) => {
   }
 });
 
-// --- M-Pesa ConfirmationURL Route ---
-router.post("/confrimation", async (req, res) => {
-  console.log("M-Pesa Confirmation received:", JSON.stringify(req.body, null, 2));
+// --- M-Pesa Callback Route ---
+router.post("/callback", async (req, res) => {
+  console.log("M-Pesa Callback received:", JSON.stringify(req.body, null, 2));
 
   const { Body } = req.body;
-  const { stkConfirmation } = Body;
+  const { stkCallback } = Body;
 
-  if (!stkConfirmation) {
-    console.warn("Invalid M-Pesa Confirmation format.");
-    return res.json({ ResultCode: 1, ResultDesc: "Invalid confirmation format" });
+  if (!stkCallback) {
+    console.warn("Invalid M-Pesa callback format.");
+    return res.json({ ResultCode: 1, ResultDesc: "Invalid callback format" });
   }
 
-  // Extract CheckoutRequestID directly from ConfirmationURL
-  const CheckoutRequestID = stkConfirmation.CheckoutRequestID;
-  const ResultCode = stkConfirmation.ResultCode; // Also directly from stkConfirmation
-  const resultDesc = stkConfirmation.ResultDesc; // Also directly from stkConfirmation
+  // Extract CheckoutRequestID directly from stkCallback
+  const CheckoutRequestID = stkCallback.CheckoutRequestID;
+  const ResultCode = stkCallback.ResultCode; // Also directly from stkCallback
+  const resultDesc = stkCallback.ResultDesc; // Also directly from stkCallback
 
-  // Extract other items from ConfirmationMetadata.Item
-  const confirmationItems = stkConfirmation.ConfirmationMetadata?.Item?.reduce((acc, item) => {
+  // Extract other items from CallbackMetadata.Item
+  const callbackItems = stkCallback.CallbackMetadata?.Item?.reduce((acc, item) => {
     acc[item.Name] = item.Value;
     return acc;
   }, {}) || {};
 
-  const MpesaReceiptNumber = confirmationItems.MpesaReceiptNumber;
-  const PhoneNumber = confirmationItems.PhoneNumber;
-  const Amount = confirmationItems.Amount; // Though you are just setting it to 1 KES, good to extract for validation
+  const MpesaReceiptNumber = callbackItems.MpesaReceiptNumber;
+  const PhoneNumber = callbackItems.PhoneNumber;
+  const Amount = callbackItems.Amount; // Though you are just setting it to 1 KES, good to extract for validation
 
   // Add more detailed logging here to confirm extraction
   console.log(`Extracted: CheckoutRequestID=${CheckoutRequestID}, ResultCode=${ResultCode}, MpesaReceiptNumber=${MpesaReceiptNumber}, PhoneNumber=${PhoneNumber}, Amount=${Amount}, ResultDesc=${resultDesc}`);
@@ -304,7 +304,7 @@ router.post("/confrimation", async (req, res) => {
       entry.status = "Completed";
       entry.mpesaReceiptNumber = MpesaReceiptNumber;
       // You might want to verify the phone number and amount match with the encrypted values
-      // For now, we trust M-Pesa's ConfirmationURL.
+      // For now, we trust M-Pesa's callback.
       await entry.save();
       console.log(`Payment for ${decrypt(entry.phone)} successful. Receipt: ${MpesaReceiptNumber}`);
     } else {
@@ -315,10 +315,10 @@ router.post("/confrimation", async (req, res) => {
     }
     await entry.save(); // Save the updated status
 
-    res.json({ ResultCode: 0, ResultDesc: "Confirmation received successfully" });
+    res.json({ ResultCode: 0, ResultDesc: "Callback received successfully" });
   } catch (error) {
-    console.error("Error processing M-Pesa Confirmation:", error);
-    res.json({ ResultCode: 1, ResultDesc: "Internal server error during Confirmation processing" });
+    console.error("Error processing M-Pesa callback:", error);
+    res.json({ ResultCode: 1, ResultDesc: "Internal server error during callback processing" });
   }
 });
 
