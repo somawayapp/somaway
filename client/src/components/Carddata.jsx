@@ -154,7 +154,20 @@ Join now for just one bob —
             {/* Cycle Status Display */}
             {cycleStatus && (
               <div className="text-sm text-gray-400 mb-4">
-              
+                <p>
+                  Participants:{" "}
+                  <strong>
+                    {cycleStatus.currentParticipants.toLocaleString()} /{" "}
+                    {cycleStatus.maxParticipants.toLocaleString()}
+                  </strong>
+                </p>
+                <p>
+                  Amount Stashed:{" "}
+                  <strong>
+                    KES {cycleStatus.currentAmount.toLocaleString()} /{" "}
+                    {cycleStatus.maxParticipants.toLocaleString()}
+                  </strong>
+                </p>
                 {cycleStatus.isMaxReached && (
                   <p className="text-red-400 font-semibold mt-2">
                     Maximum participants reached for this cycle!
