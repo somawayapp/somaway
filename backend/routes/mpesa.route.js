@@ -14,6 +14,7 @@ const passkey = "bfb279f9aa9bdbcf158e97dd71a467cd2e0c893059b10f78e6b72ada1ed2c91
 const callbackURL = "https://somawayapi.vercel.app/mpesa/callback";
 
 
+
 // Encryption Configuration
 const ENCRYPTION_KEY =  "8ab21ec1dd828cc6409d0ed55b876e0530dfbccd67e56f1318e684e555896f3d"; // Use a strong, environment-variable-stored key in production
 const IV_LENGTH = 16; // For AES-256-CBC

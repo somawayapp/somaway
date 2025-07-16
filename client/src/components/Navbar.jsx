@@ -68,8 +68,10 @@
   
              {/* Show on medium screens and larger */}
              <Link to="/" className="flex items-center gap-1 text-xl font-bold md:text-3xl hidden md:flex">
-              <img src="/logo.png" className="md:h-8 rounded-lg" />
+             <img src="/logo.png" className="md:h-[30px] rounded-lg" />
+              <span className="hidden md:inline">Shilingi</span>
              </Link>
+
               <Link
               to="/help">
               <button
