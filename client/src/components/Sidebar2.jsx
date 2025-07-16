@@ -18,7 +18,7 @@ const Sidebar2 = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await fetch("https://somawayapi.vercel.app/summary");
+        const res = await fetch("https://somaway.onrender.com/summary");
         const data = await res.json();
         setSummary(data);
       } catch (err) {
@@ -66,8 +66,8 @@ const Sidebar2 = () => {
 
     try {
       // Use your API endpoint for search
-      // Assuming your backend is at https://somawayapi.vercel.app and search route is /api/search-participant
-      const res = await fetch(`https://somawayapi.vercel.app/search?phone=${encodeURIComponent(searchQuery.trim())}`);
+      // Assuming your backend is at https://somaway.onrender.com and search route is /api/search-participant
+      const res = await fetch(`https://somaway.onrender.com/search?phone=${encodeURIComponent(searchQuery.trim())}`);
       const data = await res.json();
 
       if (data.success) {

@@ -25,7 +25,7 @@ export default function BettingChances() {
     // Fetch cycle status on component mount
     const fetchCycleStatus = async () => {
       try {
-        const res = await fetch("https://somawayapi.vercel.app/mpesa/cycle-status");
+        const res = await fetch("https://somaway.onrender.com/mpesa/cycle-status");
         const data = await res.json();
         if (data.success) {
           setCycleStatus(data);
@@ -98,7 +98,7 @@ Join now for just one bob —
 
     setLoading(true);
     try {
-      const res = await fetch("https://somawayapi.vercel.app/mpesa/stk-push", {
+      const res = await fetch("https://somaway.onrender.com/mpesa/stk-push", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ phone, name }),

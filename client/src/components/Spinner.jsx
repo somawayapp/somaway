@@ -9,7 +9,7 @@ const Spinner = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await fetch("https://somawayapi.vercel.app/summary");
+        const res = await fetch("https://somaway.onrender.com/summary");
         const data = await res.json();
         setSummary(data);
       } catch (err) {
