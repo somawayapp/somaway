@@ -134,18 +134,19 @@ Join now for just one bob —
           transition={{ duration: 0.4, delay: i * 0.1 }}
           className="overflow-hidden shadow-lg rounded-2xl bg-gradient-to-br from-[#111] to-[#1a1a1a] border-2 border-[#1b1f1c] text-white flex flex-col"
         >
-           <img
-      src={card.imageSmall}
-      alt={card.title}
-      className="block lg:hidden w-full rounded-xl"
-    />
+          <img
+            src={item.imageSmall}
+            alt={item.title}
+            className="w-full h-full object-cover object-center hover:scale-102 transition-transform duration-300"
+          />
+
+        <img
+            src={item.imageLarge}
+            alt={item.title}
+            className="w-full h-full object-cover object-center hover:scale-102 transition-transform duration-300"
+          />
     
-    {/* Large Screen Image */}
-    <img
-      src={card.imageLarge}
-      alt={card.title}
-      className="hidden lg:block w-full rounded-xl"
-    />
+    
           <div className="p-5 flex flex-col flex-grow">
             <h2 className="text-xl font-bold mb-2">{item.title}</h2>
             <p className="text-sm text-gray-300 mb-4">{item.desc}</p>
