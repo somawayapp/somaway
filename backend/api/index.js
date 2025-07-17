@@ -30,6 +30,7 @@ app.use(
         'https://somawayclient.vercel.app',
         'https://blogifiyclient.vercel.app',
          'https://somaway.onrender.com',
+         'https://somaway.onrender.com/mpesa/query-stk-status',
         'http://localhost:5173',
         'https://www.xtechnewsletter.com',
         'https://xtechnewsletter.com',
