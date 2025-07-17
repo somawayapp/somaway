@@ -128,7 +128,7 @@ async function queryStkStatus(checkoutRequestID) {
           entry.mpesaReceiptNumber = queryRes.data.MpesaReceiptNumber;
           console.log(`Reconciled: Transaction ${checkoutRequestID} is Completed. DB updated.`);
         } else if (ResultCode === "1032") {
-          entry.status = "Cancelled"; // <<<--- NOW A VALID ENUM
+          entry.status = "Cancelled";
           entry.failReason = ResultDesc;
           console.log(`Reconciled: Transaction ${checkoutRequestID} was Cancelled by user. DB updated.`);
         } else {
@@ -141,7 +141,7 @@ async function queryStkStatus(checkoutRequestID) {
         entry.failReason = "Transaction not found by Safaricom (might have expired or never completed)";
         console.log(`Reconciled: Transaction ${checkoutRequestID} not found by Safaricom. DB updated.`);
       } else {
-        entry.status = "Query_Failed"; // <<<--- NOW A VALID ENUM
+        entry.status = "Query_Failed";
         entry.failReason = queryRes.data.ResponseDescription || "Unknown query error";
         console.log(`Reconciled: Query for ${checkoutRequestID} failed: ${entry.failReason}. DB updated.`);
       }
@@ -154,12 +154,6 @@ async function queryStkStatus(checkoutRequestID) {
 
   } catch (error) {
     console.error("STK Push Query error (internal function):", error?.response?.data || error.message || error);
-    // When the transaction is being processed, Safaricom returns an error
-    // We should specifically handle this case to not mark as a permanent failure
-    if (error?.response?.data?.errorCode === '500.001.1001' && error?.response?.data?.errorMessage === 'The transaction is being processed') {
-        console.log(`Transaction ${checkoutRequestID} is still processing. Will attempt later.`);
-        return { success: false, error: 'Transaction is still processing on M-Pesa side.' };
-    }
     return { success: false, error: "Failed to query STK push status due to an internal error." };
   }
 }
@@ -223,13 +217,10 @@ router.post("/stk-push", async (req, res) => {
           success: false,
           error: "This phone number has already successfully participated in this cycle.",
         });
-      }
-      // --- FIX for Issue 3: Delete existing non-completed entries ---
-      else if (existingEntry.status !== "Completed") {
-        console.log(`Existing entry found with status '${existingEntry.status}'. Deleting it to allow new transaction.`);
+      } else if (existingEntry.status === "Pending") {
+        console.log("Pending entry found. Deleting it to allow new transaction.");
         await EntryModel.deleteOne({ _id: existingEntry._id });
       }
-      // --- END FIX ---
     } else {
         console.log("No existing entry found for this phone number in the current cycle.");
     }
@@ -302,8 +293,9 @@ router.post("/stk-push", async (req, res) => {
       newEntry.transactionId = stkRes.data.CheckoutRequestID;
       await newEntry.save();
 
-      // --- IMMEDIATE ASYNCHRONOUS STATUS CHECK (FIXED DELAY) ---
-      const queryDelay = 45 * 1000; // Increased to 45 seconds for better reliability
+      // --- IMMEDIATE ASYNCHRONOUS STATUS CHECK (NEW LOGIC) ---
+      // We are *not* waiting for this to complete before responding to the client.
+      const queryDelay = 60 * 1000; // 25 seconds
       console.log(`Scheduling STK status check for ${newEntry.transactionId} in ${queryDelay / 1000} seconds.`);
       setTimeout(() => {
         queryStkStatus(newEntry.transactionId)
@@ -369,27 +361,21 @@ router.post("/callback", async (req, res) => {
       return;
     }
 
-    // Only update if the status is still pending or if this callback provides a 'Completed'
-    // It's possible the query already updated it, so be careful not to downgrade a 'Completed' status.
-    if (entry.status === "Pending" || (ResultCode === 0 && entry.status !== "Completed")) {
-        if (ResultCode === 0) {
-          entry.status = "Completed";
-          entry.mpesaReceiptNumber = MpesaReceiptNumber;
-          console.log(`Callback: Payment for CheckoutRequestID ${CheckoutRequestID} successful. Receipt: ${MpesaReceiptNumber}. DB updated.`);
-        } else {
-          entry.status = "Failed";
-          entry.failReason = resultDesc;
-          console.log(`Callback: Payment for CheckoutRequestID ${CheckoutRequestID} failed/cancelled. ResultCode: ${ResultCode}, Desc: ${resultDesc}. DB updated.`);
-        }
-        await entry.save();
+// Only update if the status is not 'Completed'
+if (entry.status !== "Completed") {
+    if (ResultCode === 0) {
+        entry.status = "Completed";
+        entry.mpesaReceiptNumber = MpesaReceiptNumber;
+        console.log(`Callback: Payment for CheckoutRequestID ${CheckoutRequestID} successful. Receipt: ${MpesaReceiptNumber}. DB updated.`);
     } else {
-        console.log(`Callback: Entry for ${CheckoutRequestID} already processed or status is not Pending. Current status: ${entry.status}. No update needed from this callback.`);
+        entry.status = "Failed";
+        entry.failReason = resultDesc;
+        console.log(`Callback: Payment for CheckoutRequestID ${CheckoutRequestID} failed/cancelled. ResultCode: ${ResultCode}, Desc: ${resultDesc}. DB updated.`);
     }
-
-  } catch (error) {
-    console.error("Error processing M-Pesa callback:", error);
-  }
-});
+    await entry.save();
+} else {
+    console.log(`Callback: Entry for ${CheckoutRequestID} already processed or status is not Pending. Current status: ${entry.status}. No update needed from this callback.`);
+}
 
 // --- API to query STK Push transaction status (can still be used manually) ---
 router.post("/query-stk-status", async (req, res) => {
@@ -403,10 +389,7 @@ router.post("/query-stk-status", async (req, res) => {
   if (result.success) {
     res.json(result);
   } else {
-    // Return 200 OK for query endpoint even if internal function reports error,
-    // as the error is *within* processing the query, not the query request itself.
-    // However, ensure the 'success' flag is false and 'error' message is present.
-    res.json(result);
+    res.status(500).json(result); // Return appropriate status code
   }
 });
 
