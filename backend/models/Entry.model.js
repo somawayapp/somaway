@@ -29,10 +29,14 @@ const EntrySchema = new mongoose.Schema(
       region: { type: String, default: "Unknown" },
       timezone: { type: String, default: "Unknown" },
     },
-    status: {
+     status: {
       type: String,
-      enum: ["Pending", "Completed", "Failed"],
+      enum: ["Pending", "Completed", "Failed", "Cancelled", "Query_Failed"], // <<<--- UPDATED ENUM
+      required: true,
       default: "Pending",
+    },
+    failReason: {
+      type: String, // To store ResultDesc from M-Pesa failures
     },
     cycle: {
       type: Number,
