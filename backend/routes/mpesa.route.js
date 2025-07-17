@@ -87,76 +87,119 @@ const MAX_PARTICIPANTS = 1000000; // 1 Million participants/Ksh
 const CURRENT_CYCLE = 1; // You might want to manage this dynamically later
 
 // --- Function to query STK Push transaction status (extracted for reusability) ---
-async function queryStkStatus(checkoutRequestID) {
-  if (!checkoutRequestID) {
-    console.error("queryStkStatus called without checkoutRequestID.");
-    return { success: false, error: "checkoutRequestID is required." };
-  }
+// --- Function to query STK Push transaction status (extracted for reusability) ---
+ async function queryStkStatus(checkoutRequestID) {
+   if (!checkoutRequestID) {
+     console.error("queryStkStatus called without checkoutRequestID.");
+     return { success: false, error: "checkoutRequestID is required." };
+   }
 
-  try {
-    const timestamp = moment().format("YYYYMMDDHHmmss");
-    const password = Buffer.from(shortCode + passkey + timestamp).toString("base64");
-    const token = await getAccessToken();
+   try {
+     const timestamp = moment().format("YYYYMMDDHHmmss");
+     const password = Buffer.from(shortCode + passkey + timestamp).toString("base64");
+     const token = await getAccessToken();
 
-    const queryRes = await axios.post(
-      "https://sandbox.safaricom.co.ke/mpesa/stkpushquery/v1/query",
-      {
-        BusinessShortCode: shortCode,
-        Password: password,
-        Timestamp: timestamp,
-        CheckoutRequestID: checkoutRequestID,
-      },
-      {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      }
-    );
+     const queryRes = await axios.post(
+       "https://sandbox.safaricom.co.ke/mpesa/stkpushquery/v1/query",
+       {
+         BusinessShortCode: shortCode,
+         Password: password,
+         Timestamp: timestamp,
+         CheckoutRequestID: checkoutRequestID,
+       },
+       {
+         headers: {
+           Authorization: `Bearer ${token}`,
+         },
+       }
+     );
 
-    console.log(`STK Push Query response for ${checkoutRequestID}:`, queryRes.data);
+     console.log(`STK Push Query response for ${checkoutRequestID}:`, queryRes.data);
 
-    // Update your database based on the query response
-    const entry = await EntryModel.findOne({ transactionId: checkoutRequestID });
+     // Update your database based on the query response
+     const entry = await EntryModel.findOne({ transactionId: checkoutRequestID });
 
-    if (entry) {
-      if (queryRes.data.ResponseCode === "0") {
-        const ResultCode = queryRes.data.ResultCode;
-        const ResultDesc = queryRes.data.ResultDesc;
+     if (entry) {
+       // --- Start of MODIFIED LOGIC ---
+       if (queryRes.data.ResponseCode === "0") {
+         // Safaricom acknowledged the query successfully, now check ResultCode
+         const ResultCode = queryRes.data.ResultCode;
+         const ResultDesc = queryRes.data.ResultDesc;
 
-        if (ResultCode === "0") {
-          entry.status = "Completed";
-          entry.mpesaReceiptNumber = queryRes.data.MpesaReceiptNumber;
-          console.log(`Reconciled: Transaction ${checkoutRequestID} is Completed. DB updated.`);
-        } else if (ResultCode === "1032") {
-          entry.status = "Cancelled";
-          entry.failReason = ResultDesc;
-          console.log(`Reconciled: Transaction ${checkoutRequestID} was Cancelled by user. DB updated.`);
-        } else {
-          entry.status = "Failed";
-          entry.failReason = ResultDesc;
-          console.log(`Reconciled: Transaction ${checkoutRequestID} Failed with code ${ResultCode}. DB updated.`);
+         if (ResultCode === "0") {
+           // Transaction completed successfully by M-Pesa
+           entry.status = "Completed";
+           entry.mpesaReceiptNumber = queryRes.data.MpesaReceiptNumber;
+           entry.failReason = null; // Clear any previous fail reason
+           console.log(`Reconciled: Transaction ${checkoutRequestID} is Completed. DB updated.`);
+         } else if (ResultCode === "1032") {
+           // Transaction was cancelled by user
+           entry.status = "Cancelled";
+           entry.failReason = ResultDesc;
+           console.log(`Reconciled: Transaction ${checkoutRequestID} was Cancelled by user. DB updated.`);
+         } else if (ResultCode === "1" || ResultCode === "2") {
+           // Other common M-Pesa failure codes
+           entry.status = "Failed";
+           entry.failReason = ResultDesc;
+           console.log(`Reconciled: Transaction ${checkoutRequestID} Failed with code ${ResultCode}. DB updated.`);
+         } else if (queryRes.data.errorMessage && queryRes.data.errorCode === "500.001.1001") {
+            // This is the "transaction is being processed" state
+            // DO NOT change status from Pending, and DO NOT set failReason
+            console.log(`STK Query: Transaction ${checkoutRequestID} is still being processed by M-Pesa.`);
+            // No status update needed if it's already Pending
+            // If entry was just created, its status is "Pending" by default.
+            // We ensure failReason is null or empty if it's not a final failure.
+            if (entry.status !== "Completed" && entry.status !== "Failed" && entry.status !== "Cancelled") {
+                entry.status = "Pending"; // Explicitly keep it pending
+            }
+            entry.failReason = null; // Clear fail reason if it's just processing
+            await entry.save(); // Save to clear failReason if it was set previously
+            return { success: true, data: queryRes.data, dbStatus: entry.status }; // Return success, so frontend continues polling
+         }
+         else {
+           // Any other unexpected ResultCode
+           entry.status = "Failed";
+           entry.failReason = ResultDesc || "Unknown M-Pesa ResultCode.";
+           console.log(`Reconciled: Transaction ${checkoutRequestID} Failed with unexpected code ${ResultCode}. DB updated.`);
+         }
+       } else if (queryRes.data.ResponseCode === "1" && queryRes.data.ResultDesc === "The transaction is not found") {
+         entry.status = "Failed"; // Or "Expired", depending on your business logic
+         entry.failReason = "Transaction not found by Safaricom (might have expired or never completed)";
+         console.log(`Reconciled: Transaction ${checkoutRequestID} not found by Safaricom. DB updated.`);
+       } else {
+         // This covers cases where Safaricom returns a non-0 ResponseCode that isn't "transaction not found"
+         // or other general errors from Safaricom's query endpoint.
+         entry.status = "Query_Failed";
+         entry.failReason = queryRes.data.ResponseDescription || queryRes.data.errorMessage || "Unknown query error from M-Pesa.";
+         console.log(`Reconciled: Query for ${checkoutRequestID} failed: ${entry.failReason}. DB updated.`);
+       }
+       // --- End of MODIFIED LOGIC ---
+
+       await entry.save();
+       return { success: true, data: queryRes.data, dbStatus: entry.status };
+     } else {
+       console.warn(`Query received for CheckoutRequestID ${checkoutRequestID} but no matching entry found in DB.`);
+       return { success: false, error: "Entry not found in database for reconciliation." };
+     }
+
+   } catch (error) {
+     console.error("STK Push Query error (internal function - during axios call):", error?.response?.data || error.message || error);
+     // If the error object contains an errorCode from M-Pesa implying 'processing', handle it gracefully
+     if (error?.response?.data?.errorCode === "500.001.1001") {
+        console.log(`STK Push Query: Transaction ${checkoutRequestID} is still being processed, not a final failure.`);
+        // Even if the initial query throws this as an axios error, we still want to indicate it's pending.
+        // We need to fetch the entry here to update its status to pending if it's not already.
+        const entry = await EntryModel.findOne({ transactionId: checkoutRequestID });
+        if (entry && entry.status !== "Completed" && entry.status !== "Failed" && entry.status !== "Cancelled") {
+            entry.status = "Pending";
+            entry.failReason = null;
+            await entry.save();
+            return { success: true, data: error.response.data, dbStatus: "Pending" }; // Return success to frontend
         }
-      } else if (queryRes.data.ResponseCode === "1" && queryRes.data.ResultDesc === "The transaction is not found") {
-        entry.status = "Failed"; // Or "Expired", depending on your business logic
-        entry.failReason = "Transaction not found by Safaricom (might have expired or never completed)";
-        console.log(`Reconciled: Transaction ${checkoutRequestID} not found by Safaricom. DB updated.`);
-      } else {
-        entry.status = "Query_Failed";
-        entry.failReason = queryRes.data.ResponseDescription || "Unknown query error";
-        console.log(`Reconciled: Query for ${checkoutRequestID} failed: ${entry.failReason}. DB updated.`);
-      }
-      await entry.save();
-      return { success: true, data: queryRes.data, dbStatus: entry.status };
-    } else {
-      console.warn(`Query received for CheckoutRequestID ${checkoutRequestID} but no matching entry found in DB.`);
-      return { success: false, error: "Entry not found in database for reconciliation." };
-    }
-
-  } catch (error) {
-    console.error("STK Push Query error (internal function):", error?.response?.data || error.message || error);
-    return { success: false, error: "Failed to query STK push status due to an internal error." };
-  }
-}
+     }
+     return { success: false, error: "Failed to query STK push status due to an internal error." };
+   }
+ }
 
 // --- Main STK Push route ---
 router.post("/stk-push", async (req, res) => {
