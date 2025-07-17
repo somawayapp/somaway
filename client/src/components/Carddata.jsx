@@ -19,7 +19,8 @@ export default function BettingChances() {
   const [loading, setLoading] = useState(false);
   const [cycleStatus, setCycleStatus] = useState(null);
   const [errorMessage, setErrorMessage] = useState(""); // General error message for user
-  const [transactionStatus, setTransactionStatus] = useState(null); // 'Pending', 'Completed', 'Failed', 'Cancelled', 'Query_Failed', 'Expired/NotFound'
+  // transactionStatus can be null, 'Completed', 'Failed', 'Cancelled', 'Expired/NotFound'
+  const [transactionStatus, setTransactionStatus] = useState(null);
   const [checkoutRequestID, setCheckoutRequestID] = useState(null);
   const pollIntervalRef = useRef(null);
 
@@ -47,7 +48,8 @@ export default function BettingChances() {
 
   // Effect for polling the STK push status
   useEffect(() => {
-    if (checkoutRequestID && transactionStatus === "Pending") {
+    // Only poll if there's a checkoutRequestID and we haven't reached a final status
+    if (checkoutRequestID && transactionStatus === null) {
       // Clear any existing interval to prevent multiple polls
       if (pollIntervalRef.current) {
         clearInterval(pollIntervalRef.current);
@@ -63,47 +65,40 @@ export default function BettingChances() {
           const data = await res.json();
 
           if (data.success) {
-            setTransactionStatus(data.dbStatus); // Update with 'Completed', 'Failed', 'Cancelled', etc.
-            if (data.dbStatus !== "Pending" && data.dbStatus !== "Query_Failed") {
-              // If status is final, stop polling
+            // Check if it's a final status (Completed, Failed, Cancelled, Expired/NotFound)
+            // The backend should return 'Pending' if still processing, or a final status.
+            if (data.dbStatus && data.dbStatus !== "Pending") {
+              setTransactionStatus(data.dbStatus); // Update with 'Completed', 'Failed', 'Cancelled', etc.
               clearInterval(pollIntervalRef.current);
               pollIntervalRef.current = null;
               console.log("Polling stopped. Transaction is no longer pending:", data.dbStatus);
-              // Clear error message if transaction succeeded
+
               if (data.dbStatus === "Completed") {
-                setErrorMessage("");
+                setErrorMessage(""); // Clear error on success
               } else {
                 // Set specific error for failed/cancelled states if available
                 setErrorMessage(data.data?.ResultDesc || data.error || "Transaction failed or was cancelled.");
               }
             }
+            // If data.dbStatus is 'Pending', do nothing, just keep polling.
           } else {
             console.warn("Polling query returned non-success:", data);
-            // This is where backend errors from `queryStkStatus` come through
-            if (data.error && data.error.includes("Entry not found")) {
-                setTransactionStatus("Expired/NotFound");
-                clearInterval(pollIntervalRef.current);
-                pollIntervalRef.current = null;
-                setErrorMessage("Transaction timed out or was not found. Please try again.");
-            } else if (data.error && data.error.includes("The transaction is being processed")) {
-                // This means the transaction is still pending, no need to show an error
-                // The transactionStatus is already "Pending"
-                console.log("Transaction still processing, continuing to poll.");
-            } else {
-                setTransactionStatus("Query_Failed"); // Set a specific status for query failures
-                setErrorMessage(data.error || "Failed to get transaction status. Please check again.");
-            }
+            // This catches immediate backend errors from `queryStkStatus`
+            setTransactionStatus("Failed"); // Indicate a query failure or transaction failure
+            setErrorMessage(data.error || "Failed to get transaction status. Please try again.");
+            clearInterval(pollIntervalRef.current); // Stop polling on query failure
+            pollIntervalRef.current = null;
           }
         } catch (err) {
           console.error("Error during STK status polling:", err);
           setErrorMessage("Network error while checking transaction status. Please check your connection.");
-          setTransactionStatus("Query_Failed"); // Indicate a network-related failure during polling
+          setTransactionStatus("Failed"); // Indicate a network-related failure during polling
           clearInterval(pollIntervalRef.current); // Stop polling on critical network error
           pollIntervalRef.current = null;
         }
       }, 5000); // Poll every 5 seconds (adjust as needed)
-    } else if (pollIntervalRef.current && transactionStatus !== "Pending") {
-      // If status is no longer pending or checkoutRequestID is cleared, stop polling
+    } else if (pollIntervalRef.current && transactionStatus !== null) {
+      // If status is no longer null (i.e., it's a final status) or checkoutRequestID is cleared, stop polling
       clearInterval(pollIntervalRef.current);
       pollIntervalRef.current = null;
     }
@@ -187,16 +182,18 @@ Join now for just one bob —
       if (data.success) {
         setSubmitted(true);
         setJoining(false); // Hide form
-        setPhone(""); // Clear input
-        setName(""); // Clear input
+        // setPhone(""); // Keep phone/name for potential retry if needed or clear them after final success
+        // setName("");
         setAcceptedTerms(false); // Reset terms
         setCheckoutRequestID(data.data.CheckoutRequestID); // Store the CheckoutRequestID
-        setTransactionStatus("Pending"); // Set initial status to Pending
         setErrorMessage(""); // Clear error if STK push was successfully initiated
+        // Do NOT set transactionStatus to 'Pending' here. Keep it null,
+        // so the polling useEffect starts and waits for a final status.
+        // The UI will just show the form disappear.
       } else {
         // STK push initiation failed (e.g., duplicate entry, M-Pesa error)
         setErrorMessage(data.error || "Failed to send payment prompt. Try again.");
-        setTransactionStatus("Failed"); // Indicate immediate failure
+        setTransactionStatus("Failed"); // Indicate immediate failure to show the error message
       }
     } catch (err) {
       console.error(err);
@@ -208,7 +205,7 @@ Join now for just one bob —
   };
 
   // Determine if the join button should be visible
-  const showJoinButton = !joining && !submitted && cycleStatus && !cycleStatus.isMaxReached && transactionStatus !== "Pending";
+  const showJoinButton = !joining && !submitted && cycleStatus && !cycleStatus.isMaxReached && transactionStatus === null;
 
   return (
     <div className="grid grid-cols-1 gap-6 pb-8 pt-4 bg-[var(--bg)]">
@@ -262,34 +259,16 @@ Join now for just one bob —
               </div>
             )}
 
-            {/* Error Message Display - Show only when no specific transaction status message is active */}
-            {errorMessage && !submitted && !joining && (
+            {/* General Error Message Display (only if no transaction status is showing) */}
+            {errorMessage && transactionStatus === null && !joining && (
                  <div className="bg-red-800 p-3 rounded-xl text-sm mb-4 text-center">
                     {errorMessage}
                  </div>
             )}
 
 
-            {/* Transaction Status Messages */}
+            {/* Transaction Status Messages - ONLY show final outcomes */}
             <AnimatePresence mode="wait">
-              {submitted && transactionStatus === "Pending" && (
-                <motion.div
-                  key="pending"
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -10 }}
-                  className="bg-blue-800 p-4 rounded-xl text-sm mt-4 text-center"
-                >
-                  ⏳ A prompt has been sent to your phone. Please complete the payment.
-                  <br />
-                  We are checking the status...
-                  <br />
-                  <span className="text-gray-300 text-xs">
-                    (This message will update automatically)
-                  </span>
-                </motion.div>
-              )}
-
               {transactionStatus === "Completed" && (
                 <motion.div
                   key="completed"
@@ -306,7 +285,6 @@ Join now for just one bob —
 
               {(transactionStatus === "Failed" ||
                 transactionStatus === "Cancelled" ||
-                transactionStatus === "Query_Failed" ||
                 transactionStatus === "Expired/NotFound") && (
                 <motion.div
                   key="failed"
@@ -318,11 +296,24 @@ Join now for just one bob —
                   ❌ **Payment Failed.**
                   <br />
                   {errorMessage || "There was an issue processing your payment. Please try again."}
+                  {/* You can add a button to retry here */}
+                  <button
+                    onClick={() => {
+                        setSubmitted(false);
+                        setJoining(true); // Bring back the form
+                        setTransactionStatus(null);
+                        setErrorMessage("");
+                        setCheckoutRequestID(null);
+                    }}
+                    className="mt-2 text-white bg-red-600 hover:bg-red-700 py-1 px-3 rounded"
+                  >
+                    Try Again
+                  </button>
                 </motion.div>
               )}
             </AnimatePresence>
 
-            {/* Join Button - Only show if conditions are met */}
+            {/* Join Button - Only show if conditions are met and no final transaction status is displayed */}
             {showJoinButton && (
               <button
                 onClick={handleJoinClick}
