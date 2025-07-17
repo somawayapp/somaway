@@ -153,27 +153,35 @@ async function queryStkStatus(checkoutRequestID) {
       return { success: false, error: "Entry not found in database for reconciliation. Transaction status is unknown.", dbStatus: "Unknown_No_DB_Entry" };
     }
 
-  } catch (error) {
-    const errorResponse = error?.response;
-    const errorData = errorResponse?.data;
-    const contentType = errorResponse?.headers?.['content-type'];
+  // ... inside queryStkStatus catch block
+} catch (error) {
+  const errorResponse = error?.response;
+  const errorData = errorResponse?.data;
+  const contentType = errorResponse?.headers?.['content-type'];
 
-    // Check for specific M-Pesa error code for "still processing"
-    if (errorData?.errorCode === "500.001.1001") {
-      console.warn(`STK query for ${checkoutRequestID} says transaction is still being processed.`);
-      return { success: false, pending: true, message: "Transaction is still processing, try again shortly." };
-    }
-
-    // Handle Incapsula or other HTML responses
-    if (contentType && contentType.includes('text/html')) {
-      console.error(`STK Push Query error for ${checkoutRequestID}: Received HTML response (possible WAF/network issue). Full response (truncated):`, String(errorData).substring(0, 500));
-      return { success: false, error: "Failed to query STK push status due to a network/security block (e.g., Incapsula). Please try again later.", dbStatus: "Query_Failed_Network" };
-    }
-
-    // General network or unexpected errors
-    console.error(`STK Push Query error (internal function) for ${checkoutRequestID}:`, errorData || error.message || error);
-    return { success: false, error: "Failed to query STK push status due to an unexpected internal error.", dbStatus: "Query_Failed_Internal" };
+  // Check for specific M-Pesa error code for "still processing"
+  if (errorData?.errorCode === "500.001.1001") {
+    console.warn(`STK query for ${checkoutRequestID} says transaction is still being processed.`);
+    return { success: false, pending: true, message: "Transaction is still processing, try again shortly." };
   }
+
+  // Handle Incapsula or other HTML responses
+  if (contentType && contentType.includes('text/html')) {
+    console.error(`STK Push Query error for ${checkoutRequestID}: Received HTML response (possible WAF/network issue). Full response (truncated):`, String(errorData).substring(0, 500));
+    // Provide a clearer error message for the frontend
+    return { success: false, error: "Failed to query STK push status due to a network/security block (e.g., Incapsula). Please try again later.", dbStatus: "Query_Failed_Network" };
+  }
+
+  // Capture M-Pesa specific errors if they come as JSON
+  if (errorData && typeof errorData === 'object' && errorData.errorMessage) {
+      console.error(`STK Push Query error (M-Pesa API error) for ${checkoutRequestID}:`, errorData);
+      return { success: false, error: errorData.errorMessage, dbStatus: "Query_Failed_Mpesa_API" };
+  }
+
+  // General network or unexpected errors
+  console.error(`STK Push Query error (internal function) for ${checkoutRequestID}:`, errorData || error.message || error);
+  return { success: false, error: "Failed to query STK push status due to an unexpected internal error.", dbStatus: "Query_Failed_Internal" };
+}
 }
 
 // --- Main STK Push route ---
@@ -316,7 +324,7 @@ router.post("/stk-push", async (req, res) => {
 
       // --- IMMEDIATE ASYNCHRONOUS STATUS CHECK (NEW LOGIC) ---
       // We are *not* waiting for this to complete before responding to the client.
-      const queryDelay = 60 * 1000; // 25 seconds
+      const queryDelay = 20 * 1000; // 25 seconds
       console.log(`Scheduling STK status check for ${newEntry.transactionId} in ${queryDelay / 1000} seconds.`);
       setTimeout(() => {
         queryStkStatus(newEntry.transactionId)

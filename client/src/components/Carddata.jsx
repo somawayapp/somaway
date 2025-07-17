@@ -1,5 +1,5 @@
 // components/BettingChances.jsx
-import React, { useState, useEffect, useRef } from "react"; // Import useRef
+import React, { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
 const cardData = [
@@ -25,7 +25,6 @@ export default function BettingChances() {
   const [currentCheckoutRequestID, setCurrentCheckoutRequestID] = useState(null); // Store CheckoutRequestID
   const statusCheckIntervalRef = useRef(null); // Ref for interval ID
 
-
   useEffect(() => {
     // Fetch cycle status on component mount
     const fetchCycleStatus = async () => {
@@ -49,74 +48,67 @@ export default function BettingChances() {
   }, []);
 
   // Effect to continuously check transaction status if currentCheckoutRequestID is set
-// ... (your existing imports and state declarations)
-
-useEffect(() => {
-  // ... (existing fetchCycleStatus useEffect)
-}, []);
-
-// Effect to continuously check transaction status if currentCheckoutRequestID is set
-useEffect(() => {
-  if (currentCheckoutRequestID && !["Completed", "Failed", "Cancelled", "Query_Failed_Network", "Query_Failed_Internal", "Unknown_No_DB_Entry"].includes(transactionStatus)) {
-    // Clear any existing interval to prevent multiple intervals running
-    if (statusCheckIntervalRef.current) {
-      clearInterval(statusCheckIntervalRef.current);
-    }
-
-    const checkStatus = async () => {
-      try {
-        const res = await fetch("https://somaway.onrender.com/mpesa/query-stk-status", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ checkoutRequestID: currentCheckoutRequestID }),
-        });
-        const data = await res.json();
-
-        if (data.success) {
-          setTransactionStatus(data.dbStatus);
-          // Only clear interval if a final status is reached
-          if (["Completed", "Failed", "Cancelled", "Query_Failed", "Query_Failed_Network", "Query_Failed_Internal", "Unknown_No_DB_Entry"].includes(data.dbStatus)) {
-            setFailReason(data.data?.ResultDesc || data.error || "Transaction ended with an unknown error.");
-            clearInterval(statusCheckIntervalRef.current);
-          }
-        } else if (data.pending) {
-          setTransactionStatus("Still processing..."); // Continue polling
-        } else {
-          // If data.success is false and not pending, it's a final failure
-          setTransactionStatus("Failed");
-          setFailReason(data.error || "Failed to retrieve transaction status from server.");
-          clearInterval(statusCheckIntervalRef.current);
-        }
-
-      } catch (error) {
-        console.error("Error checking STK status:", error);
-        setTransactionStatus("Failed");
-        setFailReason("Network error during status check. Please check your connection.");
-        clearInterval(statusCheckIntervalRef.current);
-      }
-    };
-
-    // Start polling for status
-    statusCheckIntervalRef.current = setInterval(checkStatus, 5000); // Poll every 5 seconds
-
-    // Initial check immediately
-    checkStatus();
-
-    // Cleanup function to clear the interval when the component unmounts or dependencies change
-    return () => {
+  useEffect(() => {
+    if (currentCheckoutRequestID && !["Completed", "Failed", "Cancelled"].includes(transactionStatus)) {
+      // Clear any existing interval to prevent multiple intervals running
       if (statusCheckIntervalRef.current) {
         clearInterval(statusCheckIntervalRef.current);
       }
-    };
-  } else {
-    // Clear interval if no longer needed (e.g., currentCheckoutRequestID becomes null, or status is final)
-    if (statusCheckIntervalRef.current) {
-      clearInterval(statusCheckIntervalRef.current);
-    }
-  }
-}, [currentCheckoutRequestID, transactionStatus]); // Re-run when these change
 
-// ... (rest of your component code)
+      const checkStatus = async () => {
+        try {
+          const res = await fetch("https://somaway.onrender.com/mpesa/query-stk-status", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ checkoutRequestID: currentCheckoutRequestID }),
+          });
+          const data = await res.json();
+
+          if (data.success) {
+            setTransactionStatus(data.dbStatus); // Update status based on DB reconciliation
+            if (data.dbStatus === "Failed" || data.dbStatus === "Cancelled" || data.dbStatus === "Query_Failed_Network" || data.dbStatus === "Query_Failed_Internal" || data.dbStatus === "Unknown_No_DB_Entry") {
+              setFailReason(data.error || data.data?.ResultDesc || "Transaction ended with an unknown error.");
+              clearInterval(statusCheckIntervalRef.current);
+            } else if (data.dbStatus === "Completed") {
+              setFailReason("Transaction completed successfully."); // Success message
+              clearInterval(statusCheckIntervalRef.current);
+            }
+          } else if (data.pending) {
+            setTransactionStatus("Still processing..."); // Continue polling
+          } else {
+            // If data.success is false and not pending, it's a final failure from the query API itself
+            setTransactionStatus("Failed");
+            setFailReason(data.error || "Failed to retrieve transaction status from server.");
+            clearInterval(statusCheckIntervalRef.current);
+          }
+        } catch (error) {
+          console.error("Error checking STK status:", error);
+          setTransactionStatus("Failed");
+          setFailReason("Network error during status check. Please check your connection.");
+          clearInterval(statusCheckIntervalRef.current);
+        }
+      };
+
+      // Start polling for status
+      statusCheckIntervalRef.current = setInterval(checkStatus, 5000); // Poll every 5 seconds
+
+      // Initial check immediately
+      checkStatus();
+
+      // Cleanup function to clear the interval when the component unmounts or dependencies change
+      return () => {
+        if (statusCheckIntervalRef.current) {
+          clearInterval(statusCheckIntervalRef.current);
+        }
+      };
+    } else {
+      // Clear interval if no longer needed (e.g., currentCheckoutRequestID becomes null, or status is final)
+      if (statusCheckIntervalRef.current) {
+        clearInterval(statusCheckIntervalRef.current);
+      }
+    }
+  }, [currentCheckoutRequestID, transactionStatus]); // Re-run when these change
+
   const handleShareToWhatsApp = () => {
     const message = `
 One shilling gives you a chance to win one million shillings!
@@ -276,17 +268,16 @@ Join now for just one bob —
                   exit={{ opacity: 0, y: -10 }}
                   className={`p-3 rounded-xl text-sm mb-4 text-center font-semibold
                     ${transactionStatus === "Completed" ? "bg-green-700 text-white" : ""}
-                    ${transactionStatus === "Failed" || transactionStatus === "Cancelled" || transactionStatus === "Query_Failed" ? "bg-red-700 text-white" : ""}
-                    ${transactionStatus === "Processing..." || transactionStatus === "Pending M-Pesa Confirmation..." ? "bg-blue-700 text-white" : ""}
+                    ${transactionStatus.includes("Failed") || transactionStatus === "Cancelled" || transactionStatus === "Query_Failed" ? "bg-red-700 text-white" : ""}
+                    ${transactionStatus === "Processing..." || transactionStatus === "Pending M-Pesa Confirmation..." || transactionStatus === "Still processing..." ? "bg-blue-700 text-white" : ""}
                   `}
                 >
+                  {/* Display failReason directly if it exists for failed/cancelled states */}
                   {transactionStatus === "Completed" && "✅ Transaction Completed Successfully!"}
-                  {transactionStatus === "Failed" && `❌ Transaction Failed: ${failReason}`}
-                  {transactionStatus === "Cancelled" && `❌ Transaction Cancelled: ${failReason}`}
-                  {transactionStatus === "Query_Failed" && `⚠️ Status Query Failed: ${failReason}`}
+                  {(transactionStatus.includes("Failed") || transactionStatus === "Cancelled" || transactionStatus === "Query_Failed") && `❌ Transaction ${transactionStatus.replace('_', ' ')}: ${failReason}`}
                   {transactionStatus === "Processing..." && "⌛ Processing your request..."}
-                  {transactionStatus === "Pending M-Pesa Confirmation..." &&
-                    "⏳ Awaiting M-Pesa confirmation. Please enter your PIN on your phone."}
+                  {transactionStatus === "Pending M-Pesa Confirmation..." && "⏳ Awaiting M-Pesa confirmation. Please enter your PIN on your phone."}
+                  {transactionStatus === "Still processing..." && "⏳ Transaction is still processing. Please wait..."}
                 </motion.div>
               )}
             </AnimatePresence>
@@ -375,28 +366,6 @@ Join now for just one bob —
                 </motion.form>
               )}
             </AnimatePresence>
-
-            {/* Confirmation Message (Replaced by transaction status display) */}
-            {/* Keeping this here commented out in case you prefer the old way for completed, but the new status display handles it */}
-            {/* <AnimatePresence>
-              {submitted && transactionStatus === "Pending M-Pesa Confirmation..." && (
-                <motion.div
-                  key="confirmation"
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  exit={{ opacity: 0 }}
-                  className="bg-green-800 p-4 rounded-xl text-sm mt-4"
-                >
-                  ✅ A prompt has been sent to <strong>{phone}</strong>. Please confirm
-                  the payment of <strong>1 KES</strong> to{" "}
-                  <strong>Shilingi</strong> via M-Pesa and enter your PIN to
-                  complete the transaction.
-                  <br />
-                  Your contribution will now be added to the stash and you’ll appear
-                  on the leaderboard as <strong>{name}</strong>!
-                </motion.div>
-              )}
-            </AnimatePresence> */}
           </div>
         </motion.div>
       ))}
