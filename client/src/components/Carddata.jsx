@@ -64,20 +64,24 @@ export default function BettingChances() {
           });
           const data = await res.json();
 
-          if (data.success) {
-            setTransactionStatus(data.dbStatus); // Update status from DB
-            if (data.dbStatus === "Failed" || data.dbStatus === "Cancelled" || data.dbStatus === "Query_Failed") {
-              setFailReason(data.data.ResultDesc || data.error || "Unknown error occurred."); // Get fail reason
-              clearInterval(statusCheckIntervalRef.current); // Stop checking on failure
-            } else if (data.dbStatus === "Completed") {
-              clearInterval(statusCheckIntervalRef.current); // Stop checking on completion
-            }
-          } else {
-            // If the query itself fails (e.g., network error, server error from your backend)
+         if (data.success) {
+           setTransactionStatus(data.dbStatus);
+
+               if (["Failed", "Cancelled", "Query_Failed"].includes(data.dbStatus)) {
+          setFailReason(data.data?.ResultDesc || data.error || "Unknown error occurred.");
+           clearInterval(statusCheckIntervalRef.current);
+               } else if (data.dbStatus === "Completed") {
+             clearInterval(statusCheckIntervalRef.current);
+             }
+          } else if (data.pending) {
+          setTransactionStatus("Still processing..."); // Optional status
+         // Don't clear the interval — allow it to keep checking
+         } else {
             setTransactionStatus("Failed");
             setFailReason(data.error || "Failed to retrieve transaction status from server.");
-            clearInterval(statusCheckIntervalRef.current);
-          }
+              clearInterval(statusCheckIntervalRef.current);
+             }
+
         } catch (error) {
           console.error("Error checking STK status:", error);
           setTransactionStatus("Failed");
