@@ -18,7 +18,6 @@ const ENCRYPTION_KEY = process.env.ENCRYPTION_KEY;
 const IV_LENGTH = 16;
 
 
-
 // --- Helper Function for Hashing (NEW) ---
 function hashPhoneNumber(phone) {
   // Always hash the *formatted* phone number
@@ -90,8 +89,6 @@ const MAX_PARTICIPANTS = 1000000; // 1 Million participants/Ksh
 const CURRENT_CYCLE = 1; // You might want to manage this dynamically later
 
 // --- Main STK Push route ---
-
-// --- Main STK Push route ---
 router.post("/stk-push", async (req, res) => {
   let { phone, name } = req.body;
   const amount = 1; // Always 1 KES
@@ -108,10 +105,8 @@ router.post("/stk-push", async (req, res) => {
     return res.status(400).json({ success: false, error: "Invalid phone number format" });
   }
 
-  // --- HASH THE PHONE FOR LOOKUP (NEW) ---
   const phoneNumberHash = hashPhoneNumber(phone);
   console.log(`Checking for existing entry for phone hash: ${phoneNumberHash} in cycle: ${CURRENT_CYCLE}`);
-  // --- END HASHING FOR LOOKUP ---
 
   // Check current participant count and total confirmed amount
   try {
@@ -135,13 +130,12 @@ router.post("/stk-push", async (req, res) => {
 
     // Check for duplicate phone number (already initiated or completed transaction)
     const existingEntry = await EntryModel.findOne({
-      phoneNumberHash: phoneNumberHash, // <<<--- NOW USING THE HASH FOR LOOKUP
+      phoneNumberHash: phoneNumberHash,
       cycle: CURRENT_CYCLE,
     });
 
     if (existingEntry) {
       console.log(`Existing entry found (encrypted): ${JSON.stringify(existingEntry)}`);
-      // --- ADDED DECRYPTED LOGGING HERE ---
       try {
           const decryptedPhone = decrypt(existingEntry.phone);
           const decryptedName = decrypt(existingEntry.name);
@@ -149,22 +143,15 @@ router.post("/stk-push", async (req, res) => {
       } catch (decryptError) {
           console.error("Error decrypting existing entry for logging:", decryptError.message);
       }
-      // --- END ADDED DECRYPTED LOGGING ---
-
-      
 
       if (existingEntry.status === "Completed") {
         return res.status(409).json({
           success: false,
           error: "This phone number has already successfully participated in this cycle.",
         });
-      } else if (existingEntry.status === "Pending") {    
+      } else if (existingEntry.status === "Pending") {
        console.log("Pending entry found. Deleting it to allow new transaction.");
-      await EntryModel.deleteOne({ _id: existingEntry._id });  
-
-    
-
-        
+       await EntryModel.deleteOne({ _id: existingEntry._id });
       }
     } else {
         console.log("No existing entry found for this phone number in the current cycle.");
@@ -173,34 +160,28 @@ router.post("/stk-push", async (req, res) => {
     console.error("Database check error:", dbError);
     return res.status(500).json({ success: false, error: "Server error during entry check." });
   }
-  // ... (rest of your STK push code) ...
 
+  const timestamp = moment().format("YYYYMMDDHHmmss");
+  const password = Buffer.from(shortCode + passkey + timestamp).toString("base64");
 
-  const timestamp = moment().format("YYYYMMDDHHmmss");
-  const password = Buffer.from(shortCode + passkey + timestamp).toString("base64");
+  try {
+    const token = await getAccessToken();
 
-  try {
-    const token = await getAccessToken();
+    const newEntry = await EntryModel.create({
+      name: encrypt(name),
+      phone: encrypt(phone),
+      amount: amount,
+      phoneNumberHash: phoneNumberHash,
+      location: {
+        country: req.headers["x-vercel-ip-country"] || "Unknown",
+        city: req.headers["x-vercel-ip-city"] || "Unknown",
+        region: req.headers["x-vercel-ip-country-region"] || "Unknown",
+        timezone: req.headers["x-vercel-ip-timezone"] || "Unknown",
+      },
+      status: "Pending",
+      cycle: CURRENT_CYCLE,
+    });
 
-    // Create a pending entry in the database BEFORE sending STK push
-    // Store encrypted name and phone
-    const newEntry = await EntryModel.create({
-      name: encrypt(name),
-      phone: encrypt(phone),
-      amount: amount,
-      phoneNumberHash: phoneNumberHash, 
-      location: {
-        country: req.headers["x-vercel-ip-country"] || "Unknown",
-        city: req.headers["x-vercel-ip-city"] || "Unknown",
-        region: req.headers["x-vercel-ip-country-region"] || "Unknown",
-        timezone: req.headers["x-vercel-ip-timezone"] || "Unknown",
-      },
-      status: "Pending", // Set initial status to pending
-      cycle: CURRENT_CYCLE,
-      // transactionId will be updated after successful STK push initiation
-    });
-
-    // --- ADD THIS LOGGING HERE ---
     console.log("--- STK Push Request Payload Being Sent to Safaricom ---");
     console.log("BusinessShortCode:", shortCode);
     console.log("Password:", password);
@@ -210,80 +191,70 @@ router.post("/stk-push", async (req, res) => {
     console.log("PartyA:", phone);
     console.log("PartyB:", shortCode);
     console.log("PhoneNumber:", phone);
-    console.log("CallBackURL (THIS IS KEY):", callbackURL); // <--- THIS IS THE LOG TO CHECK
+    console.log("CallBackURL (THIS IS KEY):", callbackURL);
     console.log("AccountReference:", "Shilingi");
     console.log("TransactionDesc:", "Join cycle");
     console.log("--- End STK Push Request Payload ---");
 
-    const stkRes = await axios.post(
-      "https://sandbox.safaricom.co.ke/mpesa/stkpush/v1/processrequest",
-      {
-        BusinessShortCode: shortCode,
-        Password: password,
-        Timestamp: timestamp,
-        TransactionType: "CustomerPayBillOnline",
-        Amount: amount,
-        PartyA: phone,
-        PartyB: shortCode,
-        PhoneNumber: phone,
-        CallBackURL: callbackURL, // This variable is defined at the top of your file
-        AccountReference: "Shilingi",
-        TransactionDesc: "Join cycle",
-      },
-      {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      }
-    );
+    const stkRes = await axios.post(
+      "https://sandbox.safaricom.co.ke/mpesa/stkpush/v1/processrequest",
+      {
+        BusinessShortCode: shortCode,
+        Password: password,
+        Timestamp: timestamp,
+        TransactionType: "CustomerPayBillOnline",
+        Amount: amount,
+        PartyA: phone,
+        PartyB: shortCode,
+        PhoneNumber: phone,
+        CallBackURL: callbackURL,
+        AccountReference: "Shilingi",
+        TransactionDesc: "Join cycle",
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
 
-    console.log("Safaricom STK response:", stkRes.data);
+    console.log("Safaricom STK response:", stkRes.data);
 
-    if (stkRes.data.ResponseCode === "0") {
-      // Update the pending entry with the CheckoutRequestID
-      newEntry.transactionId = stkRes.data.CheckoutRequestID;
-      await newEntry.save();
-      res.json({ success: true, message: "STK push sent", data: stkRes.data });
-    } else {
-      // If STK push failed, remove the pending entry or mark it as failed
-      await EntryModel.deleteOne({ _id: newEntry._id }); // Or update status to 'Failed'
-      res.status(400).json({ success: false, error: stkRes.data.ResponseDescription || "Failed to initiate STK push" });
-    }
-  } catch (error) {
-    console.error("STK Push error:", error?.response?.data || error.message || error);
-    // If an error occurred before sending STK or while updating entry, clean up
-    // This assumes newEntry might not exist if error was early
-    if (newEntry && newEntry._id) {
-      await EntryModel.deleteOne({ _id: newEntry._id });
-    }
-    res.status(500).json({ success: false, error: "Failed to initiate STK push due to a server error." });
-  }
+    if (stkRes.data.ResponseCode === "0") {
+      newEntry.transactionId = stkRes.data.CheckoutRequestID;
+      await newEntry.save();
+      res.json({ success: true, message: "STK push sent", data: stkRes.data });
+    } else {
+      await EntryModel.deleteOne({ _id: newEntry._id });
+      res.status(400).json({ success: false, error: stkRes.data.ResponseDescription || "Failed to initiate STK push" });
+    }
+  } catch (error) {
+    console.error("STK Push error:", error?.response?.data || error.message || error);
+    if (newEntry && newEntry._id) {
+      await EntryModel.deleteOne({ _id: newEntry._id });
+    }
+    res.status(500).json({ success: false, error: "Failed to initiate STK push due to a server error." });
+  }
 });
-
-
 
 
 // --- M-Pesa Callback Route ---
 router.post("/callback", async (req, res) => {
   console.log("M-Pesa Callback received:", JSON.stringify(req.body, null, 2));
- console.log(JSON.stringify(req.body, null, 2));
-  // always respond 200
   res.status(200).send('OK');
-  
+
   const { Body } = req.body;
   const { stkCallback } = Body;
 
   if (!stkCallback) {
     console.warn("Invalid M-Pesa callback format.");
-    return res.json({ ResultCode: 1, ResultDesc: "Invalid callback format" });
+    return; // Do not send JSON response after res.status(200).send('OK');
   }
 
-  // Extract CheckoutRequestID directly from stkCallback
   const CheckoutRequestID = stkCallback.CheckoutRequestID;
-  const ResultCode = stkCallback.ResultCode; // Also directly from stkCallback
-  const resultDesc = stkCallback.ResultDesc; // Also directly from stkCallback
+  const ResultCode = stkCallback.ResultCode;
+  const resultDesc = stkCallback.ResultDesc;
 
-  // Extract other items from CallbackMetadata.Item
   const callbackItems = stkCallback.CallbackMetadata?.Item?.reduce((acc, item) => {
     acc[item.Name] = item.Value;
     return acc;
@@ -291,45 +262,113 @@ router.post("/callback", async (req, res) => {
 
   const MpesaReceiptNumber = callbackItems.MpesaReceiptNumber;
   const PhoneNumber = callbackItems.PhoneNumber;
-  const Amount = callbackItems.Amount; // Though you are just setting it to 1 KES, good to extract for validation
+  const Amount = callbackItems.Amount;
 
-  // Add more detailed logging here to confirm extraction
-  console.log(`Extracted: CheckoutRequestID=${CheckoutRequestID}, ResultCode=${ResultCode}, MpesaReceiptNumber=${MpesaReceiptNumber}, PhoneNumber=${PhoneNumber}, Amount=${Amount}, ResultDesc=${resultDesc}`);
-
+  console.log(`Extracted from callback: CheckoutRequestID=${CheckoutRequestID}, ResultCode=${ResultCode}, MpesaReceiptNumber=${MpesaReceiptNumber}, PhoneNumber=${PhoneNumber}, Amount=${Amount}, ResultDesc=${resultDesc}`);
 
   try {
     const entry = await EntryModel.findOne({ transactionId: CheckoutRequestID });
 
     if (!entry) {
-      console.error(`Entry not found for CheckoutRequestID: ${CheckoutRequestID}`);
-      return res.json({ ResultCode: 1, ResultDesc: "Entry not found in database" });
+      console.error(`Entry not found for CheckoutRequestID: ${CheckoutRequestID} in database.`);
+      return;
     }
 
     if (ResultCode === 0) {
-      // Payment successful
       entry.status = "Completed";
       entry.mpesaReceiptNumber = MpesaReceiptNumber;
-      // You might want to verify the phone number and amount match with the encrypted values
-      // For now, we trust M-Pesa's callback.
-      await entry.save();
-      console.log(`Payment for ${decrypt(entry.phone)} successful. Receipt: ${MpesaReceiptNumber}`);
+      // Optional: Add more validation here, e.g., check if Amount matches expected amount
+      // const decryptedPhone = decrypt(entry.phone); // If you need to log it
+      console.log(`Payment for CheckoutRequestID ${CheckoutRequestID} successful. Receipt: ${MpesaReceiptNumber}`);
     } else {
-      // Payment failed or cancelled
       entry.status = "Failed";
-      // Optionally store ResultDesc for debugging
-      console.log(`Payment for ${decrypt(entry.phone)} failed/cancelled. ResultCode: ${ResultCode}, Desc: ${resultDesc}`);
+      entry.failReason = resultDesc; // Store the reason for failure
+      console.log(`Payment for CheckoutRequestID ${CheckoutRequestID} failed/cancelled. ResultCode: ${ResultCode}, Desc: ${resultDesc}`);
     }
-    await entry.save(); // Save the updated status
+    await entry.save();
+    console.log(`Entry for CheckoutRequestID ${CheckoutRequestID} updated to status: ${entry.status}.`);
 
-    res.json({ ResultCode: 0, ResultDesc: "Callback received successfully" });
   } catch (error) {
     console.error("Error processing M-Pesa callback:", error);
-    res.json({ ResultCode: 1, ResultDesc: "Internal server error during callback processing" });
   }
 });
 
+// --- NEW: API to query STK Push transaction status ---
+router.post("/query-stk-status", async (req, res) => {
+  const { checkoutRequestID } = req.body;
 
+  if (!checkoutRequestID) {
+    return res.status(400).json({ success: false, error: "checkoutRequestID is required." });
+  }
 
+  try {
+    const timestamp = moment().format("YYYYMMDDHHmmss");
+    const password = Buffer.from(shortCode + passkey + timestamp).toString("base64");
+    const token = await getAccessToken();
+
+    const queryRes = await axios.post(
+      "https://sandbox.safaricom.co.ke/mpesa/stkpushquery/v1/query",
+      {
+        BusinessShortCode: shortCode,
+        Password: password,
+        Timestamp: timestamp,
+        CheckoutRequestID: checkoutRequestID,
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+
+    console.log(`STK Push Query response for ${checkoutRequestID}:`, queryRes.data);
+
+    // Update your database based on the query response
+    const entry = await EntryModel.findOne({ transactionId: checkoutRequestID });
+
+    if (entry) {
+      if (queryRes.data.ResponseCode === "0") {
+        // ResponseCode 0 usually means the query was successful,
+        // now check the ResultCode from the detailed response for transaction status
+        const ResultCode = queryRes.data.ResultCode; // This might be nested, check Daraja docs carefully
+        const ResultDesc = queryRes.data.ResultDesc;
+
+        if (ResultCode === "0") { // The actual transaction was successful
+          entry.status = "Completed";
+          entry.mpesaReceiptNumber = queryRes.data.MpesaReceiptNumber; // M-Pesa Receipt if available
+          console.log(`Reconciled: Transaction ${checkoutRequestID} is Completed.`);
+        } else if (ResultCode === "1032") { // User cancelled
+          entry.status = "Cancelled";
+          console.log(`Reconciled: Transaction ${checkoutRequestID} was Cancelled by user.`);
+        } else { // Other failure codes
+          entry.status = "Failed";
+          entry.failReason = ResultDesc;
+          console.log(`Reconciled: Transaction ${checkoutRequestID} Failed with code ${ResultCode}.`);
+        }
+      } else if (queryRes.data.ResponseCode === "1" && queryRes.data.ResultDesc === "The transaction is not found") {
+        // This can happen if the STK push was initiated but never completed
+        // or if the request was too old. You might want to mark it as 'Failed' or 'Expired'.
+        entry.status = "Failed";
+        entry.failReason = "Transaction not found by Safaricom (might have expired or never completed)";
+        console.log(`Reconciled: Transaction ${checkoutRequestID} not found by Safaricom.`);
+      } else {
+        // Generic query failure
+        entry.status = "Query_Failed"; // A new status to indicate query itself failed
+        entry.failReason = queryRes.data.ResponseDescription || "Unknown query error";
+        console.log(`Reconciled: Query for ${checkoutRequestID} failed: ${entry.failReason}.`);
+      }
+      await entry.save();
+    } else {
+      console.warn(`Query received for CheckoutRequestID ${checkoutRequestID} but no matching entry found in DB.`);
+    }
+
+    res.json({ success: true, data: queryRes.data, dbStatus: entry ? entry.status : "Not Found in DB" });
+
+  } catch (error) {
+    console.error("STK Push Query error:", error?.response?.data || error.message || error);
+    res.status(500).json({ success: false, error: "Failed to query STK push status due to a server error." });
+  }
+});
 
 
 // --- API to get current cycle status (for frontend to display) ---
@@ -365,5 +404,3 @@ router.get("/cycle-status", async (req, res) => {
 
 
 export default router;
-
-
