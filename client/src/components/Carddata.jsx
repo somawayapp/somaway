@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react"; // Import useRef
+import React, { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
 const cardData = [
@@ -18,10 +18,10 @@ export default function BettingChances() {
   const [acceptedTerms, setAcceptedTerms] = useState(false);
   const [loading, setLoading] = useState(false);
   const [cycleStatus, setCycleStatus] = useState(null);
-  const [errorMessage, setErrorMessage] = useState("");
-  const [transactionStatus, setTransactionStatus] = useState(null); // New state for transaction status (e.g., 'Pending', 'Completed', 'Failed')
-  const [checkoutRequestID, setCheckoutRequestID] = useState(null); // New state to store CheckoutRequestID
-  const pollIntervalRef = useRef(null); // Ref to store interval ID
+  const [errorMessage, setErrorMessage] = useState(""); // General error message for user
+  const [transactionStatus, setTransactionStatus] = useState(null); // 'Pending', 'Completed', 'Failed', 'Cancelled', 'Query_Failed', 'Expired/NotFound'
+  const [checkoutRequestID, setCheckoutRequestID] = useState(null);
+  const pollIntervalRef = useRef(null);
 
   useEffect(() => {
     const fetchCycleStatus = async () => {
@@ -32,15 +32,17 @@ export default function BettingChances() {
           setCycleStatus(data);
         } else {
           console.error("Failed to fetch cycle status:", data.error);
+          setErrorMessage("Failed to load cycle status. Please refresh.");
         }
       } catch (err) {
         console.error("Error fetching cycle status:", err);
+        setErrorMessage("Network error fetching cycle status.");
       }
     };
     fetchCycleStatus();
 
     const intervalId = setInterval(fetchCycleStatus, 30000); // Every 30 seconds
-    return () => clearInterval(intervalId); // Cleanup on unmount
+    return () => clearInterval(intervalId);
   }, []);
 
   // Effect for polling the STK push status
@@ -60,28 +62,44 @@ export default function BettingChances() {
           });
           const data = await res.json();
 
-          if (data.success && data.dbStatus) {
+          if (data.success) {
             setTransactionStatus(data.dbStatus); // Update with 'Completed', 'Failed', 'Cancelled', etc.
             if (data.dbStatus !== "Pending" && data.dbStatus !== "Query_Failed") {
               // If status is final, stop polling
               clearInterval(pollIntervalRef.current);
               pollIntervalRef.current = null;
               console.log("Polling stopped. Transaction is no longer pending:", data.dbStatus);
+              // Clear error message if transaction succeeded
+              if (data.dbStatus === "Completed") {
+                setErrorMessage("");
+              } else {
+                // Set specific error for failed/cancelled states if available
+                setErrorMessage(data.data?.ResultDesc || data.error || "Transaction failed or was cancelled.");
+              }
             }
-          } else if (data.error && data.error.includes("Entry not found")) {
-            // If entry not found after some time, might be expired or not created
-            setTransactionStatus("Expired/NotFound");
-            clearInterval(pollIntervalRef.current);
-            pollIntervalRef.current = null;
-            setErrorMessage("Transaction not found or expired. Please try again.");
           } else {
             console.warn("Polling query returned non-success:", data);
-            // Continue polling if it's just a temporary query error
+            // This is where backend errors from `queryStkStatus` come through
+            if (data.error && data.error.includes("Entry not found")) {
+                setTransactionStatus("Expired/NotFound");
+                clearInterval(pollIntervalRef.current);
+                pollIntervalRef.current = null;
+                setErrorMessage("Transaction timed out or was not found. Please try again.");
+            } else if (data.error && data.error.includes("The transaction is being processed")) {
+                // This means the transaction is still pending, no need to show an error
+                // The transactionStatus is already "Pending"
+                console.log("Transaction still processing, continuing to poll.");
+            } else {
+                setTransactionStatus("Query_Failed"); // Set a specific status for query failures
+                setErrorMessage(data.error || "Failed to get transaction status. Please check again.");
+            }
           }
         } catch (err) {
           console.error("Error during STK status polling:", err);
-          // Consider stopping polling after a few errors, or setting a specific error status
-          // For now, we'll let it continue attempting.
+          setErrorMessage("Network error while checking transaction status. Please check your connection.");
+          setTransactionStatus("Query_Failed"); // Indicate a network-related failure during polling
+          clearInterval(pollIntervalRef.current); // Stop polling on critical network error
+          pollIntervalRef.current = null;
         }
       }, 5000); // Poll every 5 seconds (adjust as needed)
     } else if (pollIntervalRef.current && transactionStatus !== "Pending") {
@@ -133,13 +151,13 @@ Join now for just one bob —
     setSubmitted(false); // Reset submitted state when showing form again
     setTransactionStatus(null); // Reset transaction status
     setCheckoutRequestID(null); // Reset CheckoutRequestID
-    setErrorMessage(""); // Clear any previous errors
+    setErrorMessage(""); // Clear any previous errors before showing the form
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setErrorMessage("");
-    setTransactionStatus(null); // Reset before new submission
+    setErrorMessage(""); // Clear previous errors
+    setTransactionStatus(null); // Clear previous transaction status
 
     if (!phone || !name) {
       setErrorMessage("Name and phone number are required.");
@@ -150,6 +168,7 @@ Join now for just one bob —
       return;
     }
 
+    // Validate phone number format
     if (!/^07\d{8}$/.test(phone)) {
       setErrorMessage("Please enter a valid M-Pesa phone number starting with 07...");
       return;
@@ -173,7 +192,9 @@ Join now for just one bob —
         setAcceptedTerms(false); // Reset terms
         setCheckoutRequestID(data.data.CheckoutRequestID); // Store the CheckoutRequestID
         setTransactionStatus("Pending"); // Set initial status to Pending
+        setErrorMessage(""); // Clear error if STK push was successfully initiated
       } else {
+        // STK push initiation failed (e.g., duplicate entry, M-Pesa error)
         setErrorMessage(data.error || "Failed to send payment prompt. Try again.");
         setTransactionStatus("Failed"); // Indicate immediate failure
       }
@@ -185,6 +206,9 @@ Join now for just one bob —
       setLoading(false);
     }
   };
+
+  // Determine if the join button should be visible
+  const showJoinButton = !joining && !submitted && cycleStatus && !cycleStatus.isMaxReached && transactionStatus !== "Pending";
 
   return (
     <div className="grid grid-cols-1 gap-6 pb-8 pt-4 bg-[var(--bg)]">
@@ -238,12 +262,13 @@ Join now for just one bob —
               </div>
             )}
 
-            {/* Error Message Display */}
-            {errorMessage && (
-              <div className="bg-red-800 p-3 rounded-xl text-sm mb-4 text-center">
-                {errorMessage}
-              </div>
+            {/* Error Message Display - Show only when no specific transaction status message is active */}
+            {errorMessage && !submitted && !joining && (
+                 <div className="bg-red-800 p-3 rounded-xl text-sm mb-4 text-center">
+                    {errorMessage}
+                 </div>
             )}
+
 
             {/* Transaction Status Messages */}
             <AnimatePresence mode="wait">
@@ -258,6 +283,10 @@ Join now for just one bob —
                   ⏳ A prompt has been sent to your phone. Please complete the payment.
                   <br />
                   We are checking the status...
+                  <br />
+                  <span className="text-gray-300 text-xs">
+                    (This message will update automatically)
+                  </span>
                 </motion.div>
               )}
 
@@ -275,7 +304,10 @@ Join now for just one bob —
                 </motion.div>
               )}
 
-              {(transactionStatus === "Failed" || transactionStatus === "Cancelled" || transactionStatus === "Query_Failed" || transactionStatus === "Expired/NotFound") && (
+              {(transactionStatus === "Failed" ||
+                transactionStatus === "Cancelled" ||
+                transactionStatus === "Query_Failed" ||
+                transactionStatus === "Expired/NotFound") && (
                 <motion.div
                   key="failed"
                   initial={{ opacity: 0, y: 10 }}
@@ -290,8 +322,8 @@ Join now for just one bob —
               )}
             </AnimatePresence>
 
-            {/* Join Button - Only show if not joining, not submitted, and max not reached, and no pending transaction */}
-            {!joining && !submitted && cycleStatus && !cycleStatus.isMaxReached && transactionStatus !== "Pending" && (
+            {/* Join Button - Only show if conditions are met */}
+            {showJoinButton && (
               <button
                 onClick={handleJoinClick}
                 className="mt-auto bg-[#020201] py-4 hover:bg-[#0e0e06] text-[#EBD402] rounded-2xl font-semibold w-full hover:scale-102 transition-transform duration-200"
