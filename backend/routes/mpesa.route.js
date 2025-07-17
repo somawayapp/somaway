@@ -231,7 +231,7 @@ router.post("/stk-push", async (req, res) => {
     console.error("Database check error:", dbError);
     return res.status(500).json({ success: false, error: "Server error during entry check." });
   }
-  
+
   const timestamp = moment().format("YYYYMMDDHHmmss");
   const password = Buffer.from(shortCode + passkey + timestamp).toString("base64");
   let newEntry = null; // Initialize newEntry here for broader scope
@@ -375,20 +375,28 @@ if (entry.status !== "Completed") {
         entry.status = "Completed";
         entry.mpesaReceiptNumber = MpesaReceiptNumber;
         console.log(`Callback: Payment for CheckoutRequestID ${CheckoutRequestID} successful. Receipt: ${MpesaReceiptNumber}. DB updated.`);
+        // Congratulatory message for the user
+        // You might send this via SMS, push notification, or update a UI element.
+        console.log(`Congratulations! Your payment was successful and you've successfully joined! Your M-Pesa Receipt Number is: ${MpesaReceiptNumber}`);
     } else {
         entry.status = "Failed";
         entry.failReason = resultDesc;
         console.log(`Callback: Payment for CheckoutRequestID ${CheckoutRequestID} failed/cancelled. ResultCode: ${ResultCode}, Desc: ${resultDesc}. DB updated.`);
+        // Message for failed/cancelled payment with reason
+        // You might send this via SMS, push notification, or update a UI element.
+        console.log(`Your payment for CheckoutRequestID ${CheckoutRequestID} failed or was cancelled. Reason: ${resultDesc}. Please try again.`);
     }
     await entry.save();
 } else {
     console.log(`Callback: Entry for ${CheckoutRequestID} already processed or status is not Pending. Current status: ${entry.status}. No update needed from this callback.`);
+    // Message if already completed or no update needed
+    console.log(`Your transaction for CheckoutRequestID ${CheckoutRequestID} has already been processed. Current status: ${entry.status}.`);
 }
 
   } catch (error) {
     console.error("Error processing M-Pesa callback:", error);
   }
-  
+
 });
 
 // --- API to query STK Push transaction status (can still be used manually) ---
