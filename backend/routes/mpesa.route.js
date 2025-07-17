@@ -197,7 +197,6 @@ const CURRENT_CYCLE = 1; // You might want to manage this dynamically later
             return { success: true, data: error.response.data, dbStatus: "Pending" }; // Return success to frontend
         }
      }
-     return { success: false, error: "Failed to query STK push status due to an internal error." };
    }
  }
 
