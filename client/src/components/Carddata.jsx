@@ -49,68 +49,74 @@ export default function BettingChances() {
   }, []);
 
   // Effect to continuously check transaction status if currentCheckoutRequestID is set
-  useEffect(() => {
-    if (currentCheckoutRequestID && transactionStatus !== "Completed" && transactionStatus !== "Failed") {
-      // Clear any existing interval to prevent multiple intervals running
-      if (statusCheckIntervalRef.current) {
-        clearInterval(statusCheckIntervalRef.current);
-      }
+// ... (your existing imports and state declarations)
 
-      const checkStatus = async () => {
-        try {
-          const res = await fetch("https://somaway.onrender.com/mpesa/query-stk-status", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ checkoutRequestID: currentCheckoutRequestID }),
-          });
-          const data = await res.json();
+useEffect(() => {
+  // ... (existing fetchCycleStatus useEffect)
+}, []);
 
-         if (data.success) {
-           setTransactionStatus(data.dbStatus);
-
-               if (["Failed", "Cancelled", "Query_Failed"].includes(data.dbStatus)) {
-          setFailReason(data.data?.ResultDesc || data.error || "Unknown error occurred.");
-           clearInterval(statusCheckIntervalRef.current);
-               } else if (data.dbStatus === "Completed") {
-             clearInterval(statusCheckIntervalRef.current);
-             }
-          } else if (data.pending) {
-          setTransactionStatus("Still processing..."); // Optional status
-         // Don't clear the interval — allow it to keep checking
-         } else {
-            setTransactionStatus("Failed");
-            setFailReason(data.error || "Failed to retrieve transaction status from server.");
-              clearInterval(statusCheckIntervalRef.current);
-             }
-
-        } catch (error) {
-          console.error("Error checking STK status:", error);
-          setTransactionStatus("Failed");
-          setFailReason("Network error during status check. Please check your connection.");
-          clearInterval(statusCheckIntervalRef.current);
-        }
-      };
-
-      // Start polling for status
-      statusCheckIntervalRef.current = setInterval(checkStatus, 5000); // Poll every 5 seconds
-
-      // Initial check immediately
-      checkStatus();
-
-      // Cleanup function to clear the interval when the component unmounts or dependencies change
-      return () => {
-        if (statusCheckIntervalRef.current) {
-          clearInterval(statusCheckIntervalRef.current);
-        }
-      };
-    } else {
-      // Clear interval if no longer needed (e.g., currentCheckoutRequestID becomes null, or status is final)
-      if (statusCheckIntervalRef.current) {
-        clearInterval(statusCheckIntervalRef.current);
-      }
+// Effect to continuously check transaction status if currentCheckoutRequestID is set
+useEffect(() => {
+  if (currentCheckoutRequestID && !["Completed", "Failed", "Cancelled", "Query_Failed_Network", "Query_Failed_Internal", "Unknown_No_DB_Entry"].includes(transactionStatus)) {
+    // Clear any existing interval to prevent multiple intervals running
+    if (statusCheckIntervalRef.current) {
+      clearInterval(statusCheckIntervalRef.current);
     }
-  }, [currentCheckoutRequestID, transactionStatus]); // Re-run when these change
 
+    const checkStatus = async () => {
+      try {
+        const res = await fetch("https://somaway.onrender.com/mpesa/query-stk-status", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ checkoutRequestID: currentCheckoutRequestID }),
+        });
+        const data = await res.json();
+
+        if (data.success) {
+          setTransactionStatus(data.dbStatus);
+          // Only clear interval if a final status is reached
+          if (["Completed", "Failed", "Cancelled", "Query_Failed", "Query_Failed_Network", "Query_Failed_Internal", "Unknown_No_DB_Entry"].includes(data.dbStatus)) {
+            setFailReason(data.data?.ResultDesc || data.error || "Transaction ended with an unknown error.");
+            clearInterval(statusCheckIntervalRef.current);
+          }
+        } else if (data.pending) {
+          setTransactionStatus("Still processing..."); // Continue polling
+        } else {
+          // If data.success is false and not pending, it's a final failure
+          setTransactionStatus("Failed");
+          setFailReason(data.error || "Failed to retrieve transaction status from server.");
+          clearInterval(statusCheckIntervalRef.current);
+        }
+
+      } catch (error) {
+        console.error("Error checking STK status:", error);
+        setTransactionStatus("Failed");
+        setFailReason("Network error during status check. Please check your connection.");
+        clearInterval(statusCheckIntervalRef.current);
+      }
+    };
+
+    // Start polling for status
+    statusCheckIntervalRef.current = setInterval(checkStatus, 5000); // Poll every 5 seconds
+
+    // Initial check immediately
+    checkStatus();
+
+    // Cleanup function to clear the interval when the component unmounts or dependencies change
+    return () => {
+      if (statusCheckIntervalRef.current) {
+        clearInterval(statusCheckIntervalRef.current);
+      }
+    };
+  } else {
+    // Clear interval if no longer needed (e.g., currentCheckoutRequestID becomes null, or status is final)
+    if (statusCheckIntervalRef.current) {
+      clearInterval(statusCheckIntervalRef.current);
+    }
+  }
+}, [currentCheckoutRequestID, transactionStatus]); // Re-run when these change
+
+// ... (rest of your component code)
   const handleShareToWhatsApp = () => {
     const message = `
 One shilling gives you a chance to win one million shillings!

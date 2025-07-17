@@ -95,8 +95,9 @@ async function queryStkStatus(checkoutRequestID) {
 
   try {
     const timestamp = moment().format("YYYYMMDDHHmmss");
+    // Ensure shortCode, passkey are defined in scope or imported
     const password = Buffer.from(shortCode + passkey + timestamp).toString("base64");
-    const token = await getAccessToken();
+    const token = await getAccessToken(); // Ensure getAccessToken is defined
 
     const queryRes = await axios.post(
       "https://sandbox.safaricom.co.ke/mpesa/stkpushquery/v1/query",
@@ -142,35 +143,37 @@ async function queryStkStatus(checkoutRequestID) {
         console.log(`Reconciled: Transaction ${checkoutRequestID} not found by Safaricom. DB updated.`);
       } else {
         entry.status = "Query_Failed";
-        entry.failReason = queryRes.data.ResponseDescription || "Unknown query error";
+        entry.failReason = queryRes.data.ResponseDescription || "Unknown query error from M-Pesa.";
         console.log(`Reconciled: Query for ${checkoutRequestID} failed: ${entry.failReason}. DB updated.`);
       }
       await entry.save();
       return { success: true, data: queryRes.data, dbStatus: entry.status };
     } else {
-      console.warn(`Query received for CheckoutRequestID ${checkoutRequestID} but no matching entry found in DB.`);
-      return { success: false, error: "Entry not found in database for reconciliation." };
+      console.warn(`Query received for CheckoutRequestID ${checkoutRequestID} but no matching entry found in DB. This might indicate a race condition or a missed initial save.`);
+      return { success: false, error: "Entry not found in database for reconciliation. Transaction status is unknown.", dbStatus: "Unknown_No_DB_Entry" };
     }
 
+  } catch (error) {
+    const errorResponse = error?.response;
+    const errorData = errorResponse?.data;
+    const contentType = errorResponse?.headers?.['content-type'];
 
-} catch (error) {
-    const errorData = error?.response?.data;
-    const contentType = error?.response?.headers?.['content-type'];
-
+    // Check for specific M-Pesa error code for "still processing"
     if (errorData?.errorCode === "500.001.1001") {
-        console.warn("STK query says transaction is still being processed.");
-        return { success: false, pending: true, message: "Transaction is still processing, try again shortly." };
+      console.warn(`STK query for ${checkoutRequestID} says transaction is still being processed.`);
+      return { success: false, pending: true, message: "Transaction is still processing, try again shortly." };
     }
 
+    // Handle Incapsula or other HTML responses
     if (contentType && contentType.includes('text/html')) {
-        console.error("STK Push Query error: Received HTML response (possible WAF/network issue). Full response:", errorData);
-        return { success: false, error: "Failed to query STK push status due to an external network/security issue. Please try again." };
+      console.error(`STK Push Query error for ${checkoutRequestID}: Received HTML response (possible WAF/network issue). Full response (truncated):`, String(errorData).substring(0, 500));
+      return { success: false, error: "Failed to query STK push status due to a network/security block (e.g., Incapsula). Please try again later.", dbStatus: "Query_Failed_Network" };
     }
 
-    console.error("STK Push Query error (internal function):", errorData || error.message || error);
-    return { success: false, error: "Failed to query STK push status due to an internal error." };
-}
-
+    // General network or unexpected errors
+    console.error(`STK Push Query error (internal function) for ${checkoutRequestID}:`, errorData || error.message || error);
+    return { success: false, error: "Failed to query STK push status due to an unexpected internal error.", dbStatus: "Query_Failed_Internal" };
+  }
 }
 
 // --- Main STK Push route ---
