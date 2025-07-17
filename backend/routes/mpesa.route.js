@@ -212,26 +212,26 @@ router.post("/stk-push", async (req, res) => {
           console.error("Error decrypting existing entry for logging:", decryptError.message);
       }
 
-    if (existingEntry) { // Check if an existing entry was found at all
-    if (existingEntry.status === "Completed") {
-        return res.status(409).json({
-            success: false,
-            error: "This phone number has already successfully participated in this cycle.",
-        });
-    } else {
-        // If existingEntry.status is NOT "Completed" (e.g., "Pending", "Failed", etc.)
-        console.log(`Entry found with status "${existingEntry.status}". Deleting it to allow new transaction.`);
-        await EntryModel.deleteOne({ _id: existingEntry._id });
-    }
-} else {
-    console.log("No existing entry found for this phone number in the current cycle.");
-}
 
+
+      
+     if (existingEntry.status === "Completed") {
+        return res.status(409).json({
+          success: false,
+          error: "This phone number has already successfully participated in this cycle.",
+        });
+      } else if (["Pending", "Failed", "Cancelled", "Query_Failed"].includes(existingEntry.status)) {
+        console.log("Pending entry found. Deleting it to allow new transaction.");
+        await EntryModel.deleteOne({ _id: existingEntry._id });
+      }
+    } else {
+      console.log("No existing entry found for this phone number in the current cycle.");
+    }
   } catch (dbError) {
     console.error("Database check error:", dbError);
     return res.status(500).json({ success: false, error: "Server error during entry check." });
   }
-
+  
   const timestamp = moment().format("YYYYMMDDHHmmss");
   const password = Buffer.from(shortCode + passkey + timestamp).toString("base64");
   let newEntry = null; // Initialize newEntry here for broader scope
@@ -388,7 +388,7 @@ if (entry.status !== "Completed") {
   } catch (error) {
     console.error("Error processing M-Pesa callback:", error);
   }
-
+  
 });
 
 // --- API to query STK Push transaction status (can still be used manually) ---
