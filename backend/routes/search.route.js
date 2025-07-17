@@ -88,10 +88,12 @@ router.get("/", async (req, res) => {
 
   try {
     // DIRECT DATABASE QUERY USING phoneNumberHash
-    const foundEntries = await EntryModel.find({
-      phoneNumberHash: searchPhoneNumberHash, // Direct comparison with the generated hash
-      status: "Completed",
-    }).sort({ createdAt: -1 });
+// Assuming searchPhoneNumberHash is already defined from a hashed input phone number
+
+const foundEntries = await EntryModel.find({
+  phoneNumberHash: searchPhoneNumberHash, // Direct comparison with the generated hash
+  status: { $in: ["Completed", "Failed", "Pending", "Cancelled", "Query_Failed"] }, // Use $in operator to match any of these statuses
+}).sort({ createdAt: -1 }); // Sort by creation date, newest first
 
     console.log(`[Search Route] Found ${foundEntries.length} entries matching hash '${searchPhoneNumberHash}' and status 'Completed'.`);
 
