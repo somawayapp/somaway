@@ -25,6 +25,7 @@ export default function BettingChances() {
   const [currentCheckoutRequestID, setCurrentCheckoutRequestID] = useState(null); // Store CheckoutRequestID
   const statusCheckIntervalRef = useRef(null); // Ref for interval ID
 
+
   useEffect(() => {
     // Fetch cycle status on component mount
     const fetchCycleStatus = async () => {

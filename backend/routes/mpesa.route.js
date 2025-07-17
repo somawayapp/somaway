@@ -152,16 +152,23 @@ async function queryStkStatus(checkoutRequestID) {
       return { success: false, error: "Entry not found in database for reconciliation." };
     }
 
- } catch (error) {
-  const errorData = error?.response?.data;
 
-  if (errorData?.errorCode === "500.001.1001") {
-    console.warn("STK query says transaction is still being processed.");
-    return { success: false, pending: true, message: "Transaction is still processing, try again shortly." };
-  }
+} catch (error) {
+    const errorData = error?.response?.data;
+    const contentType = error?.response?.headers?.['content-type'];
 
-  console.error("STK Push Query error (internal function):", errorData || error.message || error);
-  return { success: false, error: "Failed to query STK push status due to an internal error." };
+    if (errorData?.errorCode === "500.001.1001") {
+        console.warn("STK query says transaction is still being processed.");
+        return { success: false, pending: true, message: "Transaction is still processing, try again shortly." };
+    }
+
+    if (contentType && contentType.includes('text/html')) {
+        console.error("STK Push Query error: Received HTML response (possible WAF/network issue). Full response:", errorData);
+        return { success: false, error: "Failed to query STK push status due to an external network/security issue. Please try again." };
+    }
+
+    console.error("STK Push Query error (internal function):", errorData || error.message || error);
+    return { success: false, error: "Failed to query STK push status due to an internal error." };
 }
 
 }
