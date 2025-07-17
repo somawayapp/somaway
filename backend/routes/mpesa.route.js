@@ -361,7 +361,12 @@ router.post("/callback", async (req, res) => {
       return;
     }
 
-// Only update if the status is not 'Completed'
+    // Only update if the status is still pending or if this callback provides a 'Completed'
+    // It's possible the query already updated it, so be careful not to downgrade a 'Completed' status.
+ 
+
+
+  // Only update if the status is not 'Completed'
 if (entry.status !== "Completed") {
     if (ResultCode === 0) {
         entry.status = "Completed";
@@ -376,6 +381,12 @@ if (entry.status !== "Completed") {
 } else {
     console.log(`Callback: Entry for ${CheckoutRequestID} already processed or status is not Pending. Current status: ${entry.status}. No update needed from this callback.`);
 }
+
+  } catch (error) {
+    console.error("Error processing M-Pesa callback:", error);
+  }
+  
+});
 
 // --- API to query STK Push transaction status (can still be used manually) ---
 router.post("/query-stk-status", async (req, res) => {
