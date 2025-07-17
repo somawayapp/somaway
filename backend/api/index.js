@@ -29,6 +29,7 @@ app.use(
         'https://www.makesomaway.com',
         'https://somawayclient.vercel.app',
         'https://blogifiyclient.vercel.app',
+         'https://somaway.onrender.com',
         'http://localhost:5173',
         'https://www.xtechnewsletter.com',
         'https://xtechnewsletter.com',
