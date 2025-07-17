@@ -94,10 +94,11 @@ const CURRENT_CYCLE = 1; // You might want to manage this dynamically later
      return { success: false, error: "checkoutRequestID is required." };
    }
 
+   let entry; // Declare entry here for broader scope within the try block
    try {
      const timestamp = moment().format("YYYYMMDDHHmmss");
      const password = Buffer.from(shortCode + passkey + timestamp).toString("base64");
-     const token = await getAccessToken();
+     const token = await getAccessToken(); // This might throw an error if Incapsula blocks
 
      const queryRes = await axios.post(
        "https://sandbox.safaricom.co.ke/mpesa/stkpushquery/v1/query",
@@ -116,88 +117,83 @@ const CURRENT_CYCLE = 1; // You might want to manage this dynamically later
 
      console.log(`STK Push Query response for ${checkoutRequestID}:`, queryRes.data);
 
-     // Update your database based on the query response
-     const entry = await EntryModel.findOne({ transactionId: checkoutRequestID });
+     entry = await EntryModel.findOne({ transactionId: checkoutRequestID });
 
-     if (entry) {
-       // --- Start of MODIFIED LOGIC ---
-       if (queryRes.data.ResponseCode === "0") {
-         // Safaricom acknowledged the query successfully, now check ResultCode
-         const ResultCode = queryRes.data.ResultCode;
-         const ResultDesc = queryRes.data.ResultDesc;
-
-         if (ResultCode === "0") {
-           // Transaction completed successfully by M-Pesa
-           entry.status = "Completed";
-           entry.mpesaReceiptNumber = queryRes.data.MpesaReceiptNumber;
-           entry.failReason = null; // Clear any previous fail reason
-           console.log(`Reconciled: Transaction ${checkoutRequestID} is Completed. DB updated.`);
-         } else if (ResultCode === "1032") {
-           // Transaction was cancelled by user
-           entry.status = "Cancelled";
-           entry.failReason = ResultDesc;
-           console.log(`Reconciled: Transaction ${checkoutRequestID} was Cancelled by user. DB updated.`);
-         } else if (ResultCode === "1" || ResultCode === "2") {
-           // Other common M-Pesa failure codes
-           entry.status = "Failed";
-           entry.failReason = ResultDesc;
-           console.log(`Reconciled: Transaction ${checkoutRequestID} Failed with code ${ResultCode}. DB updated.`);
-         } else if (queryRes.data.errorMessage && queryRes.data.errorCode === "500.001.1001") {
-            // This is the "transaction is being processed" state
-            // DO NOT change status from Pending, and DO NOT set failReason
-            console.log(`STK Query: Transaction ${checkoutRequestID} is still being processed by M-Pesa.`);
-            // No status update needed if it's already Pending
-            // If entry was just created, its status is "Pending" by default.
-            // We ensure failReason is null or empty if it's not a final failure.
-            if (entry.status !== "Completed" && entry.status !== "Failed" && entry.status !== "Cancelled") {
-                entry.status = "Pending"; // Explicitly keep it pending
-            }
-            entry.failReason = null; // Clear fail reason if it's just processing
-            await entry.save(); // Save to clear failReason if it was set previously
-            return { success: true, data: queryRes.data, dbStatus: entry.status }; // Return success, so frontend continues polling
-         }
-         else {
-           // Any other unexpected ResultCode
-           entry.status = "Failed";
-           entry.failReason = ResultDesc || "Unknown M-Pesa ResultCode.";
-           console.log(`Reconciled: Transaction ${checkoutRequestID} Failed with unexpected code ${ResultCode}. DB updated.`);
-         }
-       } else if (queryRes.data.ResponseCode === "1" && queryRes.data.ResultDesc === "The transaction is not found") {
-         entry.status = "Failed"; // Or "Expired", depending on your business logic
-         entry.failReason = "Transaction not found by Safaricom (might have expired or never completed)";
-         console.log(`Reconciled: Transaction ${checkoutRequestID} not found by Safaricom. DB updated.`);
-       } else {
-         // This covers cases where Safaricom returns a non-0 ResponseCode that isn't "transaction not found"
-         // or other general errors from Safaricom's query endpoint.
-         entry.status = "Query_Failed";
-         entry.failReason = queryRes.data.ResponseDescription || queryRes.data.errorMessage || "Unknown query error from M-Pesa.";
-         console.log(`Reconciled: Query for ${checkoutRequestID} failed: ${entry.failReason}. DB updated.`);
-       }
-       // --- End of MODIFIED LOGIC ---
-
-       await entry.save();
-       return { success: true, data: queryRes.data, dbStatus: entry.status };
-     } else {
+     if (!entry) {
        console.warn(`Query received for CheckoutRequestID ${checkoutRequestID} but no matching entry found in DB.`);
+       // If no entry, we can't update. Still a "failure" for this specific query attempt.
        return { success: false, error: "Entry not found in database for reconciliation." };
      }
 
+     // Handle Safaricom's 'processing' response *inside* the successful axios response body
+     if (queryRes.data.ResponseCode === "0" && queryRes.data.ResultCode === "0") {
+       // Transaction completed successfully by M-Pesa
+       entry.status = "Completed";
+       entry.mpesaReceiptNumber = queryRes.data.MpesaReceiptNumber;
+       entry.failReason = null; // Clear any previous fail reason
+       console.log(`Reconciled: Transaction ${checkoutRequestID} is Completed. DB updated.`);
+     } else if (queryRes.data.ResponseCode === "0" && queryRes.data.ResultCode === "1032") {
+       // Transaction was cancelled by user
+       entry.status = "Cancelled";
+       entry.failReason = queryRes.data.ResultDesc;
+       console.log(`Reconciled: Transaction ${checkoutRequestID} was Cancelled by user. DB updated.`);
+     } else if (queryRes.data.ResponseCode === "0" && queryRes.data.ResultCode && queryRes.data.ResultCode !== "0") {
+        // Other non-zero ResultCodes implying failure
+        entry.status = "Failed";
+        entry.failReason = queryRes.data.ResultDesc || `M-Pesa ResultCode: ${queryRes.data.ResultCode}`;
+        console.log(`Reconciled: Transaction ${checkoutRequestID} Failed with M-Pesa ResultCode ${queryRes.data.ResultCode}. DB updated.`);
+     } else if (queryRes.data.ResponseCode === "1" && queryRes.data.ResultDesc === "The transaction is not found") {
+       // Transaction not found by Safaricom (might have expired or never completed)
+       entry.status = "Failed";
+       entry.failReason = "Transaction not found by Safaricom (might have expired or never completed)";
+       console.log(`Reconciled: Transaction ${checkoutRequestID} not found by Safaricom. DB updated.`);
+     }
+     // If none of the above, it means it's still 'processing' or some other transient state.
+     // In this case, we don't update to Failed/Completed/Cancelled unless explicitly stated by Safaricom.
+     // If the status is already "Pending", keep it that way.
+     // Clear failReason if it's currently showing an error but Safaricom implies 'processing'.
+     if (entry.status !== "Completed" && entry.status !== "Failed" && entry.status !== "Cancelled") {
+        entry.status = "Pending"; // Explicitly keep it pending for non-final states
+        entry.failReason = null; // Clear any old fail reasons if it's now just pending
+     }
+
+     await entry.save();
+     return { success: true, data: queryRes.data, dbStatus: entry.status };
+
    } catch (error) {
      console.error("STK Push Query error (internal function - during axios call):", error?.response?.data || error.message || error);
-     // If the error object contains an errorCode from M-Pesa implying 'processing', handle it gracefully
+
+     // First, check for the specific 'transaction being processed' error code
      if (error?.response?.data?.errorCode === "500.001.1001") {
-        console.log(`STK Push Query: Transaction ${checkoutRequestID} is still being processed, not a final failure.`);
-        // Even if the initial query throws this as an axios error, we still want to indicate it's pending.
-        // We need to fetch the entry here to update its status to pending if it's not already.
-        const entry = await EntryModel.findOne({ transactionId: checkoutRequestID });
-        if (entry && entry.status !== "Completed" && entry.status !== "Failed" && entry.status !== "Cancelled") {
-            entry.status = "Pending";
-            entry.failReason = null;
+        console.log(`STK Push Query: Transaction ${checkoutRequestID} is still being processed (via error catch).`);
+        // Fetch the entry if not already done, or if it was thrown before `entry` was defined
+        if (!entry) {
+            entry = await EntryModel.findOne({ transactionId: checkoutRequestID });
+        }
+        if (entry) {
+            // Ensure status remains pending and clear any failReason
+            if (entry.status !== "Completed" && entry.status !== "Failed" && entry.status !== "Cancelled") {
+                entry.status = "Pending";
+                entry.failReason = null;
+            }
             await entry.save();
-            return { success: true, data: error.response.data, dbStatus: "Pending" }; // Return success to frontend
+            // Return success: true so the frontend continues polling
+            return { success: true, data: error.response.data, dbStatus: "Pending" };
+        } else {
+             // If entry not found even for a processing error, still an issue
+            return { success: false, error: "Transaction is being processed, but entry not found for update." };
         }
      }
-     return { success: false, error: "Failed to query STK push status due to an internal error." };
+
+     // Handle access token errors specifically
+     if (error.message && error.message.includes("Failed to get M-Pesa access token")) {
+        console.error("STK Push Query failed due to M-Pesa access token issue.");
+        return { success: false, error: "Failed to connect to M-Pesa (access token issue). Please try again." };
+     }
+
+     // Generic error handling for other unexpected axios errors
+     // This will be returned if none of the above specific error cases match
+     return { success: false, error: "Failed to query STK push status due to an unexpected server error." };
    }
  }
 
