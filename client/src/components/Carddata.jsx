@@ -286,7 +286,7 @@ Join now for just one bob —
                     ${transactionDetails.status.includes("Pending") || transactionDetails.status.includes("Processing") || transactionDetails.status.includes("Unknown") ? "bg-blue-700 text-white" : ""}
                   `}
                 >
-                  {transactionDetails.status === "Completed" && "✅ Transaction Completed Successfully!"}
+                  {transactionDetails.status === "Completed" && "✅ Transaction Completed Successfully! You are now part of the initiative."}
                   {["Failed", "Cancelled", "Query_Failed_Internal", "Expired"].includes(transactionDetails.status) && `❌ Transaction ${transactionDetails.status.replace(/_/g, ' ')}: ${transactionDetails.failReason}`}
                   {transactionDetails.status.includes("Pending") && "⏳ Awaiting M-Pesa confirmation. Please enter your PIN on your phone."}
                   {transactionDetails.status.includes("Processing") && "⌛ Processing your request..."}
