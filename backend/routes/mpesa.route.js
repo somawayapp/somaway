@@ -465,4 +465,39 @@ router.get("/cycle-status", async (req, res) => {
 });
 
 
+// This would be in your API route file, e.g., api/mpesa.js or a dedicated controller
+
+// Assuming EntryModel is your Mongoose model for M-Pesa transactions
+
+// New endpoint to get transaction status from DB
+router.post('/get-status', async (req, res) => {
+  const { checkoutRequestID } = req.body;
+
+  if (!checkoutRequestID) {
+    return res.status(400).json({ success: false, error: "CheckoutRequestID is required." });
+  }
+
+  try {
+    const entry = await EntryModel.findOne({ transactionId: checkoutRequestID });
+
+    if (entry) {
+      // Return the status and failReason directly from the database
+      return res.json({
+        success: true,
+        transaction: {
+          checkoutRequestID: entry.transactionId,
+          status: entry.status,
+          failReason: entry.failReason || ""
+        }
+      });
+    } else {
+      // If no entry found, it could mean it never hit your DB or expired before saving
+      return res.status(404).json({ success: false, error: "Transaction not found in database.", transaction: { status: "Unknown", failReason: "Transaction record not found." } });
+    }
+  } catch (error) {
+    console.error("Error fetching transaction from DB:", error);
+    return res.status(500).json({ success: false, error: "Internal server error.", transaction: { status: "Query_Failed_Internal", failReason: "Backend database query failed." } });
+  }
+});
+
 export default router;

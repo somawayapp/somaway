@@ -20,13 +20,18 @@ export default function BettingChances() {
   const [loading, setLoading] = useState(false);
   const [cycleStatus, setCycleStatus] = useState(null);
   const [errorMessage, setErrorMessage] = useState("");
-  const [transactionStatus, setTransactionStatus] = useState(""); // New state for transaction status
-  const [failReason, setFailReason] = useState(""); // New state for fail reason
-  const [currentCheckoutRequestID, setCurrentCheckoutRequestID] = useState(null); // Store CheckoutRequestID
+
+  // New state to manage transaction details from local storage/after submission
+  const [transactionDetails, setTransactionDetails] = useState(() => {
+    // Initialize from localStorage on mount
+    const storedTransaction = localStorage.getItem("pendingMpesaTransaction");
+    return storedTransaction ? JSON.parse(storedTransaction) : null;
+  });
+
   const statusCheckIntervalRef = useRef(null); // Ref for interval ID
 
+  // --- Initial Fetch for Cycle Status ---
   useEffect(() => {
-    // Fetch cycle status on component mount
     const fetchCycleStatus = async () => {
       try {
         const res = await fetch("https://somawayapi.vercel.app/mpesa/cycle-status");
@@ -42,72 +47,70 @@ export default function BettingChances() {
     };
     fetchCycleStatus();
 
-    // Optionally, refetch status periodically if you want real-time updates without page refresh
     const intervalId = setInterval(fetchCycleStatus, 30000); // Every 30 seconds
-    return () => clearInterval(intervalId); // Cleanup on unmount
+    return () => clearInterval(intervalId);
   }, []);
 
-  // Effect to continuously check transaction status if currentCheckoutRequestID is set
+  // --- Effect to Check Transaction Status from DB (Simplified Polling) ---
   useEffect(() => {
-    if (currentCheckoutRequestID && !["Completed", "Failed", "Cancelled"].includes(transactionStatus)) {
+    // Only proceed if there's a transactionDetails and its status isn't final
+    if (transactionDetails && !["Completed", "Failed", "Cancelled", "Expired", "Query_Failed_Internal"].includes(transactionDetails.status)) {
+
       // Clear any existing interval to prevent multiple intervals running
       if (statusCheckIntervalRef.current) {
         clearInterval(statusCheckIntervalRef.current);
       }
 
-      const checkStatus = async () => {
+      const checkDbStatus = async () => {
         try {
-          const res = await fetch("https://somawayapi.vercel.app/mpesa/query-stk-status", {
+          const res = await fetch("https://somawayapi.vercel.app/mpesa/get-status", { // NEW ENDPOINT
             method: "POST",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ checkoutRequestID: currentCheckoutRequestID }),
+            body: JSON.stringify({ checkoutRequestID: transactionDetails.checkoutRequestID }),
           });
           const data = await res.json();
 
-          if (data.success) {
-            setTransactionStatus(data.dbStatus); // Update status based on DB reconciliation
-            if (data.dbStatus === "Failed" || data.dbStatus === "Cancelled" || data.dbStatus === "Query_Failed_Network" || data.dbStatus === "Query_Failed_Internal" || data.dbStatus === "Unknown_No_DB_Entry") {
-              setFailReason(data.error || data.data?.ResultDesc || "Transaction ended with an unknown error.");
+          if (data.success && data.transaction) {
+            const { status, failReason } = data.transaction;
+            setTransactionDetails(prev => ({ ...prev, status, failReason }));
+
+            if (["Completed", "Failed", "Cancelled", "Expired", "Query_Failed_Internal"].includes(status)) {
+              // Transaction is final, stop polling and remove from local storage
               clearInterval(statusCheckIntervalRef.current);
-            } else if (data.dbStatus === "Completed") {
-              setFailReason("Transaction completed successfully."); // Success message
-              clearInterval(statusCheckIntervalRef.current);
+              localStorage.removeItem("pendingMpesaTransaction");
             }
-          } else if (data.pending) {
-            setTransactionStatus("Still processing..."); // Continue polling
           } else {
-            // If data.success is false and not pending, it's a final failure from the query API itself
-            setTransactionStatus("Failed");
-            setFailReason(data.error || "Failed to retrieve transaction status from server.");
-            clearInterval(statusCheckIntervalRef.current);
+            // If backend says not found or an error, assume it might have expired or failed
+            // Still keep polling for a bit, or you can decide to set a "pending-unknown" state
+            // For now, let's keep polling and let the backend definitively update.
+            console.log("DB transaction status not yet final or not found:", data.error || "No transaction data");
           }
         } catch (error) {
-          console.error("Error checking STK status:", error);
-          setTransactionStatus("Failed");
-          setFailReason("Network error during status check. Please check your connection.");
-          clearInterval(statusCheckIntervalRef.current);
+          console.error("Error checking DB transaction status:", error);
+          // Network error on client side, keep current state and retry
         }
       };
 
       // Start polling for status
-      statusCheckIntervalRef.current = setInterval(checkStatus, 5000); // Poll every 5 seconds
+      statusCheckIntervalRef.current = setInterval(checkDbStatus, 5000); // Poll every 5 seconds
 
       // Initial check immediately
-      checkStatus();
+      checkDbStatus();
 
-      // Cleanup function to clear the interval when the component unmounts or dependencies change
+      // Cleanup function
       return () => {
         if (statusCheckIntervalRef.current) {
           clearInterval(statusCheckIntervalRef.current);
         }
       };
     } else {
-      // Clear interval if no longer needed (e.g., currentCheckoutRequestID becomes null, or status is final)
+      // If transactionDetails is null or status is final, clear any interval
       if (statusCheckIntervalRef.current) {
         clearInterval(statusCheckIntervalRef.current);
       }
     }
-  }, [currentCheckoutRequestID, transactionStatus]); // Re-run when these change
+  }, [transactionDetails]); // Re-run when transactionDetails changes
+
 
   const handleShareToWhatsApp = () => {
     const message = `
@@ -141,15 +144,13 @@ Join now for just one bob —
     }
     setJoining(true);
     setErrorMessage("");
-    setTransactionStatus(""); // Clear previous transaction status
-    setFailReason(""); // Clear previous fail reason
+    setTransactionDetails(null); // Clear any previous transaction details
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setErrorMessage("");
-    setTransactionStatus(""); // Reset status on new submission
-    setFailReason(""); // Reset fail reason on new submission
+    setTransactionDetails(null); // Reset details on new submission
 
     if (!phone || !name) {
       setErrorMessage("Name and phone number are required.");
@@ -159,14 +160,12 @@ Join now for just one bob —
       setErrorMessage("Please accept the terms and conditions to continue.");
       return;
     }
-
     if (!/^07\d{8}$/.test(phone)) {
       setErrorMessage("Please enter a valid M-Pesa phone number starting with 07...");
       return;
     }
 
     setLoading(true);
-    setTransactionStatus("Processing..."); // Set initial status to processing
     try {
       const res = await fetch("https://somawayapi.vercel.app/mpesa/stk-push", {
         method: "POST",
@@ -182,18 +181,33 @@ Join now for just one bob —
         setPhone(""); // Clear input
         setName(""); // Clear input
         setAcceptedTerms(false); // Reset terms
-        setCurrentCheckoutRequestID(data.data.CheckoutRequestID); // Store this for status checking
-        setTransactionStatus("Pending M-Pesa Confirmation..."); // Update status to pending
+
+        // Store transaction details (including initial pending status)
+        const newTransaction = {
+          checkoutRequestID: data.data.CheckoutRequestID,
+          status: "Pending M-Pesa Confirmation...", // Initial client-side status
+          failReason: ""
+        };
+        setTransactionDetails(newTransaction);
+        localStorage.setItem("pendingMpesaTransaction", JSON.stringify(newTransaction));
+
       } else {
         setErrorMessage(data.error || "Failed to send payment prompt. Try again.");
-        setTransactionStatus("Failed");
-        setFailReason(data.error || "Failed to initiate STK push.");
+        // If STK push initiation failed, set status to failed immediately
+        setTransactionDetails({
+          status: "Failed",
+          failReason: data.error || "Failed to initiate STK push."
+        });
+        localStorage.removeItem("pendingMpesaTransaction"); // Clear if initiation failed
       }
     } catch (err) {
       console.error(err);
       setErrorMessage("Error initiating payment. Please check your network connection.");
-      setTransactionStatus("Failed");
-      setFailReason("Network error during payment initiation.");
+      setTransactionDetails({
+        status: "Failed",
+        failReason: "Network error during payment initiation."
+      });
+      localStorage.removeItem("pendingMpesaTransaction"); // Clear if initiation failed
     } finally {
       setLoading(false);
     }
@@ -260,30 +274,29 @@ Join now for just one bob —
 
             {/* Transaction Status Display */}
             <AnimatePresence mode="wait">
-              {transactionStatus && (
+              {transactionDetails && (
                 <motion.div
                   key="transaction-status"
                   initial={{ opacity: 0, y: -10 }}
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: -10 }}
                   className={`p-3 rounded-xl text-sm mb-4 text-center font-semibold
-                    ${transactionStatus === "Completed" ? "bg-green-700 text-white" : ""}
-                    ${transactionStatus.includes("Failed") || transactionStatus === "Cancelled" || transactionStatus === "Query_Failed" ? "bg-red-700 text-white" : ""}
-                    ${transactionStatus === "Processing..." || transactionStatus === "Pending M-Pesa Confirmation..." || transactionStatus === "Still processing..." ? "bg-blue-700 text-white" : ""}
+                    ${transactionDetails.status === "Completed" ? "bg-green-700 text-white" : ""}
+                    ${["Failed", "Cancelled", "Query_Failed_Internal", "Expired"].includes(transactionDetails.status) ? "bg-red-700 text-white" : ""}
+                    ${transactionDetails.status.includes("Pending") || transactionDetails.status.includes("Processing") || transactionDetails.status.includes("Unknown") ? "bg-blue-700 text-white" : ""}
                   `}
                 >
-                  {/* Display failReason directly if it exists for failed/cancelled states */}
-                  {transactionStatus === "Completed" && "✅ Transaction Completed Successfully!"}
-                  {(transactionStatus.includes("Failed") || transactionStatus === "Cancelled" || transactionStatus === "Query_Failed") && `❌ Transaction ${transactionStatus.replace('_', ' ')}: ${failReason}`}
-                  {transactionStatus === "Processing..." && "⌛ Processing your request..."}
-                  {transactionStatus === "Pending M-Pesa Confirmation..." && "⏳ Awaiting M-Pesa confirmation. Please enter your PIN on your phone."}
-                  {transactionStatus === "Still processing..." && "⏳ Transaction is still processing. Please wait..."}
+                  {transactionDetails.status === "Completed" && "✅ Transaction Completed Successfully!"}
+                  {["Failed", "Cancelled", "Query_Failed_Internal", "Expired"].includes(transactionDetails.status) && `❌ Transaction ${transactionDetails.status.replace(/_/g, ' ')}: ${transactionDetails.failReason}`}
+                  {transactionDetails.status.includes("Pending") && "⏳ Awaiting M-Pesa confirmation. Please enter your PIN on your phone."}
+                  {transactionDetails.status.includes("Processing") && "⌛ Processing your request..."}
+                  {transactionDetails.status.includes("Unknown") && "⏳ Transaction status unknown. Please wait or check again later."}
                 </motion.div>
               )}
             </AnimatePresence>
 
             {/* Join Button */}
-            {!joining && !submitted && cycleStatus && !cycleStatus.isMaxReached && (
+            {!joining && !transactionDetails && cycleStatus && !cycleStatus.isMaxReached && (
               <button
                 onClick={handleJoinClick}
                 className="mt-auto bg-[#020201] py-4 hover:bg-[#0e0e06] text-[#EBD402] rounded-2xl font-semibold w-full hover:scale-102 transition-transform duration-200"
@@ -293,10 +306,20 @@ Join now for just one bob —
             )}
 
             {/* Message when max is reached and not joining */}
-            {!joining && !submitted && cycleStatus && cycleStatus.isMaxReached && (
+            {!joining && !transactionDetails && cycleStatus && cycleStatus.isMaxReached && (
               <p className="text-center text-red-400 font-semibold mt-auto p-4 border border-red-500 rounded-xl">
                 The maximum number of participants for this cycle has been reached. Please check back for the next cycle!
               </p>
+            )}
+
+            {/* If a transaction is ongoing, show a "Check Status" or a "Start New Transaction" button,
+                or hide "Join Now" if a transaction is still pending.
+                For now, if transactionDetails exist, hide the Join Now button.
+            */}
+            {transactionDetails && !["Completed", "Failed", "Cancelled", "Expired", "Query_Failed_Internal"].includes(transactionDetails.status) && (
+                 <p className="text-center text-gray-400 font-semibold mt-auto p-4 rounded-xl">
+                    Your previous transaction is still processing.
+                 </p>
             )}
 
             <button
@@ -308,7 +331,7 @@ Join now for just one bob —
 
             {/* Input Form */}
             <AnimatePresence>
-              {joining && !submitted && (
+              {joining && ( // Show form if joining is true
                 <motion.form
                   key="form"
                   onSubmit={handleSubmit}
