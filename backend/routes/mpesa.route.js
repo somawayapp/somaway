@@ -324,7 +324,7 @@ router.post("/stk-push", async (req, res) => {
 
       // --- IMMEDIATE ASYNCHRONOUS STATUS CHECK (NEW LOGIC) ---
       // We are *not* waiting for this to complete before responding to the client.
-      const queryDelay = 90 * 1000; // 25 seconds
+      const queryDelay = 90 * 1000; 
       console.log(`Scheduling STK status check for ${newEntry.transactionId} in ${queryDelay / 1000} seconds.`);
       setTimeout(() => {
         queryStkStatus(newEntry.transactionId)
