@@ -13,6 +13,7 @@ import TermsAndConditions from "./routes/termsandconditionsPage.jsx";
 import PrivacyPolicy from "./routes/privacypolicyPage.jsx";
 import HelpCenter from "./routes/HelpcenterPage.jsx";
 import PaymentTerms from "./routes/paymenttermsPage.jsx";
+import Winners from "./routes/winnersPage.jsx";
 const queryClient = new QueryClient();
 
 
@@ -25,7 +26,10 @@ const router = createBrowserRouter([
         path: "/",
         element: <Homepage />,
       },
-     
+      {
+        path: "/winners",
+        element: <Winners />,
+      },
       {
         path: "/terms",
         element: <TermsAndConditions />,
