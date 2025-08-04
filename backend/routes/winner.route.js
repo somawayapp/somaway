@@ -6,7 +6,7 @@ import WinnerModel from "../models/Winner.model.js";
 const router = express.Router();
 
 const CURRENT_CYCLE = 1;
-const MAX_PARTICIPANTS = 1000000;
+const MAX_PARTICIPANTS = 1;
 const PUBLIC_SEED = "0000000000000000001a7c2139b7b72e00000000000000000000000000000000"; // Fixed, auditable
 
 // GET /api/winner - Fetch current cycle winner
