@@ -10,7 +10,7 @@ const MAX_PARTICIPANTS = 1000000;
 const PUBLIC_SEED = "0000000000000000001a7c2139b7b72e00000000000000000000000000000000"; // Fixed, auditable
 
 // GET /api/winner - Fetch current cycle winner
-router.get("/winner", async (req, res) => {
+router.get("/", async (req, res) => {
   try {
     const winner = await WinnerModel.findOne({ cycle: CURRENT_CYCLE });
     if (!winner) return res.json({ success: false, message: "No winner yet" });
@@ -23,7 +23,7 @@ router.get("/winner", async (req, res) => {
 });
 
 // POST /api/winner - Trigger winner selection
-router.post("/winner", async (req, res) => {
+router.post("/", async (req, res) => {
   try {
     // 1. Fetch all completed entries for current cycle
     const entries = await EntryModel.find({ status: "Completed", cycle: CURRENT_CYCLE });
