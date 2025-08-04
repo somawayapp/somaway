@@ -1,4 +1,5 @@
-import mongoose from "mongoose";
+// models/Winner.model.js
+import mongoose from 'mongoose';
 
 const WinnerSchema = new mongoose.Schema({
   cycle: {
@@ -6,41 +7,53 @@ const WinnerSchema = new mongoose.Schema({
     required: true,
     unique: true, // Only one winner per cycle
   },
-  winnerEntry: {
+  winnerEntryId: { // Reference to the EntryModel document
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'Entry', // Reference to the EntryModel
+    ref: 'Entry',
     required: true,
   },
-  name: {
-    type: String, // Encrypted winner name
+  winnerNameEncrypted: {
+    type: String,
     required: true,
   },
-  phone: {
-    type: String, // Encrypted winner phone
+  winnerPhoneEncrypted: {
+    type: String,
     required: true,
   },
   amountWon: {
     type: Number,
     required: true,
   },
-  timestamp: {
+  selectionTimestamp: {
     type: Date,
     default: Date.now,
   },
-  // Data needed for auditable randomness
-  publicRandomSeed: {
-    type: String, // e.g., Bitcoin block hash
+  publicRandomSeed: { // The Bitcoin block hash used for this selection
+    type: String,
     required: true,
   },
-  participantHashesSnapshot: {
-    type: [String], // Array of participant hashes at the time of draw
+  // Store the state of participants at the time of selection for auditability
+  // This could be an array of objects: [{ _id, phoneHash, originalIndex }]
+  participantsSnapshot: {
+    type: [
+      {
+        _id: mongoose.Schema.Types.ObjectId,
+        phoneHash: String,
+        createdAt: Date, // To ensure order for deterministic selection
+      }
+    ],
     required: true,
   },
-  winnerCalculatedIndex: {
-    type: Number, // The index of the winner in the participantHashesSnapshot array
+  // You might want to store the winning hash/score for audit
+  winningHash: {
+    type: String,
+    required: true,
+  },
+  winningScore: {
+    type: Number,
     required: true,
   },
 });
 
-const WinnerModel = mongoose.models.Winner || mongoose.model("Winner", WinnerSchema);
+const WinnerModel = mongoose.models.Winner || mongoose.model('Winner', WinnerSchema);
 export default WinnerModel;

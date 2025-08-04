@@ -7,6 +7,7 @@ import moment from 'moment-timezone'; // Import moment-timezone
 import mpesaRouter from '../routes/mpesa.route.js';
 import summaryRouter from '../routes/summary.route.js';
 import searchRouter from '../routes/search.route.js';
+import winnerRouter from './routes/winner.route.js'; // NEW IMPORT
 
 
 dotenv.config();
@@ -56,6 +57,7 @@ app.use(
 app.use('/mpesa', mpesaRouter);
 app.use('/summary', summaryRouter);
 app.use('/search', searchRouter);
+app.use('/winner', winnerRouter);
 
 
 
