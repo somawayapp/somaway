@@ -15,7 +15,7 @@ const Winners = () => {
       try {
         setLoading(true);
         setError(null);
-        const response = await axios.get("/api/mpesa/winners/latest"); // Adjust API route if needed
+        const response = await axios.get("https://somawayapi.vercel.app/mpesa/winners"); // Adjust API route if needed
         if (response.data.success) {
           setLatestWinner(response.data.winner);
         } else {
