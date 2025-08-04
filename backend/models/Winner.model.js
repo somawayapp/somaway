@@ -1,59 +1,64 @@
 // models/Winner.model.js
-import mongoose from 'mongoose';
+import mongoose from "mongoose";
 
-const WinnerSchema = new mongoose.Schema({
-  cycle: {
-    type: Number,
-    required: true,
-    unique: true, // Only one winner per cycle
+const WinnerSchema = new mongoose.Schema(
+  {
+    entryId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Entry", // Reference to the Entry model
+      required: true,
+      unique: true, // A single entry can only win once
+    },
+    name: {
+      type: String,
+      required: true,
+    },
+    phone: {
+      type: String, // Storing the encrypted phone number
+      required: true,
+    },
+    phoneNumberHash: {
+      type: String,
+      required: true,
+    },
+    amount: {
+      type: Number,
+      required: true,
+    },
+    location: {
+      country: { type: String, default: "Unknown" },
+      city: { type: String, default: "Unknown" },
+      region: { type: String, default: "Unknown" },
+      timezone: { type: String, default: "Unknown" },
+    },
+    cycle: {
+      type: Number,
+      required: true,
+    },
+    transactionId: {
+      type: String,
+    },
+    mpesaReceiptNumber: {
+      type: String,
+    },
+    winDate: {
+      type: Date,
+      default: Date.now,
+    },
+    // You might want to store the public random seed used for this draw
+    publicRandomSeed: {
+      type: String,
+      required: true,
+    },
+    // Optionally, store the array of participant hashes for auditability
+    // participantHashesAtDraw: {
+    //   type: [String],
+    //   required: true,
+    // }
   },
-  winnerEntryId: { // Reference to the EntryModel document
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'Entry',
-    required: true,
-  },
-  winnerNameEncrypted: {
-    type: String,
-    required: true,
-  },
-  winnerPhoneEncrypted: {
-    type: String,
-    required: true,
-  },
-  amountWon: {
-    type: Number,
-    required: true,
-  },
-  selectionTimestamp: {
-    type: Date,
-    default: Date.now,
-  },
-  publicRandomSeed: { // The Bitcoin block hash used for this selection
-    type: String,
-    required: true,
-  },
-  // Store the state of participants at the time of selection for auditability
-  // This could be an array of objects: [{ _id, phoneHash, originalIndex }]
-  participantsSnapshot: {
-    type: [
-      {
-        _id: mongoose.Schema.Types.ObjectId,
-        phoneHash: String,
-        createdAt: Date, // To ensure order for deterministic selection
-      }
-    ],
-    required: true,
-  },
-  // You might want to store the winning hash/score for audit
-  winningHash: {
-    type: String,
-    required: true,
-  },
-  winningScore: {
-    type: Number,
-    required: true,
-  },
-});
+  { timestamps: true }
+);
 
-const WinnerModel = mongoose.models.Winner || mongoose.model('Winner', WinnerSchema);
+const WinnerModel = mongoose.model("Winner", WinnerSchema);
+
 export default WinnerModel;
