@@ -10,7 +10,7 @@ const Winners = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch("https://somawayapi.vercel.app/mpesa/cycle-status")
+    fetch("https://somawayapi.vercel.app/winner")
       .then((res) => res.json())
       .then((data) => {
         if (data.success) setWinner(data.winner);
