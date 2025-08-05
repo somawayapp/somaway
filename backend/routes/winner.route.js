@@ -91,10 +91,7 @@ router.post("/", async (req, res) => {
       return res.json({ success: false, message: "Threshold not yet met" });
     }
 
-       if (entries.length < MAX_PARTICIPANTS) {
-      return res.json({ success: false, message: "Not enough participants" });
-    }
-
+   
     // ✅ Use entries after they're fetched
     const allData = entries.map(e => `${e.phoneNumberHash}-${e.timestamp}-${e.amount}`).join("|");
     const PUBLIC_SEED = crypto.createHash("sha256").update(allData).digest("hex");
