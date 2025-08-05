@@ -2,8 +2,6 @@ import express from "express";
 import crypto from "crypto";
 import EntryModel from "../models/Entry.model.js";
 import WinnerModel from "../models/Winner.model.js";
-// Assuming you have these decryption functions available
-import { decrypt } from "../utils/encryption.js"; // Adjust the path as needed
 
 const router = express.Router();
 
@@ -22,23 +20,8 @@ router.get("/", async (req, res) => {
       return res.json({ success: false, message: "No winner yet" });
     }
 
-    // Decrypt name and phone for display on the frontend
-    const decryptedName = decrypt(winner.name);
-    const decryptedPhone = decrypt(winner.phone);
-
-    // Mask the phone number: hide the middle 3 digits
-    const maskedPhone = decryptedPhone.length > 7
-      ? decryptedPhone.substring(0, 3) + '***' + decryptedPhone.substring(decryptedPhone.length - 4)
-      : decryptedPhone; // Fallback for shorter numbers
-
-    const winnerForFrontend = {
-      ...winner.toObject(), // Convert Mongoose document to a plain JavaScript object
-      name: decryptedName,
-      phone: maskedPhone,
-    };
-
-    console.log(`[GET /api/winner] Winner found for cycle ${CURRENT_CYCLE}:`, winnerForFrontend);
-    return res.json({ success: true, winner: winnerForFrontend });
+    console.log(`[GET /api/winner] Winner found for cycle ${CURRENT_CYCLE}:`, winner);
+    return res.json({ success: true, winner });
   } catch (err) {
     console.error("[GET /api/winner] Error fetching winner:", err);
     res.status(500).json({ success: false, error: "Internal server error" });
@@ -55,7 +38,7 @@ router.post("/", async (req, res) => {
     console.log(`[POST /api/winner] Found ${entries.length} completed entries.`);
     // Log details of fetched entries for verification
     entries.forEach((entry, index) => {
-      console.log(`   Entry ${index + 1}: _id=${entry._id}, amount=${entry.amount}, status=${entry.status}, cycle=${entry.cycle}`);
+      console.log(`  Entry ${index + 1}: _id=${entry._id}, amount=${entry.amount}, status=${entry.status}, cycle=${entry.cycle}`);
     });
 
     const totalAmount = entries.reduce((sum, entry) => sum + entry.amount, 0);
@@ -71,22 +54,7 @@ router.post("/", async (req, res) => {
     const existingWinner = await WinnerModel.findOne({ cycle: CURRENT_CYCLE });
     if (existingWinner) {
       console.log(`[POST /api/winner] Winner already selected for cycle ${CURRENT_CYCLE}. Existing winner ID: ${existingWinner._id}`);
-      // Decrypt and mask existing winner's data before sending
-      const decryptedExistingName = decrypt(existingWinner.name);
-      const decryptedExistingPhone = decrypt(existingWinner.phone);
-      const maskedExistingPhone = decryptedExistingPhone.length > 7
-        ? decryptedExistingPhone.substring(0, 3) + '***' + decryptedExistingPhone.substring(decryptedExistingPhone.length - 4)
-        : decryptedExistingPhone;
-
-      return res.json({
-        success: false,
-        message: "Winner already selected",
-        winner: {
-          ...existingWinner.toObject(),
-          name: decryptedExistingName,
-          phone: maskedExistingPhone,
-        },
-      });
+      return res.json({ success: false, message: "Winner already selected" });
     }
     console.log(`[POST /api/winner] No existing winner found for cycle ${CURRENT_CYCLE}. Proceeding to select.`);
 
@@ -121,21 +89,12 @@ router.post("/", async (req, res) => {
     const winnerEntry = entries[winnerIndex];
     console.log("[POST /api/winner] Selected winner entry:", winnerEntry);
 
-    // Decrypt the winner's name and phone number
-    const decryptedWinnerName = decrypt(winnerEntry.name);
-    const decryptedWinnerPhone = decrypt(winnerEntry.phone);
 
-    // Mask the decrypted phone number for display
-    const maskedWinnerPhone = decryptedWinnerPhone.length > 7
-      ? decryptedWinnerPhone.substring(0, 3) + '***' + decryptedWinnerPhone.substring(decryptedWinnerPhone.length - 4)
-      : decryptedWinnerPhone;
-
-
-    // 5. Save winner to DB (you still save the encrypted values here for security)
+    // 5. Save winner to DB
     const savedWinner = await WinnerModel.create({
       entryId: winnerEntry._id,
-      name: winnerEntry.name, // Save encrypted name to DB
-      phone: winnerEntry.phone, // Save encrypted phone to DB
+      name: winnerEntry.name,
+      phone: winnerEntry.phone,
       phoneNumberHash: winnerEntry.phoneNumberHash,
       amount: winnerEntry.amount,
       location: winnerEntry.location,
@@ -146,14 +105,8 @@ router.post("/", async (req, res) => {
     });
     console.log(`[POST /api/winner] Winner saved to DB with ID: ${savedWinner._id}`);
 
-    // Create a new object for the frontend response with decrypted and masked data
-    const winnerForFrontend = {
-      ...savedWinner.toObject(), // Convert Mongoose document to a plain JavaScript object
-      name: decryptedWinnerName,
-      phone: maskedWinnerPhone,
-    };
 
-    return res.json({ success: true, winner: winnerForFrontend });
+    return res.json({ success: true, winner: savedWinner });
   } catch (err) {
     console.error("[POST /api/winner] Error selecting winner:", err);
     res.status(500).json({ success: false, error: "Failed to select winner" });
