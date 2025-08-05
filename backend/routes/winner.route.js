@@ -2,7 +2,6 @@ import express from "express";
 import crypto from "crypto";
 import EntryModel from "../models/Entry.model.js";
 import WinnerModel from "../models/Winner.model.js";
-import crypto from "crypto";
 
 const router = express.Router();
 
