@@ -22,14 +22,27 @@ router.get("/", async (req, res) => {
       return res.json({ success: false, message: "No winner yet" });
     }
 
-    // Decrypt name and phone for display on the frontend
-    const decryptedName = decrypt(winner.name);
-    const decryptedPhone = decrypt(winner.phone);
+    // --- FIX STARTS HERE ---
+    let decryptedName = null;
+    let decryptedPhone = null;
+
+    if (winner.name) {
+      decryptedName = decrypt(winner.name);
+    } else {
+      console.warn(`[GET /api/winner] Winner for cycle ${CURRENT_CYCLE} has no 'name' field.`);
+    }
+
+    if (winner.phone) {
+      decryptedPhone = decrypt(winner.phone);
+    } else {
+      console.warn(`[GET /api/winner] Winner for cycle ${CURRENT_CYCLE} has no 'phone' field.`);
+    }
+    // --- FIX ENDS HERE ---
 
     // Mask the phone number: hide the middle 3 digits
-    const maskedPhone = decryptedPhone.length > 7
+    const maskedPhone = decryptedPhone && decryptedPhone.length > 7
       ? decryptedPhone.substring(0, 3) + '***' + decryptedPhone.substring(decryptedPhone.length - 4)
-      : decryptedPhone; // Fallback for shorter numbers
+      : decryptedPhone; // Fallback for shorter numbers or if decryptedPhone is null/undefined
 
     const winnerForFrontend = {
       ...winner.toObject(), // Convert Mongoose document to a plain JavaScript object
@@ -55,7 +68,7 @@ router.post("/", async (req, res) => {
     console.log(`[POST /api/winner] Found ${entries.length} completed entries.`);
     // Log details of fetched entries for verification
     entries.forEach((entry, index) => {
-      console.log(`   Entry ${index + 1}: _id=${entry._id}, amount=${entry.amount}, status=${entry.status}, cycle=${entry.cycle}`);
+      console.log(`    Entry ${index + 1}: _id=${entry._id}, amount=${entry.amount}, status=${entry.status}, cycle=${entry.cycle}`);
     });
 
     const totalAmount = entries.reduce((sum, entry) => sum + entry.amount, 0);
@@ -72,9 +85,22 @@ router.post("/", async (req, res) => {
     if (existingWinner) {
       console.log(`[POST /api/winner] Winner already selected for cycle ${CURRENT_CYCLE}. Existing winner ID: ${existingWinner._id}`);
       // Decrypt and mask existing winner's data before sending
-      const decryptedExistingName = decrypt(existingWinner.name);
-      const decryptedExistingPhone = decrypt(existingWinner.phone);
-      const maskedExistingPhone = decryptedExistingPhone.length > 7
+      let decryptedExistingName = null;
+      let decryptedExistingPhone = null;
+
+      if (existingWinner.name) {
+        decryptedExistingName = decrypt(existingWinner.name);
+      } else {
+        console.warn(`[POST /api/winner] Existing winner for cycle ${CURRENT_CYCLE} has no 'name' field.`);
+      }
+
+      if (existingWinner.phone) {
+        decryptedExistingPhone = decrypt(existingWinner.phone);
+      } else {
+        console.warn(`[POST /api/winner] Existing winner for cycle ${CURRENT_CYCLE} has no 'phone' field.`);
+      }
+
+      const maskedExistingPhone = decryptedExistingPhone && decryptedExistingPhone.length > 7
         ? decryptedExistingPhone.substring(0, 3) + '***' + decryptedExistingPhone.substring(decryptedExistingPhone.length - 4)
         : decryptedExistingPhone;
 
@@ -122,11 +148,25 @@ router.post("/", async (req, res) => {
     console.log("[POST /api/winner] Selected winner entry:", winnerEntry);
 
     // Decrypt the winner's name and phone number
-    const decryptedWinnerName = decrypt(winnerEntry.name);
-    const decryptedWinnerPhone = decrypt(winnerEntry.phone);
+    // --- FIX STARTS HERE (similar to GET) ---
+    let decryptedWinnerName = null;
+    let decryptedWinnerPhone = null;
+
+    if (winnerEntry.name) {
+      decryptedWinnerName = decrypt(winnerEntry.name);
+    } else {
+      console.warn(`[POST /api/winner] Selected winner entry has no 'name' field.`);
+    }
+
+    if (winnerEntry.phone) {
+      decryptedWinnerPhone = decrypt(winnerEntry.phone);
+    } else {
+      console.warn(`[POST /api/winner] Selected winner entry has no 'phone' field.`);
+    }
+    // --- FIX ENDS HERE ---
 
     // Mask the decrypted phone number for display
-    const maskedWinnerPhone = decryptedWinnerPhone.length > 7
+    const maskedWinnerPhone = decryptedWinnerPhone && decryptedWinnerPhone.length > 7
       ? decryptedWinnerPhone.substring(0, 3) + '***' + decryptedWinnerPhone.substring(decryptedWinnerPhone.length - 4)
       : decryptedWinnerPhone;
 
