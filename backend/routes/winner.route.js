@@ -51,14 +51,14 @@ router.get("/", async (req, res) => {
 
     console.log(`[GET /api/winner] Winner found: ${decryptedName}, Phone: ${decryptedPhone}`);
 
-   return res.json({
-  success: true,
-  winner: {
-    ...savedWinner.toObject(),
-    name: decrypt(savedWinner.name),
-    phone: decrypt(savedWinner.phone),
-  },
-});
+    return res.json({
+      success: true,
+      winner: {
+        ...winner.toObject(),
+        name: decryptedName,
+        phone: decryptedPhone,
+      },
+    });
 
   } catch (err) {
     console.error("[GET /api/winner] Error fetching winner:", err);
