@@ -22,16 +22,16 @@ function encrypt(text) {
   return iv.toString("hex") + ":" + encrypted.toString("hex");
 }
 
-
-// Decrypt text using AES-256-CBC
 function decrypt(text) {
-  const [ivHex, encrypted] = text.split(":");
-  const iv = Buffer.from(ivHex, "hex");
-  const decipher = crypto.createDecipheriv("aes-256-cbc", Buffer.from(ENCRYPTION_KEY), iv);
-  let decrypted = decipher.update(encrypted, "hex", "utf8");
-  decrypted += decipher.final("utf8");
-  return decrypted;
+  const textParts = text.split(":");
+  const iv = Buffer.from(textParts.shift(), "hex");
+  const encryptedText = Buffer.from(textParts.join(":"), "hex");
+  const decipher = crypto.createDecipheriv("aes-256-cbc", Buffer.from(ENCRYPTION_KEY, "hex"), iv);
+  let decrypted = decipher.update(encryptedText);
+  decrypted = Buffer.concat([decrypted, decipher.final()]);
+  return decrypted.toString();
 }
+
 
 // Mask phone: e.g., 0712345678 → 071***678
 function maskPhone(phone) {
