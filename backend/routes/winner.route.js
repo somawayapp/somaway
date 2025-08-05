@@ -7,15 +7,17 @@ const router = express.Router();
 
 const CURRENT_CYCLE = 1;
 const MAX_PARTICIPANTS = 2;
-const PUBLIC_SEED = "0000000000000000001a7c2139b7b72e00000000000000000000000000000000"; // Fixed, auditable
+const PUBLIC_SEED = "0000000000000000001a7c2139b7b72e00000000000000000000000000000000";
 
-// IMPORTANT: In a real application, ENCRYPTION_KEY should be loaded securely
-// from environment variables or a key management system, NOT hardcoded.
-// This is for conceptual demonstration ONLY.
-const ENCRYPTION_KEY = "YOUR_SECURE_32_BYTE_HEX_ENCRYPTION_KEY"; // Placeholder - REPLACE THIS!
-const IV_LENGTH = 16; // For AES-256-CBC
+// --- IMPORTANT: SECURELY LOAD YOUR ENCRYPTION KEY ---
+// DO NOT hardcode this in production. Use environment variables.
+// Example: const ENCRYPTION_KEY = process.env.ENCRYPTION_KEY;
+// For demonstration, use a placeholder.
+const ENCRYPTION_KEY = Buffer.from('THISISASUPERSECURE32BYTEKEYFORAES', 'utf8').toString('hex'); // Replace with your actual 32-byte (64 hex char) key
+const IV_LENGTH = 16; // 16 bytes for AES-256-CBC
 
-// Helper Functions for Encryption (from your provided code)
+// --- Helper Functions for Encryption (from your provided code) ---
+// You provided these, ensure they are consistently defined and used.
 function encrypt(text) {
     const iv = crypto.randomBytes(IV_LENGTH);
     const cipher = crypto.createCipheriv("aes-256-cbc", Buffer.from(ENCRYPTION_KEY, "hex"), iv);
@@ -25,11 +27,14 @@ function encrypt(text) {
 }
 
 function decrypt(text) {
-    if (!text) return null; // Handle cases where text might be null/undefined
+    if (!text || typeof text !== 'string') {
+        console.warn("Decrypt function received invalid input:", text);
+        return null;
+    }
     try {
         const textParts = text.split(":");
         if (textParts.length !== 2) {
-            console.warn("Invalid encrypted text format for decryption:", text);
+            console.warn("Invalid encrypted text format for decryption (missing IV or ciphertext):", text);
             return null;
         }
         const iv = Buffer.from(textParts[0], "hex");
@@ -39,22 +44,22 @@ function decrypt(text) {
         decrypted = Buffer.concat([decrypted, decipher.final()]);
         return decrypted.toString();
     } catch (error) {
-        console.error("Error during decryption:", error);
+        console.error("Error during decryption:", error.message);
         return null;
     }
 }
 
-// Function to mask phone number (e.g., +2547XXXXXXXX to +2547***XX)
+// Function to mask phone number
 function maskPhoneNumber(phoneNumber) {
-    if (!phoneNumber || phoneNumber.length < 7) { // Ensure sufficient length to mask
-        return phoneNumber;
+    if (!phoneNumber || phoneNumber.length < 7) {
+        return phoneNumber; // Not long enough to mask effectively
     }
-    // Example masking: +254700123456 -> +254700***456
-    // This assumes a typical Kenyan mobile number format. Adjust as needed.
-    const start = phoneNumber.substring(0, phoneNumber.length - 5); // Keep first part (e.g., +25470)
-    const end = phoneNumber.substring(phoneNumber.length - 2); // Keep last 2 digits (e.g., 56)
-    const masked = "***"; // Masking characters
-    return `${start}${masked}${end}`;
+    // Example: +254712345678 -> +2547****5678
+    // Adjust masking logic as needed for your specific phone number formats.
+    const prefix = phoneNumber.substring(0, 5); // e.g., +2547
+    const suffix = phoneNumber.substring(phoneNumber.length - 4); // e.g., 5678
+    const masked = "****";
+    return `${prefix}${masked}${suffix}`;
 }
 
 // GET /api/winner - Fetch current cycle winner
@@ -68,33 +73,45 @@ router.get("/", async (req, res) => {
             return res.json({ success: false, message: "No winner yet" });
         }
 
-        // Conceptual Decryption and Masking (DO NOT USE WITH REAL SENSITIVE DATA WITHOUT PROPER SECURITY REVIEW)
+        // --- Decrypt and Mask Data for Response ---
         let decryptedName = null;
         let maskedPhone = null;
 
         if (winner.name) {
             decryptedName = decrypt(winner.name);
+            console.log(`[GET /api/winner] Decrypted Name: ${decryptedName ? decryptedName.substring(0, 5) + '...' : 'Failed'}`);
         }
         if (winner.phone) {
-            const decryptedPhone = decrypt(winner.phone);
-            if (decryptedPhone) {
-                maskedPhone = maskPhoneNumber(decryptedPhone);
+            const tempDecryptedPhone = decrypt(winner.phone);
+            if (tempDecryptedPhone) {
+                maskedPhone = maskPhoneNumber(tempDecryptedPhone);
+                console.log(`[GET /api/winner] Decrypted Phone: ${tempDecryptedPhone}, Masked: ${maskedPhone}`);
+            } else {
+                console.log(`[GET /api/winner] Phone decryption failed for: ${winner.phone}`);
             }
         }
 
+        // Prepare the response object, ensuring sensitive raw encrypted data isn't sent
         const responseWinner = {
-            ...winner.toObject(), // Convert Mongoose document to plain JavaScript object
-            name: decryptedName, // Include decrypted name
-            phone: maskedPhone, // Include masked phone number
-            // Ensure you don't send the raw encrypted fields if not needed elsewhere
-            // Or selectively remove them if they are part of winner.toObject()
+            // Include essential fields from the winner document
+            _id: winner._id,
+            entryId: winner.entryId,
+            amount: winner.amount,
+            location: winner.location,
+            cycle: winner.cycle,
+            transactionId: winner.transactionId,
+            mpesaReceiptNumber: winner.mpesaReceiptNumber,
+            publicRandomSeed: winner.publicRandomSeed,
+            createdAt: winner.createdAt, // Assuming your model has these
+            updatedAt: winner.updatedAt, // Assuming your model has these
+
+            // Add the decrypted/masked fields
+            name: decryptedName, // This will be null if decryption failed or field was empty
+            phone: maskedPhone,   // This will be null if decryption/masking failed or field was empty
+            phoneNumberHash: winner.phoneNumberHash // Include the hash if useful for verification
         };
-        // Example of removing original encrypted fields if they are still present
-        delete responseWinner.name; // Remove the original encrypted name if it was there
-        delete responseWinner.phone; // Remove the original encrypted phone if it was there
 
-
-        console.log(`[GET /api/winner] Winner found for cycle ${CURRENT_CYCLE}:`, responseWinner);
+        console.log(`[GET /api/winner] Winner data prepared for response:`, responseWinner);
         return res.json({ success: true, winner: responseWinner });
     } catch (err) {
         console.error("[GET /api/winner] Error fetching winner:", err);
@@ -102,73 +119,49 @@ router.get("/", async (req, res) => {
     }
 });
 
-// POST /api/winner - Trigger winner selection (no changes here related to decryption/masking)
+// POST /api/winner - Trigger winner selection (no changes needed here for decryption/masking)
 router.post("/", async (req, res) => {
     try {
         console.log(`[POST /api/winner] Starting winner selection for cycle: ${CURRENT_CYCLE}`);
 
-        // 1. Fetch all completed entries for current cycle
         const entries = await EntryModel.find({ status: "Completed", cycle: CURRENT_CYCLE });
         console.log(`[POST /api/winner] Found ${entries.length} completed entries.`);
-        // Log details of fetched entries for verification
-        entries.forEach((entry, index) => {
-            console.log(`  Entry ${index + 1}: _id=${entry._id}, amount=${entry.amount}, status=${entry.status}, cycle=${entry.cycle}`);
-        });
 
         const totalAmount = entries.reduce((sum, entry) => sum + entry.amount, 0);
         console.log(`[POST /api/winner] Calculated total amount from entries: ${totalAmount}`);
-        console.log(`[POST /api/winner] MAX_PARTICIPANTS set to: ${MAX_PARTICIPANTS}`);
 
         if (entries.length < MAX_PARTICIPANTS || totalAmount < MAX_PARTICIPANTS) {
             console.log(`[POST /api/winner] Threshold not yet met. Entries: ${entries.length}/${MAX_PARTICIPANTS}, Total Amount: ${totalAmount}/${MAX_PARTICIPANTS}`);
             return res.json({ success: false, message: "Threshold not yet met" });
         }
 
-        // 2. Check if winner already selected
         const existingWinner = await WinnerModel.findOne({ cycle: CURRENT_CYCLE });
         if (existingWinner) {
-            console.log(`[POST /api/winner] Winner already selected for cycle ${CURRENT_CYCLE}. Existing winner ID: ${existingWinner._id}`);
+            console.log(`[POST /api/winner] Winner already selected for cycle ${CURRENT_CYCLE}.`);
             return res.json({ success: false, message: "Winner already selected" });
         }
         console.log(`[POST /api/winner] No existing winner found for cycle ${CURRENT_CYCLE}. Proceeding to select.`);
 
-        // 3. Hash participants
         const participantHashes = entries.map((entry, index) => {
             const hashInput = `${index}-${entry.phoneNumberHash}`;
-            const hashOutput = crypto.createHash("sha256").update(hashInput).digest("hex");
-            console.log(`[POST /api/winner] Participant ${index} hash input: "${hashInput}", output: "${hashOutput}"`);
-            return hashOutput;
+            return crypto.createHash("sha256").update(hashInput).digest("hex");
         });
-        console.log("[POST /api/winner] All participant hashes generated.");
 
-        // 4. Combine with seed and compute scores
         const combinedHashes = participantHashes.map((hash) => {
             const combinedInput = PUBLIC_SEED + hash;
-            const combinedOutput = crypto.createHash("sha256").update(combinedInput).digest("hex");
-            console.log(`[POST /api/winner] Combined hash input (PUBLIC_SEED + participant hash): "${combinedInput.substring(0, 50)}...", output: "${combinedOutput}"`); // Truncate long input for logging
-            return combinedOutput;
+            return crypto.createHash("sha256").update(combinedInput).digest("hex");
         });
-        console.log("[POST /api/winner] All combined hashes generated.");
 
-
-        const scores = combinedHashes.map((hash) => {
-            const score = parseInt(hash.slice(0, 8), 16);
-            console.log(`[POST /api/winner] Hash for score: ${hash.slice(0, 8)}, Parsed score: ${score}`);
-            return score;
-        });
-        console.log("[POST /api/winner] All scores computed:", scores);
+        const scores = combinedHashes.map((hash) => parseInt(hash.slice(0, 8), 16));
 
         const winnerIndex = scores.indexOf(Math.min(...scores));
-        console.log(`[POST /api/winner] Minimum score found: ${Math.min(...scores)} at index: ${winnerIndex}`);
         const winnerEntry = entries[winnerIndex];
-        console.log("[POST /api/winner] Selected winner entry:", winnerEntry);
 
-
-        // 5. Save winner to DB
+        // 5. Save winner to DB (saving the original encrypted name/phone)
         const savedWinner = await WinnerModel.create({
             entryId: winnerEntry._id,
-            name: winnerEntry.name, // This would be the encrypted name
-            phone: winnerEntry.phone, // This would be the encrypted phone
+            name: winnerEntry.name, // This should be the encrypted name
+            phone: winnerEntry.phone, // This should be the encrypted phone
             phoneNumberHash: winnerEntry.phoneNumberHash,
             amount: winnerEntry.amount,
             location: winnerEntry.location,
@@ -178,7 +171,6 @@ router.post("/", async (req, res) => {
             publicRandomSeed: PUBLIC_SEED,
         });
         console.log(`[POST /api/winner] Winner saved to DB with ID: ${savedWinner._id}`);
-
 
         return res.json({ success: true, winner: savedWinner });
     } catch (err) {
