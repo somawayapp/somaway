@@ -111,8 +111,8 @@ router.post("/", async (req, res) => {
     // 5. Save winner with encrypted phone and name
     const savedWinner = await WinnerModel.create({
       entryId: winnerEntry._id,
-      name: encrypt(winnerEntry.name),
-      phone: encrypt(winnerEntry.phone),
+      name: winnerEntry.name,
+      phone: winnerEntry.phone,
       phoneNumberHash: winnerEntry.phoneNumberHash,
       amount: winnerEntry.amount,
       location: winnerEntry.location,
