@@ -9,6 +9,40 @@ const CURRENT_CYCLE = 1;
 const MAX_PARTICIPANTS = 2;
 const PUBLIC_SEED = "0000000000000000001a7c2139b7b72e00000000000000000000000000000000"; // Fixed, auditable
 
+// Encryption config
+const ENCRYPTION_KEY = process.env.ENCRYPTION_KEY || "0123456789abcdef0123456789abcdef"; // 32 bytes
+const IV_LENGTH = 16;
+
+// Encrypt text using AES-256-CBC
+function encrypt(text) {
+  const iv = crypto.randomBytes(IV_LENGTH);
+  const cipher = crypto.createCipheriv("aes-256-cbc", Buffer.from(ENCRYPTION_KEY), iv);
+  let encrypted = cipher.update(text, "utf8", "hex");
+  encrypted += cipher.final("hex");
+  return iv.toString("hex") + ":" + encrypted;
+}
+
+// Decrypt text using AES-256-CBC
+function decrypt(text) {
+  const [ivHex, encrypted] = text.split(":");
+  const iv = Buffer.from(ivHex, "hex");
+  const decipher = crypto.createDecipheriv("aes-256-cbc", Buffer.from(ENCRYPTION_KEY), iv);
+  let decrypted = decipher.update(encrypted, "hex", "utf8");
+  decrypted += decipher.final("utf8");
+  return decrypted;
+}
+
+// Mask phone: e.g., 0712345678 → 071***678
+function maskPhone(phone) {
+  return phone.replace(/(\d{3})\d{3}(\d{3})/, "$1***$2");
+}
+
+// Mask name: John → J**n, Al → A*
+function maskName(name) {
+  if (name.length <= 2) return name[0] + "*";
+  return name[0] + "*".repeat(name.length - 2) + name[name.length - 1];
+}
+
 // GET /api/winner - Fetch current cycle winner
 router.get("/", async (req, res) => {
   try {
@@ -20,8 +54,20 @@ router.get("/", async (req, res) => {
       return res.json({ success: false, message: "No winner yet" });
     }
 
-    console.log(`[GET /api/winner] Winner found for cycle ${CURRENT_CYCLE}:`, winner);
-    return res.json({ success: true, winner });
+    // Decrypt and mask
+    const decryptedName = decrypt(winner.name);
+    const decryptedPhone = decrypt(winner.phone);
+
+    console.log(`[GET /api/winner] Winner found: ${decryptedName}, Phone: ${decryptedPhone}`);
+
+    return res.json({
+      success: true,
+      winner: {
+        ...winner.toObject(),
+        name: maskName(decryptedName),
+        phone: maskPhone(decryptedPhone),
+      },
+    });
   } catch (err) {
     console.error("[GET /api/winner] Error fetching winner:", err);
     res.status(500).json({ success: false, error: "Internal server error" });
@@ -33,68 +79,47 @@ router.post("/", async (req, res) => {
   try {
     console.log(`[POST /api/winner] Starting winner selection for cycle: ${CURRENT_CYCLE}`);
 
-    // 1. Fetch all completed entries for current cycle
+    // 1. Fetch all completed entries
     const entries = await EntryModel.find({ status: "Completed", cycle: CURRENT_CYCLE });
     console.log(`[POST /api/winner] Found ${entries.length} completed entries.`);
-    // Log details of fetched entries for verification
-    entries.forEach((entry, index) => {
-      console.log(`  Entry ${index + 1}: _id=${entry._id}, amount=${entry.amount}, status=${entry.status}, cycle=${entry.cycle}`);
-    });
 
     const totalAmount = entries.reduce((sum, entry) => sum + entry.amount, 0);
-    console.log(`[POST /api/winner] Calculated total amount from entries: ${totalAmount}`);
-    console.log(`[POST /api/winner] MAX_PARTICIPANTS set to: ${MAX_PARTICIPANTS}`);
+    console.log(`[POST /api/winner] Total amount: ${totalAmount}`);
 
     if (entries.length < MAX_PARTICIPANTS || totalAmount < MAX_PARTICIPANTS) {
-      console.log(`[POST /api/winner] Threshold not yet met. Entries: ${entries.length}/${MAX_PARTICIPANTS}, Total Amount: ${totalAmount}/${MAX_PARTICIPANTS}`);
+      console.log(`[POST /api/winner] Threshold not met. Entries: ${entries.length}, Amount: ${totalAmount}`);
       return res.json({ success: false, message: "Threshold not yet met" });
     }
 
     // 2. Check if winner already selected
     const existingWinner = await WinnerModel.findOne({ cycle: CURRENT_CYCLE });
     if (existingWinner) {
-      console.log(`[POST /api/winner] Winner already selected for cycle ${CURRENT_CYCLE}. Existing winner ID: ${existingWinner._id}`);
+      console.log(`[POST /api/winner] Winner already selected`);
       return res.json({ success: false, message: "Winner already selected" });
     }
-    console.log(`[POST /api/winner] No existing winner found for cycle ${CURRENT_CYCLE}. Proceeding to select.`);
 
-    // 3. Hash participants
+    // 3. Hash each participant
     const participantHashes = entries.map((entry, index) => {
       const hashInput = `${index}-${entry.phoneNumberHash}`;
       const hashOutput = crypto.createHash("sha256").update(hashInput).digest("hex");
-      console.log(`[POST /api/winner] Participant ${index} hash input: "${hashInput}", output: "${hashOutput}"`);
       return hashOutput;
     });
-    console.log("[POST /api/winner] All participant hashes generated.");
 
-    // 4. Combine with seed and compute scores
-    const combinedHashes = participantHashes.map((hash) => {
-      const combinedInput = PUBLIC_SEED + hash;
-      const combinedOutput = crypto.createHash("sha256").update(combinedInput).digest("hex");
-      console.log(`[POST /api/winner] Combined hash input (PUBLIC_SEED + participant hash): "${combinedInput.substring(0, 50)}...", output: "${combinedOutput}"`); // Truncate long input for logging
-      return combinedOutput;
+    // 4. Combine with seed and score them
+    const scores = participantHashes.map((hash) => {
+      const combined = crypto.createHash("sha256").update(PUBLIC_SEED + hash).digest("hex");
+      return parseInt(combined.slice(0, 8), 16);
     });
-    console.log("[POST /api/winner] All combined hashes generated.");
-
-
-    const scores = combinedHashes.map((hash) => {
-        const score = parseInt(hash.slice(0, 8), 16);
-        console.log(`[POST /api/winner] Hash for score: ${hash.slice(0, 8)}, Parsed score: ${score}`);
-        return score;
-    });
-    console.log("[POST /api/winner] All scores computed:", scores);
 
     const winnerIndex = scores.indexOf(Math.min(...scores));
-    console.log(`[POST /api/winner] Minimum score found: ${Math.min(...scores)} at index: ${winnerIndex}`);
     const winnerEntry = entries[winnerIndex];
-    console.log("[POST /api/winner] Selected winner entry:", winnerEntry);
+    console.log(`[POST /api/winner] Selected winner at index ${winnerIndex}:`, winnerEntry);
 
-
-    // 5. Save winner to DB
+    // 5. Save winner with encrypted phone and name
     const savedWinner = await WinnerModel.create({
       entryId: winnerEntry._id,
-      name: winnerEntry.name,
-      phone: winnerEntry.phone,
+      name: encrypt(winnerEntry.name),
+      phone: encrypt(winnerEntry.phone),
       phoneNumberHash: winnerEntry.phoneNumberHash,
       amount: winnerEntry.amount,
       location: winnerEntry.location,
@@ -103,9 +128,8 @@ router.post("/", async (req, res) => {
       mpesaReceiptNumber: winnerEntry.mpesaReceiptNumber,
       publicRandomSeed: PUBLIC_SEED,
     });
-    console.log(`[POST /api/winner] Winner saved to DB with ID: ${savedWinner._id}`);
 
-
+    console.log(`[POST /api/winner] Winner saved with ID: ${savedWinner._id}`);
     return res.json({ success: true, winner: savedWinner });
   } catch (err) {
     console.error("[POST /api/winner] Error selecting winner:", err);
