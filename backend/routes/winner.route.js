@@ -2,12 +2,12 @@ import express from "express";
 import crypto from "crypto";
 import EntryModel from "../models/Entry.model.js";
 import WinnerModel from "../models/Winner.model.js";
+import crypto from "crypto";
 
 const router = express.Router();
 
 const CURRENT_CYCLE = 1;
 const MAX_PARTICIPANTS = 2;
-const PUBLIC_SEED = sha256(allData);
 
 // Encryption config
 const ENCRYPTION_KEY = process.env.ENCRYPTION_KEY;
