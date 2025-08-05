@@ -10,17 +10,18 @@ const MAX_PARTICIPANTS = 2;
 const PUBLIC_SEED = "0000000000000000001a7c2139b7b72e00000000000000000000000000000000"; // Fixed, auditable
 
 // Encryption config
-const ENCRYPTION_KEY = process.env.ENCRYPTION_KEY; // 32 bytes
+const ENCRYPTION_KEY = process.env.ENCRYPTION_KEY;
+
 const IV_LENGTH = 16;
 
-// Encrypt text using AES-256-CBC
 function encrypt(text) {
   const iv = crypto.randomBytes(IV_LENGTH);
-  const cipher = crypto.createCipheriv("aes-256-cbc", Buffer.from(ENCRYPTION_KEY), iv);
-  let encrypted = cipher.update(text, "utf8", "hex");
-  encrypted += cipher.final("hex");
-  return iv.toString("hex") + ":" + encrypted;
+  const cipher = crypto.createCipheriv("aes-256-cbc", Buffer.from(ENCRYPTION_KEY, "hex"), iv);
+  let encrypted = cipher.update(text);
+  encrypted = Buffer.concat([encrypted, cipher.final()]);
+  return iv.toString("hex") + ":" + encrypted.toString("hex");
 }
+
 
 // Decrypt text using AES-256-CBC
 function decrypt(text) {
