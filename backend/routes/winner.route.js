@@ -33,16 +33,6 @@ function decrypt(text) {
 }
 
 
-// Mask phone: e.g., 0712345678 → 071***678
-function maskPhone(phone) {
-  return phone.replace(/(\d{3})\d{3}(\d{3})/, "$1***$2");
-}
-
-// Mask name: John → J**n, Al → A*
-function maskName(name) {
-  if (name.length <= 2) return name[0] + "*";
-  return name[0] + "*".repeat(name.length - 2) + name[name.length - 1];
-}
 
 // GET /api/winner - Fetch current cycle winner
 router.get("/", async (req, res) => {
@@ -65,8 +55,8 @@ router.get("/", async (req, res) => {
       success: true,
       winner: {
         ...winner.toObject(),
-        name: maskName(decryptedName),
-        phone: maskPhone(decryptedPhone),
+        name: (decryptedName),
+        phone: (decryptedPhone),
       },
     });
   } catch (err) {
