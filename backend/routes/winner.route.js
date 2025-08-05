@@ -10,7 +10,7 @@ const MAX_PARTICIPANTS = 2;
 const PUBLIC_SEED = "0000000000000000001a7c2139b7b72e00000000000000000000000000000000"; // Fixed, auditable
 
 // Encryption config
-const ENCRYPTION_KEY = process.env.ENCRYPTION_KEY || "0123456789abcdef0123456789abcdef"; // 32 bytes
+const ENCRYPTION_KEY = process.env.ENCRYPTION_KEY; // 32 bytes
 const IV_LENGTH = 16;
 
 // Encrypt text using AES-256-CBC
