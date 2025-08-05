@@ -92,7 +92,7 @@ router.post("/", async (req, res) => {
 
    
     // ✅ Use entries after they're fetched
-    const allData = entries.map(e => `${e.phoneNumberHash}-${e.timestamp}-${e.amount}`).join("|");
+    const allData = entries.map(e => `${e.phoneNumberHash}-${e.timestamp}-${e.transactionId}`).join("|");
     const PUBLIC_SEED = crypto.createHash("sha256").update(allData).digest("hex");
 
 
