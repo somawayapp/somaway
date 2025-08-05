@@ -176,8 +176,24 @@ router.post("/", async (req, res) => {
         responseWinner.phone = maskPhoneNumber(decryptedWinnerPhone);
     }
 
-    return res.json({ success: true, winner: responseWinner });
-  } catch (err) {
+// Decrypt sensitive fields
+const decryptedName = decrypt(winner.name);
+const decryptedPhone = decrypt(winner.phone);
+
+// Mask middle digits of phone (e.g. 0712***345)
+const maskedPhone = decryptedPhone.replace(/^(\d{4})\d{3}(\d{3})$/, "$1***$2");
+
+// Return with decrypted + masked fields
+return res.json({
+  success: true,
+  winner: {
+    ...winner.toObject(),
+    name: decryptedName,
+    phone: maskedPhone,
+  },
+});
+
+} catch (err) {
     console.error("[POST /api/winner] Error selecting winner:", err);
     res.status(500).json({ success: false, error: "Failed to select winner" });
   }
