@@ -7,7 +7,6 @@ const router = express.Router();
 
 const CURRENT_CYCLE = 1;
 const MAX_PARTICIPANTS = 2;
-const allData = entries.map(e => `${e.phoneNumberHash}-${e.timestamp}-${e.amount}`).join("|");
 const PUBLIC_SEED = sha256(allData);
 
 // Encryption config
@@ -68,10 +67,17 @@ router.get("/", async (req, res) => {
   }
 });
 
+
+
+
+
 // POST /api/winner - Trigger winner selection
 router.post("/", async (req, res) => {
   try {
     console.log(`[POST /api/winner] Starting winner selection for cycle: ${CURRENT_CYCLE}`);
+
+ 
+ 
 
     // 1. Fetch all completed entries
     const entries = await EntryModel.find({ status: "Completed", cycle: CURRENT_CYCLE });
@@ -84,6 +90,15 @@ router.post("/", async (req, res) => {
       console.log(`[POST /api/winner] Threshold not met. Entries: ${entries.length}, Amount: ${totalAmount}`);
       return res.json({ success: false, message: "Threshold not yet met" });
     }
+
+       if (entries.length < MAX_PARTICIPANTS) {
+      return res.json({ success: false, message: "Not enough participants" });
+    }
+
+    // ✅ Use entries after they're fetched
+    const allData = entries.map(e => `${e.phoneNumberHash}-${e.timestamp}-${e.amount}`).join("|");
+    const PUBLIC_SEED = crypto.createHash("sha256").update(allData).digest("hex");
+
 
     // 2. Check if winner already selected
     const existingWinner = await WinnerModel.findOne({ cycle: CURRENT_CYCLE });
