@@ -7,7 +7,8 @@ const router = express.Router();
 
 const CURRENT_CYCLE = 1;
 const MAX_PARTICIPANTS = 2;
-const PUBLIC_SEED = "0000000000000000001a7c2139b7b72e00000000000000000000000000000000"; // Fixed, auditable
+const allData = entries.map(e => `${e.phoneNumberHash}-${e.timestamp}-${e.amount}`).join("|");
+const PUBLIC_SEED = sha256(allData);
 
 // Encryption config
 const ENCRYPTION_KEY = process.env.ENCRYPTION_KEY;
