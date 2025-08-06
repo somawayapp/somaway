@@ -88,16 +88,16 @@ const AboutPage = () => {
 <h3 className="text-3xl md:text-5xl font-bold mt-4 mb-4">How did the idea of Shilingi come?</h3>
 <p className="text-sm md:text-lg max-w-lg mb-6">
 One day i walked out of the supermarket with three shillings in my hand. I remember when this
- could buy so much and still some change back. Now, it just feels… small.
+ could buy so much and still get some change back. Now, it just feels… small.
 
 I tossed the coins in the air on my way home, and three of them slipped away. When I finally got home, the last shilling
  fell at the corner of the bathroom.
-
-Everyday i saw it i would wonder if the one shiling could find
-its value again.  I would imagine this idea of a dustin placed outside the supermarket, where everyone would dump there one
+<br />
+Everyday i saw it, i would wonder if that one shiling could find
+its value again.  I would imagine this idea of a dustbin placed outside the supermarket, where everyone would dump there one
  shilling coins and once it summed up to a good amount, 
 a random lucky shopper would be awarded with it. But even though i dont own a supermarket, this idea stuck with me.
-
+<br />
 So, I decided to build something. A online platform where anyone – can toss in their extra shillings. 
 A community led initiative, where every single shilling gets a chance to matter again.
 
@@ -179,6 +179,7 @@ className="w-8 h-8 mb-6 mx-auto md:mx-0 md:ml-0"
 
 
 
+<div className="flex items-center justify-center text-[var(--textColor)] mx-auto" >
 
 
       <div className="flex items-center justify-center text-[var(--textColor)] mx-auto">
@@ -187,11 +188,12 @@ className="w-8 h-8 mb-6 mx-auto md:mx-0 md:ml-0"
       Contact us shilingi@gmail.com or call +254 703 394794
     </p>
   </div>
-        <Footer />
 
 </div>
 
+        <Footer />
 
+</div>
 
     
     </div>

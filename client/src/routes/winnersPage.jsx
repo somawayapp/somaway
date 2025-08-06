@@ -79,7 +79,7 @@ const Winners = () => {
   <h3 className="text-lg font-semibold text-white">🔍 How the Winner is Selected?</h3>
 
   <p>
-    Once exactly <strong>1,000,000 KES</strong> had been received from participants, the system automatically 
+    Once exactly <strong>1,000,000 KES</strong> has been received from participants, the system automatically 
     selects a winner using a fair and transparent process that anyone can verify.
   </p>
 
