@@ -87,21 +87,21 @@ const AboutPage = () => {
 <div className="flex-1  text-center  md:text-left">
 <h3 className="text-3xl md:text-5xl font-bold mt-4 mb-4">How did the idea of Shilingi come?</h3>
 <p className="text-sm md:text-lg max-w-lg mb-6">
-One day i walked out of the supermarket with three shillings in my hand, hardly any money at all these days. I remember when that
- could buy so much – bread, milk, sweets, and even get some change back. Now, it just feels… small.
+One day i walked out of the supermarket with three shillings in my hand. I remember when this
+ could buy so much and still some change back. Now, it just feels… small.
 
-I tossed the coins in the air on my way home, and three of them slipped away, just gone. When I finally got inside, the last shilling
- rolled into a corner of the bathroom. I saw it every day, just sitting there, and I kept wondering: Could this one shilling ever feel
-  important again?
+I tossed the coins in the air on my way home, and three of them slipped away. When I finally got home, the last shilling
+ fell at the corner of the bathroom.
 
-Everyday i would wonder if the one shiling could find
-its value again. Like a dustin placed outside the shop, where everyone would dump there one shilling coins and oce it got  to a good amount, 
-a random lucky shopper would be awarded with it. I don't own a shop, but that idea stuck with me.
+Everyday i saw it i would wonder if the one shiling could find
+its value again.  I would imagine this idea of a dustin placed outside the supermarket, where everyone would dump there one
+ shilling coins and once it summed up to a good amount, 
+a random lucky shopper would be awarded with it. But even though i dont own a supermarket, this idea stuck with me.
 
 So, I decided to build something. A online platform where anyone – can toss in their extra shillings. 
 A community led initiative, where every single shilling gets a chance to matter again.
 
-After several months of building, we have Shilling – bringing back the true worth of your shilling.
+After several months of building, we have Shilingi – bringing back the true worth of your shilling.
 </p>
 <img 
 src="/love.svg" 
@@ -187,9 +187,10 @@ className="w-8 h-8 mb-6 mx-auto md:mx-0 md:ml-0"
       Contact us shilingi@gmail.com or call +254 703 394794
     </p>
   </div>
+        <Footer />
+
 </div>
 
-      <Footer />
 
 
     

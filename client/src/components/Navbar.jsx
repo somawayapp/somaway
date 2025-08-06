@@ -164,6 +164,13 @@
              onClick={() => setOpen(false)}          > Home     
             </Link>
 
+       <Link
+              to="/winners"
+              className="block py-2 text-[var(--softTextColor)]  hover:text-[#f36dff]  p-2 rounded-xl"
+              onClick={() => setOpen(false)}          > Winners
+            </Link>
+
+
 
             <Link
               to="/about"

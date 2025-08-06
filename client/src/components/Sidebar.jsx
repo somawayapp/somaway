@@ -5,7 +5,7 @@ const Sidebar = () => {
     {
       title: "",
       items: [
-        { name: "Winners", icon: "🏅", href: "/" },
+        { name: "Winners", icon: "🏅", href: "/winners" },
       ],
     },
     {

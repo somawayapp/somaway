@@ -76,44 +76,45 @@ const Winners = () => {
         )}
 
      <div className="mt-10 space-y-4 text-sm text-gray-300">
-  <h3 className="text-lg font-semibold text-white">🔍 How Was the Winner Selected?</h3>
+  <h3 className="text-lg font-semibold text-white">🔍 How the Winner is Selected?</h3>
 
   <p>
     Once exactly <strong>1,000,000 KES</strong> had been received from participants, the system automatically 
-    selected a winner using a fair and transparent process that anyone can verify.
+    selects a winner using a fair and transparent process that anyone can verify.
   </p>
 
   <p>
-    Here's how it worked:
-    Each person’s phone number was turned into a secret code using a method called <code>SHA-256</code>. This keeps your
+    Here's how it works:
+    Each person’s phone number is turned into a secret code using a method called <code>SHA-256</code>. This keeps your
      number private, but still lets it be used in the draw.
   </p>
 
   <p>
-    Then, we combined those secret codes with details from your transaction — like the exact time you joined and the M-Pesa
-     receipt — and used that data to create a single <strong>public fingerprint</strong> (called a "seed"). This fingerprint is
+    Those secret codes are then combined with details from your transaction — like the exact time you joined and the M-Pesa
+     transaction ID, from all participants — and used to create a single <strong>public fingerprint</strong> (called a "seed"). This fingerprint is
       unique and impossible to predict ahead of time.
   </p>
 
   <p>
-    We then used this fingerprint to give each participant a random score. The person with the <strong>lowest score</strong> was 
+    This fingerprint is then used to give each participant a random score. The person with the <strong>lowest score</strong> is 
     selected as the winner.
   </p>
 
   <p>
     This process is <strong>100% fair and automatic</strong>. No human decides the winner. And because 
     everything is based on real data from the entries, anyone with access to that data can repeat the same 
-    steps and get the exact same winner.
+    procces and verify the winner.
   </p>
 
   <p className="text-green-400">
     🔐 This means the draw is completely transparent, tamper-proof, and provable by anyone — even you.
   </p>
 </div>
+      <Footer />
+
 
       </div>
 
-      <Footer />
     </div>
   );
 };
