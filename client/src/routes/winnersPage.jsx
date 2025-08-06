@@ -62,7 +62,7 @@ const Winners = () => {
             <h2 className="text-xl font-semibold text-green-400">🏆 Cycle {winner.cycle} Winner</h2>
             <div className="space-y-2">
               <p><strong>Name:</strong> {winner.name}</p>
-              <p><strong>Phone (Encrypted):</strong> {winner.phone}</p>
+              <p><strong>Phone:</strong> {winner.phone}</p>
               <p><strong>Amount Sent:</strong> {winner.amount} KES</p>
               <p><strong>MPESA Receipt:</strong> {winner.mpesaReceiptNumber || "N/A"}</p>
               <p><strong>Transaction ID:</strong> {winner.transactionId || "N/A"}</p>
@@ -75,21 +75,42 @@ const Winners = () => {
           </div>
         )}
 
-        <div className="mt-10 space-y-4 text-sm text-gray-300">
-          <h3 className="text-lg font-semibold text-white">🔍 How Was the Winner Selected?</h3>
-          <p>
-            Once we received <strong>exactly 1,000,000 KES</strong> in contributions from participants, we triggered a verifiable winner selection process.
-          </p>
-          <p>
-            Each participant's phone number was hashed using <code>SHA-256</code>. Then, each hash was combined with a fixed public randomness seed sourced from a verifiable and publicly visible source (e.g. Bitcoin block hash).
-          </p>
-          <p>
-            From the resulting combined hashes, we converted each to a number and picked the entry with the <strong>lowest number</strong>. This process is fully deterministic, meaning anyone with the data can reproduce and verify the winner selection independently.
-          </p>
-          <p className="text-green-400">
-            🔐 This ensures fairness, transparency, and zero manipulation.
-          </p>
-        </div>
+     <div className="mt-10 space-y-4 text-sm text-gray-300">
+  <h3 className="text-lg font-semibold text-white">🔍 How Was the Winner Selected?</h3>
+
+  <p>
+    Once exactly <strong>1,000,000 KES</strong> had been received from participants, the system automatically 
+    selected a winner using a fair and transparent process that anyone can verify.
+  </p>
+
+  <p>
+    Here's how it worked:
+    Each person’s phone number was turned into a secret code using a method called <code>SHA-256</code>. This keeps your
+     number private, but still lets it be used in the draw.
+  </p>
+
+  <p>
+    Then, we combined those secret codes with details from your transaction — like the exact time you joined and the M-Pesa
+     receipt — and used that data to create a single <strong>public fingerprint</strong> (called a "seed"). This fingerprint is
+      unique and impossible to predict ahead of time.
+  </p>
+
+  <p>
+    We then used this fingerprint to give each participant a random score. The person with the <strong>lowest score</strong> was 
+    selected as the winner.
+  </p>
+
+  <p>
+    This process is <strong>100% fair and automatic</strong>. No human decides the winner. And because 
+    everything is based on real data from the entries, anyone with access to that data can repeat the same 
+    steps and get the exact same winner.
+  </p>
+
+  <p className="text-green-400">
+    🔐 This means the draw is completely transparent, tamper-proof, and provable by anyone — even you.
+  </p>
+</div>
+
       </div>
 
       <Footer />
