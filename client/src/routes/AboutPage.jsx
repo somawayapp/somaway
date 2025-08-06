@@ -92,12 +92,12 @@ One day i walked out of the supermarket with three shillings in my hand. I remem
 
 I tossed the coins in the air on my way home, and three of them slipped away. When I finally got home, the last shilling
  fell at the corner of the bathroom.
-<br />
+<br /> <br />
 Everyday i saw it, i would wonder if that one shiling could find
 its value again.  I would imagine this idea of a dustbin placed outside the supermarket, where everyone would dump there one
  shilling coins and once it summed up to a good amount, 
 a random lucky shopper would be awarded with it. But even though i dont own a supermarket, this idea stuck with me.
-<br />
+<br /> <br />
 So, I decided to build something. A online platform where anyone – can toss in their extra shillings. 
 A community led initiative, where every single shilling gets a chance to matter again.
 
@@ -179,7 +179,6 @@ className="w-8 h-8 mb-6 mx-auto md:mx-0 md:ml-0"
 
 
 
-<div className="flex items-center justify-center text-[var(--textColor)] mx-auto" >
 
 
       <div className="flex items-center justify-center text-[var(--textColor)] mx-auto">
@@ -191,9 +190,7 @@ className="w-8 h-8 mb-6 mx-auto md:mx-0 md:ml-0"
 
 </div>
 
-        <Footer />
 
-</div>
 
     
     </div>
