@@ -221,7 +221,7 @@ const TermsAndConditions = () => {
           For any questions, feedback, or dispute resolution, contact us:
         </p>
         <ul className="list-disc pl-6">
-         <li>Email: shilingi@gmail.com</li>
+         <li>Email: shilingiventures@gmail.com</li>
             <li>Phone: +254 703 394 794</li>
           </ul>
 

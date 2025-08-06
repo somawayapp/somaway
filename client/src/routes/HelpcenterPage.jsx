@@ -124,7 +124,7 @@ const HelpCenter = () => {
             If your question isn't answered here, feel free to reach out to our support team.
           </p>
           <ul className="list-disc pl-6 mt-2">
-            <li>Email: shilingi@gmail.com</li>
+            <li>Email: shilingiventures@gmail.com</li>
             <li>Phone: +254 703 394 794</li>
           </ul>
         </section>

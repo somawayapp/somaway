@@ -138,7 +138,7 @@ const PaymentTerms = () => {
         <h2 className="text-xl font-semibold">12. Contact</h2>
         <p>For payout-related concerns, contact:</p>
         <ul className="list-disc pl-6">
-            <li>Email: shilingi@gmail.com</li>
+            <li>Email: shilingiventures@gmail.com</li>
             <li>Phone: +254 703 394 794</li>
           </ul>
 

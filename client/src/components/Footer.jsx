@@ -46,7 +46,7 @@ const Footer = () => {
         <p className="text-[var(--softTextColor)]">
           © {currentYear}, Shilingi initiative Nairobi
           <a href="mailto:support@soma.ia.com" className="text-[var(--softTextColor)] pl-1 hover:text-[var(--softTextColor)]">
-            support: shilingi@gmail.com
+            support: shilingiventures@gmail.com
           </a>
         </p>
       </div>
