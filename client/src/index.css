@@ -12,6 +12,8 @@
   --bg: #181a19;
   --textColor: white;
   --softBg: #f0f0f0;
+ --color-scheme: dark;
+
   
   --softTextColor: #626262;
   --bg-image-light: url('/client/public/x.png');

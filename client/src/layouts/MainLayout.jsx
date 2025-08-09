@@ -2,7 +2,6 @@ import { Outlet, useLocation } from "react-router-dom";
 
 import { useEffect } from "react";
 import Navbar from "../components/Navbar";
-import { ThemeProvider } from "../../themecontext";
 
 const MainLayout = () => {
   const location = useLocation();
@@ -43,13 +42,11 @@ const MainLayout = () => {
 
 
 return (
-  <ThemeProvider>
 
   <div className="container  mx-auto  ">
     <Outlet />
 
   </div>
-  </ThemeProvider>
 
 
   );
