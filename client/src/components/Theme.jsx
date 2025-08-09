@@ -3,7 +3,6 @@ import { useEffect } from "react";
 const ThemeToggler = () => {
   useEffect(() => {
     const root = document.documentElement;
-    root.classList.remove("light");
     root.classList.add("dark");
     localStorage.setItem("theme", "dark");
   }, []);

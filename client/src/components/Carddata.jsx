@@ -34,7 +34,7 @@ export default function BettingChances() {
   useEffect(() => {
     const fetchCycleStatus = async () => {
       try {
-        const res = await fetch("https://somawayapi.vercel.app/mpesa/cycle-status");
+        const res = await fetch("https://shilingiapi.vercel.app/mpesa/cycle-status");
         const data = await res.json();
         if (data.success) {
           setCycleStatus(data);
@@ -63,7 +63,7 @@ export default function BettingChances() {
 
       const checkDbStatus = async () => {
         try {
-          const res = await fetch("https://somawayapi.vercel.app/mpesa/get-status", { // NEW ENDPOINT
+          const res = await fetch("https://shilingiapi.vercel.app/mpesa/get-status", { // NEW ENDPOINT
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ checkoutRequestID: transactionDetails.checkoutRequestID }),
@@ -129,7 +129,7 @@ One million.
 One lucky winner.
 
 Join now for just one bob —
-👉\n\n Shilingi yaweza kupa mamili. Visit:\nhttps://makesomaway.com ✨`;
+👉\n\n Shilingi yaweza kupa mamili. Visit:\nhttps://shilingi.co.ke ✨`;
 
     const url = `https://wa.me/?text=${encodeURIComponent(message + " ")}`;
 
@@ -167,7 +167,7 @@ Join now for just one bob —
 
     setLoading(true);
     try {
-      const res = await fetch("https://somawayapi.vercel.app/mpesa/stk-push", {
+      const res = await fetch("https://shilingiapi.vercel.app/mpesa/stk-push", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ phone, name }),

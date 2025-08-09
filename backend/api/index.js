@@ -27,8 +27,11 @@ app.use(
     origin: function (origin, callback) {
       const allowedOrigins = [
         'https://makesomaway.com',
+         'https://shilingi.co.ke',
         'https://www.makesomaway.com',
+        'https://www.shilingi.co.ke',
         'https://somawayclient.vercel.app',
+        'https://shilingiclient.vercel.app',
         'https://blogifiyclient.vercel.app',
          'https://somaway.onrender.com',
          'https://somaway.onrender.com/mpesa/query-stk-status',
