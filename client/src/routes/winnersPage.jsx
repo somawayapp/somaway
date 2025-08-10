@@ -9,21 +9,23 @@ const Winners = () => {
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    fetch("https://shilingiapi.vercel.app/winner")
-      .then((res) => res.json())
-      .then((data) => {
-        if (data.success && data.winners && data.winners.length > 0) {
-          // Sort by winDate to get the latest winner if there are multiple
-          const latestWinner = data.winners.sort((a, b) => new Date(b.winDate) - new Date(a.winDate))[0];
-          setWinner(latestWinner);
-        } else {
-          setError("No winner has been selected yet. Stay tuned!");
-        }
-      })
-      .catch(() => setError("Failed to fetch winner information. Please try again later."))
-      .finally(() => setLoading(false));
-  }, []);
+useEffect(() => {
+  fetch("https://shilingiapi.vercel.app/winner")
+    .then((res) => res.json())
+    .then((data) => {
+      // Check for success and if the 'winners' array exists and has elements
+      if (data.success && data.winners && data.winners.length > 0) {
+        // Sort by winDate to get the latest winner if there are multiple
+        const latestWinner = data.winners.sort((a, b) => new Date(b.winDate) - new Date(a.winDate))[0];
+        setWinner(latestWinner);
+      } else {
+        // If success is false, or 'winners' array is missing/empty
+        setError("No winner has been selected yet. Stay tuned!");
+      }
+    })
+    .catch(() => setError("Failed to fetch winner information. Please try again later."))
+    .finally(() => setLoading(false));
+}, []);
 
   return (
     <div>
