@@ -37,7 +37,8 @@ function decrypt(text) {
 router.get("/", async (req, res) => {
   try {
     console.log(`[GET /api/winner] Attempting to fetch winner for cycle: ${CURRENT_CYCLE}`);
-    const winner = await WinnerModel.findOne({ cycle: CURRENT_CYCLE });
+    const winner = await WinnerModel.find().sort({ cycle: -1 })
+
 
     if (!winner) {
       console.log(`[GET /api/winner] No winner found for cycle: ${CURRENT_CYCLE}`);
