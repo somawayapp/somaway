@@ -5,7 +5,7 @@ import Link from "next/link";
 import { Helmet } from "react-helmet";
 
 const Winners = () => {
-  const [winner, setWinner] = useState(null);
+  const [winners, setWinners] = useState(null);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
 
@@ -60,7 +60,7 @@ const Winners = () => {
         {error && <p className="text-red-500">{error}</p>}
 
             {winners.map(w => (
-    <li key={w._id}>
+           <li key={w._id}>
           <div className="bg-[#141414] border border-gray-700 p-6 rounded-xl shadow-md space-y-4">
             <h2 className="text-xl font-semibold text-green-400">🏆 Cycle {winner.cycle} Winner</h2>
             <div className="space-y-2">
