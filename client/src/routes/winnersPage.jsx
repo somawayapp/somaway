@@ -15,10 +15,11 @@ useEffect(() => {
     .then((res) => res.json())
     .then((data) => {
       if (data.success) {
+        setError(null); // ✅ clear old error
         if (Array.isArray(data.winners)) {
           setWinners(data.winners);
         } else if (data.winner) {
-          setWinners([data.winner]); // wrap single winner in array
+          setWinners([data.winner]);
         }
       } else {
         setError("No winner has been selected yet.");
@@ -27,6 +28,7 @@ useEffect(() => {
     .catch(() => setError("Failed to fetch winner. Please try again later."))
     .finally(() => setLoading(false));
 }, []);
+
 
 
   return (
