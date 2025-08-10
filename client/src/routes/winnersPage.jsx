@@ -13,10 +13,15 @@ const Winners = () => {
     fetch("https://shilingiapi.vercel.app/winner")
       .then((res) => res.json())
       .then((data) => {
-        if (data.success) setWinner(data.winner);
-        else setError("No winner has been selected yet.");
+        if (data.success && data.winners && data.winners.length > 0) {
+          // Sort by winDate to get the latest winner if there are multiple
+          const latestWinner = data.winners.sort((a, b) => new Date(b.winDate) - new Date(a.winDate))[0];
+          setWinner(latestWinner);
+        } else {
+          setError("No winner has been selected yet. Stay tuned!");
+        }
       })
-      .catch(() => setError("Failed to fetch winner. Please try again later."))
+      .catch(() => setError("Failed to fetch winner information. Please try again later."))
       .finally(() => setLoading(false));
   }, []);
 
@@ -75,46 +80,43 @@ const Winners = () => {
           </div>
         )}
 
-     <div className="mt-10 space-y-4 text-sm text-gray-300">
-  <h3 className="text-lg font-semibold text-white">🔍 How the Winner is Selected?</h3>
+        <div className="mt-10 space-y-4 text-sm text-gray-300">
+          <h3 className="text-lg font-semibold text-white">🔍 How the Winner is Selected?</h3>
 
-  <p>
-    Once exactly <strong>1,000,000 KES</strong> has been received from participants, the system automatically 
-    selects a winner using a fair and transparent process that anyone can verify.
-  </p>
+          <p>
+            Once exactly **1,000,000 KES** has been received from participants, the system automatically
+            selects a winner using a fair and transparent process that anyone can verify.
+          </p>
 
-  <p>
-    Here's how it works:
-    Each person’s phone number is turned into a secret code using a method called <code>SHA-256</code>. This keeps your
-     number private, but still lets it be used in the draw.
-  </p>
+          <p>
+            Here's how it works:
+            Each person’s phone number is turned into a secret code using a method called `SHA-256`. This keeps your
+            number private, but still lets it be used in the draw.
+          </p>
 
-  <p>
-    Those secret codes are then combined with details from your transaction — like the exact time you joined and the M-Pesa
-     transaction ID, from all participants — and used to create a single <strong>public fingerprint</strong> (called a "seed"). This fingerprint is
-      unique and impossible to predict ahead of time.
-  </p>
+          <p>
+            Those secret codes are then combined with details from your transaction — like the exact time you joined and the M-Pesa
+            transaction ID, from all participants — and used to create a single **public fingerprint** (called a "seed"). This fingerprint is
+            unique and impossible to predict ahead of time.
+          </p>
 
-  <p>
-    This fingerprint is then used to give each participant a random score. The person with the <strong>lowest score</strong> is 
-    selected as the winner.
-  </p>
+          <p>
+            This fingerprint is then used to give each participant a random score. The person with the **lowest score** is
+            selected as the winner.
+          </p>
 
-  <p>
-    This process is <strong>100% fair and automatic</strong>. No human decides the winner. And because 
-    everything is based on real data from the entries, anyone with access to that data can repeat the same 
-    procces and verify the winner.
-  </p>
+          <p>
+            This process is **100% fair and automatic**. No human decides the winner. And because
+            everything is based on real data from the entries, anyone with access to that data can repeat the same
+            process and verify the winner.
+          </p>
 
-  <p className="text-green-400">
-    🔐 This means the draw is completely transparent, tamper-proof, and provable by anyone — even you.
-  </p>
-</div>
-      <Footer />
-
-
+          <p className="text-green-400">
+            🔐 This means the draw is completely transparent, tamper-proof, and provable by anyone — even you.
+          </p>
+        </div>
       </div>
-
+      <Footer />
     </div>
   );
 };
