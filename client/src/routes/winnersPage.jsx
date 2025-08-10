@@ -11,9 +11,11 @@ const Winners = () => {
 
   useEffect(() => {
     fetch("https://shilingiapi.vercel.app/winner")
+    
       .then((res) => res.json())
       .then((data) => {
-        if (data.success) setWinner(data.winner);
+        if (data.success) setWinners(data.winners);
+
         else setError("No winner has been selected yet.");
       })
       .catch(() => setError("Failed to fetch winner. Please try again later."))
@@ -57,7 +59,8 @@ const Winners = () => {
         {loading && <p>Loading winner information...</p>}
         {error && <p className="text-red-500">{error}</p>}
 
-        {winner && (
+            {winners.map(w => (
+    <li key={w._id}>
           <div className="bg-[#141414] border border-gray-700 p-6 rounded-xl shadow-md space-y-4">
             <h2 className="text-xl font-semibold text-green-400">🏆 Cycle {winner.cycle} Winner</h2>
             <div className="space-y-2">
@@ -73,7 +76,8 @@ const Winners = () => {
               <code className="block break-words text-xs text-pink-400 mt-1">{winner.publicRandomSeed}</code>
             </div>
           </div>
-        )}
+        </li>
+  ))}
 
      <div className="mt-10 space-y-4 text-sm text-gray-300">
   <h3 className="text-lg font-semibold text-white">🔍 How the Winner is Selected?</h3>
