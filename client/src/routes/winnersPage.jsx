@@ -15,7 +15,6 @@ useEffect(() => {
     .then((res) => res.json())
     .then((data) => {
       if (data.success) {
-        setError(null); // ✅ clear old error
         if (Array.isArray(data.winners)) {
           setWinners(data.winners);
         } else if (data.winner) {
@@ -28,7 +27,6 @@ useEffect(() => {
     .catch(() => setError("Failed to fetch winner. Please try again later."))
     .finally(() => setLoading(false));
 }, []);
-
 
 
   return (
