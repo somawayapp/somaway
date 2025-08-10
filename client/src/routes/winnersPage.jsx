@@ -5,7 +5,8 @@ import Link from "next/link";
 import { Helmet } from "react-helmet";
 
 const Winners = () => {
-  const [winners, setWinners] = useState(null);
+           const [winners, setWinners] = useState([]);
+
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
 
@@ -59,25 +60,36 @@ const Winners = () => {
         {loading && <p>Loading winner information...</p>}
         {error && <p className="text-red-500">{error}</p>}
 
-            {winners.map(w => (
-           <li key={w._id}>
-          <div className="bg-[#141414] border border-gray-700 p-6 rounded-xl shadow-md space-y-4">
-            <h2 className="text-xl font-semibold text-green-400">🏆 Cycle {winner.cycle} Winner</h2>
-            <div className="space-y-2">
-              <p><strong>Name:</strong> {winner.name}</p>
-              <p><strong>Phone:</strong> {winner.phone}</p>
-              <p><strong>Amount Sent:</strong> {winner.amount} KES</p>
-              <p><strong>MPESA Receipt:</strong> {winner.mpesaReceiptNumber || "N/A"}</p>
-              <p><strong>Transaction ID:</strong> {winner.transactionId || "N/A"}</p>
-              <p><strong>Date Won:</strong> {new Date(winner.winDate).toLocaleString()}</p>
-            </div>
-            <div className="mt-4 text-sm text-gray-400">
-              <p><strong>🔐 Public Random Seed:</strong></p>
-              <code className="block break-words text-xs text-pink-400 mt-1">{winner.publicRandomSeed}</code>
-            </div>
-          </div>
-        </li>
-  ))}
+
+
+{winners.length > 0 ? (
+  winners.map(w => (
+    <li key={w._id}>
+      <div className="bg-[#141414] border border-gray-700 p-6 rounded-xl shadow-md space-y-4">
+        <h2 className="text-xl font-semibold text-green-400">
+          🏆 Cycle {w.cycle} Winner
+        </h2>
+        <div className="space-y-2">
+          <p><strong>Name:</strong> {w.name}</p>
+          <p><strong>Phone:</strong> {w.phone}</p>
+          <p><strong>Amount Sent:</strong> {w.amount} KES</p>
+          <p><strong>MPESA Receipt:</strong> {w.mpesaReceiptNumber || "N/A"}</p>
+          <p><strong>Transaction ID:</strong> {w.transactionId || "N/A"}</p>
+          <p><strong>Date Won:</strong> {new Date(w.winDate).toLocaleString()}</p>
+        </div>
+        <div className="mt-4 text-sm text-gray-400">
+          <p><strong>🔐 Public Random Seed:</strong></p>
+          <code className="block break-words text-xs text-pink-400 mt-1">
+            {w.publicRandomSeed}
+          </code>
+        </div>
+      </div>
+    </li>
+  ))
+) : (
+  !loading && <p className="text-red-500">{error || "No winners yet."}</p>
+)}
+
 
      <div className="mt-10 space-y-4 text-sm text-gray-300">
   <h3 className="text-lg font-semibold text-white">🔍 How the Winner is Selected?</h3>

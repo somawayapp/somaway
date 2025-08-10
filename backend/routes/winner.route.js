@@ -37,28 +37,24 @@ function decrypt(text) {
 router.get("/", async (req, res) => {
   try {
     console.log(`[GET /api/winner] Attempting to fetch winner for cycle: ${CURRENT_CYCLE}`);
-    const winner = await WinnerModel.find().sort({ cycle: -1 })
+const winners = await WinnerModel.find().sort({ cycle: -1 });
+
+if (!winners.length) {
+  return res.json({ success: false, message: "No winners yet" });
+}
+
+const decryptedWinners = winners.map(w => ({
+  ...w.toObject(),
+  name: w.name ? decrypt(w.name) : null,
+  phone: w.phone ? decrypt(w.phone) : null
+}));
+
+return res.json({ success: true, winners: decryptedWinners });
 
 
-    if (!winner) {
-      console.log(`[GET /api/winner] No winner found for cycle: ${CURRENT_CYCLE}`);
-      return res.json({ success: false, message: "No winner yet" });
-    }
 
-    // Decrypt and mask
-    const decryptedName = decrypt(winner.name);
-    const decryptedPhone = decrypt(winner.phone);
 
-    console.log(`[GET /api/winner] Winner found: ${decryptedName}, Phone: ${decryptedPhone}`);
 
-   return res.json({
-  success: true,
-  winner: {
-    ...winner.toObject(),
-    name: decrypt(winner.name),
-    phone: decrypt(winner.phone),
-  },
-});
 
 
   } catch (err) {
