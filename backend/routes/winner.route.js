@@ -34,22 +34,25 @@ function decrypt(text) {
 
 
 // GET /api/winner - Fetch current cycle winner
-router.get("/winner", async (req, res) => {
+router.get("/", async (req, res) => {
   try {
-    const winners = await WinnerModel.find({}).sort({ cycle: 1 });
+    const winners = await WinnerModel.find({}); // all winners from all cycles
     if (!winners.length) {
-      return res.json({ success: false, message: "No winner yet" });
+      return res.json({ success: false, message: "No winners yet" });
     }
-    res.json({ success: true, winners: winners.map(w => ({
+
+    const decrypted = winners.map(w => ({
       ...w.toObject(),
       name: decrypt(w.name),
-      phone: decrypt(w.phone),
-    })) });
+      phone: decrypt(w.phone)
+    }));
+
+    res.json({ success: true, winners: decrypted });
   } catch (err) {
+    console.error("[GET /api/winner] Error fetching winners:", err);
     res.status(500).json({ success: false, error: "Internal server error" });
   }
 });
-
 
 
 
