@@ -36,29 +36,20 @@ function decrypt(text) {
 // GET /api/winner - Fetch current cycle winner
 router.get("/", async (req, res) => {
   try {
-    console.log(`[GET /api/winner] Attempting to fetch winner for cycle: ${CURRENT_CYCLE}`);
-const winners = await WinnerModel.find().sort({ cycle: -1 });
+    const winners = await WinnerModel.find({}); // all winners from all cycles
+    if (!winners.length) {
+      return res.json({ success: false, message: "No winners yet" });
+    }
 
-if (!winners.length) {
-  return res.json({ success: false, message: "No winners yet" });
-}
+    const decrypted = winners.map(w => ({
+      ...w.toObject(),
+      name: decrypt(w.name),
+      phone: decrypt(w.phone)
+    }));
 
-const decryptedWinners = winners.map(w => ({
-  ...w.toObject(),
-  name: w.name ? decrypt(w.name) : null,
-  phone: w.phone ? decrypt(w.phone) : null
-}));
-
-return res.json({ success: true, winners: decryptedWinners });
-
-
-
-
-
-
-
+    res.json({ success: true, winners: decrypted });
   } catch (err) {
-    console.error("[GET /api/winner] Error fetching winner:", err);
+    console.error("[GET /api/winner] Error fetching winners:", err);
     res.status(500).json({ success: false, error: "Internal server error" });
   }
 });
