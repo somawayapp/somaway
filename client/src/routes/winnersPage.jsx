@@ -1,31 +1,47 @@
 import React, { useEffect, useState } from "react";
-import Navbar from "../components/Navbar";
-import Footer from "../components/Footer";
-import Link from "next/link";
-import { Helmet } from "react-helmet";
+import Navbar from "../components/Navbar"; // Assuming these paths are correct for your project
+import Footer from "../components/Footer"; // Assuming these paths are correct for your project
+import Link from "next/link"; // Assuming you are using Next.js
+import { Helmet } from "react-helmet"; // Assuming you have react-helmet installed
 
 const Winners = () => {
   const [winner, setWinner] = useState(null);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
 
-useEffect(() => {
-  fetch("https://shilingiapi.vercel.app/winner")
-    .then((res) => res.json())
-    .then((data) => {
-      // Check for success and if the 'winners' array exists and has elements
-      if (data.success && data.winners && data.winners.length > 0) {
-        // Sort by winDate to get the latest winner if there are multiple
-        const latestWinner = data.winners.sort((a, b) => new Date(b.winDate) - new Date(a.winDate))[0];
-        setWinner(latestWinner);
-      } else {
-        // If success is false, or 'winners' array is missing/empty
-        setError("No winner has been selected yet. Stay tuned!");
-      }
-    })
-    .catch(() => setError("Failed to fetch winner information. Please try again later."))
-    .finally(() => setLoading(false));
-}, []);
+  useEffect(() => {
+    // Correct API endpoint based on your previous messages
+    fetch("https://shilingiapi.vercel.app/winner")
+      .then((res) => {
+        if (!res.ok) {
+          // Handle HTTP errors (e.g., 404, 500)
+          throw new Error(`HTTP error! status: ${res.status}`);
+        }
+        return res.json();
+      })
+      .then((data) => {
+        // Log the data to the console for debugging
+        console.log("API Response Data:", data);
+
+        // Check if data.success is true AND if data.winners is an array with at least one entry
+        if (data.success && Array.isArray(data.winners) && data.winners.length > 0) {
+          // Sort the winners by winDate in descending order to get the latest one
+          const latestWinner = data.winners.sort((a, b) => new Date(b.winDate) - new Date(a.winDate))[0];
+          setWinner(latestWinner);
+        } else {
+          // If no winners, or the structure isn't as expected
+          setError("No winner has been selected yet. Stay tuned for the next cycle!");
+        }
+      })
+      .catch((err) => {
+        // Catch network errors or errors thrown from .then block
+        console.error("Error fetching winner:", err);
+        setError(`Failed to fetch winner information: ${err.message}. Please try again later.`);
+      })
+      .finally(() => {
+        setLoading(false); // Always stop loading, regardless of success or error
+      });
+  }, []); // Empty dependency array means this effect runs once on mount
 
   return (
     <div>
@@ -41,6 +57,7 @@ useEffect(() => {
         />
       </Helmet>
 
+      {/* Sticky header/navigation */}
       <div
         style={{ zIndex: 100004 }}
         className="md:px-[5%] bg-[var(--bg)] px-4 sticky top-0 justify-between flex py-4 flex-row text-xs"
@@ -59,18 +76,22 @@ useEffect(() => {
       <Navbar />
 
       <div className="text-[var(--softTextColor)] bg-[var(--bg)] space-y-6 max-w-[1100px] mx-auto mt-8 md:mt-[50px] mb-8 md:mb-[40px] px-4 md:px-[80px]">
-        <h1 className="text-3xl font-bold mb-4">🎉 Winner Announcement</h1>
+        <h1 className="text-3xl font-bold mb-4">🎉 Latest Winner Announcement</h1>
 
-        {loading && <p>Loading winner information...</p>}
-        {error && <p className="text-red-500">{error}</p>}
+        {loading && <p className="text-gray-400">Loading winner information...</p>}
 
-        {winner && (
+        {/* Display error message if there's an error and not loading */}
+        {!loading && error && <p className="text-red-500">{error}</p>}
+
+        {/* Display winner information if 'winner' state is populated */}
+        {!loading && !error && winner && (
           <div className="bg-[#141414] border border-gray-700 p-6 rounded-xl shadow-md space-y-4">
             <h2 className="text-xl font-semibold text-green-400">🏆 Cycle {winner.cycle} Winner</h2>
             <div className="space-y-2">
               <p><strong>Name:</strong> {winner.name}</p>
               <p><strong>Phone:</strong> {winner.phone}</p>
-              <p><strong>Amount Sent:</strong> {winner.amount} KES</p>
+              <p><strong>Amount Contributed:</strong> {winner.amount} KES</p>
+              {/* Using optional chaining for properties that might be missing */}
               <p><strong>MPESA Receipt:</strong> {winner.mpesaReceiptNumber || "N/A"}</p>
               <p><strong>Transaction ID:</strong> {winner.transactionId || "N/A"}</p>
               <p><strong>Date Won:</strong> {new Date(winner.winDate).toLocaleString()}</p>
@@ -82,6 +103,7 @@ useEffect(() => {
           </div>
         )}
 
+        {/* How the Winner is Selected section */}
         <div className="mt-10 space-y-4 text-sm text-gray-300">
           <h3 className="text-lg font-semibold text-white">🔍 How the Winner is Selected?</h3>
 
