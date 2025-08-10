@@ -8,20 +8,22 @@ const Winners = () => {
   const [winners, setWinners] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    fetch("https://shilingiapi.vercel.app/winner")
-      .then((res) => res.json())
-      .then((data) => {
-        if (data.success) {
-          if (Array.isArray(data.winners)) {
-            setWinners(data.winners);
-          } else if (data.winner) {
-            setWinners([data.winner]);
-          }
+useEffect(() => {
+  fetch("https://shilingiapi.vercel.app/winner")
+    .then(res => res.json())
+    .then(data => {
+      if (data.success) {
+        if (Array.isArray(data.winners)) {
+          setWinners(data.winners);
+        } else if (data.winner) {
+          setWinners([data.winner]);
         }
-      })
-      .finally(() => setLoading(false));
-  }, []);
+      }
+    })
+    .catch(err => console.error("Failed to fetch winners:", err))
+    .finally(() => setLoading(false));
+}, []);
+
 
   return (
     <div>
