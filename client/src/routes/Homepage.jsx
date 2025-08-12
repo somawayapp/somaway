@@ -81,11 +81,18 @@ const HomePage = () => {
     </Link>
   </div>
 </div>
-  <BettingGroups />
 
   <Navbar />
 
+
 <div className=""> 
+
+
+  <div> 
+     <BettingGroups />
+</div>
+
+
   <div className="flex md:flex-row relative"> 
 
     {/* Sidebar */}

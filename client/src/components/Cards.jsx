@@ -54,6 +54,7 @@ export default function BettingGroups() {
               <p className="text-sm text-gray-300 mb-4">{group.desc}</p>
 
               {groupData.current !== undefined && (
+                <div className="flex flex-row gap-4 ">
                 <div className="mb-4">
                   <p className="text-sm text-gray-400">
                     Stashed: <strong>KES {groupData.current.toLocaleString()} / {groupData.total?.toLocaleString()}</strong>
@@ -61,20 +62,28 @@ export default function BettingGroups() {
                   <p className="text-sm text-gray-400">
                     Est. Time Remaining: <strong>{groupData.estimatedTime || "Calculating..."}</strong>
                   </p>
-                  <div className="mt-3">
+                </div>
+             
+
+                <div>
+                       <div className="mt-3">
                     <ReactSpeedometer
                       value={groupData.percentage || 0}
                       maxValue={100}
                       needleColor="gold"
-                      startColor="red"
-                      endColor="green"
-                      height={140}
-                      width={220}
+                      startColor="purple"
+                      endColor="gray"
+                      height={70}
+                      width={110}
                       segments={10}
                       currentValueText={`${groupData.percentage || 0}% to full`}
                     />
                   </div>
                 </div>
+
+
+                </div>
+
               )}
 
               <a
