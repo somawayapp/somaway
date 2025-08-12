@@ -7,12 +7,12 @@ import dynamic from "next/dynamic";
 const ReactSpeedometer = dynamic(() => import("react-d3-speedometer"), { ssr: false });
 
 const groups = [
-  { name: "msh", title: "Win KSH 10 ", img: "/shilingibanner.png", desc: "Stash small, win big!" },
-  { name: "msh", title: "Win KSH 100 ", img: "/shilingibanner.png", desc: "Bigger stash, better reward!" },
-  { name: "msh", title: "Win KSH 1,000 ", img: "/shilingibanner.png", desc: "Go for a grand!" },
-  { name: "msh", title: "Win KSH 10,000 ", img: "/shilingibanner.png", desc: "A big leap to 10k!" },
-  { name: "msh", title: "Win KSH 100,000 ", img: "/shilingibanner.png", desc: "High stakes, high rewards!" },
-  { name: "msh", title: "Win KSH 1 Million ", img: "/shilingibanner.png", desc: "The ultimate jackpot!" },
+  { name: "ten", title: "Win KSH 10 ", img: "/shilingibanner.png", desc: "Stash small, win big!" },
+  { name: "hundred", title: "Win KSH 100 ", img: "/shilingibanner.png", desc: "Bigger stash, better reward!" },
+  { name: "thousand", title: "Win KSH 1,000 ", img: "/shilingibanner.png", desc: "Go for a grand!" },
+  { name: "tenthousand", title: "Win KSH 10,000 ", img: "/shilingibanner.png", desc: "A big leap to 10k!" },
+  { name: "hundredthousand", title: "Win KSH 100,000 ", img: "/shilingibanner.png", desc: "High stakes, high rewards!" },
+  { name: "million", title: "Win KSH 1 Million ", img: "/shilingibanner.png", desc: "The ultimate jackpot!" },
 ];
 
 export default function BettingGroups() {
@@ -69,7 +69,7 @@ export default function BettingGroups() {
   useEffect(() => {
     groups.forEach(async (group) => {
       try {
-        const res = await fetch(`https://shilingiapi.vercel.app/summary`);
+        const res = await fetch(`https://shilingiapi.vercel.app/summary/${group.name}`);
         const json = await res.json();
         setData(prev => ({ ...prev, [group.name]: json }));
       } catch (error) {
