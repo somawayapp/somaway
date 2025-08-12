@@ -99,7 +99,7 @@ export default function BettingGroups() {
     <img
               src={group.img}
               alt={group.title}
-              className="w-19 h-19 rounded-xl object-cover object-center"
+              className="w-20 h-20 rounded-xl object-cover object-center"
             />
     <h2 className="text-lg font-bold">{group.title}</h2>
 
