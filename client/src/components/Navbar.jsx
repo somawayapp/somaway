@@ -60,7 +60,7 @@
   
           return(
           <div  style={{ zIndex: 100015, }}
-             className="flex justify-between  flex-col relative w-full  gap-3 py-2 md:py-3  md:gap-6 flex sticky top-[48px]  text-[var(--TextColor)] bg-[#65026e] md:border-b  border-b-[var(--softBg4)] " >
+             className="flex justify-between  flex-col relative w-full  gap-3 py-2 md:py-3  md:gap-6 flex sticky top-[48px]  text-[var(--TextColor)] bg-[#65026e]  " >
       
       
             <div className="relative w-full   gap-2 md:gap-6 flex flex-row items-center  text-[var(--TextColor)]  justify-between  px-4 md:px-[5%] "           >
@@ -214,7 +214,7 @@
   
            </div>
 
-      <div className="grid grid-cols-3 md:hidden mb-none px-6 text-sm font-semibold">
+      <div className="grid grid-cols-3 md:hidden mb-2 px-6 text-sm font-semibold">
       <p className="text-left text-[#f36dff] hover:text-[#f36dff] transition cursor-pointer">1 shiling</p>
       <p className="text-center text-[#f2f2f2] hover:text-[#f36dff] transition cursor-pointer">To Win</p>
       <p className="text-right text-[#f2f2f2] hover:text-[#f36dff] transition cursor-pointer">1 Million</p>
