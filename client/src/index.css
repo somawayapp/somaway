@@ -9,7 +9,7 @@
 @tailwind utilities;
 
 :root {
-  --bg: #1a1a1a;
+  --bg: #cc0e0e;
   --textColor: white;
   --softBg: #f0f0f0;
  --color-scheme: dark;
@@ -20,7 +20,6 @@
   --bg-image-dark:  url('/client/public/add2.gif');
 
   
-  --bg: #1a1a1a;
   --textColor: #dfecf5;
   --TextColor: #dfecf5;
 
