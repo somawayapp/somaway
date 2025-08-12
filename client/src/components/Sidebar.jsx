@@ -2,21 +2,12 @@ import React from "react";
 
 const Sidebar = () => {
   const sections = [
-    {
-      title: "",
-      items: [
-        { name: "Winners", icon: "🏅", href: "/winners" },
-      ],
-    },
+   
         {
-      title: "Groups",
+      title: "      Winners",
       items: [
-        { name: "Win Ksh 10", icon: "🏠", href: "/" },
-        { name: "Win Ksh 100", icon: "ℹ️", href: "/about" },
-        { name: "Win Ksh 1000", icon: "📝", href: "/help" },
-        { name: "Win Ksh 10 000", icon: "🆘", href: "/help" },
-        { name: "Win Ksh 100 000", icon: "🆘", href: "/help" },
-        { name: "Win Ksh 1 Million", icon: "🆘", href: "/help" },
+        { name: "Latest", icon: "🏠", href: "/" },
+        { name: "Winners", icon: "🏅", href: "/winners" },
 
       ],
     },
