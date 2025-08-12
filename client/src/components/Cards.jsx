@@ -9,10 +9,10 @@ const ReactSpeedometer = dynamic(() => import("react-d3-speedometer"), { ssr: fa
 const groups = [
   { name: "g1", title: "Win KSH 10 ", img: "/shilingibanner.png", desc: "Stash small, win big!" },
   { name: "g2", title: "Win KSH 100 ", img: "/shilingibanner.png", desc: "Bigger stash, better reward!" },
-  { name: "g2", title: "Win KSH 1,000 ", img: "/shilingibanner.png", desc: "Go for a grand!" },
-  { name: "g3", title: "Win KSH 10,000 ", img: "/shilingibanner.png", desc: "A big leap to 10k!" },
-  { name: "g4", title: "Win KSH 100,000 ", img: "/shilingibanner.png", desc: "High stakes, high rewards!" },
-  { name: "g5", title: "Win KSH 1 Million ", img: "/shilingibanner.png", desc: "The ultimate jackpot!" },
+  { name: "g3", title: "Win KSH 1,000 ", img: "/shilingibanner.png", desc: "Go for a grand!" },
+  { name: "g4", title: "Win KSH 10,000 ", img: "/shilingibanner.png", desc: "A big leap to 10k!" },
+  { name: "g5", title: "Win KSH 100,000 ", img: "/shilingibanner.png", desc: "High stakes, high rewards!" },
+  { name: "g6", title: "Win KSH 1 Million ", img: "/shilingibanner.png", desc: "The ultimate jackpot!" },
 ];
 
 export default function BettingGroups() {
