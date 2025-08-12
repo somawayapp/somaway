@@ -91,15 +91,16 @@ export default function BettingGroups() {
             transition={{ duration: 0.4, delay: i * 0.1 }}
             className="bg-gradient-to-br from-[#111] to-[#1a1a1a] border border-[#1b1f1c] rounded-2xl shadow-lg overflow-hidden text-white flex flex-col"
           >
-            <img
-              src={group.img}
-              alt={group.title}
-              className="w-full h-48 object-cover object-center"
-            />
+           
 
           <div className="p-5 flex flex-col flex-grow gap-4">
   {/* Title + Progress Bar Row */}
   <div className="flex items-center justify-between">
+    <img
+              src={group.img}
+              alt={group.title}
+              className="w-full h-28 object-cover object-center"
+            />
     <h2 className="text-lg font-bold">{group.title}</h2>
 
      <HalfCircleProgress percentage={groupData.percentage || 20} />
