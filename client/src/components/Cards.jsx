@@ -49,48 +49,55 @@ export default function BettingGroups() {
               className="w-full h-48 object-cover object-center"
             />
 
-          <div className="p-5 flex flex-row flex-grow">
-  <div className="flex flex-col gap-4 w-full">
-    <h2 className="text-lg font-bold mb-2">{group.title}</h2>
-    <p className="text-sm text-gray-300 mb-4">{group.desc}</p>
+          <div className="p-5 flex flex-col flex-grow gap-4">
+  {/* Title + Progress Bar Row */}
+  <div className="flex items-center justify-between">
+    <h2 className="text-lg font-bold">{group.title}</h2>
 
     {groupData.current !== undefined && (
-      <div className="mb-4 flex items-center justify-between">
-        {/* Left Side: Text */}
-        <div>
-          <p className="text-sm text-gray-400">
-            Stashed:{" "}
-            <strong>
-              KES {groupData.current.toLocaleString()} / {groupData.total?.toLocaleString()}
-            </strong>
-          </p>
-          <p className="text-sm text-gray-400">
-            Est. Time Remaining: <strong>{groupData.estimatedTime || "Calculating..."}</strong>
-          </p>
+      <div className="flex flex-col items-center">
+        {/* Progress Bar */}
+        <div className="relative w-[110px] h-[20px] bg-gray-600 rounded-full overflow-hidden">
+          <div
+            className="h-full bg-purple-600"
+            style={{ width: `${groupData.percentage || 0}%` }}
+          ></div>
         </div>
-
-        {/* Right Side: Progress Bar */}
-        <div className="flex flex-col items-center ml-4">
-          <div className="relative w-[110px] h-[20px] bg-gray-600 rounded-full overflow-hidden">
-            <div
-              className="h-full bg-purple-600"
-              style={{ width: `${groupData.percentage || 0}%` }}
-            ></div>
-          </div>
-          <div className="mt-1 text-white font-bold text-sm">
-            {groupData.percentage || 0}%
-          </div>
+        {/* Percentage */}
+        <div className="text-white font-bold text-sm mt-1">
+          {groupData.percentage || 0}%
         </div>
       </div>
     )}
-
-    <a
-      href={`/group/${group.name}`}
-      className="mt-auto bg-[#020201] py-3 text-[#EBD402] rounded-xl font-semibold w-full text-center hover:bg-[#0e0e06] hover:scale-102 transition-transform duration-200"
-    >
-      Join Now
-    </a>
   </div>
+
+  {/* Description */}
+  <p className="text-sm text-gray-300">{group.desc}</p>
+
+  {/* Stash Info */}
+  {groupData.current !== undefined && (
+    <div>
+      <p className="text-sm text-gray-400">
+        Stashed:{" "}
+        <strong>
+          KES {groupData.current.toLocaleString()} /{" "}
+          {groupData.total?.toLocaleString()}
+        </strong>
+      </p>
+      <p className="text-sm text-gray-400">
+        Est. Time Remaining:{" "}
+        <strong>{groupData.estimatedTime || "Calculating..."}</strong>
+      </p>
+    </div>
+  )}
+
+  {/* Join Button */}
+  <a
+    href={`/group/${group.name}`}
+    className="mt-auto bg-[#020201] py-3 text-[#EBD402] rounded-xl font-semibold w-full text-center hover:bg-[#0e0e06] hover:scale-102 transition-transform duration-200"
+  >
+    Join Now
+  </a>
 </div>
 
           </motion.div>
