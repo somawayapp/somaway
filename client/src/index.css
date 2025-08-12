@@ -9,7 +9,7 @@
 @tailwind utilities;
 
 :root {
-  --bg: #cc0e0e;
+  --bg: #0f0f0f;
   --textColor: white;
   --softBg: #f0f0f0;
  --color-scheme: dark;
