@@ -7,11 +7,11 @@ import dynamic from "next/dynamic";
 const ReactSpeedometer = dynamic(() => import("react-d3-speedometer"), { ssr: false });
 
 const groups = [
-  { name: "1osh", title: "Win 10 Shillings", img: "/images/1osh.png", desc: "Stash small, win big!" },
-  { name: "1oosh", title: "Win 100 Shillings", img: "/images/1oosh.png", desc: "Bigger stash, better reward!" },
-  { name: "1ksh", title: "Win 1,000 Shillings", img: "/images/1ksh.png", desc: "Go for a grand!" },
-  { name: "1oksh", title: "Win 10,000 Shillings", img: "/images/1oksh.png", desc: "A big leap to 10k!" },
-  { name: "1ooksh", title: "Win 100,000 Shillings", img: "/images/1ooksh.png", desc: "High stakes, high rewards!" },
+  { name: "msh", title: "Win 10 Shillings", img: "/shilingibanner.png", desc: "Stash small, win big!" },
+  { name: "msh", title: "Win 100 Shillings", img: "/shilingibanner.png", desc: "Bigger stash, better reward!" },
+  { name: "msh", title: "Win 1,000 Shillings", img: "/shilingibanner.png", desc: "Go for a grand!" },
+  { name: "msh", title: "Win 10,000 Shillings", img: "/shilingibanner.png", desc: "A big leap to 10k!" },
+  { name: "msh", title: "Win 100,000 Shillings", img: "/shilingibanner.png", desc: "High stakes, high rewards!" },
   { name: "msh", title: "Win 1 Million Shillings", img: "/shilingibanner.png", desc: "The ultimate jackpot!" },
 ];
 
@@ -21,7 +21,7 @@ export default function BettingGroups() {
   useEffect(() => {
     groups.forEach(async (group) => {
       try {
-        const res = await fetch(`https://shilingiapi.vercel.app/summary/${group.name}`);
+        const res = await fetch(`https://shilingiapi.vercel.app/summary`);
         const json = await res.json();
         setData(prev => ({ ...prev, [group.name]: json }));
       } catch (error) {
