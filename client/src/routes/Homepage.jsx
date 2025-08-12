@@ -104,6 +104,7 @@ const HomePage = () => {
 
     {/* Card List */}
     <div className="flex-1 md:px-8">
+      <div className="md:pl-[5%]"></div>
      <BettingGroups />
       <HowToJoin />
       <div className="md:hidden">
