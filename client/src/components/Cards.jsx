@@ -49,8 +49,8 @@ export default function BettingGroups() {
               className="w-full h-48 object-cover object-center"
             />
 
-            <div className="p-5 flex flex-col flex-grow">
-                                <div className="flex flex-row gap-4 ">
+            <div className="p-5 flex flex-row flex-grow">
+             <div className="flex flex-col gap-4 ">
 
               <h2 className="text-lg font-bold mb-2">{group.title}</h2>
               <p className="text-sm text-gray-300 mb-4">{group.desc}</p>
@@ -72,7 +72,6 @@ export default function BettingGroups() {
 
                {groupData.current !== undefined && (
                 <div>
-                <div>
                        <div className="mt-3">
                     <ReactSpeedometer
                       value={groupData.percentage || 0}
@@ -85,7 +84,6 @@ export default function BettingGroups() {
                       segments={5}
                       currentValueText={`${groupData.percentage || 0}% to full`}
                     />
-                  </div>
                 </div>
 
 
