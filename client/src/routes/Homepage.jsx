@@ -11,6 +11,7 @@ import Sidebar from "../components/Sidebar";
 import Sidebar2 from "../components/Sidebar2";
 import HowToJoin from "../components/Howtojoin";
 import Spinner from "../components/Spinner";
+import BettingGroups from "../components/Cards";
 const HomePage = () => {
 
   useEffect(() => {
@@ -80,7 +81,7 @@ const HomePage = () => {
     </Link>
   </div>
 </div>
-
+  <BettingGroups />
 
   <Navbar />
 
