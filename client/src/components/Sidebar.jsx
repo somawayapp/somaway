@@ -28,7 +28,7 @@ const Sidebar = () => {
   ];
 
   return (
-    <div className="px-[23%]">
+    <div className="pl-[23%] pr-[12%]">
       {/* Fixed Sidebar */}
       <div className="hidden md:flex flex-col py-5 overflow-y-scroll whitespace-nowrap min-w-fit">
         {sections.map((section, idx) => (
