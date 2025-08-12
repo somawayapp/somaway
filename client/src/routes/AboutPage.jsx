@@ -148,7 +148,7 @@ className="w-8 h-8 mb-6 mx-auto md:mx-0 md:ml-0"
   ].map((item, index) => (
     <div
       key={index}
-      className="bg-[var(--bd)] shadow-2xl rounded-2xl md:rounded-[20px] p-4 md:px-8 flex flex-col items-start text-left relative"
+      className="bg-[var(--bd)] shadow-2xl rounded-2xl md:rounded-[20px] p-4 md:px-12 flex flex-col items-start text-left relative"
     >
       {/* Icon */}
       <img
@@ -156,7 +156,7 @@ className="w-8 h-8 mb-6 mx-auto md:mx-0 md:ml-0"
         className="absolute top-4 left-4 w-12 h-18 md:w-20 md;h-30"
       />
       {/* Text */}
-      <p className="text-lg md:text-2xl font-bold text-[var(--textColor)] mt-[70px] md:mt-[100px] ">
+      <p className="text-md md:text-xl font-bold text-[var(--textColor)] mt-[70px] md:mt-[100px] ">
         {item.text}
       </p>
     </div>

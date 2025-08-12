@@ -4,10 +4,10 @@ const Sidebar = () => {
   const sections = [
    
         {
-      title: "      Winners",
+      title: " Pinned",
       items: [
         { name: "Winners", icon: "🏅", href: "/winners" },
-        { name: "Announcements", icon: "🏠", href: "/" },
+        { name: "Winner selection", icon: "🏠", href: "/winners" },
 
 
       ],
@@ -17,7 +17,7 @@ const Sidebar = () => {
       items: [
         { name: "Home", icon: "🏠", href: "/" },
         { name: "About", icon: "ℹ️", href: "/about" },
-         { name: "Blog", icon: "🆘", href: "/help" },
+         { name: "Founder", icon: "🆘", href: "/about" },
         { name: "How to join", icon: "📝", href: "/help" },
         { name: "Help Center", icon: "🆘", href: "/help" },
       ],
