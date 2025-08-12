@@ -50,11 +50,12 @@ export default function BettingGroups() {
             />
 
             <div className="p-5 flex flex-col flex-grow">
+                                <div className="flex flex-row gap-4 ">
+
               <h2 className="text-lg font-bold mb-2">{group.title}</h2>
               <p className="text-sm text-gray-300 mb-4">{group.desc}</p>
 
               {groupData.current !== undefined && (
-                <div className="flex flex-row gap-4 ">
                 <div className="mb-4">
                   <p className="text-sm text-gray-400">
                     Stashed: <strong>KES {groupData.current.toLocaleString()} / {groupData.total?.toLocaleString()}</strong>
@@ -63,8 +64,14 @@ export default function BettingGroups() {
                     Est. Time Remaining: <strong>{groupData.estimatedTime || "Calculating..."}</strong>
                   </p>
                 </div>
-             
+                       
+                )}          
+               </div>
 
+
+
+               {groupData.current !== undefined && (
+                <div>
                 <div>
                        <div className="mt-3">
                     <ReactSpeedometer
@@ -75,7 +82,7 @@ export default function BettingGroups() {
                       endColor="gray"
                       height={70}
                       width={110}
-                      segments={10}
+                      segments={5}
                       currentValueText={`${groupData.percentage || 0}% to full`}
                     />
                   </div>

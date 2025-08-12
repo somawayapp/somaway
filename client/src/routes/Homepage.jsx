@@ -88,10 +88,6 @@ const HomePage = () => {
 <div className=""> 
 
 
-  <div> 
-     <BettingGroups />
-</div>
-
 
   <div className="flex md:flex-row relative"> 
 
@@ -108,7 +104,7 @@ const HomePage = () => {
 
     {/* Card List */}
     <div className="flex-1 md:px-8">
-      <BettingChances />
+     <BettingGroups />
       <HowToJoin />
       <div className="md:hidden">
         <Sidebar2 />
@@ -116,10 +112,7 @@ const HomePage = () => {
       <Footer />
     </div>
 
-    {/* Right Sidebar */}
-    <div className="w-full hidden md:sticky md:top-[110px] md:block md:w-[23%] h-[calc(100vh-130px)] overflow-y-auto border-l-2 border-[#1b1f1c]">
-      <Sidebar2 />
-    </div>
+  
   </div>
 </div>
 
