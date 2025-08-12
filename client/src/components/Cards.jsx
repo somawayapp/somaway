@@ -89,7 +89,7 @@ export default function BettingGroups() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.4, delay: i * 0.1 }}
-            className="bg-gradient-to-br from-[#111] to-[#1a1a1a] border border-[#1b1f1c] rounded-2xl shadow-lg overflow-hidden text-white flex flex-col"
+            className="bg-gradient-to-br from-[#070707ff] to-[#111] border border-[#1b1f1c] rounded-2xl shadow-lg overflow-hidden text-white flex flex-col"
           >
            
 
@@ -99,7 +99,7 @@ export default function BettingGroups() {
     <img
               src={group.img}
               alt={group.title}
-              className="w-full h-28 object-cover object-center"
+              className="w-28 h-28 rounded-xl object-cover object-center"
             />
     <h2 className="text-lg font-bold">{group.title}</h2>
 
