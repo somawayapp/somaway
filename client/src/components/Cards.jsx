@@ -103,7 +103,7 @@ export default function BettingGroups() {
             />
     <h2 className="text-lg font-bold">{group.title}</h2>
 
-     <HalfCircleProgress percentage={groupData.percentage || 20} />
+     <HalfCircleProgress percentage={group.percentage || 20} />
 
   </div>
 
