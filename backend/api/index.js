@@ -58,7 +58,7 @@ app.use(
 // API Routes
 
 app.use('/mpesa', mpesaRouter);
-app.use('/summary/g1', summaryRouter);
+app.use('/summary/g', summaryRouter);
 app.use('/summary/g2', summaryRouter);
 app.use('/summary/g3', summaryRouter);
 app.use('/summary/g4', summaryRouter);
