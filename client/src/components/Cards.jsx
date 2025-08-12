@@ -17,6 +17,54 @@ const groups = [
 
 export default function BettingGroups() {
   const [data, setData] = useState({});
+  const HalfCircleProgress = ({ percentage }) => {
+  const radius = 40; // radius of the arc
+  const strokeWidth = 8; // thickness of the arc
+  const circumference = Math.PI * radius; // half circle circumference
+  const offset = circumference - (percentage / 100) * circumference;
+
+  return (
+    <svg
+      width="100"
+      height="60"
+      viewBox="0 0 100 60"
+      className="overflow-visible"
+    >
+      {/* Background arc */}
+      <path
+        d="M 10 50 A 40 40 0 0 1 90 50"
+        fill="transparent"
+        stroke="#6B7280" // gray background
+        strokeWidth={strokeWidth}
+        strokeLinecap="round"
+      />
+
+      {/* Progress arc */}
+      <path
+        d="M 10 50 A 40 40 0 0 1 90 50"
+        fill="transparent"
+        stroke="#9333EA" // purple fill
+        strokeWidth={strokeWidth}
+        strokeLinecap="round"
+        strokeDasharray={circumference}
+        strokeDashoffset={offset}
+      />
+
+      {/* Percentage text */}
+      <text
+        x="50"
+        y="45"
+        textAnchor="middle"
+        fontSize="14"
+        fontWeight="bold"
+        fill="white"
+      >
+        {percentage}%
+      </text>
+    </svg>
+  );
+};
+
 
   useEffect(() => {
     groups.forEach(async (group) => {
@@ -54,21 +102,8 @@ export default function BettingGroups() {
   <div className="flex items-center justify-between">
     <h2 className="text-lg font-bold">{group.title}</h2>
 
-    {groupData.current !== undefined && (
-      <div className="flex flex-col items-center">
-        {/* Progress Bar */}
-        <div className="relative w-[110px] h-[20px] bg-gray-600 rounded-full overflow-hidden">
-          <div
-            className="h-full bg-purple-600"
-            style={{ width: `${groupData.percentage || 0}%` }}
-          ></div>
-        </div>
-        {/* Percentage */}
-        <div className="text-white font-bold text-sm mt-1">
-          {groupData.percentage || 0}%
-        </div>
-      </div>
-    )}
+     <HalfCircleProgress percentage={groupData.percentage || 0} />
+
   </div>
 
   {/* Description */}
