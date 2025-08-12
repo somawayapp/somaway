@@ -93,12 +93,12 @@ One day i walked out of the supermarket with three shillings in my hand. I remem
 I tossed the coins in the air on my way home, and three of them slipped away. When I finally got home, the last shilling
  fell at the corner of the bathroom.
 <br /> <br />
-Everyday i saw it, i would wonder if that one shiling could find
+Everyday that i saw it, i would wonder if that one shiling could find
 its value again.  I would imagine this idea of a dustbin placed outside the supermarket, where everyone would dump there one
  shilling coins and once it summed up to a good amount, 
 a random lucky shopper would be awarded with it. But even though i dont own a supermarket, this idea stuck with me.
 <br /> <br />
-So, I decided to build something. A online platform where anyone – can toss in their extra shillings. 
+So, I decided to build something. An online platform where anyone – can toss in their extra shillings. 
 A community led initiative, where every single shilling gets a chance to matter again.
 
 After several months of building, we have Shilingi – bringing back the true worth of your shilling.
@@ -114,7 +114,7 @@ className="w-8 h-8 mb-6 mx-auto md:mx-0 md:ml-0"
 
 {/* Adjust vertical alignment with self-start or self-end */}
 <div className=" self-end ">
-<img src="/ceo.png" className=" h-[500px] top-0 mr-0 md:mr-[42px] mt-0 md:mt-[80px] object-cover" />
+<img src="/ceo.png" className=" h-[500px] top-0 mr-0 md:mr-[42px] mt-0 md:mt-[85px] object-cover" />
 </div>
 </div>
 
@@ -148,12 +148,12 @@ className="w-8 h-8 mb-6 mx-auto md:mx-0 md:ml-0"
   ].map((item, index) => (
     <div
       key={index}
-      className="bg-[var(--bd)] shadow-2xl rounded-2xl md:rounded-[20px] p-4 md:px-12 flex flex-col items-start text-left relative"
+      className="bg-[var(--bd)] shadow-2xl rounded-2xl md:rounded-[20px] p-4 md:p-12 flex flex-col items-start text-left relative"
     >
       {/* Icon */}
       <img
         src={item.icon}
-        className="absolute top-4 left-4 w-12 h-18 md:w-20 md;h-30"
+        className="absolute w-12 h-18 md:w-20 md;h-30"
       />
       {/* Text */}
       <p className="text-md md:text-xl font-bold text-[var(--textColor)] mt-[70px] md:mt-[100px] ">
