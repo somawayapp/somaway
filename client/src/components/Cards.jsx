@@ -7,12 +7,12 @@ import dynamic from "next/dynamic";
 const ReactSpeedometer = dynamic(() => import("react-d3-speedometer"), { ssr: false });
 
 const groups = [
-  { name: "msh", title: "Win 10 Shillings", img: "/shilingibanner.png", desc: "Stash small, win big!" },
-  { name: "msh", title: "Win 100 Shillings", img: "/shilingibanner.png", desc: "Bigger stash, better reward!" },
-  { name: "msh", title: "Win 1,000 Shillings", img: "/shilingibanner.png", desc: "Go for a grand!" },
-  { name: "msh", title: "Win 10,000 Shillings", img: "/shilingibanner.png", desc: "A big leap to 10k!" },
-  { name: "msh", title: "Win 100,000 Shillings", img: "/shilingibanner.png", desc: "High stakes, high rewards!" },
-  { name: "msh", title: "Win 1 Million Shillings", img: "/shilingibanner.png", desc: "The ultimate jackpot!" },
+  { name: "msh", title: "Win KSH 10 ", img: "/shilingibanner.png", desc: "Stash small, win big!" },
+  { name: "msh", title: "Win KSH 100 ", img: "/shilingibanner.png", desc: "Bigger stash, better reward!" },
+  { name: "msh", title: "Win KSH 1,000 ", img: "/shilingibanner.png", desc: "Go for a grand!" },
+  { name: "msh", title: "Win KSH 10,000 ", img: "/shilingibanner.png", desc: "A big leap to 10k!" },
+  { name: "msh", title: "Win KSH 100,000 ", img: "/shilingibanner.png", desc: "High stakes, high rewards!" },
+  { name: "msh", title: "Win KSH 1 Million ", img: "/shilingibanner.png", desc: "The ultimate jackpot!" },
 ];
 
 export default function BettingGroups() {
