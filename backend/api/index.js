@@ -5,7 +5,7 @@ import cors from 'cors';
 import 'dotenv/config';
 import moment from 'moment-timezone'; // Import moment-timezone
 import summaryRouter from '../routes/summary.route.js';
-import G2mpesaRouter from '../routes/Mpesa/G2mpesa.route.js';
+import G1mpesaRouter from '../routes/Mpesa/G1mpesa.route.js';
 
 import searchRouter from '../routes/search.route.js';
 import winnerRouter from '../routes/winner.route.js'; // NEW IMPORT
@@ -58,7 +58,7 @@ app.use(
 
 // API Routes
 
-app.use('/mpesa/g2', G2mpesaRouter);
+app.use('/mpesa/g2', G1mpesaRouter);
 app.use('/summary/g1', summaryRouter);
 app.use('/summary/g2', summaryRouter);
 app.use('/summary/g3', summaryRouter);

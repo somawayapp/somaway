@@ -93,7 +93,7 @@ let lastUpdated = 0;
 const CACHE_TTL = 60 * 1000; // 1 minute in milliseconds
 
 async function fetchSummaryData() {
-  const totalGoalAmount = 1_000_000; // Define your overall monetary goal here
+  const totalGoalAmount = 10; // Define your overall monetary goal here
 
   // 1. Total amount collected so far (ONLY for "Completed" transactions)
   const aggregation = await G1entryModel.aggregate([
