@@ -1,7 +1,7 @@
 import express from "express";
 import crypto from "crypto";
-import WinnerModel from "../models/Winner.model.js";
 import G1entryModel from "../models/Entries/G1entry.model.js";
+import G1winnerModel from "../models/Winers/G1winner.model.js";
 
 const router = express.Router();
 
@@ -36,7 +36,7 @@ function decrypt(text) {
 // GET /api/winner - Fetch current cycle winner
 router.get("/", async (req, res) => {
   try {
-    const winners = await WinnerModel.find({}); // all winners from all cycles
+    const winners = await G1winnerModel.find({}); // all winners from all cycles
     if (!winners.length) {
       return res.json({ success: false, message: "No winners yet" });
     }
@@ -85,7 +85,7 @@ router.post("/", async (req, res) => {
 
 
     // 2. Check if winner already selected
-    const existingWinner = await WinnerModel.findOne({ cycle: CURRENT_CYCLE });
+    const existingWinner = await G1winnerModel.findOne({ cycle: CURRENT_CYCLE });
     if (existingWinner) {
       console.log(`[POST /api/winner] Winner already selected`);
       return res.json({ success: false, message: "Winner already selected" });
@@ -109,7 +109,7 @@ router.post("/", async (req, res) => {
     console.log(`[POST /api/winner] Selected winner at index ${winnerIndex}:`, winnerEntry);
 
     // 5. Save winner with encrypted phone and name
-    const savedWinner = await WinnerModel.create({
+    const savedWinner = await G1winnerModel.create({
       entryId: winnerEntry._id,
       name: winnerEntry.name,
       phone: winnerEntry.phone,
