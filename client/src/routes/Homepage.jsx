@@ -104,7 +104,7 @@ const HomePage = () => {
 
     {/* Card List */}
     <div className="flex-1 md:px-8">
-      <div className="md:pr-[5%]">
+      <div className="md:pr-[4%]">
 
      <BettingGroups />
           <BettingChances />
