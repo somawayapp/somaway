@@ -1,7 +1,7 @@
 import express from "express";
 import crypto from "crypto";
 import G1entryModel from "../models/Entries/G1entry.model.js";
-import G1winnerModel from "../models/Winers/G1winner.model.js";
+import G1winnerModel from "../models/Winners/G1winner.model.js";
 
 const router = express.Router();
 
