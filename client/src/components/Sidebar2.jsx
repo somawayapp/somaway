@@ -18,7 +18,7 @@ const Sidebar2 = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await fetch("https://shilingiapi.vercel.app/summary");
+        const res = await fetch("https://shilingiapi.vercel.app/summary/g1");
         const data = await res.json();
         setSummary(data);
       } catch (err) {
