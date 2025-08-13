@@ -107,6 +107,8 @@ const HomePage = () => {
       <div className="md:pr-[5%]">
 
      <BettingGroups />
+          <BettingChances />
+
       <HowToJoin />
     
       <div className="md:hidden">
