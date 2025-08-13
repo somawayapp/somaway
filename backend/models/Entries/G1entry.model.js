@@ -77,6 +77,6 @@ const EntrySchema = new mongoose.Schema(
 EntrySchema.index({ phoneNumberHash: 1, cycle: 1 }, { unique: true });
 
 
-const EntryModel = mongoose.model("Entry", EntrySchema);
+const EntryModel = mongoose.model("Entry1", EntrySchema);
 
 export default EntryModel;

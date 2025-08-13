@@ -70,6 +70,6 @@ const WinnerSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-const WinnerModel = mongoose.model("Winner", WinnerSchema);
+const WinnerModel = mongoose.model("Winner1", WinnerSchema);
 
 export default WinnerModel;
