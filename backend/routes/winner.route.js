@@ -1,7 +1,7 @@
 import express from "express";
 import crypto from "crypto";
-import EntryModel from "../models/Entry.model.js";
 import WinnerModel from "../models/Winner.model.js";
+import G1entryModel from "../models/Entries/G1entry.model.js";
 
 const router = express.Router();
 
@@ -67,7 +67,7 @@ router.post("/", async (req, res) => {
  
 
     // 1. Fetch all completed entries
-    const entries = await EntryModel.find({ status: "Completed", cycle: CURRENT_CYCLE });
+    const entries = await G1entryModel.find({ status: "Completed", cycle: CURRENT_CYCLE });
     console.log(`[POST /api/winner] Found ${entries.length} completed entries.`);
 
     const totalAmount = entries.reduce((sum, entry) => sum + entry.amount, 0);

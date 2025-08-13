@@ -1,4 +1,3 @@
-// models/Winner.model.js
 import mongoose from "mongoose";
 
 const WinnerSchema = new mongoose.Schema(
@@ -16,6 +15,18 @@ const WinnerSchema = new mongoose.Schema(
     phone: {
       type: String, // Storing the encrypted phone number
       required: true,
+    },
+        groupId: {
+      type: String,
+      required: true,
+       default: "g2" // This will auto-assign "g1" unless overridden
+
+    },
+        total: {
+       type: Number,
+       required: true,
+       default: "100" // This will auto-assign "g1" unless overridden
+
     },
     phoneNumberHash: {
       type: String,

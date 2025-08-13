@@ -1,4 +1,3 @@
-// models/Entry.model.js
 import mongoose from "mongoose";
 
 const EntrySchema = new mongoose.Schema(
@@ -10,6 +9,18 @@ const EntrySchema = new mongoose.Schema(
     phone: {
       type: String, // Storing the encrypted phone number
       required: true,
+    },
+    groupId: {
+      type: String,
+      required: true,
+       default: "g4" // This will auto-assign "g1" unless overridden
+
+    },
+        total: {
+       type: Number,
+       required: true,
+       default: "10000" // This will auto-assign "g1" unless overridden
+
     },
     // ADD THIS NEW FIELD
     phoneNumberHash: {

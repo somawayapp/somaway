@@ -129,7 +129,7 @@ export default function BettingGroups() {
 
   {/* Join Button */}
   <a
-    href={`/group/${group.name}`}
+    href={`/${group.name}`}
     className="mt-auto bg-[#020201] py-3 text-[#EBD402] rounded-xl font-semibold w-full text-center hover:bg-[#0e0e06] hover:scale-102 transition-transform duration-200"
   >
     Join Now

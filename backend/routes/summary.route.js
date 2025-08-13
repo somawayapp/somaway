@@ -1,5 +1,6 @@
 import express from "express";
-import EntryModel from "../models/Entry.model.js"; // Import the Entry model
+import G1entryModel from "../models/Entries/G1entry.model.js";
+
 import moment from "moment";
 import crypto from "crypto"; // <<< ADD THIS IMPORT for decrypt/encrypt (if used here)
 import dotenv from "dotenv";
@@ -92,10 +93,10 @@ let lastUpdated = 0;
 const CACHE_TTL = 60 * 1000; // 1 minute in milliseconds
 
 async function fetchSummaryData() {
-  const totalGoalAmount = 10; // Define your overall monetary goal here
+  const totalGoalAmount = 1_000_000; // Define your overall monetary goal here
 
   // 1. Total amount collected so far (ONLY for "Completed" transactions)
-  const aggregation = await EntryModel.aggregate([
+  const aggregation = await G1entryModel.aggregate([
     { $match: { status: "Completed" } }, // <<< Filter only completed
     { $group: { _id: null, totalAmount: { $sum: "$amount" } } }
   ]);
@@ -103,7 +104,7 @@ async function fetchSummaryData() {
 
   // 2. Get all "Completed" entries from the last 24 hours sorted by time ascending
   const since = moment().subtract(24, "hours").toDate();
-  const paymentsLast24Hours = await EntryModel.find(
+  const paymentsLast24Hours = await G1entryModel.find(
     { status: "Completed", createdAt: { $gte: since } }, // <<< Filter only completed
     { amount: 1, createdAt: 1 }
   ).sort({ createdAt: 1 }).lean();
@@ -148,7 +149,7 @@ async function fetchSummaryData() {
   }
 
   // 6. Get latest participants (ONLY for "Completed" transactions) and Decrypt their data
-  const players = await EntryModel.find({ status: "Completed" }, { name: 1, phone: 1 }) // <<< Filter only completed
+  const players = await G1entryModel.find({ status: "Completed" }, { name: 1, phone: 1 }) // <<< Filter only completed
     .sort({ createdAt: -1 })
     .limit(1000)
     .lean(); // .lean() makes it plain JavaScript objects, faster for processing

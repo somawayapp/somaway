@@ -1,9 +1,13 @@
 import express from "express";
 import axios from "axios";
 import moment from "moment";
-import EntryModel from "../models/Entry.model.js";
+import G4entryModel from "../../models/Entries/G4entry.model.js";
 import crypto from "crypto";
 import dotenv from "dotenv";
+import G4cycleModel from "../../models/Cycles/G4cycle.model.js";
+
+
+
 dotenv.config();
 
 const router = express.Router();
@@ -83,8 +87,28 @@ const getAccessToken = async () => {
 };
 
 // --- Cycle Configuration ---
-const MAX_PARTICIPANTS = 1000000; // 1 Million participants/Ksh
-const CURRENT_CYCLE = 1; // You might want to manage this dynamically later
+const MAX_PARTICIPANTS = 10000; //  participants/Ksh
+
+
+
+async function getCurrentCycle() {
+  let cycle = await G4cycleModel.findOne();
+  if (!cycle) {
+    cycle = await G4cycleModel.create({ number: 1 }); // first cycle starts at 1
+  }
+  return cycle;
+}
+
+
+
+
+async function incrementCycle() {
+  let cycle = await getCurrentCycle();
+  cycle.number += 1;
+  await cycle.save();
+  console.log(`Cycle incremented to: ${cycle.number}`);
+  return cycle.number;
+}
 
 // --- Function to query STK Push transaction status (extracted for reusability) ---
 async function queryStkStatus(checkoutRequestID) {
@@ -117,7 +141,7 @@ async function queryStkStatus(checkoutRequestID) {
     console.log(`STK Push Query response for ${checkoutRequestID}:`, queryRes.data);
 
     // Update your database based on the query response
-    const entry = await EntryModel.findOne({ transactionId: checkoutRequestID });
+    const entry = await G4entryModel.findOne({ transactionId: checkoutRequestID });
 
     if (entry) {
       if (queryRes.data.ResponseCode === "0") {
@@ -201,31 +225,40 @@ router.post("/stk-push", async (req, res) => {
     return res.status(400).json({ success: false, error: "Invalid phone number format" });
   }
 
-  const phoneNumberHash = hashPhoneNumber(phone);
-  console.log(`Checking for existing entry for phone hash: ${phoneNumberHash} in cycle: ${CURRENT_CYCLE}`);
+
+    const phoneNumberHash = hashPhoneNumber(phone);
+    const cycleDoc = await getCurrentCycle();
+     console.log(`Checking for existing entry for phone hash: ${phoneNumberHash} in cycle: ${cycleDoc.number}`);
+
 
   try {
-    const totalParticipants = await EntryModel.countDocuments({
+    const totalParticipants = await G4entryModel.countDocuments({
       status: "Completed",
-      cycle: CURRENT_CYCLE,
+      cycle: (await getCurrentCycle()).number,
     });
-    const totalAmountConfirmed = (
-      await EntryModel.aggregate([
-        { $match: { status: "Completed", cycle: CURRENT_CYCLE } },
-        { $group: { _id: null, total: { $sum: "$amount" } } },
-      ])
-    )[0]?.total || 0;
+    
+const cycleDoc = await getCurrentCycle();
 
-    if (totalParticipants >= MAX_PARTICIPANTS && totalAmountConfirmed >= MAX_PARTICIPANTS) {
-      return res.status(403).json({
-        success: false,
-        error: "Maximum participants reached for this cycle. No more entries allowed.",
-      });
-    }
+const totalAmountConfirmed = (
+  await G4entryModel.aggregate([
+    { $match: { status: "Completed", cycle: cycleDoc.number } },
+    { $group: { _id: null, total: { $sum: "$amount" } } },
+  ])
+)[0]?.total || 0;
 
-    const existingEntry = await EntryModel.findOne({
+
+  if (totalParticipants >= MAX_PARTICIPANTS && totalAmountConfirmed >= MAX_PARTICIPANTS) {
+  await incrementCycle();
+  return res.status(403).json({
+    success: false,
+    error: "Maximum participants reached for this cycle. Cycle has been moved to the next one.",
+  });
+}
+
+
+    const existingEntry = await G4entryModel.findOne({
       phoneNumberHash: phoneNumberHash,
-      cycle: CURRENT_CYCLE,
+     cycle: (await getCurrentCycle()).number,
     });
 
     if (existingEntry) {
@@ -248,7 +281,7 @@ router.post("/stk-push", async (req, res) => {
         });
       } else if (["Pending", "Failed", "Cancelled", "Query_Failed"].includes(existingEntry.status)) {
         console.log("Pending entry found. Deleting it to allow new transaction.");
-        await EntryModel.deleteOne({ _id: existingEntry._id });
+        await G4entryModel.deleteOne({ _id: existingEntry._id });
       }
     } else {
       console.log("No existing entry found for this phone number in the current cycle.");
@@ -264,8 +297,11 @@ router.post("/stk-push", async (req, res) => {
 
   try {
     const token = await getAccessToken();
+       const cycleDoc = await getCurrentCycle();
 
-    newEntry = await EntryModel.create({ // Assign to newEntry here
+
+
+    newEntry = await G4entryModel.create({ // Assign to newEntry here
       name: encrypt(name),
       phone: encrypt(phone),
       amount: amount,
@@ -277,7 +313,7 @@ router.post("/stk-push", async (req, res) => {
         timezone: req.headers["x-vercel-ip-timezone"] || "Unknown",
       },
       status: "Pending",
-      cycle: CURRENT_CYCLE,
+      cycle: cycleDoc.number,
     });
 
     console.log("--- STK Push Request Payload Being Sent to Safaricom ---");
@@ -339,13 +375,13 @@ router.post("/stk-push", async (req, res) => {
 
       res.json({ success: true, message: "STK push sent, status check scheduled.", data: stkRes.data });
     } else {
-      await EntryModel.deleteOne({ _id: newEntry._id });
+      await G4entryModel.deleteOne({ _id: newEntry._id });
       res.status(400).json({ success: false, error: stkRes.data.ResponseDescription || "Failed to initiate STK push" });
     }
   } catch (error) {
     console.error("STK Push error:", error?.response?.data || error.message || error);
     if (newEntry && newEntry._id) {
-      await EntryModel.deleteOne({ _id: newEntry._id });
+      await G4entryModel.deleteOne({ _id: newEntry._id });
     }
     res.status(500).json({ success: false, error: "Failed to initiate STK push due to a server error." });
   }
@@ -383,7 +419,7 @@ router.post("/callback", async (req, res) => {
   console.log(`Extracted from callback: CheckoutRequestID=${CheckoutRequestID}, ResultCode=${ResultCode}, MpesaReceiptNumber=${MpesaReceiptNumber}, ResultDesc=${resultDesc}`);
 
   try {
-    const entry = await EntryModel.findOne({ transactionId: CheckoutRequestID });
+    const entry = await G4entryModel.findOne({ transactionId: CheckoutRequestID });
 
     if (!entry) {
       console.error(`Callback: Entry not found for CheckoutRequestID: ${CheckoutRequestID} in database.`);
@@ -436,15 +472,20 @@ router.post("/query-stk-status", async (req, res) => {
 // --- API to get current cycle status (for frontend to display) ---
 router.get("/cycle-status", async (req, res) => {
   try {
-    const totalParticipants = await EntryModel.countDocuments({
+    const totalParticipants = await G4entryModel.countDocuments({
       status: "Completed",
-      cycle: CURRENT_CYCLE,
+      cycle: (await getCurrentCycle()).number,
+
     });
+  
+
+    const cycleDoc = await getCurrentCycle();
+
     const totalAmountConfirmed = (
-      await EntryModel.aggregate([
-        { $match: { status: "Completed", cycle: CURRENT_CYCLE } },
-        { $group: { _id: null, total: { $sum: "$amount" } } },
-      ])
+  await G4entryModel.aggregate([
+    { $match: { status: "Completed", cycle: cycleDoc.number } },
+    { $group: { _id: null, total: { $sum: "$amount" } } },
+  ])      
     )[0]?.total || 0;
 
     const isMaxReached =
@@ -456,7 +497,7 @@ router.get("/cycle-status", async (req, res) => {
       currentAmount: totalAmountConfirmed,
       maxParticipants: MAX_PARTICIPANTS,
       isMaxReached: isMaxReached,
-      cycle: CURRENT_CYCLE,
+cycle: (await getCurrentCycle()).number,
     });
   } catch (error) {
     console.error("Error fetching cycle status:", error);
@@ -467,7 +508,7 @@ router.get("/cycle-status", async (req, res) => {
 
 // This would be in your API route file, e.g., api/mpesa.js or a dedicated controller
 
-// Assuming EntryModel is your Mongoose model for M-Pesa transactions
+// Assuming G4entryModel is your Mongoose model for M-Pesa transactions
 
 // New endpoint to get transaction status from DB
 router.post('/get-status', async (req, res) => {
@@ -478,7 +519,7 @@ router.post('/get-status', async (req, res) => {
   }
 
   try {
-    const entry = await EntryModel.findOne({ transactionId: checkoutRequestID });
+    const entry = await G4entryModel.findOne({ transactionId: checkoutRequestID });
 
     if (entry) {
       // Return the status and failReason directly from the database

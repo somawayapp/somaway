@@ -1,6 +1,7 @@
 // routes/search.router.js
 import express from "express";
-import EntryModel from "../models/Entry.model.js";
+import G1entryModel from "../models/Entries/G1entry.model.js";
+
 import crypto from "crypto"; // For hashing and decryption
 import dotenv from "dotenv";
 dotenv.config();
@@ -88,7 +89,7 @@ router.get("/", async (req, res) => {
 
   try {
     // DIRECT DATABASE QUERY USING phoneNumberHash
-    const foundEntries = await EntryModel.find({
+    const foundEntries = await G1entryModel.find({
       phoneNumberHash: searchPhoneNumberHash, // Direct comparison with the generated hash
       status: "Completed",
     }).sort({ createdAt: -1 });
@@ -135,7 +136,7 @@ router.get("/", async (req, res) => {
 router.get("/admin/decrypt-all-completed", async (req, res) => {
     console.log("\n[Admin Decrypt Route] Attempting to retrieve and decrypt all completed entries.");
     try {
-        const completedEntries = await EntryModel.find({ status: "Completed" }).sort({ createdAt: -1 });
+        const completedEntries = await G1entryModel.find({ status: "Completed" }).sort({ createdAt: -1 });
         console.log(`[Admin Decrypt Route] Found ${completedEntries.length} completed entries in the database.`);
 
         if (completedEntries.length === 0) {
