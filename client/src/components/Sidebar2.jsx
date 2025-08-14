@@ -193,7 +193,7 @@ const Sidebar2 = () => {
            />
           <button
             onClick={handleSearch}
-            className="bg-[#ffd700]  text-md text-gray-900 rounded-md font-semibold hover:bg-[#ffc107] transition-colors 
+            className="bg-[#ffd700]  px-2 py-9 text-md text-gray-900 rounded-md font-semibold hover:bg-[#ffc107] transition-colors 
             disabled:opacity-50 disabled:cursor-not-allowed"
             disabled={searchLoading}
           >
