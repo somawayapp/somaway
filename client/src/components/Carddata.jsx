@@ -259,7 +259,7 @@ Join now for just one bob —
                 </p>
                 {cycleStatus.isMaxReached && (
                   <p className="text-red-400 font-semibold mt-2">
-                    Maximum participants reached for this cycle!
+                    Maximum participants reached for this cycle! You will be added to the next group cycle.
                   </p>
                 )}
               </div>
@@ -305,12 +305,7 @@ Join now for just one bob —
               </button>
             )}
 
-            {/* Message when max is reached and not joining */}
-            {!joining && !transactionDetails && cycleStatus && cycleStatus.isMaxReached && (
-              <p className="text-center text-red-400 font-semibold mt-auto p-4 border border-red-500 rounded-xl">
-                The maximum number of participants for this cycle has been reached. Please check back for the next cycle!
-              </p>
-            )}
+          
 
             {/* If a transaction is ongoing, show a "Check Status" or a "Start New Transaction" button,
                 or hide "Join Now" if a transaction is still pending.
