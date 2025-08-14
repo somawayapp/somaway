@@ -47,7 +47,7 @@ export default function BettingChances() {
     };
     fetchCycleStatus();
 
-    const intervalId = setInterval(fetchCycleStatus, 30000); // Every 30 seconds
+    const intervalId = setInterval(fetchCycleStatus, 1000); // Every 30 seconds
     return () => clearInterval(intervalId);
   }, []);
 

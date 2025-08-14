@@ -69,7 +69,6 @@ function maskPhoneNumber(phoneNumber) {
     return `${prefix}${start}${maskedPart}${end}`;
   }
 }
-    const now = moment();
 
 
 async function fetchSummaryData(cycleNumber) {
@@ -87,6 +86,9 @@ async function fetchSummaryData(cycleNumber) {
     { status: "Completed", cycle: cycleNumber },
     { amount: 1, createdAt: 1 }
   ).sort({ createdAt: 1 }).lean();
+
+      const now = moment();
+
 
   // 3. Determine Growth Rate and Estimated Time based on recent activity
   const remainingAmount = totalGoalAmount - currentAmountCollected;
