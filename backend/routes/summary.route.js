@@ -69,6 +69,8 @@ function maskPhoneNumber(phoneNumber) {
     return `${prefix}${start}${maskedPart}${end}`;
   }
 }
+    const now = moment();
+
 
 async function fetchSummaryData(cycleNumber) {
   const totalGoalAmount = 10; // Define your overall monetary goal here
@@ -93,7 +95,6 @@ async function fetchSummaryData(cycleNumber) {
 
   // Only proceed with estimation if there's an amount remaining and payments exist
   if (remainingAmount > 0 && paymentsForCycle.length > 0) {
-    const now = moment();
 
     // Strategy 1: Check very recent activity (e.g., last 5 minutes)
     const recentPayments = paymentsForCycle.filter(p =>
