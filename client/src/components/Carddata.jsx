@@ -227,11 +227,7 @@ Join now for just one bob —
             className="w-full h-full md:hidden object-cover object-center hover:scale-102 transition-transform duration-300"
           />
 
-          <img
-            src={item.imageLarge}
-            alt={item.title}
-            className="w-full h-full hidden lg:block object-cover object-center hover:scale-102 transition-transform duration-300"
-          />
+         
 
           <div className="p-5 flex flex-col flex-grow">
             <h2 className="text-xl font-bold mb-2">{item.title}</h2>

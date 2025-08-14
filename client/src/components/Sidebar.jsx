@@ -7,7 +7,7 @@ const Sidebar = () => {
       title: " Pinned",
       items: [
         { name: "Winners", icon: "🏅", href: "/winners" },
-        { name: "Winner selection", icon: "🏠", href: "/winners" },
+        { name: "Winner selection", icon: "🏆", href: "/winners" },
 
 
       ],
@@ -17,7 +17,7 @@ const Sidebar = () => {
       items: [
         { name: "Home", icon: "🏠", href: "/" },
         { name: "About", icon: "ℹ️", href: "/about" },
-         { name: "Founder", icon: "🆘", href: "/about" },
+         { name: "Founder", icon: "👤", href: "/about" },
         { name: "How to join", icon: "📝", href: "/help" },
         { name: "Help Center", icon: "🆘", href: "/help" },
       ],

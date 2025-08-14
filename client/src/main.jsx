@@ -14,6 +14,7 @@ import PrivacyPolicy from "./routes/privacypolicyPage.jsx";
 import HelpCenter from "./routes/HelpcenterPage.jsx";
 import PaymentTerms from "./routes/paymenttermsPage.jsx";
 import Winners from "./routes/winnersPage.jsx";
+import G1Page from "./routes/G1page.jsx";
 const queryClient = new QueryClient();
 
 
@@ -25,6 +26,10 @@ const router = createBrowserRouter([
       {
         path: "/",
         element: <Homepage />,
+      },
+        {
+        path: "/g1",
+        element: <G1Page />,
       },
       {
         path: "/winners",

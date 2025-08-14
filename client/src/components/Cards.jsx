@@ -113,7 +113,7 @@ export default function BettingGroups() {
                   alt={group.title}
                   className="w-20 h-20 rounded-xl object-cover object-center"
                 />
-                <h2 className="text-lg font-bold">{group.title}</h2>
+                <h2 className="text-lg px-1 font-bold">{group.title}</h2>
                 <HalfCircleProgress percentage={groupData.percentage} />
               </div>
 

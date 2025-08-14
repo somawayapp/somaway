@@ -12,7 +12,7 @@ import Sidebar2 from "../components/Sidebar2";
 import HowToJoin from "../components/Howtojoin";
 import Spinner from "../components/Spinner";
 import BettingGroups from "../components/Cards";
-const HomePage = () => {
+const G1Page = () => {
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -96,15 +96,17 @@ const HomePage = () => {
       <Sidebar />
     </div>
 
-
+    {/* Spinner in center, over both nav and cards */}
+<div style={{ zIndex: 100015, }}  className="fixed left-1/2 top-[100px] transform -translate-x-1/2 ">
+  <Spinner />
+</div>
 
 
     {/* Card List */}
     <div className="flex-1 md:px-8">
       <div className="md:pr-[5%]">
 
-     <BettingGroups />
-          <BettingChances />
+     <BettingChances />
 
       <HowToJoin />
     
@@ -116,7 +118,11 @@ const HomePage = () => {
 
     </div>
 
-  
+     <div className="w-full hidden sticky top-[110px] md:block md:w-[18%] h-[calc(100vh-130px)] overflow-y-auto border-l-2 border-[#1b1f1c]">
+          <Sidebar2 />
+    </div>
+
+
   </div>
 </div>
 
@@ -130,7 +136,5 @@ const HomePage = () => {
 
   );
 };
-export default HomePage;
+export default G1Page;
 
-
-    
