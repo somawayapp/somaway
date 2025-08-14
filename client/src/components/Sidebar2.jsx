@@ -101,7 +101,7 @@ const Sidebar2 = () => {
   const players = summary?.players ?? []; // The list of all participants from summary
 
   return (
-    <div className="w-full md:pr-[24%] pb-9 md:py-5 overflow-y-auto h-[calc(100vh-130px)] text-white flex flex-col items-center gap-6">
+    <div className="w-full md:pr-[26%] pl-[13%] pb-9 md:py-5 overflow-y-auto h-[calc(100vh-130px)] text-white flex flex-col items-center gap-6">
       {/* Gauge */}
       <div className="relative w-40 hidden md:flex h-40 flex justify-center items-center">
         <svg className="w-full h-full rotate-[135deg]" viewBox="0 0 200 200">
@@ -179,8 +179,8 @@ const Sidebar2 = () => {
         <div className="flex flex-col sm:flex-row gap-2 justify-center">
           <input
             type="text"
-            placeholder="Enter your phone number (e.g., 07XXXXXXXX)"
-            className="flex-grow p-2 rounded-md bg-gray-700 border border-gray-600 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#f36dff]"
+            placeholder="Enter phone  (e.g., 07XXX)"
+            className="flex-shrink p-2 rounded-md bg-gray-700 border border-gray-600 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#f36dff]"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             onKeyPress={(e) => { // Allow pressing Enter to search
