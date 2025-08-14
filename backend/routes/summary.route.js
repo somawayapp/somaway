@@ -2,14 +2,12 @@ import express from "express";
 import G1entryModel from "../models/Entries/G1entry.model.js";
 
 import moment from "moment";
-import crypto from "crypto"; // <<< ADD THIS IMPORT for decrypt/encrypt (if used here)
+import crypto from "crypto";
 import dotenv from "dotenv";
 dotenv.config();
 
 const router = express.Router();
 
-// IMPORTANT: Ensure ENCRYPTION_KEY is set as a Vercel Environment Variable
-// DO NOT HARDCODE THIS KEY IN PRODUCTION. This is for demonstration if not using process.env
 const ENCRYPTION_KEY = process.env.ENCRYPTION_KEY;
 const IV_LENGTH = 16; // For AES-256-CBC
 
@@ -20,7 +18,7 @@ function decrypt(text) {
   }
   const textParts = text.split(":");
   if (textParts.length !== 2) {
-      throw new Error("Invalid encrypted text format.");
+    throw new Error("Invalid encrypted text format.");
   }
   const iv = Buffer.from(textParts.shift(), "hex");
   const encryptedText = Buffer.from(textParts.join(":"), "hex");
@@ -32,91 +30,68 @@ function decrypt(text) {
 
 // Function to mask phone numbers
 function maskPhoneNumber(phoneNumber) {
-    if (typeof phoneNumber !== 'string') {
-        return phoneNumber;
-    }
+  if (typeof phoneNumber !== 'string') {
+    return phoneNumber;
+  }
 
-    // Sanitize the input: remove spaces, dashes, parentheses.
-    let cleanNumber = phoneNumber.replace(/[\s-()]/g, '');
+  let cleanNumber = phoneNumber.replace(/[\s-()]/g, '');
 
-    let prefix = '';
-    let coreNumber = cleanNumber;
+  let prefix = '';
+  let coreNumber = cleanNumber;
 
-    // Handle +254 prefix
-    if (cleanNumber.startsWith('+254')) {
-        prefix = '+254';
-        coreNumber = cleanNumber.substring(4);
-    } 
-    // Handle leading 0 (common for domestic calls in Kenya)
-    else if (cleanNumber.startsWith('0') && cleanNumber.length > 1) {
-        prefix = '0';
-        coreNumber = cleanNumber.substring(1);
-    }
-    // If it's a 9-digit number without 0 or +254, treat it as is (e.g., 7XXXXXXXX)
-    // If it's not starting with 254 or 0, we'll assume it's the core number directly.
-    // This part requires careful consideration of expected input formats.
+  if (cleanNumber.startsWith('+254')) {
+    prefix = '+254';
+    coreNumber = cleanNumber.substring(4);
+  } else if (cleanNumber.startsWith('0') && cleanNumber.length > 1) {
+    prefix = '0';
+    coreNumber = cleanNumber.substring(1);
+  }
 
-    // Minimum length for a meaningful mask (e.g., 3 masked + 2 at start + 2 at end)
-    // For 9-digit core numbers, this allows 3 visible, 3 masked, 3 visible.
-    // For 10-digit core numbers, this allows 3 visible, 3 masked, 4 visible.
-    if (coreNumber.length < 7) { 
-        return phoneNumber; // Too short to mask 3 digits in the center and show sufficient visible parts.
-    }
+  if (coreNumber.length < 7) {
+    return phoneNumber;
+  }
 
-    const maskedLength = 3;
-    const remainingVisibleLength = coreNumber.length - maskedLength;
+  const maskedLength = 3;
+  const remainingVisibleLength = coreNumber.length - maskedLength;
 
-    // Calculate how many digits to show before the masked part
-    const visibleStartLength = Math.floor(remainingVisibleLength / 2);
-    // Calculate how many digits to show after the masked part
-    const visibleEndLength = remainingVisibleLength - visibleStartLength;
+  const visibleStartLength = Math.floor(remainingVisibleLength / 2);
+  const visibleEndLength = remainingVisibleLength - visibleStartLength;
 
-    const maskedPart = '*'.repeat(maskedLength);
+  const maskedPart = '*'.repeat(maskedLength);
 
-    const start = coreNumber.substring(0, visibleStartLength);
-    const end = coreNumber.substring(coreNumber.length - visibleEndLength);
+  const start = coreNumber.substring(0, visibleStartLength);
+  const end = coreNumber.substring(coreNumber.length - visibleEndLength);
 
-    // If there's no original prefix, just return the masked core number.
-    // Otherwise, combine the original prefix with the masked core number.
-    if (prefix === '') {
-        return `${start}${maskedPart}${end}`;
-    } else {
-        // Reconstruct with the original prefix (e.g., +254 or 0)
-        return `${prefix}${start}${maskedPart}${end}`;
-    }
+  if (prefix === '') {
+    return `${start}${maskedPart}${end}`;
+  } else {
+    return `${prefix}${start}${maskedPart}${end}`;
+  }
 }
 
-
-// In-memory cache
-let cache = null;
-let lastUpdated = 0;
-const CACHE_TTL = 60 * 1000; // 1 minute in milliseconds
-
-async function fetchSummaryData() {
+async function fetchSummaryData(cycleNumber) {
   const totalGoalAmount = 10; // Define your overall monetary goal here
 
-  // 1. Total amount collected so far (ONLY for "Completed" transactions)
+  // 1. Total amount collected so far (ONLY for "Completed" transactions) for the specific cycle
   const aggregation = await G1entryModel.aggregate([
-    { $match: { status: "Completed" } }, // <<< Filter only completed
+    { $match: { status: "Completed", cycle: cycleNumber } },
     { $group: { _id: null, totalAmount: { $sum: "$amount" } } }
   ]);
   const currentAmountCollected = aggregation[0]?.totalAmount || 0;
 
-  // 2. Get all "Completed" entries from the last 24 hours sorted by time ascending
+  // 2. Get all "Completed" entries for the specific cycle from the last 24 hours sorted by time ascending
   const since = moment().subtract(24, "hours").toDate();
   const paymentsLast24Hours = await G1entryModel.find(
-    { status: "Completed", createdAt: { $gte: since } }, // <<< Filter only completed
+    { status: "Completed", cycle: cycleNumber, createdAt: { $gte: since } },
     { amount: 1, createdAt: 1 }
   ).sort({ createdAt: 1 }).lean();
 
   // 3. Bucket payments into 12 intervals of 2 hours each
-  const buckets = Array(12).fill(0); // 12 intervals * 2 hours = 24 hours
-  const nowTimestamp = Date.now(); // Milliseconds since epoch
+  const buckets = Array(12).fill(0);
+  const nowTimestamp = Date.now();
 
   paymentsLast24Hours.forEach(entry => {
-    // Calculate hours ago relative to 'nowTimestamp'
     const hoursAgo = (nowTimestamp - new Date(entry.createdAt).getTime()) / (1000 * 60 * 60);
-    // Determine bucket index: (24 - hoursAgo) gives hours until 'now', divide by 2 for 2-hour buckets
     const bucketIndex = Math.floor((24 - hoursAgo) / 2);
     if (bucketIndex >= 0 && bucketIndex < 12) {
       buckets[bucketIndex] += entry.amount;
@@ -124,41 +99,47 @@ async function fetchSummaryData() {
   });
 
   // 4. Calculate growth rate for estimation
-  // A simpler approach: total collected in last 24 hours
   const totalCollectedInLast24Hours = paymentsLast24Hours.reduce((sum, entry) => sum + entry.amount, 0);
-  const growthRatePerHour = totalCollectedInLast24Hours / 24; // Average growth over last 24 hours
+  const growthRatePerHour = totalCollectedInLast24Hours / 24;
 
   // 5. Estimate time to reach goal
   const remainingAmount = totalGoalAmount - currentAmountCollected;
-  let estimatedHours = "Unknown";
   let estimatedTime = "Unknown";
 
   if (growthRatePerHour > 0) {
-    estimatedHours = Math.ceil(remainingAmount / growthRatePerHour);
-    if (estimatedHours < 0) estimatedHours = 0; // If goal already reached
-
-    if (estimatedHours === 0) {
-        estimatedTime = "Goal reached!";
-    } else if (estimatedHours < 24) {
-        estimatedTime = `${estimatedHours} hour(s)`;
+    const estimatedHours = remainingAmount / growthRatePerHour;
+    if (estimatedHours <= 0) {
+      estimatedTime = "Goal reached!";
     } else {
-        const days = Math.floor(estimatedHours / 24);
-        const hours = estimatedHours % 24;
-        estimatedTime = `${days} day(s) ${hours} hour(s)`;
+      const totalSeconds = estimatedHours * 3600;
+
+      if (totalSeconds < 60) {
+        estimatedTime = `${Math.ceil(totalSeconds)} second(s)`;
+      } else if (totalSeconds < 3600) {
+        estimatedTime = `${Math.ceil(totalSeconds / 60)} minute(s)`;
+      } else if (totalSeconds < 86400) { // Less than 24 hours
+        estimatedTime = `${Math.ceil(totalSeconds / 3600)} hour(s)`;
+      } else {
+        const days = Math.floor(totalSeconds / 86400);
+        const hours = Math.ceil((totalSeconds % 86400) / 3600);
+        estimatedTime = `${days} day(s)`;
+        if (hours > 0) {
+          estimatedTime += ` ${hours} hour(s)`;
+        }
+      }
     }
   }
 
-  // 6. Get latest participants (ONLY for "Completed" transactions) and Decrypt their data
-  const players = await G1entryModel.find({ status: "Completed" }, { name: 1, phone: 1 }) // <<< Filter only completed
+  // 6. Get latest participants (ONLY for "Completed" transactions) for the specific cycle
+  const players = await G1entryModel.find({ status: "Completed", cycle: cycleNumber }, { name: 1, phone: 1 })
     .sort({ createdAt: -1 })
     .limit(1000)
-    .lean(); // .lean() makes it plain JavaScript objects, faster for processing
+    .lean();
 
-  // Decrypt name and phone for each player and then mask the phone number
   const decryptedPlayers = players.map(player => {
     let decryptedName = "Error";
     let decryptedPhone = "Error";
-    let maskedPhone = "Error"; // Initialize masked phone
+    let maskedPhone = "Error";
 
     try {
       decryptedName = decrypt(player.name);
@@ -167,42 +148,40 @@ async function fetchSummaryData() {
     }
     try {
       decryptedPhone = decrypt(player.phone);
-      maskedPhone = maskPhoneNumber(decryptedPhone); // Mask the decrypted phone number
+      maskedPhone = maskPhoneNumber(decryptedPhone);
     } catch (e) {
       console.error(`Error decrypting player phone for ID ${player._id}:`, e.message);
     }
     return {
       _id: player._id,
       name: decryptedName,
-      phone: maskedPhone, // <<< Use masked phone
-      createdAt: player.createdAt // Keep original creation time
+      phone: maskedPhone,
+      createdAt: player.createdAt
     };
   });
-
 
   return {
     current: currentAmountCollected,
     total: totalGoalAmount,
     percentage: Math.round((currentAmountCollected / totalGoalAmount) * 100),
     estimatedTime,
-    players: decryptedPlayers, // <<< Use decrypted and masked players
+    players: decryptedPlayers,
   };
 }
 
-// API route with caching
-router.get("/", async (req, res) => {
+// API route without caching, fetching based on cycle number
+router.get("/:cycleNumber", async (req, res) => {
   try {
-    const now = Date.now();
-    if (!cache || now - lastUpdated > CACHE_TTL) {
-      console.log("Fetching new summary data (cache expired or not set)...");
-      cache = await fetchSummaryData();
-      lastUpdated = now;
-      console.log("Summary data fetched and cached.");
-    } else {
-      console.log("Serving summary data from cache.");
+    const cycleNumber = parseInt(req.params.cycleNumber, 10);
+    if (isNaN(cycleNumber)) {
+      return res.status(400).json({ error: "Invalid cycle number provided." });
     }
 
-    res.json(cache);
+    console.log(`Fetching live summary data for cycle: ${cycleNumber}...`);
+    const summaryData = await fetchSummaryData(cycleNumber);
+    console.log(`Summary data fetched for cycle: ${cycleNumber}.`);
+
+    res.json(summaryData);
   } catch (err) {
     console.error("Summary fetch error:", err);
     res.status(500).json({ error: "Failed to fetch summary" });
