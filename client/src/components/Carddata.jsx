@@ -296,7 +296,7 @@ Join now for just one bob —
             </AnimatePresence>
 
             {/* Join Button */}
-            {!joining && !transactionDetails && cycleStatus && !cycleStatus.isMaxReached && (
+            {!joining && !transactionDetails && cycleStatus && (
               <button
                 onClick={handleJoinClick}
                 className="mt-auto bg-[#020201] py-4 hover:bg-[#0e0e06] text-[#EBD402] rounded-2xl font-semibold w-full hover:scale-102 transition-transform duration-200"
