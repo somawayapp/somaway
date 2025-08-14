@@ -177,18 +177,20 @@ const Sidebar2 = () => {
           Search Your Entry:
         </h3>
         <div className="flex flex-col sm:flex-row gap-2 justify-center">
-          <input
-            type="text"
-            placeholder="07XXX"
-            className="flex-shrink p-2 rounded-md bg-gradient-to-br from-[#070707ff] to-[#111] border border-[#1b1f1c] text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#f36dff]"
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-            onKeyPress={(e) => { // Allow pressing Enter to search
-              if (e.key === 'Enter') {
-                handleSearch();
-              }
-            }}
-          />
+       // Within your React component's JSX
+<input
+  type="text"
+  placeholder="07XXX"
+  className="flex-grow p-2 py-3 rounded-md bg-gradient-to-br from-[#070707ff] to-[#111] border border-[#1b1f1c] text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#f36dff]
+             min-w-0" // Add min-w-0 here for Tailwind CSS
+  value={searchQuery}
+  onChange={(e) => setSearchQuery(e.target.value)}
+  onKeyPress={(e) => {
+    if (e.key === 'Enter') {
+      handleSearch();
+    }
+  }}
+/>
           <button
             onClick={handleSearch}
             className="px-4 py-2 bg-[#ffd700] text-gray-900 rounded-md font-semibold hover:bg-[#ffc107] transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
@@ -218,7 +220,7 @@ const Sidebar2 = () => {
 
                <motion.div
              key={idx}
-            className="mt-2 p-3 bg-gradient-to-br from-[#070707ff] to-[#111] border border-[#1b1f1c] rounded-md  text-center"
+            className="mt-2 p-3  bg-gradient-to-br from-[#070707ff] to-[#111] border border-[#1b1f1c] rounded-md  text-center"
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.3 }}
@@ -251,7 +253,7 @@ const Sidebar2 = () => {
 
 
           <motion.div
-          className="w-full mt-2 text-center h-[fit-content] max-h-[calc(100vh-600px)] p-3 bg-gray-800 overflow-y-auto "
+          className="w-full mt-2 text-center h-[fit-content] max-h-[calc(100vh-600px)] p-3 bg-gradient-to-br from-[#070707ff] to-[#111] border border-[#1b1f1c] overflow-y-auto "
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.2, duration: 0.5 }}
