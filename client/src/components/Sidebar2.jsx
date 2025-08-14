@@ -1,4 +1,5 @@
-// components/Sidebar2.jsx (or wherever your Sidebar2 is located)
+
+        // components/Sidebar2.jsx (or wherever your Sidebar2 is located)
 import React, { useEffect, useState, useRef } from "react"; // Import useRef
 import { motion, useAnimation } from "framer-motion";
 
@@ -176,11 +177,11 @@ const Sidebar2 = () => {
         <h3 className="text-sm font-bold text-[#f36dff] mb-2 text-center">
           Search Your Entry:
         </h3>
-        <div className="flex flex-col sm:flex-row gap-2 justify-center">
+        <div className="flex flex-col text-md sm:flex-row gap-2 justify-center">
           <input
             type="text"
              placeholder="07XXXXXXXX"
-             className="flex-grow p-2 py-3 text-md md:text-lg rounded-md bg-gradient-to-br from-[#070707ff] to-[#111] border border-[#1b1f1c] text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#f36dff]
+             className="flex-grow p-2 py-3 text-md rounded-md bg-gradient-to-br from-[#070707ff] to-[#111] border border-[#1b1f1c] text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#f36dff]
              min-w-0" // Add min-w-0 here for Tailwind CSS
              value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
@@ -192,7 +193,8 @@ const Sidebar2 = () => {
            />
           <button
             onClick={handleSearch}
-            className="bg-[#ffffff] text-md md:text-lg text-gray-900 rounded-md font-semibold hover:bg-[#ffc107] transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+            className="bg-[#ffd700]  text-md text-gray-900 rounded-md font-semibold hover:bg-[#ffc107] transition-colors 
+            disabled:opacity-50 disabled:cursor-not-allowed"
             disabled={searchLoading}
           >
             {searchLoading ? "Searching..." : "Search"}
@@ -285,4 +287,4 @@ const Sidebar2 = () => {
   );
 };
 
-export default Sidebar2;
+export default Sidebar2;    
