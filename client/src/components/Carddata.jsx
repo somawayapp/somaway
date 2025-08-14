@@ -138,14 +138,12 @@ Join now for just one bob —
   };
 
   const handleJoinClick = () => {
-    if (cycleStatus && cycleStatus.isMaxReached) {
-      setErrorMessage("The maximum number of participants for this cycle has been reached.");
-      return;
-    }
-    setJoining(true);
-    setErrorMessage("");
-    setTransactionDetails(null); // Clear any previous transaction details
-  };
+  // Removed the capacity check
+  setJoining(true);
+  setErrorMessage("");
+  setTransactionDetails(null); // Clear any previous transaction details
+};
+
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -296,7 +294,7 @@ Join now for just one bob —
             </AnimatePresence>
 
             {/* Join Button */}
-            {!joining && !transactionDetails && cycleStatus && (
+            {!joining && !transactionDetails && cycleStatus && !cycleStatus.isMaxReached && (
               <button
                 onClick={handleJoinClick}
                 className="mt-auto bg-[#020201] py-4 hover:bg-[#0e0e06] text-[#EBD402] rounded-2xl font-semibold w-full hover:scale-102 transition-transform duration-200"
