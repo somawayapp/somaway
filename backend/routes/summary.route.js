@@ -273,7 +273,7 @@ router.get("/", async (req, res) => {
 
 // If you still want an endpoint to get summary for a *specific* cycle number,
 // you can keep this route alongside the one above:
-router.get("/:cycleNumber", async (req, res) => {
+router.get("/", async (req, res) => {
   try {
     const cycleNumber = parseInt(req.params.cycleNumber, 10);
     if (isNaN(cycleNumber)) {
