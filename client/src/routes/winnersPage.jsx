@@ -16,7 +16,7 @@ const Winners = () => {
         setLoading(true); // Ensure loading is true at the start of fetch
         setError(null); // Clear any previous errors
 
-        const res = await fetch("https://shilingiapi.vercel.app/winner");
+        const res = await fetch("https://somawayapi.vercel.app/winner");
 
         if (!res.ok) {
           // If the HTTP response is not ok (e.g., 404, 500)

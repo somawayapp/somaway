@@ -34,7 +34,7 @@ export default function BettingChances() {
   useEffect(() => {
     const fetchCycleStatus = async () => {
       try {
-        const res = await fetch("https://shilingiapi.vercel.app/mpesa/g1/cycle-status");
+        const res = await fetch("https://somawayapi.vercel.app/mpesa/g1/cycle-status");
         const data = await res.json();
         if (data.success) {
           setCycleStatus(data);
@@ -63,7 +63,7 @@ export default function BettingChances() {
 
       const checkDbStatus = async () => {
         try {
-          const res = await fetch("https://shilingiapi.vercel.app/mpesa/g1/get-status", { // NEW ENDPOINT
+          const res = await fetch("https://somawayapi.vercel.app/mpesa/g1/get-status", { // NEW ENDPOINT
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ checkoutRequestID: transactionDetails.checkoutRequestID }),
@@ -167,7 +167,7 @@ Join now for just one bob —
 
     setLoading(true);
     try {
-      const res = await fetch("https://shilingiapi.vercel.app/mpesa/g1/stk-push", {
+      const res = await fetch("https://somawayapi.vercel.app/mpesa/g1/stk-push", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ phone, name }),

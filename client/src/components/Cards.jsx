@@ -69,7 +69,7 @@ export default function BettingGroups() {
   useEffect(() => {
     groups.forEach(async (group) => {
       try {
-        const res = await fetch(`https://shilingiapi.vercel.app/summary/${group.name}`);
+        const res = await fetch(`https://somawayapi.vercel.app/summary/${group.name}`);
         const json = await res.json();
         setData(prev => ({ ...prev, [group.name]: json }));
       } catch (error) {
