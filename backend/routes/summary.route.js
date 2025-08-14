@@ -1,5 +1,6 @@
 import express from "express";
 import G1entryModel from "../models/Entries/G1entry.model.js";
+import G1cycleModel from "../models/Cycles/G1cycle.model.js"; // <<< Import the Cycle Model
 
 import moment from "moment";
 import crypto from "crypto";
@@ -80,7 +81,6 @@ async function fetchSummaryData(cycleNumber) {
   const currentAmountCollected = aggregation[0]?.totalAmount || 0;
 
   // 2. Get all "Completed" entries for the specific cycle, sorted by time ascending
-  // We'll fetch all completed entries for the cycle to analyze various time windows
   const paymentsForCycle = await G1entryModel.find(
     { status: "Completed", cycle: cycleNumber },
     { amount: 1, createdAt: 1 }
@@ -157,7 +157,7 @@ async function fetchSummaryData(cycleNumber) {
           }
       }
     }
-    
+
     // If no recent activity to base a rate on, consider if the goal is already met or if there's no progress
     if (currentAmountCollected >= totalGoalAmount) {
         estimatedTime = "Goal reached!";
@@ -238,21 +238,49 @@ async function fetchSummaryData(cycleNumber) {
     total: totalGoalAmount,
     percentage: Math.round((currentAmountCollected / totalGoalAmount) * 100),
     estimatedTime,
+    cycleNumber: cycleNumber, // Add the cycle number to the response
     players: decryptedPlayers,
     // You might want to include buckets data here if it's for the frontend chart
     // buckets: buckets,
   };
 }
 
-// API route without caching, fetching based on cycle number
+// API route to get the summary for the CURRENT active cycle
+// Changed from "/:cycleNumber" to just "/" to imply getting the current cycle
 router.get("/", async (req, res) => {
+  try {
+    // 1. Find the current active cycle number
+    // Assuming the "current" cycle is the one with the highest 'number'
+    const currentCycle = await G1cycleModel.findOne().sort({ number: -1 }).lean();
+
+    if (!currentCycle) {
+      // If no cycle exists, you might want to default to cycle 1 or return an error
+      return res.status(404).json({ error: "No active cycle found. Please create a cycle first." });
+    }
+
+    const cycleNumber = currentCycle.number;
+
+    console.log(`Fetching live summary data for current cycle: ${cycleNumber}...`);
+    const summaryData = await fetchSummaryData(cycleNumber);
+    console.log(`Summary data fetched for cycle: ${cycleNumber}.`);
+
+    res.json(summaryData);
+  } catch (err) {
+    console.error("Summary fetch error:", err);
+    res.status(500).json({ error: "Failed to fetch summary" });
+  }
+});
+
+// If you still want an endpoint to get summary for a *specific* cycle number,
+// you can keep this route alongside the one above:
+router.get("/:cycleNumber", async (req, res) => {
   try {
     const cycleNumber = parseInt(req.params.cycleNumber, 10);
     if (isNaN(cycleNumber)) {
       return res.status(400).json({ error: "Invalid cycle number provided." });
     }
 
-    console.log(`Fetching live summary data for cycle: ${cycleNumber}...`);
+    console.log(`Fetching live summary data for specific cycle: ${cycleNumber}...`);
     const summaryData = await fetchSummaryData(cycleNumber);
     console.log(`Summary data fetched for cycle: ${cycleNumber}.`);
 
