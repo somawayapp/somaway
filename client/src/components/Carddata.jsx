@@ -300,11 +300,7 @@ Join now for just one bob —
                 or hide "Join Now" if a transaction is still pending.
                 For now, if transactionDetails exist, hide the Join Now button.
             */}
-            {transactionDetails && !["Completed", "Failed", "Cancelled", "Expired", "Query_Failed_Internal"].includes(transactionDetails.status) && (
-                 <p className="text-center text-gray-400 font-semibold mt-auto p-4 rounded-xl">
-                    Your previous transaction is still processing.
-                 </p>
-            )}
+          
 
             <button
               onClick={handleShareToWhatsApp}
@@ -329,7 +325,7 @@ Join now for just one bob —
                     placeholder="Enter your name"
                     value={name}
                     onChange={(e) => setName(e.target.value)}
-                    className="flex-grow p-2 rounded-md bg-gray-700 border border-gray-600 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#f36dff]"
+                    className="flex-grow p-2 rounded-md bg-gradient-to-br from-[#070707ff] to-[#111] border border-[#1b1f1c] text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#f36dff]"
                     required
                   />
                   <input
@@ -337,7 +333,7 @@ Join now for just one bob —
                     placeholder="Enter M-Pesa number (e.g. 07XX...)"
                     value={phone}
                     onChange={(e) => setPhone(e.target.value)}
-                    className="flex-grow p-2 rounded-md bg-gray-700 border border-gray-600 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#f36dff]"
+                    className="flex-grow p-2 rounded-md bg-gradient-to-br from-[#070707ff] to-[#111] border border-[#1b1f1c] text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#f36dff]"
                     required
                   />
 

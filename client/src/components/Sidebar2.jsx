@@ -101,7 +101,7 @@ const Sidebar2 = () => {
   const players = summary?.players ?? []; // The list of all participants from summary
 
   return (
-    <div className="w-full md:pr-[26%] pl-[13%] pb-9 md:py-5 overflow-y-auto h-[calc(100vh-130px)] text-white flex flex-col items-center gap-4">
+    <div className="w-full md:pr-[25%] pl-[13%] pb-9 md:py-5 overflow-y-auto h-[calc(100vh-130px)] text-white flex flex-col items-center gap-4">
       {/* Gauge */}
       <div className="relative w-40 hidden md:flex h-40 flex justify-center items-center">
         <svg className="w-full h-full rotate-[135deg]" viewBox="0 0 200 200">
@@ -179,8 +179,8 @@ const Sidebar2 = () => {
         <div className="flex flex-col sm:flex-row gap-2 justify-center">
           <input
             type="text"
-            placeholder="Enter phone  (e.g., 07XXX)"
-            className="flex-shrink p-2 rounded-md bg-gray-700 border border-gray-600 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#f36dff]"
+            placeholder="07XXX"
+            className="flex-shrink p-2 rounded-md bg-gradient-to-br from-[#070707ff] to-[#111] border border-[#1b1f1c] text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#f36dff]"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             onKeyPress={(e) => { // Allow pressing Enter to search
@@ -218,7 +218,7 @@ const Sidebar2 = () => {
 
                <motion.div
              key={idx}
-            className="mt-2 p-3 bg-gray-800 rounded-md border border-gray-700 text-center"
+            className="mt-2 p-3 bg-gradient-to-br from-[#070707ff] to-[#111] border border-[#1b1f1c] rounded-md  text-center"
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.3 }}
