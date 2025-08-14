@@ -164,7 +164,7 @@ const Sidebar2 = () => {
         transition={{ delay: 1.5, duration: 0.5 }}
       >
         <p className="text-sm text-gray-300">Estimated Time to Full</p>
-        <p className="text-lg font-medium text-[#f36dff]">{estimatedTime}</p>
+        <p className="text-md text-[#ffd700]">{estimatedTime}</p>
       </motion.div>
 
       {/* --- NEW SEARCH BAR --- */}
@@ -174,7 +174,7 @@ const Sidebar2 = () => {
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 1.0, duration: 0.5 }}
       >
-        <h3 className="text-sm font-bold text-[#f36dff] mb-2 text-center">
+        <h3 className="text-sm font-bold text-[#f36dff] mb-3 text-center">
           Search Your Entry:
         </h3>
    <div class="relative flex-grow min-w-0">
