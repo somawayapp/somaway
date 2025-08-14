@@ -243,7 +243,6 @@ const Sidebar2 = () => {
       )}
        
 
-     <hr className="border-t border-gray-700 mt-2" />
 
       {/* Players List (Conditionally rendered or below search results) */}
       {/* You might want to hide the full player list if search results are displayed
@@ -255,7 +254,7 @@ const Sidebar2 = () => {
 
 
           <motion.div
-          className="w-full mt-2 text-center h-[fit-content] max-h-[calc(100vh-600px)] p-3 bg-gradient-to-br from-[#070707ff] to-[#111] border border-[#1b1f1c] overflow-y-auto "
+          className="w-full text-center h-[fit-content] max-h-[calc(100vh-600px)] p-3 bg-gradient-to-br from-[#070707ff] to-[#111] border border-[#1b1f1c] overflow-y-auto "
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.2, duration: 0.5 }}
