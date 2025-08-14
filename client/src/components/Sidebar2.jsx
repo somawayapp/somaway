@@ -177,22 +177,22 @@ const Sidebar2 = () => {
           Search Your Entry:
         </h3>
         <div className="flex flex-col sm:flex-row gap-2 justify-center">
-       <input
-  type="text"
-  placeholder="07XXX"
-  className="flex-grow p-2 py-3 rounded-md bg-gradient-to-br from-[#070707ff] to-[#111] border border-[#1b1f1c] text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#f36dff]
+          <input
+            type="text"
+             placeholder="07XXXXX"
+             className="flex-grow p-2 py-3 rounded-md bg-gradient-to-br from-[#070707ff] to-[#111] border border-[#1b1f1c] text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#f36dff]
              min-w-0" // Add min-w-0 here for Tailwind CSS
-  value={searchQuery}
-  onChange={(e) => setSearchQuery(e.target.value)}
-  onKeyPress={(e) => {
-    if (e.key === 'Enter') {
-      handleSearch();
-    }
-  }}
-/>
+             value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+             onKeyPress={(e) => {
+            if (e.key === 'Enter') {
+             handleSearch();
+             }
+            }}
+           />
           <button
             onClick={handleSearch}
-            className="px-4 py-2 bg-[#ffd700] text-gray-900 rounded-md font-semibold hover:bg-[#ffc107] transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+            className="px-4 bg-[#ffd700] text-gray-900 rounded-md font-semibold hover:bg-[#ffc107] transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
             disabled={searchLoading}
           >
             {searchLoading ? "Searching..." : "Search"}
