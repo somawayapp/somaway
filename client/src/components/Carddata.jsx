@@ -140,7 +140,6 @@ Join now for just one bob —
   const handleJoinClick = () => {
   // Removed the capacity check
   setJoining(true);
-  setErrorMessage("");
   setTransactionDetails(null); // Clear any previous transaction details
 };
 
