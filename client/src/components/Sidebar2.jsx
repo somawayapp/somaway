@@ -177,30 +177,30 @@ const Sidebar2 = () => {
         <h3 className="text-sm font-bold text-[#f36dff] mb-2 text-center">
           Search Your Entry:
         </h3>
-        <div className="flex flex-col text-md sm:flex-row gap-2 justify-center">
-          <input
-            type="text"
-             placeholder="07XXXXXXXX"
-             className="flex-grow px-3 text-sm rounded-md bg-gradient-to-br from-[#070707ff] to-[#111] border-4 border-[#1b1f1c] 
-             text-white placeholder-gray-400 focus:outline-none  focus:ring-2 focus:ring-[#f36dff]
-             min-w-0" // Add min-w-0 here for Tailwind CSS
-             value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-             onKeyPress={(e) => {
-            if (e.key === 'Enter') {
-             handleSearch();
-             }
-            }}
-           />
-          <button
-            onClick={handleSearch}
-            className="bg-[#ffd700]  px-3 py-2 text-md text-gray-900 rounded-md font-semibold hover:bg-[#ffc107] transition-colors 
-            disabled:opacity-50 disabled:cursor-not-allowed"
-            disabled={searchLoading}
-          >
-            {searchLoading ? "Searching..." : "Search"}
-          </button>
-        </div>
+      <div class="relative flex-grow min-w-0">
+  <input
+    type="text"
+    placeholder="07XXXXXXXX"
+    class="w-full px-3 pr-16 text-sm rounded-md bg-gradient-to-br from-[#070707ff] to-[#111] border-4 border-[#1b1f1c]
+           text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#f36dff]
+           min-w-0 py-2"
+    value={searchQuery}
+    onChange={(e) => setSearchQuery(e.target.value)}
+    onKeyPress={(e) => {
+      if (e.key === 'Enter') {
+        handleSearch();
+      }
+    }}
+  />
+  <button
+    onClick={handleSearch}
+    class="absolute inset-y-0 right-0 bg-[#ffd700] px-3 text-sm text-gray-900 rounded-r-md font-semibold hover:bg-[#ffc107] transition-colors
+           disabled:opacity-50 disabled:cursor-not-allowed"
+    disabled={searchLoading}
+  >
+    {searchLoading ? "Searching..." : "Search"}
+  </button>
+</div>
 
         {searchLoading && <p className="text-center text-sm text-gray-400 mt-2">Loading...</p>}
         {searchError && <p className="text-center text-sm text-red-400 mt-2">{searchError}</p>}
