@@ -247,14 +247,6 @@ const totalAmountConfirmed = (
 )[0]?.total || 0;
 
 
-  if (totalParticipants >= MAX_PARTICIPANTS && totalAmountConfirmed >= MAX_PARTICIPANTS) {
-  await incrementCycle();
-  return res.status(403).json({
-    success: false,
-    error: "Maximum participants reached for this cycle. Cycle has been moved to the next one.",
-  });
-}
-
 
     const existingEntry = await G1entryModel.findOne({
       phoneNumberHash: phoneNumberHash,
@@ -437,6 +429,26 @@ if (entry.status !== "Completed") {
         entry.status = "Completed";
         entry.mpesaReceiptNumber = MpesaReceiptNumber;
         console.log(`Callback: Payment for CheckoutRequestID ${CheckoutRequestID} successful. Receipt: ${MpesaReceiptNumber}. DB updated.`);
+
+        // ✅ Check if the cycle is now full
+        const cycleDoc = await getCurrentCycle();
+        const totalParticipants = await G1entryModel.countDocuments({
+            status: "Completed",
+            cycle: cycleDoc.number,
+        });
+
+        const totalAmountConfirmed = (
+            await G1entryModel.aggregate([
+                { $match: { status: "Completed", cycle: cycleDoc.number } },
+                { $group: { _id: null, total: { $sum: "$amount" } } },
+            ])
+        )[0]?.total || 0;
+
+        if (totalParticipants >= MAX_PARTICIPANTS && totalAmountConfirmed >= MAX_PARTICIPANTS) {
+            await incrementCycle();
+            console.log(`Cycle full! Moved to cycle ${cycleDoc.number + 1}.`);
+        }
+
     } else {
         entry.status = "Failed";
         entry.failReason = resultDesc;
@@ -446,7 +458,7 @@ if (entry.status !== "Completed") {
 } else {
     console.log(`Callback: Entry for ${CheckoutRequestID} already processed or status is not Pending. Current status: ${entry.status}. No update needed from this callback.`);
 }
-
+  
   } catch (error) {
     console.error("Error processing M-Pesa callback:", error);
   }
