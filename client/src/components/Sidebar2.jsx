@@ -177,8 +177,7 @@ const Sidebar2 = () => {
           Search Your Entry:
         </h3>
         <div className="flex flex-col sm:flex-row gap-2 justify-center">
-       // Within your React component's JSX
-<input
+       <input
   type="text"
   placeholder="07XXX"
   className="flex-grow p-2 py-3 rounded-md bg-gradient-to-br from-[#070707ff] to-[#111] border border-[#1b1f1c] text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#f36dff]
