@@ -245,7 +245,7 @@ async function fetchSummaryData(cycleNumber) {
 }
 
 // API route without caching, fetching based on cycle number
-router.get("/:cycleNumber", async (req, res) => {
+router.get("/", async (req, res) => {
   try {
     const cycleNumber = parseInt(req.params.cycleNumber, 10);
     if (isNaN(cycleNumber)) {
