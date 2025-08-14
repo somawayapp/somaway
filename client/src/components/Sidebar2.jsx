@@ -181,7 +181,7 @@ const Sidebar2 = () => {
           <input
             type="text"
              placeholder="07XXXXXXXX"
-             className="flex-grow p-2 py-3 text-md rounded-md bg-gradient-to-br from-[#070707ff] to-[#111] border border-[#1b1f1c] text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#f36dff]
+             className="flex-grow  text-md rounded-md bg-gradient-to-br from-[#070707ff] to-[#111] border border-[#1b1f1c] text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#f36dff]
              min-w-0" // Add min-w-0 here for Tailwind CSS
              value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
@@ -193,7 +193,7 @@ const Sidebar2 = () => {
            />
           <button
             onClick={handleSearch}
-            className="bg-[#ffd700]  px-2 py-9 text-md text-gray-900 rounded-md font-semibold hover:bg-[#ffc107] transition-colors 
+            className="bg-[#ffd700]  px-3 py-1 text-md text-gray-900 rounded-md font-semibold hover:bg-[#ffc107] transition-colors 
             disabled:opacity-50 disabled:cursor-not-allowed"
             disabled={searchLoading}
           >
