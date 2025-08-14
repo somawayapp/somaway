@@ -68,7 +68,7 @@
   
              {/* Show on medium screens and larger */}
              <Link to="/" className="flex items-center gap-1 text-xl font-bold md:text-xl hidden md:flex">
-             <img src="/logo.png" className="md:h-[44px] hidden md:flex rounded-lg" />
+             <img src="/logo.png" className="md:h-[34px] hidden md:flex rounded-lg" />
               <span className="hidden md:inline">Shilingi</span>
              </Link>
 

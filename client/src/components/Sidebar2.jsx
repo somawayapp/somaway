@@ -101,7 +101,7 @@ const Sidebar2 = () => {
   const players = summary?.players ?? []; // The list of all participants from summary
 
   return (
-    <div className="w-full md:px-[5%] pb-9 md:py-5 overflow-y-auto h-[calc(100vh-130px)] text-white flex flex-col items-center gap-6">
+    <div className="w-full md:pr-[24%] pb-9 md:py-5 overflow-y-auto h-[calc(100vh-130px)] text-white flex flex-col items-center gap-6">
       {/* Gauge */}
       <div className="relative w-40 hidden md:flex h-40 flex justify-center items-center">
         <svg className="w-full h-full rotate-[135deg]" viewBox="0 0 200 200">

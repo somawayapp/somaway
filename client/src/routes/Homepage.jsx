@@ -96,7 +96,10 @@ const HomePage = () => {
       <Sidebar />
     </div>
 
-
+    {/* Spinner in center, over both nav and cards */}
+<div style={{ zIndex: 100015, }}  className="fixed left-1/2 top-[100px] transform -translate-x-1/2 ">
+  <Spinner />
+</div>
 
 
     {/* Card List */}
