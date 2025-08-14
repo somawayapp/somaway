@@ -247,6 +247,14 @@ const totalAmountConfirmed = (
 )[0]?.total || 0;
 
 
+  if (totalParticipants >= MAX_PARTICIPANTS && totalAmountConfirmed >= MAX_PARTICIPANTS) {
+  await incrementCycle();
+  return res.status(403).json({
+    success: false,
+    error: "Maximum participants reached for this cycle. Cycle has been moved to the next one.",
+  });
+}
+
 
     const existingEntry = await G1entryModel.findOne({
       phoneNumberHash: phoneNumberHash,
