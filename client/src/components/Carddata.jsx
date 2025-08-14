@@ -221,11 +221,7 @@ Join now for just one bob —
           transition={{ duration: 0.4, delay: i * 0.1 }}
           className="overflow-hidden shadow-lg rounded-2xl bg-gradient-to-br from-[#111] to-[#1a1a1a] border-2 border-[#1b1f1c] text-white flex flex-col"
         >
-          <img
-            src={item.imageSmall}
-            alt={item.title}
-            className="w-full h-full md:hidden object-cover object-center hover:scale-102 transition-transform duration-300"
-          />
+  
 
          
 
