@@ -2,9 +2,9 @@ import express from "express";
 import axios from "axios";
 import moment from "moment";
 import G5entryModel from "../../models/Entries/G5entry.model.js";
+import G5cycleModel from "../../models/Cycles/G5cycle.model.js";
 import crypto from "crypto";
 import dotenv from "dotenv";
-import G5cycleModel from "../../models/Cycles/G5cycle.model.js";
 
 
 
@@ -239,21 +239,15 @@ router.post("/stk-push", async (req, res) => {
     
 const cycleDoc = await getCurrentCycle();
 
-const totalAmountConfirmed = (
-  await G5entryModel.aggregate([
-    { $match: { status: "Completed", cycle: cycleDoc.number } },
-    { $group: { _id: null, total: { $sum: "$amount" } } },
-  ])
-)[0]?.total || 0;
 
 
-  if (totalParticipants >= MAX_PARTICIPANTS && totalAmountConfirmed >= MAX_PARTICIPANTS) {
-  await incrementCycle();
+ if (totalParticipants >= MAX_PARTICIPANTS) {
   return res.status(403).json({
     success: false,
-    error: "Maximum participants reached for this cycle. Cycle has been moved to the next one.",
+    error: "Maximum participants reached for this cycle.",
   });
 }
+
 
 
     const existingEntry = await G5entryModel.findOne({
@@ -390,13 +384,11 @@ const totalAmountConfirmed = (
 
 // --- M-Pesa Callback Route (Modified for current situation) ---
 router.post("/callback", async (req, res) => {
-  console.log("M-Pesa Callback received (even if not fully working):", JSON.stringify(req.body, null, 2));
-  // Always respond 200 OK immediately, as per M-Pesa's requirement
-  // even if we know the callback isn't always reliable for you currently.
-  res.status(200).send('OK');
+  console.log("M-Pesa Callback received:", JSON.stringify(req.body, null, 2));
+  res.status(200).send("OK");
 
   const { Body } = req.body;
-  const { stkCallback } = Body;
+  const { stkCallback } = Body || {};
 
   if (!stkCallback) {
     console.warn("Invalid M-Pesa callback format.");
@@ -413,8 +405,6 @@ router.post("/callback", async (req, res) => {
   }, {}) || {};
 
   const MpesaReceiptNumber = callbackItems.MpesaReceiptNumber;
-  // const PhoneNumber = callbackItems.PhoneNumber; // Not used in this logic block
-  // const Amount = callbackItems.Amount; // Not used in this logic block
 
   console.log(`Extracted from callback: CheckoutRequestID=${CheckoutRequestID}, ResultCode=${ResultCode}, MpesaReceiptNumber=${MpesaReceiptNumber}, ResultDesc=${resultDesc}`);
 
@@ -422,36 +412,53 @@ router.post("/callback", async (req, res) => {
     const entry = await G5entryModel.findOne({ transactionId: CheckoutRequestID });
 
     if (!entry) {
-      console.error(`Callback: Entry not found for CheckoutRequestID: ${CheckoutRequestID} in database.`);
+      console.error(`Callback: Entry not found for CheckoutRequestID: ${CheckoutRequestID}`);
       return;
     }
 
-    // Only update if the status is still pending or if this callback provides a 'Completed'
-    // It's possible the query already updated it, so be careful not to downgrade a 'Completed' status.
- 
-
-
-  // Only update if the status is not 'Completed'
-if (entry.status !== "Completed") {
-    if (ResultCode === 0) {
+    if (entry.status !== "Completed") {
+      if (ResultCode === 0) {
         entry.status = "Completed";
         entry.mpesaReceiptNumber = MpesaReceiptNumber;
-        console.log(`Callback: Payment for CheckoutRequestID ${CheckoutRequestID} successful. Receipt: ${MpesaReceiptNumber}. DB updated.`);
-    } else {
+        console.log(`Callback: Payment successful. Receipt: ${MpesaReceiptNumber}. DB updated.`);
+      } else {
         entry.status = "Failed";
         entry.failReason = resultDesc;
-        console.log(`Callback: Payment for CheckoutRequestID ${CheckoutRequestID} failed/cancelled. ResultCode: ${ResultCode}, Desc: ${resultDesc}. DB updated.`);
+        console.log(`Callback: Payment failed/cancelled. ResultCode: ${ResultCode}, Desc: ${resultDesc}. DB updated.`);
+      }
+      await entry.save();
+    } else {
+      console.log(`Callback: Entry already processed. Status: ${entry.status}.`);
     }
-    await entry.save();
-} else {
-    console.log(`Callback: Entry for ${CheckoutRequestID} already processed or status is not Pending. Current status: ${entry.status}. No update needed from this callback.`);
-}
+
+    // === New Cycle Increment Logic ===
+    if (ResultCode === 0) {
+      const cycleDoc = await getCurrentCycle();
+
+      const totalParticipants = await G5entryModel.countDocuments({
+        status: "Completed",
+        cycle: cycleDoc.number,
+      });
+
+      const totalAmountConfirmed = (
+        await G5entryModel.aggregate([
+          { $match: { status: "Completed", cycle: cycleDoc.number } },
+          { $group: { _id: null, total: { $sum: "$amount" } } },
+        ])
+      )[0]?.total || 0;
+
+      if (totalParticipants >= MAX_PARTICIPANTS && totalAmountConfirmed >= MAX_PARTICIPANTS) {
+        console.log(`Cycle ${cycleDoc.number} has reached max participants. Incrementing cycle...`);
+        await incrementCycle();
+      }
+    }
+    // === End New Cycle Increment Logic ===
 
   } catch (error) {
     console.error("Error processing M-Pesa callback:", error);
   }
-  
 });
+
 
 // --- API to query STK Push transaction status (can still be used manually) ---
 router.post("/query-stk-status", async (req, res) => {

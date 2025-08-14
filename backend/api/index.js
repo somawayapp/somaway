@@ -4,8 +4,19 @@ import dotenv from 'dotenv';
 import cors from 'cors';
 import 'dotenv/config';
 import moment from 'moment-timezone'; // Import moment-timezone
-import summaryRouter from '../routes/summary.route.js';
+import G1summaryRouter from '../routes/Summary/G1summary.route.js';
+import G2summaryRouter from '../routes/Summary/G2summary.route.js';
+import G3summaryRouter from '../routes/Summary/G3summary.route.js';
+import G4summaryRouter from '../routes/Summary/G4summary.route.js';
+import G5summaryRouter from '../routes/Summary/G5summary.route.js';
+import G6summaryRouter from '../routes/Summary/G6summary.route.js';
+
 import G1mpesaRouter from '../routes/Mpesa/G1mpesa.route.js';
+import G2mpesaRouter from '../routes/Mpesa/G2mpesa.route.js';
+import G3mpesaRouter from '../routes/Mpesa/G3mpesa.route.js';
+import G4mpesaRouter from '../routes/Mpesa/G4mpesa.route.js';
+import G5mpesaRouter from '../routes/Mpesa/G5mpesa.route.js';
+import G6mpesaRouter from '../routes/Mpesa/G6mpesa.route.js';
 
 import searchRouter from '../routes/search.route.js';
 import winnerRouter from '../routes/winner.route.js'; // NEW IMPORT
@@ -59,12 +70,18 @@ app.use(
 // API Routes
 
 app.use('/mpesa/g1', G1mpesaRouter);
-app.use('/summary/g1', summaryRouter);
-app.use('/summary/g2', summaryRouter);
-app.use('/summary/g3', summaryRouter);
-app.use('/summary/g4', summaryRouter);
-app.use('/summary/g5', summaryRouter);
-app.use('/summary/g6', summaryRouter);
+app.use('/mpesa/g2', G2mpesaRouter);
+app.use('/mpesa/g3', G3mpesaRouter);
+app.use('/mpesa/g4', G4mpesaRouter);
+app.use('/mpesa/g5', G5mpesaRouter);
+app.use('/mpesa/g6', G6mpesaRouter);
+
+app.use('/summary/g1', G1summaryRouter);
+app.use('/summary/g2', G2summaryRouter);
+app.use('/summary/g3', G3summaryRouter);
+app.use('/summary/g4', G4summaryRouter);
+app.use('/summary/g5', G5summaryRouter);
+app.use('/summary/g6', G6summaryRouter);
 
 app.use('/search', searchRouter);
 app.use('/winner', winnerRouter);

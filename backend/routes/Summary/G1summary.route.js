@@ -1,6 +1,6 @@
 import express from "express";
-import G1entryModel from "../models/Entries/G1entry.model.js";
-import G1cycleModel from "../models/Cycles/G1cycle.model.js"; // <<< Import the Cycle Model
+import G1entryModel from "../../models/Entries/G1entry.model.js";
+import G1cycleModel from "../../models/Cycles/G1cycle.model.js"; // <<< Import the Cycle Model
 
 import moment from "moment";
 import crypto from "crypto";

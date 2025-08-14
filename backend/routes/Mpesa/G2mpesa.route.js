@@ -1,10 +1,10 @@
 import express from "express";
 import axios from "axios";
 import moment from "moment";
-import G2entryModel from "../../models/Entries/G2entry.model.js";
+import G1entryModel from "../../models/Entries/G1entry.model.js";
+import G1cycleModel from "../../models/Cycles/G1cycle.model.js";
 import crypto from "crypto";
 import dotenv from "dotenv";
-import G2cycleModel from "../../models/Cycles/G2cycle.model.js";
 
 
 
@@ -92,9 +92,9 @@ const MAX_PARTICIPANTS = 100; //  participants/Ksh
 
 
 async function getCurrentCycle() {
-  let cycle = await G2cycleModel.findOne();
+  let cycle = await G1cycleModel.findOne();
   if (!cycle) {
-    cycle = await G2cycleModel.create({ number: 1 }); // first cycle starts at 1
+    cycle = await G1cycleModel.create({ number: 1 }); // first cycle starts at 1
   }
   return cycle;
 }
@@ -141,7 +141,7 @@ async function queryStkStatus(checkoutRequestID) {
     console.log(`STK Push Query response for ${checkoutRequestID}:`, queryRes.data);
 
     // Update your database based on the query response
-    const entry = await G2entryModel.findOne({ transactionId: checkoutRequestID });
+    const entry = await G1entryModel.findOne({ transactionId: checkoutRequestID });
 
     if (entry) {
       if (queryRes.data.ResponseCode === "0") {
@@ -232,31 +232,25 @@ router.post("/stk-push", async (req, res) => {
 
 
   try {
-    const totalParticipants = await G2entryModel.countDocuments({
+    const totalParticipants = await G1entryModel.countDocuments({
       status: "Completed",
       cycle: (await getCurrentCycle()).number,
     });
     
 const cycleDoc = await getCurrentCycle();
 
-const totalAmountConfirmed = (
-  await G2entryModel.aggregate([
-    { $match: { status: "Completed", cycle: cycleDoc.number } },
-    { $group: { _id: null, total: { $sum: "$amount" } } },
-  ])
-)[0]?.total || 0;
 
 
-  if (totalParticipants >= MAX_PARTICIPANTS && totalAmountConfirmed >= MAX_PARTICIPANTS) {
-  await incrementCycle();
+ if (totalParticipants >= MAX_PARTICIPANTS) {
   return res.status(403).json({
     success: false,
-    error: "Maximum participants reached for this cycle. Cycle has been moved to the next one.",
+    error: "Maximum participants reached for this cycle.",
   });
 }
 
 
-    const existingEntry = await G2entryModel.findOne({
+
+    const existingEntry = await G1entryModel.findOne({
       phoneNumberHash: phoneNumberHash,
      cycle: (await getCurrentCycle()).number,
     });
@@ -281,7 +275,7 @@ const totalAmountConfirmed = (
         });
       } else if (["Pending", "Failed", "Cancelled", "Query_Failed"].includes(existingEntry.status)) {
         console.log("Pending entry found. Deleting it to allow new transaction.");
-        await G2entryModel.deleteOne({ _id: existingEntry._id });
+        await G1entryModel.deleteOne({ _id: existingEntry._id });
       }
     } else {
       console.log("No existing entry found for this phone number in the current cycle.");
@@ -301,7 +295,7 @@ const totalAmountConfirmed = (
 
 
 
-    newEntry = await G2entryModel.create({ // Assign to newEntry here
+    newEntry = await G1entryModel.create({ // Assign to newEntry here
       name: encrypt(name),
       phone: encrypt(phone),
       amount: amount,
@@ -375,13 +369,13 @@ const totalAmountConfirmed = (
 
       res.json({ success: true, message: "STK push sent, status check scheduled.", data: stkRes.data });
     } else {
-      await G2entryModel.deleteOne({ _id: newEntry._id });
+      await G1entryModel.deleteOne({ _id: newEntry._id });
       res.status(400).json({ success: false, error: stkRes.data.ResponseDescription || "Failed to initiate STK push" });
     }
   } catch (error) {
     console.error("STK Push error:", error?.response?.data || error.message || error);
     if (newEntry && newEntry._id) {
-      await G2entryModel.deleteOne({ _id: newEntry._id });
+      await G1entryModel.deleteOne({ _id: newEntry._id });
     }
     res.status(500).json({ success: false, error: "Failed to initiate STK push due to a server error." });
   }
@@ -390,13 +384,11 @@ const totalAmountConfirmed = (
 
 // --- M-Pesa Callback Route (Modified for current situation) ---
 router.post("/callback", async (req, res) => {
-  console.log("M-Pesa Callback received (even if not fully working):", JSON.stringify(req.body, null, 2));
-  // Always respond 200 OK immediately, as per M-Pesa's requirement
-  // even if we know the callback isn't always reliable for you currently.
-  res.status(200).send('OK');
+  console.log("M-Pesa Callback received:", JSON.stringify(req.body, null, 2));
+  res.status(200).send("OK");
 
   const { Body } = req.body;
-  const { stkCallback } = Body;
+  const { stkCallback } = Body || {};
 
   if (!stkCallback) {
     console.warn("Invalid M-Pesa callback format.");
@@ -413,45 +405,60 @@ router.post("/callback", async (req, res) => {
   }, {}) || {};
 
   const MpesaReceiptNumber = callbackItems.MpesaReceiptNumber;
-  // const PhoneNumber = callbackItems.PhoneNumber; // Not used in this logic block
-  // const Amount = callbackItems.Amount; // Not used in this logic block
 
   console.log(`Extracted from callback: CheckoutRequestID=${CheckoutRequestID}, ResultCode=${ResultCode}, MpesaReceiptNumber=${MpesaReceiptNumber}, ResultDesc=${resultDesc}`);
 
   try {
-    const entry = await G2entryModel.findOne({ transactionId: CheckoutRequestID });
+    const entry = await G1entryModel.findOne({ transactionId: CheckoutRequestID });
 
     if (!entry) {
-      console.error(`Callback: Entry not found for CheckoutRequestID: ${CheckoutRequestID} in database.`);
+      console.error(`Callback: Entry not found for CheckoutRequestID: ${CheckoutRequestID}`);
       return;
     }
 
-    // Only update if the status is still pending or if this callback provides a 'Completed'
-    // It's possible the query already updated it, so be careful not to downgrade a 'Completed' status.
- 
-
-
-  // Only update if the status is not 'Completed'
-if (entry.status !== "Completed") {
-    if (ResultCode === 0) {
+    if (entry.status !== "Completed") {
+      if (ResultCode === 0) {
         entry.status = "Completed";
         entry.mpesaReceiptNumber = MpesaReceiptNumber;
-        console.log(`Callback: Payment for CheckoutRequestID ${CheckoutRequestID} successful. Receipt: ${MpesaReceiptNumber}. DB updated.`);
-    } else {
+        console.log(`Callback: Payment successful. Receipt: ${MpesaReceiptNumber}. DB updated.`);
+      } else {
         entry.status = "Failed";
         entry.failReason = resultDesc;
-        console.log(`Callback: Payment for CheckoutRequestID ${CheckoutRequestID} failed/cancelled. ResultCode: ${ResultCode}, Desc: ${resultDesc}. DB updated.`);
+        console.log(`Callback: Payment failed/cancelled. ResultCode: ${ResultCode}, Desc: ${resultDesc}. DB updated.`);
+      }
+      await entry.save();
+    } else {
+      console.log(`Callback: Entry already processed. Status: ${entry.status}.`);
     }
-    await entry.save();
-} else {
-    console.log(`Callback: Entry for ${CheckoutRequestID} already processed or status is not Pending. Current status: ${entry.status}. No update needed from this callback.`);
-}
+
+    // === New Cycle Increment Logic ===
+    if (ResultCode === 0) {
+      const cycleDoc = await getCurrentCycle();
+
+      const totalParticipants = await G1entryModel.countDocuments({
+        status: "Completed",
+        cycle: cycleDoc.number,
+      });
+
+      const totalAmountConfirmed = (
+        await G1entryModel.aggregate([
+          { $match: { status: "Completed", cycle: cycleDoc.number } },
+          { $group: { _id: null, total: { $sum: "$amount" } } },
+        ])
+      )[0]?.total || 0;
+
+      if (totalParticipants >= MAX_PARTICIPANTS && totalAmountConfirmed >= MAX_PARTICIPANTS) {
+        console.log(`Cycle ${cycleDoc.number} has reached max participants. Incrementing cycle...`);
+        await incrementCycle();
+      }
+    }
+    // === End New Cycle Increment Logic ===
 
   } catch (error) {
     console.error("Error processing M-Pesa callback:", error);
   }
-  
 });
+
 
 // --- API to query STK Push transaction status (can still be used manually) ---
 router.post("/query-stk-status", async (req, res) => {
@@ -472,7 +479,7 @@ router.post("/query-stk-status", async (req, res) => {
 // --- API to get current cycle status (for frontend to display) ---
 router.get("/cycle-status", async (req, res) => {
   try {
-    const totalParticipants = await G2entryModel.countDocuments({
+    const totalParticipants = await G1entryModel.countDocuments({
       status: "Completed",
       cycle: (await getCurrentCycle()).number,
 
@@ -482,7 +489,7 @@ router.get("/cycle-status", async (req, res) => {
     const cycleDoc = await getCurrentCycle();
 
     const totalAmountConfirmed = (
-  await G2entryModel.aggregate([
+  await G1entryModel.aggregate([
     { $match: { status: "Completed", cycle: cycleDoc.number } },
     { $group: { _id: null, total: { $sum: "$amount" } } },
   ])      
@@ -508,7 +515,7 @@ cycle: (await getCurrentCycle()).number,
 
 // This would be in your API route file, e.g., api/mpesa.js or a dedicated controller
 
-// Assuming G2entryModel is your Mongoose model for M-Pesa transactions
+// Assuming G1entryModel is your Mongoose model for M-Pesa transactions
 
 // New endpoint to get transaction status from DB
 router.post('/get-status', async (req, res) => {
@@ -519,7 +526,7 @@ router.post('/get-status', async (req, res) => {
   }
 
   try {
-    const entry = await G2entryModel.findOne({ transactionId: checkoutRequestID });
+    const entry = await G1entryModel.findOne({ transactionId: checkoutRequestID });
 
     if (entry) {
       // Return the status and failReason directly from the database
