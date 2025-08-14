@@ -177,11 +177,11 @@ const Sidebar2 = () => {
         <h3 className="text-sm font-bold text-[#f36dff] mb-2 text-center">
           Search Your Entry:
         </h3>
-      <div class="relative flex-grow min-w-0">
+   <div class="relative flex-grow min-w-0">
   <input
     type="text"
     placeholder="07XXXXXXXX"
-    class="w-full px-3 pr-16 text-sm rounded-md bg-gradient-to-br from-[#070707ff] to-[#111] border-4 border-[#1b1f1c]
+    class="w-full px-3 pr-16 text-sm rounded-md bg-gradient-to-br from-[#070707ff] to-[#111] border-2 border-[#070707ff]
            text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#f36dff]
            min-w-0 py-2"
     value={searchQuery}
