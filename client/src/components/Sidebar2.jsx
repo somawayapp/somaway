@@ -168,7 +168,7 @@ const Sidebar2 = () => {
 
       {/* --- NEW SEARCH BAR --- */}
          <motion.div
-        className="w-full px-4 mt-3"
+        className="w-full mt-3"
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 1.0, duration: 0.5 }}
