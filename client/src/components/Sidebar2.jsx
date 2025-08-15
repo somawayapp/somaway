@@ -29,7 +29,7 @@ const Sidebar2 = () => {
 
     fetchData();
     // Set up an interval to refresh summary every, say, 30 seconds
-    const intervalId = setInterval(fetchData, 10000); // Fetch every 30 seconds
+    const intervalId = setInterval(fetchData, 30000); // Fetch every 30 seconds
     return () => clearInterval(intervalId); // Cleanup on component unmount
   }, []);
 
