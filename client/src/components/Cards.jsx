@@ -63,7 +63,7 @@ export default function BettingGroups() {
           fontWeight="bold"
           fill="white"
         >
-          {percentage ? percentage.toFixed(0) : 0}%
+          {percentage ? percentage.toFixed(0) : 1}%
         </text>
       </svg>
     );

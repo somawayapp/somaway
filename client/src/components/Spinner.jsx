@@ -83,7 +83,7 @@ const Spinner = () => {
       </svg>
       <div className="absolute text-center">
         <p className="text-xl font-bold text-[#f36dff]">
-          {displayedPercentage}%
+          {displayedPercentage}%  
         </p>
         <p className="text-[8px] text-gray-400 mt-1">PROGRESS</p>
       </div>
