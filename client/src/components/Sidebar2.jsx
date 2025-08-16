@@ -104,44 +104,49 @@ const Sidebar2 = () => {
   return (
     <div className="w-full md:pr-[25%] pl-[13%] pb-9 md:py-5 overflow-y-auto h-[calc(100vh-130px)] text-white flex flex-col items-center gap-4">
       {/* Gauge */}
-      <div className="relative w-40 hidden md:flex h-40 flex justify-center items-center">
-        <svg className="w-full h-full rotate-[135deg]" viewBox="0 0 200 200">
-          <circle
-            cx="100"
-            cy="100"
-            r="70"
-            fill="none"
-            stroke="#3a3a3a"
-            strokeWidth="20"
-            strokeDasharray="440"
-            strokeDashoffset="0"
-          />
-          <motion.circle
-            cx="100"
-            cy="100"
-            r="70"
-            fill="none"
-            stroke="url(#grad)"
-            strokeWidth="20"
-            strokeLinecap="round"
-            strokeDasharray="440"
-            strokeDashoffset="440"
-            animate={controls}
-          />
-          <defs>
-            <linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="0%">
-              <stop offset="0%" stopColor="#f36dff" />
-              <stop offset="100%" stopColor="#ffd700" />
-            </linearGradient>
-          </defs>
-        </svg>
-        <div className="absolute text-center">
-          <p className="text-3xl font-bold text-[#f36dff]">
-            {displayedPercentage}%
-          </p>
-          <p className="text-xs text-gray-400 mt-1">PROGRESS</p>
-        </div>
-      </div>
+     {/* Gauge */}
+<div className="relative w-40 h-40 flex items-center justify-center">
+  <svg className="w-full h-full -rotate-90" viewBox="0 0 200 200">
+    <circle
+      cx="100"
+      cy="100"
+      r="70"
+      fill="none"
+      stroke="#3a3a3a"
+      strokeWidth="20"
+      strokeDasharray="440"
+      strokeDashoffset="0"
+    />
+    <motion.circle
+      cx="100"
+      cy="100"
+      r="70"
+      fill="none"
+      stroke="url(#grad)"
+      strokeWidth="20"
+      strokeLinecap="round"
+      strokeDasharray="440"
+      strokeDashoffset="440"
+      animate={controls}
+    />
+    <defs>
+      <linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="0%">
+        <stop offset="0%" stopColor="#f36dff" />
+        <stop offset="100%" stopColor="#ffd700" />
+      </linearGradient>
+    </defs>
+  </svg>
+  <div className="absolute text-center">
+    <p className="text-3xl font-bold text-[#f36dff]">
+      {displayedPercentage}%
+    </p>
+    <p className="text-xs text-gray-400 mt-1">PROGRESS</p>
+  </div>
+</div>
+
+
+
+      
 
       {/* Total Amount */}
       <div className="text-center mt-9 md:mt-0 hover:scale-[1.02] transition-transform duration-300">
