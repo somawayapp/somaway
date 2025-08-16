@@ -49,7 +49,7 @@ const Spinner = () => {
           r="70"
           fill="none"
           stroke="#3a3a3a"
-          strokeWidth="20"
+          strokeWidth="16"
           strokeDasharray="440"
           strokeDashoffset="0"
         />

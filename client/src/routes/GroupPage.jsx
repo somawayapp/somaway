@@ -11,8 +11,7 @@ import Sidebar from "../components/Sidebar";
 import Sidebar2 from "../components/Sidebar2";
 import HowToJoin from "../components/Howtojoin";
 import Spinner from "../components/Spinner";
-import BettingGroups from "../components/Cards";
-const G1Page = () => {
+const GroupPage = () => {
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -136,5 +135,5 @@ const G1Page = () => {
 
   );
 };
-export default G1Page;
+export default GroupPage;
 

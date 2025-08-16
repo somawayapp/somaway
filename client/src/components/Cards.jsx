@@ -111,7 +111,7 @@ export default function BettingGroups() {
                 <img
                   src={group.img}
                   alt={group.title}
-                  className="w-20 h-20 rounded-xl object-cover object-center"
+                  className="w-15 h-15 md:h-20 md:w-20 rounded-xl object-cover object-center"
                 />
                 <h2 className="text-lg px-1 font-bold">{group.title}</h2>
                 <HalfCircleProgress percentage={groupData.percentage} />

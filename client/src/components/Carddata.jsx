@@ -1,6 +1,7 @@
 // components/BettingChances.jsx
 import React, { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { useParams } from "react-router-dom"; // Import useParams
 
 const cardData = [
   {
@@ -21,10 +22,14 @@ export default function BettingChances() {
   const [cycleStatus, setCycleStatus] = useState(null);
   const [errorMessage, setErrorMessage] = useState("");
 
+  // Get the 'group' parameter from the URL using useParams
+  // Assumes your route is something like "/group/:groupId" or just "/:groupId"
+  const { groupId } = useParams(); // 'groupId' will be 'g1', 'g2', etc.
+
   // New state to manage transaction details from local storage/after submission
   const [transactionDetails, setTransactionDetails] = useState(() => {
-    // Initialize from localStorage on mount
-    const storedTransaction = localStorage.getItem("pendingMpesaTransaction");
+    // Initialize from localStorage on mount, using a key specific to the group
+    const storedTransaction = localStorage.getItem(`pendingMpesaTransaction_${groupId}`);
     return storedTransaction ? JSON.parse(storedTransaction) : null;
   });
 
@@ -32,9 +37,12 @@ export default function BettingChances() {
 
   // --- Initial Fetch for Cycle Status ---
   useEffect(() => {
+    // Ensure groupId is available before making API calls
+    if (!groupId) return;
+
     const fetchCycleStatus = async () => {
       try {
-        const res = await fetch("https://somawayapi.vercel.app/mpesa/g1/cycle-status");
+        const res = await fetch(`https://somawayapi.vercel.app/mpesa/${groupId}/cycle-status`);
         const data = await res.json();
         if (data.success) {
           setCycleStatus(data);
@@ -49,7 +57,7 @@ export default function BettingChances() {
 
     const intervalId = setInterval(fetchCycleStatus, 1000); // Every 30 seconds
     return () => clearInterval(intervalId);
-  }, []);
+  }, [groupId]); // Re-run when groupId changes
 
   // --- Effect to Check Transaction Status from DB (Simplified Polling) ---
   useEffect(() => {
@@ -63,7 +71,7 @@ export default function BettingChances() {
 
       const checkDbStatus = async () => {
         try {
-          const res = await fetch("https://somawayapi.vercel.app/mpesa/g1/get-status", { // NEW ENDPOINT
+          const res = await fetch(`https://somawayapi.vercel.app/mpesa/${groupId}/get-status`, { // NEW ENDPOINT
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ checkoutRequestID: transactionDetails.checkoutRequestID }),
@@ -77,7 +85,7 @@ export default function BettingChances() {
             if (["Completed", "Failed", "Cancelled", "Expired", "Query_Failed_Internal"].includes(status)) {
               // Transaction is final, stop polling and remove from local storage
               clearInterval(statusCheckIntervalRef.current);
-              localStorage.removeItem("pendingMpesaTransaction");
+              localStorage.removeItem(`pendingMpesaTransaction_${groupId}`); // Use group-specific key
             }
           } else {
             // If backend says not found or an error, assume it might have expired or failed
@@ -109,7 +117,7 @@ export default function BettingChances() {
         clearInterval(statusCheckIntervalRef.current);
       }
     }
-  }, [transactionDetails]); // Re-run when transactionDetails changes
+  }, [transactionDetails, groupId]); // Re-run when transactionDetails or groupId changes
 
 
   const handleShareToWhatsApp = () => {
@@ -138,10 +146,10 @@ Join now for just one bob —
   };
 
   const handleJoinClick = () => {
-  // Removed the capacity check
-  setJoining(true);
-  setTransactionDetails(null); // Clear any previous transaction details
-};
+    // Removed the capacity check
+    setJoining(true);
+    setTransactionDetails(null); // Clear any previous transaction details
+  };
 
 
   const handleSubmit = async (e) => {
@@ -149,6 +157,11 @@ Join now for just one bob —
     setErrorMessage("");
     setTransactionDetails(null); // Reset details on new submission
 
+    // Name validation: only letters, max 30 characters
+    if (!/^[a-zA-Z\s]{1,30}$/.test(name)) {
+      setErrorMessage("Please enter a valid name (letters and spaces only, max 30 characters).");
+      return;
+    }
     if (!phone || !name) {
       setErrorMessage("Name and phone number are required.");
       return;
@@ -164,7 +177,7 @@ Join now for just one bob —
 
     setLoading(true);
     try {
-      const res = await fetch("https://somawayapi.vercel.app/mpesa/g1/stk-push", {
+      const res = await fetch(`https://somawayapi.vercel.app/mpesa/${groupId}/stk-push`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ phone, name }),
@@ -186,7 +199,7 @@ Join now for just one bob —
           failReason: ""
         };
         setTransactionDetails(newTransaction);
-        localStorage.setItem("pendingMpesaTransaction", JSON.stringify(newTransaction));
+        localStorage.setItem(`pendingMpesaTransaction_${groupId}`, JSON.stringify(newTransaction)); // Use group-specific key
 
       } else {
         setErrorMessage(data.error || "Failed to send payment prompt. Try again.");
@@ -195,7 +208,7 @@ Join now for just one bob —
           status: "Failed",
           failReason: data.error || "Failed to initiate STK push."
         });
-        localStorage.removeItem("pendingMpesaTransaction"); // Clear if initiation failed
+        localStorage.removeItem(`pendingMpesaTransaction_${groupId}`); // Clear if initiation failed, use group-specific key
       }
     } catch (err) {
       console.error(err);
@@ -204,7 +217,7 @@ Join now for just one bob —
         status: "Failed",
         failReason: "Network error during payment initiation."
       });
-      localStorage.removeItem("pendingMpesaTransaction"); // Clear if initiation failed
+      localStorage.removeItem(`pendingMpesaTransaction_${groupId}`); // Clear if initiation failed, use group-specific key
     } finally {
       setLoading(false);
     }
@@ -221,10 +234,6 @@ Join now for just one bob —
           transition={{ duration: 0.4, delay: i * 0.1 }}
           className="overflow-hidden shadow-lg rounded-2xl bg-gradient-to-br from-[#111] to-[#1a1a1a] border-2 border-[#1b1f1c] text-white flex flex-col"
         >
-  
-
-         
-
           <div className="p-5 flex flex-col flex-grow">
             <h2 className="text-xl font-bold mb-2">{item.title}</h2>
             <p className="text-sm text-gray-300 mb-4">{item.desc}</p>
@@ -294,14 +303,6 @@ Join now for just one bob —
               </button>
             )}
 
-          
-
-            {/* If a transaction is ongoing, show a "Check Status" or a "Start New Transaction" button,
-                or hide "Join Now" if a transaction is still pending.
-                For now, if transactionDetails exist, hide the Join Now button.
-            */}
-          
-
             <button
               onClick={handleShareToWhatsApp}
               className=" bg-[#020201] py-4 md:py-5 mt-3 md:mt-4 hover:bg-[#0e0e06] text-[#EBD402] rounded-2xl font-semibold w-full hover:scale-102 transition-transform duration-200"
@@ -326,6 +327,7 @@ Join now for just one bob —
                     value={name}
                     onChange={(e) => setName(e.target.value)}
                     className="flex-grow p-2 py-3 rounded-md bg-gradient-to-br from-[#070707ff] to-[#111] border border-[#1b1f1c] text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#f36dff]"
+                    maxLength={30} // Max length for name
                     required
                   />
                   <input
@@ -333,7 +335,7 @@ Join now for just one bob —
                     placeholder="Enter M-Pesa number (e.g. 07XX...)"
                     value={phone}
                     onChange={(e) => setPhone(e.target.value)}
-                    className="flex-grow p-2 py-3  rounded-md bg-gradient-to-br from-[#070707ff] to-[#111] border border-[#1b1f1c] text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#f36dff]"
+                    className="flex-grow p-2 py-3 rounded-md bg-gradient-to-br from-[#070707ff] to-[#111] border border-[#1b1f1c] text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#f36dff]"
                     required
                   />
 
