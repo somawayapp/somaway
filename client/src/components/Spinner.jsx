@@ -16,7 +16,7 @@ const Spinner = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await fetch(`https://somawayapi.vercel.app/summary${groupId}`);
+        const res = await fetch(`https://somawayapi.vercel.app/summary/${groupId}`);
 
         const data = await res.json();
         setSummary(data);
