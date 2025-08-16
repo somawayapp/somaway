@@ -42,6 +42,8 @@ const Sidebar2 = () => {
     const radius = 70; // radius of the arc
     const strokeWidth = 16; // thickness of the arc
     const circumference = 2 * Math.PI * radius; // Full circle circumference
+    const offset = circumference - (percentage / 100) * circumference;
+
 
     return (
       <svg
