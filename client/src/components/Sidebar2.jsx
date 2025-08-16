@@ -119,18 +119,19 @@ const Sidebar2 = () => {
           strokeDasharray="440"
           strokeDashoffset="0"
         />
-        <motion.circle
-          cx="100"
-          cy="100"
-          r="70"
-          fill="none"
-          stroke="url(#grad)"
-          strokeWidth="20"
-          strokeLinecap="round"
-          strokeDasharray="440"
-          strokeDashoffset="440"
-          animate={controls}
-        />
+     <motion.circle
+  cx="100"
+  cy="100"
+  r="70"
+  fill="none"
+  stroke="url(#grad)"
+  strokeWidth="20"
+  strokeLinecap="round"
+  strokeDasharray="440"
+  // Change this line:
+  strokeDashoffset={440 - (440 * displayedPercentage) / 100} // Initialize with displayedPercentage
+  animate={controls}
+/>
         <defs>
           <linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="0%">
             <stop offset="0%" stopColor="#f36dff" />
