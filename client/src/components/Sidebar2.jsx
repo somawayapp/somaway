@@ -167,7 +167,7 @@ const Sidebar2 = () => {
       {/* Gauge */}
      {/* Gauge */}
 <div className="relative w-40 h-40 flex items-center justify-center">
-                <HalfCircleProgress percentage={groupData.percentage} />
+                <HalfCircleProgress percentage={displayedPercentage} />
 
   <div className="absolute text-center">
     <p className="text-2xl font-bold text-[#f36dff]">
