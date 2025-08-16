@@ -70,8 +70,6 @@ const Sidebar2 = () => {
         strokeWidth={strokeWidth}
       />
 
-
-
       {/* Progress circle */}
       <circle
         cx="100"
