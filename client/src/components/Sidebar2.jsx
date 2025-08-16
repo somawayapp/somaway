@@ -38,52 +38,55 @@ const Sidebar2 = () => {
 
 
 
-    const HalfCircleProgress = ({ percentage }) => {
-    const radius = 70; // radius of the arc
-    const strokeWidth = 12; // thickness of the arc
-    const circumference = 2 * Math.PI * radius; // Full circle circumference
-     const offset = circumference - (percentage / 100) * circumference;
+  const FullCircleProgress = ({ percentage }) => {
+  const radius = 80; // radius of the circle
+  const strokeWidth = 12; // thickness
+  const circumference = 2 * Math.PI * radius;
+  const offset = circumference - (percentage / 100) * circumference;
 
+  return (
+    <svg
+      className="w-full h-full"
+      viewBox="0 0 200 200"
+    >
+      {/* Background circle */}
+      <circle
+        cx="100"
+        cy="100"
+        r={radius}
+        fill="transparent"
+        stroke="#6B7280"
+        strokeWidth={strokeWidth}
+      />
 
-    return (
-      <svg className="w-full h-full rotate-[135deg]"
-        viewBox="0 0 200 200"
+      {/* Progress circle */}
+      <circle
+        cx="100"
+        cy="100"
+        r={radius}
+        fill="transparent"
+        stroke="#ffd700"
+        strokeWidth={strokeWidth}
+        strokeDasharray={circumference}
+        strokeDashoffset={offset}
+        strokeLinecap="round"
+        transform="rotate(-90 100 100)" // Start from top
+      />
+
+      {/* Percentage text */}
+      <text
+        x="100"
+        y="110"
+        textAnchor="middle"
+        fontSize="22"
+        fontWeight="bold"
+        fill="white"
       >
-
-        {/* Background arc */}
-        <path
-          d="M 10 50 A 40 40 0 0 1 90 50"
-          fill="transparent"
-          stroke="#6B7280" // gray background
-          strokeWidth={strokeWidth}
-          strokeLinecap="round"
-        />
-
-        {/* Progress arc */}
-        <path
-          d="M 10 50 A 40 40 0 0 1 90 50"
-          fill="transparent"
-          stroke="#ffd700" 
-          strokeWidth={strokeWidth}
-          strokeLinecap="round"
-          strokeDasharray={circumference}
-          strokeDashoffset={offset}
-        />
-
-        {/* Percentage text */}
-        <text
-          x="50"
-          y="45"
-          textAnchor="middle"
-          fontSize="18"
-          fontWeight="bold"
-          fill="white"
-        >
-          {percentage ? percentage.toFixed(0) : 0}%
-        </text>
-      </svg>
-    );
-  };
+        {percentage}%
+      </text>
+    </svg>
+  );
+};
 
 
 
@@ -166,7 +169,7 @@ const Sidebar2 = () => {
       {/* Gauge */}
      {/* Gauge */}
 <div className="relative w-40 h-40 flex items-center justify-center">
-                <HalfCircleProgress percentage={displayedPercentage} />
+                <FullCircleProgress percentage={displayedPercentage} />
 
   <div className="absolute text-center">
     <p className="text-2xl font-bold text-[#f36dff]">
