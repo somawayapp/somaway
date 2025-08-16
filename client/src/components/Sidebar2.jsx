@@ -40,7 +40,7 @@ const Sidebar2 = () => {
 
   const FullCircleProgress = ({ percentage }) => {
   const radius = 80; // radius of the circle
-  const strokeWidth = 12; // thickness
+  const strokeWidth = 14; // thickness
   const circumference = 2 * Math.PI * radius;
   const offset = circumference - (percentage / 100) * circumference;
 
@@ -73,17 +73,7 @@ const Sidebar2 = () => {
         transform="rotate(-90 100 100)" // Start from top
       />
 
-      {/* Percentage text */}
-      <text
-        x="100"
-        y="110"
-        textAnchor="middle"
-        fontSize="22"
-        fontWeight="bold"
-        fill="white"
-      >
-        {percentage}%
-      </text>
+   
     </svg>
   );
 };
