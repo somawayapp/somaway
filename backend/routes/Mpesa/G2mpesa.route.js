@@ -16,7 +16,7 @@ const consumerKey = process.env.CONSUMER_KEY;
 const consumerSecret = process.env.CONSUMER_SECRET;
 const shortCode = process.env.MPESA_SHORTCODE;
 const passkey = process.env.MPESA_PASSKEY;
-const callbackURL = `${process.env.MPESA_CALLBACK_BASE_URL}/${g2}/callback`;
+const callbackURL = `${process.env.MPESA_CALLBACK_BASE_URL}/g2/callback`;
 const ENCRYPTION_KEY = process.env.ENCRYPTION_KEY;
 const IV_LENGTH = 16;
 
