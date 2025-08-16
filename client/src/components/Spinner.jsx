@@ -12,22 +12,24 @@ const Spinner = () => {
 
         if (!groupId) return;
   
-    useEffect(() => {
+
+  useEffect(() => {
     const fetchData = async () => {
-        try {
-          const res = await fetch(`https://somawayapi.vercel.app/summary${groupId}`);
-  
-          const data = await res.json();
-          setSummary(data);
-        } catch (err) {
-          console.error("Failed to fetch summary:", err);
-        }
-      };
-  
-        const intervalId = setInterval(fetchCycleStatus, 3000); // Every 30 seconds
-      return () => clearInterval(intervalId);
-    }, [groupId]); // Re-run when groupId changes
-  
+      try {
+        const res = await fetch(`https://somawayapi.vercel.app/summary${groupId}`);
+
+        const data = await res.json();
+        setSummary(data);
+      } catch (err) {
+        console.error("Failed to fetch summary:", err);
+      }
+    };
+
+    fetchData();
+    // Set up an interval to refresh summary every, say, 30 seconds
+    const intervalId = setInterval(fetchData, 30000); // Fetch every 30 seconds
+    return () => clearInterval(intervalId); // Cleanup on component unmount
+        }, [groupId]); // Re-run when groupId changes
   
   useEffect(() => {
     if (!summary) return;

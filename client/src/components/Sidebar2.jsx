@@ -22,6 +22,10 @@ const Sidebar2 = () => {
 
       if (!groupId) return;
 
+
+   
+      
+    
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -34,9 +38,11 @@ const Sidebar2 = () => {
       }
     };
 
-      const intervalId = setInterval(fetchCycleStatus, 3000); // Every 30 seconds
-    return () => clearInterval(intervalId);
-  }, [groupId]); // Re-run when groupId changes
+    fetchData();
+    // Set up an interval to refresh summary every, say, 30 seconds
+    const intervalId = setInterval(fetchData, 30000); // Fetch every 30 seconds
+    return () => clearInterval(intervalId); // Cleanup on component unmount
+        }, [groupId]); // Re-run when groupId changes
 
 
 
