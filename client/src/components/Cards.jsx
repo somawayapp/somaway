@@ -25,7 +25,7 @@ export default function BettingGroups() {
     const radius = 40; // radius of the arc
     const strokeWidth = 8; // thickness of the arc
     const circumference = Math.PI * radius; // half circle circumference
-    const offset = circumference - (percentage / 100) * circumference;
+    const offset = circumference - (percentage / 100) * circumference || 1;
 
     return (
       <svg
