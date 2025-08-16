@@ -33,6 +33,65 @@ const Sidebar2 = () => {
     return () => clearInterval(intervalId); // Cleanup on component unmount
   }, []);
 
+
+
+
+
+
+    const HalfCircleProgress = ({ percentage }) => {
+    const radius = 40; // radius of the arc
+    const strokeWidth = 8; // thickness of the arc
+    const circumference = Math.PI * radius; // half circle circumference
+    const offset = circumference - (percentage / 100) * circumference;
+
+    return (
+      <svg
+        width="100"
+        height="60"
+        viewBox="0 0 100 60"
+        className="overflow-visible"
+      >
+        {/* Background arc */}
+        <path
+          d="M 10 50 A 40 40 0 0 1 90 50"
+          fill="transparent"
+          stroke="#6B7280" // gray background
+          strokeWidth={strokeWidth}
+          strokeLinecap="round"
+        />
+
+        {/* Progress arc */}
+        <path
+          d="M 10 50 A 40 40 0 0 1 90 50"
+          fill="transparent"
+          stroke="#9333EA" // purple fill
+          strokeWidth={strokeWidth}
+          strokeLinecap="round"
+          strokeDasharray={circumference}
+          strokeDashoffset={offset}
+        />
+
+        {/* Percentage text */}
+        <text
+          x="50"
+          y="45"
+          textAnchor="middle"
+          fontSize="14"
+          fontWeight="bold"
+          fill="white"
+        >
+          {percentage ? percentage.toFixed(0) : 0}%
+        </text>
+      </svg>
+    );
+  };
+
+
+
+
+
+
+
   // Existing useEffect for gauge animation
   useEffect(() => {
     if (!summary) return;
@@ -108,37 +167,8 @@ const Sidebar2 = () => {
       {/* Gauge */}
      {/* Gauge */}
 <div className="relative w-40 h-40 flex items-center justify-center">
- <svg className="w-full h-full rotate-[135deg]" viewBox="0 0 200 200">
-        <circle
-          cx="100"
-          cy="100"
-          r="70"
-          fill="none"
-          stroke="#3a3a3a"
-          strokeWidth="20"
-          strokeDasharray="440"
-          strokeDashoffset="100"
-        />
-     <motion.circle
-  cx="100"
-  cy="100"
-  r="70"
-  fill="none"
-  stroke="url(#grad)"
-  strokeWidth="20"
-  strokeLinecap="round"
-  strokeDasharray="440"
-  // Change this line:
-  strokeDashoffset={440 - (440 * displayedPercentage) / 100} // Initialize with displayedPercentage
-  animate={controls}
-/>
-        <defs>
-          <linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="0%">
-            <stop offset="0%" stopColor="#f36dff" />
-            <stop offset="100%" stopColor="#ffd700" />
-          </linearGradient>
-        </defs>
-      </svg>
+                <HalfCircleProgress percentage={groupData.percentage} />
+
   <div className="absolute text-center">
     <p className="text-2xl font-bold text-[#f36dff]">
       {displayedPercentage}%
