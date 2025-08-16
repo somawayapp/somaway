@@ -70,19 +70,27 @@ const Sidebar2 = () => {
         strokeWidth={strokeWidth}
       />
 
-      {/* Progress circle */}
-      <circle
-        cx="100"
-        cy="100"
-        r={radius}
+
+      <motion.circle
+          cx="100"
+          cy="100"
+         r={radius}
         fill="transparent"
-        stroke="#ffd700"
         strokeWidth={strokeWidth}
         strokeDasharray={circumference}
         strokeDashoffset={offset}
-        strokeLinecap="round"
-        transform="rotate(-90 100 100)" // Start from top
-      />
+          stroke="url(#grad)"
+          strokeLinecap="round"
+          animate={controls}
+        />
+        <defs>
+          <linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" stopColor="#f36dff" />
+            <stop offset="100%" stopColor="#ffd700" />
+          </linearGradient>
+        </defs>
+      {/* Progress circle */}
+    
 
    
     </svg>
