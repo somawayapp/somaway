@@ -2,6 +2,8 @@
         // components/Sidebar2.jsx (or wherever your Sidebar2 is located)
 import React, { useEffect, useState, useRef } from "react"; // Import useRef
 import { motion, useAnimation } from "framer-motion";
+import { useParams } from "react-router-dom"; // Import useParams
+
 
 const Sidebar2 = () => {
 
@@ -14,12 +16,17 @@ const Sidebar2 = () => {
   const [searchLoading, setSearchLoading] = useState(false);
   const [searchError, setSearchError] = useState(null);
   const searchInputRef = useRef(null); // Ref for input focus
+  const { groupId } = useParams(); // 'groupId' will be 'g1', 'g2', etc.
 
   // Existing useEffect for fetching summary
+
+      if (!groupId) return;
+
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await fetch("https://somawayapi.vercel.app/summary/g1");
+        const res = await fetch(`https://somawayapi.vercel.app/summary${groupId}`);
+
         const data = await res.json();
         setSummary(data);
       } catch (err) {
@@ -27,11 +34,9 @@ const Sidebar2 = () => {
       }
     };
 
-    fetchData();
-    // Set up an interval to refresh summary every, say, 30 seconds
-    const intervalId = setInterval(fetchData, 30000); // Fetch every 30 seconds
-    return () => clearInterval(intervalId); // Cleanup on component unmount
-  }, []);
+      const intervalId = setInterval(fetchCycleStatus, 3000); // Every 30 seconds
+    return () => clearInterval(intervalId);
+  }, [groupId]); // Re-run when groupId changes
 
 
 

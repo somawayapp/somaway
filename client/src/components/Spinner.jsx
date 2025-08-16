@@ -1,26 +1,33 @@
 import React, { useEffect, useState } from "react";
 import { motion, useAnimation } from "framer-motion";
+import { useParams } from "react-router-dom"; // Import useParams
+
 
 const Spinner = () => {
   const [summary, setSummary] = useState(null);
   const [displayedPercentage, setDisplayedPercentage] = useState(0);
   const controls = useAnimation();
+  const { groupId } = useParams(); // 'groupId' will be 'g1', 'g2', etc.
+
+      if (!groupId) return;
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await fetch("https://somawayapi.vercel.app/summary/g1");
+        const res = await fetch(`https://somawayapi.vercel.app/summary${groupId}`);
+
         const data = await res.json();
         setSummary(data);
       } catch (err) {
         console.error("Failed to fetch summary:", err);
       }
     };
-  fetchData();
-    // Set up an interval to refresh summary every, say, 30 seconds
-    const intervalId = setInterval(fetchData, 30000); // Fetch every 30 seconds
-    return () => clearInterval(intervalId); // Cleanup on component unmount
-  }, []);
+
+      const intervalId = setInterval(fetchCycleStatus, 3000); // Every 30 seconds
+    return () => clearInterval(intervalId);
+  }, [groupId]); // Re-run when groupId changes
+
+
 
   useEffect(() => {
     if (!summary) return;
