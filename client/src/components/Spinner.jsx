@@ -16,8 +16,10 @@ const Spinner = () => {
         console.error("Failed to fetch summary:", err);
       }
     };
-
-    fetchData();
+  fetchData();
+    // Set up an interval to refresh summary every, say, 30 seconds
+    const intervalId = setInterval(fetchData, 30000); // Fetch every 30 seconds
+    return () => clearInterval(intervalId); // Cleanup on component unmount
   }, []);
 
   useEffect(() => {
