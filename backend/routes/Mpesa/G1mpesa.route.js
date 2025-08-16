@@ -16,10 +16,35 @@ const consumerKey = process.env.CONSUMER_KEY;
 const consumerSecret = process.env.CONSUMER_SECRET;
 const shortCode = process.env.MPESA_SHORTCODE;
 const passkey = process.env.MPESA_PASSKEY;
-const callbackURL = process.env.MPESA_CALLBACK_URL; // Keep this defined, even if not working
-
+const callbackURL = `${process.env.MPESA_CALLBACK_BASE_URL}/${g1}/callback`;
 const ENCRYPTION_KEY = process.env.ENCRYPTION_KEY;
 const IV_LENGTH = 16;
+
+
+function getMpesaCallbackUrlForGroup(groupId) {
+  // Always retrieve the base URL from environment variables for production
+  const MPESA_CALLBACK_BASE_URL = process.env.MPESA_CALLBACK_BASE_URL;
+
+  if (!MPESA_CALLBACK_BASE_URL) {
+    console.error("Error: MPESA_CALLBACK_BASE_URL is not defined in environment variables.");
+    // Depending on your application's robustness, you might want to:
+    // - Throw an error: throw new Error("M-Pesa base URL missing.");
+    // - Return a default/fallback URL (less recommended for production)
+    return null;
+  }
+
+  // Basic validation for groupId (e.g., "g1" through "g6")
+  if (!/^g[1-6]$/.test(groupId)) {
+    console.error(`Invalid group ID: ${groupId}. Expected format 'g1' to 'g6'.`);
+    return null;
+  }
+
+  return `${MPESA_CALLBACK_BASE_URL}/${groupId}/callback`;
+}
+
+// Example usage:
+// When you need to get the callback URL for a specific group (e.g., group 1)
+const groupSpecificCallbackURL = getMpesaCallbackUrlForGroup("g1");
 
 
 // --- Helper Function for Hashing ---
