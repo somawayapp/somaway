@@ -9,26 +9,26 @@ const Spinner = () => {
   const controls = useAnimation();
   const { groupId } = useParams(); // 'groupId' will be 'g1', 'g2', etc.
 
-      if (!groupId) return;
 
-  useEffect(() => {
+        if (!groupId) return;
+  
+    useEffect(() => {
     const fetchData = async () => {
-      try {
-        const res = await fetch(`https://somawayapi.vercel.app/summary${groupId}`);
-
-        const data = await res.json();
-        setSummary(data);
-      } catch (err) {
-        console.error("Failed to fetch summary:", err);
-      }
-    };
-
-      const intervalId = setInterval(fetchCycleStatus, 3000); // Every 30 seconds
-    return () => clearInterval(intervalId);
-  }, [groupId]); // Re-run when groupId changes
-
-
-
+        try {
+          const res = await fetch(`https://somawayapi.vercel.app/summary${groupId}`);
+  
+          const data = await res.json();
+          setSummary(data);
+        } catch (err) {
+          console.error("Failed to fetch summary:", err);
+        }
+      };
+  
+        const intervalId = setInterval(fetchCycleStatus, 3000); // Every 30 seconds
+      return () => clearInterval(intervalId);
+    }, [groupId]); // Re-run when groupId changes
+  
+  
   useEffect(() => {
     if (!summary) return;
 
@@ -56,7 +56,7 @@ const Spinner = () => {
           r="70"
           fill="none"
           stroke="#3a3a3a"
-          strokeWidth="16"
+          strokeWidth="14"
           strokeDasharray="440"
           strokeDashoffset="0"
         />
