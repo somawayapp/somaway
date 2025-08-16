@@ -40,9 +40,9 @@ const HomePage = () => {
     .join(" | ") || "All summaries"; 
 
     return (
-      < >
+      <>
 
-<div className="overflow-x-hidden">
+       <div className="  overflow-x-none ">
 <Helmet>
   <title>Shilingi: Every Shilling Counts - Bringing Back the Value of a Shilling</title>
 
@@ -93,7 +93,7 @@ const HomePage = () => {
 
     {/* Sidebar */}
 
-    <div className="w-full hidden sticky top-[110px] md:block md:w-[20%] h-[calc(100vh-130px)] overflow-y-auto border-r-2 border-[#1b1f1c]">
+    <div className="w-full hidden sticky top-[110px] md:block md:w-[22%] h-[calc(100vh-130px)] overflow-y-auto border-r-2 border-[#1b1f1c]">
       <Sidebar />
     </div>
 
@@ -108,7 +108,7 @@ const HomePage = () => {
       <div className="md:pr-[5%]">
 
      <BettingGroups />
-\
+
       <HowToJoin />
     
       <div className="md:hidden">
