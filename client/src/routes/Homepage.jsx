@@ -40,7 +40,7 @@ const HomePage = () => {
     .join(" | ") || "All summaries"; 
 
     return (
-      <>
+      < >
 
        <div className="  overflow-x-none ">
 <Helmet>
