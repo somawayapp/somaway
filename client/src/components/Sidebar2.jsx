@@ -16,22 +16,19 @@ const Sidebar2 = () => {
   const searchInputRef = useRef(null); // Ref for input focus
 
   // Existing useEffect for fetching summary
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const res = await fetch("https://somawayapi.vercel.app/summary/g1");
-        const data = await res.json();
-        setSummary(data);
-      } catch (err) {
-        console.error("Failed to fetch summary:", err);
-      }
-    };
-
-    fetchData();
-    // Set up an interval to refresh summary every, say, 30 seconds
-    const intervalId = setInterval(fetchData, 30000); // Fetch every 30 seconds
-    return () => clearInterval(intervalId); // Cleanup on component unmount
-  }, []);
+    useEffect(() => {
+       const fetchData = async () => {
+         try {
+           const res = await fetch("https://somawayapi.vercel.app/summary/g1");
+           const data = await res.json();
+           setSummary(data);
+         } catch (err) {
+           console.error("Failed to fetch summary:", err);
+         }
+       };
+   
+       fetchData();
+     }, []);
 
   // Existing useEffect for gauge animation
   useEffect(() => {
@@ -101,7 +98,6 @@ const Sidebar2 = () => {
   const estimatedTime = summary?.estimatedTime ?? "-";
   const players = summary?.players ?? []; // The list of all participants from summary
   const radius = 70;
-const circumference = 2 * Math.PI * radius;
 
 
   return (
