@@ -38,10 +38,11 @@ const Sidebar2 = () => {
     if (!summary) return;
 
     const percentage = summary.percentage;
-    controls.start({
-      strokeDashoffset: 440 - (440 * percentage) / 100,
-      transition: { duration: 2, ease: "easeInOut" },
-    });
+ controls.start({
+  strokeDashoffset: circumference - (circumference * percentage) / 100,
+  transition: { duration: 2, ease: "easeInOut" },
+});
+
 
     let currentPercent = 0;
     const interval = setInterval(() => {
@@ -100,6 +101,9 @@ const Sidebar2 = () => {
   const percentage = summary?.percentage ?? 0;
   const estimatedTime = summary?.estimatedTime ?? "-";
   const players = summary?.players ?? []; // The list of all participants from summary
+  const radius = 70;
+const circumference = 2 * Math.PI * radius;
+
 
   return (
     <div className="w-full md:pr-[25%] pl-[13%] pb-9 md:py-5 overflow-y-auto h-[calc(100vh-130px)] text-white flex flex-col items-center gap-4">
@@ -117,18 +121,19 @@ const Sidebar2 = () => {
       strokeDasharray="440"
       strokeDashoffset="0"
     />
-    <motion.circle
-      cx="100"
-      cy="100"
-      r="70"
-      fill="none"
-      stroke="url(#grad)"
-      strokeWidth="20"
-      strokeLinecap="round"
-      strokeDasharray="440"
-      strokeDashoffset="440"
-      animate={controls}
-    />
+   <motion.circle
+  cx="100"
+  cy="100"
+  r={radius}
+  fill="none"
+  stroke="url(#grad)"
+  strokeWidth="20"
+  strokeLinecap="round"
+  strokeDasharray={circumference}
+  strokeDashoffset={circumference}
+  animate={controls}
+/>
+
     <defs>
       <linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="0%">
         <stop offset="0%" stopColor="#f36dff" />
