@@ -39,15 +39,14 @@ const Sidebar2 = () => {
 
 
     const HalfCircleProgress = ({ percentage }) => {
-    const radius = 40; // radius of the arc
-    const strokeWidth = 8; // thickness of the arc
-    const circumference = Math.PI * radius; // half circle circumference
-    const offset = circumference - (percentage / 100) * circumference;
+    const radius = 70; // radius of the arc
+    const strokeWidth = 16; // thickness of the arc
+    const circumference = 2 * Math.PI * radius; // Full circle circumference
 
     return (
       <svg
         width="100"
-        height="60"
+        height="70"
         viewBox="0 0 100 60"
         className="overflow-visible"
       >
@@ -64,7 +63,7 @@ const Sidebar2 = () => {
         <path
           d="M 10 50 A 40 40 0 0 1 90 50"
           fill="transparent"
-          stroke="#9333EA" // purple fill
+          stroke="#ffd700" 
           strokeWidth={strokeWidth}
           strokeLinecap="round"
           strokeDasharray={circumference}
@@ -76,7 +75,7 @@ const Sidebar2 = () => {
           x="50"
           y="45"
           textAnchor="middle"
-          fontSize="14"
+          fontSize="18"
           fontWeight="bold"
           fill="white"
         >
