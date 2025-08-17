@@ -91,10 +91,9 @@ router.get("/", async (req, res) => {
     // DIRECT DATABASE QUERY USING phoneNumberHash
     const foundEntries = await G1entryModel.find({
       phoneNumberHash: searchPhoneNumberHash, // Direct comparison with the generated hash
-      status: "",
     }).sort({ createdAt: -1 });
 
-    console.log(`[Search Route] Found ${foundEntries.length} entries matching hash '${searchPhoneNumberHash}' and status ''.`);
+    console.log(`[Search Route] Found ${foundEntries.length} entries matching hash '${searchPhoneNumberHash}'.`);
 
     if (foundEntries.length === 0) {
       console.log("[Search Route] No  entries found for this phone number via direct hash search.");
