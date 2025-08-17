@@ -114,7 +114,7 @@ const GroupPage = () => {
 
     </div>
 
-     <div className="w-full hidden sticky top-[110px] md:block md:w-[22%] h-[calc(100vh-130px)] overflow-y-auto border-l-2 border-[#1b1f1c]">
+     <div className="w-full hidden sticky top-[110px] md:block md:w-[22%] overflow-y-auto border-l-2 border-[#1b1f1c]">
           <Sidebar2 />
     </div>
 
