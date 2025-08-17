@@ -73,7 +73,7 @@
              </Link>
 
               <Link
-              to="/help">
+              to="/g6">
               <button
                 type="button"
                 className="md:hidden  text-xs font-semibold border-[1px] border-[#EBD402]  py-2 px-4 rounded-full hover:bg-[#57025f]
@@ -144,7 +144,7 @@
 
             <div
            className={`inline-flex overflow-y-auto bg-[var(--bg)] rounded-xl border border-[var(--softBg4)] flex-col p-5 items-left justify-left text-[var(--softTextColor)] 
-             font-sm text-md rounded-md shadow-md min-w-[19%] fixed top-[10%]  right-3 md:right-[80px] overflow-x-hidden transition-transform ease-in-out ${
+             font-sm text-md rounded-md shadow-md min-w-[19%] fixed top-[14%]  right-3 md:right-[80px] overflow-x-hidden transition-transform ease-in-out ${
            open ? "translate-x-0 visible" : "translate-x-full invisible" }`}
 
           style={{ zIndex: 100017 }}>
