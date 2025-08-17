@@ -94,11 +94,11 @@ router.get("/", async (req, res) => {
       status: "",
     }).sort({ createdAt: -1 });
 
-    console.log(`[Search Route] Found ${foundEntries.length} entries matching hash '${searchPhoneNumberHash}' and status 'Completed'.`);
+    console.log(`[Search Route] Found ${foundEntries.length} entries matching hash '${searchPhoneNumberHash}' and status ''.`);
 
     if (foundEntries.length === 0) {
-      console.log("[Search Route] No completed entries found for this phone number via direct hash search.");
-      return res.status(200).json({ success: true, message: "No completed entries found for this phone number.", results: [] });
+      console.log("[Search Route] No  entries found for this phone number via direct hash search.");
+      return res.status(200).json({ success: true, message: "No  entries found for this phone number.", results: [] });
     }
 
     // Decrypt the relevant fields for the results that *were* found
@@ -117,11 +117,11 @@ router.get("/", async (req, res) => {
     // Filter out any entries where decryption might have failed
     const filteredResults = decryptedResults.filter(result => result.name !== null && result.phone !== null);
 
-    console.log(`[Search Route] Successfully found and decrypted ${filteredResults.length} completed entries.`);
+    console.log(`[Search Route] Successfully found and decrypted ${filteredResults.length}  entries.`);
 
     res.json({
       success: true,
-      message: `${filteredResults.length} completed entries found.`,
+      message: `${filteredResults.length}  entries found.`,
       results: filteredResults,
     });
 
@@ -132,18 +132,18 @@ router.get("/", async (req, res) => {
 });
 
 
-// --- ADMIN Route: Get and Decrypt All Completed Entries (for inspection/debugging) ---
-router.get("/admin/decrypt-all-completed", async (req, res) => {
-    console.log("\n[Admin Decrypt Route] Attempting to retrieve and decrypt all completed entries.");
+// --- ADMIN Route: Get and Decrypt All  Entries (for inspection/debugging) ---
+router.get("/admin/decrypt-all", async (req, res) => {
+    console.log("\n[Admin Decrypt Route] Attempting to retrieve and decrypt all  entries.");
     try {
-        const completedEntries = await G1entryModel.find({ status: "Completed" }).sort({ createdAt: -1 });
-        console.log(`[Admin Decrypt Route] Found ${completedEntries.length} completed entries in the database.`);
+        const entries = await G1entryModel.find({ status: "" }).sort({ createdAt: -1 });
+        console.log(`[Admin Decrypt Route] Found ${entries.length}  entries in the database.`);
 
-        if (completedEntries.length === 0) {
-            return res.status(200).json({ success: true, message: "No completed entries found to decrypt.", results: [] });
+        if (entries.length === 0) {
+            return res.status(200).json({ success: true, message: "No  entries found to decrypt.", results: [] });
         }
 
-        const decryptedData = completedEntries.map(entry => {
+        const decryptedData = entries.map(entry => {
             const decryptedName = decrypt(entry.name);
             const decryptedPhone = decrypt(entry.phone);
 
@@ -169,13 +169,13 @@ router.get("/admin/decrypt-all-completed", async (req, res) => {
 
         res.json({
             success: true,
-            message: `Successfully retrieved and decrypted ${filteredDecryptedData.length} completed entries.`,
+            message: `Successfully retrieved and decrypted ${filteredDecryptedData.length}  entries.`,
             results: filteredDecryptedData,
         });
 
     } catch (error) {
-        console.error("[Admin Decrypt Route] Error decrypting all completed entries:", error);
-        res.status(500).json({ success: false, message: "Server error during decryption of all completed entries." });
+        console.error("[Admin Decrypt Route] Error decrypting all  entries:", error);
+        res.status(500).json({ success: false, message: "Server error during decryption of all  entries." });
     }
 });
 
