@@ -66,7 +66,7 @@ const Sidebar2 = () => {
         cy="100"
         r={radius}
         fill="transparent"
-        stroke="#6B7280"
+        stroke="#3a3a3a"
         strokeWidth={strokeWidth}
       />
 

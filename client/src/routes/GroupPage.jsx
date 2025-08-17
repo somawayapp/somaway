@@ -95,23 +95,20 @@ const GroupPage = () => {
       <Sidebar />
     </div>
 
-    {/* Spinner in center, over both nav and cards */}
-<div style={{ zIndex: 100015, }}  className="fixed left-1/2 top-[100px] transform -translate-x-1/2 ">
-  <Spinner />
-</div>
-
 
     {/* Card List */}
     <div className="flex-1 md:px-8">
       <div className="md:pr-[5%]">
 
      <BettingChances />
+     
+     <div className="md:hidden">
+        <Sidebar2 />
+      </div>
 
       <HowToJoin />
     
-      <div className="md:hidden">
-        <Sidebar2 />
-      </div>
+      
       <Footer />
             </div>
 

@@ -10,7 +10,7 @@
 
 :root {
 
-   max-width: 99vw;
+  overflow-x: hidden;
 
   --bg: #141414;
   --textColor: white;
