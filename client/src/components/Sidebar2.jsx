@@ -253,7 +253,7 @@ const Sidebar2 = () => {
       {/* --- SEARCH RESULTS DISPLAY --- */}
       {searchResults.length > 0 && (
         <motion.div
-          className="w-full mt-2 text-center h-[fit-content] max-h-[calc(100vh-600px)] overflow-y-auto border-t border-gray-700 pt-4"
+          className="w-full mt-2 text-center h-[fit-content] max-h-[calc(100vh-600px)] overflow-y-auto"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.2, duration: 0.5 }}
@@ -271,8 +271,8 @@ const Sidebar2 = () => {
             <h4 className="text-md font-bold text-[#ffd700]">Search Results!</h4>
             <p className="text-sm text-gray-300">Name: {result.name}</p>
             <p className="text-sm text-gray-300">Phone: {result.phone}</p>
-            <p className="text-sm text-gray-300">Status: {result.status}</p>
-            <p className="text-sm text-gray-300">Cycle: {result.cycle}</p>
+            <p className={`text-sm ${result.status !== 'Completed' ? 'text-red-500 font-semibold' : 'text-gray-300'}`}>  Status: {result.status}</p>   
+             <p className="text-sm text-gray-300">Cycle: {result.cycle}</p>
             <p className="text-xs text-gray-400 mt-1">Joined: {new Date(result.createdAt).toLocaleString()}</p>
           </motion.div>
 
