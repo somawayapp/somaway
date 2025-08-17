@@ -166,7 +166,7 @@ const Sidebar2 = () => {
 
 
   return (
-    <div className="w-full md:pr-[25%] px-4 md:px-0 md:pl-[13%] pb-9 md:py-5 overflow-y-auto h-[calc(90vh)] text-white flex flex-col items-center gap-4">
+    <div className="w-full md:pr-[25%] px-4 md:px-0 md:pl-[13%] pb-9 md:py-5 overflow-y-auto h-[calc(98vh)] text-white flex flex-col items-center gap-4">
       {/* Gauge */}
      {/* Gauge */}
 <div className="relative w-40 h-40 flex items-center justify-center">
