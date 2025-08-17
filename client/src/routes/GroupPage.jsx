@@ -41,7 +41,7 @@ const GroupPage = () => {
     return (
       <>
 
-<div className="overflow-x-hidden">
+<div className="">
 <Helmet>
   <title>Shilingi: Every Shilling Counts - Bringing Back the Value of a Shilling</title>
 
@@ -101,7 +101,7 @@ const GroupPage = () => {
       <div className="md:pr-[5%]">
 
      <BettingChances />
-     
+
      <div className="md:hidden">
         <Sidebar2 />
       </div>

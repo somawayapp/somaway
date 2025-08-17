@@ -97,7 +97,7 @@
               <div className="relative"  onClick={() => setOpen((prev) => !prev)}>
               <div className="flex flex-row items-center gap-3">
               <Link
-              to="/help">
+              to="/g6">
               <button
                 type="button"
                 className="hidden md:block text-sm font-semibold border-[1px] border-[#EBD402]  py-2 px-4 rounded-full hover:bg-[#57025f]
