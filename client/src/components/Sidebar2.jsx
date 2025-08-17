@@ -166,7 +166,7 @@ const Sidebar2 = () => {
 
 
   return (
-    <div className="w-full md:pr-[25%] px-4 md:px-0 md:pl-[13%] pb-9 md:py-5 overflow-y-auto h-[calc(100vh-130px)] text-white flex flex-col items-center gap-4">
+    <div className="w-full md:pr-[25%] px-4 md:px-0 md:pl-[13%] pb-9 md:py-5 overflow-y-auto h-[calc(90vh)] text-white flex flex-col items-center gap-4">
       {/* Gauge */}
      {/* Gauge */}
 <div className="relative w-40 h-40 flex items-center justify-center">
@@ -253,7 +253,7 @@ const Sidebar2 = () => {
       {/* --- SEARCH RESULTS DISPLAY --- */}
       {searchResults.length > 0 && (
         <motion.div
-          className="w-full mt-2 text-center h-[fit-content] max-h-[calc(100vh-600px)] overflow-y-auto"
+          className="w-full text-center h-[fit-content] max-h-[calc(100vh-600px)] overflow-y-auto"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.2, duration: 0.5 }}
@@ -271,7 +271,7 @@ const Sidebar2 = () => {
             <h4 className="text-md font-bold text-[#ffd700]">Search Results!</h4>
             <p className="text-sm text-gray-300">Name: {result.name}</p>
             <p className="text-sm text-gray-300">Phone: {result.phone}</p>
-            <p className={`text-sm ${result.status !== 'Completed' ? 'text-red-500 font-semibold' : 'text-blue-500'}`}>  Status: {result.status}</p>   
+            <p className={`text-sm ${result.status !== 'Completed' ? 'text-red-500 font-semibold' : 'text-blue-500'}`}>  Transaction: {result.status}</p>   
              <p className="text-sm text-gray-300">Cycle: {result.cycle}</p>
             <p className="text-xs text-gray-400 mt-1">Joined: {new Date(result.createdAt).toLocaleString()}</p>
           </motion.div>
