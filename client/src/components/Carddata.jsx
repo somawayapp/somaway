@@ -157,9 +157,9 @@ Join now for just one bob —
     setErrorMessage("");
     setTransactionDetails(null); // Reset details on new submission
 
-    // Name validation: only letters, max 30 characters
-    if (!/^[a-zA-Z\s]{1,30}$/.test(name)) {
-      setErrorMessage("Please enter a valid name (letters and spaces only, max 30 characters).");
+    // Name validation: only letters, max 20 characters
+    if (!/^[a-zA-Z\s]{1,20}$/.test(name)) {
+      setErrorMessage("Please enter a valid name (letters and spaces only, max 20 characters).");
       return;
     }
     if (!phone || !name) {
