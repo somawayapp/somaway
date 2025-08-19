@@ -239,9 +239,9 @@ Join now for just one bob —
                 <img
                   src={item.img}
                   alt={item.title}
-                  className="w-16 h-16 md:h-20 md:w-20 rounded-xl object-cover object-center"
+                  className="w-16 h-16 md:h-24 md:w-24 lg:h-30 lg:w-30 rounded-xl object-cover object-center"
                 />
-                <h2 className="text-md md:text-lg px-1 font-bold">{item.title}</h2>
+                <h2 className="text-md md:text-lg pl-2 md:pl-4 font-bold">{item.title}</h2>
               </div>
 
             <p className="text-sm text-gray-300 mb-4">{item.desc}</p>
