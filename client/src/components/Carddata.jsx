@@ -7,7 +7,9 @@ const cardData = [
   {
     img: "/shilingibanner.png",
     title: "Win Ksh 1 Million",
-    desc: "Join a community-powered luck pool where everyone has a fair shot to win 1 million shillings by stashing only 1 shilling.",
+    desc: "Join a community-powered luck pool where everyone has a fair shot to win 1 million shillings by stashing only 1 shilling. The One Bob Millionaire - Become part of something bigger than just one shiling,Together a shiling at a time, Let's mae a millionaire. ",
+    tag: "1 man 1 shiling 1 chance 1 winner",
+
   },
 ];
 
@@ -245,6 +247,8 @@ Join now for just one bob —
               </div>
 
             <p className="text-sm text-gray-300 mb-2  mt-3 md:mt-5">{item.desc}</p>
+           <p className="text-sm text-gray-300 mb-2  ">{item.tag}</p>
+
 
             {/* Cycle Status Display */}
             {cycleStatus && (
