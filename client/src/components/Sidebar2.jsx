@@ -253,7 +253,7 @@ const Sidebar2 = () => {
       {/* --- SEARCH RESULTS DISPLAY --- */}
       {searchResults.length > 0 && (
         <motion.div
-          className="w-full  text-center h-[fit-content] max-h-[55vh] overflow-y-auto"
+          className="w-full  text-center h-[fit-content] border border-[#1b1f1c]   overflow-y-auto"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.2, duration: 0.5 }}
@@ -295,7 +295,7 @@ const Sidebar2 = () => {
 
 
           <motion.div
-          className="w-full text-center h-[fit-content] max-h-[calc(100vh-600px)] p-3 bg-gradient-to-br from-[#070707ff] to-[#111] border border-[#1b1f1c] overflow-y-auto "
+          className="w-full text-center h-[fit-content] max-h-[40vh] p-3 bg-gradient-to-br from-[#070707ff] to-[#111] border border-[#1b1f1c] overflow-y-auto "
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.2, duration: 0.5 }}
