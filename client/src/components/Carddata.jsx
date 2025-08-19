@@ -244,7 +244,7 @@ Join now for just one bob —
                 <h2 className="text-md md:text-lg pl-2 md:pl-4  font-bold">{item.title}</h2>
               </div>
 
-            <p className="text-sm text-gray-300 mb-2  pt-3 md:pt-6">{item.desc}</p>
+            <p className="text-sm text-gray-300 mb-2  mt-3 md:mt-5">{item.desc}</p>
 
             {/* Cycle Status Display */}
             {cycleStatus && (
