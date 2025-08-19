@@ -253,7 +253,7 @@ const Sidebar2 = () => {
       {/* --- SEARCH RESULTS DISPLAY --- */}
       {searchResults.length > 0 && (
         <motion.div
-          className="w-full  text-center h-[fit-content] max-h-[55vh]  min-h-[55vh]  overflow-y-auto"
+          className="w-full  text-center h-[fit-content] max-h-[55vh] overflow-y-auto"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.2, duration: 0.5 }}
