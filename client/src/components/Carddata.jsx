@@ -5,8 +5,7 @@ import { useParams } from "react-router-dom"; // Import useParams
 
 const cardData = [
   {
-    imageSmall: "/shilingibanner.png",
-    imageLarge: "/shilingibanner2.png",
+    img: "/shilingibanner.png",
     title: "Win Ksh 1 Million",
     desc: "Join a community-powered luck pool where everyone has a fair shot to win 1 million shillings by stashing only 1 shilling.",
   },
@@ -157,9 +156,9 @@ Join now for just one bob —
     setErrorMessage("");
     setTransactionDetails(null); // Reset details on new submission
 
-    // Name validation: only letters, max 20 characters
-    if (!/^[a-zA-Z\s]{1,20}$/.test(name)) {
-      setErrorMessage("Please enter a valid name (letters and spaces only, max 20 characters).");
+    // Name validation: only letters, max 30 characters
+    if (!/^[a-zA-Z\s]{1,30}$/.test(name)) {
+      setErrorMessage("Please enter a valid name (letters and spaces only, max 30 characters).");
       return;
     }
     if (!phone || !name) {
@@ -235,7 +234,16 @@ Join now for just one bob —
           className="overflow-hidden shadow-lg rounded-2xl bg-gradient-to-br from-[#111] to-[#1a1a1a] border-2 border-[#1b1f1c] text-white flex flex-col"
         >
           <div className="p-5 flex flex-col flex-grow">
-            <h2 className="text-xl font-bold mb-2">{item.title}</h2>
+
+             <div className="flex items-center justify-between">
+                <img
+                  src={item.img}
+                  alt={item.title}
+                  className="w-16 h-16 md:h-20 md:w-20 rounded-xl object-cover object-center"
+                />
+                <h2 className="text-md md:text-lg px-1 font-bold">{item.title}</h2>
+              </div>
+
             <p className="text-sm text-gray-300 mb-4">{item.desc}</p>
 
             {/* Cycle Status Display */}
