@@ -91,7 +91,7 @@ const GroupPage = () => {
   <div className="flex md:flex-row relative"> 
 
     {/* Sidebar */}
-    <div className="w-full hidden sticky top-[110px] md:block md:w-[22%] h-[75vh] overflow-y-auto border-r-2 border-[#1b1f1c]">
+    <div className="w-full hidden sticky top-[110px] md:block md:w-[22%] h-[80vh] overflow-y-auto border-r-2 border-[#1b1f1c]">
       <Sidebar />
     </div>
 
@@ -114,7 +114,7 @@ const GroupPage = () => {
 
     </div>
 
-     <div className="w-full hidden sticky top-[110px] md:block md:w-[22%] h-[75vh] overflow-y-auto border-l-2 border-[#1b1f1c]">
+     <div className="w-full hidden sticky top-[110px] md:block md:w-[22%] h-[80vh] overflow-y-auto border-l-2 border-[#1b1f1c]">
           <Sidebar2 />
     </div>
 
