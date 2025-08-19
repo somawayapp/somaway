@@ -274,6 +274,17 @@ const Sidebar2 = () => {
             <p className={`text-sm ${result.status !== 'Completed' ? 'text-red-500 font-semibold' : 'text-blue-500'}`}>  Transaction: {result.status}</p>   
              <p className="text-sm text-gray-300">Cycle: {result.cycle}</p>
             <p className="text-xs text-gray-400 mt-1">Joined: {new Date(result.createdAt).toLocaleString()}</p>
+              <h4 className="text-md font-bold text-[#ffd700]">Search Results!</h4>
+            <p className="text-sm text-gray-300">Name: {result.name}</p>
+            <p className="text-sm text-gray-300">Phone: {result.phone}</p>
+            <p className={`text-sm ${result.status !== 'Completed' ? 'text-red-500 font-semibold' : 'text-blue-500'}`}>  Transaction: {result.status}</p>   
+             <p className="text-sm text-gray-300">Cycle: {result.cycle}</p>
+            <p className="text-xs text-gray-400 mt-1">Joined: {new Date(result.createdAt).toLocaleString()}</p>  <h4 className="text-md font-bold text-[#ffd700]">Search Results!</h4>
+            <p className="text-sm text-gray-300">Name: {result.name}</p>
+            <p className="text-sm text-gray-300">Phone: {result.phone}</p>
+            <p className={`text-sm ${result.status !== 'Completed' ? 'text-red-500 font-semibold' : 'text-blue-500'}`}>  Transaction: {result.status}</p>   
+             <p className="text-sm text-gray-300">Cycle: {result.cycle}</p>
+            <p className="text-xs text-gray-400 mt-1">Joined: {new Date(result.createdAt).toLocaleString()}</p>
           </motion.div>
 
 
