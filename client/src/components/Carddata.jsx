@@ -7,7 +7,7 @@ const cardData = [
   {
     img: "/shilingibanner.png",
     title: "Win Ksh 1 Million",
-    desc: "Join a community-powered luck pool where everyone has a fair shot to win 1 million shillings by stashing only 1 shilling. The One Bob Millionaire - Become part of something bigger than just one shiling,Together a shiling at a time, Let's mae a millionaire. ",
+    desc: "Join a community-powered luck pool where everyone has a fair shot to win 1 million shillings by stashing only 1 shilling. The One Bob Millionaire - Become part of something bigger than just one shiling, together one shiling at a time, let's make someone a millionaire. ",
     tag: "1 man 1 shiling 1 chance 1 winner",
 
   },
