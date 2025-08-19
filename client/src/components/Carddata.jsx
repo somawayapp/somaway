@@ -241,10 +241,10 @@ Join now for just one bob —
                   alt={item.title}
                   className="w-16 h-16 md:h-24 md:w-24 lg:h-30 lg:w-30 rounded-xl object-cover object-center"
                 />
-                <h2 className="text-md md:text-lg pl-2 md:pl-4  pt-3 md:pt-6 font-bold">{item.title}</h2>
+                <h2 className="text-md md:text-lg pl-2 md:pl-4  font-bold">{item.title}</h2>
               </div>
 
-            <p className="text-sm text-gray-300 mb-4">{item.desc}</p>
+            <p className="text-sm text-gray-300 mb-2  pt-3 md:pt-6">{item.desc}</p>
 
             {/* Cycle Status Display */}
             {cycleStatus && (
